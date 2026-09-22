@@ -5,17 +5,20 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Where MX meets the UNESCO Recommendation on the Ethics of AI"
 description: "How the Machine Experience discipline gives technical shape to UNESCO's ethical principles for artificial intelligence."
 author: "Tom Cranstoun"
 created: 2026-05-10
-modified: 2026-05-10
-version: "1.0"
+modified: 2026-09-21
+version: "1.1"
 
 type: blog-post
 mx:
   audience: [humans]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/where-mx-meets-unesco-ai-ethics.md
+  contextProvides:
+    - "How the Machine Experience discipline gives technical shape to UNESCO's ethical principles for artificial intelligence."
   stability: stable
   purpose: "How the Machine Experience discipline gives technical shape to UNESCO's ethical principles for artificial intelligence."
   servedAt: https://mx.allabout.network/blog/drafts/where-mx-meets-unesco-ai-ethics.html
@@ -61,14 +64,12 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Where MX meets the UNESCO Recommendation on the Ethics of AI">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/drafts/where-mx-meets-unesco-ai-ethics.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -108,7 +109,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 890,
+        "wordCount": 934,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -188,7 +189,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="890">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="934">
         <header class="article-header">
           <h1>Where MX meets the UNESCO Recommendation on the Ethics of AI</h1>
           <div class="article-meta"
@@ -208,15 +209,15 @@ mx:
 <p>This post walks through the alignment.</p>
 <h2 id="four-core-values-one-shared-instinct" tabindex="-1">Four core values, one shared instinct</h2>
 <p>UNESCO's four core values are human rights and human dignity; living in peaceful, just, and interconnected societies; diversity and inclusiveness; and environment and ecosystem flourishing.</p>
-<p>The fourth one is the cleanest match to MX. UNESCO calls for AI that supports environmental flourishing. MX principle 2 makes the same demand operational: choose what is better for the planet, reduce compute, reduce inference, reduce energy. Where UNESCO frames the ethical position, MX gives delivery teams a rule they can apply on a Monday morning when picking between two architectural options.</p>
+<p>The fourth one is the cleanest match to MX. UNESCO calls for AI that supports environmental flourishing. MX makes the same demand operational through metadata. Any Document Can Be a Cog sets out the cost equation: each field in the frontmatter settles a question an agent would otherwise work out by reading the whole document, so richer metadata costs less to use. Trust Is Structural follows it through: fewer inference steps mean less token consumption and a smaller energy draw. Where UNESCO frames the ethical position, MX gives delivery teams a rule they can apply on a Monday morning when picking between two architectural options.</p>
 <p>Diversity and inclusiveness lands in MX as a hard requirement: every MX-compliant site must meet WCAG accessibility standards. Accessibility is a requirement, not optional. That phrasing matters. UNESCO sets the value; MX refuses to ship without it.</p>
 <h2 id="ten-principles-mapped" tabindex="-1">Ten principles, mapped</h2>
 <p>The Recommendation lays out ten principles. Several map directly onto MX practice.</p>
 <p><strong>Transparency and Explainability.</strong> UNESCO asks that AI systems be transparent and explainable to a degree appropriate to context. MX answers this with cogs: portable, self-describing documents that carry their own metadata, intent, and update instructions. A cog explains itself to the next reader, human or machine. REGINALD, the registry layer, adds signed provenance on top.</p>
-<p><strong>Human Oversight and Determination.</strong> UNESCO is firm that AI must not displace human responsibility. MX principle 1 says it almost in the same breath: design for both humans and machines, with the human always in the loop, and outputs readable and reviewable by both. Reviewability is the mechanism. If a machine cannot show its working to a person, the principle is not being met.</p>
+<p><strong>Human Oversight and Determination.</strong> UNESCO is firm that AI must not displace human responsibility. Design for Both says it almost in the same breath: build for humans and machines together, with the human always in the loop, and outputs readable and reviewable by both. Reviewability is the mechanism. If a machine cannot show its working to a person, the principle is not being met.</p>
 <p><strong>Responsibility and Accountability.</strong> The Recommendation calls for auditable, traceable systems with oversight, impact assessment, and due diligence. The Gathering (<a href="https://tg.community" rel="noopener">tg.community</a>) is being set up as an independent open standards body for MX precisely so that audit and governance sit outside any single vendor. Open standards make accountability something anyone can check.</p>
 <p><strong>Fairness and Non-Discrimination.</strong> UNESCO wants AI's benefits accessible to all. MX makes accessibility a gate on compliance, not a feature request. The two positions agree.</p>
-<p><strong>Awareness and Literacy.</strong> Public understanding of AI through open, accessible education is a UNESCO principle. MX principle 3, build on what humans already know and use, is the same idea seen from the delivery side. Do not invent new mental models when existing ones work; do not raise the literacy bar unnecessarily.</p>
+<p><strong>Awareness and Literacy.</strong> Public understanding of AI through open, accessible education is a UNESCO principle. Use Existing Standards, which asks you to build on what humans already know, is the same idea seen from the delivery side. Do not invent new mental models when existing ones work; do not raise the literacy bar unnecessarily.</p>
 <p><strong>Sustainability.</strong> UNESCO ties this to the UN Sustainable Development Goals. MX ties it to compute, inference, and energy at the per-decision level. The two scales meet in the middle.</p>
 <p><strong>Proportionality and Do No Harm</strong>, <strong>Safety and Security</strong>, <strong>Right to Privacy and Data Protection</strong>, and <strong>Multi-stakeholder and Adaptive Governance</strong> are not contradicted by MX, but they sit further from where MX currently operates. They are policy and risk territory. MX can support them, a self-describing cog with provenance is easier to audit for privacy compliance than an opaque blob, but the principles themselves are owned by governance, not delivery.</p>
 <h2 id="the-practical-hook" tabindex="-1">The practical hook</h2>

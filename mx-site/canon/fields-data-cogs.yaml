@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Cog Layer
-version: '1.8'
+version: '1.9'
 created: 2026-04-27
-modified: '2026-08-06'
+modified: '2026-09-19'
 author: Tom Cranstoun
 description: >-
   Cog-specific structural vocabulary. Cogs are an OPTIONAL layer on top of MX,
@@ -301,7 +301,7 @@ mx:
         or cogs (community-owned governance standard, governed by https://tg.community)
         cogs. The three values are: scripted (cog body carries a fenced
         @embedded:<id> block; mx-exec extracts and runs it), sop (cog body has no @embedded block; the
-        x-mx-execute.actions[].usage prose is descriptive, intended for an LLM via a skill to read and perform), and
+        execute.actions[].usage prose is descriptive, intended for an LLM via a skill to read and perform), and
         hybrid (cog body carries both an @embedded script and descriptive usage prose). The validator gates each
         combination — scripted-no-embedded, sop-no-usage-prose, and hybrid-needs-both are all errors.
       status: canonical
@@ -311,7 +311,7 @@ mx:
         - MX Cogs note §6.7.3
       description: Action-cog discriminator. Names the cognitive class of an action-doc as scripted, sop, or hybrid.
 
-    - name: x-mx-execute.route
+    - name: execute.route
       type: string
       definition: >-
         Execution route for scripted and hybrid action-doc cogs. Declares where the extracted script block is
@@ -325,8 +325,9 @@ mx:
         - ollama
         - agent
       notes: >-
-        Optional field on x-mx-execute. Defaults to bash when absent. Applies as the default route for
-        all blocks in the cog; individual blocks may override with x-mx-execute.actions[].route.
+        Optional field on the execute action block (the open name; the vendor spelling x-mx-execute is
+        deprecated, ADR 70). Defaults to bash when absent. Applies as the default route for
+        all blocks in the cog; individual blocks may override with execute.actions[].route.
         The Ollama serialisation queue (scripts/lib/llm-queue.cjs) ensures calls do not race. The agent
         stub no-ops when MX_AGENT_ENDPOINT is unset. Cogs using non-bash routes conventionally carry the
         .sh.cog.md infix in their filename as a human-readable signal.

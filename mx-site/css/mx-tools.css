@@ -773,3 +773,224 @@
   border-radius: 12px;
   background-color: var(--mx-tool-surface);
 }
+
+/* ── MX components (component-mx.js) ────────────────────────
+   One rule per component kind, styled only through --mx-* tokens. A state is
+   carried in text and in data-mx-* attributes; the classes below decorate,
+   they never carry meaning on their own. */
+
+.mxc {
+  margin: 1rem 0;
+}
+
+.mxc-grid-mount {
+  display: grid;
+  gap: calc(var(--mxc-grid-unit, 8px) * 2);
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 900px) {
+  .mxc-grid-mount {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  }
+
+  .mxc-grid-mount > .mxc-object-inspector,
+  .mxc-grid-mount > .mxc-verification-panel {
+    grid-column: 1 / -1;
+  }
+}
+
+.mxc-object-card,
+.mxc-verification-panel,
+.mxc-object-inspector,
+.mxc-narrative-layer {
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  background-color: var(--mx-tool-surface);
+  border: 1px solid var(--mx-border);
+}
+
+.mxc-card-title {
+  margin-top: 0;
+}
+
+.mxc-card-summary {
+  color: var(--mx-text-muted);
+}
+
+.mxc-card-preview {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.mxc-fields {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0.75rem 0;
+}
+
+.mxc-fields dt {
+  font-weight: 600;
+  color: var(--mx-text);
+}
+
+.mxc-fields dd {
+  margin: 0;
+  color: var(--mx-text-muted);
+  word-break: break-word;
+}
+
+.mxc-fields-mono dd {
+  font-family: var(--mx-font-mono);
+  font-size: 0.9rem;
+}
+
+.mxc-provenance-badge {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: var(--mx-tool-surface-strong);
+  border-left: 4px solid var(--mx-gold);
+}
+
+.mxc-badge-head {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+.mxc-badge-label {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.8rem;
+  color: var(--mx-gold);
+}
+
+.mxc-badge-signals summary {
+  cursor: pointer;
+  color: var(--mx-text);
+  margin-top: 0.5rem;
+}
+
+.mxc-signals {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0.5rem 0 0;
+}
+
+.mxc-signals dt {
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.mxc-signals dd {
+  margin: 0;
+  color: var(--mx-text-muted);
+}
+
+.mxc-actions {
+  list-style: none;
+  padding: 0;
+  margin: 1rem 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mxc-action-withheld {
+  color: var(--mx-text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+.mxc-relationship-line {
+  font-family: var(--mx-font-mono);
+  font-size: 0.9rem;
+  margin: 0.35rem 0;
+}
+
+.mxc-rel-field {
+  color: var(--mx-gold);
+  font-weight: 600;
+}
+
+.mxc-rel-note {
+  color: var(--mx-text-muted);
+}
+
+.mxc-steps {
+  padding-left: 1.25rem;
+}
+
+.mxc-steps li {
+  margin: 0.35rem 0;
+}
+
+.mxc-step-outcome {
+  font-weight: 700;
+}
+
+.mxc-steps .is-pass .mxc-step-outcome {
+  color: var(--mx-tool-pass);
+}
+
+.mxc-steps .is-fail .mxc-step-outcome {
+  color: var(--mx-tool-fail);
+}
+
+.mxc-steps .is-warn .mxc-step-outcome {
+  color: var(--mx-tool-warn);
+}
+
+.mxc-steps .is-skipped .mxc-step-outcome {
+  color: var(--mx-text-muted);
+}
+
+.mxc-step-detail,
+.mxc-step-time,
+.mxc-step-agent {
+  color: var(--mx-text-muted);
+}
+
+.mxc-signal-bar {
+  display: inline-flex;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background-color: var(--mx-tool-surface-strong);
+  font-weight: 600;
+  margin-right: 0.5rem;
+}
+
+.mxc-signal-bar.is-mx-state-valid,
+.mxc-signal-bar.is-mx-state-mx {
+  border: 1px solid var(--mx-tool-pass);
+}
+
+.mxc-signal-bar.is-mx-state-warn,
+.mxc-signal-bar.is-mx-state-eaa-tagged {
+  border: 1px solid var(--mx-tool-warn);
+}
+
+.mxc-signal-bar.is-mx-state-fail,
+.mxc-signal-bar.is-mx-state-plain {
+  border: 1px solid var(--mx-tool-fail);
+}
+
+.mxc-narrative-layer {
+  border-left: 4px solid var(--mx-gold);
+}
+
+.mxc-cue {
+  margin-top: 0;
+}
+
+.mxc-inspector-section h4 {
+  margin-bottom: 0.25rem;
+  text-transform: capitalize;
+}

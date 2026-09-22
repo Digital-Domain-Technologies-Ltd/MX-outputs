@@ -1,7 +1,7 @@
 title: MX Workflow Fields
-version: '1.1'
+version: '1.2'
 created: '2026-05-08'
-modified: '2026-09-14'
+modified: '2026-09-17'
 author: Tom Cranstoun
 description: 'Field dictionary for workflow and process metadata used by tooling artefacts that borrow markdown frontmatter syntax. These fields describe submission acts, build acts, audit acts, and similar process state. They are NOT part of the open MX standard and NOT vendor extensions to the content vocabulary; they are workflow vocabulary that lives in its own dictionary so the canon and the vendor-extensions file stay focused on document content.'
 mx:
@@ -218,20 +218,11 @@ mx:
     context: Carried only when meaningful; can be omitted for revisions where the default false applies.
     description: Whether the package is filing a draft for the first time.
 
-  - name: workflowId
-    type: string
-    definition: Stable identifier for the workflow the record describes. Conventionally a slug naming
-      the team and the process, so the same record can be re-read at each periodic review and compared
-      across sectors without imposing one operating model.
-    example: survey-team-adaptive-interviewing
-    notes: One record per workflow. A redesign of the same workflow updates the record; a different
-      workflow gets a different identifier.
-    status: canonical
-    profile: workflow-record
-    required: required
-    context: The record's machine-readable handle, used in cross-references from provenance sidecars
-      and audit findings.
-    description: Stable handle for the workflow the record describes.
+  # workflowId, the record's own handle, is a core field in fields-data.yaml
+  # (provenance group, beside workflowRecord): a provenance record and any
+  # document produced under the workflow carry the same value as a pointer
+  # back to this record, and a public trail may not depend on a field
+  # outside the open standard. The header above still carries it.
 
   - name: baselineProcess
     type: string

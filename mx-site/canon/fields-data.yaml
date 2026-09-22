@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.16'
+version: '6.25'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-09-16'
+modified: '2026-09-19'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -313,6 +313,14 @@ mx:
     migration: migration
     script: script
     error-page: core
+    component:provenanceBadge: component
+    component:objectCard: component
+    component:relationshipLine: component
+    component:verificationPanel: component
+    component:narrativeLayer: component
+    component:gridMount: component
+    component:signalBar: component
+    component:objectInspector: component
   validationPolicy:
     keywords:
       - '@context'
@@ -337,6 +345,12 @@ mx:
     excludeFromTopLevel:
       rule: 'Auto: any field whose name contains ''.'''
   deprecations:
+    - old: attestation
+      replacement: attestationRecord
+      notes: >-
+        Top-level attestation carried two incompatible meanings (a record pointer and a status) while the name was
+        already taken inside the security block for an execution policy. Split into attestationRecord and
+        attestationStatus; mx.security.attestation is unaffected.
     - old: provenanceAuthor
       replacement: author
       notes: MX defers to Schema.org; the Zone 1 author field already carries this meaning.
@@ -371,6 +385,29 @@ mx:
     - old: category
       replacement: x-mx-category
       notes: CogNovaMX cog-taxonomy classifier, not a Gathering open-standard field. Moved to cognovamx-fields.yaml under the x-mx-public profile.
+    - old: wordCount
+      replacement: x-mx-wordCount
+      notes: >-
+        A vendor entry carries its prefix in the dictionary as in the document; the estate wrote the prefixed name
+        while the dictionary declared the bare one.
+    - old: canonicalSource
+      replacement: x-mx-canonicalSource
+      notes: >-
+        The generators write and the friable check reads the prefixed name; the bare entry was a stub with no
+        definition.
+    - old: x-mx-execute
+      replacement: execute
+      notes: >-
+        The action block that makes a cog an action-doc is the open-standard field execute, as the Gathering's cog
+        specification, the core-metadata draft and Appendix M name it. The vendor name entered the estate through a
+        drift correction that recorded what the cogs carried. Every x-mx- field is stripped from a published page
+        (ADR 63), so a cog published with the vendor name reaches its reader with no action block. ADR 70.
+    - old: priority
+      replacement: x-mx-priority
+      notes: >-
+        A rank on a work item inside a CogNovaMX workflow, not a property of the document: a vendor enum, declared in
+        cognovamx-fields.yaml under the x-mx-public profile. The contact-profile entry that survived the 2026-04-17
+        cull is retired with this rename.
     - old: riskLevel
       replacement: security.riskLevel
       notes: >-
@@ -1036,6 +1073,28 @@ mx:
       reason: >-
         Different roles. author is the original creator (immutable). maintainer is the person or team responsible for
         ongoing updates (mutable). A document's author never changes; its maintainer may.
+    - fields:
+        - narrativeContext
+        - context
+      overlap: false
+      reason: >-
+        Different concerns. context is the folder-metadata domain object (domain, purpose, constraints).
+        narrativeContext is the component family's URI to fuller editorial context a narrative layer points a human
+        reader to. Neither stands in for contextProvides or contextRequired, the Context Declaration pair.
+    - fields:
+        - inspectorSections
+        - sections
+      overlap: false
+      reason: >-
+        Different concerns. sections is an extended free-text field. inspectorSections is the component family's array
+        of named groups an object inspector presents an object's fields in.
+    - fields:
+        - layoutConstraints
+        - context.constraints
+      overlap: false
+      reason: >-
+        Different concerns. context.constraints names the constraints a folder's domain works under. layoutConstraints
+        is the component family's declared layout a grid mount places components by.
   fields:
     - name: title
       type: string
@@ -1625,6 +1684,340 @@ mx:
         - folder
         - cog
       required: optional
+    # --- Component family: the fields a rendered component carries to its human and machine readers.
+    # Defined by the MX Component Standard (mx-canon/ssot/papers/mx-component-standard.md). Every field is
+    # optional and Zone 2; a component also carries the root fields (identity, provenance, relationships,
+    # signals). The component kind is a value of the OKF type field (component:provenanceBadge and the
+    # other kinds routed through contentTypeToProfile). Approved by The Gathering on 2026-09-17 (ADR 68).
+    - name: displayMode
+      type: string
+      definition: How a provenance badge is rendered, collapsed to its origin and trust signals or expanded to the full record.
+      example: compact
+      validValues:
+        - compact
+        - expanded
+      notes: >-
+        A compact badge still exposes every trust signal one interaction away; the mode governs what is shown first,
+        never what is carried.
+      status: canonical
+      profile: component
+      required: optional
+    - name: icon
+      type: string
+      definition: The icon a provenance badge renders, as a URI or a styling token name.
+      example: token:mx-badge-verified
+      status: canonical
+      profile: component
+      required: optional
+    - name: verificationChanged
+      type: string
+      definition: The ISO 8601 timestamp of the last change in the object's verification state.
+      example: '2026-09-17T08:51:12Z'
+      notes: >-
+        A renderer signals the change in text or a screen-reader equivalent, never through motion or styling
+        alone; motion is optional on top.
+      status: canonical
+      profile: component
+      required: optional
+    - name: attestation
+      type: string-or-object
+      definition: The registry's attestation record for the object, or a pointer to it, the trust signal that answers who published this and when.
+      example: https://reginald.example.com/records/provenance-and-the-regulator
+      notes: >-
+        A URI points at the record; an object carries it inline. A component reports attestation beside currency,
+        freshness and corroboration and never folds them into one score. Distinct from security.attestation, the
+        execution policy's flag for whether attestation is required before an action block runs.
+      status: canonical
+      profile: component
+      required: optional
+    - name: preview
+      type: string
+      definition: The URI of a preview rendering of the object an object card represents.
+      example: https://mx.allabout.network/images/previews/provenance-regime-compatibility.png
+      status: canonical
+      profile: component
+      required: optional
+    - name: actions
+      type: array
+      definition: The actions an object card offers on its object, declared so a human and an agent see the same list.
+      example:
+        - name: open
+          target: https://mx.allabout.network/papers/provenance-regime-compatibility.html
+          verifiability: deterministic
+        - name: export-provenance
+          target: https://mx.allabout.network/papers/provenance-regime-compatibility.provenance.json
+          verifiability: deterministic
+          withheldFrom: [humans]
+      notes: >-
+        An action withheld from one audience is declared with withheldFrom rather than omitted, so the other audience
+        can see the withholding.
+      status: canonical
+      profile: component
+      required: optional
+    - name: actions[].name
+      type: string
+      definition: The name of one action an object card offers.
+      example: open
+      status: canonical
+      profile: component
+      required: optional
+    - name: actions[].target
+      type: string
+      definition: The URI the action resolves to.
+      example: https://mx.allabout.network/papers/provenance-regime-compatibility.html
+      status: canonical
+      profile: component
+      required: optional
+    - name: actions[].verifiability
+      type: string
+      definition: How the action's result can be checked, in the action-cog vocabulary.
+      example: deterministic
+      validValues:
+        - deterministic
+        - inferential
+        - external
+      status: canonical
+      profile: component
+      required: optional
+    - name: actions[].withheldFrom
+      type: array
+      definition: The audiences the action is not offered to.
+      example:
+        - humans
+      validValues:
+        - humans
+        - machines
+        - agents
+      status: canonical
+      profile: component
+      required: optional
+    - name: relationshipField
+      type: string
+      definition: The name of the relationship field a relationship line renders, which is also the line's direction.
+      example: buildsOn
+      validValues:
+        - buildsOn
+        - derivedFrom
+        - partOf
+        - supersedes
+        - supersededBy
+        - refersTo
+        - relatedTo
+      status: canonical
+      profile: component
+      required: optional
+    - name: inferred
+      type: boolean
+      definition: Whether the relationship a line renders was inferred rather than declared by the publisher.
+      example: false
+      notes: >-
+        A declared relationship carries no confidence value, because it is a statement by the publisher rather than
+        an estimate; an inferred one carries finalConfidence and confidenceMethod.
+      status: canonical
+      profile: component
+      required: optional
+    - name: visualWeight
+      type: string
+      definition: The styling token that sets a relationship line's weight, derived from confidence for an inferred relationship and fixed for a declared one.
+      example: token:mx-line-declared
+      status: canonical
+      profile: component
+      required: optional
+    - name: verificationSummary
+      type: string
+      definition: A one-line statement of the outcome of the verification trail a verification panel exposes.
+      example: Attested by the publisher, current version, publisher active, one claim corroborated.
+      status: canonical
+      profile: component
+      required: optional
+    - name: verificationSteps
+      type: array
+      definition: The steps of the verification trail, each timestamped and attributed to the agent that performed it.
+      example:
+        - timestamp: '2026-09-17T08:51:12Z'
+          agent: reginald.allabout.network
+          method: ed25519-signature-check
+          outcome: pass
+        - timestamp: '2026-09-17T08:51:13Z'
+          agent: check-blog-corroboration.cjs
+          method: corroboration-source-resolves
+          outcome: pass
+      notes: >-
+        The same step vocabulary as the provenance sidecar: timestamp, agent, method, outcome. Freshness is read from
+        the registry, never asserted by the object about itself.
+      status: canonical
+      profile: component
+      required: optional
+    - name: verificationSteps[].timestamp
+      type: string
+      definition: The ISO 8601 timestamp of one verification step.
+      example: '2026-09-17T08:51:12Z'
+      status: canonical
+      profile: component
+      required: optional
+    - name: verificationSteps[].agent
+      type: string
+      definition: The person, system, or rule that performed the step.
+      example: reginald.allabout.network
+      status: canonical
+      profile: component
+      required: optional
+    - name: verificationSteps[].method
+      type: string
+      definition: The method the step applied.
+      example: ed25519-signature-check
+      status: canonical
+      profile: component
+      required: optional
+    - name: verificationSteps[].outcome
+      type: string
+      definition: The outcome of the step.
+      example: pass
+      validValues:
+        - pass
+        - warn
+        - fail
+        - skipped
+      status: canonical
+      profile: component
+      required: optional
+    - name: finalConfidence
+      type: number
+      definition: The confidence a verification panel reports for its trail, from 0 to 1.
+      example: 0.92
+      notes: >-
+        The same 0 to 1 range as ai.confidence. Never a combined trust score: the trust signals stay separate, and this
+        value describes the trail, not the object.
+      status: canonical
+      profile: component
+      required: optional
+    - name: confidenceMethod
+      type: string
+      definition: How a confidence value was derived.
+      example: weighted-step-outcomes
+      status: canonical
+      profile: component
+      required: optional
+    - name: cue
+      type: string
+      definition: A short human-facing note a narrative layer carries beside a component, never in place of its metadata.
+      example: Read alongside the regime registry before quoting a date.
+      status: canonical
+      profile: component
+      required: optional
+    - name: narrativeContext
+      type: string
+      definition: The URI of fuller editorial context a narrative layer points a human reader to.
+      example: https://mx.allabout.network/blog/provenance-is-an-evidence-vehicle.html
+      notes: >-
+        Distinct from context (a folder-metadata domain object) and from contextProvides and contextRequired (the
+        Context Declaration pair). The narrative layer is optional and never obscures the structured fields.
+      status: canonical
+      profile: component
+      required: optional
+    - name: gridUnit
+      type: string
+      definition: The base layout unit a grid mount lays components out from.
+      example: 8px
+      status: canonical
+      profile: component
+      required: optional
+    - name: layoutConstraints
+      type: array
+      definition: The declared layout constraints a grid mount places components by, so position carries no meaning the metadata does not also carry.
+      example:
+        - component: provenanceBadge
+          adjacentTo: objectCard
+        - component: verificationPanel
+          span: 2
+      notes: >-
+        Named layoutConstraints rather than constraints to stay clear of context.constraints, the folder-metadata
+        domain constraint. Adjacency follows a declared relationship; adjacency alone never implies one.
+      status: canonical
+      profile: component
+      required: optional
+    - name: snapPoints
+      type: array
+      definition: The positions a grid mount lets a component occupy.
+      example:
+        - 0
+        - 8
+        - 16
+        - 24
+      status: canonical
+      profile: component
+      required: optional
+    - name: barState
+      type: object
+      definition: The state a signal bar displays, bound to a named field and its value rather than to a state that exists only in the rendering.
+      example:
+        field: validationStatus
+        value: valid
+      status: canonical
+      profile: component
+      required: optional
+    - name: barState.field
+      type: string
+      definition: The name of the field the signal bar is bound to.
+      example: validationStatus
+      status: canonical
+      profile: component
+      required: optional
+    - name: barState.value
+      type: string
+      definition: The bound field's value the signal bar displays.
+      example: valid
+      status: canonical
+      profile: component
+      required: optional
+    - name: pulse
+      type: boolean
+      definition: Whether a signal bar or badge animates a state change in addition to conveying it in text.
+      example: false
+      notes: Motion is always optional; the state is conveyed in text or a screen-reader equivalent first.
+      status: canonical
+      profile: component
+      required: optional
+    - name: styleToken
+      type: string
+      definition: The declared styling token for a signal bar's state, so one state looks the same everywhere it appears.
+      example: token:mx-state-valid
+      status: canonical
+      profile: component
+      required: optional
+    - name: inspectorSections
+      type: array
+      definition: The sections an object inspector groups the object's fields into, each naming its fields.
+      example:
+        - name: identity
+          fields: [title, canonicalUri, version, created, modified]
+        - name: provenance
+          fields: [authorship, generatedBy, provenanceUri]
+        - name: trust
+          fields: [attestation, integritySignature, trustLevel, x-mx-corroboratedBy, x-mx-contestedBy]
+      notes: >-
+        Named inspectorSections rather than sections, an existing extended field. The inspector shows every field
+        under the name the dictionary gives it and presents the same order every time it opens on the same object.
+      status: canonical
+      profile: component
+      required: optional
+    - name: inspectorSections[].name
+      type: string
+      definition: The name of one inspector section.
+      example: provenance
+      status: canonical
+      profile: component
+      required: optional
+    - name: inspectorSections[].fields
+      type: array
+      definition: The dictionary names of the fields the section groups.
+      example:
+        - authorship
+        - generatedBy
+        - provenanceUri
+      status: canonical
+      profile: component
+      required: optional
     - name: replacedBy
       type: string-or-object
       definition: >-
@@ -1660,7 +2053,13 @@ mx:
       example:
         runtime: node
         command: node scripts/validate.js
-      notes: Its presence makes a cog an action-doc. Action cogs live in scripts/ folder.
+      notes: >-
+        Its presence makes a cog an action-doc. Action cogs live in scripts/ folder. Sub-fields: route (bash, ollama
+        or agent; the default runtime for every block, declared in fields-data-cogs.yaml as execute.route) and
+        actions[] (id, name, an optional per-action route, and usage prose, which for actionType sop is the
+        descriptive instruction an LLM reads and performs). The vendor spelling x-mx-execute is deprecated (ADR 70):
+        a vendor field is stripped from a published page, and an action block a reader cannot meet is not an action
+        block.
       status: canonical
       profile: cog
       required: false
@@ -2300,18 +2699,6 @@ mx:
       notes: Helps agents select appropriate tools for the folder.
       status: canonical
       profile: folder
-    - name: priority
-      type: string
-      definition: 'Priority. Values: critical, high, medium, low.'
-      example: high
-      validValues:
-        - critical
-        - high
-        - medium
-        - low
-      notes: Determines outreach frequency and attention level.
-      status: canonical
-      profile: contact
     - name: cogId
       type: string
       definition: Unique cog identifier within the registry.
@@ -2376,6 +2763,88 @@ mx:
         record. Part of the provenance group.
       status: canonical
       profile: core
+    - name: workflowId
+      type: string
+      definition: >-
+        Stable identifier of the workflow record that declares the boundary a document or a provenance chain was
+        produced under: the tasks and authority given to the agent, the points where a human decides, and the
+        residual risk accepted. Conventionally a slug naming the team and the process.
+      example: survey-team-adaptive-interviewing
+      notes: >-
+        One record per workflow; a redesign updates the same record, a different workflow gets a different
+        identifier. The workflow-record profile carries it as the record's own handle; any document or provenance
+        record produced under that workflow carries the same value as a pointer back to it. Part of the provenance
+        group.
+      status: canonical
+      profile: core
+    - name: workflowRecord
+      type: string
+      definition: >-
+        Where the workflow record named by workflowId lives: a repo-root-relative path or a URL, so a reader walks
+        from a document or a provenance chain to the declared boundary in one step.
+      example: workflows/survey-team-adaptive-interviewing.md
+      notes: >-
+        The pointer, not the record. Follows the refersTo convention for a path and the refersToExternal convention
+        for a URL. Absent or null is an honest "no declared boundary", never a default. Part of the provenance
+        group.
+      status: canonical
+      profile: core
+    - name: residualRisk
+      type: object
+      definition: >-
+        The risk the operator judges to remain after the controls a document or a provenance chain records: a level
+        drawn from the security.riskLevel vocabulary, the reason that level remains, the role that accepted it, and
+        when it was reviewed.
+      example:
+        level: low
+        basis: Every model output is reviewed by the editor before it is filed; a misfiled draft is recoverable.
+        acceptedBy: deployer
+        reviewedAt: 2026-09-17
+      notes: >-
+        A declaration, never a computation, and never defaulted: absent means no residual-risk statement was made,
+        not that the risk is low. Answers the question a reader of the boundary pointer asks next, after what the
+        agent was allowed to do and what it did: what remains. A regime's own classification lives in its extension
+        room (x-eu-ai-act.riskClassification); this is the regime-neutral statement. Part of the provenance group.
+      status: canonical
+      profile: core
+      required: optional
+    - name: residualRisk.level
+      type: string
+      definition: The residual-risk level, in the same vocabulary as security.riskLevel so one risk scale serves the action-cog, the workflow record and the chain.
+      example: low
+      validValues:
+        - low
+        - medium
+        - high
+        - critical
+      notes: Required inside residualRisk; a block without a level is not a statement and a reader treats it as absent.
+      status: canonical
+      profile: core
+      required: optional
+    - name: residualRisk.basis
+      type: string
+      definition: One sentence stating why that level remains after the controls.
+      example: Every model output is reviewed by the editor before it is filed; a misfiled draft is recoverable.
+      notes: The reasoning a regulator reads first; without it the level is a number nobody can check.
+      status: canonical
+      profile: core
+      required: optional
+    - name: residualRisk.acceptedBy
+      type: string
+      definition: The role that accepted the residual risk, drawn from the provenance parties roles.
+      example: deployer
+      notes: A role, not a name; the named person behind the role is in parties[] or responsiblePerson.
+      status: canonical
+      profile: core
+      required: optional
+    - name: residualRisk.reviewedAt
+      type: string
+      definition: The date the residual-risk statement was last reviewed. ISO 8601 (YYYY-MM-DD).
+      example: 2026-09-17
+      notes: A statement with no review date is read as unreviewed; a periodic review updates it.
+      status: canonical
+      profile: core
+      required: optional
     - name: aiUsageDeclarationUri
       type: string
       definition: >-
@@ -2422,6 +2891,44 @@ mx:
         churn never invalidates it), file (the whole carrier), or a named range. A reader recomputes the digest and
         compares; a mismatch is evidence the copy was altered after publication. Aligns with RFC 9421 HTTP Message
         Signatures and Subresource Integrity for the algorithm and encoding vocabulary.
+      status: canonical
+      profile: core
+      required: optional
+    - name: attestationRecord
+      type: string
+      definition: >-
+        The registry attestation record for this artefact, or a pointer to it, naming who published the artefact and
+        when. Answers "who vouched for this, and where can I check?"
+      example: https://reginald.example.com/records/provenance-and-the-regulator
+      notes: >-
+        Genuineness family, and the first of the four trust signals a reader meets: attestation (who published this),
+        currency (is this the current version), freshness (is the publisher still standing behind it), corroboration
+        (does an authoritative outside source say the same). Each is reported separately and none is collapsed into a
+        single trust score. The value points AT an attestation record rather than embedding one, because the record is
+        itself a data file conforming to a cog schema and carries its own signature, digest and inclusion proof. Named
+        attestationRecord rather than attestation because that shorter name already carries a different meaning inside
+        the security block, where it declares whether execution requires cryptographic attestation; one name meaning
+        two things is the ambiguity MX exists to remove.
+      status: canonical
+      profile: core
+      required: optional
+    - name: attestationStatus
+      type: string
+      definition: >-
+        Whether this artefact has been attested by a registry yet. Answers "has anyone vouched for this, and was that
+        decision made deliberately?"
+      example: unattested
+      validValues:
+        - unattested
+        - pending
+        - attested
+        - withdrawn
+      notes: >-
+        Genuineness family, and deliberately distinct from attestationRecord: the record says WHERE the attestation is,
+        this says WHETHER there is one. Both can be absent, and that is a third state - nobody has considered it. An
+        explicit unattested is a considered position rather than an oversight, which is why the value exists instead of
+        being inferred from a missing record. withdrawn is the state that matters most to a reader, because an
+        attestation that once existed and was retracted is not the same as one that never existed.
       status: canonical
       profile: core
       required: optional
@@ -3167,7 +3674,7 @@ mx:
       optional:
         - dependencies
         - refersTo
-        - x-mx-execute
+        - execute
         - x-mx-blocks
         - x-mx-policy
         - x-mx-cogId
@@ -3749,3 +4256,83 @@ mx:
         - type
         - tags
         - resource
+    - name: component
+      description: >-
+        The fields a rendered component carries to its human reader and its machine reader, as the MX Component
+        Standard defines them. A component is the unit in which an MX-described object reaches a reader (a card, a
+        badge, a panel, an inspector view), and it carries the same metadata for both audiences: the root fields for
+        identity, provenance, relationships and signals, plus the component family for how the component presents
+        them. The component kind is a value of the OKF type field (component:provenanceBadge, component:objectCard,
+        component:relationshipLine, component:verificationPanel, component:narrativeLayer, component:gridMount,
+        component:signalBar, component:objectInspector), and every field in the family is optional. Trust signals are
+        reported separately and never combined into one score; a state is conveyed in text before any styling or
+        motion. The Gathering approved the family on 2026-09-17.
+      header: |
+        ---
+        # Carrier: a rendered component, described in the frontmatter of the document it stands for
+        # --- Zone 1a: Identity ---
+        title: "Provenance and the regulator"
+        description: "Position paper on evidence a regulator can verify without the publisher's site."
+        author: Tom Cranstoun
+        created: 2026-09-14
+        modified: 2026-09-17
+        version: "1.2"
+        # --- Zone 1b: OKF reserved surface ---
+        type: component:objectCard
+        tags: [example, component]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          canonicalUri: https://example.com/papers/provenance-and-the-regulator.md
+          status: active
+          authorship: solo
+          relatedTo: [https://example.com/papers/regime-registry.md]
+          attestation: https://reginald.example.com/records/provenance-and-the-regulator
+          displayMode: compact
+          preview: https://example.com/previews/provenance-and-the-regulator.png
+          actions:
+            - name: open
+              target: https://example.com/papers/provenance-and-the-regulator.html
+              verifiability: deterministic
+          verificationSummary: "Attested by the publisher, current version, publisher active."
+          finalConfidence: 0.92
+          confidenceMethod: weighted-step-outcomes
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - canonicalUri
+        - authorship
+      recommended:
+        - version
+        - status
+        - relatedTo
+        - attestationRecord
+      optional:
+        - type
+        - tags
+        - resource
+        - displayMode
+        - icon
+        - verificationChanged
+        - preview
+        - actions
+        - relationshipField
+        - inferred
+        - visualWeight
+        - verificationSummary
+        - verificationSteps
+        - finalConfidence
+        - confidenceMethod
+        - cue
+        - narrativeContext
+        - gridUnit
+        - layoutConstraints
+        - snapPoints
+        - barState
+        - pulse
+        - styleToken
+        - inspectorSections

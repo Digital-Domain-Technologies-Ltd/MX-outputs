@@ -5,12 +5,13 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Governance Gap Regulators Just Discovered"
 description: "Why the Trump administration's partial AI ban lift reveals a systemic problem - and what solving it means for AI governance"
 author: Tom Cranstoun
 created: 2026-06-29
-modified: 2026-06-29
-version: "1.1"
+modified: 2026-09-20
+version: "1.2"
 type: blog-post
 tags: [ai-governance, regulation, mx, reginald, transparency, verification]
 mx:
@@ -24,6 +25,8 @@ mx:
   runbook: "Published blog post. Edit source here; republish with npm run promote -- datalake/draft-site/blog/governance-gap-regulators-discovered.md --publish --republish --apply."
   stability: stable
   purpose: "Explain the regulatory gap revealed by the Anthropic export-ban negotiations and position REGINALD as the machine-readable attestation infrastructure that solves it."
+  contextProvides:
+    - "Raskin-structured sales narrative: the US AI export-ban as the world-shift, winners vs losers, promised land of verifiable attestation, REGINALD as the magic gift, production evidence."
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -64,14 +67,12 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Governance Gap Regulators Just Discovered">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.1">
+  <meta name="mx:version" content="1.2">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/governance-gap-regulators-discovered.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -97,7 +98,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -111,7 +112,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 901,
+        "wordCount": 1061,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -165,7 +166,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../images/avatars/tom-avatar.webp"
+            <img src="../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -191,18 +192,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="901">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1061">
         <header class="article-header">
           <h1>The Governance Gap Regulators Just Discovered</h1>
           <div class="article-meta"
                data-published="2026-06-29"
                data-modified="2026-06-29"
-               data-reading-time="5 min">
+               data-reading-time="6 min">
             <time datetime="2026-06-29">29 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>5 min read</span>
+            <span>6 min read</span>
           </div>
         </header>
 
@@ -212,6 +213,7 @@ mx:
 <p>AI regulation stopped being theoretical. In the space of two weeks, a government imposed an export ban on a frontier model, discovered it had no objective way to evaluate the safety claims involved, and negotiated a partial exception based on commercial pressure rather than evidence.</p>
 <p>That pattern will repeat. Every jurisdiction drafting AI governance frameworks is about to discover the same gap: there is no standard format for an AI safety claim, no way to check who made it, no way to verify it hasn't been altered, and no way for a third party to confirm it without access to internal systems.</p>
 <p>The companies that have already built their attestation infrastructure will navigate this cleanly. The ones that haven't will negotiate.</p>
+<p>Independent analysts have converged on the same diagnosis. <a href="https://fortune.com/2026/06/16/trump-administration-licensing-regime-for-frontier-ai-models-ad-hoc-and-opaque-eye-on-ai/">Fortune describes the current arrangement as a licensing regime for frontier AI that is &quot;ad hoc and opaque&quot;</a>, quoting the Wharton Accountable AI Lab's &quot;backdoor licensing regime&quot; characterisation. <a href="https://techcrunch.com/2026/06/26/openai-limits-gpt-5-6-rollout-after-government-request-says-restrictions-shouldnt-be-the-norm/">A former White House AI adviser calls it a de facto involuntary licensing regime</a> - one with no defined standards behind it. <a href="https://iapp.org/news/a/thought-for-the-week-us-government-order-forces-commercial-suspension-of-two-fronteir-ai-models">The IAPP notes the suspension order arrived with no published process</a>, and <a href="https://fortune.com/2026/07/02/anthropic-fable-and-mythos-are-restored-but-us-ai-policy-is-still-a-mess/">Fortune's assessment after the models were restored</a> is that the underlying policy remains improvised. The <a href="https://www.business-standard.com/world-news/us-govt-in-advanced-talks-with-ai-companies-for-voluntary-model-standards-126070200121_1.html">voluntary standards framework the White House is now negotiating with the major labs</a> would publish criteria that today exist only inside private negotiations - which is the gap this post is about.</p>
 <h2 id="what-it-looks-like-when-you-dont-have-it" tabindex="-1">What It Looks Like When You Don't Have It</h2>
 <p>Anthropic is one of the most technically sophisticated AI companies in the world. They still spent two weeks under a partial export ban because the government had no standardised way to evaluate their safety claims. The result: a negotiated exception for select partners, ongoing uncertainty, and a framework-building process that will define the next round of restrictions.</p>
 <p>That is what it looks like without verifiable attestation. A company that cannot prove its claims to an objective third party cannot get a clean answer from a regulator. It gets a negotiation, and negotiations are slow, political, and unpredictable.</p>
@@ -228,7 +230,7 @@ mx:
 <p><strong>What REGINALD does:</strong> Uses RFC 9421 HTTP signatures over an operator-controlled DID-document key. If the attestation changes, the signature fails. The verifier knows immediately.</p>
 <h3 id="section-3-there-is-no-chain-of-custody" tabindex="-1">3. There is no chain of custody</h3>
 <p>A single attested claim is a snapshot. A regulator needs to know how that claim was reached and what changed between training and deployment.</p>
-<p><strong>What REGINALD does:</strong> Maintains an immutable audit trail. Every change tracked, every review recorded, every test result stored.</p>
+<p><strong>What REGINALD does:</strong> Keeps each attestation as a dated record in a series a verifier reads in order, so when a claim was made, and what superseded it, is checkable rather than asserted. What the registry holds is what was submitted to it. Keeping the series complete is the publisher's obligation, and nobody can confer a completeness they were never given.</p>
 <h3 id="section-4-third-party-verification-requires-internal-access" tabindex="-1">4. Third-party verification requires internal access</h3>
 <p>Asking a partner or auditor to verify AI claims today means giving them access to systems you may not want to share.</p>
 <p><strong>What REGINALD does:</strong> Makes attestations public and verifiable by any third party using standard open-source tools - DID resolution, JCS, Ed25519. No internal access required.</p>
@@ -253,7 +255,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -304,5 +306,6 @@ mx:
   </footer>
 
   <script src="../js/app.js"></script>
+  <script type="module" src="../js/mx-provenance-demo.js"></script>
 </body>
 </html>

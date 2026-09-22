@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '1.22'
+version: '1.24'
 created: '2026-04-15'
-modified: '2026-09-16'
+modified: '2026-09-18'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -48,6 +48,27 @@ mx:
       profile: x-mx-public
       required: true
       context: Used in .mx.yaml.md folder metadata for git submodules to categorise them in the hub mount table.
+    - name: x-mx-componentKind
+      type: string
+      definition: 'The MX Component Standard kind an Intent CMS chunk renders, mirrored from the chunk registry into the chunk directory descriptor.'
+      example: component:objectCard
+      validValues:
+        - component:provenanceBadge
+        - component:objectCard
+        - component:relationshipLine
+        - component:verificationPanel
+        - component:narrativeLayer
+        - component:gridMount
+        - component:signalBar
+        - component:objectInspector
+      notes: >-
+        A library fact about the chunk directory, so it stays in the vendor tier and never reaches a published page.
+        The component family the rendered chunk carries to a reader (displayMode, actions, cue and siblings) is core MX,
+        never this field. The registry (intent-cms/lib/chunks/registry.cjs) is the authority; the descriptor mirrors it.
+      status: canonical
+      profile: x-mx-public
+      required: optional
+      context: Used in intent-cms/chunks/<name>/.mx.yaml.md folder metadata.
     - name: x-mx-mountSwappable
       type: string-or-boolean
       definition: 'Whether this mount can be swapped for a different repository. Values: true, false, fork.'
@@ -408,6 +429,7 @@ mx:
       type: string
       definition: Next concrete action this contact / opportunity / report needs.
       example: Schedule follow-up call after their MX audit lands.
+      notes: Free-form text describing the next step. Pairs with nextActionDate, which carries the deadline.
       status: canonical
       profile:
         - contact
@@ -670,11 +692,14 @@ mx:
       status: canonical
       profile: folder
       required: optional
-    - name: wordCount
+    - name: x-mx-wordCount
       type: number
       definition: Word count of the document content.
       example: 3500
-      notes: Used for publication planning and progress tracking.
+      notes: >-
+        Used for publication planning and progress tracking. The bare name is a deprecated synonym; a vendor entry
+        carries its prefix in the dictionary as in the document. x-mx-wordCountApprox is the page programme's
+        estimate before a draft exists, a different signal.
       status: canonical
       profile: book
     - name: blogState
@@ -739,13 +764,6 @@ mx:
       type: string
       definition: Organisation name.
       example: CogNovaMX Ltd
-      status: canonical
-      profile: contact
-    - name: nextAction
-      type: string
-      definition: Next action for this contact.
-      example: Follow up after Frankfurt CMS Summit
-      notes: Free-form text describing the next step.
       status: canonical
       profile: contact
     - name: relatedFolders
@@ -1579,11 +1597,6 @@ mx:
       definition: 'Extended metadata field: entity type.'
       status: canonical
       profile: any
-    - name: capabilities
-      type: string
-      definition: 'Extended metadata field: capabilities.'
-      status: canonical
-      profile: any
     - name: communityAuthors
       type: string-or-array
       definition: Array of community contributors to this document.
@@ -1706,9 +1719,13 @@ mx:
       definition: Estimated value of a partnership. Financial or strategic metric.
       status: canonical
       profile: contact
-    - name: canonicalSource
+    - name: x-mx-canonicalSource
       type: string
-      definition: 'Cog operational metadata: canonical source.'
+      definition: The source a generated or mirrored document is derived from, as a repo-relative path or a statement naming the generator, so a reader edits the source and never the artefact.
+      example: mx-canon/mx-maxine-lives/pim/records/
+      notes: >-
+        Written by the generators (the pim views, the audit deck scaffold) and read by the friable check, which names
+        the source to regenerate from. The bare name is a deprecated synonym.
       status: canonical
       profile: cog
     - name: prerequisites

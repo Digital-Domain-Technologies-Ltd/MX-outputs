@@ -21,6 +21,18 @@ import {
   inspectCarrier,
   detectCarrierFromName,
 } from './mx-inspector-core.js';
+import {
+  objectCard,
+  verificationPanel,
+  relationshipLine,
+  signalBar,
+  narrativeLayer,
+  gridMount,
+  objectInspector,
+  render as renderComponents,
+  RELATIONSHIP_FIELDS,
+} from './component-mx.js';
+import { el } from './mx-dom.js';
 
 // Vendored from pdfjs-dist@4.10.38. Files are kept as .js (not .mjs) because
 // the Cloudflare worker's content-type map does not yet emit
@@ -116,152 +128,167 @@ function downloadBlob(filename, mime, content) {
   URL.revokeObjectURL(url);
 }
 
-function evidenceTable(classification) {
-  const rows = classification.evidence.map((row) => `
-    <tr>
-      <td>${escapeHtml(row.label)}</td>
-      <td class="tool-evidence-status is-${row.status}">${row.status.toUpperCase()}</td>
-      <td class="tool-evidence-detail">${escapeHtml(row.detail)}</td>
-    </tr>
-  `).join('');
-  return `
-    <table class="tool-evidence" aria-label="Evidence findings">
-      <thead><tr><th>Check</th><th>Status</th><th>Detail</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
+// The inspected file as one MX object: the fields the carrier declares (keys
+// normalised to the dictionary's camelCase, since the PDF path capitalises
+// XMP labels), plus the verification trail the inspection itself produced.
+function inspectedObject(file, carrier, classification, findings, inspectedAt) {
+  const obj = {};
+  for (const [k, v] of Object.entries(findings.fields || {})) {
+    obj[k.charAt(0).toLowerCase() + k.slice(1)] = v;
+  }
+  if (!obj.title) obj.title = file.name;
+  obj.validationStatus = classification.tier;
+  if (findings.responsiblePerson && findings.responsiblePerson.name && !obj.responsiblePerson) {
+    obj.responsiblePerson = findings.responsiblePerson.name;
+  }
+  const parsed = findings.provenance && findings.provenance.parsed;
+  if (parsed) {
+    obj.verificationChanged = parsed.lastRunAt || parsed.startedAt || undefined;
+    if (!obj.generatedBy && parsed.operator) obj.generatedBy = parsed.operator;
+    if (!obj.authorship && Array.isArray(parsed.steps) && parsed.steps.length) obj.authorship = 'curated';
+  }
+  const rows = classification.evidence || [];
+  obj.verificationSteps = rows.map((row) => ({
+    timestamp: inspectedAt,
+    agent: 'mx-inspector-core.js (in your browser)',
+    method: row.key,
+    outcome: row.status === 'na' ? 'skipped' : row.status,
+    detail: row.detail,
+  }));
+  const judged = rows.filter((r) => r.status === 'pass' || r.status === 'fail');
+  if (judged.length) {
+    obj.finalConfidence = Math.round((judged.filter((r) => r.status === 'pass').length / judged.length) * 100) / 100;
+    obj.confidenceMethod = 'share of evidence checks passed';
+  }
+  obj.verificationSummary = `${TIER_LABELS[classification.tier] || classification.tier}: ${judged.filter((r) => r.status === 'pass').length} of ${judged.length} evidence check(s) passed for this ${carrier}.`;
+  return obj;
 }
 
-function metadataTable(fields) {
-  const keys = Object.keys(fields || {});
-  if (!keys.length) return '';
-  const rows = keys.map((k) => `
-    <tr><td>${escapeHtml(k)}</td><td class="tool-evidence-detail">${escapeHtml(fields[k])}</td></tr>
-  `).join('');
-  return `
-    <h3>MX metadata</h3>
-    <table class="tool-evidence" aria-label="MX metadata fields">
-      <thead><tr><th>Field</th><th>Value</th></tr></thead>
-      <tbody>${rows}</tbody>
-    </table>`;
+// The actions the object card offers on an inspected file, the same list for a
+// person and an agent. The buttons are wired by their data-mx-action-button name.
+function inspectionActions({ isPdf, provDownload, provUrl, hasEmbedded }) {
+  const actions = [{ name: 'download-inspection-json', label: 'inspection.json', verifiability: 'deterministic' }];
+  if (isPdf) actions.push({ name: 'download-report-md', label: 'inspection-report.md', verifiability: 'deterministic' });
+  if (provDownload) actions.push({ name: 'download-provenance', label: 'provenance-ai-extracted.json', verifiability: 'deterministic' });
+  if (provUrl) {
+    actions.push({
+      name: 'fetch-canonical-provenance',
+      label: hasEmbedded ? 'Fetch canonical provenance' : 'Fetch and walk the provenance record',
+      target: provUrl,
+      verifiability: 'external',
+    });
+  }
+  actions.push({ name: 'inspect-another', label: 'Inspect another file', verifiability: 'deterministic' });
+  return actions;
 }
 
-function renderResults(file, carrier, classification, findings, resultsEl) {
+// One relationship line per target of every relationship field the object declares.
+function relationshipLines(obj, fallbackFrom) {
+  const lines = [];
+  for (const field of RELATIONSHIP_FIELDS) {
+    const raw = obj[field];
+    if (!raw) continue;
+    const targets = Array.isArray(raw) ? raw : String(raw).split(/,\s*/);
+    for (const t of targets) if (t) lines.push(relationshipLine(obj.canonicalUri || fallbackFrom, field, t));
+  }
+  return lines;
+}
+
+// Wire the rendered actions to their handlers.
+function wireResultActions(resultsEl, ctx) {
+  const { file, baseStem, classification, findings, inspectionJson, provUrl, provStatus } = ctx;
+  const onAction = (name, fn) => {
+    const btn = resultsEl.querySelector(`[data-mx-action-button="${name}"]`);
+    if (btn) btn.addEventListener('click', fn);
+  };
+  const dropzoneEl = document.querySelector('[data-mx-inspector-dropzone]');
+  onAction('inspect-another', () => {
+    resultsEl.hidden = true;
+    resultsEl.textContent = '';
+    hideChain();
+    const input = document.querySelector('[data-mx-inspector-input]');
+    if (input) input.value = '';
+    if (dropzoneEl) {
+      dropzoneEl.hidden = false;
+      dropzoneEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  });
+  onAction('download-inspection-json', () => {
+    downloadBlob(`${baseStem}-inspection.json`, 'application/json', JSON.stringify(inspectionJson, null, 2));
+  });
+  onAction('export-inspection', () => {
+    downloadBlob(`${baseStem}-mx-fields.json`, 'application/json', JSON.stringify(inspectionJson.components, null, 2));
+  });
+  onAction('download-report-md', () => {
+    downloadBlob(`${baseStem}-inspection-report.md`, 'text/markdown', makeReportMarkdown(file, classification, findings));
+  });
+  onAction('download-provenance', () => {
+    downloadBlob(`${baseStem}-provenance-ai-extracted.json`, 'application/json', JSON.stringify(findings.provenance.parsed, null, 2));
+  });
+  // Rendered as a link (the target is a URL), so the handler takes over the
+  // click and walks the record in place; without script the link still resolves.
+  onAction('fetch-canonical-provenance', (event) => {
+    event.preventDefault();
+    fetchAndWalkProvenance(provUrl, provStatus);
+  });
+}
+
+// Render an inspection as the MX Component Standard's components (component-mx.js):
+// signal bars for the verdict, an object card with a provenance badge and the
+// actions, a verification panel of the checks, a relationship line per declared
+// relationship, an inspector view of every field, and a narrative layer. Exported
+// so the jsdom smoke check in tests/test-component-mx.js can render one.
+export function renderResults(file, carrier, classification, findings, resultsEl) {
   const tier = classification.tier;
-  const verdictClass = `tool-verdict is-${tier === 'eaa-tagged' ? 'eaa' : tier}`;
   const isPdf = carrier === 'pdf';
   const pivot = isPdf ? PIVOT_COPY[tier] : (GENERIC_PIVOT[tier] || GENERIC_PIVOT.plain);
   const baseStem = file.name.replace(/\.[^.]+$/, '');
-
-  const provDownload = isPdf && findings.provenance && findings.provenance.present && findings.provenance.parsed;
-
-  // A file may name its canonical provenance record by URL (mx.provenanceUri).
-  // Offer to fetch it: when a chain is already embedded, to check for a newer
-  // canonical version; otherwise, as the way to walk the chain at all.
+  const inspectedAt = new Date().toISOString();
   const fields = findings.fields || {};
-  const provUrlRaw = fields.provenanceUri || fields.provenanceuri || '';
+  const provUrlRaw = fields.provenanceUri || fields.provenanceuri || fields.ProvenanceUri || '';
   const provUrl = isHttpUrl(provUrlRaw) ? provUrlRaw.trim() : '';
   const hasEmbedded = Boolean(findings.provenance && findings.provenance.parsed);
-  const provUrlPanel = provUrl ? `
-    <div class="tool-prov-url" data-prov-url>
-      <h3>Canonical provenance</h3>
-      <p>${hasEmbedded
-    ? 'This file also names a canonical provenance record. Fetch it to check for a newer version than the embedded copy:'
-    : 'This file names its provenance record at a URL. Fetching it reads that public URL only; your file is never sent.'}</p>
-      <p><code>${escapeHtml(provUrl)}</code></p>
-      <button type="button" class="tool-download" data-prov-fetch>${hasEmbedded ? 'Fetch canonical version' : 'Fetch and walk it'}</button>
-      <p class="tool-prov-url-status" data-prov-url-status aria-live="polite"></p>
-    </div>` : '';
+  const provDownload = isPdf && hasEmbedded;
 
-  // The results REPLACE the dropzone in the hero: the dropzone hides, this box
-  // renders in its place, and the "Inspect another file" control brings the
-  // dropzone back. When the file embeds a provenance chain, a highlighted jump
-  // link points at the evidence-chain walk that has opened further down.
+  const obj = inspectedObject(file, carrier, classification, findings, inspectedAt);
+  obj.actions = inspectionActions({ isPdf, provDownload, provUrl, hasEmbedded });
+
+  const heading = el('h2', { id: 'results-heading', text: 'Inspection result' });
+  const verdict = el('p', { class: 'mxc-verdict-line' },
+    signalBar('validationStatus', TIER_LABELS[tier] || tier, { styleToken: `token:mx-state-${tier}` }),
+    signalBar('carrier', carrier),
+    obj.status ? signalBar('status', obj.status) : null,
+    el('span', { class: 'tool-verdict-pdf-name', text: file.name }));
   const chainJump = hasEmbedded
-    ? '<p><a class="tool-chain-jump" href="#explore-the-chain">Walk the evidence chain &darr;</a></p>'
-    : '';
+    ? el('p', {}, el('a', { class: 'tool-chain-jump', href: '#explore-the-chain', text: 'Walk the evidence chain' }))
+    : null;
+  const provStatus = el('p', { class: 'tool-prov-url-status', 'data-prov-url-status': '', 'aria-live': 'polite' });
+  const inspector = objectInspector(obj, { heading: 'Every MX field this file carries' });
+  const grid = gridMount([
+    objectCard(obj, { fallbackTitle: file.name, displayMode: 'compact' }),
+    verificationPanel(obj, { heading: 'What the inspection checked' }),
+    ...relationshipLines(obj, file.name),
+    inspector,
+  ], { gridUnit: '8px' });
+  const note = narrativeLayer(pivot.body, pivot.href, { heading: pivot.headline, contextLabel: pivot.cta });
+  note.appendChild(el('p', {}, el('a', { class: 'tool-pivot-cta', href: '/about/contact.html', text: 'Contact us' })));
 
-  resultsEl.innerHTML = `
-    <h2 id="results-heading">Inspection result</h2>
-    <p>
-      <span class="${verdictClass}">${TIER_LABELS[tier] || tier}</span>
-      <span class="tool-verdict-pdf-name">${escapeHtml(file.name)} <small>(${escapeHtml(carrier)})</small></span>
-      <button type="button" class="tool-download tool-inspect-another" data-inspect-another>Inspect another file</button>
-    </p>
-    ${chainJump}
-
-    ${evidenceTable(classification)}
-    ${metadataTable(findings.fields)}
-    ${provUrlPanel}
-
-    <h3>Downloads</h3>
-    <div class="tool-downloads" id="tool-downloads">
-      <button type="button" class="tool-download" data-download="json">inspection.json</button>
-      ${isPdf ? '<button type="button" class="tool-download" data-download="md">inspection-report.md</button>' : ''}
-      ${provDownload ? '<button type="button" class="tool-download" data-download="provenance">provenance-ai-extracted.json</button>' : ''}
-    </div>
-
-    <div class="tool-pivot">
-      <h3>${escapeHtml(pivot.headline)}</h3>
-      <p>${escapeHtml(pivot.body)}</p>
-      <p>
-        <a class="tool-pivot-cta" href="${pivot.href}">${escapeHtml(pivot.cta)}</a>
-        <a class="tool-pivot-cta" href="/about/contact.html" style="margin-left: 0.5rem;">Contact us</a>
-      </p>
-    </div>
-  `;
+  renderComponents(resultsEl, [heading, verdict, chainJump, grid, provStatus, note]);
   resultsEl.hidden = false;
-
-  // The swap: results stand where the dropzone stood; the control restores it.
   const dropzoneEl = document.querySelector('[data-mx-inspector-dropzone]');
   if (dropzoneEl) dropzoneEl.hidden = true;
-  const anotherBtn = resultsEl.querySelector('[data-inspect-another]');
-  if (anotherBtn) {
-    anotherBtn.addEventListener('click', () => {
-      resultsEl.hidden = true;
-      resultsEl.innerHTML = '';
-      hideChain();
-      const input = document.querySelector('[data-mx-inspector-input]');
-      if (input) input.value = '';
-      if (dropzoneEl) {
-        dropzoneEl.hidden = false;
-        dropzoneEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    });
-  }
 
   const inspectionJson = {
-    inspectedAt: new Date().toISOString(),
+    inspectedAt,
     file: { name: file.name, size: file.size },
     carrier,
     verdict: tier,
     evidence: classification.evidence,
     fields: findings.fields || null,
     responsiblePerson: findings.responsiblePerson || null,
+    components: inspector.mxExport(),
   };
-
-  resultsEl.querySelector('[data-download="json"]').addEventListener('click', () => {
-    downloadBlob(`${baseStem}-inspection.json`, 'application/json', JSON.stringify(inspectionJson, null, 2));
-  });
-
-  const mdBtn = resultsEl.querySelector('[data-download="md"]');
-  if (mdBtn) {
-    mdBtn.addEventListener('click', () => {
-      downloadBlob(`${baseStem}-inspection-report.md`, 'text/markdown', makeReportMarkdown(file, classification, findings));
-    });
-  }
-
-  const provBtn = resultsEl.querySelector('[data-download="provenance"]');
-  if (provBtn) {
-    provBtn.addEventListener('click', () => {
-      downloadBlob(`${baseStem}-provenance-ai-extracted.json`, 'application/json', JSON.stringify(findings.provenance.parsed, null, 2));
-    });
-  }
-
-  const fetchBtn = resultsEl.querySelector('[data-prov-fetch]');
-  if (fetchBtn) {
-    const st = resultsEl.querySelector('[data-prov-url-status]');
-    fetchBtn.addEventListener('click', () => fetchAndWalkProvenance(provUrl, st));
-  }
+  wireResultActions(resultsEl, { file, baseStem, classification, findings, inspectionJson, provUrl, provStatus });
 }
 
 function renderError(resultsEl, message) {
