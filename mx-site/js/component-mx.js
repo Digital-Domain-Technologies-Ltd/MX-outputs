@@ -39,7 +39,7 @@ export const RELATIONSHIP_FIELDS = Object.freeze([
 
 const IDENTITY_FIELDS = ['title', 'description', 'canonicalUri', 'version', 'created', 'modified', 'type'];
 const PROVENANCE_FIELDS = ['authorship', 'generatedBy', 'provenanceUri', 'author', 'responsiblePerson'];
-const TRUST_FIELDS = ['attestation', 'integritySignature', 'trustLevel', 'x-mx-corroboratedBy', 'x-mx-contestedBy'];
+const TRUST_FIELDS = ['attestation', 'integritySignature', 'trustLevel', 'corroboratedBy', 'contestedBy'];
 const REUSE_FIELDS = ['license', 'contentPolicy', 'attribution', 'aiUsageDeclarationUri', 'status', 'validationStatus', 'expires'];
 
 // ── Helpers ────────────────────────────────────────────────
@@ -117,8 +117,8 @@ function definitionList(pairs, cls) {
  * authoritative sources the object declares, with contested claims named.
  */
 export function trustSignals(obj = {}, opts = {}) {
-  const corroborated = list([].concat(obj['x-mx-corroboratedBy'] || []));
-  const contested = list([].concat(obj['x-mx-contestedBy'] || []));
+  const corroborated = list([].concat(obj['corroboratedBy'] || []));
+  const contested = list([].concat(obj['contestedBy'] || []));
   let attestation = 'not declared';
   if (isPresent(obj.attestation)) attestation = `attested (${valueText(obj.attestation)})`;
   else if (isPresent(obj.integritySignature)) attestation = 'signed, attestation not declared';

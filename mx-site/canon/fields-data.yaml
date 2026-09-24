@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.25'
+version: '6.4'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-09-19'
+modified: '2026-09-23'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -345,6 +345,21 @@ mx:
     excludeFromTopLevel:
       rule: 'Auto: any field whose name contains ''.'''
   deprecations:
+    - old: x-mx-corroboratedBy
+      replacement: corroboratedBy
+      notes: >-
+        Corroboration is a property of the content, not of one vendor's registry, so the field is core rather than a
+        CogNovaMX extension. Its recorded-dissent half, contestedBy, is core beside it.
+    - old: x-mx-contestedBy
+      replacement: contestedBy
+      notes: >-
+        The disagreements behind a claim are a property of the content in the same way agreement is, and an evidence
+        layer that can only record agreement is not one, so the pair is core together.
+    - old: x-mx-quotes
+      replacement: quotes
+      notes: >-
+        Which words a document carries rather than authors is a fact every consumer of the document needs, so the
+        field is core rather than a CogNovaMX extension.
     - old: attestation
       replacement: attestationRecord
       notes: >-
@@ -1656,6 +1671,67 @@ mx:
       profile: core
       required: optional
       context: 'Declared on any document whose argument rests on named external works: papers, standards, essays, reports.'
+    - name: corroboratedBy
+      type: array
+      definition: >-
+        The external authoritative sources that independently state this document's load-bearing claims: a flat list
+        of http(s) URLs, each of which also appears as a citation in the body.
+      example:
+        - https://typesafe.ai/blog/introducing-system-one-models-and-jev
+        - https://docs.typesafe.ai/primitives
+      notes: >-
+        The carrier of the corroboration trust signal. Attestation proves who published a claim, never that anyone
+        authoritative agrees, so corroboration is the separate signal a machine weights at the decision turn. A
+        citation in refersToExternal says the document read a source; an entry here says the source states the claim.
+        A URL on the publisher's own host is self-reference, not corroboration. The recorded disagreements behind the
+        same claims are its other half, contestedBy. Enforced by scripts/check-blog-corroboration.cjs (Gate 27).
+        Governing principle: Corroboration over Assertion.
+      status: canonical
+      profile: core
+      required: optional
+      context: 'Declared on any document whose claims are load-bearing; enforced today on mx-site blog sources.'
+    - name: contestedBy
+      type: array
+      definition: >-
+        The recorded disagreements behind this document's load-bearing claims: an array of objects, each naming the
+        disputed claim, the contesting sources and what each actually states, whether the disagreement is resolved,
+        and the basis on which this document states the claim as it does.
+      example:
+        - claim: Jev answers in under 500 milliseconds end to end.
+          sources:
+            - uri: https://typesafe.ai/blog/introducing-system-one-models-and-jev
+              states: 70 to 500 milliseconds, measured from the vendor's own laptops on the US West Coast
+          status: unresolved
+          basis: The figure is the vendor's and no independent measurement exists yet, so the claim is stated as the vendor's.
+      notes: >-
+        The other half of corroboratedBy. Corroboration records that authoritative sources agree; this records that
+        they do not, and preserves the disagreement instead of flattening it, so a machine sees each source, what it
+        states, and how the publisher resolved it rather than inheriting one side as settled. status is resolved or
+        unresolved; unresolved is a signal to down-weight the claim, not a defect. Every source uri must be external
+        authoritative and cited in the body, the same orphan rule corroboration carries. Enforced by
+        scripts/check-blog-corroboration.cjs (Gate 27). Governing principle: Corroboration over Assertion.
+      status: canonical
+      profile: core
+      required: optional
+      context: 'Declared on any document that states a claim authoritative sources disagree about.'
+    - name: quotes
+      type: array
+      definition: >-
+        The verbatim spans in this document that are someone else's words, external blockquotes, cited passages and
+        quoted fragments, each entry the exact text as it appears in the body.
+      example:
+        - "The model returns a probability distribution over your options or levels, never a value outside them."
+      notes: >-
+        Declares which words the document carries rather than authors, so a prose-quality scanner, a character gate
+        or a dialect check judges the author's own writing and leaves the quoted words alone; the writing of someone
+        else's words is not the author's to rewrite. Only declared spans are exempt, and the author's own scare-quoted
+        words stay in scope. A populator (npm run quotes:populate) fills it from the body's blockquotes; a quoted
+        fragment inside a sentence is declared by hand. Distinct from x-mx-allowEmdash, which exempts a span of the
+        author's own prose from the dash rule.
+      status: canonical
+      profile: core
+      required: optional
+      context: 'Declared on any document that reproduces external words verbatim.'
     - name: relatedTo
       type: array
       definition: >-
@@ -1994,7 +2070,7 @@ mx:
         - name: provenance
           fields: [authorship, generatedBy, provenanceUri]
         - name: trust
-          fields: [attestation, integritySignature, trustLevel, x-mx-corroboratedBy, x-mx-contestedBy]
+          fields: [attestation, integritySignature, trustLevel, corroboratedBy, contestedBy]
       notes: >-
         Named inspectorSections rather than sections, an existing extended field. The inspector shows every field
         under the name the dictionary gives it and presents the same order every time it opens on the same object.
@@ -3919,7 +3995,7 @@ mx:
         - chapter
         - canonicalUri
       optional:
-        - x-mx-quotes
+        - quotes
         - x-mx-createdHash
         - copyright
         - x-mx-wordCount
@@ -4037,7 +4113,7 @@ mx:
         - x-mx-pdfDoctype
         - x-mx-createdHash
         - generate
-        - x-mx-quotes
+        - quotes
         - type
         - tags
         - resource

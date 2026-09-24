@@ -14,7 +14,7 @@ mx:
   audience: [humans, machines]
   stability: stable
   runbook: "Standalone LinkedIn deliverable. Paste into LinkedIn as an article; delete the paste-and-publish notes block first. Not promoted to HTML."
-  x-mx-quotes:
+  quotes:
     - "Choose what is better for the planet. Reduce compute, reduce inference, reduce energy."
     - "This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation."
   contextProvides: ["LinkedIn article on MX reducing hallucinations, inference cost, and energy, with a free-audit CTA."]

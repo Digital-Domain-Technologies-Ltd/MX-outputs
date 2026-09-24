@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '1.24'
+version: '1.26'
 created: '2026-04-15'
-modified: '2026-09-18'
+modified: '2026-09-23'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -2463,46 +2463,6 @@ mx:
       profile: x-mx-public
       required: false
       context: 'Declared on cog files whose scope is governed by a recorded Business Decision Record.'
-    - name: x-mx-corroboratedBy
-      type: array
-      definition: >-
-        The external authoritative sources that independently state this document's load-bearing claims. A flat list
-        of http(s) URLs, each of which must also appear as a citation in the body.
-      example:
-        - https://arxiv.org/abs/2005.11401
-      notes: >-
-        Attestation proves who published a claim, never that anyone authoritative agrees, so corroboration is the
-        separate signal a machine weights at the decision turn. A URL on a CogNovaMX host is self-reference, not
-        corroboration. Enforced by scripts/check-blog-corroboration.cjs (Gate 27). Governing principle:
-        Corroboration over Assertion.
-      status: canonical
-      profile: x-mx-public
-      required: false
-      context: 'Declared on any document whose claims are load-bearing; enforced today on mx-site blog sources.'
-    - name: x-mx-contestedBy
-      type: array
-      definition: >-
-        The recorded disagreements behind this document's load-bearing claims. An array of objects, each naming the
-        disputed claim, the contesting sources and what each actually states, whether the disagreement is resolved,
-        and the basis on which this document states the claim as it does.
-      example:
-        - claim: The high-risk obligations apply from 2 August 2026.
-          sources:
-            - uri: https://data.consilium.europa.eu/doc/document/x/en/pdf
-              states: deferred to 2 December 2027 by the Digital Omnibus
-          status: resolved
-          basis: The Council's own adopted record supersedes the third-party tracker.
-      notes: >-
-        The other half of x-mx-corroboratedBy. Corroboration records that authoritative sources agree; this records
-        that they do not, and preserves the disagreement instead of flattening it, so a machine sees each source, what
-        it states, and how the publisher resolved it rather than inheriting one side as settled. status is resolved or
-        unresolved; unresolved is a signal to down-weight the claim, not a defect. Every source uri must be external
-        authoritative and cited in the body, the same orphan rule corroboration carries. Enforced by
-        scripts/check-blog-corroboration.cjs (Gate 27). Governing principle: Corroboration over Assertion.
-      status: canonical
-      profile: x-mx-public
-      required: false
-      context: 'Declared on any document that states a claim authoritative sources disagree about.'
     - name: x-mx-managedBy
       type: string
       definition: >-
@@ -2775,8 +2735,6 @@ mx:
         - x-mx-adr
         - x-mx-ndr
         - x-mx-bdr
-        - x-mx-corroboratedBy
-        - x-mx-contestedBy
         - x-mx-managedBy
         - x-mx-productionCanonical
         - x-mx-domainTerms
