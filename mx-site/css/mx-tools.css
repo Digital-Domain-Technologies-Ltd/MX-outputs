@@ -994,3 +994,83 @@
   margin-bottom: 0.25rem;
   text-transform: capitalize;
 }
+
+/* ── Phone width ─────────────────────────────────────────── */
+/* A QR scan on a phone lands here (mx.allabout.network/tell), so the page must
+   fit the screen. At 390px it measured 547px wide: stacked side padding left
+   the results ~140px, grid tracks declared `1fr` could not shrink below their
+   content (a 1fr track's minimum is its min-content), the badge table's
+   nowrap token column forced 480px, and long unbreakable strings (URLs,
+   hashes, timestamps) ran past their boxes. Every rule sits under this query,
+   so wider screens are untouched. Proven by tests/test-inspector-phone-layout.js. */
+@media (max-width: 720px) {
+  main#main {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .section-deep {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero-inner h1,
+  .hero-inner .subtitle {
+    overflow-wrap: break-word;
+  }
+
+  .mxc-grid-mount,
+  .mx-prov-popper {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mx-prov-flow,
+  .mx-prov-blob {
+    min-width: 0;
+  }
+
+  .mx-prov-blob {
+    max-width: 100%;
+  }
+
+  .mxc-signal-bar {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .tool-results,
+  .prov-explorer,
+  .tool-chain {
+    overflow-wrap: break-word;
+  }
+
+  .mx-prov-blob-body,
+  .mx-prov-blob-topic {
+    overflow-wrap: anywhere;
+  }
+
+  .tool-results pre,
+  .prov-explorer pre,
+  .tool-chain pre {
+    white-space: pre-wrap;
+  }
+
+  .tool-badge-table th,
+  .tool-badge-table td {
+    padding: 0.6rem 0.55rem;
+  }
+
+  .tool-badge-table td:first-child {
+    white-space: normal;
+  }
+
+  .tool-badge-table td:first-child code {
+    overflow-wrap: anywhere;
+  }
+}
