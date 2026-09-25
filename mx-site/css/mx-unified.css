@@ -1033,13 +1033,15 @@ body.cog-overlay-open {
    sitemap page found 18 of 166 overflowing, for four reasons, fixed here:
    - content tables sized to their content. They stay real tables (display:
      block would strip table semantics in Safari and VoiceOver, on exactly the
-     phones this is for) and instead take the column's width with fixed layout,
-     their cells wrapping;
+     phones this is for); their cells wrap, and each keeps a minimum width so a
+     many-column table scrolls inside its box rather than squeezing a column
+     until words break letter by letter;
    - inline code with long unbreakable strings (paths, hashes, field names);
    - long unbroken links in running text;
    - form controls wider than the column.
    overflow-wrap: anywhere breaks a word only when it cannot otherwise fit its
-   line, so ordinary prose is unchanged. Guarded by npm run site:phone-audit. */
+   line, so ordinary prose is unchanged. Guarded by npm run site:phone-audit,
+   which checks that every page both fits and reads. */
 @media (max-width: 720px) {
   /* Give content its width back: main, the section and its inner wrapper each
      add side padding, leaving a 390px phone a ~223px content column. */
@@ -1068,13 +1070,20 @@ body.cog-overlay-open {
     padding-right: 0.35rem;
     overflow-wrap: break-word;
     hyphens: auto;
+    min-width: 5.5em;
   }
 
   main p code,
-  main li code,
+  main li code {
+    overflow-wrap: anywhere;
+  }
+
+  /* In a cell, break-word (not anywhere) leaves the column's minimum width at
+     the whole token, so the table widens and scrolls in its box instead of
+     splitting a field name into single letters. */
   main td code,
   main th code {
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
   }
 
   main p a,
