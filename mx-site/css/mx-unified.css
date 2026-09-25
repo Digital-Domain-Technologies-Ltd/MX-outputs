@@ -1026,3 +1026,66 @@ ol li code[data-cog] {
 body.cog-overlay-open {
   overflow: hidden;
 }
+
+/* ── Phone width: content fits the screen ────────────────── */
+/* html sets overflow-x: hidden, so anything wider than a phone is CUT OFF, not
+   scrollable: the reader loses the right-hand edge. A 390px sweep of every
+   sitemap page found 18 of 166 overflowing, for four reasons, fixed here:
+   - content tables sized to their content. They stay real tables (display:
+     block would strip table semantics in Safari and VoiceOver, on exactly the
+     phones this is for) and instead take the column's width with fixed layout,
+     their cells wrapping;
+   - inline code with long unbreakable strings (paths, hashes, field names);
+   - long unbroken links in running text;
+   - form controls wider than the column.
+   overflow-wrap: anywhere breaks a word only when it cannot otherwise fit its
+   line, so ordinary prose is unchanged. Guarded by npm run site:phone-audit. */
+@media (max-width: 720px) {
+  /* Give content its width back: main, the section and its inner wrapper each
+     add side padding, leaving a 390px phone a ~223px content column. */
+  main#main {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  main .section,
+  main .section-inner {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  main table {
+    max-width: 100%;
+    font-size: 0.78rem;
+  }
+
+  main th,
+  main td {
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  main p code,
+  main li code,
+  main td code,
+  main th code {
+    overflow-wrap: anywhere;
+  }
+
+  main p a,
+  main li a,
+  main td a {
+    overflow-wrap: anywhere;
+  }
+
+  main select,
+  main input,
+  main textarea {
+    max-width: 100%;
+  }
+}
