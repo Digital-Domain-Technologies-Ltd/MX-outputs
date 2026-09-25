@@ -7,7 +7,7 @@
     "description": "Evidence chain of the non-deterministic steps (model calls, agent work, human-committed actions) behind mx-explained.pdf.",
     "author": "Tom Cranstoun",
     "created": "2026-09-24",
-    "modified": "2026-09-24",
+    "modified": "2026-09-25",
     "version": "1",
     "type": "provenance-record",
     "tags": [
@@ -29,10 +29,30 @@
       "mx-site/mx-explained.pdf"
     ]
   },
+  "artefactMx": {
+    "carrier": "pdf-xmp",
+    "source": "mx-site/mx-explained.md",
+    "sourceName": "mx-explained.md",
+    "fields": {
+      "Author": "Tom Cranstoun",
+      "Version": "1.0",
+      "Created": "2026-09-24",
+      "Modified": "2026-09-24",
+      "Status": "active",
+      "Audience": [
+        "humans",
+        "machines",
+        "business"
+      ],
+      "CanonicalUrl": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md",
+      "Summary": "What MX is, why it exists, how it defers to existing standards, why it works in any container and for any machine, and when it is worth using."
+    },
+    "note": "The XMP-mx fields the artefact carries, from one definition (scripts/lib/pdf/xmp-fields.cjs). SourceSha is stamped into the XMP after the source frontmatter is updated, so it is recorded in each pdf-render step as inputs.sourceSha rather than here; ProvenanceAiPayload embeds this record itself and is never repeated inside it."
+  },
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
   "auditId": null,
   "runRevision": 1,
-  "lastWriteAt": "2026-09-24T16:59:31.019Z",
+  "lastWriteAt": "2026-09-25T08:04:15.552Z",
   "operator": "tom.cranstoun@gmail.com",
   "parties": [
     {
@@ -383,7 +403,8 @@
       "available": true,
       "root": "~/ai-log",
       "days": [
-        "2026-09-24"
+        "2026-09-24",
+        "2026-09-25"
       ],
       "header": "provenance.ai.json",
       "steps": "provenance.steps.jsonl",
@@ -448,8 +469,9 @@
         "source": "mx-site/mx-explained.md",
         "reviewer": "Tom Cranstoun"
       },
-      "humanIntervention": "approved",
-      "outcome": "pass"
+      "humanIntervention": "review-before",
+      "outcome": "pass",
+      "notes": "humanIntervention corrected on 2026-09-25 from 'approved', a value outside the schema enum, to 'review-before', which is what happened: the operator approved the markdown before the PDF was generated. No other field of this step was changed."
     },
     {
       "timestamp": "2026-09-24T16:57:02.261Z",
@@ -489,6 +511,78 @@
         "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md"
       },
       "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-09-25T08:04:10.376Z",
+      "stepId": "review.operator-approval-final",
+      "agent": "human-committed",
+      "intent": "Tom Cranstoun reviewed the published PDF and, through it, its markdown source, and approved both for publication",
+      "inputs": {
+        "reviewer": "Tom Cranstoun",
+        "reviewerRole": "operator (Human-in-Command)",
+        "reviewedAt": "2026-09-25",
+        "reviewedArtefact": "https://mx.allabout.network/mx-explained.pdf",
+        "reviewedArtefactSha256": "21fe62a1a863115900455d2e4e6d8d7fe52f8dd404c219425196d799b4ec3e5f",
+        "reviewedArtefactFormat": "A4, 13 pages, rendered from the source below",
+        "approvedSource": "mx-site/mx-explained.md",
+        "approvedSourceSha": "e9496adc403bfa9ab292f59f38579062509fcb9c",
+        "approvalCovers": "The rendered PDF and, through it, its markdown source: the text, the structure, the legal disclaimer, the MX Compatible badge and the last-page QR to https://mx.allabout.network/tell.",
+        "changesDirectedWithApproval": [
+          "Render on US Letter instead of A4 (mx.generate.formats: [Letter]); page size only, the approved content is unchanged.",
+          "Record this approval in the provenance chain.",
+          "Carry the PDF's MX metadata as an object at the root of the provenance chain (artefactMx), for every PDF."
+        ]
+      },
+      "humanIntervention": "review-after",
+      "outcome": "pass",
+      "guardrails": [
+        {
+          "id": "policy:human-in-command",
+          "kind": "human",
+          "state": "met",
+          "decision": "Approved MX Explained for publication after reviewing the rendered PDF and, through it, its markdown source; directed a US Letter re-render with the approved content unchanged.",
+          "decidedBy": "Tom Cranstoun",
+          "at": "2026-09-25T08:04:10.376Z",
+          "requires": "A person with authority reviews and approves a public artefact before it stands as published.",
+          "stepId": "review.operator-approval-final",
+          "stream": "ai"
+        }
+      ]
+    },
+    {
+      "timestamp": "2026-09-25T08:04:15.552Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render mx-explained.md to tagged PDF via mx.pdf.sh (doctype: info-doc)",
+      "inputs": {
+        "source": "mx-explained.md",
+        "doctype": "info-doc",
+        "sourceSha": "ac6f4ecdc29bf6b0bc64f860db341afc42e86176",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md"
+      },
+      "outcome": "pass"
     }
-  ]
+  ],
+  "guardrails": {
+    "encountered": 1,
+    "met": 1,
+    "waived": 0,
+    "failed": 0,
+    "notApplicable": 0,
+    "allMet": true,
+    "deterministicMirrored": 0,
+    "entries": [
+      {
+        "id": "policy:human-in-command",
+        "kind": "human",
+        "state": "met",
+        "decision": "Approved MX Explained for publication after reviewing the rendered PDF and, through it, its markdown source; directed a US Letter re-render with the approved content unchanged.",
+        "decidedBy": "Tom Cranstoun",
+        "at": "2026-09-25T08:04:10.376Z",
+        "requires": "A person with authority reviews and approves a public artefact before it stands as published.",
+        "stepId": "review.operator-approval-final",
+        "stream": "ai"
+      }
+    ]
+  }
 }

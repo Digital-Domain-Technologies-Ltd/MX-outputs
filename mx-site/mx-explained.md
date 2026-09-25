@@ -15,6 +15,7 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md
   generate:
     output: mx-site/mx-explained.pdf
+    formats: [Letter]
   servedPdfUri: https://mx.allabout.network/mx-explained.pdf
   x-mx-pdfQrUrl: https://mx.allabout.network/tell
   x-mx-pdfBadgePlacement: last-page
