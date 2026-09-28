@@ -72,10 +72,11 @@ metadataFields:
 
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
+category: mx-core
 type: specification
 tags: [mx, cog, magic-header, specification, the-gathering]
 mx:
-  x-mx-category: mx-core
+  mxSpecVersion: "0.9"
   x-mx-cogRole: definition
   status: draft
   audience: [humans, machines, agents]

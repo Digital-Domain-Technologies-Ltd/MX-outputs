@@ -10,7 +10,7 @@ description: "Drop any file on this page and inspect the MX metadata it carries.
 author: "Tom Cranstoun"
 created: 2026-05-31
 modified: 2026-09-17
-version: "1.3"
+version: "1.4"
 
 type: component:objectInspector
 
@@ -196,6 +196,12 @@ mx:
           <h3 id="check-provenance">Provenance AI payload</h3>
 
           <p>Every MX Compatible PDF this hub produces carries an AI-governance provenance record embedded inside the XMP packet under <code>mx:ProvenanceAiPayload</code>. The record is JSON. The inspector extracts it, parses it, and reports the number of steps recorded and the named operator. If the embedded record parses cleanly, you can download it as a standalone JSON file via the downloads panel.</p>
+
+          <h3 id="check-decisions">Decisions</h3>
+
+          <p>A provenance chain can also record decisions. A decider is a model that answers a typed question about a supplied state with a probability, and the software around it acts, asks a person, asks for clarification, or falls back, depending on a bar set by how reversible the action is. A router choosing which model a task goes to is the same thing at volume. When a chain carries decision steps, the evidence-chain view adds a Decisions table: what was asked, the answer and how sure the decider was, the bar and the kind of action it was set for, what happened next, where the task was routed, who confirmed, and the recorded verdict. A line above the table gives the volume: how many decisions, how many escalated, how many were acted on below the bar, how many still await confirmation, and the routed spend by model.</p>
+
+          <p>The state the decider judged and the prompt it was given travel as hashes, never raw, because the record travels with the file. The label set is hashed too: adding one permitted answer changes every probability, so a changed hash tells you that thresholds tuned on the old set no longer mean what they did. The table shows the verdict the record states. The publisher's own check recomputes each verdict from the facts in the row before the record is pushed, so a record claiming a clean act over a below-bar call does not reach you.</p>
 
           <h3 id="check-responsible-person">Responsible Person Identifier</h3>
 

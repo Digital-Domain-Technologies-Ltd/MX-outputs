@@ -18,6 +18,7 @@ cogHeader:
 type: specification
 tags: [cog, runtime, specification, agents]
 mx:
+  mxSpecVersion: "0.9"
   status: active
   partOf: mx-the-gathering
   buildsOn: [cog-spec.v1]

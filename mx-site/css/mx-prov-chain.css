@@ -126,6 +126,36 @@
   outline: 2px solid var(--accent-color); outline-offset: 1px;
 }
 
+/* Decisions panel (js/mx-prov-decisions.js): decider steps recorded by
+   recordDecision(). The verdict word carries the meaning; the tone is a
+   redundant cue. The table scrolls sideways inside its own box so a phone
+   never scrolls the page. */
+.mx-prov-decisions { margin: 1.5rem 0 1rem; }
+.mx-prov-decisions-h { margin: 0 0 0.25rem; color: var(--heading-color); }
+.mx-prov-decisions-hint { font-size: 0.9rem; color: var(--secondary-text); margin: 0.25rem 0; }
+.mx-prov-decisions-volume { font-size: 0.9rem; font-weight: 600; color: var(--primary-text); margin: 0.5rem 0; }
+.mx-prov-decisions-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; max-width: 100%; }
+.mx-prov-decisions-table {
+  width: 100%; border-collapse: collapse; font-size: 0.85rem;
+  background: var(--code-bg); color: var(--primary-text);
+  border: 1px solid var(--border-color); border-radius: 8px;
+}
+.mx-prov-decisions-table th,
+.mx-prov-decisions-table td {
+  padding: 0.45rem 0.6rem; text-align: left; vertical-align: top;
+  border-bottom: 1px solid var(--border-color); white-space: nowrap;
+}
+.mx-prov-decisions-table th { font-weight: 600; }
+.mx-prov-decisions-table tr:last-child td { border-bottom: 0; }
+.mx-prov-verdict { font-weight: 600; }
+.mx-prov-verdict-ok { border-left: 4px solid var(--heading-color); }
+.mx-prov-verdict-warn { border-left: 4px dashed var(--accent-color); }
+.mx-prov-verdict-fail { border-left: 4px solid var(--accent-color); text-decoration: underline; }
+.mx-prov-sr {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;
+}
+
 /* Motion is decorative here: hold still for readers who ask for reduced motion. */
 @media (prefers-reduced-motion: reduce) {
   .mx-prov-blob, .mx-prov-blob-topic, .mx-json-step { transition: none; }

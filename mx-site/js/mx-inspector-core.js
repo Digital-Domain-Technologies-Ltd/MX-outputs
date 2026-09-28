@@ -256,7 +256,10 @@ function mxNamespaceDetail(findings) {
 function provenanceDetail(findings) {
   if (!findings.provenance.present) return 'mx:ProvenanceAiPayload field absent.';
   if (!findings.provenance.parsed) return `Payload present but does not parse as JSON: ${findings.provenance.parseError}`;
-  return `${findings.provenance.parsed.steps?.length || 0} step(s) recorded; operator: ${findings.provenance.parsed.operator || 'unknown'}`;
+  const steps = Array.isArray(findings.provenance.parsed.steps) ? findings.provenance.parsed.steps : [];
+  const decisions = steps.filter((s) => s && s.decision && typeof s.decision === 'object').length;
+  const decided = decisions ? ` (${decisions} decider decision(s), listed in the Decisions table)` : '';
+  return `${steps.length} step(s) recorded${decided}; operator: ${findings.provenance.parsed.operator || 'unknown'}`;
 }
 
 export function classify(findings) {
@@ -639,10 +642,137 @@ export function classifyGeneric(carrier, fields, extra = {}) {
   return { tier: present ? 'mx' : 'plain', evidence };
 }
 
+// ─── Profile check ─────────────────────────────────────────────────────────
+// A document's `type` routes it to a profile in the field dictionary; the
+// profile names the fields that kind of document must and should carry. The
+// table is mx-site/canon/profiles.json, generated from the dictionary by the
+// same code the repository validator uses, so the browser and the validator
+// judge a file against one list. parseYamlSubset drops block parents
+// (`parties:`, `inherentRisk:`), so presence is read from every key name in
+// the source YAML, at any depth.
+
+// Every key name in a YAML block, block parents and list-item keys included.
+export function frontmatterKeys(yaml) {
+  const keys = new Set();
+  for (const raw of String(yaml || '').split(/\r?\n/)) {
+    const m = raw.replace(/\t/g, '  ').match(/^\s*(?:-\s+)?([A-Za-z0-9_.-]+):(?:\s|$)/);
+    if (m && !/^\s*#/.test(raw)) keys.add(lcKey(m[1].split('.').pop()));
+  }
+  return keys;
+}
+
+// The regimes a document claims evidence for, from its jurisdictionalEvidence
+// block: [{ regime, refs }], refs being the clause/control/article/function
+// lines under that regime as plain text. Empty when the block is absent.
+export function readJurisdictionalEvidence(yaml) {
+  const lines = String(yaml || '').replace(/\t/g, '  ').split(/\r?\n/);
+  const start = lines.findIndex((l) => /^\s*jurisdictionalEvidence:\s*$/.test(l));
+  if (start < 0) return [];
+  const indent = (l) => l.match(/^\s*/)[0].length;
+  const base = indent(lines[start]);
+  const out = [];
+  let regimeIndent = null;
+  for (let i = start + 1; i < lines.length; i += 1) {
+    const l = lines[i];
+    if (!l.trim() || /^\s*#/.test(l)) continue;
+    if (indent(l) <= base) break;
+    if (regimeIndent === null) regimeIndent = indent(l);
+    const m = l.trim().match(/^([A-Za-z0-9][A-Za-z0-9-]*):\s*(.*)$/);
+    if (indent(l) === regimeIndent && m) {
+      out.push({ regime: m[1], refs: m[2] ? [m[2]] : [] });
+    } else if (out.length) {
+      out[out.length - 1].refs.push(l.trim());
+    }
+  }
+  return out.map((e) => ({ regime: e.regime, refs: e.refs.join(' ').replace(/\s+/g, ' ').trim() }));
+}
+
+// The source YAML block a text carrier holds, or null. The same wrappers the
+// field extractors read.
+export function sourceYamlFor(carrier, text) {
+  const t = String(text || '');
+  if (carrier === 'shell') {
+    const lines = t.split(/\r?\n/);
+    let s = -1; let e = -1;
+    for (let i = 0; i < Math.min(lines.length, 80); i += 1) {
+      if (/^#\s*---\s*$/.test(lines[i])) { if (s < 0) s = i; else { e = i; break; } }
+    }
+    return s >= 0 && e >= 0 ? lines.slice(s + 1, e).map((l) => l.replace(/^#\s?/, '')).join('\n') : null;
+  }
+  if (carrier === 'markdown') {
+    const m = t.match(/^﻿?---\r?\n([\s\S]*?)\r?\n---/);
+    return m ? m[1] : null;
+  }
+  if (carrier === 'sidecar') {
+    const m = t.match(/^﻿?---\r?\n([\s\S]*?)\r?\n---/);
+    return m ? m[1] : t;
+  }
+  if (carrier === 'html') {
+    const blk = t.match(/MX-SOURCE-FRONTMATTER:START[\s\S]*?MX-SOURCE-FRONTMATTER:END/);
+    return blk ? yamlFromCommentBlock(blk[0]) : null;
+  }
+  if (carrier === 'svg') {
+    const block = t.match(/<metadata\b[^>]*id=["']mx-metadata["'][^>]*>([\s\S]*?)<\/metadata>/i);
+    if (!block) return null;
+    const cdata = block[1].match(/<!\[CDATA\[([\s\S]*?)\]\]>/);
+    const body = cdata ? cdata[1] : block[1];
+    return yamlFromCommentBlock(body) || body;
+  }
+  return null;
+}
+
+// Evidence rows for a document's profile. profileData is the served
+// profiles.json object, or null when it could not be loaded. Never a
+// compliance verdict: a profile says which fields a kind of document carries,
+// and regime evidence is the publisher's claim of relevance.
+export function checkProfile({ fields = {}, yaml = null, profileData = null } = {}) {
+  if (yaml == null) return { rows: [], profile: null };
+  if (!profileData || !profileData.profiles) {
+    return {
+      profile: null,
+      rows: [{ key: 'profile-required', label: 'Profile fields', status: 'na', detail: 'Profile data unavailable (canon/profiles.json could not be loaded), so the profile was not checked.' }],
+    };
+  }
+  const keys = frontmatterKeys(yaml);
+  const has = (f) => keys.has(f) || fields[f] !== undefined;
+  const type = fields.type || fields.contentType || null;
+  const routed = (type && profileData.contentTypeToProfile && profileData.contentTypeToProfile[type]) || 'core';
+  const def = profileData.profiles[routed] || profileData.profiles.core || { required: [], recommended: [] };
+  const missing = (def.required || []).filter((f) => !has(f));
+  const absent = (def.recommended || []).filter((f) => !has(f) && !(def.required || []).includes(f));
+  const via = type ? `type ${type} -> profile ${routed}` : `no type declared -> profile ${routed}`;
+  const rows = [
+    {
+      key: 'profile-required',
+      label: `Profile ${routed}: required fields`,
+      status: missing.length ? 'fail' : 'pass',
+      detail: missing.length
+        ? `${via}. Missing: ${missing.join(', ')}.`
+        : `${via}. All ${(def.required || []).length} required field(s) present.`,
+    },
+    {
+      key: 'profile-recommended',
+      label: `Profile ${routed}: recommended fields`,
+      status: absent.length ? 'na' : 'pass',
+      detail: absent.length ? `Recommended, not required: ${absent.join(', ')}.` : 'All recommended fields present.',
+    },
+  ];
+  const claims = readJurisdictionalEvidence(yaml);
+  if (claims.length) {
+    rows.push({
+      key: 'regime-evidence',
+      label: 'Regime evidence claimed',
+      status: 'na',
+      detail: `${claims.map((c) => (c.refs ? `${c.regime} (${c.refs})` : c.regime)).join('; ')}. The publisher's claim of relevance, not a compliance verdict.`,
+    });
+  }
+  return { profile: { type, profile: routed, missing, recommendedAbsent: absent, regimeEvidence: claims }, rows };
+}
+
 // Top-level carrier-agnostic entry for every carrier except PDF (PDFs go through
 // inspectPdfDoc, since the caller already holds a pdf.js document). Returns the
 // same { findings, classification } shape as the PDF path.
-export function inspectCarrier({ carrier, filename, bytes, text } = {}) {
+export function inspectCarrier({ carrier, filename, bytes, text, profileData = null } = {}) {
   const c = carrier || detectCarrierFromName(filename);
   const asText = () => (typeof text === 'string' ? text : bytesToLatin1(bytes));
   let fields = {};
@@ -674,5 +804,9 @@ export function inspectCarrier({ carrier, filename, bytes, text } = {}) {
 
   const provenance = extractProvenanceFromCarrier({ carrier: c, bytes, text });
   const classification = classifyGeneric(c, fields, { accessibility });
-  return { findings: { carrier: c, fields, accessibility, provenance }, classification };
+  // The profile rows add to the evidence; they never change the tier.
+  const yaml = c === 'raster' ? null : sourceYamlFor(c, asText());
+  const { rows, profile } = checkProfile({ fields, yaml, profileData });
+  classification.evidence.push(...rows);
+  return { findings: { carrier: c, fields, accessibility, provenance, profile }, classification };
 }

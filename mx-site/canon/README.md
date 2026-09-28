@@ -8,6 +8,7 @@ modified: 2026-09-05
 
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/canon/README.md
 
 ---

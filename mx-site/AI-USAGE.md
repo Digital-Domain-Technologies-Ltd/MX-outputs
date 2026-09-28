@@ -10,6 +10,7 @@ version: "1.0"
 type: info-doc
 tags: [authorship, ai-usage, declaration, mx-books, provenance]
 mx:
+  mxSpecVersion: "0.9"
   status: active
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/AI-USAGE.md

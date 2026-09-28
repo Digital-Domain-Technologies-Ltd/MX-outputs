@@ -13,7 +13,7 @@
 // @mx:partOf mx-os
 
 import { inspectCarrier, detectCarrierFromName } from './mx-inspector-core.js';
-import { el, isHumanStep, buildChain } from './mx-prov-chain.js';
+import { el, isHumanStep, buildChain, buildDecisions } from './mx-prov-chain.js';
 
 const SEP = ' – '; // en-dash separator, built at runtime (never an em-dash literal in source)
 
@@ -131,6 +131,8 @@ function renderResult(body, url, findings, classification, parsedOverride, sourc
     body.appendChild(el('h3', { class: 'mx-prov-h', text: heading }));
     body.appendChild(el('p', { class: 'mx-prov-hint', text: 'Click a step in the chain to read its record.' }));
     body.appendChild(chain);
+    const decisions = buildDecisions(parsed);
+    if (decisions) body.appendChild(decisions);
     if (rp && rp.name) {
       body.appendChild(el('p', { class: 'mx-prov-rp' },
         'Accountable person: ', el('strong', { text: rp.name }),

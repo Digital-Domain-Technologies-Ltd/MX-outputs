@@ -5,6 +5,8 @@
 // (the shape of a .provenance.ai.json sidecar) as the shared accessible popper:
 // the same node-blob flow and live JSON tree the blog demo overlay shows, from the
 // one shared component (mx-prov-chain.js), so the tool and the overlay cannot drift.
+// When the record carries decider decisions, the shared Decisions panel follows
+// the chain, from the same component.
 //
 // The object arrives one way: the inspector shell (mx-inspector.js) dispatches a
 // `mx:provenance` CustomEvent after it finds a parseable provenance chain in the
@@ -15,7 +17,7 @@
 // Values come from arbitrary files, so every value is written with textContent (via
 // the shared el helper), never innerHTML.
 
-import { buildChain } from './mx-prov-chain.js';
+import { buildChain, buildDecisions } from './mx-prov-chain.js';
 import { el } from './mx-dom.js';
 
 // ── State ──────────────────────────────────────────────────
@@ -53,6 +55,8 @@ function render() {
     container.appendChild(el('p', { class: 'prov-chain-hint', text: 'Click a step to walk the flow: an agent attaches, a human checks. The record on the right scrolls to each step.' }));
     container.appendChild(chain);
   }
+  const decisions = buildDecisions(currentData);
+  if (decisions) container.appendChild(decisions);
 }
 
 function load(source, parsed) {

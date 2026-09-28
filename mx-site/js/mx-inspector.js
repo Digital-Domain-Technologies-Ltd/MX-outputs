@@ -34,6 +34,19 @@ import {
 } from './component-mx.js';
 import { el } from './mx-dom.js';
 
+// The dictionary's profile table (generated from fields-data.yaml by
+// scripts/gen-mx-profiles.cjs). Loaded once; null when it cannot be fetched, and
+// the profile check then says it was not run rather than guessing.
+let profilesPromise = null;
+function loadProfiles() {
+  if (!profilesPromise) {
+    profilesPromise = fetch('/canon/profiles.json')
+      .then((res) => (res.ok ? res.json() : null))
+      .catch(() => null);
+  }
+  return profilesPromise;
+}
+
 // Vendored from pdfjs-dist@4.10.38. Files are kept as .js (not .mjs) because
 // the Cloudflare worker's content-type map does not yet emit
 // application/javascript for .mjs; without that header the browser refuses to
@@ -341,10 +354,10 @@ async function inspectFile(file, resultsEl, busyEl) {
       ({ findings, classification } = await inspectPdfDoc(pdfDoc));
     } else if (carrier === 'raster') {
       const bytes = new Uint8Array(await file.arrayBuffer());
-      ({ findings, classification } = inspectCarrier({ carrier, filename: file.name, bytes }));
+      ({ findings, classification } = inspectCarrier({ carrier, filename: file.name, bytes, profileData: await loadProfiles() }));
     } else {
       const text = await file.text();
-      ({ findings, classification } = inspectCarrier({ carrier, filename: file.name, text }));
+      ({ findings, classification } = inspectCarrier({ carrier, filename: file.name, text, profileData: await loadProfiles() }));
     }
 
     busyEl.hidden = true;

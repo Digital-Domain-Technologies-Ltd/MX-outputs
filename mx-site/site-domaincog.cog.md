@@ -14,12 +14,13 @@ modified: 2026-07-10
 version: "1.0"
 triggers: [site-domaincog, mx-site-domain, served-site-domain]
 
+category: mx-core
 type: info-doc
 tags: [domaincog, ubercog-family, mx-site, served]
 mx:
+  mxSpecVersion: "0.9"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/site-domaincog.cog.md
   status: active
-  x-mx-category: mx-core
   x-mx-cogRole: domaincog
   x-mx-domainScope: ["mx-site"]
   partOf: UBERCOG

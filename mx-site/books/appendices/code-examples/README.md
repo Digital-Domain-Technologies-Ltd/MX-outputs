@@ -9,6 +9,7 @@ version: "1.0"
 
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   status: draft
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/books/appendices/code-examples/README.md
 

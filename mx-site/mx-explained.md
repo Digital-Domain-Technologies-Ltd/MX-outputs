@@ -10,6 +10,7 @@ version: "1.0"
 type: info-doc
 tags: [mx, explainer, philosophy, standards, carrier-neutral, neutrality, provenance, reginald]
 mx:
+  mxSpecVersion: "0.9"
   status: active
   audience: [humans, machines, business]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md

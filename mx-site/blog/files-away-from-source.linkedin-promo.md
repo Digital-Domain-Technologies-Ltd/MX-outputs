@@ -9,6 +9,7 @@ version: "1.0"
 
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   status: active
   purpose: "Files Away From Their Source - LinkedIn feed promo"
   audience: [humans, machines]

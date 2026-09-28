@@ -20,6 +20,7 @@ cogHeader:
 
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/drafts/cog-spec.v1.md
   purpose: "The cog file format, artefact model, and verification algorithm."
   audience: [humans, machines]

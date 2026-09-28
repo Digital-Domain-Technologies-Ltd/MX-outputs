@@ -1,17 +1,17 @@
 title: CogNovaMX Field Extensions
-version: '1.26'
+version: '1.28'
 created: '2026-04-15'
-modified: '2026-09-23'
+modified: '2026-09-27'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
   own x-vendor- extensions. This dictionary documents the vocabulary; documents never carry it into publication, because
   the vendor layer is stripped from every published artefact. Per the namespace policy, the prefix is the policy: no
   additional visibility markers needed.
+category: vendor-extensions
 mx:
   status: active
   license: proprietary
-  x-mx-category: vendor-extensions
   partOf: mx-cognovamx
   tags:
     - fields
@@ -2233,91 +2233,6 @@ mx:
       profile: x-mx-public
       required: true
       context: 'Declared under the mx block on action cogs so every friction has a machine-readable, owner-routed resolution.'
-    - name: x-mx-category
-      type: string
-      definition: 'Cog category for registry grouping (CogNovaMX taxonomy). Controlled vocabulary; see validValues. Synonym and variant spellings are normalised to one canonical value (for example mx-tools to mx-tool, contact to mx-contact, adr to decision-record).'
-      example: mx-core
-      validValues:
-        - architecture
-        - audit-suite
-        - brand
-        - business
-        - cockpit
-        - collaborate
-        - contributor-profile
-        - convention
-        - crm
-        - crm-material
-        - decision-record
-        - deliverable
-        - director-briefing
-        - draft
-        - event
-        - example
-        - founder-profile
-        - governance
-        - infrastructure
-        - learning
-        - manual
-        - marketing
-        - messaging
-        - methodology
-        - mx-app
-        - mx-architecture
-        - mx-audit
-        - mx-canon
-        - mx-contact
-        - mx-content
-        - mx-core
-        - mx-dev
-        - mx-maxine-core
-        - mx-ops
-        - mx-os
-        - mx-research
-        - mx-sales
-        - mx-the-gathering
-        - mx-tool
-        - naming
-        - onboarding
-        - outreach
-        - output-scripts
-        - partner-profile
-        - pipeline
-        - plan
-        - prd
-        - principle
-        - product
-        - prospect
-        - provenance
-        - reference
-        - reference-implementation
-        - reginald
-        - registry
-        - reminders
-        - restaurant
-        - risk
-        - security
-        - specification
-        - standard
-        - strategy
-        - system
-        - technical-notes
-        - template
-        - understand
-        - validation
-        - vendor-extensions
-        - venue
-        - vision
-        - workflow
-      notes: >-
-        Vendor-tier cog taxonomy, distinct from the standard contentType field (which types the document
-        universally). The controlled vocabulary is broadened to the categories the estate actually uses, with
-        synonym spellings collapsed to one canonical value. The bare `category` name is a deprecated synonym; see
-        fields-data.yaml's deprecations table and mx-canon/ssot/field-cull-log.md.
-      status: canonical
-      profile: x-mx-public
-      required: true
-      context: 'Required on cog files (.cog.md) to group them for registry purposes.'
     - name: x-mx-contentState
       type: string
       definition: >-
@@ -2545,6 +2460,22 @@ mx:
       profile: x-mx-public
       required: false
       context: 'Declared on a PRD whose delivery progress is tracked separately from its document status.'
+    - name: x-mx-kanban
+      type: object
+      definition: >-
+        A card's place on the chain kanban: rank, a whole number where 1 is the top of its column, and assignee,
+        either operator or agent. The column itself is mx.status.
+      example:
+        rank: 1
+        assignee: agent
+      notes: >-
+        Declared on every intent, spec, plan and unit card under mx-canon/mx-maxine-lives/management/intents/. Read and
+        written only through scripts/lib/chain.cjs, which holds rank unique within a column; checked by
+        scripts/check-chain.cjs. Acceptance is recorded in the core reviewedBy and statusNote fields, not here.
+      status: canonical
+      profile: x-mx-public
+      required: false
+      context: 'Declared on a chain card so the board and agents share one order of work.'
     - name: x-mx-thresholds
       type: object
       definition: The numeric limits a workflow contract enforces before an action may proceed.
@@ -2730,7 +2661,6 @@ mx:
         - x-mx-wordCountApprox
         - x-mx-productionUrl
         - x-mx-sourceFile
-        - x-mx-category
         - x-mx-contentState
         - x-mx-adr
         - x-mx-ndr

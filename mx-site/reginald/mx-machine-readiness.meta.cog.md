@@ -66,10 +66,11 @@ metadataFields:
 
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
+category: mx-content
 type: meta-cog
 tags: [meta-cog, cog-construction, the-gathering, mx-core-metadata, mx-cogs, worked-example]
 mx:
-  x-mx-category: mx-content
+  mxSpecVersion: "0.9"
   x-mx-cogRole: example
   status: published
   audience: [humans, machines]

@@ -102,10 +102,11 @@ metadataFields:
 
 
 # ── ZONE 2 · Operational metadata (Note 2 §6) ────────────────
+category: mx-content
 type: position-paper
 tags: [machine-experience, mx, reginald, the-gathering, cog, machine-readiness, provenance, eu-ai-act]
 mx:
-  x-mx-category: mx-content
+  mxSpecVersion: "0.9"
   # Lifecycle (§6.1)
   status: published
 

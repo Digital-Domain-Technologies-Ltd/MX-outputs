@@ -9,6 +9,7 @@ version: "1.0"
 
 type: social-post
 mx:
+  mxSpecVersion: "0.9"
   status: draft
   purpose: "LinkedIn article: MX makes content machine-readable, so agents cite facts instead of guessing, which cuts hallucinations, inference cost, and energy. Carries a free-audit call to action."
   audience: [humans, machines]

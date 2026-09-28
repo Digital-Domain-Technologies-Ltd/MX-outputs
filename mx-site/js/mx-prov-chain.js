@@ -25,6 +25,9 @@ import { isHumanStep, isHumanAuthored, stepRole, stepCategory, catClass } from '
 
 export { el };          // re-exported so callers that build their own DOM share one helper
 export { isHumanStep }; // re-exported for the demo overlay's two-party summary
+// The Decisions panel ships from here too, so every surface that calls
+// buildChain reaches it through the one component (the inspector-parity rule).
+export { buildDecisions } from './mx-prov-decisions.js';
 
 // Fill the single detail tabpanel with a step's full record (the accessible,
 // no-hover baseline; the visual grow-to-reveal on the blob mirrors the topic).

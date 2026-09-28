@@ -1,17 +1,29 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.4'
+version: '6.28'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-09-23'
+modified: '2026-09-27'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
   relationships, machine-readability infrastructure, folder metadata, cog contract, and non-YAML markup carriers. For
   carrier-format schemas (code/database/media) see fields-data-carriers.yaml. For CogNovaMX vendor extensions see
   cognovamx-fields.yaml.
+category: standard
 mx:
   status: active
+  # The MX specification this dictionary defines. The single source for the
+  # mxSpecVersion value every document declares (scripts/lib/mx-spec-version.cjs).
+  # The 1.0 deadline is stableWithinMonths after outOfDraft, so the deadline
+  # moves with it if the out-of-draft date moves.
+  specification:
+    version: '0.9'
+    status: draft
+    outOfDraft: '2027-01-01'
+    outOfDraftAssumed: false
+    stableVersion: '1.0'
+    stableWithinMonths: 18
+    stableNoLaterThan: '2028-07-01'
   license: MIT
-  x-mx-category: standard
   partOf: mx-the-gathering
   tags:
     - fields
@@ -247,7 +259,7 @@ mx:
         rule: Always explicit. These are document identity fields and never move under mx:.
       mx:
         fields: >-
-          All other MX-operational fields (status, contentType, x-mx-category, tags, audience, runbook, execute, ai* fields,
+          All other MX-operational fields (status, contentType, category, tags, audience, runbook, execute, ai* fields,
           etc.)
         rule: Optional fields with documented defaults may be omitted when matching their default value.
     always-explicit:
@@ -321,6 +333,11 @@ mx:
     component:gridMount: component
     component:signalBar: component
     component:objectInspector: component
+    aims:systemInventoryEntry: aims-system-inventory
+    aims:statementOfApplicability: aims-statement-of-applicability
+    aims:riskRegisterEntry: aims-risk-register
+    aims:impactAssessment: aims-impact-assessment
+    aims:policy: aims-policy
   validationPolicy:
     keywords:
       - '@context'
@@ -397,9 +414,11 @@ mx:
       replacement: maintainedDate
     - old: verifiedBy
       replacement: maintainedBy
-    - old: category
-      replacement: x-mx-category
-      notes: CogNovaMX cog-taxonomy classifier, not a Gathering open-standard field. Moved to cognovamx-fields.yaml under the x-mx-public profile.
+    - old: x-mx-category
+      replacement: category
+      notes: >-
+        The document grouping is a top-level open-standard field (ADR 74), read beside type and tags without opening
+        the mx: block. The rename also moves the field from Zone 2 to Zone 1a; npm run okf:migrate completes both.
     - old: wordCount
       replacement: x-mx-wordCount
       notes: >-
@@ -1208,12 +1227,105 @@ mx:
       status: canonical
       profile: core
       required: recommended
+    - name: category
+      type: string
+      definition: >-
+        The functional grouping a document belongs to, declared at Zone 1a (top level) beside its identity, so a
+        registry, a graph or an agent can group documents without opening the mx: block. Controlled vocabulary; see
+        validValues.
+      example: mx-core
+      validValues:
+        - architecture
+        - audit
+        - audit-suite
+        - brand
+        - business
+        - cockpit
+        - collaborate
+        - content
+        - contributor-profile
+        - convention
+        - crm
+        - crm-material
+        - decision-record
+        - deliverable
+        - director-briefing
+        - draft
+        - event
+        - example
+        - founder-profile
+        - governance
+        - infrastructure
+        - learning
+        - manual
+        - marketing
+        - messaging
+        - methodology
+        - mx-app
+        - mx-architecture
+        - mx-audit
+        - mx-canon
+        - mx-contact
+        - mx-content
+        - mx-core
+        - mx-dev
+        - mx-maxine-core
+        - mx-ops
+        - mx-os
+        - mx-research
+        - mx-sales
+        - mx-the-gathering
+        - mx-tool
+        - naming
+        - onboarding
+        - other
+        - output-scripts
+        - outreach
+        - partner-profile
+        - pipeline
+        - plan
+        - prd
+        - principle
+        - product
+        - prospect
+        - provenance
+        - reference
+        - reference-implementation
+        - reginald
+        - registry
+        - reminders
+        - restaurant
+        - risk
+        - security
+        - specification
+        - standard
+        - strategy
+        - system
+        - technical-notes
+        - template
+        - understand
+        - validation
+        - vendor-extensions
+        - venue
+        - vision
+        - workflow
+      notes: >-
+        Distinct from type, which says what kind of document a file is; category says which part of the work it belongs
+        to. Published like every core field, so a value is visible on a served page. A Claude skill file (skill.md)
+        carries category because the Claude Skills specification requires it; the skill values (workflow, content,
+        audit, mx-os, other) are part of the vocabulary so one field serves both. Variant spellings are normalised to one
+        value (mx-tools to mx-tool, contact to mx-contact, adr to decision-record). The vendor-era name x-mx-category is
+        a deprecated synonym in the deprecations table. Promoted by ADR 74.
+      status: canonical
+      profile: core
+      required: recommended
     - name: status
       type: string
       definition: >-
         Lifecycle state. Standard values: draft, active, published, deprecated, archived, unknown. Decision records:
         proposed, accepted, rejected, superseded. Workflow: pending, review, approved, planning, open, closed, sent.
-        Special: canonical.
+        Standing: disputed (the content is under challenge and a consumer should weigh it as contested), withdrawn
+        (the publisher no longer stands behind the content and a consumer should stop using it). Special: canonical.
       example: active
       validValues:
         - draft
@@ -1239,7 +1351,11 @@ mx:
         - final
         - current
         - deferred
-      notes: Core recommended — always include. Different contexts use different subsets.
+        - disputed
+        - withdrawn
+      notes: >-
+        Core recommended — always include. Different contexts use different subsets. A disputed or withdrawn document
+        says why, and whom to contact, in statusNotice; a successor is named in supersededBy.
       status: canonical
       profile: core
       required: recommended
@@ -2560,12 +2676,19 @@ mx:
       required: optional
     - name: mxSpecVersion
       type: string
-      definition: MX specification version. Distinct from version (document version). Typically '1.0'.
-      example: '1.0'
-      notes: Distinct from version (document version). Tracks MX specification conformance.
+      definition: The version of the MX specification a document's metadata follows, so a machine knows which
+        rules to read it by. Distinct from version, which is the document's own version.
+      example: '0.9'
+      validValues:
+        - '0.9'
+      notes: The current value and the specification's status and timeline are declared once, in this dictionary's
+        header (mx.specification). MX is the 0.9 draft; a new value joins validValues when that version is
+        released, and the old value stays valid for documents written against it.
       status: canonical
-      profile: folder
-      required: optional
+      profile:
+        - core
+        - folder
+      required: recommended
     - name: conventions
       type: object
       definition: Code conventions object. Contains style, testing, documentation, markdown, commits.
@@ -2625,7 +2748,7 @@ mx:
         - title
         - status
         - contentType
-        - x-mx-category
+        - category
       notes: ROUTING.cog.md only. Route hint for agents. Distinct from tags.
       status: canonical
       profile: routing
@@ -2920,6 +3043,303 @@ mx:
       notes: A statement with no review date is read as unreviewed; a periodic review updates it.
       status: canonical
       profile: core
+      required: optional
+    # --- Evidence fields: accountability, regime evidence, standing, data preparation and resources. Any document
+    # may carry them; the AIMS profile set requires several. parties and jurisdictionalEvidence share their shape with the
+    # provenance record (provenance-ai.v2.schema.json), so a COG and its provenance chain name people and regimes the
+    # same way. Approved by The Gathering on 2026-09-27 (ADR 73).
+    - name: parties
+      type: array
+      definition: >-
+        The role-attributed people and organisations accountable for a document, each entry carrying a role, a name,
+        and optionally an email, an identifier URL, an organisation and an ISO 3166-1 country code.
+      example:
+        - role: systemOwner
+          name: Head of Clinical Content
+          organisation: Example Health
+          country: GB
+      notes: >-
+        The same six-field core as parties[] in a provenance record, with email optional because a COG is often public.
+        Multiple entries per role are permitted. A role, not a name, is what other fields point at
+        (residualRisk.acceptedBy, transformations[].actor).
+      status: canonical
+      profile: core
+      required: optional
+    - name: parties.role
+      type: string
+      definition: The accountability role an entry in parties holds.
+      example: riskOwner
+      validValues:
+        - auditOperator
+        - provider
+        - deployer
+        - authorisedRepresentative
+        - importer
+        - distributor
+        - auditor
+        - dataController
+        - dataProcessor
+        - dpo
+        - modelDeveloper
+        - modelEvaluator
+        - systemOwner
+        - riskOwner
+        - assessor
+        - approver
+      notes: >-
+        One vocabulary with the provenance record's parties[].role, so a role named on a COG means the same thing in
+        its chain. systemOwner, riskOwner, assessor and approver name the roles an AI management system assigns.
+        tests/test-party-roles-lockstep.js holds this list, the provenance schema and the REGINALD primitive equal.
+      status: canonical
+      profile: core
+      required: optional
+    - name: jurisdictionalEvidence
+      type: object
+      definition: >-
+        The clauses, articles, controls or functions of each regulatory regime a document provides evidence for, keyed
+        by the regime identifier in the AI-regimes registry.
+      example:
+        ISO-42001:
+          clauses:
+            - 6.1.2
+          controls:
+            - A.6.2.8
+        EU-AI-Act:
+          articles:
+            - '12'
+      notes: >-
+        Keys are regime ids from mx-canon/ssot/registries/ai-regimes.json; values carry lists named articles, clauses,
+        controls or functions. A claim of relevance, never a compliance grant: the organisation still owes the regime
+        its own duties. The document-level form of the per-step jurisdictionalEvidence a provenance record carries.
+      status: canonical
+      profile: core
+      required: optional
+    - name: statusNotice
+      type: object
+      definition: >-
+        Why a document carries the status disputed or withdrawn, the date that standing began, and whom a reader
+        contacts about it.
+      example:
+        reason: A reader reported that the dosage table does not match the current product licence.
+        date: 2026-09-27
+        contact: content-standards@example.org
+      notes: >-
+        Pairs with status and supersededBy. The record of the dispute itself, claim by claim, is contestedBy; this is
+        the document-level notice a consumer reads before deciding whether to use the content at all.
+      status: canonical
+      profile: core
+      required: optional
+    - name: transformations
+      type: array
+      definition: >-
+        The preparation steps applied to the data a document derives from, each naming its type, method, tool, date
+        and the parties role that performed it.
+      example:
+        - type: deduplication
+          method: Removed records with identical patient reference and date
+          tool: scripts/dedupe.cjs
+          date: 2026-09-20
+          actor: dataProcessor
+      notes: >-
+        Complements derivedFrom, which names the source, and the provenance block, which records one derivation in the
+        body. method and date keep the provenance block's names. A provenance chain, when present, holds the full step
+        record; this list is the summary that travels in the frontmatter.
+      status: canonical
+      profile: core
+      required: optional
+    - name: resourceProfile
+      type: object
+      definition: >-
+        The compute and energy a document's production or an AI system's operation uses, with the unit, whether the
+        figure was measured, estimated or declared, the method, and the workload baseline it is compared against.
+      example:
+        computeEstimate: 1200
+        energyEstimate: 0.8
+        unit: kWh per month
+        basis: estimated
+        method: Provider-published per-token figures multiplied by logged token counts
+        baselineRef: https://example.org/baselines/leaflet-summariser-2026-09.md
+      notes: >-
+        A figure without a basis and a baseline is not an energy claim; the renewable-inference strategy
+        (mx-canon/ssot/renewable-inference-aim.cog.md) requires a named workload baseline before any efficiency or
+        energy statement.
+      status: canonical
+      profile: core
+      required: optional
+    - name: resourceProfile.basis
+      type: string
+      definition: Whether a resourceProfile figure was measured, estimated or declared by a third party.
+      example: estimated
+      validValues:
+        - measured
+        - estimated
+        - declared
+      status: canonical
+      profile: core
+      required: optional
+    # --- AI management system (AIMS) records: the aims-* profile set. Each record is a COG whose kind is an aims: value of
+    # the OKF type field. The fields describe structure only; MX supplies no risk, impact or applicability method, and
+    # a well-formed record says nothing about whether the assessment it records is sound. JSON Schemas for the four
+    # kinds live in mx-reginald/packages/schemas/src/aims-*.schema.json. Approved by The Gathering on 2026-09-27
+    # (ADR 73).
+    - name: recordId
+      type: string
+      definition: The organisation's own identifier for an AIMS record, stable across versions of the record.
+      example: R-014
+      status: canonical
+      profile: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      required: optional
+    - name: systemRef
+      type: string
+      definition: >-
+        A reference to the AI system inventory entry an AIMS record concerns, as a repository path, an https URI or a
+        REGINALD cogUrn.
+      example: https://example.org/aims/systems/leaflet-summariser.md
+      status: canonical
+      profile: [aims-risk-register, aims-impact-assessment]
+      required: optional
+    - name: intendedUse
+      type: object
+      definition: >-
+        The uses an AI system is intended for and the uses it must not be put to, as permitted and prohibited lists
+        with free-text notes.
+      example:
+        permitted:
+          - summarisation
+          - retrieval
+        prohibited:
+          - decisionSupport
+        notes: Summaries are drafts for pharmacist review, never advice to patients.
+      notes: >-
+        List values: retrieval, training, fineTuning, summarisation, display, decisionSupport, generation. Describes an
+        AI system. What a machine may do with a document's content is contentPolicy (inference) and aiTraining or
+        trainingDataPolicy (training).
+      status: canonical
+      profile: aims-system-inventory
+      required: optional
+    - name: dataSources
+      type: array
+      definition: The data an AI system draws on, as references to the COGs that describe each source.
+      example:
+        - https://example.org/data/product-licences.md
+      status: canonical
+      profile: aims-system-inventory
+      required: optional
+    - name: aimsScope
+      type: string
+      definition: The boundary of the AI management system a statement of applicability covers.
+      example: AI systems that produce patient-facing content in the UK business unit.
+      status: canonical
+      profile: aims-statement-of-applicability
+      required: optional
+    - name: controlApplicability
+      type: array
+      definition: >-
+        For each control of a regime, whether it applies within the AIMS scope, the justification, and the records that
+        provide evidence for it.
+      example:
+        - regime: ISO-42001
+          controlId: A.6.2.8
+          applicable: true
+          justification: The summariser logs each generation event.
+          evidenceRefs:
+            - https://example.org/aims/logs/leaflet-summariser.md
+      notes: >-
+        Named controlApplicability because applicability is the conditional-profiling field (jurisdiction, product,
+        role). regime is an ai-regimes.json id.
+      status: canonical
+      profile: aims-statement-of-applicability
+      required: optional
+    - name: approvedAt
+      type: string
+      definition: The date an AIMS record was approved, ISO 8601 (YYYY-MM-DD); the approver is a parties entry with role approver.
+      example: 2026-09-27
+      status: canonical
+      profile: [aims-statement-of-applicability, aims-policy]
+      required: optional
+    - name: inherentRisk
+      type: object
+      definition: >-
+        The risk an AIMS risk entry identifies before treatment, with the same level, basis and review keys as
+        residualRisk.
+      example:
+        level: high
+        basis: An unreviewed summary could reach a patient.
+      notes: Pairs with residualRisk, the risk judged to remain after treatment. One scale for both.
+      status: canonical
+      profile: aims-risk-register
+      required: optional
+    - name: inherentRisk.level
+      type: string
+      definition: The inherent-risk level, in the residualRisk.level vocabulary.
+      example: high
+      validValues:
+        - low
+        - medium
+        - high
+        - critical
+      status: canonical
+      profile: aims-risk-register
+      required: optional
+    - name: riskTreatment
+      type: object
+      definition: The treatment option chosen for an identified risk and the actions that carry it out.
+      example:
+        option: modify
+        actions:
+          - A pharmacist reviews every summary before release.
+      status: canonical
+      profile: aims-risk-register
+      required: optional
+    - name: riskTreatment.option
+      type: string
+      definition: The treatment option chosen for a risk.
+      example: modify
+      validValues:
+        - modify
+        - avoid
+        - share
+        - retain
+      status: canonical
+      profile: aims-risk-register
+      required: optional
+    - name: affectedGroups
+      type: array
+      definition: The individuals, groups or societies an impact assessment considers.
+      example:
+        - Patients reading the leaflets
+        - Pharmacists reviewing summaries
+      status: canonical
+      profile: aims-impact-assessment
+      required: optional
+    - name: impacts
+      type: array
+      definition: >-
+        The impacts an assessment identifies, each naming the group affected, the impact, and its severity in the
+        residualRisk.level vocabulary.
+      example:
+        - group: Patients reading the leaflets
+          description: A misstated dosage could lead to harm.
+          severity: high
+      status: canonical
+      profile: aims-impact-assessment
+      required: optional
+    - name: mitigations
+      type: array
+      definition: The measures that address the impacts an assessment identifies, each naming the impact it addresses and its owning role.
+      example:
+        - impact: A misstated dosage could lead to harm.
+          description: A pharmacist reviews every summary before release.
+          owner: riskOwner
+      status: canonical
+      profile: aims-impact-assessment
+      required: optional
+    - name: assessedAt
+      type: string
+      definition: The date an impact assessment was carried out, ISO 8601 (YYYY-MM-DD).
+      example: 2026-09-27
+      status: canonical
+      profile: aims-impact-assessment
       required: optional
     - name: aiUsageDeclarationUri
       type: string
@@ -3674,6 +4094,7 @@ mx:
         # --- Zone 2: MX operational ---
         mx:
           status: active
+          mxSpecVersion: "0.9"
         ---
       required:
         - title
@@ -3684,6 +4105,7 @@ mx:
       recommended:
         - version
         - status
+        - mxSpecVersion
       optional:
         - tags
         - audience
@@ -3721,13 +4143,13 @@ mx:
         author: Tom Cranstoun
         created: 2026-09-14
         modified: 2026-09-14
+        category: mx-core
         # --- Zone 1b: OKF reserved surface (optional) ---
         type: action-doc
         tags: [example, profile]
         resource: https://example.com/the-one-asset-this-document-describes
         # --- Zone 2: MX operational ---
         mx:
-          x-mx-category: mx-core
           partOf: mx-os
           purpose: "One sentence on what this document is for."
           audience: [humans, machines]
@@ -3744,7 +4166,7 @@ mx:
         - runbook
         - contextProvides
       recommended:
-        - x-mx-category
+        - category
         - buildsOn
         - tags
       optional:
@@ -4048,7 +4470,7 @@ mx:
         - x-mx-managedBy
         - servedAt
         - generate
-        - x-mx-category
+        - category
         - aiAssistance
         - blogUrl
         - blogFilename
@@ -4101,7 +4523,7 @@ mx:
         - canonicalUri
       optional:
         - x-mx-contactKind
-        - x-mx-category
+        - category
         - agentType
         - partOf
         - schema
@@ -4412,3 +4834,211 @@ mx:
         - pulse
         - styleToken
         - inspectorSections
+    # --- The AIMS profile set (ADR 73): one profile per record an AI management system keeps. Built for ISO/IEC 42001
+    # and named for the management system, so the same records serve NIST AI RMF and EU AI Act evidence. Each profile
+    # defines structure only: MX supplies no risk, impact or applicability method, and a well-formed record is evidence
+    # an assessor reads, never a certification or a compliance grant.
+    - name: aims-system-inventory
+      description: >-
+        One AI system within the scope of an AI management system: its purpose, its owner and other accountable
+        parties, its permitted and prohibited uses, the data it draws on, and its compute and energy use. The record
+        kind is aims:systemInventoryEntry. Part of the AIMS profile set, approved by The Gathering on 2026-09-27.
+      header: |
+        ---
+        # Carrier: an AIMS system inventory entry, one COG per AI system
+        # --- Zone 1a: Identity ---
+        title: "Leaflet summariser"
+        description: "Inventory entry for the model that drafts plain-language summaries of patient leaflets."
+        author: Tom Cranstoun
+        created: 2026-09-27
+        modified: 2026-09-27
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface ---
+        type: aims:systemInventoryEntry
+        tags: [example, aims, system-inventory]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          canonicalUri: https://example.com/aims/systems/leaflet-summariser.md
+          status: active
+          recordId: SYS-003
+          purpose: Drafts plain-language summaries of patient leaflets for pharmacist review.
+          parties:
+            - role: systemOwner
+              name: Head of Clinical Content
+          intendedUse:
+            permitted: [summarisation, retrieval]
+            prohibited: [decisionSupport]
+          dataSources: [https://example.com/data/product-licences.md]
+          reviewBy: 2027-03-27
+          jurisdictionalEvidence:
+            ISO-42001:
+              controls: [A.4.2, A.6.2.3, A.9.4]
+        ---
+      required: [title, description, author, created, modified, canonicalUri, status, recordId, parties, purpose]
+      recommended: [version, reviewBy, jurisdictionalEvidence, intendedUse]
+      optional: [type, tags, resource, dataSources, resourceProfile, residualRisk, transformations, statusNotice, supersededBy]
+    - name: aims-statement-of-applicability
+      description: >-
+        Which controls of a regime apply within the scope of an AI management system, the justification for each, and
+        the records that provide evidence for it, with its approver and approval date. The record kind is
+        aims:statementOfApplicability. Part of the AIMS profile set, approved by The Gathering on 2026-09-27.
+      header: |
+        ---
+        # Carrier: an AIMS statement of applicability, one COG per scope
+        # --- Zone 1a: Identity ---
+        title: "Statement of applicability, patient content"
+        description: "Which ISO/IEC 42001 controls apply to AI systems producing patient-facing content, and why."
+        author: Tom Cranstoun
+        created: 2026-09-27
+        modified: 2026-09-27
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface ---
+        type: aims:statementOfApplicability
+        tags: [example, aims, statement-of-applicability]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          canonicalUri: https://example.com/aims/soa-2026.md
+          status: active
+          recordId: SOA-2026
+          aimsScope: AI systems that produce patient-facing content.
+          approvedAt: 2026-09-27
+          parties:
+            - role: approver
+              name: Managing Director
+          controlApplicability:
+            - regime: ISO-42001
+              controlId: A.6.2.8
+              applicable: true
+              justification: The summariser logs each generation event.
+        ---
+      required: [title, description, author, created, modified, canonicalUri, status, recordId, parties, aimsScope, controlApplicability, approvedAt]
+      recommended: [version, reviewBy]
+      optional: [type, tags, resource, jurisdictionalEvidence, statusNotice, supersededBy]
+    - name: aims-risk-register
+      description: >-
+        One identified AI risk: the system it concerns, its owner, its level before treatment, the treatment chosen,
+        and the risk judged to remain. The record kind is aims:riskRegisterEntry. Part of the AIMS profile set,
+        approved by The Gathering on 2026-09-27.
+      header: |
+        ---
+        # Carrier: an AIMS risk register entry, one COG per risk
+        # --- Zone 1a: Identity ---
+        title: "Risk: summaries misstate dosage in patient leaflets"
+        description: "Register entry for the leaflet summariser's dosage-misstatement risk and its treatment."
+        author: Tom Cranstoun
+        created: 2026-09-27
+        modified: 2026-09-27
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface ---
+        type: aims:riskRegisterEntry
+        tags: [example, aims, risk-register]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          canonicalUri: https://example.com/aims/risks/r-014.md
+          status: active
+          recordId: R-014
+          systemRef: https://example.com/aims/systems/leaflet-summariser.md
+          parties:
+            - role: riskOwner
+              name: Head of Clinical Content
+          inherentRisk:
+            level: high
+            basis: An unreviewed summary could reach a patient.
+          riskTreatment:
+            option: modify
+            actions: ["A pharmacist reviews every summary before release."]
+          residualRisk:
+            level: low
+            basis: Every summary is reviewed before release.
+            acceptedBy: riskOwner
+            reviewedAt: 2026-09-27
+          reviewBy: 2027-03-27
+          jurisdictionalEvidence:
+            ISO-42001:
+              clauses: ["6.1.2", "8.2", "8.3"]
+        ---
+      required: [title, description, author, created, modified, canonicalUri, status, recordId, parties, systemRef, inherentRisk, riskTreatment]
+      recommended: [version, reviewBy, residualRisk, jurisdictionalEvidence]
+      optional: [type, tags, resource, statusNotice, supersededBy]
+    - name: aims-impact-assessment
+      description: >-
+        The record of an AI system impact assessment: the groups affected, each impact and its severity, the
+        mitigations and their owners, the assessor and the date. The record kind is aims:impactAssessment. Part of the
+        AIMS profile set, approved by The Gathering on 2026-09-27.
+      header: |
+        ---
+        # Carrier: an AIMS impact assessment, one COG per assessment
+        # --- Zone 1a: Identity ---
+        title: "Impact assessment: leaflet summariser"
+        description: "Record of the impact assessment for the model that drafts patient leaflet summaries."
+        author: Tom Cranstoun
+        created: 2026-09-27
+        modified: 2026-09-27
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface ---
+        type: aims:impactAssessment
+        tags: [example, aims, impact-assessment]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          canonicalUri: https://example.com/aims/impact/ia-003.md
+          status: active
+          recordId: IA-003
+          systemRef: https://example.com/aims/systems/leaflet-summariser.md
+          assessedAt: 2026-09-27
+          parties:
+            - role: assessor
+              name: Clinical Safety Officer
+          affectedGroups: [Patients reading the leaflets]
+          impacts:
+            - group: Patients reading the leaflets
+              description: A misstated dosage could lead to harm.
+              severity: high
+          mitigations:
+            - impact: A misstated dosage could lead to harm.
+              description: A pharmacist reviews every summary before release.
+              owner: riskOwner
+        ---
+      required: [title, description, author, created, modified, canonicalUri, status, recordId, parties, systemRef, affectedGroups, impacts, assessedAt]
+      recommended: [version, mitigations, reviewBy, jurisdictionalEvidence]
+      optional: [type, tags, resource, statusNotice, supersededBy]
+    - name: aims-policy
+      description: >-
+        An AI policy kept as a document: its version, approver, approval date, next review, and the regime clauses it
+        serves. The record kind is aims:policy. The registry form of the same policy is the REGINALD policy COG, which
+        carries approvedBy, approvedAt, reviewBy and jurisdictionalEvidence under the same meanings. Part of the AIMS
+        profile set, approved by The Gathering on 2026-09-27.
+      header: |
+        ---
+        # Carrier: an AI policy, one COG per policy version
+        # --- Zone 1a: Identity ---
+        title: "AI policy"
+        description: "The organisation's policy for developing and using AI systems."
+        author: Tom Cranstoun
+        created: 2026-09-27
+        modified: 2026-09-27
+        version: "2.0"
+        # --- Zone 1b: OKF reserved surface ---
+        type: aims:policy
+        tags: [example, aims, ai-policy]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          canonicalUri: https://example.com/aims/ai-policy.md
+          status: active
+          recordId: POL-AI
+          approvedAt: 2026-09-27
+          parties:
+            - role: approver
+              name: Board of Directors
+          reviewBy: 2027-09-27
+          jurisdictionalEvidence:
+            ISO-42001:
+              controls: [A.2.2, A.2.4]
+        ---
+      required: [title, description, author, created, modified, version, canonicalUri, status, recordId, parties, approvedAt]
+      recommended: [reviewBy, jurisdictionalEvidence]
+      optional: [type, tags, resource, statusNotice, supersededBy]
