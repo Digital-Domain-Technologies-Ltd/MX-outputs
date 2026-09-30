@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "MX: The Handbook Is Here"
 description: "The practical implementation guide to Machine Experience, making your website work for AI agents, screen readers, and everything in between. Available now as PDF and print."
 author: "Tom Cranstoun"
@@ -12,17 +13,20 @@ created: 2026-04-10
 modified: 2026-04-10
 version: "1.0"
 
+type: blog-post
 mx:
-  status: published
-  contentType: blog-post
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/mx-handbook-is-here.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/foundations/mx-handbook-is-here.md
+  contextProvides:
+    - "The practical implementation guide to Machine Experience, making your website work for AI agents, screen readers, and everything in between. Available now as PDF and print."
   stability: stable
   purpose: "The practical implementation guide to Machine Experience, making your website work for AI agents, screen readers, and everything in between. Available now as PDF and print."
   servedAt: https://mx.allabout.network/blog/mx-handbook-is-here.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   blogUrl: https://mx.allabout.network/blog/mx-handbook-is-here.html
   blogFilename: mx-handbook-is-here
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -63,11 +67,9 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="MX: The Handbook Is Here">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -96,7 +98,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -110,7 +112,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 716,
+        "wordCount": 715,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -164,7 +166,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../images/avatars/tom-avatar.webp"
+            <img src="../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -191,7 +193,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="716">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="715">
         <header class="article-header">
           <h1>MX: The Handbook Is Here</h1>
           <div class="article-meta"
@@ -211,10 +213,10 @@ mx:
 <img src="https://mx.allabout.network/images/handbook-book.webp" loading="eager" width="150" height="219" alt="MX: The Handbook, book cover" />
 </figure>
 <p>In January 2026, Amazon launched Alexa+. Microsoft launched Copilot Checkout. Google launched UCP. Anthropic launched Claude Cowork. The infrastructure for machines to act on web pages arrived in a single month.</p>
-<p>Your website wasn't ready. Neither was mine. Neither was almost anyone's.</p>
-<p>That's why I wrote this book.</p>
+<p>Your website was not ready. Neither was mine. Neither was almost anyone's.</p>
+<p>That is why I wrote this book.</p>
 <h2 id="the-problem-is-not-intelligence-it-is-guessing" tabindex="-1">The problem is not intelligence, it is guessing</h2>
-<p>Over 40% of models on Hugging Face have fewer than 100 million parameters. The agent visiting your product page might be Claude with a million-token context window, or it might be a local model running on a phone with only 4,000 tokens. You can't detect which one it is, User-Agent strings are trivially spoofed.</p>
+<p>Over 40% of models on Hugging Face have fewer than 100 million parameters. The agent visiting your product page might be Claude with a million-token context window, or it might be a local model running on a phone with 4,000 tokens to work with. You cannot detect which one it is, User-Agent strings are trivially spoofed.</p>
 <p>When an agent encounters incomplete information, it does what any system does with missing data: it fills in the gaps. In AI, we call that hallucination. In web development, we call it a bug.</p>
 <p>Machine Experience is the practice of making the gaps disappear.</p>
 <h2 id="what-mx-actually-means-in-practice" tabindex="-1">What MX actually means in practice</h2>
@@ -222,17 +224,17 @@ mx:
 <p>The core insight came from Steve Krug's &quot;Don't Make Me Think&quot;, applied to a different audience. When a human has to think about how to use your interface, you have failed at UX. When an AI agent has to think about what your page means, you have failed at MX. The agent will guess. The guess may be wrong. The user relying on that agent will get wrong information about your business.</p>
 <p>Every pattern in The Handbook follows the same principle: be explicit. State what something is. State what it costs. State where it lives. State who wrote it and when. If the information exists, surface it in the DOM where any agent, from a billion-parameter model to a hundred-million-parameter crawler, can find it without inference.</p>
 <h2 id="what-is-in-the-book" tabindex="-1">What is in the book</h2>
-<p>The Handbook is 320 pages of implementation patterns. Every chapter starts with a problem you'll identify and ends with code you can deploy.</p>
-<p>Chapters 1-3 establish how AI agents actually read your pages, the five agent types, what they can and can't perceive, and the principles that make the difference between a page that works and one that hallucinates.</p>
+<p>The Handbook is 320 pages of implementation patterns. Every chapter starts with a problem you recognise and ends with code you can deploy.</p>
+<p>Chapters 1-3 establish how AI agents actually read your pages, the five agent types, what they can and cannot perceive, and the principles that make the difference between a page that works and one that hallucinates.</p>
 <p>Chapters 4-7 are the implementation core. Content architecture. Metadata. Navigation. JavaScript. Each chapter covers the patterns that matter, with working examples you can adapt to your CMS.</p>
-<p>Chapter 8 is testing: how to confirm your pages work for machines the way you verify they do for humans.</p>
-<p>Chapter 9 lists the anti-patterns. The things teams do that actively break agent comprehension. Hidden state behind JavaScript toggles. Prices that only appear after interaction. Forms with no semantic structure. Each one documented with the fix.</p>
-<p>Chapters 10-12 connect implementation to business outcomes. The five-stage MX process from discovery through purchase confidence. Cogs and <a href="https://reginald.allabout.network/" rel="noopener">Reginald</a>, the registry that attests provenance, who published a cog, that it's unaltered since publication, whether it was produced by a human or an AI, so agents can act on verified content rather than inference. MX makes content machine-readable. Reginald makes it machine-trustworthy.</p>
+<p>Chapter 8 is testing, how to verify your pages work for machines the way you verify they work for humans.</p>
+<p>Chapter 9 catalogs the anti-patterns. The things teams do that actively break agent comprehension. Hidden state behind JavaScript toggles. Prices that only appear after interaction. Forms with no semantic structure. Each one documented with the fix.</p>
+<p>Chapters 10-12 connect implementation to business outcomes. The five-stage MX journey from discovery through purchase confidence. Cogs and <a href="https://reginald.allabout.network/" rel="noopener">Reginald</a>, the registry that attests provenance, who published a cog, that it is unaltered since publication, whether it was produced by a human or an AI, so agents can act on verified content rather than inference. MX makes content machine-readable. Reginald makes it machine-trustworthy.</p>
 <h2 id="who-this-is-for" tabindex="-1">Who this is for</h2>
-<p>Frontend developers who want copy-paste patterns. UX designers exploring the machine side. Technical leads making architectural decisions. QA engineers who need testing methodologies. Business leaders who want to understand why their competitors' products appear in AI answers and theirs don't.</p>
+<p>Frontend developers who want copy-paste patterns. UX designers exploring the machine side. Technical leads making architectural decisions. QA engineers who need testing methodologies. Business leaders who want to understand why their competitors' products appear in AI answers and theirs do not.</p>
 <p>The book works from both ends. Developers start at Chapter 1 and work forward. Business leaders start at Chapter 11 and work back.</p>
 <h2 id="the-standards-hierarchy" tabindex="-1">The standards hierarchy</h2>
-<p>MX doesn't replace anything you already do well. Everything that benefits SEO also benefits MX. Everything that benefits accessibility also benefits MX. Established web standards, HTML semantics, WCAG, <a href="https://schema.org">Schema.org</a>, Open Graph, Dublin Core, come first. MX adds governance and lifecycle metadata where those standards leave gaps.</p>
+<p>MX does not replace anything you already do well. Everything that benefits SEO also benefits MX. Everything that benefits accessibility also benefits MX. Established web standards, HTML semantics, WCAG, <a href="https://schema.org">Schema.org</a>, Open Graph, Dublin Core, come first. MX adds governance and lifecycle metadata where those standards leave gaps.</p>
 <p>A well-built MX page is a well-built SEO page, a well-built accessible page, and a well-built GEO page. The patterns compound.</p>
 <h2 id="get-the-book" tabindex="-1">Get the book</h2>
 <p><strong>MX: The Handbook</strong> is available now.</p>
@@ -243,7 +245,7 @@ mx:
 </ul>
 <p><a href="https://mx.allabout.network/books/handbook.html"><strong>Buy the book</strong></a></p>
 <p>ISBN 978-1-067638-40-5. Published by Digital Domain Technologies Ltd, trading as CogNovaMX.</p>
-<p>New to MX? Start with the free <a href="https://mx.allabout.network/books/introduction.html">Introduction</a>. Want the full strategic picture? <a href="https://mx.allabout.network/books/protocols.html">MX: The Protocols</a> publishes 1 July 2026.</p>
+<p>New to MX? Start with the free <a href="https://mx.allabout.network/books/introduction.html">Introduction</a>. Want the full strategic picture? <a href="https://mx.allabout.network/books/protocols.html">MX: The Protocols</a> publishes January 2027.</p>
 
 
       </article>
@@ -252,16 +254,16 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
-            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Focus areas include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
           </div>
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your team stands on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
@@ -303,5 +305,6 @@ mx:
   </footer>
 
   <script src="../js/app.js"></script>
+  <script type="module" src="../js/mx-provenance-demo.js"></script>
 </body>
 </html>

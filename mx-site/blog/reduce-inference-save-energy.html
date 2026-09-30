@@ -11,7 +11,7 @@ description: "The AI-power debate is all about supply. The overlooked lever is d
 author: Tom Cranstoun
 created: "2026-07-18"
 modified: 2026-09-30
-version: "1.1"
+version: "1.2"
 type: blog-post
 tags:
   - machine-experience
@@ -34,7 +34,9 @@ mx:
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator. This is the canonical energy detail post the renewable-inference aim points other surfaces at."
   blogUrl: https://mx.allabout.network/blog/reduce-inference-save-energy.html
   blogFilename: reduce-inference-save-energy
+  servedAt: https://mx.allabout.network/blog/reduce-inference-save-energy.html
 refersTo:
+  - https://mx.allabout.network/blog/agent-web/thought-is-getting-cheaper-faster-than-transistors-did.html
   - https://mx.allabout.network/blog/industry/humans-take-journeys-agents-take-one-fetch.html
   - https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html
   - https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html
@@ -86,7 +88,7 @@ refersTo:
        estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Reduce Inference, Save Energy">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.1">
+  <meta name="mx:version" content="1.2">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/reduce-inference-save-energy.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -126,7 +128,7 @@ refersTo:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1096,
+        "wordCount": 1164,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -208,7 +210,7 @@ refersTo:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1096">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1164">
         <header class="article-header">
           <h1>Reduce Inference, Save Energy</h1>
           <div class="article-meta"
@@ -228,7 +230,7 @@ refersTo:
 <p>The part that gets missed is that inference, not training, is roughly 90% of AI energy use (<a href="https://aimultiple.com/ai-energy-consumption">aimultiple</a>, <a href="https://news.mit.edu/2025/explained-generative-ai-environmental-impact-0117">MIT News</a>). Training a model is a big one-off bill. Inference is the bill that arrives every time anyone asks the model anything, and it never stops. A large slice of that inference is redundant. Agents re-crawl pages they can't parse. They re-derive facts that were never written down in a form a machine can read. They hallucinate, then spend more compute correcting themselves.</p>
 <p>I'll give you one case from our own work. An AI assistant insisted a fully documented command didn't exist. The troubleshooting cascade that followed burned about 40,000 tokens to recover an answer that needed roughly 200. A 200-to-1 waste ratio, on a single question. That waste is electricity and water, and almost nobody is measuring it.</p>
 <h2 id="efficiency-alone-wont-save-you" tabindex="-1">Efficiency Alone Won't Save You</h2>
-<p>The usual reassurance is that hardware keeps getting more efficient, so this sorts itself out. It doesn't, and the reason has a name: Jevons paradox. When something gets cheaper to do, we do more of it. Cheaper inference invites more of it. Google's own carbon footprint has risen 48% since 2019 despite years of per-query efficiency gains (<a href="https://arxiv.org/abs/2501.16548">arXiv</a>). The per-query saving was real; the total went up anyway, because usage grew faster than the efficiency did. TypeSafe named its decision model, Jev, after Jevons and <a href="https://mx.allabout.network/blog/industry/nobody-got-fired-for-using-geo.html">bet its business on the same effect</a>: cheaper machine decisions mean more of them.</p>
+<p>The usual reassurance is that hardware keeps getting more efficient, so this sorts itself out. It doesn't, and the reason has a name: Jevons paradox. When something gets cheaper to do, we do more of it. Cheaper inference invites more of it. Google's own carbon footprint has risen 48% since 2019 despite years of per-query efficiency gains (<a href="https://arxiv.org/abs/2501.16548">arXiv</a>). The per-query saving was real; the total went up anyway, because usage grew faster than the efficiency did. TypeSafe named its decision model, Jev, after Jevons and <a href="https://mx.allabout.network/blog/industry/nobody-got-fired-for-using-geo.html">bet its business on the same effect</a>: cheaper machine decisions mean more of them. That effect now has a measured rate: Epoch AI measures the cost of a given level of AI performance <a href="https://epoch.ai/publications/the-plunging-price-of-thought">falling about 13 times a year</a> since 2023, several times faster than the price of compute ever fell. I've <a href="https://mx.allabout.network/blog/agent-web/thought-is-getting-cheaper-faster-than-transistors-did.html">set that beside Moore's law and our own decider</a>.</p>
 <p>Cheap decisions will multiply whatever we do. The demand-side answer is that a question a document answers in a declared field needs no model at all. Checking whether an expiry date has passed is a line of code, not an inference.</p>
 <p>The lever that scales is doing less inference per task rather than making each call cheaper, and that's a content problem, not a silicon one.</p>
 <h2 id="the-scale-is-not-small" tabindex="-1">The Scale Is Not Small</h2>
@@ -250,6 +252,7 @@ refersTo:
 <li><a href="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">A Decider Is Only as Good as Its State</a>: what a decision model is, and why its calibration stops at the state it's handed.</li>
 <li><a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">I Built a Decider and Measured It</a>: the local rebuild, and what embedded MX metadata did to its accuracy.</li>
 <li><a href="https://mx.allabout.network/blog/industry/nobody-got-fired-for-using-geo.html">Nobody Got Fired for Using GEO</a>: why cheap decisions multiply, and why MX is worth promoting before the market asks.</li>
+<li><a href="https://mx.allabout.network/blog/agent-web/thought-is-getting-cheaper-faster-than-transistors-did.html">Thought Is Getting Cheaper Faster Than Transistors Did</a>: Epoch AI's price-of-thought figures set beside Moore's law and our own local decider.</li>
 <li><a href="https://mx.allabout.network/blog/industry/humans-take-journeys-agents-take-one-fetch.html">Humans Take Journeys, Agents Take One Fetch</a>: why most agents read one file in isolation and decide, and why MX designs for both a drip feed and everything at once.</li>
 <li><a href="https://mx.allabout.network/blog/why-use-mx.html">Why Use MX</a>: why a file needs metadata that travels with it, so the machine that meets it next doesn't have to guess.</li>
 </ul>
