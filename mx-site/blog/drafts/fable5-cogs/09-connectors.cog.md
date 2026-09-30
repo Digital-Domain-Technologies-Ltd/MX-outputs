@@ -10,7 +10,7 @@ title: "MCP App and Connector Routing"
 description: "Defines when to search the MCP registry, when to call suggest_connectors, and when to call a third-party tool directly. Maps to mcp_app_suggestions in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Define routing rules for MCP app connectors."
   stability: stable
   contextProvides: ["[third_party_mcp_app] tools require suggest_connectors even when connected - never pick a partner on the user's behalf. Native tools (calendar, code host) call directly. User names a connector not present: search registry first. Never suggest e-commerce proactively."]

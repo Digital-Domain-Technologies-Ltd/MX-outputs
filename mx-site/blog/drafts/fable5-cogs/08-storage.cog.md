@@ -10,7 +10,7 @@ title: "Artifact Persistent Storage"
 description: "Defines the storage API available to Artifacts for persisting data across sessions, with design rules and hard limits. Maps to persistent_storage_for_artifacts in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Define the storage API for Artifact persistent data and the rules for using it safely."
   stability: stable
   contextProvides: ["window.storage API: get/set/delete/list with shared flag. Keys under 200 chars, no whitespace/slashes/quotes. Values under 5MB. Last-write-wins. Never use localStorage or sessionStorage in Artifacts - they fail in the Claude.ai sandbox."]

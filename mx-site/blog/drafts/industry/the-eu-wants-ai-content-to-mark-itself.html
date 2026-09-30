@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The EU just told AI content to mark itself. We added the field."
 description: "On 10 June 2026 the European Commission published a Code of Practice asking AI-generated content to be marked in a machine-readable way. That is the MX argument in the regulator's own words. Here is the field we added so a file, or a binary asset, can say it was made by a machine."
 author: "Tom Cranstoun"
@@ -14,8 +15,12 @@ version: "1.0"
 
 type: blog-post
 mx:
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/industry/the-eu-wants-ai-content-to-mark-itself.md
+  contextProvides:
+    - "On 10 June 2026 the European Commission published a Code of Practice asking AI-generated content to be marked in a machine-readable way. That is the MX argument in the regulator's own words. Here is the field we added so a file, or a binary asset, can say it was made by a machine."
   stability: stable
   purpose: "On 10 June 2026 the European Commission published a Code of Practice asking AI-generated content to be marked in a machine-readable way. That is the MX argument in the regulator's own words. Here is the field we added so a file, or a binary asset, can say it was made by a machine."
   servedAt: https://mx.allabout.network/blog/drafts/industry/the-eu-wants-ai-content-to-mark-itself.html
@@ -64,11 +69,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The EU just told AI content to mark itself. We added the field.">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -111,7 +114,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 880,
+        "wordCount": 873,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -182,14 +185,14 @@ mx:
         <nav aria-label="Table of contents">
           <ul>
         <li><a href="#this-is-the-machine-first-argument-in-the-regulators-mouth">This is the machine-first argument, in the regulator's mouth</a></li>
-        <li><a href="#what-we-changed-this-week">What we changed this week</a></li>
+        <li><a href="#what-we-changed">What we changed</a></li>
         <li><a href="#the-honest-part-because-it-matters">The honest part, because it matters</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="880">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="873">
         <header class="article-header">
           <h1>The EU just told AI content to mark itself. We added the field.</h1>
           <div class="article-meta"
@@ -205,14 +208,14 @@ mx:
         </header>
 
 
-<p>This week the European Commission published the final Code of Practice on Transparency of AI-generated Content. It is voluntary, it was drafted by six independent experts with input from more than 180 stakeholders, and it sets out practical steps to help providers and deployers of generative AI meet the transparency obligations of the EU AI Act, which apply from 2 August 2026.</p>
+<p>The European Commission has published the final Code of Practice on Transparency of AI-generated Content. It is voluntary, it was drafted by six independent experts with input from more than 180 stakeholders, and it sets out practical steps to help providers and deployers of generative AI meet the transparency obligations of the EU AI Act, which apply from 2 August 2026.</p>
 <p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
 <p>I want to pull out one line, because it is the whole reason I am writing this. From that date, AI-generated or AI-manipulated content has to be &quot;marked in a machine-readable way&quot; so it &quot;can be detected as artificially generated or manipulated&quot;. Deepfakes get labelled. Machine-written text on matters of public interest gets labelled when no human reviewed it. And people get told when they are talking to a chatbot rather than a person.</p>
 <p>Read that again with an engineer's eye. The regulator is not asking for a banner a human can see. It is asking for a marker a machine can read, attached to the file, before a human is in the loop. That is the argument I have been making for two years, and it just arrived in a Commission instrument with a date on it.</p>
 <h2 id="this-is-the-machine-first-argument-in-the-regulators-mouth" tabindex="-1">This is the machine-first argument, in the regulator's mouth</h2>
 <p>The case for Machine Experience has always been that a file should be able to tell a machine what it is, without the page that produced it, without a human translating, without anyone guessing. Who made this. When. Under what authority. Whether a person reviewed it. Most content on the web cannot answer any of that, which is exactly why agents hallucinate about it and auditors end up taking the operator's word.</p>
 <p>The Code of Practice picks the sharpest version of that question and makes it a transparency duty: was this made by a machine, and can a machine tell? If your answer lives only in a human-readable disclaimer, or nowhere at all, you do not have a machine-readable marking. You have a hope.</p>
-<h2 id="what-we-changed-this-week" tabindex="-1">What we changed this week</h2>
+<h2 id="what-we-changed" tabindex="-1">What we changed</h2>
 <p>MX already had a field for how content was created. <code>provenanceOrigin</code> could say <code>human-directed</code>, <code>ai-assisted</code>, or <code>automated-fact-check</code>. What it could not say cleanly was the case the Code of Practice cares about most: a machine made this, on its own, with no real human authorship behind it.</p>
 <p>So we extended the field with the two values the regulation itself names:</p>
 <ul>
@@ -228,7 +231,7 @@ mx:
 <p>Declaring that a machine authored a file is not the same as watermarking the file so a detector can prove it is synthetic. The first is provenance. The second is content authenticity, and that is the job of a marking standard like C2PA Content Credentials or a watermark like SynthID. MX is not a watermark, and I am not going to tell you it satisfies Article 50 on its own. It does not.</p>
 <p>What MX gives the obligation is the layer the regulation quietly assumes already exists: a machine-readable declaration of who, or what, authored the content, carried in the file, sitting alongside whatever watermark the artefact also bears. The watermark proves it is synthetic. MX records the authorship and the provenance chain around it. Carry both and you have answered the whole question. Claim one is the other and you will be corrected on the first inquiry.</p>
 <p>That distinction is the difference between selling &quot;queryable, verifiable evidence&quot;, which is honest, and selling &quot;compliance in a box&quot;, which collapses the moment a regulator looks. MX and REGINALD are the first kind. A voluntary code that lets a signer demonstrate compliance is evidence you can produce on request, not a certificate you can hide behind. Compliance stays the organisation's legal duty. What we make is the documentation that duty requires, machine-readable and travelling with the file.</p>
-<p>The web is filling up with content no one made by hand. The EU just said that content should be able to say so, in a form a machine can read. As of this week, MX has the field, and your files and your assets can carry it.</p>
+<p>The web is filling up with content no one made by hand. The EU just said that content should be able to say so, in a form a machine can read. MX has the field, and your files and your assets can carry it.</p>
 
 
       </article>

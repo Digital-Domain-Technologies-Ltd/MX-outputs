@@ -5,23 +5,29 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "WordPress's Update Delay and the Provenance Gap"
 description: "WordPress.org's Protect The Shire adds a 24-hour cooldown to plugin auto-updates so an AI reviewer can vet each one. A Reddit thread reads it as an upsell. I read it as a tell: a delay is what you build when you cannot verify provenance on the spot. The durable fix is content that proves what it is the moment a machine looks at it."
 author: Tom Cranstoun
 created: 2026-06-16
 modified: 2026-06-16
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [supply-chain, provenance, attestation, mx-foundations]
 mx:
+  mxSpecVersion: "0.9"
   servedAt: https://mx.allabout.network/blog/drafts/wordpress-update-delay-provenance-gap.html
   generate:
     script: scripts/generate-content-html.cjs
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/wordpress-update-delay-provenance-gap.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides:
+    - "Reads WordPress's Protect The Shire 24-hour update cooldown as evidence of a missing instrument: a delay is the workaround for not being able to verify provenance instantly. MX makes an artefact machine-readable, REGINALD makes it machine-trustworthy, and that pair is the verifiable alternative to a slower pipe."
   stability: stable
   purpose: "Use the WordPress Protect The Shire update delay to make the MX + REGINALD case: supply-chain trust is a provenance problem, and a cooldown is what you reach for when provenance is not machine-checkable."
   blogUrl: https://mx.allabout.network/blog/drafts/wordpress-update-delay-provenance-gap.html
@@ -67,11 +73,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="WordPress's Update Delay and the Provenance Gap">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -208,7 +212,7 @@ mx:
         </header>
 
 
-<p>A post doing the rounds on Reddit this week put its finger on something real, even if it reached for the wrong villain. <a href="http://WordPress.org">WordPress.org</a> has launched an initiative called <a href="https://wordpress.org/news/2026/06/pts/">Protect The Shire</a>, and the headline change is a 24-hour cooldown before plugin and theme updates reach sites through auto-update. The window exists so an AI-assisted reviewer can check each update before it ships, after a run of supply-chain attacks where backdoored updates slipped straight into live sites.</p>
+<p>In June 2026 a post doing the rounds on Reddit put its finger on something real, even if it reached for the wrong villain. <a href="http://WordPress.org">WordPress.org</a> has launched an initiative called <a href="https://wordpress.org/news/2026/06/pts/">Protect The Shire</a>, and the headline change is a 24-hour cooldown before plugin and theme updates reach sites through auto-update. The window exists so an AI-assisted reviewer can check each update before it ships, after a run of supply-chain attacks where backdoored updates slipped straight into live sites.</p>
 <p>The Reddit author's worry, stripped of the heat, is an economic one. Attacks now move faster than the gate. <a href="https://patchstack.com/whitepaper/state-of-wordpress-security-in-2026/">Patchstack's 2026 report</a> puts the weighted median time from disclosure to first exploit at five hours, with roughly 45% of high-impact vulnerabilities exploited inside 24 hours. Meanwhile <a href="https://www.wordfence.com/wordfence-free-vs-premium/">Wordfence's free tier</a> sits 30 days behind on firewall rules and malware signatures; real-time protection is the paid product. Stack a 24-hour update gate on top of a 30-day signature lag and the only door that stays open quickly is the one with a price on it. You can see why someone concludes the squeeze is deliberate.</p>
 <p>I do not think it is deliberate. But I do think the delay is a tell, and it points at something MX has been saying for a while.</p>
 <h2 id="a-delay-is-what-you-build-when-you-cannot-verify" tabindex="-1">A delay is what you build when you cannot verify</h2>
@@ -220,7 +224,7 @@ mx:
 <p>MX's answer is a principle we call corroboration over assertion. A small publisher whose content is machine-readable, attributed, and corroborated by authoritative external sources can be as trustworthy to a machine as a giant, without buying the position. The fix for &quot;size decides&quot; is not a fairness policy bolted on later. It is giving the machine better signals to read, so that relevance and provenance can outweigh raw size.</p>
 <h2 id="what-mx-does-not-claim" tabindex="-1">What MX does not claim</h2>
 <p>To be straight about scope: MX does not fix WordPress, and it does not make anything secure. Attestation proves who shipped an update; it does not prove the update is safe, and an attested backdoor is still a backdoor. What attestation removes is the doubt about origin and tampering, which is the specific doubt the 24-hour delay is paying for with time. The review still has to happen. It just stops having to happen blind, and it stops having to happen slowly.</p>
-<p>The pattern is bigger than one content platform. Any registry that manages supply-chain risk by adding a delay, whether a package index, an app store, or a model hub, is paying in latency for a problem that provenance solves in verification. WordPress is the example in front of us this week, handed over by a Reddit thread. The lesson travels.</p>
+<p>The pattern is bigger than one content platform. Any registry that manages supply-chain risk by adding a delay, whether a package index, an app store, or a model hub, is paying in latency for a problem that provenance solves in verification. WordPress is the example in front of us here, handed over by a Reddit thread. The lesson travels.</p>
 <p>WordPress bought itself a day. Fair enough; given the tools on the table, a day is a reasonable thing to buy. But the bill comes due as latency, and latency is what the attackers are counting on. The durable fix is not a longer queue. It is content that can prove what it is the moment a machine looks at it.</p>
 
 

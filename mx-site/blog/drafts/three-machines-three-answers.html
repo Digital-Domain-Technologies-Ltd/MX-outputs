@@ -5,21 +5,27 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Three Machines, Three Answers"
 description: "When a CDN serves three different versions of your page to three types of AI machine, you don't have one source of truth. You have three. That problem compounds."
 author: Tom Cranstoun
 created: "2026-06-17"
 modified: "2026-06-17"
 version: "1.0"
+type: blog-post
+tags: [scrunch, axp, machine-types, provenance, cogs, mx-foundations]
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
-  tags: [scrunch, axp, machine-types, provenance, cogs, mx-foundations]
   purpose: "Expose the machine-type fragmentation problem created by CDN-layer content transformation, and position MX as the structurally correct alternative."
   stability: stable
+  contextProvides:
+    - "Machine-type fragmentation: training crawlers, search indexers, and real-time agents receive different content from the same URL"
+    - "Provenance problem: three versions cannot all be authoritative"
+    - "MX answer: one declared, structured COG that all machine types read"
   runbook: "Draft blog post. When ready, run npm run promote to publish to mx-site/blog/."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/three-machines-three-answers.md
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -28,11 +34,11 @@ mx:
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="When a CDN serves three different versions of your page to three types of AI machine, you don't have one source of truth. You have three. That problem compounds.">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://allabout.network/blogs/mx/three-machines-three-answers.html">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/three-machines-three-answers.html">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://allabout.network/blogs/mx/three-machines-three-answers.html">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/three-machines-three-answers.html">
   <meta property="og:title" content="Three Machines, Three Answers | CogNovaMX">
   <meta property="og:description" content="When a CDN serves three different versions of your page to three types of AI machine, you don't have one source of truth. You have three. That problem compounds.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
@@ -60,16 +66,14 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Three Machines, Three Answers">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
   <meta name="mx:author" content="Tom Cranstoun">
-  <link rel="mx" href="https://allabout.network/blogs/mx/three-machines-three-answers.html">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/three-machines-three-answers.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
   <meta name="ai-disclosure" content="ai-assisted">
 
@@ -93,7 +97,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -103,7 +107,7 @@ mx:
           "url": "https://mx.allabout.network/"
         },
         "mainEntityOfPage": {
-          "@id": "https://allabout.network/blogs/mx/three-machines-three-answers.html"
+          "@id": "https://mx.allabout.network/blog/drafts/three-machines-three-answers.html"
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
@@ -115,9 +119,9 @@ mx:
       },
       {
         "@type": "WebPage",
-        "@id": "https://allabout.network/blogs/mx/three-machines-three-answers.html",
+        "@id": "https://mx.allabout.network/blog/drafts/three-machines-three-answers.html",
         "name": "Three Machines, Three Answers",
-        "url": "https://allabout.network/blogs/mx/three-machines-three-answers.html",
+        "url": "https://mx.allabout.network/blog/drafts/three-machines-three-answers.html",
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -161,7 +165,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -209,9 +213,9 @@ mx:
 <h2 id="the-three-machines" tabindex="-1">The Three Machines</h2>
 <p>AXP distinguishes:</p>
 <ol>
-<li><strong>Training crawlers</strong> — building the next generation of LLM datasets from your content.</li>
-<li><strong>Search indexers</strong> — building the citation stores that retrieval systems query.</li>
-<li><strong>Real-time retrieval agents</strong> — answering live questions right now, using your page as a source.</li>
+<li><strong>Training crawlers</strong> - building the next generation of LLM datasets from your content.</li>
+<li><strong>Search indexers</strong> - building the citation stores that retrieval systems query.</li>
+<li><strong>Real-time retrieval agents</strong> - answering live questions right now, using your page as a source.</li>
 </ol>
 <p>Each gets a different HTML response. Different structure. Possibly different emphasis. Plausibly different facts if the transformation layer rewrites, summarises, or reorders content.</p>
 <p>Same URL. Three versions. Three places where your content now lives.</p>
@@ -219,8 +223,8 @@ mx:
 <p>This matters because these three machines do not talk to each other.</p>
 <p>The training crawler archives its version. In six months, an LLM trained on that archive will answer questions about your product using what it saw.</p>
 <p>The search indexer stores its version. A retrieval system will cite that.</p>
-<p>The real-time agent reads its version today.</p>
-<p>Three versions. Three archives. Three answers about you — potentially contradicting each other.</p>
+<p>The real-time agent reads the live version.</p>
+<p>Three versions. Three archives. Three answers about you - potentially contradicting each other.</p>
 <p>And the divergence grows. Every time you update your page, each machine type gets a fresh transformation of the new content. The training dataset never catches up to the index. The index never catches up to real-time. The gap is structural, not a bug to fix.</p>
 <h2 id="where-provenance-goes" tabindex="-1">Where Provenance Goes</h2>
 <p>There is a deeper problem. Once AXP transforms your content and sends it to a crawler, the provenance chain is severed.</p>
@@ -229,7 +233,7 @@ mx:
 <p>REGINALD cannot sign what it never saw. Your AI Usage Declaration cannot travel with content that left its origin in a different form.</p>
 <h2 id="one-source-declared-readable-by-any-machine" tabindex="-1">One Source. Declared. Readable by Any Machine</h2>
 <p>The MX approach is structurally different.</p>
-<p>A COG — a Community Owned Governance Standards document — is structured at the point of authorship, not at the point of delivery. The governance travels inside the document. Every machine type reads the same declared content. What changes is the projection, not the source.</p>
+<p>A COG - a Community Owned Governance Standards document - is structured at the point of authorship, not at the point of delivery. The governance travels inside the document. Every machine type reads the same declared content. What changes is the projection, not the source.</p>
 <p>A training crawler reads the COG. A search indexer reads the COG. A real-time agent reads the COG. They all get the same structured facts, the same declared intent, the same cryptographic provenance from REGINALD.</p>
 <p>No transformation layer. No derivative. No three answers.</p>
 <h2 id="the-vendor-bet" tabindex="-1">The Vendor Bet</h2>
@@ -247,7 +251,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -298,5 +302,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

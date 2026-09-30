@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Metadata Was Already There"
 description: "When content needs to be machine-readable, the reflex is to point a model at it and let it tag everything. That is the expensive way round. Most of the metadata is already in the file, in the alt text, the caption, the nearest heading, the path, and you can harvest it deterministically, with no guessing."
 author: "Tom Cranstoun"
@@ -12,24 +13,22 @@ created: 2026-06-10
 modified: 2026-06-10
 version: "1.0"
 
+type: blog-post
+tags: [machine-experience, mx, metadata, determinism, intent-cms, content-operations]
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
-  tags:
-    - machine-experience
-    - mx
-    - metadata
-    - determinism
-    - intent-cms
-    - content-operations
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/cogs-and-metadata/the-metadata-was-already-there.md
+  contextProvides:
+    - "Why the deterministic way to make content self-describing is to harvest the signals already in the file (alt text, caption, nearest heading, URL path) at ingest, rather than paying a model to invent metadata."
   stability: stable
   purpose: "Argue for the deterministic decorator: most asset metadata is already present as signals a publisher wrote on purpose, and harvesting it on ingest is cheaper, repeatable, auditable, and honest, where a model guesses fluently and privately."
   servedAt: https://mx.allabout.network/blog/drafts/cogs-and-metadata/the-metadata-was-already-there.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   blogUrl: https://mx.allabout.network/blog/drafts/cogs-and-metadata/the-metadata-was-already-there.html
   blogFilename: the-metadata-was-already-there
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -70,11 +69,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Metadata Was Already There">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -103,7 +100,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -117,7 +114,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1440,
+        "wordCount": 1441,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -171,7 +168,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -199,7 +196,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1440">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1441">
         <header class="article-header">
           <h1>The Metadata Was Already There</h1>
           <div class="article-meta"
@@ -237,7 +234,7 @@ mx:
 <p>Same input, same output, every single time. No model in the loop.</p>
 <h2 id="what-deterministic-actually-buys-you" tabindex="-1">What &quot;Deterministic&quot; Actually Buys You</h2>
 <p>That word, deterministic, does a lot of work, so let me cash it out in plain terms.</p>
-<p><strong>It repeats.</strong> Run the decorator over the same library tomorrow and you get the same metadata, byte for byte. Run it on a different machine and you get the same again. Nobody has to wonder whether today's batch was tagged differently from last month's.</p>
+<p><strong>It repeats.</strong> Run the decorator over the same library tomorrow and you get the same metadata, byte for byte. Run it on a different machine and you get the same again. Nobody has to wonder whether one batch was tagged differently from the one before.</p>
 <p><strong>It's cheap.</strong> Reading the alt text costs nothing. There's no per-image model call, no inference bill that grows with the size of your archive. A library of fifty thousand images costs about the same to describe as a library of fifty.</p>
 <p><strong>It's auditable.</strong> Every field can point back at the signal it came from. This description came from that caption. This title came from that heading. When someone asks how the record was made, you show them the trail. You're not standing behind &quot;the model said so.&quot;</p>
 <p><strong>It's honest.</strong> It never makes anything up. And that matters most at the edge, where the signals run out.</p>
@@ -271,7 +268,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -322,5 +319,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

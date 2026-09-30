@@ -4,13 +4,14 @@ title: "Files Away From Their Source - LinkedIn feed promo"
 description: "Files Away From Their Source - LinkedIn feed promo"
 author: Tom Cranstoun
 created: 2026-06-08
-modified: 2026-06-08
+modified: 2026-09-29
 version: "1.0"
 
 type: info-doc
 mx:
   mxSpecVersion: "0.9"
   status: active
+  x-mx-createdHash: 10d4104d
   purpose: "Files Away From Their Source - LinkedIn feed promo"
   audience: [humans, machines]
   stability: stable

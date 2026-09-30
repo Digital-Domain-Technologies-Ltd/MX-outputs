@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Search Deal Was a Handshake"
 description: "For twenty years the web ran on an unwritten bargain: search engines crawled your content and sent readers back to you. AI answers broke it, and now both sides are reaching for blunt instruments, walls on one side and charge-everyone tollbooths on the other. The Pew and Cloudflare numbers are real. What is missing is the part nobody ever wrote down: machine-readable terms, per resource, and proof they were honoured."
 author: "Tom Cranstoun"
@@ -12,14 +13,19 @@ created: 2026-06-08
 modified: 2026-06-08
 version: "0.1"
 
+type: blog-post
+tags: [ai-search, crawlers, pay-per-crawl, publishers, provenance, terms-of-use, governance, mx, reginald]
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  quotes:
+    - "**Note:** This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation."
   audience: [business, humans, machines]
+  aiAssistance: "welcome"
   targetReaders: "Publishers, content and SEO teams, platform and infrastructure decision-makers, and the technical readers who will have to implement whatever replaces the old crawl-and-cite bargain."
-  tags: [ai-search, crawlers, pay-per-crawl, publishers, provenance, terms-of-use, governance, mx, reginald]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/industry/the-search-deal-was-a-handshake.md
   servedAt: https://mx.allabout.network/blog/drafts/industry/the-search-deal-was-a-handshake.html
+  contextProvides:
+    - "Why the old crawl-and-cite search bargain broke, what the Pew and Cloudflare 2025 numbers actually say, and why machine-readable per-resource terms plus verifiable attestation are the missing middle between bot walls and charge-everyone tollbooths."
   stability: stable
   purpose: "Make the case that the broken search bargain needs machine-readable terms of use per resource plus verifiable attestation, not blunt walls or flat tollbooths."
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
@@ -29,6 +35,7 @@ refersTo:
 - cma-makes-google-show-publishers-ai-search-data.md
 - block-the-machine-it-walks-around-you.md
 - ai-assistants-are-a-traffic-channel.md
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -69,11 +76,9 @@ refersTo:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Search Deal Was a Handshake">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="0.1">
@@ -102,7 +107,7 @@ refersTo:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -116,7 +121,7 @@ refersTo:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1396,
+        "wordCount": 1397,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -170,7 +175,7 @@ refersTo:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -197,7 +202,7 @@ refersTo:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1396">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1397">
         <header class="article-header">
           <h1>The Search Deal Was a Handshake</h1>
           <div class="article-meta"
@@ -213,7 +218,7 @@ refersTo:
         </header>
 
 
-<p>A friend sent me a screenshot this week. It was one of those posts that does the rounds because it names something everyone has half-felt: AI search broke the deal the web ran on, and now the web is trying to break it back. The post called the AI answer layer a tollbooth that copied the map, blocked the road, and started charging everyone to get home.</p>
+<p>In June 2026 a friend sent me a screenshot. It was one of those posts that does the rounds because it names something everyone has half-felt: AI search broke the deal the web ran on, and now the web is trying to break it back. The post called the AI answer layer a tollbooth that copied the map, blocked the road, and started charging everyone to get home.</p>
 <p>I checked the facts in it, because confident posts about regulators and platforms are usually a little ahead of the evidence. This one was not. The numbers hold up. That is what made me want to write the part the post leaves out.</p>
 <h2 id="the-deal-nobody-signed" tabindex="-1">The deal nobody signed</h2>
 <p>For twenty years the web ran on a bargain that no one ever wrote down. A search engine crawled your content for free. In exchange, when someone searched, it sent them to you with a link and a snippet, and you got the visit. Crawl in, traffic out. Nobody signed it. There was no contract, no schedule of terms, no machine either side could point to and say &quot;this is what we agreed&quot;. It was a handshake, held in place by mutual interest and the absence of a better idea.</p>
@@ -253,7 +258,7 @@ refersTo:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -304,5 +309,6 @@ refersTo:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

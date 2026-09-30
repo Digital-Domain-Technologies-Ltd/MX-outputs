@@ -10,7 +10,7 @@ title: "Knowledge Cutoff and Search Triggers"
 description: "Defines the agent's reliable knowledge cutoff, the current date injection point, and the rules for when to search the web versus answer from training data. Maps to knowledge_cutoff in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Define when to use web search versus answer from training data."
   stability: stable
   contextProvides: ["Knowledge cutoff: January 2026. Always search for: current position holders, binary events (deaths/elections), fast-changing data (prices/news), unrecognised entities. Never search for: timeless facts, fundamental concepts, biographical data about known historical figures."]

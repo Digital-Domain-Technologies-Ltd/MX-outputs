@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The label is the easy five percent"
 description: "The EU's Code of Practice on labelling AI content is being read as a story about an icon. The icon is the easy part. The expensive part is the provenance record behind it, and it arrives as a customer questionnaire long before it arrives as a fine."
 author: "Tom Cranstoun"
@@ -12,13 +13,18 @@ created: "2026-06-24"
 modified: "2026-06-24"
 version: "1.0"
 
+category: mx-content
 type: blog-post
 tags: [provenance, eu-ai-act, labelling, reginald, procurement]
 mx:
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/provenance/the-label-is-the-easy-five-percent.md
+  contextProvides:
+    - "The EU's Code of Practice on labelling AI content is being read as a story about an icon. The icon is the easy part. The expensive part is the provenance record behind it, and it arrives as a customer questionnaire long before it arrives as a fine."
   stability: stable
   purpose: "Take the 'label is the easy five percent' framing public: the labelling Code points at a provenance record most organisations cannot produce, the record has to survive downstream tooling, and the demand reaches suppliers as a vendor questionnaire before any regulator is involved. Route the reader to the self-check and an audit."
   servedAt: https://mx.allabout.network/blog/drafts/provenance/the-label-is-the-easy-five-percent.html
@@ -66,11 +72,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The label is the easy five percent">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -113,7 +117,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1017,
+        "wordCount": 1016,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -193,7 +197,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1017">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1016">
         <header class="article-header">
           <h1>The label is the easy five percent</h1>
           <div class="article-meta"
@@ -209,14 +213,14 @@ mx:
         </header>
 
 
-<p>This week Fabio Marcello Salvadori, a sovereign-AI architect writing in his Signals from the AI Edge newsletter, published a short piece with a long shadow. His argument, stripped down: everyone is reading the EU's new Code of Practice on labelling AI-generated content as a story about an icon you drop in the corner of an image, and the icon is the easy five percent. The expensive ninety-five percent is the paper trail sitting behind it.</p>
+<p>In June 2026 Fabio Marcello Salvadori, a sovereign-AI architect writing in his Signals from the AI Edge newsletter, published a short piece with a long shadow. His argument, stripped down: everyone is reading the EU's new Code of Practice on labelling AI-generated content as a story about an icon you drop in the corner of an image, and the icon is the easy five percent. The expensive ninety-five percent is the paper trail sitting behind it.</p>
 <p>He is right, and it is worth saying why in plain terms, because this is the argument I have been making for two years and he has framed the hard part more sharply than I had.</p>
 <blockquote>
 <p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
 </blockquote>
 <h2 id="the-label-is-not-the-question" tabindex="-1">The label is not the question</h2>
 <p>Read past the label and the regulation is asking a much harder set of questions. Who generated this? Who changed it? Did a person review it? Who is accountable for publishing it? And can you still prove all of that to a regulator six months from now, when nobody in the building remembers how the content was made?</p>
-<p>That is a provenance problem, which is a plain way of saying you need a reliable record of where a piece of content came from and what happened to it on the way out. Most organisations have no such record today. They can put an icon on an image in an afternoon. They cannot answer the five questions, because keeping the answers was never a feature anyone asked for.</p>
+<p>That is a provenance problem, which is a plain way of saying you need a reliable record of where a piece of content came from and what happened to it on the way out. Most organisations have no such record. They can put an icon on an image in an afternoon. They cannot answer the five questions, because keeping the answers was never a feature anyone asked for.</p>
 <h2 id="the-mark-has-to-survive-the-real-world" tabindex="-1">The mark has to survive the real world</h2>
 <p>Here is the part Salvadori names that most of the coverage misses. Marking content at the moment of creation is the easy bit. The hard bit is that the mark has to survive contact with the world. A screenshot, a crop, a re-compression, a paraphrase, a translation: any one of them can quietly strip a marker that lives in the wrong place. A label painted on the surface of a file does not travel. The moment the file is copied into a slide, summarised by an assistant, or pulled one chunk at a time into a retrieval system, the label is gone and the questions come back unanswered.</p>
 <p>This is the whole reason I keep insisting the metadata belongs inside the file, and that it has to travel with the file. A marker that only exists on the page you published is a marker you lose the first time a machine touches your content. We wrote about <a href="https://mx.allabout.network/blog/the-eu-wants-ai-content-to-mark-itself.html">the field that lets a file say it was made by a machine</a> when the Code first landed. The field is the easy five percent. Making it survive, and making it provable, is the rest.</p>
@@ -230,7 +234,7 @@ mx:
 <h2 id="a-two-minute-self-check" tabindex="-1">A two-minute self-check</h2>
 <p>So I built the questionnaire your EU customer is about to send you. It asks the five questions, plus the three that decide whether your answers survive contact with a machine, and it scores where you actually stand: ready, partial, or holding nothing but the label. It also tells you which records you are missing, so the gap is a list, not a worry.</p>
 <p>Take the <a href="https://mx.allabout.network/reginald/provenance-readiness-check.html">provenance readiness check</a>. It takes about two minutes, asks for nothing but your own honest answers, and stores nothing.</p>
-<p>If it tells you what I suspect it will, send me your domain at <a href="mailto:info@cognovamx.com">info@cognovamx.com</a> and I will show you exactly what a machine sees when it reads your content today, and what a dated, attested record of it would look like. The first five pages are free.</p>
+<p>If it tells you what I suspect it will, send me your domain at <a href="mailto:info@cognovamx.com">info@cognovamx.com</a> and I will show you exactly what a machine sees when it reads your content, and what a dated, attested record of it would look like. The first five pages are free.</p>
 
 
       </article>

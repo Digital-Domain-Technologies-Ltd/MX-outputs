@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Google Just Added an Agentic Browsing Score to PageSpeed Insights"
 description: "PageSpeed Insights now scores a site's Agentic Browsing alongside Performance and Accessibility, checking whether AI agents can browse it and whether its WebMCP integration is correct. What that means for anyone building machine-readable pages."
 author: Tom Cranstoun
@@ -19,10 +20,13 @@ tags:
   - agent-web
   - mx-readiness
 mx:
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/google-scores-agentic-browsing-in-pagespeed-insights.md
+  contextProvides:
+    - "PageSpeed Insights now scores a site's Agentic Browsing alongside Performance and Accessibility, checking whether AI agents can browse it and whether its WebMCP integration is correct. What that means for anyone building machine-readable pages."
   stability: stable
   purpose: "PageSpeed Insights now scores a site's Agentic Browsing alongside Performance and Accessibility, checking whether AI agents can browse it and whether its WebMCP integration is correct. What that means for anyone building machine-readable pages."
   servedAt: https://mx.allabout.network/blog/drafts/agent-web/google-scores-agentic-browsing-in-pagespeed-insights.html
@@ -69,11 +73,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Google Just Added an Agentic Browsing Score to PageSpeed Insights">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -211,7 +213,7 @@ mx:
         </header>
 
 
-<p>I saw this in a screenshot doing the rounds on LinkedIn this week, so I went and checked it myself. Open PageSpeed Insights on a live URL and, alongside the familiar Performance, Accessibility, Best Practices and SEO scores, there's now a fifth: <strong>Agentic Browsing</strong>.</p>
+<p>I saw this in a screenshot doing the rounds on LinkedIn in July 2026, so I went and checked it myself. Open PageSpeed Insights on a live URL and, alongside the familiar Performance, Accessibility, Best Practices and SEO scores, there's now a fifth: <strong>Agentic Browsing</strong>.</p>
 <p>The description Google ships with it's blunt about where it stands: &quot;These checks ensure high-quality, browsable websites for AI agents and validate the correctness of WebMCP integrations. This category is still under development and subject to change.&quot; The screenshot I saw showed a site scoring 2 out of 3 on it.</p>
 <p>That's a small line of text doing a lot of work.</p>
 <h2 id="why-this-is-not-just-another-score" tabindex="-1">Why this is not just another score</h2>
@@ -221,7 +223,7 @@ mx:
 <p>The other half of the description names WebMCP specifically, and it's worth being precise about what that is. WebMCP is a proposal, incubated at W3C with Microsoft's Edge team leading it, that lets a web page act as its own MCP server, exposing a set of tools an agent can call from right there, under the user's existing authenticated session and the browser's existing security model. It's the missing piece in the story I've told before on this blog, the assistant that can read your prescription renewal form perfectly and still can't act on it, because the session belongs to the browser and nobody handed the agent a way to press the button.</p>
 <p>WebMCP is the action layer. It answers &quot;what can an agent <em>do</em> here, and how does it ask permission.&quot; MX sits one layer over from that. MX answers &quot;what <em>is</em> this, where did it come from, and how should it be interpreted.&quot; A page can have a flawless WebMCP integration and still be unreadable if its content carries no provenance, no context, and no signal of who stands behind it. The two are complementary, not competing: WebMCP without MX gives an agent a lever to pull with no idea what it's attached to; MX without WebMCP gives it a trustworthy description of a page it still can't act on.</p>
 <h2 id="early-unstable-and-worth-tracking-anyway" tabindex="-1">Early, unstable, and worth tracking anyway</h2>
-<p>I want to be straight about the caveat in Google's own text: this category is still under development and subject to change. A 2 out of 3 score today tells you almost nothing about what a 3 out of 3 will require in six months. Whatever checks survive to general availability will most likely become the de facto benchmark for agent-readiness, the same way Core Web Vitals quietly became one for performance. Nobody voted for that outcome either time. It just happened because the tool was already sitting on every developer's desk.</p>
+<p>I want to be straight about the caveat in Google's own text: this category is still under development and subject to change. A 2 out of 3 score tells you almost nothing about what a 3 out of 3 will require in six months. Whatever checks survive to general availability will most likely become the de facto benchmark for agent-readiness, the same way Core Web Vitals quietly became one for performance. Nobody voted for that outcome either time. It just happened because the tool was already sitting on every developer's desk.</p>
 <p>That's worth building towards now, not after the rubric settles. If your site isn't yet thinking about what an agent sees when it browses your pages, this is as good a prompt as you'll get to start.</p>
 <h2 id="further-reading" tabindex="-1">Further reading</h2>
 <p>This sits alongside the wider story I have been telling in the agent-web series: <a href="https://mx.allabout.network/blog/the-agent-web-looks-like-1995.html">The Agent Web Looks a Lot Like 1995</a> on the standards gap across MCP, A2A, UCP and WebMCP, and <a href="https://mx.allabout.network/blog/server-side-rendering-for-ai.html">What AI Crawlers See When They Can't Run Your JavaScript</a> on the precondition that has to hold before any of this works at all. If you want to see where your own site currently stands, <a href="https://mx.allabout.network">mx.allabout.network</a> runs a free MX readiness check.</p>

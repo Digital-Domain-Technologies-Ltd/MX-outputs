@@ -15,13 +15,10 @@
 // detect -> extract -> classify shape for raster, svg, html, markdown, shell,
 // and sidecar carriers.
 //
-// SINGLE SOURCE OF TRUTH — this module exists as two byte-identical copies:
-//   - mx-site/js/mx-inspector-core.js                             (canonical; edit here)
-//   - distributions/mx-inspector/v1.0.0/lib/mx-inspector-core.js  (shipped CLI copy)
-// The audit-site loads the first; the packaged CLI loads the second. Edit the
-// canonical file, then copy it across so both run identical code.
-// scripts/check_inspector_core_sync.py (SessionStart gate + CI) fails the build
-// if the two diverge.
+// SINGLE SOURCE OF TRUTH - this file is the only copy in the repository. The
+// MX reader (packages/mx-reader/src/read.js) imports it in place; the reader's
+// publish build copies it into the package, so a published reader runs the
+// same code the site and the CLI run.
 
 export const MX_NAMESPACE_PRIMARY = 'https://mx.allabout.network/ns/1.0';
 export const MX_NAMESPACE_LEGACY = 'https://schemas.cognovamx.com/mx/1.0/';

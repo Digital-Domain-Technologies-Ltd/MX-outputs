@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: The Day the Workspace Confessed
 description: A biography extraction turned into an environment audit, and every loophole found became machinery the same day. How a self-healing repository actually improves.
 author: Tom Cranstoun
@@ -19,11 +20,13 @@ tags:
   - machine-experience
   - environments
 mx:
-  status: draft
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/the-day-the-workspace-confessed.md
+  contextProvides:
+    - "A biography extraction turned into an environment audit, and every loophole found became machinery the same day. How a self-healing repository actually improves."
   stability: stable
   purpose: "A biography extraction turned into an environment audit, and every loophole found became machinery the same day. How a self-healing repository actually improves."
   servedAt: https://mx.allabout.network/blog/drafts/the-day-the-workspace-confessed.html
@@ -70,11 +73,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Day the Workspace Confessed">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -117,7 +118,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 758,
+        "wordCount": 764,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -196,7 +197,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="758">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="764">
         <header class="article-header">
           <h1>The Day the Workspace Confessed</h1>
           <div class="article-meta"
@@ -219,7 +220,7 @@ mx:
 <h2 id="ask-one-confession-get-several" tabindex="-1">Ask one confession, get several</h2>
 <p>Once the workspace had confessed to one omission, the obvious move was to ask for the rest. What else had nobody mentioned?</p>
 <p>Plenty. The safety hooks the repository relies on, the ones that block a broken push or a leaked secret, were not installed, because git installs none of them on clone; every one of our carefully built guards was a text file that never ran. The sibling repositories the project composes with were absent. The document toolchain was missing. Some of those gaps healed with one command each. Some were walls. And one, the missing credentials, deserved to be read as a compliment: an environment that withholds secrets from a fresh workspace is doing least privilege properly.</p>
-<p>The probing turned &quot;a limited environment&quot; from a vague feeling into an exact map. That map now lives in the repository, where the next reader, human or machine, inherits it instead of rediscovering it.</p>
+<p>The probing turned &quot;a limited environment&quot; from a vague feeling into an exact map. That map now lives in the MX-hub repository, where the next reader, human or machine, inherits it instead of rediscovering it.</p>
 <h2 id="the-part-that-matters-same-day-machinery" tabindex="-1">The part that matters: same-day machinery</h2>
 <p>Finding gaps is easy and a little theatrical. The discipline that matters is what happens next, and here's where I'll happily show off, because the loop worked.</p>
 <p>Every blocked operation during the day went into a friction ledger: what ran, what blocked it, what fixed it. At the end, the ledger gets read back and every entry becomes an offer: here's the mechanical fix, accept or dismiss. By the close of play the day's ledger read like this. The session now arms its own hooks at start, so the guards actually run on a fresh workspace. It fetches its own missing history, so no more confident near-empty answers. A whole class of merge conflict, two sessions bumping the same version number, ended permanently with a small merge driver. The healer that writes folder metadata learnt to see brand-new directories. A blocked push caused by a merge is now impossible, because the merge hydrates what the push checks. Seven fixes delivered as working code; one queued for a machine that has the tools this one lacks.</p>
@@ -227,7 +228,7 @@ mx:
 <h2 id="why-im-telling-you-this" tabindex="-1">Why I'm telling you this</h2>
 <p>Because the loop is the product, not the war stories. Friction, logged; log, inspected; every entry, an offer; every accepted offer, machinery, ideally the same day. The human decides, the machine does, and the repository ends the day knowing more about itself than it did at breakfast. That's what &quot;self-healing&quot; actually means in practice; it isn't magic, it's bookkeeping with follow-through.</p>
 <p>And because your workspace, whoever hosts it, is quietly making decisions about what you get. Ask it what it's holding back. Treat thin answers as findings. Write what you learn where your tools and your agents will read it, because the machine is an audience now, not just a runtime.</p>
-<p>I'm writing the book on this facet of MX, <em>MX: The Repo</em>, and two of its chapters were written today, from this. The companion piece to this post is <a href="https://mx.allabout.network/blog/the-clone-you-are-given.html">The Clone You Are Given Is Not the Repository</a>, which goes deeper on what hosted environments hand you. Today was the day the theory earned its examples.</p>
+<p>I'm writing the book on this facet of MX, <em>MX: The Repo</em>, and two of its chapters were written on 6 July 2026, from this. The companion piece to this post is <a href="https://mx.allabout.network/blog/the-clone-you-are-given.html">The Clone You Are Given Is Not the Repository</a>, which goes deeper on what hosted environments hand you. 6 July 2026 was the day the theory earned its examples.</p>
 
 
       </article>

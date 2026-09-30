@@ -5,20 +5,28 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Hobson's Choice on the Booking Screen"
 description: "A restaurant booking widget demanded I pick from a single dining option before it would let me continue: a Hobson's choice dressed up as a decision. The same missing signal that makes it needless friction for a human makes it a dead end for any agent trying to complete the same booking. MX is what declares the difference between a real choice and a formality, for both readers at once."
 author: Tom Cranstoun
 created: "2026-07-04"
 modified: "2026-07-04"
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [machine-experience, forms, ux, hospitality, booking-systems, agent-navigability, design-for-both]
 mx:
+  mxSpecVersion: "0.9"
   audience:
     - business
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/hobsons-choice-on-the-booking-screen.md
+  contextProvides:
+    - "A booking widget's forced-choice screen (one option, already selected, still marked 'required') is a literal Hobson's choice: a decision point with no real decision inside it."
+    - "The friction that irritates a human booking a table becomes a hard stop for an agent completing the same booking, because nothing in the markup says the choice is trivial."
+    - "MX's Design for Both principle applied to booking forms: the fix that serves humans (skip the pointless step) is the same fix that serves machines (a declared field for option count and whether a selection is real)."
   stability: stable
   purpose: "Uses a restaurant booking widget's forced single-option selection screen to show the MX Design for Both test in action: a UI pattern that fails humans and machines alike, and the missing metadata that would fix both at once."
   servedAt: https://mx.allabout.network/blog/drafts/hobsons-choice-on-the-booking-screen.html
@@ -66,11 +74,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Hobson's Choice on the Booking Screen">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -113,7 +119,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 613,
+        "wordCount": 614,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -189,7 +195,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="613">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="614">
         <header class="article-header">
           <h1>Hobson's Choice on the Booking Screen</h1>
           <div class="article-meta"
@@ -205,7 +211,7 @@ mx:
         </header>
 
 
-<p>I was testing a restaurant's table-booking widget this week when it stopped me cold. Date picked, party size set, time slot chosen. Then a screen appeared: &quot;An option is required for this booking.&quot; Below it sat a single card, the only item on the list, already ticked &quot;Selected.&quot; There was nowhere else to go and nothing to pick beyond it, and the form still made me confirm the choice before it would let me move on.</p>
+<p>I was testing a restaurant's table-booking widget in July 2026 when it stopped me cold. Date picked, party size set, time slot chosen. Then a screen appeared: &quot;An option is required for this booking.&quot; Below it sat a single card, the only item on the list, already ticked &quot;Selected.&quot; There was nowhere else to go and nothing to pick beyond it, and the form still made me confirm the choice before it would let me move on.</p>
 <p>Thomas Hobson ran a livery stable in Cambridge four hundred years ago and gave his name to exactly this trick. Customers thought they were choosing a horse. They weren't. Hobson rotated the stock and handed out whichever animal stood nearest the door: take it or leave the stable. A Hobson's choice looks like a decision and isn't one.</p>
 <p>The booking widget I was testing had built the same trap out of software, presenting what looked like a decision point where none existed, then asking me to perform the choosing anyway. For a human, that's an extra click on a page that adds nothing, a small tax, mildly annoying, forgotten in five seconds. For a machine trying to complete the same booking, it's worse. A person glances at the card, sees the tick, and hits Next without thinking about it. An agent working through the same flow has to work out whether &quot;Selected&quot; already satisfies the requirement, whether it needs to click the card again to register a choice, or whether the step is genuinely gating something it hasn't understood yet. Nothing in the markup says there's only one option and it isn't really optional. The agent either guesses, stalls, or fails the booking outright, and the site owner never finds out why, because nobody watches one fail a reservation the way they'd notice a human muttering at a screen.</p>
 <p>This is the exact test MX applies to every design decision: does it work for humans and machines, or does it help one at the expense of the other? The forced-choice screen fails both. It doesn't help the human, who gets an interstitial for a decision that was already made. It doesn't help the machine, which gets a &quot;required&quot; field with no real alternative and no signal that the choice is trivial. Nobody wins. The screen exists because the booking platform treats &quot;select a dining option&quot; as one fixed interaction regardless of whether the list holds one item or ten, and never asks if that design still makes sense once nothing is left to choose between.</p>

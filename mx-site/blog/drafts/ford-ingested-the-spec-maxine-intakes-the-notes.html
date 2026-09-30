@@ -5,19 +5,25 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Ford Ingested the Spec. Maxine Intakes the Notes."
 description: "A widely shared LinkedIn post says Ford's AI inspection system failed because documented specs are not the same as decades of operational judgement. Here is how Maxine, our own AI partner, is built to close that exact gap."
 author: Tom Cranstoun
 created: "2026-07-01"
 modified: "2026-07-01"
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [maxine, operational-knowledge, ai-governance, self-learning, machine-readiness]
 mx:
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/ford-ingested-the-spec-maxine-intakes-the-notes.md
+  contextProvides:
+    - "Uses a widely shared account of a Ford AI manufacturing setback, documented specs fed into an inspection system without the operational judgement behind them, to explain how Maxine's design (mx-pim notes, reminders.cog.md, learnings.cog.md, memory-sync) closes that gap by intaking operational notes continuously and adjusting standing rules, rather than ingesting a static document set once."
   stability: stable
   purpose: "Turn a topical LinkedIn story about an AI manufacturing setback into a concrete illustration of why Maxine intakes ongoing operational notes and self-adjusts, rather than treating a one-time document ingestion as equivalent to institutional judgement."
   servedAt: https://mx.allabout.network/blog/drafts/ford-ingested-the-spec-maxine-intakes-the-notes.html
@@ -65,11 +71,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Ford Ingested the Spec. Maxine Intakes the Notes.">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -112,7 +116,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 745,
+        "wordCount": 750,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -190,7 +194,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="745">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="750">
         <header class="article-header">
           <h1>Ford Ingested the Spec. Maxine Intakes the Notes.</h1>
           <div class="article-meta"
@@ -206,14 +210,14 @@ mx:
         </header>
 
 
-<p>A LinkedIn account went round this week about Ford. As reported there: Ford deployed close to 900 AI-assisted cameras across manufacturing and quality inspection, fed the system its design requirements, and expected the documented specification to carry the whole process on its own. The account puts 2025 down as a record recall year for the company and says Ford is now bringing several hundred experienced engineers back in to retrain the system and redesign the process by hand. I haven't checked those specific figures against Ford's own reporting, and you should verify them yourself before repeating them anywhere that matters. But the underlying problem doesn't need the exact numbers to be worth talking about, because I've watched the same thing play out in software, not just on a factory floor.</p>
-<p>Whatever its precise scale, the mistake is a familiar one. Documenting a process isn't the same as capturing the judgement behind it. A specification tells you what should happen. It doesn't cover the exception legal signed off three times last year, or the thing that technically passes every check but still gets pulled aside by someone who's seen it fail before. Nor does it capture the call an experienced person makes without consulting anything written down. Feed a system the spec and you've given it an outline. You haven't given it the judgement.</p>
+<p>Around 1 July 2026 a LinkedIn account went round about Ford. As reported there: Ford deployed close to 900 AI-assisted cameras across manufacturing and quality inspection, fed the system its design requirements, and expected the documented specification to carry the whole process on its own. The account puts 2025 down as a record recall year for the company and says Ford is now bringing several hundred experienced engineers back in to retrain the system and redesign the process by hand. I haven't checked those specific figures against Ford's own reporting, and you should verify them yourself before repeating them anywhere that matters. But the underlying problem doesn't need the exact numbers to be worth talking about, because I've watched the same thing play out in software, not just on a factory floor.</p>
+<p>Whatever its precise scale, the mistake is a familiar one. Documenting a process isn't the same as capturing the judgement behind it. A specification tells you what should happen. It doesn't cover the exception legal signed off three times the year before, or the thing that technically passes every check but still gets pulled aside by someone who's seen it fail before. Nor does it capture the call an experienced person makes without consulting anything written down. Feed a system the spec and you've given it an outline. You haven't given it the judgement.</p>
 <h2 id="why-this-isnt-an-abstract-worry-for-us" tabindex="-1">Why this isn't an abstract worry for us</h2>
-<p>I build Maxine, my working AI partner, inside this repository, and the same gap sits right under every AI product that promises &quot;load your playbooks and go.&quot; A one-time bulk ingestion of static documents freezes judgement at the moment of upload. Every exception handled afterwards, every correction a person makes, every &quot;actually, do it this way instead&quot; gets left outside, because nobody asks the tool again.</p>
+<p>I build Maxine, my working AI partner, inside the MX-hub repository, and the same gap sits right under every AI product that promises &quot;load your playbooks and go.&quot; A one-time bulk ingestion of static documents freezes judgement at the moment of upload. Every exception handled afterwards, every correction a person makes, every &quot;actually, do it this way instead&quot; gets left outside, because nobody asks the tool again.</p>
 <p>Maxine's built the other way round. She takes in notes from the people doing the day-to-day running of this business, and adjusts. Not once. Continuously.</p>
 <h2 id="how-the-intake-actually-works" tabindex="-1">How the intake actually works</h2>
 <p>Every sitting ends with a record of what happened: a decision made, a mistake caught, a rule that should hold going forward. Those go into a standing record store, not a chat log that evaporates. A rule that survives becomes a line in <code>learnings.cog.md</code>, read back in full before any new task begins. An open item becomes a line in <code>reminders.cog.md</code>, carried forward until it's done or explicitly dropped. Neither file gets hand-edited. Both regenerate from the store, so the source of truth is the record itself, not anyone's memory of what got agreed.</p>
-<p>This is the operational-judgement layer Ford's inspection setup never had. When a slip happens once, in this repository, in a client engagement, in a piece of writing, it gets written down as a standing rule, and every task after that checks against it before the matching work begins. &quot;Verify a third-party claim before it lands in a client-facing deck&quot; is one of those rules, sitting in the store right now, put there after exactly the kind of unchecked figure I handled carefully two paragraphs up. The setup caught its own gap and adjusted. That's the whole point.</p>
+<p>This is the operational-judgement layer Ford's inspection setup never had. When a slip happens once, in the MX-hub repository, in a client engagement, in a piece of writing, it gets written down as a standing rule, and every task after that checks against it before the matching work begins. &quot;Verify a third-party claim before it lands in a client-facing deck&quot; is one of those rules, sitting in the store right now, put there after exactly the kind of unchecked figure I handled carefully two paragraphs up. The setup caught its own gap and adjusted. That's the whole point.</p>
 <h2 id="notes-not-a-bulk-upload" tabindex="-1">Notes, not a bulk upload</h2>
 <p>The distinction matters because it changes what &quot;feed the system your knowledge&quot; actually means. A vendor asking you to upload your SharePoint once is asking for a repository. What Maxine takes in is closer to a running conversation with the people who know the operation: a note after a sitting, a correction mid-task, a standing instruction that changes how every future task behaves. The record builds up. It doesn't go stale the way a specification uploaded in January does by June, because nothing forces a wait for a retraining cycle to put things right. Write the note, and the next task already knows.</p>
 <p>None of this claims Maxine holds the tacit judgement of three hundred engineers who've spent decades on a factory floor. She holds what this partnership has written down, one slip and one correction at a time, for as long as we've been working together. That's a smaller thing than Ford needed, and it's exactly the size a repository-based AI partner can genuinely carry.</p>

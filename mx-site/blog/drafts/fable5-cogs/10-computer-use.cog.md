@@ -10,7 +10,7 @@ title: "Computer Use - File Creation, Skills, and Outputs"
 description: "Defines the mandatory skill-reading requirement before any file creation, output file rules, and the decision table for when to create a file versus respond in conversation. Maps to computer_use and skills in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Define file creation rules, the mandatory skill-reading step, and output decisions."
   stability: stable
   contextProvides: ["Before any file creation: view the relevant SKILL.md - unconditional. Skills live at /mnt/skills/public/<name>/SKILL.md. Create actual output files in /mnt/user-data/outputs. pip: always --break-system-packages. Never use localhost. Never use localStorage/sessionStorage in Artifacts."]

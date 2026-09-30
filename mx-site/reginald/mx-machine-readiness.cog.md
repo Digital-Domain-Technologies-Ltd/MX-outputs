@@ -53,7 +53,7 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-09-16
+modified: 2026-09-29
 version: "2.4"
 
 # Mandatory when signed (Note 8 §4.3). Names the schema this cog
@@ -367,6 +367,7 @@ mx:
   x-mx-provAiAssistance: editorial-and-design
   x-mx-provConfidenceLevel: argued-position
   x-mx-provReviewStatus: pre-review
+  x-mx-createdHash: 10d4104d
 
 ---
 

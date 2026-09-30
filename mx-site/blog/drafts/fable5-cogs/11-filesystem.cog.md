@@ -10,7 +10,7 @@ title: "Filesystem Configuration"
 description: "Describes the mounted directories and their access permissions. Info-doc: no executable rules. Maps to filesystem_configuration in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Describe mounted directories and access permissions."
   stability: stable
   contextProvides: ["Read-only mounts: /mnt/user-data/uploads, /mnt/transcripts, /mnt/skills/public, /mnt/skills/private, /mnt/skills/examples. Writable: /mnt/user-data/outputs. To modify read-only files, copy to working directory first."]

@@ -6,7 +6,7 @@ author: Tom Cranstoun
 version: "1.0"
 status: "proposed"
 created: 2026-04-27
-modified: 2026-04-27
+modified: 2026-09-29
 date: 2026-04-27
 audience: ["tech", "agents", "humans"]
 inherits: cog-spec.v1.md
@@ -26,6 +26,7 @@ mx:
   cacheability: permanent
   runbook: "Read after cog-spec.v1.md. This document explains what a cog runtime does at runtime - parsing, validation, contract fingerprinting, witness signing, witness verification, and procedure execution - and how an agent or implementer obtains a working runtime. The reference implementations are catalogued in section 4."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/drafts/cog-runtime.md
+  x-mx-createdHash: 10d4104d
   purpose: "What a cog runtime is, what it does, and how to obtain one. Companion to cog-spec.v1."
   stability: stable
   contextProvides: ["Cog Runtime"]

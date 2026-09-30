@@ -4,7 +4,7 @@ title: "AI Usage Declaration"
 description: "How AI was used in the writing of the MX book series. Author's declaration on authorship, machine assistance, and the relationship between the two."
 author: Tom Cranstoun
 created: 2026-05-17
-modified: 2026-05-17
+modified: 2026-09-29
 version: "1.0"
 
 type: info-doc
@@ -18,6 +18,7 @@ mx:
     output: mx-site/AI-USAGE.pdf
   runbook: "Source of truth for the publisher's AI Usage Declaration per draft-cranstoun-mx-ai-usage-declaration v1.0. The JSON serialisation at mx-site/AI-USAGE.json, the HTML rendering at mx-site/AI-USAGE.html, and the PDF at mx-site/AI-USAGE.pdf are all derived from this file. Edit here, then regenerate the derivations."
 
+  x-mx-createdHash: 10d4104d
   purpose: "How AI was used in the writing of the MX book series. Author's declaration on authorship, machine assistance, and the relationship between the two."
   stability: stable
   contextProvides: ["AI Usage Declaration"]

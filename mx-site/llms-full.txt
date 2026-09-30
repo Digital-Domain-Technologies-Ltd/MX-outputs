@@ -1559,6 +1559,456 @@ The Web Audit Suite is the tool behind MX-Audit reports. It measures the metadat
 
 ---
 
+## A Decider Is Only as Good as Its State | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html
+
+**Description:** TypeSafe's Jev, launched on 15 September 2026, is a model that never writes text and only answers typed questions about a state with a calibrated probability. It's a good idea. It also moves the whole burden onto the state, and the state is what MX declares.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - What Jev Is
+
+        - What's Right About It
+
+        - The Shape of the Thing
+
+        - Every MX Field Is a Question You Don't Have to Ask
+
+        - A Threshold Is Governance Only if It Leaves a Record
+
+        - When the Decider Becomes the Router
+
+        - What to Do
+
+        - Sources
+
+        - Related
+
+        - Where Your Own Content Stands
+
+          A Decider Is Only as Good as Its State
+
+            19 September 2026
+            ·
+            Tom Cranstoun
+            ·
+            12 min read
+
+In the week Jev launched, my feed was full of a ten-step guide to something called Jev, from a company called TypeSafe AI. The guide was breathless, so I went to the source. TypeSafe's founder, Diogo Almeida, published the launch post on 15 September, and the docs are open. What follows comes from those, not from the feed.
+
+What Jev Is
+
+Jev is what TypeSafe calls a System One model, after Kahneman's fast, intuitive mode of thinking. The company's own description is "a new class of frontier models built to make fast, structured decisions that software can use directly". It doesn't write. You hand it a state, which can be any text or JSON, plus a list of typed questions, and it answers each one.
+
+A question takes one of a few shapes. A Choice picks one option from a list you supplied. A Score rates the state on an ordered scale you defined. A Noul returns the probability that a statement is true. Every answer arrives with a probability distribution and a single confidence number. TypeSafe's docs put the constraint plainly: "The model returns a probability distribution over your options or levels, never a value outside them." That's what the company means when it says Jev can't hallucinate: it can't invent an option, though it can still pick the wrong one.
+
+The launch post claims the model reaches similar intelligence to leading LLMs on this class of task while running between forty and two hundred times faster, priced at $0.042 per million input tokens, in early access from day one. Those are TypeSafe's own numbers from launch week. The evaluation method, by the company's account, uses "the predictions of the largest, smartest, and most expensive external models as reference probabilities", so "as good as a frontier model" means agreement with those models, not with the world.
+
+What's Right About It
+
+Splitting the decision from the generation is the correct cut. An agent loop that asks a chat model to decide the next step gets a paragraph back, then has to parse a decision out of the prose. A model that only ever returns a typed value removes that whole class of failure.
+
+Honest uncertainty is the second thing. TypeSafe's docs say: "If an intelligent system, whether human or machine, cannot express honest uncertainty, the system cannot be trusted." I have written a version of that sentence in this series more than once. A calibrated probability, where more confidence really does track more accuracy, is what a threshold needs to mean anything.
+
+The third is how the docs tell you to use the threshold. "A confidence threshold is not one number." The bar for acting without confirmation "is higher for a destructive operation than for a read-only one", and below the bar the instruction is to "route to a human, request clarification, or fall back to a different system". That's Human-in-Command written as an inequality. The machine acts inside a declared boundary and hands the rest to a person. I'd rather see that in a vendor's docs than in a values statement.
+
+The Shape of the Thing
+
+The breathless guide did get one thing right. Every Jev workflow runs through the same four steps: state, questions, action, verify. It's the first step that matters here, because you supply it. You hand Jev the state, and you write the questions. Calibration only covers what happens after that: how closely the model's probabilities match the true answers, for the input you gave it. It can't vouch for the input. Feed it a thin or mistaken state and you get a well-calibrated answer about the wrong thing.
+
+Ask "is this offer still valid?" about a web page that never says when it was published, and Jev gives you an honest probability about a document that didn't say. The number is calibrated, but what it measures is a guess. The docs even anticipate the gap in their own way, advising you to add "an other or none of the above option when the list might not cover every input". That's sound practice. It also tells you the model is only as complete as the state and the options you gave it.
+
+This is the point I keep making in this series, and Jev sharpens it. A small model needs your metadata more than a big one does, because it can't read its way around a page that says nothing about itself. A decider that never reads around anything, that judges exactly what it's given and no more, needs the state to be honest even more.
+
+Every MX Field Is a Question You Don't Have to Ask
+
+MX, short for machine experience, is the practice of making a file explain itself to an agent that meets it in isolation, which is exactly how a decider works. The questions a decider asks about a document are mostly questions MX asks a publisher to answer up front. Who wrote this. When. Has it been changed since. Is it the current version. What may an agent do with it. Where does the evidence for its claims live. Each of those is a Noul, a yes-or-no with a probability attached, when a model has to work it out from the prose. Each is a plain comparison when the page declares the answer in a field a machine can read.
+
+A signature with an expiry date answers "should I still trust this?" by comparing two dates. No model, no probability, no latency, and no bill. A declared content policy answers "may I quote this?" the same way. A declared fact is a decision at probability one, and it costs nothing to compute. The decider's job shrinks to the questions the page genuinely can't answer about itself, which is where a calibrated probability earns its keep.
+
+The guide's closing rule was: code computes, LLMs create, Jev decides. Add a fourth: metadata declares. The fourth makes the other three safer and less expensive, and it shrinks the cheapest of them, the decision, further still. TypeSafe charges very little per token, and a question you never ask costs nothing at all.
+
+A Threshold Is Governance Only if It Leaves a Record
+
+Routing a low-confidence decision to a human is the right move. It's governance only if the routing leaves evidence. The state it judged, by content hash. The questions you asked. The probabilities that came back. What bar applied, and why that one for that class of action. Who confirmed, and when. A Jev answer already contains most of that in a typed, machine-readable form. Logging it takes a line of code. Not logging it turns the threshold into a private conversation between a model and a script that nobody can audit afterwards.
+
+That's the same record MX asks a publisher's document to carry, read from the other side. The document declares its provenance, and the decider records its decision, so neither the human asked to confirm it nor the auditor who arrives later has to guess. The verify beat at the end of the loop, fresh state proving the result, is the same discipline again: measure, then say.
+
+We keep that kind of record already, and you can open one. Every AI step in a file we produce gets written into an AI-provenance record that travels with it: which model or agent acted, what it did, who ran it, and the human check that signed the result off. In a PDF the record is embedded in the file's metadata, so it goes wherever the file goes.
+
+We cover the decider too. Each decision goes into the same record as its own step: the state by hash, what was asked and the labels allowed, the probabilities, the bar and the kind of action it was set for, what happened next, and who confirmed it. The record also hashes the prompt and the label set, because adding one answer shifts every probability, and the thresholds you tuned on the old set stop meaning what they did. Nobody writes the verdict by hand. It's worked out from those facts, and our pre-push check recomputes it, so a record claiming a clean act over a below-bar call doesn't get through.
+
+To see one, go to mx.allabout.network/tell. It loads our MX Explained PDF into the MX Inspector, which reads the file in your browser and walks the chain step by step: the build environment, the accountable people, and every recorded action. Drop in one of your files and it never leaves your machine. The Inspector also reports each trust signal separately (who published it, how current it is, whether the publisher still stands behind it, and what corroborates it) instead of folding them into one score.
+
+When the Decider Becomes the Router
+
+A second wave of posts about Jev followed the launch, and it moved on from describing the model to predicting what it does to the market. The argument I keep seeing runs like this. Most agent steps are decisions, not writing: which tool, is this done, is this safe, escalate or not, which bucket does this go in. Put a cheap, calibrated decider in front of every call and it becomes the router. It sends the easy work to a small model, strips stale context before anything reaches the expensive one, and escalates only when its own confidence says it should. Show the cost per task side by side and nobody keeps paying flagship prices for yes-or-no answers.
+
+Most of that's right, and the waste is real. I've watched it in our own work: the strongest model gets used by default because switching is friction, not because the task needs it.
+
+Where the argument overreaches is the conclusion that frontier spend shrinks. Cheaper decisions don't mean fewer of them. When something gets cheaper to use, people tend to use more of it. Economists call that the Jevons paradox, and it's hard to miss given the model's name. Cheaper routing makes agents cheaper to run, so more agents get built, they run longer, and the hard steps still go to the big model. The labs sell small models of their own and already route inside their products, so a lot of this moves money between one vendor's tiers rather than away from the vendor.
+
+What does grow, and those posts skip it, is the number of automated choices nobody recorded. A router is a decider making thousands of quick calls per task: this one to the small model, that context dropped, this answer good enough not to escalate. Each is a decision about what a person eventually sees. When a routed answer turns out wrong, the questions are the same ones as before. What state did the router judge? What did it decide, and with what confidence? What bar applied, and who owns it? A router's calibration has the same limit as any decider's too. It's honest about the inputs it was trained on, and a router whose confidence drifts on unfamiliar traffic keeps routing with no alarm and a number that looks right.
+
+The router is the decider problem at volume, and the same two answers apply. Declared metadata shrinks its work, because a page that states its date, owner, and permitted use has already answered the questions the router would otherwise pay to ask. The log makes it accountable: which model each task went to, why, what it cost, and what the router saw at the time. Our provenance record takes a router's calls the same way it takes any decider's, and rolls them up into the figures the Jevons paradox makes you need: how many decisions, the spend by model, how often it escalated, and how many calls it acted on below the bar.
+
+What to Do
+
+If you publish, declare. The author, the date, the currency, the permitted use, the evidence, in fields a machine reads without inference. Every one you declare is a question no decider has to ask a model about your page, which means one less guess.
+
+If you build with a decision model, put the declared fields into the state before you ask the question, so it judges a document that says what it is. Set your thresholds by how reversible the action is, as TypeSafe's own docs tell you. Log the decision, every time, in a form a person can read back.
+
+If you run a router, treat it as a decider too. Log where each task went and why, test its confidence on your own traffic before you trust it, and don't book the saving as a cut in total spend until you've measured the volume that follows.
+
+I've since rebuilt a decider on a local model and measured it, with and without declared metadata. The numbers bear this out.
+
+A declared interest. CogNovaMX sells the discipline this post recommends. The claims about Jev stand on TypeSafe's own published material, linked below, and I have no relationship with the company.
+
+Sources
+
+- TypeSafe AI, 15 September 2026: Introducing System One Models and Jev, by Diogo Almeida.
+
+- TypeSafe AI docs: Confidence, how confidence is derived and when to escalate.
+
+- TypeSafe AI docs: Primitives, the Choice, Score, and Noul question types.
+
+- The ten-step guide that prompted this post circulated on LinkedIn, summarising a longer working note titled "Jev Engineering". It was the prompt, not a source for any claim here.
+
+Related
+
+- I Built a Decider and Measured It: the local rebuild, and what embedded MX metadata did to its accuracy.
+
+- Nobody Got Fired for Using GEO: why cheap decisions multiply, and why MX is worth promoting before the market asks.
+
+- Reduce Inference, Save Energy: the Jevons paradox applied to the energy AI inference uses.
+
+- Humans Take Journeys, Agents Take One Fetch: why most agents read one file in isolation and decide, and why MX designs for both a drip feed and everything at once.
+
+- Why Use MX: why a file needs metadata that travels with it, so the machine that meets it next doesn't have to guess.
+
+Where Your Own Content Stands
+
+A decider judges the state it's given. Whether your pages give it an honest one is what an MX audit measures.
+
+- Get in touch about an MX audit
+
+- The agent web series
+
+- Join The Gathering
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
+## I Built a Decider and Measured It | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html
+
+**Description:** A System One style decision model, rebuilt on a local Ollama model in an afternoon and run through five evals against the same model generating and against Claude, then against PDFs with and without an MX packet. The speed claims hold, and so does the part nobody advertises.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - The Short Version
+
+        - What I Built
+
+        - How I Tested It
+
+        - Speed Holds
+
+        - The Main Result: Embedded MX
+
+        - What in the Packet Did the Work
+
+        - Pasting Metadata Is Not the Same
+
+        - Two Things That Still Go Wrong
+
+        - A Second Witness: Token Confidence
+
+        - What I Take From It
+
+        - Related
+
+        - Where Your Own Content Stands
+
+          I Built a Decider and Measured It
+
+            22 September 2026
+            ·
+            Tom Cranstoun
+            ·
+            12 min read
+
+A 3B model on my laptop was asked two questions about a set of PDFs: is this document current, and who's accountable for it? On the bare files it guessed. It called documents current when nothing in them said so, and it named an owner nine times out of ten for files that name nobody. On the same PDFs with MX metadata embedded in them, it scored 100% on both questions, at a median of 102 ms a decision and no cost.
+
+That's the result.
+
+The Short Version
+
+- A decider is fast and cheap. Scoring the first token of a small local model gives a decision in about a tenth of a second, for nothing.
+
+- Fast and cheap isn't right. On bare documents, the small deciders guessed, and their confidence looked the same whether they were correct or not.
+
+- Embedded MX made them right. With an MX packet in the PDF, read out by a script, every local lane scored 100% on whether a document was current.
+
+- The fields do the work. Structured fields produced the result. Plain-language prose helped, but on its own it was the weakest input.
+
+- Two gaps remain. Small deciders rarely use a "none of the above" option, and their probabilities drift slightly between runs even when their decisions don't.
+
+If you want the wider argument about why this matters, I've set it out in Nobody Got Fired for Using GEO.
+
+What I Built
+
+In September 2026 TypeSafe released Jev, a model that never writes a word. The launch post says it "gives up string generation", and the primitives documentation says it "returns a probability distribution over your options or levels, never a value outside them". Avi Chawla then published a walkthrough, "Build your own Jev (100% local)", on 20 September, for building the same interface on an open model, so I built one with Ollama, which I already use.
+
+The mechanism fits in a paragraph. A language model reading a prompt produces one vector for the next position, with a score for every token it knows. Normal generation samples from that vector and goes round again. A decision only needs the first vector. Label each permitted answer with a single letter and put its meaning in the prompt. Ask Ollama for the top twenty logprobs of the first token, keep the ones that are your labels, and normalise across them. That's one forward pass, one token, temperature zero and a fixed seed.
+
+It came to about sixty lines added to my existing local model client, plus a unit test. It copies Jev's inference path, not its calibration training.
+
+How I Tested It
+
+I wrote twenty hand-labelled cases for each of five questions: support ticket routing, change-impact triage for documentation, internal link relevance, content type, and whether a document is current. The sets are small, so treat every accuracy here as indicative rather than a benchmark.
+
+Three lanes saw the same prompt: the decider on three local models, the same 3B model asked to write its answer, and Claude haiku, called from an empty directory so it received the question and nothing else. Every number comes from one run file, rendered by a script.
+
+Speed Holds
+
+Lane
+Decisions
+Accuracy
+Unscoreable
+Median latency
+Mean latency
+Total cost
+
+Decider (llama3.2:latest)
+100
+72%
+0
+102 ms
+200.7 ms
+$0.0000
+
+Decider (llama3:latest)
+100
+87%
+0
+184 ms
+405.5 ms
+$0.0000
+
+Decider (gpt-oss:20b)
+100
+2%
+98
+270 ms
+524.7 ms
+$0.0000
+
+Local generation (llama3.2:latest)
+100
+74%
+0
+441 ms
+627 ms
+$0.0000
+
+Claude (haiku)
+100
+97%
+0
+4995 ms
+5164 ms
+$0.2694
+
+The 3B decider answers in 102 ms at the median. The same model writing a letter and a sentence takes 441 ms. Claude takes about five seconds and $0.0027 a decision, and it's the most accurate lane by a distance.
+
+The reasoning model, gpt-oss:20b, couldn't be scored: its first token opens a thinking channel, so no label appears. This technique needs a model whose first token is the answer.
+
+The decider is fast and cheap, then, but on these general questions the small models were well short of Claude.
+
+The Main Result: Embedded MX
+
+MX, short for machine experience, is the practice of making a file explain itself to an agent that meets it in isolation. It says the metadata travels with the file, so I tested it that way. I took ten documents and made each into two PDFs.
+
+- The bare PDF holds the page text and nothing else. The text carries no date, no status and no owner, on purpose.
+
+- The MX PDF is the same file with an MX packet written into its XMP metadata, the standard place a PDF stores information about itself. The packet holds status, dates, an expiry or review date, what supersedes the document, and who owns it. It also holds a short summary and instructions for an agent.
+
+One script reads every PDF the same way: take whatever the packet declares, extract the page text, and pass both to the model, declared fields first. On a bare file the packet is empty, so the model gets the text alone. Nobody types anything; the file decides what the model sees.
+
+Lane (Currency of a PDF: MX metadata peeled from the file versus text alone)
+Bare prose accuracy
+Bare mean confidence
+Declared accuracy
+Declared mean confidence
+
+Decider (llama3.2:latest)
+20%
+0.487
+100%
+0.84
+
+Decider (llama3:latest)
+90%
+0.807
+100%
+0.896
+
+Local generation (llama3.2:latest)
+20%
+n/a
+100%
+n/a
+
+Claude (haiku)
+100%
+n/a
+100%
+n/a
+
+Lane (Accountability for a PDF: does the file name who stands behind it?)
+Bare prose accuracy
+Bare mean confidence
+Declared accuracy
+Declared mean confidence
+
+Decider (llama3.2:latest)
+10%
+0.702
+100%
+0.889
+
+Decider (llama3:latest)
+90%
+0.889
+100%
+0.999
+
+Local generation (llama3.2:latest)
+70%
+n/a
+90%
+n/a
+
+Claude (haiku)
+100%
+n/a
+100%
+n/a
+
+On the bare PDFs, the 3B decider guessed an answer either way for eight of ten documents that say neither. Asked whether a bare file names an owner, it said yes nine times out of ten, at confidence up to 0.86, for files that name nobody. That's a small model inventing accountability for a refund policy.
+
+With the packet embedded, the same model went to 100% on both questions. On currency, every local lane reached 100%. The gap between the laptop and Claude closed.
+
+Claude got every case right on both versions, because on a bare file it says "cannot be determined" and means it. The small models needed telling, and the embedded metadata told them.
+
+What in the Packet Did the Work
+
+I expected the plain-language summary to matter most, so I tested it. Two more versions of the packet went to the small models: fields only, and prose only.
+
+My guess was wrong. With the prose removed, the 3B decider still scored 100% on both questions, with lower confidence. The labelled fields are what it reads.
+
+Prose on its own was the weakest input. "Reviewed by finance operations" isn't read as an owner the way author: finance-ops is, and the 3B generator's accountability score fell to 30%. A sentence that points at a field also fails when its target is missing: with expires removed, the 8B decider called a policy "not current" at 0.965, because the summary said "valid until the expiry date declared here".
+
+The prose still helped. Without the sentence saying the document was in force, the 8B decider read status: active and a future expires date and called two documents not current. The full packet did best. The fields are the facts, the prose is the reading of them, and a small model uses whichever it can parse.
+
+Pasting Metadata Is Not the Same
+
+Before the PDF test, I tried pasting frontmatter into the prompt, on a separate set of plain-text documents, so the starting scores differ from the PDF tables. The 8B decider went from 50% to 100% on currency, with confidence up from 0.794 to 0.983. The 3B models got worse: the decider misread status: active and dropped from 80% to 60%, and the generator ignored the frontmatter altogether and fell from 90% to 40%.
+
+The PDF test changed two things: the metadata arrived as labelled lines under a heading naming the packet as its source, and it came with a summary written for a reader. Both 3B lanes went to 100%. How the metadata is presented matters to a small model, which is an argument for a standard packet read by one shared script rather than ad hoc text in a prompt.
+
+Two Things That Still Go Wrong
+
+The escape option goes unused. A restricted softmax always sums to one, so it can't say "none of these" unless "none" is a declared label. I declared one wherever cases could fall outside the list. The small deciders rarely chose it. Three support tickets were meant to escape: a leaked customer list, a legal request for everything held on a person, and a user receiving threats. Both deciders routed all three to "account access", the 8B at 0.82, 0.97 and 0.95. The 8B also decided a pull request titled "Misc fixes" needed no documentation update, at 0.997. Declaring the escape label is necessary, and it isn't enough: measure whether it gets used.
+
+Probabilities drift; decisions don't. I'd written "deterministic by construction" in a code comment, so I measured it. Across three runs of every case, every decider made the same decision 100 times out of 100. The probabilities moved slightly, by at most 0.008493 on the 3B model, because the first pass ran with a partial prompt cache and the repeats with a full one. It's reproducible given the cache state, not bit-identical across it. That's a fine property, and it isn't the one I'd claimed.
+
+A Second Witness: Token Confidence
+
+In 2025 I wrote up a framework for evaluating AI confidence, which reads the probability behind each word a model writes. I added it to the generation lane.
+
+The probability of the answer letter behaves like the decider's confidence. On every question it was higher when the model was right than when it was wrong, by ten to twenty-seven points. On PDF currency it was 72.5% when right and 45.9% when wrong, against the decider's 77.6% and 49.5%.
+
+It also confirmed the carrier result. On PDF currency, the generator's confidence in its answer rose from 0.456 on the bare files to 0.781 on the declared ones, as its accuracy went from 20% to 100%. With pasted frontmatter it stayed at 0.606 and 0.607 while accuracy fell. A declaration the model reads shows up in the number, and one it ignores doesn't.
+
+The framework's whole-reply score didn't track the decisions, because the explanation sentence hedges whether the label is right or not. A decision's confidence is one token's probability, and the rest is the model talking.
+
+What I Take From It
+
+The decision-model pitch is right about what it pitches. Splitting the decision from the writing makes it fast enough to run inside a loop and too cheap to count. I got that on a laptop with sixty lines.
+
+What the pitch leaves out is that a decider is two declarations and a model, and the last is the smallest part. The first declaration is the answer set, and a model can be handed an escape option and still not use it. The second is the state, and a model can be confidently consistent about a page that never says when it was published. Neither failure shows in the confidence figure, because it only describes the choices and the state you supplied.
+
+If you build one, and you should, declare the escape option and check it gets used. Then put the declared fields in the file, where a script can find them. On a 3B model, that took currency from 20% to 100% and ownership from 10% to 100%. The decider made each decision cheap, and the embedded metadata got each one right. That's MX's job, and these are the numbers for what it's worth.
+
+I've kept the evals, the runner, the run files and the script that rendered these tables. If you want to run them on your own models, get in touch and tell me what moved.
+
+A declared interest. CogNovaMX sells the discipline these results support. The claims about Jev stand on TypeSafe's own published material, and I have no relationship with the company.
+
+Related
+
+- A Decider Is Only as Good as Its State: what a decision model is, and why its calibration stops at the state it's handed.
+
+- Nobody Got Fired for Using GEO: why cheap decisions multiply, and why MX is worth promoting before the market asks.
+
+- Reduce Inference, Save Energy: the Jevons paradox applied to the energy AI inference uses.
+
+- Humans Take Journeys, Agents Take One Fetch: why most agents read one file in isolation and decide, and why MX designs for both a drip feed and everything at once.
+
+- Why Use MX: why a file needs metadata that travels with it, so the machine that meets it next doesn't have to guess.
+
+Where Your Own Content Stands
+
+These tests read each file on its own, the way most agents do. Whether your files declare enough to be read that way is what an MX audit measures.
+
+- Get in touch about an MX audit
+
+- The agent web series
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
 ## The Agent Web, Machine Experience | CogNovaMX
 
 **URL:** https://mx.allabout.network/blog/agent-web/
@@ -7827,6 +8277,63 @@ Blog
         Blockchain
         Announcements
 
+            I Built a Decider and Measured It
+
+            A System One style decision model, rebuilt on a local Ollama model in an afternoon and run through five evals against the same model generating and against Claude, then against PDFs with and without an MX packet. The speed claims hold, and so does the part nobody advertises.
+
+            22 September 2026
+            - AI agents
+
+- Practitioner
+
+- MX foundations
+
+            A Decider Is Only as Good as Its State
+
+            TypeSafe's Jev, launched on 15 September 2026, is a model that never writes text and only answers typed questions about a state with a calibrated probability. It's a good idea. It also moves the whole burden onto the state, and the state is what MX declares.
+
+            19 September 2026
+            - AI agents
+
+- Provenance
+
+- Commentary
+
+            Humans Take Journeys, Agents Take One Fetch
+
+            Google's September 2026 spam update prompted a common reading in the SEO community: the update rewards the usefulness of a page and stops chasing links. Whether or not that is Google's intent, it describes how an AI agent reads. A person follows a journey because a journey limits what they must hold in mind at once. Most agents read one file in isolation and decide, without following a link: humans want a drip feed, machines want it all at once. MX supplies the layers that let one page serve both readers.
+
+            28 September 2026
+            - SEO / GEO / AEO
+
+- AI agents
+
+- MX foundations
+
+            Nobody Got Fired for Using GEO
+
+            Marketing follows fashion, and GEO is the safe purchase of 2026. What comes after the AI bubble is many small, targeted models making cheap decisions at volume, and measured tests show they only stop guessing when the document declares its own state. That is the market MX is for, and why it is worth promoting before the market asks.
+
+            26 September 2026
+            - SEO / GEO / AEO
+
+- Business case
+
+- AI agents
+
+- Commentary
+
+            Reduce Inference, Save Energy
+
+            The AI-power debate is all about supply. The overlooked lever is demand: inference is most of AI's energy use, much of it redundant, and machine-readable content cuts the work per task.
+
+            18 July 2026
+            - Business case
+
+- AI agents
+
+- MX foundations
+
             The Machine Experience Manifesto
 
             Draft manifesto for Machine Experience (MX) practice, principles, values, and community vision
@@ -9069,6 +9576,134 @@ If you want the longer argument, it is in GEO is a tactic, MX is the specificati
 
 ---
 
+## Humans Take Journeys, Agents Take One Fetch | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/industry/humans-take-journeys-agents-take-one-fetch.html
+
+**Description:** Google's September 2026 spam update prompted a common reading in the SEO community: the update rewards the usefulness of a page and stops chasing links. Whether or not that is Google's intent, it describes how an AI agent reads. A person follows a journey because a journey limits what they must hold in mind at once. Most agents read one file in isolation and decide, without following a link: humans want a drip feed, machines want it all at once. MX supplies the layers that let one page serve both readers.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - An Agent Judges the Page It Fetched
+
+        - Why People Need Journeys
+
+        - Where Jevons Comes In
+
+        - What MX Adds
+
+        - Design for Both
+
+        - Related
+
+        - Where Your Own Content Stands
+
+          Humans Take Journeys, Agents Take One Fetch
+
+            28 September 2026
+            ·
+            Tom Cranstoun
+            ·
+            7 min read
+
+On 24 September 2026 Google released its September spam update. The Search Status Dashboard entry is short: "Released the September 2026 spam update, which applies globally and to all languages. The rollout may take up to two weeks to complete." Google didn't say what the update targets.
+
+The SEO community filled the gap. A summary on Reddit's r/DoSEO put it in one line: "It doesn't chase links; it evaluates real usefulness". Other advice follows from that: judge each page on first-hand experience and unique value, don't rush to change URLs or add redirects while rankings settle, and assess the impact only once results have settled.
+
+That reading is an interpretation, not a statement from Google. Right or wrong about Google, it describes how an AI agent reads your site.
+
+An Agent Judges the Page It Fetched
+
+An agent sent to answer a question about your business doesn't take the journey you designed. Most agents read one file and decide. They don't open the menu, click through to the next step or come back later for the terms. A few follow a link or two, but you can't design for the few. An agent doesn't experience the site the way a visitor does: the landing page that sets the scene, the menu that narrows the choice, the next step that answers the question the last one raised.
+
+This is the case MX is built for: a machine reading a file in isolation. It might be a web page, a PDF or a policy exported from the system that produced it. Whatever arrives has to explain itself, because nothing around it will.
+
+Technical writers reached a version of this idea long before agents did. Mark Baker's book Every Page Is Page One argues that readers arrive from a search, not from the table of contents, so each page has to stand on its own. For a machine, it's stricter still: page one is usually the only one it reads.
+
+So whatever the page needs to be understood has to be in the fetch. If the price is behind a tab, the terms on another page, and the date it was last checked nowhere at all, the agent works from the part it got. It won't reach the rest, and rather than say so, it fills the gap with a guess.
+
+A content strategy built on journeys was sensible when every reader was a person. A page could lean on the one before it. It could leave context to the menus and links, because the navigation was always there. An agent reading a single fetch gets the page without the journey around it.
+
+Why People Need Journeys
+
+None of this makes journeys a mistake. People like them for a good reason.
+
+We can only hold so much in mind at once. Present twenty options side by side and a person struggles to compare them. Present five, then the next five, and they can reason about each set. A good journey is a way of limiting how much someone has to carry at each step. Progressive disclosure, tabs, accordions and a clear next step all exist because too much at once is overwhelming. That's cognitive overload, and good design is built to prevent it.
+
+A machine has no such limit. It can hold the whole page, every specification, every review and every term, as easily as it holds one line. What it lacks is the context a person picks up along the way. Being led is no help to it. It wants everything, in the fetch it made.
+
+Humans want a drip feed. Machines want it all at once. That's the conflict: the same page is asked to hold back for one reader and to say everything for the other.
+
+Where Jevons Comes In
+
+I expect the number of single fetches to rise. I've written about Jev, TypeSafe's decision model, named after William Stanley Jevons. His paradox says that making a resource cheaper tends to increase total use rather than reduce it. I've measured a small decider making a decision in about a tenth of a second at no marginal cost, and argued that cheap decisions multiply.
+
+Follow that to a single page. A router fetches it to decide which model should handle it. A decider fetches it to check whether it's current. Another asks who owns it, and another whether it may be quoted. Each of those is one fetch, made by a machine with no interest in the journey. The more of them there are, the more of your content's life is spent being read one page at a time. Every one of those reads that has to guess also costs energy that a declared answer would save.
+
+What MX Adds
+
+MX leaves the journey in place and adds the layers a single fetch needs, inside the page, where a person doesn't have to look at them and a machine can't miss them.
+
+- What the page is. A title, a description and a type the machine reads directly, rather than inferring them from the layout.
+
+- Its place in the journey. Declared relationships to the pages before and after it, and to the collection that holds it. The journey a person walks becomes a set of references a machine can read in the one file, without having to follow any of them.
+
+- Who stands behind it. An author, a maintainer and a point of contact, so the claims on the page can be attributed.
+
+- Whether it's current. A modified date and a version, so a decider asking "is this still true?" has an answer rather than a guess.
+
+A person sees the page as it always was: the scene set, the choice narrowed, the next step clear. A machine sees the same page with its context declared. The visible design limits what the human has to hold at once. The metadata gives the machine everything in one go. Both describe the same content.
+
+This is the thinking behind the line the MX Manifesto opens with: "MX is to machines what UX is to users". UX designed the journey. MX makes sure each step of it can stand on its own.
+
+Design for Both
+
+The practical test is simple. Take any page on your site and fetch it on its own, without the pages around it. Ask what a reader would know if that fetch were all they had. Is it clear what the page is, who's responsible for it, when it was last checked and where it fits? If the answer depends on the journey, a machine doesn't have it.
+
+The community reading of the spam update points the same way, whatever Google's intent turns out to be: judge the page on what it offers. Agents already work like that. MX doesn't ask you to choose between the two readers. Keep the drip feed for the people who need it, and declare in every page what a machine reading it alone needs to know. That's design for both.
+
+Related
+
+- Nobody Got Fired for Using GEO: why cheap decisions multiply, and why MX is worth promoting before the market asks.
+
+- A Decider Is Only as Good as Its State: what a decision model is, and why its calibration stops at the state it's handed.
+
+- I Built a Decider and Measured It: the local rebuild, and what embedded MX metadata did to its accuracy.
+
+- Reduce Inference, Save Energy: the Jevons paradox applied to the energy AI inference uses.
+
+- Load the Answer, Not the Estate: why an agent should read a stated conclusion rather than crawl to infer one.
+
+- Why Use MX: why a file needs metadata that travels with it, so the machine that meets it next doesn't have to guess.
+
+Where Your Own Content Stands
+
+A single fetch shows what an agent can know about your page. Whether your pages declare enough to be read that way is what an MX audit measures.
+
+- Get in touch about an MX audit
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
 ## Industry Moves, Machine Experience | CogNovaMX
 
 **URL:** https://mx.allabout.network/blog/industry/
@@ -9236,6 +9871,158 @@ This post assumes only the plain ideas. If you want the grounding, the Learn sec
 About the author
 
 Tom Cranstoun is the founder of the Machine Experience (MX) community and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd. He started working on computers in 1977 and turned it into his career in 1979.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
+## Nobody Got Fired for Using GEO | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/industry/nobody-got-fired-for-using-geo.html
+
+**Description:** Marketing follows fashion, and GEO is the safe purchase of 2026. What comes after the AI bubble is many small, targeted models making cheap decisions at volume, and measured tests show they only stop guessing when the document declares its own state. That is the market MX is for, and why it is worth promoting before the market asks.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - The GEO Phase
+
+        - What Is Left When the Bubble Bursts
+
+        - What Solved It: A Jev Decider Plus Embedded MX
+
+        - The Jevons Part
+
+        - What This Means for Your Business
+
+        - Why We Promote MX Before the Market Asks
+
+        - Related
+
+          Nobody Got Fired for Using GEO
+
+            26 September 2026
+            ·
+            Tom Cranstoun
+            ·
+            12 min read
+
+In September 2026 I spent a week in Mallorca. On the Wednesday I gave a lightning talk on reverse centaurs at Boye & Co's CMS Experts day. Later that day, Nina Kozłowska asked what each reader needs when you write for humans and machines, and Deniz Ergun of Bloomreach wanted to know what happens if the page isn't the product. Then came CMS Camp itself. My thanks to Janus Boye for running the Experts day and to Volker Graubaum for running CMS Camp. I learnt a lot, but the lesson I keep coming back to came from the Friday masterclass rather than my own session. Architectural Trends in the CMS Space was run by William Borg Barthet, Professional Services Director for Bloomreach's CMS. It examined "the assumptions and architectural fashions that have shaped the industry", and it asked a question I haven't stopped thinking about: "How do we choose the right architecture for the problem, rather than adopting the architecture that happens to be fashionable?"
+
+His subject was CMS architecture, from monoliths through headless to MACH. He also raised the possibility that CMS platforms will serve "not only websites and applications, but also machine and agent consumers", which is the audience MX serves. MX, short for machine experience, is to machines what UX is to users: it makes content something an agent can understand and act on without guessing. My takeaway reached beyond architecture: the marketing industry follows fashion too.
+
+That isn't an insult. Fashion is how a crowded market handles risk. When no one can prove which option is right, you choose the one that can't be held against you. For a generation, that was the joke about IBM: nobody got fired for buying IBM. The purchase had to be defensible rather than the best.
+
+The GEO Phase
+
+In 2026 we're in the same phase, with a new name on the badge. Nobody gets fired for using GEO, generative engine optimisation: tuning content so that AI answer engines cite it.
+
+I've written before that GEO is a tactic and MX is the specification, and that Google named GEO, then debunked it. I won't repeat those arguments. The point from Mallorca is different. GEO's popularity isn't evidence that it works. It's evidence that it's safe to buy. Everyone is following the trend, and in 2026 the market hasn't worked out what comes after it.
+
+Jonathan Healey of IDHL put evidence behind this at the Experts day. He revisited eight predictions he'd made about where CMS was heading. One had landed at pace: his slide said "Every major CMS now ships with GEO and schema in mind". The next slide cited an Ahrefs controlled experiment in which 1,885 pages added JSON-LD, and "the citation lift was statistically indistinguishable from zero". Where the prediction fell short, his verdict was blunt: "Most CMSs model navigation. Almost none model meaning."
+
+That gap is where MX sits. Markup added to chase citations is fashion. Metadata that declares what a document is, who stands behind it and whether it's still current is meaning, and it's the part I've been able to measure.
+
+Fashion has a cost beyond the budget. In my talk I used Cory Doctorow's definition of a reverse centaur: a person forced by technology to work at an inhuman pace. The machine sets the pace and the human does the labour. A content team chasing whatever the answer engines reward this quarter is heading that way. It rewrites pages to suit a system it can't see, measures success by citations it can't control, and starts again when the rules change. Doctorow's governing question applies: the important thing about a technology "isn't what it does, but who it does it for and who it does it to". GEO, as usually sold, is done to the content desk.
+
+What Is Left When the Bubble Bursts
+
+I think we have to get through the bubble bursting before the next paradigm arrives. Doctorow predicted what survives. In his 2023 Locus essay, What Kind of Bubble is AI?, he wrote that "there will be little models - Hugging Face, Llama, etc - that run on commodity hardware", and that people would keep improving them, "possibly enough to satisfy most of those low-stakes, low-dollar applications".
+
+His prediction is more cautious than mine, so I'll be clear about where we differ. He also wrote: "But these little models were spun out of big models". He doubted the big models would survive without bubble money. I expect them to survive in a smaller role. Many small, targeted models do the everyday work, each answering one narrow kind of question, and they hand the hard cases up to larger models. The small ones decide and the large ones write.
+
+Models built this way already exist. TypeSafe released Jev in September 2026. It's a model that never writes text: it answers a typed question with a probability over a declared set of answers. I rebuilt the same interface on a local model and measured it. On a 3B model, a small AI with three billion parameters that runs on an ordinary laptop, a decision took a median of 102 ms and cost nothing. A hosted model, a large AI rented from a provider over the internet, took about five seconds per call.
+
+What Solved It: A Jev Decider Plus Embedded MX
+
+My working assumption going into those tests was that a targeted model hallucinates less because it's targeted. A model that can only answer "current", "stale" or "none" can't invent a paragraph.
+
+That turned out to be half the answer. Targeting stops the model inventing text, but it doesn't stop it guessing. Handed PDFs with nothing declared, the 3B decider called documents current when it had no way to know, and invented an owner nine times out of ten. It couldn't write a false sentence, so it picked a wrong label instead, with confidence.
+
+The other half was MX metadata embedded in the file. I made two versions of the same PDFs: one bare, and one with an MX packet in its XMP metadata, the standard place a PDF stores information about itself. One script peeled whatever each file declared and handed it to the decider. Nothing else changed.
+
+With the packet embedded, the problems went away:
+
+- On whether a document was current, the 3B decider went from 20% to 100%.
+
+- On who owns a document, it went from 10% to 100%, and stopped inventing owners.
+
+- On currency, every lane I tested scored 100% on the declared files, including the same 3B model writing its answers and a hosted one.
+
+Neither piece did it alone. The Jev-style decider made each decision fast and cheap: a median of 102 ms on a laptop, at no cost. The embedded metadata made each decision right. Together, a 3B model on a laptop matched a hosted service on these questions. The test set is small and hand-labelled, so treat the figures as indicative rather than a benchmark, but the direction was the same on every question I asked.
+
+Targeting narrows the question. Only the document can supply the answer. A small model has no brute-force fallback: it can't read around the gap the way a frontier system with a huge context window sometimes can. That makes declared metadata worth more to small models than to large ones, and they're the ones I expect to do most of the work.
+
+Prose on its own is the weakest input. "Reviewed by finance operations" isn't read as an owner the way a labelled field naming the owning team, author: finance-ops, is. With the labelled fields alone, the 3B decider still scored 100%. With the prose alone, the same 3B model writing its answers fell to 30% on ownership. A fact a machine must act on belongs in a field, not a sentence.
+
+The Jevons Part
+
+TypeSafe named Jev after William Stanley Jevons, whose paradox says that making a resource cheaper to use tends to increase total consumption rather than reduce it. I've traced the same effect in AI energy use. The launch post says so directly: the company expects machine intelligence to follow the path coal took after steam engines got more efficient. The company is betting on the paradox rather than hedging against it. Cheap decisions will multiply until the total goes up.
+
+Follow that through to a document. Under GEO, a page might be read by a crawler and summarised by an answer engine. After the shift, the same page is read by a router deciding which model should handle it, a decider checking whether it's current, another asking who owns it, and a third deciding if it may be quoted. Each read is cheap, so there are many more of them. Every one of them reads what the document declares, and guesses where it declares nothing.
+
+Calibration, a model being honest about how sure it is, doesn't save you here. A decider can be honest about its confidence in the state it was handed and still be wrong about the world, because the input left something out. That gap widens with volume. At a few decisions a day a human can catch the bad ones. At millions a day, the router's log is the only decision record anyone has, and only what the documents declared can make that log trustworthy. A 10% error rate is a curiosity at ten decisions a day. At a million a day, it's a hundred thousand wrong answers given in your name.
+
+Put the two results together. Jev makes decisions cheap enough to multiply, and embedded MX makes each of them right. Without the metadata, the Jevons effect multiplies guesses. With it, the effect multiplies correct answers.
+
+There's a cheaper step still. Many of those questions need no model at all once the document declares the answer. Checking whether an expiry date has passed is a line of code, not an inference, so every fact a document declares is one decision nobody pays for, in money or in energy.
+
+That's the paradigm I think we're heading for: targeted small models coordinating with the larger ones, all reading the same documents at a volume nobody can supervise by hand. That's when the world will be ready for MX in every document.
+
+What This Means for Your Business
+
+Take a document every business has: a refund policy. An agent answering a customer reads it and has to settle two things. Is this the version in force, and who stands behind it? If the file doesn't say, the agent guesses. In my tests, a small model named an owner for files that named nobody nine times out of ten, and did it with confidence. In practice, that's a customer quoted an expired policy, or a partner told the wrong team approved a price, and nobody able to show afterwards why the machine said it.
+
+The fix isn't a bigger model or a new platform. It's declaring a few facts in the documents machines already read about you. Start with the ones that carry money or liability: policies, prices, terms and product information. For each one, record three things as labelled fields: who owns it, whether it's current, and the date it stops being valid.
+
+That work pays twice. Your own AI tools stop guessing about your own documents, which is the result the tests measured. And every declared fact becomes a dated record you can show an auditor, a partner or a regulator when they ask how a machine reached its answer.
+
+Why We Promote MX Before the Market Asks
+
+The MX Manifesto opens with "MX is to machines what UX is to users", and argues for determinism over inference: the same input gives the same result every time. The Jev tests show what that means in practice. A declared fact is a decision made with certainty. An undeclared one is a guess, made at speed and repeated at scale.
+
+As I write, in September 2026, the market hasn't caught on to this. It's still in the GEO phase, buying the product that gets nobody fired. The sensible timing for MX is after the shift, when targeted models make the need obvious.
+
+We're promoting it ahead of the market anyway, for two reasons.
+
+The first is that standards compound. The manifesto calls this the architecture of participation. An organisation that declares its own documents, to make them more useful to its own machines, also produces something every other machine can read. That value builds over time, and it needs a head start.
+
+The second is fashion itself. When the market moves on from GEO, it'll look for the next safe purchase. I'd like MX to be the known answer by then, with the evidence published and the records in place.
+
+That answer won't be something you buy. MX is a practice, as UX is (I set out the case in Why Use MX), and teams build it into how they work. Declaring what each document is, who stands behind it and whether it's current becomes a habit of its authors, and no vendor can take that away.
+
+Nobody got fired for buying IBM. I'd like the next version of that line to be about MX.
+
+A declared interest. CogNovaMX sells the discipline this post recommends. The measured figures come from my own tests, published in full in the decider post, and I have no relationship with TypeSafe.
+
+Related
+
+- Why Use MX: why a file needs metadata that travels with it, so the machine that meets it next doesn't have to guess.
+
+- A Decider Is Only as Good as Its State: what a decision model is, and why its calibration stops at the state it's handed.
+
+- I Built a Decider and Measured It: the local rebuild, and what embedded MX metadata did to its accuracy.
+
+- Reduce Inference, Save Energy: the Jevons paradox applied to the energy AI inference uses.
+
+- Humans Take Journeys, Agents Take One Fetch: why most agents read one file in isolation and decide, and why MX designs for both a drip feed and everything at once.
 
             About the author
 
@@ -14340,6 +15127,112 @@ The agentic web is at the same moment with the same answer. Provenance does not 
 A great deal of the work that follows is structural, dull, and load-bearing: the metadata fields, the signing chain, the registry that holds the claims, the transparency log that audits the registry, the client libraries that do the verification on the reader's side. None of it is glamorous. All of it is the difference between an agentic web that knows what it knows and one that confidently invents the rest.
 
 Tom Cranstoun is the Machine Experience Authority and founder of the MX community. He consults on MX strategy through CogNovaMX Ltd.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
+## Reduce Inference, Save Energy | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/reduce-inference-save-energy.html
+
+**Description:** The AI-power debate is all about supply. The overlooked lever is demand: inference is most of AI's energy use, much of it redundant, and machine-readable content cuts the work per task.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - Efficiency Alone Won't Save You
+
+        - The Scale Is Not Small
+
+        - Where the Demand-Side Lever Lives
+
+        - Be Honest About the Saving
+
+        - Measurement Boundary
+
+        - The Unglamorous First Move
+
+        - Related
+
+          Reduce Inference, Save Energy
+
+            18 July 2026
+            ·
+            Tom Cranstoun
+            ·
+            6 min read
+
+The debate about AI's energy appetite is almost entirely about supply. Build more generation. Cool the racks more cleverly. Ship a more efficient chip. Every one of those is a real lever, and every one treats the demand as fixed. It isn't fixed, and the cheapest watt is still the one you never spend.
+
+The part that gets missed is that inference, not training, is roughly 90% of AI energy use (aimultiple, MIT News). Training a model is a big one-off bill. Inference is the bill that arrives every time anyone asks the model anything, and it never stops. A large slice of that inference is redundant. Agents re-crawl pages they can't parse. They re-derive facts that were never written down in a form a machine can read. They hallucinate, then spend more compute correcting themselves.
+
+I'll give you one case from our own work. An AI assistant insisted a fully documented command didn't exist. The troubleshooting cascade that followed burned about 40,000 tokens to recover an answer that needed roughly 200. A 200-to-1 waste ratio, on a single question. That waste is electricity and water, and almost nobody is measuring it.
+
+Efficiency Alone Won't Save You
+
+The usual reassurance is that hardware keeps getting more efficient, so this sorts itself out. It doesn't, and the reason has a name: Jevons paradox. When something gets cheaper to do, we do more of it. Cheaper inference invites more of it. Google's own carbon footprint has risen 48% since 2019 despite years of per-query efficiency gains (arXiv). The per-query saving was real; the total went up anyway, because usage grew faster than the efficiency did. TypeSafe named its decision model, Jev, after Jevons and bet its business on the same effect: cheaper machine decisions mean more of them.
+
+Cheap decisions will multiply whatever we do. The demand-side answer is that a question a document answers in a declared field needs no model at all. Checking whether an expiry date has passed is a line of code, not an inference.
+
+The lever that scales is doing less inference per task rather than making each call cheaper, and that's a content problem, not a silicon one.
+
+The Scale Is Not Small
+
+None of this is a rounding error. The IEA expects data-centre electricity to more than double to around 945 TWh by 2030, roughly Japan's entire annual demand (MIT News). The water side is just as physical: data-centre cooling drew more than 260 billion gallons in 2025, and a single large site can use 500,000 gallons a day (HyScaler). In the United States, data centres go from about 1% of electricity in 2024 to nearly 5% by 2030 under moderate AI growth (aimultiple). When a town fights a new data centre over its water table, it has a point. The honest answer is two-sided: invest in the grid, and drive down the avoidable demand before pouring the concrete.
+
+Where the Demand-Side Lever Lives
+
+Machine Experience works on that demand. MX is the practice of making content readable and verifiable by a machine, not only by a person: structured, attributed, and pointing at the authoritative source for the claims that matter. When an agent can read a claim and check it, it cites the fact instead of guessing at one. When it can't, it guesses, and guessing is the expensive part.
+
+Structured content removes the work. A page that parses the first time doesn't get re-crawled, and an answer stated outright needs no round-trips to reconstruct. A verified fact to cite breaks the hallucinate-then-correct loop. It's a software lever on a hardware problem, and unlike a new substation it gets cheaper as adoption grows rather than being eaten by it, because it cuts the work per task instead of the price per token.
+
+One of MX's founding principles puts it in a line: "Choose what is better for the planet. Reduce compute, reduce inference, reduce energy." A machine reading a clean, structured file instead of guessing at messy prose pays a smaller energy bill, and that cost, multiplied across every agent that touches your content, adds up.
+
+Be Honest About the Saving
+
+Two caveats, because this argument is easy to oversell. First, the cost saving is real where you're billed per token, and invisible where you're billed per request: if your provider charges a flat rate per call, fewer wasted tokens won't reach your invoice, though the energy behind them is still saved at the infrastructure level. Second, the sharpest numbers here are other people's, sourced and linked above; the 200-to-1 case is our own observation, not a general statistic. The direction of travel isn't in doubt. The precise magnitude, for your estate, is something you measure rather than assume.
+
+Measurement Boundary
+
+Better structured information can remove avoidable retrieval, retries and re-interpretation from a defined workflow. It doesn't establish a universal reduction in tokens, cost, energy use or emissions. Those outcomes depend on the baseline, task, model, retrieval route, hosting and energy-accounting method.
+
+Any customer or product claim needs a named workload and baseline, model/configuration, token and cost capture, success and error criteria, limitations, reviewer and period. That's the minimum evidence I hold any claim of this kind to, including my own.
+
+The Unglamorous First Move
+
+You can't improve what you don't measure. We learned to measure data-centre efficiency with PUE; the content equivalent is measuring how much inference an agent burns to get an answer out of your pages, and how much of that's avoidable. Treat machine-readable, verifiable content as efficiency infrastructure, because that's what it is.
+
+If you want to see where your own content forces an agent to guess, that's exactly what an audit shows. I'll audit 5 pages of your site, or 1 PDF, for free, and point at the places a machine is doing avoidable work. If you'd rather start with the idea, here is what MX is: https://mx.allabout.network/learn/what-is-mx.html
+
+Related
+
+- A Decider Is Only as Good as Its State: what a decision model is, and why its calibration stops at the state it's handed.
+
+- I Built a Decider and Measured It: the local rebuild, and what embedded MX metadata did to its accuracy.
+
+- Nobody Got Fired for Using GEO: why cheap decisions multiply, and why MX is worth promoting before the market asks.
+
+- Humans Take Journeys, Agents Take One Fetch: why most agents read one file in isolation and decide, and why MX designs for both a drip feed and everything at once.
+
+- Why Use MX: why a file needs metadata that travels with it, so the machine that meets it next doesn't have to guess.
 
             About the author
 
@@ -24855,13 +25748,13 @@ MX
 
         Become a Publisher
 
-        The REGINALD alpha registry is live at reginald.allabout.network. The Publisher Listing is an annual subscription that registers your cog file, surfaces it in the public publisher directory, and underwrites the signed attestation infrastructure every agent verifies against.
+        The REGINALD alpha registry is live at reginald.allabout.network. The Publisher Listing is an annual subscription that registers your cog file, surfaces it in the public publisher directory, and underwrites the signed attestation infrastructure behind every agent's verification.
 
-        The first cohort of publishers is being onboarded by hand, and deliberately so: we confirm your publisher identity and configure your registry credentials with you rather than around you. Tell us what you publish and we will come back to you within two working days with the listing terms.
+        The first cohort of publishers is being onboarded by hand, and deliberately so: we confirm your publisher identity and configure your registry credentials with you rather than around you. The Professional listing covers up to three namespaces for £149 a year, plus a one-time £250 signing fee. Subscribe below and we will be in touch within two working days to set up your namespaces.
 
-        Request a publisher listing
+        Subscribe - publisher listing
 
-        The listing includes registry-served discovery, public directory listing, and signed attestation infrastructure. One-off and bulk publisher arrangements are available on request.
+        The listing includes registry-served discovery, public directory listing, and signed attestation infrastructure. Business listings (up to ten namespaces, £499 a year), Enterprise arrangements, and additional namespaces are available on request.
 
         Prefer to talk first? Get in touch, or read the position paper.
 
@@ -26979,4 +27872,4 @@ MX
 
         For commissioning AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
 
-<!-- x-mx-sourceHash: 43588de7c2a1c79ca087d18f02753d349c1b25f506041ee49be9bbaea27f0c2a -->
+<!-- x-mx-sourceHash: 92516f86701c4dc605540b6ac7c9dd55afbb781301a934a097cd2373623eaf80 -->

@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The CMA Just Made Google Show Publishers Their AI Search Data"
 description: "On 3 June 2026 the CMA ordered Google to give publishers per-feature engagement metrics for AI search, disaggregated from ordinary results and delivered through a common platform like Search Console, plus controls to withhold content from AI Overviews and AI Mode. Here is what the conduct requirement actually says, and why a regulator now asking for machine-readable, attributable usage data matters."
 author: "Tom Cranstoun"
@@ -12,19 +13,25 @@ created: 2026-06-07
 modified: 2026-06-07
 version: "0.1"
 
+type: blog-post
+tags: [cma, google, ai-search, publishers, transparency, governance, evidence-vehicle, mx]
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  quotes:
+    - "**Note:** This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation."
   audience: [business, humans, machines]
+  aiAssistance: "welcome"
   targetReaders: "Publishers, SEO and content teams, and the boards weighing how AI search affects their traffic, plus the technical readers who will have to consume the new engagement data."
-  tags: [cma, google, ai-search, publishers, transparency, governance, evidence-vehicle, mx]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/industry/cma-makes-google-show-publishers-ai-search-data.md
   servedAt: https://mx.allabout.network/blog/drafts/industry/cma-makes-google-show-publishers-ai-search-data.html
+  contextProvides:
+    - "What the CMA's first conduct requirement on Google Search (3 June 2026, under the DMCC Act) actually requires: per-feature AI-search engagement metrics for publishers, disaggregated and delivered through a common platform, plus content opt-out controls."
   stability: stable
   purpose: "Explain the CMA's first Google Search conduct requirement on AI-search transparency and publisher controls, and why a regulator mandating machine-readable, attributable usage data matters for the MX argument."
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   blogUrl: https://mx.allabout.network/blog/drafts/industry/cma-makes-google-show-publishers-ai-search-data.html
   blogFilename: cma-makes-google-show-publishers-ai-search-data
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -65,11 +72,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The CMA Just Made Google Show Publishers Their AI Search Data">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="0.1">
@@ -98,7 +103,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -112,7 +117,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 896,
+        "wordCount": 899,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -166,7 +171,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -192,7 +197,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="896">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="899">
         <header class="article-header">
           <h1>The CMA Just Made Google Show Publishers Their AI Search Data</h1>
           <div class="article-meta"
@@ -208,13 +213,13 @@ mx:
         </header>
 
 
-<p>A LinkedIn post crossed my feed this week claiming the UK regulator had just forced Google to hand publishers a pile of data on AI search, clicks included. The claim sounded too clean. I checked it. It holds up.</p>
+<p>In June 2026 a LinkedIn post crossed my feed claiming the UK regulator had just forced Google to hand publishers a pile of data on AI search, clicks included. The claim sounded too clean. I checked it. It holds up.</p>
 <p>On 3 June 2026 the Competition and Markets Authority imposed its first conduct requirement on Google Search under the Digital Markets, Competition and Consumers Act 2024, following Google's Strategic Market Status designation in October 2025. The headline is real: Google now has to show publishers how users engage with their content inside AI search features, and it has to let publishers say no.</p>
 <blockquote>
 <p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
 </blockquote>
 <h2 id="what-google-has-to-disclose" tabindex="-1">What Google has to disclose</h2>
-<p>The conduct requirement makes Google give publishers metrics on how their content performs in search generative-AI features. The text names the measures plainly. Impressions. Clicks. Click-through rate. The ability to work out click quality. These are not the aggregate numbers Search Console shows today.</p>
+<p>The conduct requirement makes Google give publishers metrics on how their content performs in search generative-AI features. The text names the measures plainly. Impressions. Clicks. Click-through rate. The ability to work out click quality. These are not the aggregate numbers Search Console showed in June 2026.</p>
 <p>Two conditions make the data useful rather than decorative.</p>
 <p>First, it must be disaggregated. The data has to be separated from other elements of general search, including organic web results, images, videos, and search features that are not generative-AI features. A publisher will be able to see what AI Overviews and AI Mode did to their traffic on its own, not blended into one number that hides the effect.</p>
 <p>Second, it must be delivered somewhere publishers already work. The requirement asks for a commonly accessible platform, and names Google Search Console as the example. No bespoke portal, no data request queue. The place publishers already check.</p>
@@ -246,7 +251,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -297,5 +302,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

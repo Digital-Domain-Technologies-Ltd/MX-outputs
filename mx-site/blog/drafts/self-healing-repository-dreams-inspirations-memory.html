@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Self-Healing Code: How Dreams, Inspirations, and Memory Turn a Repository Into a Learning System"
 type: blog-post
 description: "MX-Hub's self-improving infrastructure uses three mechanisms - Dreams (silent LLM miners), Inspirations (deterministic repair actors), and Memory Sync (portable practice) - to make repositories that heal their own drift and learn from use patterns."
@@ -13,10 +14,12 @@ created: 2026-06-27
 modified: 2026-06-27
 tags: [architecture, repository, machine-learning, infrastructure, developer-experience, maxine]
 mx:
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
   purpose: "Explain how MX-Hub's self-improving infrastructure (Dreams, Inspirations, Memory Sync) keeps repositories self-healing and helps operators inherit accumulated practice on first clone."
   stability: draft
   runbook: "Blog draft in the Intent CMS source layer. Edit here, then promote with npm run promote -- <source.md> --apply; never edit the generated HTML."
+  contextProvides: ["How Dreams, Inspirations, and Memory Sync make a repository self-healing"]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/self-healing-repository-dreams-inspirations-memory.md
 ---
 -->
@@ -58,11 +61,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Self-Healing Code: How Dreams, Inspirations, and Memory Turn a Repository Into a Learning System">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -105,7 +106,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1660,
+        "wordCount": 1661,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -188,7 +189,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1660">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1661">
         <header class="article-header">
           <h1>Self-Healing Code: How Dreams, Inspirations, and Memory Turn a Repository Into a Learning System</h1>
           <div class="article-meta"
@@ -254,7 +255,7 @@ mx:
 <p>Memory lives in <code>.claude/memory/</code> and is checked into the repository. It's portable. The four types of memory that travel are:</p>
 <ol>
 <li><strong>Feedback</strong> - decisions made and why. &quot;We don't use em-dashes. Here's why and what broke when someone tried.&quot;</li>
-<li><strong>Project</strong> - operational knowledge specific to this repo. &quot;Build the indexes on a fat clone on <code>main</code>, never on branches - here's what happens if you try.&quot;</li>
+<li><strong>Project</strong> - operational knowledge specific to the MX-hub repository. &quot;Build the indexes on a fat clone on <code>main</code>, never on branches - here's what happens if you try.&quot;</li>
 <li><strong>User</strong> - individual operator profiles and preferences. &quot;Claude prefers terse responses. Claude uses the Sonnet model for reviews.&quot;</li>
 <li><strong>Reference</strong> - pointers to external resources. &quot;The Gathering standard spec lives here. The MX Manifesto lives there.&quot;</li>
 </ol>

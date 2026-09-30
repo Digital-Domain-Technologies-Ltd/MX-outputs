@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Second-Brain Recipe Is Right About Storage and Silent About Trust"
 description: "The viral Obsidian-plus-Claude recipe nails the storage half of a personal knowledge graph. It says nothing about whether a file can be trusted once it leaves your vault. Here is the missing layer."
 author: Tom Cranstoun
@@ -14,9 +15,14 @@ version: "1.0"
 type: blog-post
 tags: [second-brain, obsidian, knowledge-graph, provenance, mx-foundations, machine-trust, personal-knowledge-management]
 mx:
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
   purpose: "Show that the popular Obsidian-plus-Claude second-brain recipe solves storage but not trust, and name the MX layer that makes a personal knowledge file verifiable once it travels."
   stability: stable
+  contextProvides:
+    - "The distinction between organising knowledge (retrievable) and governing it (verifiable)"
+    - "Why a CLAUDE.md identity file and markdown vault notes lose meaning the moment they leave the vault"
+    - "The trust signals a knowledge file needs to carry: attestation, currency, freshness, corroboration"
   runbook: "Draft blog post. When ready, run npm run promote to publish to mx-site/blog/."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/second-brain-storage-not-trust.md
 
@@ -60,11 +66,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Second-Brain Recipe Is Right About Storage and Silent About Trust">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -107,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1265,
+        "wordCount": 1266,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -187,7 +191,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1265">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1266">
         <header class="article-header">
           <h1>The Second-Brain Recipe Is Right About Storage and Silent About Trust</h1>
           <div class="article-meta"
@@ -216,7 +220,7 @@ mx:
 <h2 id="three-things-that-break-at-the-boundary" tabindex="-1">Three things that break at the boundary</h2>
 <p>When a vault note travels, signals go missing, and each one is a different question the reader can no longer answer.</p>
 <p><strong>Who said this, and when?</strong> That <code>CLAUDE.md</code> the assistant wrote about you has no author stamp, no canonical address, no signature. Inside the vault it doesn't need one; everything there is yours. Outside it, it's an anonymous text file making confident claims about a person, and nothing distinguishes it from one an agent invented. The signal that fixes this is <em>attestation</em>: a record of who published a claim and when, bound so it can't be quietly altered.</p>
-<p><strong>Is this the current version?</strong> You update a workflow note. The old copy you pasted into a shared doc last month doesn't move with it. Now there are two, and a reader has no way to know which one is live. The signal here is <em>currency</em>: a way for the file to declare its own version and point at the canonical source, so a stale copy says so itself.</p>
+<p><strong>Is this the current version?</strong> You update a workflow note. The old copy you pasted into a shared doc a month ago doesn't move with it. Now there are two, and a reader has no way to know which one is live. The signal here is <em>currency</em>: a way for the file to declare its own version and point at the canonical source, so a stale copy says so itself.</p>
 <p><strong>Is the author still standing behind it?</strong> A note can be correctly attributed, up to date, and still abandoned. Knowledge has a shelf life. The signal is <em>freshness</em>, sometimes called liveness: evidence that the publisher is still maintaining the claim, not that they wrote it once and walked away.</p>
 <p>There's a fourth, and it's the one people forget, because it isn't about the file's plumbing at all. <strong>Does anyone else say this is true?</strong> A note can carry every one of those signals and still be wrong. Attestation proves who said something; it never proves anyone authoritative agrees. The signal is <em>corroboration</em>: the load-bearing claims point to an independent source that states them too. This one the content has to carry itself. No registry can add it after the fact.</p>
 <h2 id="the-cheap-part-is-making-a-file-carry-its-own-answers" tabindex="-1">The cheap part is making a file carry its own answers</h2>

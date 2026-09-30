@@ -5,12 +5,14 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "How the Frontmatter Tells a Machine What a File Is"
-description: "Every file in this repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice."
+description: "Every file in the MX-hub repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice."
 author: Tom Cranstoun
 created: "2026-07-04"
 modified: "2026-07-04"
 version: "1.0"
+category: mx-content
 type: blog-post
 tags:
   - mx
@@ -19,14 +21,17 @@ tags:
   - frontmatter
   - machine-readability
 mx:
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/how-the-frontmatter-tells-a-machine-what-a-file-is.md
+  contextProvides:
+    - "A reference-grade walk through the MX-Hub YAML frontmatter model for a human reader: the three-zone split, OKF as the base, ARD as the export layer, the MX block, the external standards MX defers to, camelCase per NDR-02, and canonicalUri. Includes the note that these standards are still draft and that the post carries its own draft state."
   stability:
     - draft
-    - friable
-  purpose: "Explain, for a human reader, how the YAML frontmatter in this repository is built, which standards sit under it, and why, while being honest that the standards are still draft and the post itself is provisional."
+  purpose: "Explain, for a human reader, how the YAML frontmatter in the MX-hub repository is built, which standards sit under it, and why, while being honest that the standards are still draft and the post itself is provisional."
   servedAt: https://mx.allabout.network/blog/drafts/how-the-frontmatter-tells-a-machine-what-a-file-is.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   blogUrl: https://mx.allabout.network/blog/drafts/how-the-frontmatter-tells-a-machine-what-a-file-is.html
@@ -38,7 +43,7 @@ mx:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
-  <meta name="description" content="Every file in this repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice.">
+  <meta name="description" content="Every file in the MX-hub repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://mx.allabout.network/blog/drafts/how-the-frontmatter-tells-a-machine-what-a-file-is.html">
 
@@ -46,7 +51,7 @@ mx:
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://mx.allabout.network/blog/drafts/how-the-frontmatter-tells-a-machine-what-a-file-is.html">
   <meta property="og:title" content="How the Frontmatter Tells a Machine What a File Is | CogNovaMX">
-  <meta property="og:description" content="Every file in this repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice.">
+  <meta property="og:description" content="Every file in the MX-hub repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta property="og:image:width" content="1200">
@@ -59,7 +64,7 @@ mx:
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How the Frontmatter Tells a Machine What a File Is | CogNovaMX">
-  <meta name="twitter:description" content="Every file in this repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice.">
+  <meta name="twitter:description" content="Every file in the MX-hub repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice.">
   <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta name="twitter:site" content="@ddttomtom">
@@ -72,11 +77,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="How the Frontmatter Tells a Machine What a File Is">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -96,7 +99,7 @@ mx:
         "@type": "BlogPosting",
         "name": "How the Frontmatter Tells a Machine What a File Is",
         "headline": "How the Frontmatter Tells a Machine What a File Is",
-        "description": "Every file in this repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice.",
+        "description": "Every file in the MX-hub repository opens with a YAML block written for the machine. Here is how it is built, the standards under it, and why we made each choice.",
         "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
         "datePublished": "2026-07-04",
         "dateModified": "2026-07-04",
@@ -119,7 +122,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 2577,
+        "wordCount": 2605,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -206,23 +209,23 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2577">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2605">
         <header class="article-header">
           <h1>How the Frontmatter Tells a Machine What a File Is</h1>
           <div class="article-meta"
                data-published="2026-07-04"
                data-modified="2026-07-04"
-               data-reading-time="13 min">
+               data-reading-time="14 min">
             <time datetime="2026-07-04">4 July 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>13 min read</span>
+            <span>14 min read</span>
           </div>
         </header>
 
 
-<p>Open any file in this repository and the first thing you meet is not a sentence. It is a block of YAML fenced between two lines of three dashes. A human eye slides past it to get to the words. A machine does the opposite. It reads that block first, and by the time it reaches the prose it already knows what the file is, who wrote it, when it last changed, where the real copy lives, who it is for, and how much to trust it.</p>
+<p>Open any file in the MX-hub repository and the first thing you meet is not a sentence. It is a block of YAML fenced between two lines of three dashes. A human eye slides past it to get to the words. A machine does the opposite. It reads that block first, and by the time it reaches the prose it already knows what the file is, who wrote it, when it last changed, where the real copy lives, who it is for, and how much to trust it.</p>
 <p>That block is the frontmatter, and it is written for the machine. This is what MX means in practice. MX is to machines what UX is to users. UX asks whether a person can understand and navigate a thing. MX asks whether a machine can understand and act on it. The frontmatter is where we answer that question, one file at a time.</p>
 <p>Here is how the block is built, which standards sit underneath it, and why we made each choice. I will be honest at the end about how finished any of this is.</p>
 <h2 id="the-block-has-three-zones" tabindex="-1">The block has three zones</h2>
@@ -309,7 +312,7 @@ mx:
 </tbody>
 </table>
 <h2 id="one-real-block-read-by-zone" tabindex="-1">One real block, read by zone</h2>
-<p>Enough tables. Here is a whole block, the kind that sits at the top of an ordinary document in this repository, with the zone each part belongs to marked in the margin.</p>
+<p>Enough tables. Here is a whole block, the kind that sits at the top of an ordinary document in the MX-hub repository, with the zone each part belongs to marked in the margin.</p>
 <pre><code class="language-yaml">title: &quot;How MX Defers to Existing Standards&quot;      # Zone 1a: identity
 description: &quot;Where MX reuses Dublin Core, Schema.org, and the rest.&quot;
 author: Tom Cranstoun
@@ -321,7 +324,7 @@ type: info-doc                                    # Zone 1b: OKF reserved
 tags: [mx, standards, metadata]
 
 mx:                                               # Zone 2: the MX block
-  status: active
+  status: draft
   audience: [humans, machines]
   stability: stable
   canonicalUri: https://raw.githubusercontent.com/.../../standards-deferral.md
@@ -373,7 +376,7 @@ mx:                                               # Zone 2: the MX block
 <td>EXIF, IPTC, XMP, ID3</td>
 </tr>
 <tr>
-<td>Content credentials for media</td>
+<td>Content credentials, every medium including text</td>
 <td>C2PA</td>
 </tr>
 <tr>
@@ -417,8 +420,8 @@ mx:                                               # Zone 2: the MX block
 <h2 id="what-this-post-says-about-itself" tabindex="-1">What this post says about itself</h2>
 <p>Which brings me to the block at the top of this very post, because it practises what the post describes. Its fields tell you how finished it is, and one of them says so twice, on two different axes.</p>
 <p><code>x-mx-contentState: draft</code> says where the post sits in our editorial pipeline. It is a draft. It is served on a page marked noindex, not on the public blog, and it has not been published. When it is, that field flips to <code>published</code> and the page moves. A tool does that, not a hand edit.</p>
-<p><code>stability</code> is the interesting one, and here it is not a single value but a list: <code>[draft, friable]</code>. A file can be more than one thing at once, so the field is an array, and this file is two things. <code>draft</code>, in the stability sense, is about the content rather than the pipeline: the ideas are not settled, because the standards under them are still draft and will move. <code>friable</code> is about the file itself. In our own vocabulary it means the artefact is regenerated from a source and must never be hand-edited. The HTML you are reading was built from this markdown by a generator. Edit the HTML and the next build erases your change. So do not; edit the source. Friable carries its plain-English sense too: crumbly, transient, remade whenever its source changes. Two values, two truths, and the field holds both because I asked it to.</p>
-<p>Notice what just happened. The same word, draft, appears in two fields and means two different things: where the post sits in the pipeline, and how settled its content is. A careless reader might call that a contradiction. A machine that knows the vocabulary is never confused, because the field a value sits in tells it which question is being answered. That is the whole reason we name things precisely and let a field carry a list when a file is genuinely more than one thing. This post will be regenerated, and it will change, and its own metadata tells you exactly that before you have finished the first paragraph.</p>
+<p><code>stability</code> here is <code>draft</code>, and it is worth pausing on, because it means something different from the pipeline draft above. Pipeline draft is about where the post sits before publication. Stability draft is about the content: the ideas are not settled, because the standards under them are still draft and will move. One is process, the other is confidence, and the field a value sits in tells a machine which question it answers. There is a companion property this source deliberately does not claim: <code>friable</code>. In our own vocabulary friable means an artefact is regenerated from a source and must never be hand-edited, and it is true of the HTML you are reading, which a generator builds from this markdown. It is not true of this markdown, which is the source you would edit. Naming the two correctly is the whole point: the source is editable, the artefact is friable, and a file that put friable on its own source would be telling a machine to leave the very thing you maintain alone.</p>
+<p>Notice what just happened. The same word, draft, appears in two fields and means two different things: where the post sits in the pipeline, and how settled its content is. A careless reader might call that a contradiction. A machine that knows the vocabulary is never confused, because the field a value sits in tells it which question is being answered. That is the whole reason we name things precisely and put each fact in the field that answers its own question. The HTML built from this post will be regenerated, and the ideas will change, and the metadata tells you exactly that before you have finished the first paragraph.</p>
 <p>That a file regenerates from a source, and that some things travel with the repository while others are rebuilt wherever they are read, is a larger story than one post. I told it on its own terms in <a href="https://mx.allabout.network/blog/fat-clones-thin-clones-and-the-strawberry-problem.html">Fat clones, thin clones, and the strawberry problem</a>.</p>
 <p>That is the payoff, and it is the reason the block exists. The machine never has to guess. The frontmatter tells it what the file is, who made it, who it is for, where the real copy lives, how settled it is, and how to act. We wrote it down so nothing has to be inferred. That is the whole of MX, in the space between two lines of three dashes.</p>
 

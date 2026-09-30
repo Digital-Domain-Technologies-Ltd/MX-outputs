@@ -10,7 +10,7 @@ title: "Search Behaviour and Copyright Compliance"
 description: "Defines how to conduct web searches, source priority, and the non-negotiable copyright rules that apply to every search-based response. Maps to search_instructions and CRITICAL_COPYRIGHT_COMPLIANCE in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Define search mechanics, source priority, and copyright compliance rules."
   stability: stable
   contextProvides: ["Hard copyright limits: max 15 words per direct quote, max one quote per source, default to paraphrasing. Search queries: 1-6 words, start broad. Source priority: internal tools first, then web search. Never reproduce lyrics, poems, or haiku in any form."]

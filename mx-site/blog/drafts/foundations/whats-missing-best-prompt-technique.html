@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "What's missing: the best prompt I know"
 description: "Ask an AI whether your work is good and it tends to agree. Ask what's missing and it lists the gaps you didn't know to look for. Why enumeration beats confirmation."
 author: "Tom Cranstoun"
@@ -12,15 +13,18 @@ created: 2026-06-12
 modified: 2026-06-12
 version: "1.0"
 
+type: blog-post
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/foundations/whats-missing-best-prompt-technique.md
+  contextProvides:
+    - "Why 'what's missing?' is a stronger prompt than 'is this good?': enumeration surfaces gaps that confirmation hides."
   stability: stable
   purpose: "Argues that asking an AI what is missing outperforms asking whether the work is good, because enumeration surfaces gaps the author cannot name in advance."
   servedAt: https://mx.allabout.network/blog/drafts/foundations/whats-missing-best-prompt-technique.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -61,11 +65,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="What's missing: the best prompt I know">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -94,7 +96,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -108,7 +110,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 705,
+        "wordCount": 706,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -162,7 +164,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -187,7 +189,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="705">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="706">
         <header class="article-header">
           <h1>What's missing: the best prompt I know</h1>
           <div class="article-meta"
@@ -211,7 +213,7 @@ mx:
 <h2 id="whats-missing-asks-for-a-list-not-a-verdict" tabindex="-1">&quot;What's missing?&quot; asks for a list, not a verdict</h2>
 <p>Change the question and you change the task. &quot;What's missing?&quot; is not a judgement, it is an enumeration. You are not asking the model to agree or disagree. You are asking it to walk the edges of the work and name what is not there. Models are good at that. They have read more checklists, more code reviews, more postmortems than any one person, and enumeration is exactly where that breadth pays off.</p>
 <p>The move that makes it powerful: you do not need to know the gap to ask for it. &quot;Is this secure?&quot; requires you to suspect a security hole. &quot;What's missing?&quot; requires nothing. You hand the model the work and it brings back the list, including the items you would never have queried because they were not on your map.</p>
-<p>I asked it this week, building a small piece of infrastructure I was happy with. The reply was not &quot;looks good&quot;. It was three specific holes: a test I had skipped, a setting I had added but never documented, and a coverage gap I would have shipped without noticing. None of those surfaced when I asked whether it was done. All three surfaced the moment I asked what was missing.</p>
+<p>I asked it in June 2026, building a small piece of infrastructure I was happy with. The reply was not &quot;looks good&quot;. It was three specific holes: a test I had skipped, a setting I had added but never documented, and a coverage gap I would have shipped without noticing. None of those surfaced when I asked whether it was done. All three surfaced the moment I asked what was missing.</p>
 <h2 id="the-same-move-we-make-for-machines" tabindex="-1">The same move we make for machines</h2>
 <p>This is not a side topic for me. The whole of MX, the metadata work I do, is the same instinct pointed at files instead of conversations. A good file does not just sit there hoping a machine guesses its context. It declares what it is, where it came from, and what it still needs: its dependencies, its required context, the fields without which it cannot be used properly. Machine-readable metadata is a file answering &quot;what's missing?&quot; before anyone has to ask.</p>
 <p>The principle underneath both is plain. A gap you can name is a gap you can close. A gap that lives only in your head is a gap that ships. Whether the reader is a person reviewing your draft or an agent parsing your PDF, the win comes from making the absence explicit instead of hoping it was covered.</p>
@@ -227,7 +229,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -278,5 +280,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

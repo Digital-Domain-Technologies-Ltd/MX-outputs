@@ -5,23 +5,32 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Seven Refusals Before Supper"
 description: "One evening our own system refused to accept our work seven times in a row. Every refusal was correct, every error message said exactly what to do next, and an AI did the redoing. This is what self-healing actually looks like: stiff gates, honest errors, a friction ledger, and a loop that goes round and round until the work is right."
 author: Tom Cranstoun
 created: 2026-07-03
 modified: 2026-07-03
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [self-healing, governance, ai-agents, content-ops, mx-foundations]
 mx:
+  mxSpecVersion: "0.9"
   servedAt: https://mx.allabout.network/blog/drafts/seven-refusals-before-supper.html
   generate:
     script: scripts/generate-content-html.cjs
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/seven-refusals-before-supper.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  corroboratedBy:
+    - https://global.toyota/en/company/vision-and-philosophy/production-system/
+    - https://sre.google/sre-book/automation-at-google/
+  contextProvides:
+    - "Explains self-healing as a discipline rather than a feature: deterministic quality gates that refuse bad work with instructive error messages, an AI that reads the refusal and redoes the work, a friction ledger recording every blocker and its fix, and a retry loop that runs until the estate is right. Draws the lineage from Toyota's stop-the-line principle and Google's view that automation should eliminate toil rather than hide it. Deliberately carries no implementation detail."
   stability: stable
   purpose: "Tell one true evening's story - seven consecutive refusals by our own quality gates, each fixed by an AI reading the error message, each recorded in a friction ledger - to explain what self-healing means and why stubborn gates with honest errors beat clever silent repairs."
   blogUrl: https://mx.allabout.network/blog/drafts/seven-refusals-before-supper.html
@@ -67,11 +76,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Seven Refusals Before Supper">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -114,7 +121,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 830,
+        "wordCount": 835,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -193,7 +200,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="830">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="835">
         <header class="article-header">
           <h1>Seven Refusals Before Supper</h1>
           <div class="article-meta"
@@ -209,10 +216,10 @@ mx:
         </header>
 
 
-<p>One evening this week I tried to ship a day's work, and my own system told me no. Then it told me no again. It said no seven times in a row, and every single time it was right.</p>
+<p>One evening at the start of July 2026 I tried to ship a day's work, and my own system told me no. Then it told me no again. It said no seven times in a row, and every single time it was right.</p>
 <p>I want to walk you through what happened, because &quot;self-healing&quot; has become one of those phrases that sounds like magic and usually means marketing. What we run is not magic. It is a loop, and the loop is made of three dull, dependable parts: gates that refuse, errors that instruct, and a ledger that remembers.</p>
 <h2 id="the-gates-do-not-negotiate" tabindex="-1">The gates do not negotiate</h2>
-<p>Before anything ships from our estate, it passes through a series of quality gates. Each one checks a single promise: links resolve for the reader, published pages match their sources, records carry the metadata they claim to carry, nothing arrives without its provenance. A gate is deterministic. It does not weigh intent, it does not accept context, and it has no mood. The work conforms or the door stays shut.</p>
+<p>Before anything ships from our own repository, it passes through a series of quality gates. Each one checks a single promise: links resolve for the reader, published pages match their sources, records carry the metadata they claim to carry, nothing arrives without its provenance. A gate is deterministic. It does not weigh intent, it does not accept context, and it has no mood. The work conforms or the door stays shut.</p>
 <p>Stiffness is the point. A gate that can be talked round is not a gate; it is a suggestion with extra steps. On the evening in question, the gates caught, among other things, a page whose published copy had quietly fallen behind its source, and a genuine bug in a change we had made that same afternoon. Both would have shipped. Neither did.</p>
 <h2 id="the-error-message-is-the-repair-instruction" tabindex="-1">The error message is the repair instruction</h2>
 <p>Here is the part most systems get wrong. A refusal that just says &quot;failed&quot; punishes you twice: once by stopping you, once by making you go and find out why. Our gates refuse loudly and helpfully. Each error names the exact thing that is wrong, where it is, and what to do about it - not a stack trace, an instruction.</p>
@@ -222,7 +229,7 @@ mx:
 <p>At the end of the run, the rule is that someone - or something - reads the ledger back. Each entry has to end one of two ways: it becomes a permanent improvement to the system, or it becomes a decision put in front of a human. What it may not do is sit there as sediment. That reading-back step is the difference between a system that heals and a system that merely scars.</p>
 <p>This is an old idea wearing new clothes. Toyota built its production system around <a href="https://global.toyota/en/company/vision-and-philosophy/production-system/">stopping the line the moment a defect appears</a>, on the understanding that the stop is not the failure - shipping the defect is - and that the line does not properly restart until the cause is fixed at the source. Google's reliability engineers make the <a href="https://sre.google/sre-book/automation-at-google/">companion argument about automation</a>: its job is to eliminate the toil, not to hide it somewhere a human will trip over it later. Our loop is those two ideas holding hands: stop hard, repair at the source, and make the repair permanent.</p>
 <h2 id="what-self-healing-is-not" tabindex="-1">What self-healing is not</h2>
-<p>It is not the machine quietly rewriting whatever it likes. Every automated repair in our estate works inside boundaries a human set, and the decisions that matter - what gets published, what gets deleted, what a fix should mean - stay with a person. A system that &quot;heals&quot; by silently changing things you never authorised has not healed anything. It has just moved the damage somewhere you cannot see it.</p>
+<p>It is not the machine quietly rewriting whatever it likes. Every automated repair in our repository works inside boundaries a human set, and the decisions that matter - what gets published, what gets deleted, what a fix should mean - stay with a person. A system that &quot;heals&quot; by silently changing things you never authorised has not healed anything. It has just moved the damage somewhere you cannot see it.</p>
 <p>It is also not softness. By the end of that evening, shipping took one attempt, first try, every gate green. The gates had not relaxed. The estate had become the kind of place where the gates find nothing to refuse - and three of the problems they caught that night can now never happen again, because their fixes went into the system rather than into a to-do list.</p>
 <p>Seven refusals before supper. I would take that trade every single time, because the alternative is not zero refusals. The alternative is shipping seven defects and finding out from your readers.</p>
 <p>That practice - content and systems that explain themselves, machines that can act on the explanation, and humans who stay in command - is what the <a href="https://mx.allabout.network/books/">MX books</a> teach. Start with one gate and one honest error message. The loop will teach you the rest.</p>

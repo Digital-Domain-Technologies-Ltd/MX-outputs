@@ -4,7 +4,7 @@ title: "AI-Native Website Code Examples"
 description: "Platform-specific code examples for implementing AI-native web patterns"
 author: Tom Cranstoun
 created: 2026-01-15
-modified: 2026-02-09
+modified: 2026-09-29
 version: "1.0"
 
 type: info-doc
@@ -13,6 +13,7 @@ mx:
   status: draft
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/books/appendices/code-examples/README.md
 
+  x-mx-createdHash: 10d4104d
 ---
 
 # AI-Native Website Code Examples

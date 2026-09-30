@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "A Decider Is Only as Good as Its State"
+description: "TypeSafe's Jev, launched on 15 September 2026, is a model that never writes text and only answers typed questions about a state with a calibrated probability. It's a good idea. It also moves the whole burden onto the state, and the state is what MX declares."
+author: Tom Cranstoun
+created: "2026-09-19"
+modified: 2026-09-30
+version: "1.2"
+type: blog-post
+tags: [agents, agentic-web, decision-models, typesafe, jev, calibration, human-in-command, provenance, mx, machine-experience]
+mx:
+  mxSpecVersion: "0.9"
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/a-decider-is-only-as-good-as-its-state.md
+  contextProvides:
+    - "Jev, TypeSafe's first System One model, answers typed questions (Choice, Score, Noul) about a supplied state with calibrated probabilities and never returns a value outside the schema."
+    - "A calibrated probability is honest about the state it was given, not about whether that state is true, current, or complete; the burden moves to the state."
+    - "Every MX field is a question a decider no longer has to ask a model: a declared fact is a decision at probability one with no inference cost."
+    - "A threshold that routes to a human is governance only when the decision is recorded: state, questions, probabilities, threshold, and who confirmed."
+    - "A decision model used as a router cuts cost per task, but cheaper decisions invite more of them (the Jevons paradox), so what grows is the volume of unrecorded routing choices; a router is a decider at volume and needs the same declared state and decision log."
+  stability: stable
+  purpose: "Explain what Jev is from TypeSafe's own launch material, credit what is right about a calibrated decision layer, and show why a decider makes declared metadata more valuable rather than less: the state it judges is what MX exists to make honest."
+  servedAt: https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator. Re-check TypeSafe's launch post and docs before editing any quoted claim; the pricing and speed figures are TypeSafe's own launch-week numbers."
+  blogUrl: https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html
+  blogFilename: a-decider-is-only-as-good-as-its-state
+  quotes:
+    - "a new class of frontier models built to make fast, structured decisions that software can use directly"
+    - "The model returns a probability distribution over your options or levels, never a value outside them."
+    - "If an intelligent system, whether human or machine, cannot express honest uncertainty, the system cannot be trusted."
+    - "A confidence threshold is not one number."
+    - "the threshold for acting without confirmation is higher for a destructive operation than for a read-only one"
+    - "Route to a human, request clarification, or fall back to a different system."
+    - "Give the full list of options, and add an other or none of the above option when the list might not cover every input."
+    - "use the predictions of the largest, smartest, and most expensive external models as reference probabilities"
+  corroboratedBy:
+    - https://typesafe.ai/blog/introducing-system-one-models-and-jev
+    - https://docs.typesafe.ai/confidence
+    - https://docs.typesafe.ai/primitives
+refersTo:
+  - https://mx.allabout.network/blog/industry/humans-take-journeys-agents-take-one-fetch.html
+  - https://mx.allabout.network/blog/agent-web/small-models-need-your-metadata-more.html
+  - https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html
+  - https://mx.allabout.network/blog/industry/nobody-got-fired-for-using-geo.html
+  - https://mx.allabout.network/blog/reduce-inference-save-energy.html
+  - https://mx.allabout.network/blog/agent-web/index.html
+  - https://mx.allabout.network/blog/why-use-mx.html
+refersToExternal:
+  - https://typesafe.ai/blog/introducing-system-one-models-and-jev
+  - https://docs.typesafe.ai/confidence
+  - https://docs.typesafe.ai/primitives
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="TypeSafe's Jev, launched on 15 September 2026, is a model that never writes text and only answers typed questions about a state with a calibrated probability. It's a good idea. It also moves the whole burden onto the state, and the state is what MX declares.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">
+  <meta property="og:title" content="A Decider Is Only as Good as Its State | CogNovaMX">
+  <meta property="og:description" content="TypeSafe's Jev, launched on 15 September 2026, is a model that never writes text and only answers typed questions about a state with a calibrated probability. It's a good idea. It also moves the whole burden onto the state, and the state is what MX declares.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-09-19">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A Decider Is Only as Good as Its State | CogNovaMX">
+  <meta name="twitter:description" content="TypeSafe's Jev, launched on 15 September 2026, is a model that never writes text and only answers typed questions about a state with a calibrated probability. It's a good idea. It also moves the whole burden onto the state, and the state is what MX declares.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="A Decider Is Only as Good as Its State">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.2">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>A Decider Is Only as Good as Its State | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "A Decider Is Only as Good as Its State",
+        "headline": "A Decider Is Only as Good as Its State",
+        "description": "TypeSafe's Jev, launched on 15 September 2026, is a model that never writes text and only answers typed questions about a state with a calibrated probability. It's a good idea. It also moves the whole burden onto the state, and the state is what MX declares.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-09-19",
+        "dateModified": "2026-09-19",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 2368,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html",
+        "name": "A Decider Is Only as Good as Its State",
+        "url": "https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-jev-is">What Jev Is</a></li>
+        <li><a href="#whats-right-about-it">What's Right About It</a></li>
+        <li><a href="#the-shape-of-the-thing">The Shape of the Thing</a></li>
+        <li><a href="#every-mx-field-is-a-question-you-dont-have-to-ask">Every MX Field Is a Question You Don't Have to Ask</a></li>
+        <li><a href="#a-threshold-is-governance-only-if-it-leaves-a-record">A Threshold Is Governance Only if It Leaves a Record</a></li>
+        <li><a href="#when-the-decider-becomes-the-router">When the Decider Becomes the Router</a></li>
+        <li><a href="#what-to-do">What to Do</a></li>
+        <li><a href="#sources">Sources</a></li>
+        <li><a href="#related">Related</a></li>
+        <li><a href="#where-your-own-content-stands">Where Your Own Content Stands</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2368">
+        <header class="article-header">
+          <h1>A Decider Is Only as Good as Its State</h1>
+          <div class="article-meta"
+               data-published="2026-09-19"
+               data-modified="2026-09-19"
+               data-reading-time="12 min">
+            <time datetime="2026-09-19">19 September 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>12 min read</span>
+          </div>
+        </header>
+
+
+<p>In the week Jev launched, my feed was full of a ten-step guide to something called Jev, from a company called TypeSafe AI. The guide was breathless, so I went to the source. TypeSafe's founder, Diogo Almeida, published the launch post on 15 September, and the docs are open. What follows comes from those, not from the feed.</p>
+<h2 id="what-jev-is" tabindex="-1">What Jev Is</h2>
+<p>Jev is what TypeSafe calls a System One model, after Kahneman's fast, intuitive mode of thinking. The company's own description is &quot;a new class of frontier models built to make fast, structured decisions that software can use directly&quot;. It doesn't write. You hand it a state, which can be any text or JSON, plus a list of typed questions, and it answers each one.</p>
+<p>A question takes one of a few shapes. A Choice picks one option from a list you supplied. A Score rates the state on an ordered scale you defined. A Noul returns the probability that a statement is true. Every answer arrives with a probability distribution and a single confidence number. TypeSafe's docs put the constraint plainly: &quot;The model returns a probability distribution over your options or levels, never a value outside them.&quot; That's what the company means when it says Jev can't hallucinate: it can't invent an option, though it can still pick the wrong one.</p>
+<p>The launch post claims the model reaches similar intelligence to leading LLMs on this class of task while running between forty and two hundred times faster, priced at $0.042 per million input tokens, in early access from day one. Those are TypeSafe's own numbers from launch week. The evaluation method, by the company's account, uses &quot;the predictions of the largest, smartest, and most expensive external models as reference probabilities&quot;, so &quot;as good as a frontier model&quot; means agreement with those models, not with the world.</p>
+<h2 id="whats-right-about-it" tabindex="-1">What's Right About It</h2>
+<p>Splitting the decision from the generation is the correct cut. An agent loop that asks a chat model to decide the next step gets a paragraph back, then has to parse a decision out of the prose. A model that only ever returns a typed value removes that whole class of failure.</p>
+<p>Honest uncertainty is the second thing. TypeSafe's docs say: &quot;If an intelligent system, whether human or machine, cannot express honest uncertainty, the system cannot be trusted.&quot; I have written a version of that sentence in this series more than once. A calibrated probability, where more confidence really does track more accuracy, is what a threshold needs to mean anything.</p>
+<p>The third is how the docs tell you to use the threshold. &quot;A confidence threshold is not one number.&quot; The bar for acting without confirmation &quot;is higher for a destructive operation than for a read-only one&quot;, and below the bar the instruction is to &quot;route to a human, request clarification, or fall back to a different system&quot;. That's Human-in-Command written as an inequality. The machine acts inside a declared boundary and hands the rest to a person. I'd rather see that in a vendor's docs than in a values statement.</p>
+<h2 id="the-shape-of-the-thing" tabindex="-1">The Shape of the Thing</h2>
+<p>The breathless guide did get one thing right. Every Jev workflow runs through the same four steps: state, questions, action, verify. It's the first step that matters here, because you supply it. You hand Jev the state, and you write the questions. Calibration only covers what happens after that: how closely the model's probabilities match the true answers, for the input you gave it. It can't vouch for the input. Feed it a thin or mistaken state and you get a well-calibrated answer about the wrong thing.</p>
+<p>Ask &quot;is this offer still valid?&quot; about a web page that never says when it was published, and Jev gives you an honest probability about a document that didn't say. The number is calibrated, but what it measures is a guess. The docs even anticipate the gap in their own way, advising you to add &quot;an other or none of the above option when the list might not cover every input&quot;. That's sound practice. It also tells you the model is only as complete as the state and the options you gave it.</p>
+<p>This is the point I keep making in this series, and Jev sharpens it. A <a href="https://mx.allabout.network/blog/agent-web/small-models-need-your-metadata-more.html">small model needs your metadata more than a big one does</a>, because it can't read its way around a page that says nothing about itself. A decider that never reads around anything, that judges exactly what it's given and no more, needs the state to be honest even more.</p>
+<h2 id="every-mx-field-is-a-question-you-dont-have-to-ask" tabindex="-1">Every MX Field Is a Question You Don't Have to Ask</h2>
+<p>MX, short for machine experience, is the practice of making a file explain itself to an agent that meets it in isolation, which is exactly how a decider works. The questions a decider asks about a document are mostly questions MX asks a publisher to answer up front. Who wrote this. When. Has it been changed since. Is it the current version. What may an agent do with it. Where does the evidence for its claims live. Each of those is a Noul, a yes-or-no with a probability attached, when a model has to work it out from the prose. Each is a plain comparison when the page declares the answer in a field a machine can read.</p>
+<p>A signature with an expiry date answers &quot;should I still trust this?&quot; by comparing two dates. No model, no probability, no latency, and no bill. A declared content policy answers &quot;may I quote this?&quot; the same way. A declared fact is a decision at probability one, and it costs nothing to compute. The decider's job shrinks to the questions the page genuinely can't answer about itself, which is where a calibrated probability earns its keep.</p>
+<p>The guide's closing rule was: code computes, LLMs create, Jev decides. Add a fourth: metadata declares. The fourth makes the other three safer and less expensive, and it shrinks the cheapest of them, the decision, further still. TypeSafe charges very little per token, and a question you never ask costs nothing at all.</p>
+<h2 id="a-threshold-is-governance-only-if-it-leaves-a-record" tabindex="-1">A Threshold Is Governance Only if It Leaves a Record</h2>
+<p>Routing a low-confidence decision to a human is the right move. It's governance only if the routing leaves evidence. The state it judged, by content hash. The questions you asked. The probabilities that came back. What bar applied, and why that one for that class of action. Who confirmed, and when. A Jev answer already contains most of that in a typed, machine-readable form. Logging it takes a line of code. Not logging it turns the threshold into a private conversation between a model and a script that nobody can audit afterwards.</p>
+<p>That's the same record MX asks a publisher's document to carry, read from the other side. The document declares its provenance, and the decider records its decision, so neither the human asked to confirm it nor the auditor who arrives later has to guess. The verify beat at the end of the loop, fresh state proving the result, is the same discipline again: measure, then say.</p>
+<p>We keep that kind of record already, and you can open one. Every AI step in a file we produce gets written into an AI-provenance record that travels with it: which model or agent acted, what it did, who ran it, and the human check that signed the result off. In a PDF the record is embedded in the file's metadata, so it goes wherever the file goes.</p>
+<p>We cover the decider too. Each decision goes into the same record as its own step: the state by hash, what was asked and the labels allowed, the probabilities, the bar and the kind of action it was set for, what happened next, and who confirmed it. The record also hashes the prompt and the label set, because adding one answer shifts every probability, and the thresholds you tuned on the old set stop meaning what they did. Nobody writes the verdict by hand. It's worked out from those facts, and our pre-push check recomputes it, so a record claiming a clean act over a below-bar call doesn't get through.</p>
+<p>To see one, go to <a href="https://mx.allabout.network/tell">mx.allabout.network/tell</a>. It loads our MX Explained PDF into the MX Inspector, which reads the file in your browser and walks the chain step by step: the build environment, the accountable people, and every recorded action. Drop in one of your files and it never leaves your machine. The Inspector also reports each trust signal separately (who published it, how current it is, whether the publisher still stands behind it, and what corroborates it) instead of folding them into one score.</p>
+<h2 id="when-the-decider-becomes-the-router" tabindex="-1">When the Decider Becomes the Router</h2>
+<p>A second wave of posts about Jev followed the launch, and it moved on from describing the model to predicting what it does to the market. The argument I keep seeing runs like this. Most agent steps are decisions, not writing: which tool, is this done, is this safe, escalate or not, which bucket does this go in. Put a cheap, calibrated decider in front of every call and it becomes the router. It sends the easy work to a small model, strips stale context before anything reaches the expensive one, and escalates only when its own confidence says it should. Show the cost per task side by side and nobody keeps paying flagship prices for yes-or-no answers.</p>
+<p>Most of that's right, and the waste is real. I've watched it in our own work: the strongest model gets used by default because switching is friction, not because the task needs it.</p>
+<p>Where the argument overreaches is the conclusion that frontier spend shrinks. Cheaper decisions don't mean fewer of them. When something gets cheaper to use, people tend to use more of it. Economists call that the Jevons paradox, and it's hard to miss given the model's name. Cheaper routing makes agents cheaper to run, so more agents get built, they run longer, and the hard steps still go to the big model. The labs sell small models of their own and already route inside their products, so a lot of this moves money between one vendor's tiers rather than away from the vendor.</p>
+<p>What does grow, and those posts skip it, is the number of automated choices nobody recorded. A router is a decider making thousands of quick calls per task: this one to the small model, that context dropped, this answer good enough not to escalate. Each is a decision about what a person eventually sees. When a routed answer turns out wrong, the questions are the same ones as before. What state did the router judge? What did it decide, and with what confidence? What bar applied, and who owns it? A router's calibration has the same limit as any decider's too. It's honest about the inputs it was trained on, and a router whose confidence drifts on unfamiliar traffic keeps routing with no alarm and a number that looks right.</p>
+<p>The router is the decider problem at volume, and the same two answers apply. Declared metadata shrinks its work, because a page that states its date, owner, and permitted use has already answered the questions the router would otherwise pay to ask. The log makes it accountable: which model each task went to, why, what it cost, and what the router saw at the time. Our provenance record takes a router's calls the same way it takes any decider's, and rolls them up into the figures the Jevons paradox makes you need: how many decisions, the spend by model, how often it escalated, and how many calls it acted on below the bar.</p>
+<h2 id="what-to-do" tabindex="-1">What to Do</h2>
+<p>If you publish, declare. The author, the date, the currency, the permitted use, the evidence, in fields a machine reads without inference. Every one you declare is a question no decider has to ask a model about your page, which means one less guess.</p>
+<p>If you build with a decision model, put the declared fields into the state before you ask the question, so it judges a document that says what it is. Set your thresholds by how reversible the action is, as TypeSafe's own docs tell you. Log the decision, every time, in a form a person can read back.</p>
+<p>If you run a router, treat it as a decider too. Log where each task went and why, test its confidence on your own traffic before you trust it, and don't book the saving as a cut in total spend until you've measured the volume that follows.</p>
+<p>I've since rebuilt a decider on a local model and <a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">measured it</a>, with and without declared metadata. The numbers bear this out.</p>
+<p><strong>A declared interest.</strong> CogNovaMX sells the discipline this post recommends. The claims about Jev stand on TypeSafe's own published material, linked below, and I have no relationship with the company.</p>
+<h2 id="sources" tabindex="-1">Sources</h2>
+<ul>
+<li>TypeSafe AI, 15 September 2026: <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">Introducing System One Models and Jev</a>, by Diogo Almeida.</li>
+<li>TypeSafe AI docs: <a href="https://docs.typesafe.ai/confidence">Confidence</a>, how confidence is derived and when to escalate.</li>
+<li>TypeSafe AI docs: <a href="https://docs.typesafe.ai/primitives">Primitives</a>, the Choice, Score, and Noul question types.</li>
+<li>The ten-step guide that prompted this post circulated on LinkedIn, summarising a longer working note titled &quot;Jev Engineering&quot;. It was the prompt, not a source for any claim here.</li>
+</ul>
+<h2 id="related" tabindex="-1">Related</h2>
+<ul>
+<li><a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">I Built a Decider and Measured It</a>: the local rebuild, and what embedded MX metadata did to its accuracy.</li>
+<li><a href="https://mx.allabout.network/blog/industry/nobody-got-fired-for-using-geo.html">Nobody Got Fired for Using GEO</a>: why cheap decisions multiply, and why MX is worth promoting before the market asks.</li>
+<li><a href="https://mx.allabout.network/blog/reduce-inference-save-energy.html">Reduce Inference, Save Energy</a>: the Jevons paradox applied to the energy AI inference uses.</li>
+<li><a href="https://mx.allabout.network/blog/industry/humans-take-journeys-agents-take-one-fetch.html">Humans Take Journeys, Agents Take One Fetch</a>: why most agents read one file in isolation and decide, and why MX designs for both a drip feed and everything at once.</li>
+<li><a href="https://mx.allabout.network/blog/why-use-mx.html">Why Use MX</a>: why a file needs metadata that travels with it, so the machine that meets it next doesn't have to guess.</li>
+</ul>
+<h2 id="where-your-own-content-stands" tabindex="-1">Where Your Own Content Stands</h2>
+<p>A decider judges the state it's given. Whether your pages give it an honest one is what an MX audit measures.</p>
+<ul>
+<li><a href="https://mx.allabout.network/about/contact.html">Get in touch about an MX audit</a></li>
+<li><a href="https://mx.allabout.network/blog/agent-web/index.html">The agent web series</a></li>
+<li><a href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+</ul>
+
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

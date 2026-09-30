@@ -5,26 +5,23 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Datalake Is the Right Architecture. MX and a Provenance Layer Are What Make It Work."
 description: "Why a datalake full of files with MX metadata and paired provenance sidecars is the only architecture that survives the AI agent era."
 author: Tom Cranstoun
 created: "2026-06-28"
 modified: "2026-06-28"
 version: "1.0"
+type: blog-post
+tags: [datalake, mx, provenance, architecture, okf, interoperability]
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
-  tags:
-    - datalake
-    - mx
-    - provenance
-    - architecture
-    - okf
-    - interoperability
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/datalake-with-mx-and-provenance.md
+  contextProvides:
+    - "The case for datalake + MX + provenance as the metadata architecture for AI-ready document systems"
   stability: stable
   purpose: "Argue that the datalake is the right storage model, and that MX metadata combined with provenance sidecars is what makes documents inside it machine-usable, trust-worthy, and regulatory-ready."
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
@@ -70,11 +67,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Datalake Is the Right Architecture. MX and a Provenance Layer Are What Make It Work.">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -103,7 +98,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -117,7 +112,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1591,
+        "wordCount": 1590,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -171,7 +166,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -202,7 +197,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1591">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1590">
         <header class="article-header">
           <h1>The Datalake Is the Right Architecture. MX and a Provenance Layer Are What Make It Work.</h1>
           <div class="article-meta"
@@ -279,7 +274,7 @@ tags: [pricing, enterprise, internal]
 resource: https://example.com/documents/q2-pricing-analysis
 
 mx:
-  status: active
+  status: draft
   audience: [humans, machines]
   purpose: &quot;Inform the Q3 pricing decision for the enterprise tier.&quot;
   canonicalUri: https://raw.githubusercontent.com/example/docs/main/q2-pricing-analysis.md
@@ -495,7 +490,7 @@ mx:
 <p>The argument now is regulatory and operational. If your organisation is generating content with AI assistance, you are going to be asked to show the evidence chain. Who decided this? What model was involved? What version of the policy was in force when this decision was made? Can you prove the output was generated under the stated rules?</p>
 <p>A datalake of files with no provenance layer cannot answer those questions. You'll be reconstructing the chain from logs and memories after the fact, and it will be incomplete.</p>
 <p>A datalake with MX envelopes and paired provenance sidecars can answer those questions from the file itself. The evidence is adjacent. It travelled with the artefact. It's queryable. It's tamper-evident (Ed25519 signatures, Merkle log structure).</p>
-<p>That's not aspirational. That's what REGINALD, the registry CogNovaMX operates on the MX standard, produces today.</p>
+<p>That's not aspirational. That's what REGINALD, the registry CogNovaMX operates on the MX standard, produces.</p>
 <h2 id="the-architecture-is-the-standard" tabindex="-1">The Architecture Is the Standard</h2>
 <p>I want to be careful about one thing. MX does not grant compliance with the EU AI Act, the European Accessibility Act, or any other regulation. Compliance is a legal duty of the organisation.</p>
 <p>What MX does is make the documentation the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request. That's what auditors, regulators, and AI providers actually need. Sold honestly as queryable, verifiable evidence, it's genuinely useful. Sold as compliance-in-a-box, it collapses on the first inquiry.</p>
@@ -512,7 +507,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -563,5 +558,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@ title: "MX Explained"
 description: "What MX is, why it exists, how it defers to existing standards, why it works in any container and for any machine, and when it is worth using."
 author: Tom Cranstoun
 created: 2026-09-24
-modified: 2026-09-24
+modified: 2026-09-29
 version: "1.0"
 
 type: info-doc
@@ -31,6 +31,7 @@ mx:
     - "How MX and REGINALD divide machine-readable from machine-trustworthy"
     - "When and where MX is worth using"
   x-mx-programmatic: forbidden
+  x-mx-createdHash: 9500acd7
 ---
 
 # MX Explained

@@ -10,7 +10,7 @@ title: "Network Configuration"
 description: "Describes network access rules and restrictions for this agent instance. Info-doc: no executable rules. Maps to network_configuration in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Describe network access rules and restrictions."
   stability: stable
   contextProvides: ["Agent has internet access for web search, web fetch, and API calls. If a network operation fails due to a blocked host, report clearly - do not retry silently or substitute fabricated results. Anthropic API available to Artifacts at https://api.anthropic.com/v1/messages - never pass API keys in Artifact code."]

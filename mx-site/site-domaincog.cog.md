@@ -10,7 +10,7 @@ title: "site-domaincog"
 description: "Domain anchor for the served site estate: the cogs, canon exports, and drafts that ship with mx.allabout.network under mx-site."
 author: "Tom Cranstoun"
 created: 2026-07-10
-modified: 2026-07-10
+modified: 2026-09-29
 version: "1.0"
 triggers: [site-domaincog, mx-site-domain, served-site-domain]
 
@@ -23,6 +23,7 @@ mx:
   status: active
   x-mx-cogRole: domaincog
   x-mx-domainScope: ["mx-site"]
+  x-mx-createdHash: b0125b66
   partOf: UBERCOG
   maintainer: info@cognovamx.com
   license: proprietary

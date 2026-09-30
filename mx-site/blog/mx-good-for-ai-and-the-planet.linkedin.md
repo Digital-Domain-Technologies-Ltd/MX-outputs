@@ -4,13 +4,14 @@ title: "MX is good for AI, and for the planet"
 description: "Why machine-readable content cuts hallucinations, cuts wasted inference, and cuts the energy behind it, plus a free audit of what an AI agent really sees when it reads your site."
 author: Tom Cranstoun
 created: 2026-07-18
-modified: 2026-07-18
+modified: 2026-09-29
 version: "1.0"
 
 type: social-post
 mx:
   mxSpecVersion: "0.9"
   status: draft
+  x-mx-createdHash: 65a62ecc
   purpose: "LinkedIn article: MX makes content machine-readable, so agents cite facts instead of guessing, which cuts hallucinations, inference cost, and energy. Carries a free-audit call to action."
   audience: [humans, machines]
   stability: stable

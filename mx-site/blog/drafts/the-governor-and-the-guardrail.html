@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Governor and the Guardrail"
 description: "The Victorian flyball governor and modern AI alignment solve the same problem: letting a machine run on its own without letting it run away."
 author: "Tom Cranstoun"
@@ -14,9 +15,11 @@ version: "1.0"
 type: "blog-post"
 tags: [mx, machine-experience, ai-alignment, control-theory, governance, provenance, history-of-technology]
 mx:
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
   purpose: "Blog post tracing the lineage from the Victorian flyball governor through cybernetics and control theory to AI alignment and machine-inclusive governance, landing on the MX thesis. Chatty register, Tom voice."
   stability: draft
+  contextProvides: ["The flyball governor as the ancestor of feedback-driven AI alignment and machine-inclusive governance; MX as the digital continuation of structuring the environment so machines can operate predictably."]
   refersTo:
     - mx-canon/ssot/principles.cog.md
     - CLAUDE.md
@@ -64,11 +67,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Governor and the Guardrail">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -111,7 +112,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1529,
+        "wordCount": 1526,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -192,7 +193,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1529">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1526">
         <header class="article-header">
           <h1>The Governor and the Guardrail</h1>
           <div class="article-meta"
@@ -209,7 +210,7 @@ mx:
 
 
 <p>There is a brass object that solved the first real problem of machine autonomy, and it did it more than two hundred years ago. It sat on top of a steam engine and spun. Two metal balls on hinged arms, turning with the engine, flying outward as the speed rose and dropping back as it fell. When the balls rose they pulled the throttle closed. When they dropped they opened it. The engine watched its own speed and corrected it, and a human did not have to stand there with a hand on the valve.</p>
-<p>That object is the flyball governor, and I have started to think of it as the oldest relative in a family that now includes everything I work on. It is not a quaint relic. It is the ancestor of feedback-driven alignment, of reinforcement learning control loops, of the guardrails we wrap around language models. The lineage runs from Watt to Wiener to modern AI safety, and it is more direct than most people building agents today realise.</p>
+<p>That object is the flyball governor, and I have started to think of it as the oldest relative in a family that now includes everything I work on. It is not a quaint relic. It is the ancestor of feedback-driven alignment, of reinforcement learning control loops, of the guardrails we wrap around language models. The lineage runs from Watt to Wiener to modern AI safety, and it is more direct than most people building agents realise.</p>
 <h2 id="the-same-problem-at-a-higher-dimension" tabindex="-1">The same problem, at a higher dimension</h2>
 <p>The governor answered one question: how do you let a machine act on its own without letting it run away, oscillate, or tear itself apart?</p>
 <p>That is still the question. We have just raised the dimensionality. Where the governor controlled the speed of one engine, a modern system has to hold a much larger envelope steady. Inference drift. Reward hacking. The boundary between a grounded answer and a hallucinated one. Safety constraints. Coordination across many agents at once. Provenance and the trust signals that ride with content. Different surface, same problem underneath.</p>
@@ -223,9 +224,9 @@ mx:
 <h2 id="alignment-without-understanding" tabindex="-1">Alignment without understanding</h2>
 <p>This is the connection I keep coming back to, and it is the one that should change how you think about building for machines.</p>
 <p>The governor did not understand the engine. It had no model of combustion, no concept of steam, no representation of what an engine is for. It enforced a constraint through feedback and nothing more. The understanding lived in the engineers who designed it. The brass just held the line.</p>
-<p>Modern alignment works the same way, and we should be honest that it does. A language model does not understand safety in any sense that would satisfy a philosopher. It operates inside feedback-governed boundaries that we set from outside. The governance is external, not internal. That is not a temporary limitation we will engineer away next year. It is the through-line from Watt to Wiener to now: useful autonomy has always been autonomy inside a boundary somebody else drew.</p>
+<p>Modern alignment works the same way, and we should be honest that it does. A language model does not understand safety in any sense that would satisfy a philosopher. It operates inside feedback-governed boundaries that we set from outside. The governance is external, not internal. That is not a temporary limitation we will engineer away later. It is the through-line from Watt to Wiener to now: useful autonomy has always been autonomy inside a boundary somebody else drew.</p>
 <p>Once you accept that, a lot follows. If the governance is external, then the environment the machine operates in has to carry the rules in a form the machine can actually read. The governor could enforce a boundary because the boundary was encoded in physical form, in the geometry of the arms and the weight of the balls. The engine could not misread it. There was no ambiguity to exploit.</p>
-<p>That is the bar. And it is the bar that most of the digital environment fails today.</p>
+<p>That is the bar. And it is the bar that most of the digital environment fails.</p>
 <h2 id="from-a-boundary-in-brass-to-a-boundary-in-metadata" tabindex="-1">From a boundary in brass to a boundary in metadata</h2>
 <p>Walk the connections out and they stop being a metaphor and start being a plan of work.</p>
 <p>The governor enforced an envelope: operate freely, but not past this safe limit. We do the same with guardrails, constitutional constraints, policy-based action limits, sandboxed execution, tool-use permissions. Same idea, abstracted off the physical and into the logical.</p>

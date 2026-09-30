@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: The Clone You Are Given Is Not the Repository
 description: Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know.
 author: Tom Cranstoun
@@ -19,11 +20,13 @@ tags:
   - machine-experience
   - environments
 mx:
-  status: draft
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/the-clone-you-are-given.md
+  contextProvides:
+    - "Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know."
   stability: stable
   purpose: "Thin clones, fat clones, and IDE environments prepare your workspace in ways nobody tells you about. What vibe coders especially need to know."
   servedAt: https://mx.allabout.network/blog/drafts/the-clone-you-are-given.html
@@ -70,11 +73,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Clone You Are Given Is Not the Repository">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -217,7 +218,7 @@ mx:
 <p>There's no binary. Completeness is a spectrum across a dozen separate axes. A clone can have the files but not the history. The history but not the sibling repositories. The code but not the dependencies. The dependencies but not the document toolchain. Everything above but none of the safety hooks the team relies on, because git installs precisely none of them when you clone. Each axis fails differently: some things crash loudly, some degrade politely, and some answer your question with total confidence while quietly covering a fraction of what you believed they covered. Those last ones are the dangerous ones.</p>
 <p>Now add the part almost nobody checks. You didn't prepare that workspace. Your environment did: the IDE, the hosted agent platform, the CI container. Each one decides what your clone contains, each one decides differently, none of them publish the recipe, and the recipe changes without notice. Two workspaces that look identical in a file listing can hold different pasts and enforce different rules. If you build software by conversation, you'll never see the difference. You were never told there was one.</p>
 <h2 id="one-example" tabindex="-1">One example</h2>
-<p>Recently I asked an assistant, working in a hosted cloud workspace, to mine a repository's commit log for a phrase I knew had been used. The answer came back fast and clean: nothing there. Two matching commits in the entire project.</p>
+<p>I once asked an assistant, working in a hosted cloud workspace, to mine a repository's commit log for a phrase I knew had been used. The answer came back fast and clean: nothing there. Two matching commits in the entire project.</p>
 <p>The repository was months old, with thousands of commits. The workspace had been handed two days of history. Not through malice; the platform clones shallow so containers start fast, which is a perfectly sensible engineering choice. But git never volunteers that anything is missing. Ask a shallow clone for its log and it answers with the fraction it holds, confidently, like a witness who genuinely believes they saw the whole thing.</p>
 <p>The remedy took seconds: one command fetched the missing months, and the real answer turned out to be genuinely useful. But every history-shaped answer produced before that moment was quietly wrong, and nothing in the workspace would ever have said so. The lesson isn't &quot;shallow clones are bad&quot;. The lesson is: a confidently thin answer is a finding, not an answer. Probe the ground before you trust it.</p>
 <h2 id="this-is-a-standards-problem-and-thats-good-news" tabindex="-1">This is a standards problem, and that's good news</h2>

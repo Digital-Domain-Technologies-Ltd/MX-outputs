@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Machine That Reviewed Itself"
 description: "We fed three days of Claude Code session transcripts back into Claude and asked it to find inefficiencies. It found them in two places: in how I work, and in the system itself. Here is what happened and what we fixed."
 author: "Tom Cranstoun"
@@ -14,10 +15,11 @@ version: "1.0"
 type: "blog-post"
 tags: [mx, machine-experience, self-improving-systems, ai-agents, claude-code, working-practice, automation]
 mx:
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
-  status: "draft"
   purpose: "Blog post showing MX OS self-auditing in practice: session JSONL data used to find both human and system inefficiencies. Chatty register, Tom voice, concrete details."
   stability: draft
+  contextProvides: ["MX OS self-auditing practice: session data used to improve both human working habits and system gate behaviour"]
   refersTo:
     - CLAUDE.md
     - datalake/draft-site/blog/what-is-machine-experience.md
@@ -63,11 +65,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Machine That Reviewed Itself">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -96,7 +96,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -110,7 +110,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1055,
+        "wordCount": 1057,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -164,7 +164,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -190,7 +190,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1055">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1057">
         <header class="article-header">
           <h1>The Machine That Reviewed Itself</h1>
           <div class="article-meta"
@@ -223,12 +223,12 @@ mx:
 <p>Each of these is the same pattern underneath: something that could be caught or prevented by a script was instead being caught by a person, after the fact.</p>
 <h2 id="what-we-fixed" tabindex="-1">What we fixed</h2>
 <p>Three tracks of work came out of the analysis.</p>
-<p>The first track was the human rules. Four additions to <a href="http://CLAUDE.md">CLAUDE.md</a> -- the file that every Claude session in this repo reads at start. OKF priority. SHA reporting after commits. Search before writing new scripts. Node.js preference. Six new memory files covering Gate 22 bypass, Gate 25 regen, Appendix M editing, gathering sweep requirements, and the push-before-switching-sessions discipline. These are rules that should have been permanent. Now they are.</p>
+<p>The first track was the human rules. Four additions to <a href="http://CLAUDE.md">CLAUDE.md</a> -- the file that every Claude session in the MX-hub repository reads at start. OKF priority. SHA reporting after commits. Search before writing new scripts. Node.js preference. Six new memory files covering Gate 22 bypass, Gate 25 regen, Appendix M editing, gathering sweep requirements, and the push-before-switching-sessions discipline. These are rules that should have been permanent. Now they are.</p>
 <p>The second track was the deterministic fixes. Gate 22 now reads the git diff for a source file and compares body content (everything after the closing frontmatter delimiter) between the base ref and HEAD. If the bodies are identical, the gate skips that file and logs &quot;frontmatter-only change, republish not required.&quot; Gate 25 now has a pre-check: if <code>.cog.md</code> files are in the push, it runs <code>npm run index:regen</code> before the idempotency check, and if the regen produces changes, it tells you exactly what to commit rather than failing with a drift error. The dream skill now auto-reruns after a fix rather than stopping and waiting for &quot;run again.&quot; And there is a new <code>/pre-push-sweep</code> skill that drains field-migration debt proactively before step-commit gates surface it one-by-one.</p>
 <p>The third track is this post.</p>
 <h2 id="why-this-is-the-point" tabindex="-1">Why this is the point</h2>
 <p>MX OS describes a repository that is self-describing, self-checking, and self-healing. The cog registry is its self-description. The pre-push gates are its self-checking. <code>mx:heal</code> is its self-healing.</p>
-<p>What happened this week is that the repository became self-auditing.</p>
+<p>What happened in June 2026 is that the repository became self-auditing.</p>
 <p>The session JSONL files are machine-readable data. They carry timestamps, tool names, user messages, and correction signals. We ran them through the same kind of analysis we run on any other data source. The output was a structured finding set: corrections that should be permanent rules, gates that were firing on false positives, a missing pre-check that every cog-adding session was hitting.</p>
 <p>The improvements are now deterministic. Gate 22 does not rely on anyone remembering that metadata-only changes do not require republishing. Gate 25 does not rely on anyone remembering to run index:regen after adding a cog. The skill instructions tell Claude to re-run after a fix without being asked. Memory files carry the corrections forward into future sessions.</p>
 <p>This is what &quot;a check a script can do, a script does&quot; means in practice. The rule that lives in memory rots. The rule that lives in a gate holds.</p>
@@ -244,7 +244,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -295,5 +295,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

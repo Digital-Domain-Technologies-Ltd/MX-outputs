@@ -5,23 +5,31 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Deploy You Cannot See"
 description: "We moved a folder and the whole site went dark. The cause was a deploy that lived in a dashboard, not in the code: Cloudflare Pages rebuilds our site on every push to the repo it is connected to, and we removed the folder that build reads from before repointing it. Here is the incident, why it happened, and the small machine-checkable rule we put in place so it cannot happen the same way twice."
 author: Tom Cranstoun
 created: 2026-07-02
 modified: 2026-07-02
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [postmortem, deploy, content-ops, mx-foundations, reliability]
 mx:
+  mxSpecVersion: "0.9"
   servedAt: https://mx.allabout.network/blog/drafts/the-deploy-you-cannot-see.html
   generate:
     script: scripts/generate-content-html.cjs
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/the-deploy-you-cannot-see.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  corroboratedBy:
+    - https://developers.cloudflare.com/pages/configuration/git-integration/
+  contextProvides:
+    - "A first-person postmortem of a self-inflicted site outage: moving a static site's files out of a git submodule, and pushing the removal before the Cloudflare Pages deploy was repointed, took every URL to 404. Explains that Cloudflare Pages git-integration auto-builds on push and is invisible in the repository, states the repoint-before-remove ordering rule, and describes the deterministic liveness probe and action cog put in place as the durable fix."
   stability: stable
   purpose: "Turn a real outage into the MX lesson: the coupling you cannot see is the one that bites, so make the invisible legible and the rule executable."
   blogUrl: https://mx.allabout.network/blog/drafts/the-deploy-you-cannot-see.html
@@ -67,11 +75,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Deploy You Cannot See">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -217,11 +223,11 @@ mx:
 <p>Part way through the move, I pushed the commit that removed the site folder from the submodule's repository. The files were safe in the new location. But within about a minute, the live site started answering every request with <code>404: Not Found</code>.</p>
 <h2 id="why" tabindex="-1">Why</h2>
 <p>The live site is built by Cloudflare Pages, and Cloudflare Pages is connected directly to the submodule's GitHub repository. Every push to that repository triggers a rebuild and a deploy. That connection is a setting in the Cloudflare dashboard. It is nowhere in our code.</p>
-<p>That last sentence is the whole story. Earlier, I had looked for a deploy step in the repository's automation, found only read-only checks, and concluded that a push could not reach production. That conclusion was wrong. Cloudflare Pages builds from a repository through its own <a href="https://developers.cloudflare.com/pages/configuration/git-integration/">git integration</a>, which is entirely separate from any GitHub Actions the repository happens to run. Push, rebuild, deploy: all automatic, all triggered by the same commit. Remove the folder the build reads from, and the next build has nothing to serve.</p>
+<p>That last sentence is the whole story. Earlier, I had looked for a deploy step in the repo's automation, found only read-only checks, and concluded that a push could not reach production. That conclusion was wrong. Cloudflare Pages builds from a repository through its own <a href="https://developers.cloudflare.com/pages/configuration/git-integration/">git integration</a>, which is entirely separate from any GitHub Actions the repository happens to run. Push, rebuild, deploy: all automatic, all triggered by the same commit. Remove the folder the build reads from, and the next build has nothing to serve.</p>
 <h2 id="the-fix" tabindex="-1">The fix</h2>
 <p>Fast, once the cause was clear: restore the folder to the source repository, push, and wait about a minute for Cloudflare to rebuild. The site came straight back. No data was lost; the outage was the deploy serving an empty build, not anything gone for good.</p>
 <h2 id="the-lesson" tabindex="-1">The lesson</h2>
-<p>The coupling you cannot see is the one that bites you. A deploy that lives in a dashboard, not in the repository, is invisible to everyone reading the code, including the person who wrote most of it. So the ordering rule writes itself, and we had it backwards:</p>
+<p>The coupling you cannot see is the one that bites you. A deploy that lives in a dashboard, not in version control, is invisible to everyone reading the code, including the person who wrote most of it. So the ordering rule writes itself, and we had it backwards:</p>
 <p>When you move what a deploy builds from, repoint the deploy to the new source first, confirm it live, and only then remove the old source.</p>
 <h2 id="what-we-kept" tabindex="-1">What we kept</h2>
 <p>We do not trust ourselves to remember a rule. So we made it mechanical. We wrote a liveness probe, a small script that asks the site's canary pages whether they are serving and reports up or down, and wrapped it in an action that raises an alert when the site is down. The discipline is now a command: run it before a change that touches the deploy, to capture a healthy baseline, and run it again after, to confirm the site still serves. If the second run is red, roll back before doing anything else.</p>

@@ -1,7 +1,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: Tom Cranstoun
-modified: 2026-09-14
+modified: 2026-09-29
 created: 2026-04-27
 title: "Cog Specification"
 description: "The cog file format, artefact model, and verification algorithm."
@@ -22,6 +22,7 @@ type: info-doc
 mx:
   mxSpecVersion: "0.9"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/drafts/cog-spec.v1.md
+  x-mx-createdHash: 10d4104d
   purpose: "The cog file format, artefact model, and verification algorithm."
   audience: [humans, machines]
   stability: stable

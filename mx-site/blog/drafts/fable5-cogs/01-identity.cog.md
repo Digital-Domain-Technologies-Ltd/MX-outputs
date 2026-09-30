@@ -10,7 +10,7 @@ title: "Agent Identity - Claude Fable 5"
 description: "Establishes the agent's name, model tier, product context, and rules for self-description. Maps to the product_information section of the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Establish the agent's identity, product context, and self-description rules."
   stability: stable
   contextProvides: ["Agent is Claude, created by Anthropic. This instance is Claude Fable 5, part of the Mythos-class tier above Opus. Fable 5 and Mythos 5 share the same model; Fable 5 is generally available with extra safety measures, Mythos 5 is restricted to approved organisations."]

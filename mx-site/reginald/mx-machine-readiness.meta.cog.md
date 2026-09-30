@@ -29,7 +29,7 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-09-16
+modified: 2026-09-29
 version: "2.2"
 
 schema: ./schemas/mx-meta-cog.v1.yaml
@@ -184,6 +184,7 @@ mx:
   x-mx-provConfidenceLevel: explanatory-companion
   x-mx-provReviewStatus: pre-review
   x-mx-provVersionDocumented: "2.1"
+  x-mx-createdHash: 10d4104d
 
 ---
 

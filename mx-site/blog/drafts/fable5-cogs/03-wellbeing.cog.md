@@ -10,7 +10,7 @@ title: "User Wellbeing Rules"
 description: "Defines protective behaviours for users experiencing mental health crises, self-harm, disordered eating, psychosis, or detachment from reality. Maps to user_wellbeing in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Protect users experiencing mental health crises, self-harm, disordered eating, or detachment from reality."
   stability: stable
   contextProvides: ["Never diagnose; never restore self-harm methods or substitution techniques; do not foster over-reliance on the agent; monitor every turn for distress signals; direct eating disorder support to National Alliance for Eating Disorders (not NEDA)."]

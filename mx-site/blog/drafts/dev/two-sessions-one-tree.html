@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Two Sessions, One Tree"
 description: "Two of my Claude Code sessions collided in one working tree. The fix: worktree isolation, one primary session, and hooks that warn when a tree is shared."
 author: Tom Cranstoun
@@ -21,10 +22,13 @@ tags:
   - developer-workflow
   - determinism
 mx:
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/dev/two-sessions-one-tree.md
+  contextProvides:
+    - "Two Claude Code sessions collided in one working tree. The fix: worktree isolation, one primary session, and hooks that warn when a tree is shared."
   stability: stable
   purpose: "Two Claude Code sessions collided in one working tree. The fix: worktree isolation, one primary session, and hooks that warn when a tree is shared."
   servedAt: https://mx.allabout.network/blog/drafts/dev/two-sessions-one-tree.html
@@ -71,11 +75,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Two Sessions, One Tree">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -118,7 +120,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1347,
+        "wordCount": 1348,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -200,7 +202,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1347">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1348">
         <header class="article-header">
           <h1>Two Sessions, One Tree</h1>
           <div class="article-meta"
@@ -216,7 +218,7 @@ mx:
         </header>
 
 
-<p>This week, two of my Claude Code sessions met in the middle of the same file.</p>
+<p>In July 2026, two of my Claude Code sessions met in the middle of the same file.</p>
 <p>One of them was repairing a metadata field across ninety-one blog sources, a careful batch fix with its own verification step. The other was renaming a path inside the frontmatter of the same files. Both sessions were doing exactly what I'd asked. Neither knew the other existed. The batch fix applied cleanly, then the verification step reported edits in more than two hundred files, and I spent the rest of the afternoon doing line-level surgery: keeping the second session's changes while backing the first session's out of the files they'd both touched.</p>
 <p>Nobody misbehaved. Both sessions shared one working tree, and that was the whole problem.</p>
 <h2 id="why-sharing-a-working-tree-fails" tabindex="-1">Why Sharing a Working Tree Fails</h2>

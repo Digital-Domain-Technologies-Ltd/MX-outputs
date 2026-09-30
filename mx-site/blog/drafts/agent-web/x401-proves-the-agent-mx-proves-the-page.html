@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "x401 Proves the Agent. MX Proves the Page."
 description: "A new protocol called x401 lets an agent prove who it acts for. It says nothing about whether the page it just read is genuine. Here is how the two halves of agent trust fit together, and the one small change that makes them verify with the same key."
 author: "Tom Cranstoun"
@@ -15,12 +16,20 @@ version: "0.1"
 type: blog-post
 tags: [agent-web, identity, provenance, x401, x402, verifiable-credentials, reginald, mx, trust]
 mx:
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.md
+  contextProvides:
+    - "How x401 (agent identity) and MX/Reginald (content provenance) compose into one agent-trust stack, the shared Ed25519 crypto under both, and the JCS canonicalisation change that makes them byte-compatible."
   stability: draft
   purpose: "Show why agent identity and content provenance are two different problems, how x401 and MX/Reginald solve one each, and where they snap together."
+  corroboratedBy:
+    - https://www.prweb.com/releases/proof-launches-x401-the-open-protocol-for-verifying-the-authority-behind-ai-agents-302810968.html
+    - https://openid.net/specs/openid-4-verifiable-presentations-1_0.html
+    - https://www.coinbase.com/developer-platform/discover/launches/x402
+    - https://www.rfc-editor.org/rfc/rfc8785
   servedAt: https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   blogUrl: https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html
@@ -65,11 +74,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="x401 Proves the Agent. MX Proves the Page.">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="0.1">
@@ -112,7 +119,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1271,
+        "wordCount": 1276,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -194,7 +201,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1271">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1276">
         <header class="article-header">
           <h1>x401 Proves the Agent. MX Proves the Page.</h1>
           <div class="article-meta"
@@ -212,7 +219,7 @@ mx:
 
 <p>An AI agent lands on your site to do something on someone's behalf. Book a room, file a claim, sign a form, pull a quote into an answer. Before you let it act, you want two things settled.</p>
 <p>Two questions decide it. Who this agent is and what it's allowed to do. And whether the thing it just read is genuine.</p>
-<p>One question is about the visitor. The other is about your page. Until recently the web had no clean answer to either one for agents. Now it has the start of an answer to the first, and that's worth understanding, because it tells you exactly which half is still missing.</p>
+<p>One question is about the visitor. The other is about your page. For a long time the web had no clean answer to either one for agents. Now it has the start of an answer to the first, and that's worth understanding, because it tells you exactly which half is still missing.</p>
 <h2 id="x402-pays-x401-proves" tabindex="-1">x402 Pays, x401 Proves</h2>
 <p>You may have seen x402 go by. It borrows the old HTTP &quot;402 Payment Required&quot; status code, dusts it off, and turns it into a way for an agent to pay for something inline, mid-request, without a human clicking through a checkout. It gave the agent web a payment layer.</p>
 <p>x401 is the sibling. The name nods to HTTP &quot;401 Unauthorized&quot;, and the job is identity. Launched by Proof with identity teams at Google, OpenAI, Okta, Circle, MATTR and Lightspark, and handed to the FIDO Alliance's agentic-authentication group, it lets a site ask an agent to prove who it represents and what it may do. The agent presents a credential, the site checks the issuer, the claim, the scope, and the action, and only then proceeds.</p>
@@ -235,7 +242,7 @@ mx:
 <p>Because they verify the same way, a single piece of software walking up to a page could check both at once. Is the agent who it claims to be? Is the page what it claims to be? One mental model, one verification routine, two answers.</p>
 <h2 id="where-they-snap-together" tabindex="-1">Where They Snap Together</h2>
 <p>Once you see the shared crypto underneath, the integration points almost draw themselves.</p>
-<p>The first is an identity socket. Reginald's provenance record already has a slot for the identifier of each party that touched an artefact. Today that slot is filled by hand, a name typed into a field. An x401 presentation fills it with a credential the agent actually proved. The record stops saying &quot;the system claims this agent acted&quot; and starts saying &quot;this one proved who it was, and here's the receipt.&quot;</p>
+<p>The first is an identity socket. Reginald's provenance record already has a slot for the identifier of each party that touched an artefact. As of June 2026 that slot is filled by hand, a name typed into a field. An x401 presentation fills it with a credential the agent actually proved. The record stops saying &quot;the system claims this agent acted&quot; and starts saying &quot;this one proved who it was, and here's the receipt.&quot;</p>
 <p>The second is permission, recorded. x401's real trick is binding identity to authorisation: who the agent is, and what it may do. Reginald's provenance steps can carry that scope as a checked precondition. The trail then proves the whole sentence: this verified agent, allowed to do this, acted on this page, under this regime. That's a far stronger thing to hand a regulator than any of the three pieces alone.</p>
 <p>The third is the single verifier from a moment ago. One library, checking the actor and the artefact with the same key math.</p>
 <h2 id="the-one-thing-that-has-to-change" tabindex="-1">The One Thing That Has to Change</h2>

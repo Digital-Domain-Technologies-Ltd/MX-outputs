@@ -6,6 +6,7 @@
 <!--
 ---
 
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Invisible Users: Why Your Website Fails AI Agents (And What That Means for Everyone)"
 description: "Blog post companion to the Members Call presentation about AI agent failures on websites and the MX solution"
 author: Tom Cranstoun
@@ -13,18 +14,20 @@ created: 2026-01-21
 modified: 2026-02-09
 version: "1.0"
 
+type: blog-post
 mx:
-  contentType: blog-post
-  status: draft
+  mxSpecVersion: "0.9"
   movedFrom: "datalake/presentations/historical/members-call-21-jan-26/talk-blog.md"
   movedDate: 2026-02-14
   purpose: "Draft blog post for the mx-site."
   stability: draft
   runbook: "Draft source for the mx-site blog. Promote via npm run promote to publish."
+  contextProvides: ["Blog post draft: The Invisible Users: Why Your Website Fails AI Agents (And What That Means for Everyone)"]
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/foundations/talk.md
   blogUrl: https://mx.allabout.network/blog/drafts/foundations/talk.html
   blogFilename: talk
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -33,11 +36,11 @@ mx:
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="Blog post companion to the Members Call presentation about AI agent failures on websites and the MX solution">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://allabout.network/blogs/mx/talk.html">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/foundations/talk.html">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://allabout.network/blogs/mx/talk.html">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/foundations/talk.html">
   <meta property="og:title" content="The Invisible Users: Why Your Website Fails AI Agents (And What That Means for Everyone) | CogNovaMX">
   <meta property="og:description" content="Blog post companion to the Members Call presentation about AI agent failures on websites and the MX solution">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
@@ -65,16 +68,14 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Invisible Users: Why Your Website Fails AI Agents (And What That Means for Everyone)">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
   <meta name="mx:author" content="Tom Cranstoun">
-  <link rel="mx" href="https://allabout.network/blogs/mx/talk.html">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/foundations/talk.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
   <meta name="ai-disclosure" content="ai-assisted">
 
@@ -98,7 +99,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -108,7 +109,7 @@ mx:
           "url": "https://mx.allabout.network/"
         },
         "mainEntityOfPage": {
-          "@id": "https://allabout.network/blogs/mx/talk.html"
+          "@id": "https://mx.allabout.network/blog/drafts/foundations/talk.html"
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
@@ -120,9 +121,9 @@ mx:
       },
       {
         "@type": "WebPage",
-        "@id": "https://allabout.network/blogs/mx/talk.html",
+        "@id": "https://mx.allabout.network/blog/drafts/foundations/talk.html",
         "name": "The Invisible Users: Why Your Website Fails AI Agents (And What That Means for Everyone)",
-        "url": "https://allabout.network/blogs/mx/talk.html",
+        "url": "https://mx.allabout.network/blog/drafts/foundations/talk.html",
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -166,7 +167,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -242,10 +243,10 @@ mx:
 <p>AI agents are called &quot;invisible users&quot; for two reasons:</p>
 <ol>
 <li>
-<p><strong>They're invisible to site owners</strong> — Unless you're tracking agent traffic (most aren't), you have no idea they're visiting or whether they succeed. They blend into analytics as slightly unusual sessions.</p>
+<p><strong>They're invisible to site owners</strong> - Unless you're tracking agent traffic (most aren't), you have no idea they're visiting or whether they succeed. They blend into analytics as slightly unusual sessions.</p>
 </li>
 <li>
-<p><strong>Your interface is invisible to them</strong> — They can't see animations, don't notice colour changes, miss three-second toast notifications that vanish after 2 seconds, and don't understand that a loading spinner means &quot;wait.&quot;</p>
+<p><strong>Your interface is invisible to them</strong> - They can't see animations, don't notice colour changes, miss three-second toast notifications that vanish after 2 seconds, and don't understand that a loading spinner means &quot;wait.&quot;</p>
 </li>
 </ol>
 <h3 id="how-machines-think" tabindex="-1">How Machines Think</h3>
@@ -284,7 +285,7 @@ mx:
 <li>Hidden state that screen readers can't perceive</li>
 <li>JavaScript-dependent navigation that confuses keyboard users</li>
 </ul>
-<p><strong>The difference today:</strong> Commercial pressure finally matches moral obligation. Businesses have financial incentives to fix these issues, not just accessibility compliance requirements. Agent-assisted commerce is creating market forces that finally prioritise universal design patterns.</p>
+<p><strong>The difference in 2026:</strong> Commercial pressure finally matches moral obligation. Businesses have financial incentives to fix these issues, not just accessibility compliance requirements. Agent-assisted commerce is creating market forces that finally prioritise universal design patterns.</p>
 <p>We're finally fixing issues we should have fixed decades ago.</p>
 <h2 id="the-solution-small-changes-big-impact" tabindex="-1">The Solution: Small Changes, Big Impact</h2>
 <p>The good news: fixing this doesn't require rebuilding your interfaces or creating special agent-only experiences. It requires making implicit state explicit through small, well-understood changes.</p>
@@ -334,7 +335,7 @@ mx:
 </ul>
 <p>Beyond fixing websites, there's a critical infrastructure gap: identity delegation. Every major platform is building proprietary identity systems. Users face lock-in. Agent creators face fragmentation. Businesses face complexity managing multiple authentication methods.</p>
 <p>The question: Will protocols converge into interoperable standards, or fragment the ecosystem into walled gardens?</p>
-<p>The book explores these emerging patterns and what they mean for businesses making platform decisions today.</p>
+<p>The book explores these emerging patterns and what they mean for businesses making platform decisions.</p>
 <h2 id="key-takeaways" tabindex="-1">Key Takeaways</h2>
 <ol>
 <li><strong>This is happening now</strong> - AI agent commerce is infrastructure, not experiment</li>
@@ -370,7 +371,7 @@ Due Q1 2026</p>
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -421,5 +422,6 @@ Due Q1 2026</p>
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

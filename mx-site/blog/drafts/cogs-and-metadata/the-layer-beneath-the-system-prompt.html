@@ -5,21 +5,27 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Layer Beneath the System Prompt"
 description: "Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard."
 author: Tom Cranstoun
 created: "2026-06-14"
 modified: "2026-06-15"
 version: "0.1"
+type: blog-post
+tags: [mx-os, cog, system-prompt, governance, hooks, provenance, agent-architecture, anthropic, dream]
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  quotes:
+    - "This hook removes the reading-and-judging step from the path: it runs the scanner itself and fails closed, so a hard-banned word cannot reach disk no matter what the author did or did not read."
   audience: [humans, machines]
-  tags: [mx-os, cog, system-prompt, governance, hooks, provenance, agent-architecture, anthropic, dream]
   purpose: "Show that system prompts are the wrong layer for operator-specific AI governance. The right layer is per-context, per-domain, enforced mechanically, and needs an open standard."
   stability: draft
+  contextProvides:
+    - "Seven capabilities the MX .claude/ governance layer has that Fable 5 can't: mechanical enforcement, session memory persistence, intent-to-COG routing, automatic provenance, pipeline awareness, vocabulary determinism with tested scanners, and a self-improving loop (Dream) that mines its own sessions with a local model and recommends rules without acting. Argument: system prompts govern general behaviour; operators need a second layer for context-specific governance, and that layer needs an open standard."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/cogs-and-metadata/the-layer-beneath-the-system-prompt.md
   runbook: "Blog post. No special context required. Read straight through."
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -28,11 +34,11 @@ mx:
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard.">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://allabout.network/blogs/mx/the-layer-beneath-the-system-prompt.html">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/cogs-and-metadata/the-layer-beneath-the-system-prompt.html">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://allabout.network/blogs/mx/the-layer-beneath-the-system-prompt.html">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/cogs-and-metadata/the-layer-beneath-the-system-prompt.html">
   <meta property="og:title" content="The Layer Beneath the System Prompt | CogNovaMX">
   <meta property="og:description" content="Fable 5's system prompt is 120,000 characters of instructions. My .claude/ folder is a runtime governance system. One tells the agent what to do. The other blocks it when it gets it wrong. These aren't the same thing, and only one of them can be built on an open standard.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
@@ -60,16 +66,14 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Layer Beneath the System Prompt">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="0.1">
   <meta name="mx:author" content="Tom Cranstoun">
-  <link rel="mx" href="https://allabout.network/blogs/mx/the-layer-beneath-the-system-prompt.html">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/cogs-and-metadata/the-layer-beneath-the-system-prompt.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
   <meta name="ai-disclosure" content="ai-assisted">
 
@@ -93,7 +97,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -103,7 +107,7 @@ mx:
           "url": "https://mx.allabout.network/"
         },
         "mainEntityOfPage": {
-          "@id": "https://allabout.network/blogs/mx/the-layer-beneath-the-system-prompt.html"
+          "@id": "https://mx.allabout.network/blog/drafts/cogs-and-metadata/the-layer-beneath-the-system-prompt.html"
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
@@ -115,9 +119,9 @@ mx:
       },
       {
         "@type": "WebPage",
-        "@id": "https://allabout.network/blogs/mx/the-layer-beneath-the-system-prompt.html",
+        "@id": "https://mx.allabout.network/blog/drafts/cogs-and-metadata/the-layer-beneath-the-system-prompt.html",
         "name": "The Layer Beneath the System Prompt",
-        "url": "https://allabout.network/blogs/mx/the-layer-beneath-the-system-prompt.html",
+        "url": "https://mx.allabout.network/blog/drafts/cogs-and-metadata/the-layer-beneath-the-system-prompt.html",
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -161,7 +165,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -222,7 +226,7 @@ mx:
 <p>Its memory section reads: &quot;Claude has no memories of the user because they haven't enabled it in Settings.&quot;</p>
 <p>That's accurate. It's also the only option available when memory is on the model provider's platform.</p>
 <p>My <code>session-memory-hydrate.sh</code> hook runs at every session start. It merges the repo-tracked memory store from <code>.claude/memory/</code> with the device-local cache, newest-wins, tombstones honoured. <code>session-uber-plan.sh</code> loads the active project plan into context. <code>session-index-trust.sh</code> sets the index trust state. After every write, <code>post-write-memory-sync.sh</code> writes new memory back to the repository.</p>
-<p>The capture is deliberate, not incidental. Write a memory in one session - a fact established about this codebase, a correction I made - and it is folded into the repo-tracked store at the write boundary and hydrated back at the next session start. Each machine keeps its own working copy, and the two reconcile by a deterministic merge: union by file, newest stamp wins, deletions carried as tombstones, so two operators on two machines converge instead of clobbering each other. Memories meant to be shared are typed to travel; private ones stay on the device. And it is gated - a pre-push check refuses to let the repository and the device drift apart - so the shared memory is trustworthy, not best-effort.</p>
+<p>The capture is deliberate, not incidental. Write a memory in one session - a fact established about the codebase, a correction I made - and it is folded into the repo-tracked store at the write boundary and hydrated back at the next session start. Each machine keeps its own working copy, and the two reconcile by a deterministic merge: union by file, newest stamp wins, deletions carried as tombstones, so two operators on two machines converge instead of clobbering each other. Memories meant to be shared are typed to travel; private ones stay on the device. And it is gated - a pre-push check refuses to let the repository and the device drift apart - so the shared memory is trustworthy, not best-effort.</p>
 <p>The agent starts from where the project actually is, not from a blank slate. That state is in version control. It travels with the repository. A new team member gets the accumulated project memory on their first clone.</p>
 <p>No system prompt can do this. Memory on the model provider's platform belongs to the provider. Memory in your repository is yours.</p>
 <h2 id="the-difference-between-a-tool-list-and-a-routing-system" tabindex="-1">The difference between a tool list and a routing system</h2>
@@ -235,7 +239,7 @@ mx:
 <p>This is evidence that travels with what was produced, not a record of what happened. Auditors can verify it. Regulators can query it. The model provider does not hold it.</p>
 <p>Anthropic's controversial 30-day data retention policy on all Fable 5 and Mythos 5 traffic exists because they have no equivalent mechanism. The evidence that their system is making good decisions has to live somewhere. They chose the API log. The right answer is the artefact.</p>
 <h2 id="the-difference-between-a-fixed-prompt-and-a-learning-loop" tabindex="-1">The difference between a fixed prompt and a learning loop</h2>
-<p>Fable 5 is the same 1,585 lines for every session. It does not learn that this codebase keeps tripping over the same mistake, because it has no memory of the codebase and no mechanism to mine one.</p>
+<p>Fable 5 is the same 1,585 lines for every session. It does not learn that the codebase keeps tripping over the same mistake, because it has no memory of the codebase and no mechanism to mine one.</p>
 <p>My <code>dream</code> skill does exactly that. It reads the project's own Claude Code session transcripts, finds the mistakes that recur (a <code>cd</code> to a relative path after the Bash working directory has drifted, an <code>Edit</code> with no preceding <code>Read</code>), and classifies them with a local Ollama model. Nothing leaves the machine. The output is a findings catalogue and a human-readable report.</p>
 <p>Here is the part that matters: Dream recommends, it does not act. It writes only inside <code>datalake/dream-files/</code>. It never edits <code>LEARNINGS.md</code>, never touches a cog, never changes the rulebook on its own. I read the report and decide what graduates into a permanent rule. The machine mines; the human commands. That is Human-in-Command, and it is the line a self-improving system has to hold: the loop that proposes is never the loop that promotes.</p>
 <p>A system prompt cannot mine its own history, and a model platform that could would hold the evidence on its side, not yours. The learning loop belongs in your repository, on a local model, writing to a bounded area you control.</p>
@@ -263,7 +267,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -314,5 +318,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

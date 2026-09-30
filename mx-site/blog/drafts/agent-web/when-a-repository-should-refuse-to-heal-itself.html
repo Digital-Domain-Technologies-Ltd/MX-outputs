@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "When a Repository Should Refuse to Heal Itself"
 description: "A self-healing repository is only safe when it knows whether it can see its whole self. The clone it is running in - complete or partial - decides whether regenerating is a repair or quiet damage, so the checks learn their environment and refuse the work they cannot honestly do."
 author: Tom Cranstoun
@@ -21,10 +22,13 @@ tags:
   - environments
   - mx
 mx:
+  mxSpecVersion: "0.9"
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/when-a-repository-should-refuse-to-heal-itself.md
+  contextProvides:
+    - "Why a self-healing repository must detect its own environment before it regenerates anything: a fat clone (complete checkout) can repair the whole estate, a thin clone (partial, ephemeral) cannot, and rebuilding a whole-estate index from a partial view produces a confidently wrong artefact with no error. The fix is environment-aware checks that refuse the work they cannot honestly do, so self-awareness guards self-healing."
   stability: stable
   purpose: "Why a self-healing repository must detect its own environment before it regenerates anything: a fat clone can repair the whole estate, a thin clone cannot, and the checks must refuse the work they cannot honestly do."
   servedAt: https://mx.allabout.network/blog/drafts/agent-web/when-a-repository-should-refuse-to-heal-itself.html
@@ -71,11 +75,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="When a Repository Should Refuse to Heal Itself">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.1">
@@ -118,7 +120,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1224,
+        "wordCount": 1223,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -198,7 +200,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1224">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1223">
         <header class="article-header">
           <h1>When a Repository Should Refuse to Heal Itself</h1>
           <div class="article-meta"
@@ -240,7 +242,7 @@ mx:
 <p>Same knowledge, two behaviours. The generator protects the artefact. The gate protects the contributor. Neither one fakes a result.</p>
 <h2 id="a-check-a-script-can-do-a-script-does" tabindex="-1">A check a script can do, a script does</h2>
 <p>There is a deeper principle underneath all of this, and it is what makes the whole thing hold together. We do not keep these guards in anyone's head, in a memory, or in a sentence of advice that says &quot;remember not to regenerate on a thin clone&quot;. A rule written only in prose rots: it gets skipped, it goes stale, and what it claimed to hold quietly becomes a suggestion.</p>
-<p>So the environment check is a script. The branch rule is a script. The is-the-tree-complete question is a script. They are wired into the test suite and into the checks that run before code is pushed, and they read the same to every agent that opens the repository, whichever model happens to be reading today. You can ask the repository for its verdict directly and get a straight answer: may these repairs run here, or not, and if not, exactly why.</p>
+<p>So the environment check is a script. The branch rule is a script. The is-the-tree-complete question is a script. They are wired into the test suite and into the checks that run before code is pushed, and they read the same to every agent that opens the repository, whichever model happens to be reading. You can ask the repository for its verdict directly and get a straight answer: may these repairs run here, or not, and if not, exactly why.</p>
 <p>That is what turns &quot;self-healing&quot; from a hopeful phrase into something you can rely on. The repository regenerates and repairs only where it can see its whole self, and it refuses everywhere else, because healing from a partial view heals wrong. The machine is as much the audience for that verdict as any person is; an agent reads the same refusal a developer does, and stops for the same reason.</p>
 <p>The cleverness was never in the healing. Plenty of systems can rewrite a file. The cleverness is in a system that knows the difference between repairing itself and damaging itself, and has the discipline to stop at the line.</p>
 <p>If you want the companion piece on why the two environments diverge in the first place, and the broader strawberry problem of &quot;the same agent&quot; not being one consistent thing, it is in <a href="https://mx.allabout.network/blog/fat-clones-thin-clones-and-the-strawberry-problem.html">Fat Clones, Thin Clones, and the Strawberry Problem</a>.</p>

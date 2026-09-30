@@ -10,7 +10,7 @@ title: "Available Tool Definitions"
 description: "Enumerates all tools available to the Fable 5 agent with their names, purposes, and classes. Info-doc: describes what exists; does not contain executable rules. Maps to Tool Definitions in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Enumerate available tools by name, purpose, and class. Read-only reference."
   stability: stable
   contextProvides: ["Available tools: web_search, web_fetch, image_search, bash_tool, create_file, str_replace, view, weather_fetch, fetch_sports_data (core); ask_user_input_v0, message_compose_v1, present_files, recipe_display_v0, places_search, places_map_display_v0 (interface); search_mcp_registry, suggest_connectors, recommend_claude_apps (MCP)."]

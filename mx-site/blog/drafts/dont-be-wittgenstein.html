@@ -5,27 +5,38 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Don't Be Wittgenstein"
 description: "Marking everything as material is the metadata version of pedantry, and agents that auto-inject JSON-LD will train machines to ignore your signal, just as SEO gaming made Google discount structured data. The fix: humans own the data model, and a trust system tells real metadata from overlay noise."
 author: Tom Cranstoun
 created: 2026-06-19
 modified: 2026-06-22
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [mx, metadata, content-model, human-in-command, materiality, philosophy, seo, geo, structured-data, trust, attestation]
 mx:
+  mxSpecVersion: "0.9"
   servedAt: https://mx.allabout.network/blog/drafts/dont-be-wittgenstein.html
   generate:
     script: scripts/generate-content-html.cjs
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/dont-be-wittgenstein.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides:
+    - "Explains why MX metadata is placed by human judgement, not reflex. Introduces Materiality over Completeness through Wittgenstein's turn against false precision and Summerfield's truth paradox, then argues that agent auto-decoration of JSON-LD/microdata in SEO and GEO will devalue the signal as SEO gaming did, and that the fix is human ownership of the data model plus an attestation-based trust layer."
   stability: stable
   purpose: "Teach the Materiality over Completeness principle: knowing when to attach MX metadata takes human experience, not a mechanical rule, that judgement is the core of Human-in-Command, and an attestation trust layer is what lets machines tell intentional metadata from agent-generated overlay noise."
   blogUrl: https://mx.allabout.network/blog/drafts/dont-be-wittgenstein.html
   blogFilename: dont-be-wittgenstein
+  corroboratedBy:
+    - https://plato.stanford.edu/entries/wittgenstein/
+    - https://developers.google.com/search/docs/essentials/spam-policies
+  quotes:
+    - "On the one hand, we need LLMs to tell the truth. On the other, it's not actually obvious how we decide what is true and what is not in the first place. What should we do?"
 refersTo:
   - mx-canon/ssot/principles.cog.md
 
@@ -69,11 +80,9 @@ refersTo:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Don't Be Wittgenstein">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -116,7 +125,7 @@ refersTo:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1485,
+        "wordCount": 1484,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -192,7 +201,7 @@ refersTo:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1485">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1484">
         <header class="article-header">
           <h1>Don't Be Wittgenstein</h1>
           <div class="article-meta"
@@ -235,7 +244,7 @@ refersTo:
 <p>Two risks sit underneath the clutter problem. The first is factual. An LLM inferring <code>schema:price</code>, <code>schema:author</code>, or a credential from your page text and getting it wrong produces a false assertion in a format machines treat as authoritative. Prose errors get caught by readers. Structured-data errors propagate in silence, and the publisher carries the liability for claims a tool made on their behalf. The second risk is the chain. When a filter inserts the metadata, the assertion that the publisher placed this mark becomes an assertion that a tool running between the CMS and the page placed it. No one signed it. No one can verify who made it. That gap is not a plumbing detail; it is the thing the rest of this argument turns on.</p>
 <p>So the answer is not to mark more, faster, with an agent. It is two things, and both put the human back in command.</p>
 <p>First, a human owns the data model. A person who knows what the content is for decides what gets marked, with which fields, and where MX applies. The agent may then fill in the model the human defined, but it does not get to invent one or smear it across everything. That is Human-in-Command at the level that matters: not rubber-stamping the output but authoring the boundary.</p>
-<p>Second, we build a trust system for the machines. The reason a generative reader can afford to ignore your markup today is that it has no way to tell intentional, human-authored, attested metadata from overlay noise an agent sprayed on in transit. Give it that signal and the calculus changes. This is what attestation is for: a registry where the metadata a publisher genuinely stands behind is signed and verifiable, so a machine can tell a mark a human placed on purpose from one an agent added because it could. Readable is not enough when anything can be decorated. The metadata also has to be trustworthy, and that means a human put their name to it.</p>
+<p>Second, we build a trust system for the machines. The reason a generative reader can afford to ignore your markup is that it has no way to tell intentional, human-authored, attested metadata from overlay noise an agent sprayed on in transit. Give it that signal and the calculus changes. This is what attestation is for: a registry where the metadata a publisher genuinely stands behind is signed and verifiable, so a machine can tell a mark a human placed on purpose from one an agent added because it could. Readable is not enough when anything can be decorated. The metadata also has to be trustworthy, and that means a human put their name to it.</p>
 <hr>
 <p>Don't be Wittgenstein. Either of them, really. Not the young one chasing a precision that helps nobody, and not the noise that pretends thoroughness is the same as care. Be the one who learned that meaning comes from use, and let the people who know the use decide.</p>
 

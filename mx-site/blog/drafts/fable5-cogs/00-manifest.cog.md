@@ -10,7 +10,7 @@ title: "Fable 5 Agent - Boot Manifest"
 description: "Root COG for a Claude Fable 5 agent instance. Defines load order and binds all sub-COGs into a coherent agent runtime."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Bootstrap a Claude Fable 5 agent instance by loading all required COGs in sequence."
   stability: stable
   contextProvides: ["Boot sequence for the Fable 5 MX COG decomposition. Lists all 13 COGs and their load order."]

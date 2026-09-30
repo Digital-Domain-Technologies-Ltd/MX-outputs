@@ -5,23 +5,31 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Telling the Machine What Pudding Is"
 description: "Three posts of word-history end at a practical question: if a machine has to guess what pudding means, what would it look like to simply tell it? A worked MX example - the meaning declared beside the word, carrier-neutral, and corroborated by pointing at a stable cross-lingual entity so an English model, a Spanish model, and a tiny local model all resolve to the same thing."
 author: Tom Cranstoun
 created: 2026-06-18
 modified: 2026-06-18
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [language, machine-readability, metadata, corroboration, mx-foundations]
 mx:
+  mxSpecVersion: "0.9"
   servedAt: https://mx.allabout.network/blog/drafts/telling-the-machine-what-pudding-is.html
   generate:
     script: scripts/generate-content-html.cjs
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/telling-the-machine-what-pudding-is.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides:
+    - "A worked, illustrative MX declaration that disambiguates an ambiguous word at source by attaching the sense, the context, and a corroborating cross-lingual entity link that travels with the file."
+    - "Why pointing a load-bearing claim at a stable external entity (corroboration over assertion) makes the meaning language-independent and model-size-independent."
+    - "The readable / attributable / corroborated framing applied to a single word: MX makes it readable, Reginald makes it attributable, the entity link makes it authoritative."
   stability: stable
   purpose: "Close the language series with a concrete MX demonstration: show what it looks like to declare meaning at source rather than leave a machine to infer it, carrier-neutral and corroborated."
   blogUrl: https://mx.allabout.network/blog/drafts/telling-the-machine-what-pudding-is.html
@@ -71,11 +79,9 @@ refersTo:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Telling the Machine What Pudding Is">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -118,7 +124,7 @@ refersTo:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1003,
+        "wordCount": 1002,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -194,7 +200,7 @@ refersTo:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1003">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1002">
         <header class="article-header">
           <h1>Telling the Machine What Pudding Is</h1>
           <div class="article-meta"
@@ -212,7 +218,7 @@ refersTo:
 
 <p>So I've spent three posts circling one word. <em>Pudding</em> <a href="the-pudding-that-was-always-a-sausage.md">was a sausage before it was a dessert</a>. The French <em>hotel</em> <a href="the-little-hat-on-the-hotel.md">wears a little hat over a dead s</a>. And <a href="how-does-a-machine-know-what-pudding-means.md">a machine reading &quot;pudding&quot; doesn't know which sense I mean - it guesses</a>, and it guesses differently in English than in Spanish, and worst of all in a small model. That's the diagnosis. This post is the cure, and it's almost embarrassingly plain.</p>
 <p>If the machine is going to guess, and guess inconsistently, and you already know the answer - then tell it. That's the whole idea. The rest is just <em>how</em>.</p>
-<p>Here is what we ship today:</p>
+<p>Here is what we ship:</p>
 <pre><code class="language-text">The black pudding was excellent.
 </code></pre>
 <p>A human is fine with that. Every machine downstream now has to reconstruct, from statistics, the thing I already knew when I typed it: that I meant the sausage, not a scorched dessert. As the last post argued, that reconstruction is where the English model, the Spanish model, and the little on-device model quietly walk off in three directions.</p>

@@ -5,23 +5,29 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Adobe Story That Explains Why Provenance Isn't Optional"
 description: "A creative-ops leader posted his Adobe billing nightmare: payment cleared, support couldn't see it, the fix was a duplicate account that got built wrong. The failure isn't the support rep. It's that nobody, on either side of the call, could produce one authoritative account of what actually happened."
 author: Tom Cranstoun
 created: 2026-07-04
 modified: 2026-07-04
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [accountability, provenance, mx, reginald, saas, customer-support]
 mx:
+  mxSpecVersion: "0.9"
   servedAt: https://mx.allabout.network/blog/drafts/adobe-support-story-provenance-isnt-optional.html
   generate:
     script: scripts/generate-content-html.cjs
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/adobe-support-story-provenance-isnt-optional.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides:
+    - "Uses a widely-shared account of an Adobe billing and licensing failure (payment processed and visible to support, account still suspended, remedy was a duplicate account built incorrectly by Adobe itself) to argue that the root failure is structural: no single, queryable, attested record of the account's state existed that every party - billing, support, the customer - could read the same answer from. Positions REGINALD's evidence-chain architecture as the same fix already being built for AI governance, applied to ordinary enterprise SaaS account operations."
   stability: stable
   purpose: "Turn a viral customer-support complaint into the MX argument: accountability failures are provenance failures, and the fix is a queryable record of account state, not a better phone script."
   blogUrl: https://mx.allabout.network/blog/drafts/adobe-support-story-provenance-isnt-optional.html
@@ -67,11 +73,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Adobe Story That Explains Why Provenance Isn't Optional">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -208,7 +212,7 @@ mx:
         </header>
 
 
-<p>A post has been doing the rounds this week from a creative-ops leader with close to 25 years managing teams across dozens of factories, all running Adobe because Adobe is the industry standard. The story: a team member loses access to Illustrator overnight, no warning. Support says the account is past due. He is holding the payment receipt while they say it, and their own screen shows the same payment, processed that morning. Nobody disputes the money moved. Nobody can explain why the account is still locked.</p>
+<p>In July 2026 a post was doing the rounds from a creative-ops leader with close to 25 years managing teams across dozens of factories, all running Adobe because Adobe is the industry standard. The story: a team member loses access to Illustrator overnight, no warning. Support says the account is past due. He is holding the payment receipt while they say it, and their own screen shows the same payment, processed that morning. Nobody disputes the money moved. Nobody can explain why the account is still locked.</p>
 <p>The fix Adobe offered was to build an entirely new account, mirror the licenses across by hand, migrate the users, and cancel the old one later. Then the new account was built wrong: extra licenses nobody asked for, assigned to the wrong person because the original owner's email couldn't be reused, and the promised follow-up call never came. He mentions, almost in passing, that the same thing happened in 2024.</p>
 <h2 id="the-rep-isnt-the-problem" tabindex="-1">The rep isn't the problem</h2>
 <p>The post is careful about this, and it's the right instinct: the individual support agents come off as courteous and genuinely trying. The team lead escalated to sounds like he wanted to help and couldn't. That rules out the easy explanation. This isn't a training problem or a bad-attitude problem. It's that everyone on that call, including the people paid to resolve it, was working from a different partial view of the account and had no way to reconcile them.</p>

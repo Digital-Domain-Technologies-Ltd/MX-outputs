@@ -5,12 +5,12 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
-title: "Tell: Inspect MX Explained"
-description: "Short URL behind the QR code in the MX Explained PDF. Opens the MX Inspector with that PDF already loaded."
+title: "Tell: Download or Inspect MX Explained"
+description: "Short URL behind the QR code in the MX Explained PDF. Lets the reader choose to download the PDF or inspect it in the MX Inspector."
 author: "Tom Cranstoun"
 created: 2026-09-24
-modified: 2026-09-24
-version: "1.0"
+modified: 2026-09-28
+version: "1.1"
 
 mx:
   status: active
@@ -18,26 +18,37 @@ mx:
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/tell.html
   servedAt: https://mx.allabout.network/tell
-  runbook: "Redirect stub for the QR code on the last page of https://mx.allabout.network/mx-explained.pdf (source mx-site/mx-explained.md, mx.x-mx-pdfQrUrl). It sends the reader to the MX Inspector's ?inspect= mode with that PDF preloaded. No separate markdown source exists."
+  runbook: "Landing page for the QR code on the last page of https://mx.allabout.network/mx-explained.pdf (source mx-site/mx-explained.md, mx.x-mx-pdfQrUrl). It offers two links and does nothing on load: download the PDF, or open the MX Inspector's ?inspect= mode with that PDF preloaded. No separate markdown source exists."
 ---
 -->
   <!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Inspect MX Explained | CogNovaMX</title>
-  <meta name="description" content="Short URL behind the QR code in the MX Explained PDF. Opens the MX Inspector with that PDF already loaded.">
+  <title>Download or Inspect MX Explained | CogNovaMX</title>
+  <meta name="description" content="Short URL behind the QR code in the MX Explained PDF. Lets the reader choose to download the PDF or inspect it in the MX Inspector.">
   <meta name="author" content="Tom Cranstoun">
-  <link rel="canonical" href="https://mx.allabout.network/tools/mx-inspector.html">
+  <link rel="canonical" href="https://mx.allabout.network/tell">
   <meta name="robots" content="noindex, follow">
-  <meta http-equiv="refresh" content="0; url=/tools/mx-inspector.html?inspect=https%3A%2F%2Fmx.allabout.network%2Fmx-explained.pdf">
   <meta name="mx:status" content="active">
   <meta name="mx:contentType" content="tool">
   <meta name="mx:audience" content="humans, machines">
+  <link rel="stylesheet" href="/css/mx-unified.css">
+  <style>
+    .tell { max-width: 40rem; margin: 0 auto; padding: 2rem 1rem; }
+    .tell-choices { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0; }
+    .tell-choices a { display: inline-block; padding: 0.75rem 1.25rem; border: 2px solid currentColor; border-radius: 0.5rem; font-weight: 600; text-decoration: none; }
+  </style>
 </head>
 <body>
-  <main>
-    <h1>Opening MX Explained in the MX Inspector</h1>
-    <p>If you are not redirected automatically, open <a href="/tools/mx-inspector.html?inspect=https%3A%2F%2Fmx.allabout.network%2Fmx-explained.pdf">the MX Inspector with MX Explained loaded</a>, or <a href="/mx-explained.pdf">download the PDF</a>.</p>
+  <main class="tell">
+    <h1>MX Explained</h1>
+    <p>You reached this page from the QR code in the MX Explained PDF. Choose what to do with the document.</p>
+    <div class="tell-choices">
+      <a href="/mx-explained.pdf" download>Download the PDF</a>
+      <a href="/tools/mx-inspector.html?inspect=https%3A%2F%2Fmx.allabout.network%2Fmx-explained.pdf">Inspect the PDF</a>
+    </div>
+    <h2>What inspect does</h2>
+    <p>Inspect opens the <a href="/tools/mx-inspector.html">MX Inspector</a> and fetches the PDF into your browser, where it is read locally and never uploaded. It shows the MX metadata embedded in the file, whether the PDF is tagged for assistive technology, the fingerprint of the source it was built from, and the provenance records that travel beside it, which you can follow as an evidence chain.</p>
   </main>
 </body>
 </html>

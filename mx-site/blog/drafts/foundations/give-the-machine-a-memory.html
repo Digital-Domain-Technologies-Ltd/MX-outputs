@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Give the Machine a Memory"
 description: "Two plain-markdown files, a lessons log and an understanding log, let any machine reading your project pick up context instead of guessing. A short tutorial on Machine Experience turned inward."
 author: "Tom Cranstoun"
@@ -15,8 +16,13 @@ version: "1.0"
 type: blog-post
 tags: [machine-experience, memory, learnings, understanding, context, agents]
 mx:
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/foundations/give-the-machine-a-memory.md
+  contextProvides:
+    - "A tutorial on keeping a lessons log and an understanding log so machines reading a project inherit context instead of guessing"
+    - "Machine Experience applied inward: explicit, append-only, machine-readable project memory"
   stability: stable
   purpose: "Explain, as MX advocacy, how a lessons log and an understanding log help a machine help the user."
   servedAt: https://mx.allabout.network/blog/drafts/foundations/give-the-machine-a-memory.html
@@ -62,11 +68,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Give the Machine a Memory">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -109,7 +113,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 959,
+        "wordCount": 960,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -190,7 +194,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="959">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="960">
         <header class="article-header">
           <h1>Give the Machine a Memory</h1>
           <div class="article-meta"
@@ -207,7 +211,7 @@ mx:
 
 
 <p>Every time a machine reads your project, it starts over.</p>
-<p>An assistant opens your work and knows nothing about the dead ends you already walked down, the decision you settled last month, or the reason a thing is built the odd way it is. So it infers. It guesses. Sometimes it guesses well, and sometimes it cheerfully repeats a mistake you fixed weeks ago, because nothing in front of it said &quot;we tried that, it broke.&quot;</p>
+<p>An assistant opens your work and knows nothing about the dead ends you already walked down, the decision you settled a month ago, or the reason a thing is built the odd way it is. So it infers. It guesses. Sometimes it guesses well, and sometimes it cheerfully repeats a mistake you fixed weeks ago, because nothing in front of it said &quot;we tried that, it broke.&quot;</p>
 <p>Machine Experience (MX) is the practice of giving machines explicit context instead of making them guess. We usually describe that as metadata on the things you publish: a page, a document, a file that can tell any machine what it is and how to use it. The same idea points inward, at your own work, and it answers a quieter question. What should a machine know before it helps you?</p>
 <p>The answer is memory. And memory, written down so a machine can read it, comes in two shapes.</p>
 <h2 id="lessons-what-not-to-do-again" tabindex="-1">Lessons: What Not to Do Again</h2>

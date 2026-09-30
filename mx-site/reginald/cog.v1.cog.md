@@ -25,7 +25,7 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-09-16
+modified: 2026-09-29
 version: "1.1"
 
 schema: ./schemas/mx-spec.v1.yaml
@@ -178,6 +178,7 @@ mx:
   x-mx-provAiAssistance: editorial-and-design
   x-mx-provConfidenceLevel: working-draft
   x-mx-provReviewStatus: pre-review
+  x-mx-createdHash: 10d4104d
 
 ---
 

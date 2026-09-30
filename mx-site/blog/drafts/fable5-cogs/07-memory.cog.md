@@ -10,7 +10,7 @@ title: "Memory System Configuration"
 description: "Describes the agent's memory system state and what derived memories are available from past conversations. Info-doc: no executable rules. Maps to memory_system in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Describe memory system state for this session."
   stability: stable
   contextProvides: ["Memory system state: no memories available in this session - the user has not enabled memory in Settings. If the user asks why the agent does not remember them, explain that memory is optional and can be enabled in Settings."]

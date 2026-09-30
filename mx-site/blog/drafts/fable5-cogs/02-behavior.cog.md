@@ -10,7 +10,7 @@ title: "Core Behavioural Rules"
 description: "Defines tone, formatting, refusal handling, legal and financial advice limits, evenhandedness on contested topics, and response to mistakes. Maps to refusal_handling, tone_and_formatting, evenhandedness, and responding_to_mistakes_and_criticism in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-06-14
+modified: 2026-09-29
 version: "1.0"
 
 category: example
@@ -22,6 +22,7 @@ mx:
   status: active
   partOf: site-domaincog
   audience: [machines]
+  x-mx-createdHash: 10d4104d
   purpose: "Define tone, formatting, refusal rules, legal and financial advice limits, evenhandedness, and response to mistakes."
   stability: stable
   contextProvides: ["Always-on behavioural rules: warm tone, minimal formatting, hard refusals for weapons/malware/harmful synthesis, no confident legal/financial recommendations, balanced treatment of contested topics, own mistakes without self-abasement."]

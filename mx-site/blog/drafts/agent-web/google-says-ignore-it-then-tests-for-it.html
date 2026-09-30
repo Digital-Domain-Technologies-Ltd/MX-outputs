@@ -5,6 +5,7 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Google Says Ignore llms.txt, Then Tests for It"
 description: "Google's guidance says llms.txt is too new to bother with. Google's own tools test for it. The contradiction points to what llms.txt actually is: an index for LLMs to read your site faster, not a training-data file."
 author: "Tom Cranstoun"
@@ -15,8 +16,11 @@ version: "1.0"
 type: blog-post
 tags: [llms-txt, agent-web, machine-experience, agent-readiness, information-architecture]
 mx:
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
   purpose: "Resolve the contradiction between Google's guidance (llms.txt is too new) and Google's tools (they test for it). Explain what llms.txt actually is: an index for LLMs, not an SEO artifact. Show how to use it in real-time LLM retrieval workflows."
+  contextProvides:
+    - "Why Google's contradiction is correct, what llms.txt is actually for, and how to use it in real-time LLM retrieval."
   stability: draft
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/google-says-ignore-it-then-tests-for-it.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
@@ -64,11 +68,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Google Says Ignore llms.txt, Then Tests for It">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -111,7 +113,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1859,
+        "wordCount": 1857,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -195,7 +197,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1859">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1857">
         <header class="article-header">
           <h1>Google Says Ignore llms.txt, Then Tests for It</h1>
           <div class="article-meta"
@@ -222,7 +224,7 @@ When your team asks an AI about your own site, providing <code>llms.txt</code> f
 </li>
 <li>
 <p><strong>Faster, more accurate answers from external LLM queries (immediate, measurable)</strong>
-When someone uses ChatGPT Search, Claude, or Perplexity to research you, they get a directed answer instead of a crawl through your entire site. Live, today, regardless of training-data outcomes.</p>
+When someone uses ChatGPT Search, Claude, or Perplexity to research you, they get a directed answer instead of a crawl through your entire site. Live, regardless of training-data outcomes.</p>
 </li>
 <li>
 <p><strong>Operational data that stays current (unlike training data)</strong>
@@ -280,7 +282,7 @@ If every site did this, LLM query cost and energy consumption would drop measura
 <p>And use it in practice yourself. When you ask an AI to research your own site, give it the <code>llms.txt</code> first. You will see the difference. The answer is faster, more focused, less likely to drift into the blog archive looking for clues.</p>
 <h2 id="why-google-tests-for-it-even-though-it-says-dont-worry" tabindex="-1">Why Google Tests for It Even Though It Says &quot;Don't Worry&quot;</h2>
 <p>The guidance that says &quot;llms.txt is too new, ignore it&quot; is correct if you are betting on training data. Training pipelines have not yet converged on it. The standard is still settling. It does not yet drive enough value in that channel to warrant priority.</p>
-<p>But Google also knows that right now, today, an LLM asking about your site benefits from having an index. Google is testing for it because Google knows that use is already live and already valuable. The guidance reflects the long-term training-data question. The test reflects the immediate query-time reality. Both are true. They are just answering different questions.</p>
+<p>But Google also knows that right now an LLM asking about your site benefits from having an index. Google is testing for it because Google knows that use is already live and already valuable. The guidance reflects the long-term training-data question. The test reflects the immediate query-time reality. Both are true. They are just answering different questions.</p>
 <p>The mistake is treating them as contradictory when they are answering different time horizons. Google is right that training data is uncertain. Google is also right that query-time indices are immediately useful. You can do the immediate useful thing right now. The training data bet will sort itself out.</p>
 <h2 id="the-checklist" tabindex="-1">The Checklist</h2>
 <p>If you own an <code>llms.txt</code> or are deciding whether to create one:</p>
