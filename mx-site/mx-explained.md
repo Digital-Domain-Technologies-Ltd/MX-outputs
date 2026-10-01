@@ -4,7 +4,7 @@ title: "MX Explained"
 description: "What MX is, why it exists, how it defers to existing standards, why it works in any container and for any machine, and when it is worth using."
 author: Tom Cranstoun
 created: 2026-09-24
-modified: 2026-09-29
+modified: 2026-09-30
 version: "1.0"
 
 type: info-doc
@@ -182,6 +182,6 @@ Rules on how AI systems use and produce content are emerging in many jurisdictio
 
 ## Inspect This Document
 
-Scan the QR code on the last page, or visit mx.allabout.network/tell. Either opens the MX Inspector with this PDF already loaded, so you can see the metadata embedded in it, the fingerprint of the source it was built from, and the provenance records that travel beside it. The inspection runs entirely in your browser.
+Scan the QR code on the last page, or visit mx.allabout.network/tell. That page lets you download this PDF or open it in the MX Inspector, where you can see the metadata embedded in it, the fingerprint of the source it was built from, and the provenance records that travel beside it. The inspection runs entirely in your browser.
 
 That is MX in practice: a file that can tell a machine what it is.

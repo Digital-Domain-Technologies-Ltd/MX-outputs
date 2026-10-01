@@ -7,7 +7,7 @@
     "description": "Evidence chain of the rule-driven steps (gate verdicts, renders, probes) behind mx-explained.pdf.",
     "author": "Tom Cranstoun",
     "created": "2026-09-24",
-    "modified": "2026-09-25",
+    "modified": "2026-09-30",
     "version": "1",
     "type": "provenance-record",
     "tags": [
@@ -37,7 +37,8 @@
       "Author": "Tom Cranstoun",
       "Version": "1.0",
       "Created": "2026-09-24",
-      "Modified": "2026-09-24",
+      "Modified": "2026-09-30",
+      "MxSpecVersion": "0.9",
       "Status": "active",
       "Audience": [
         "humans",
@@ -52,7 +53,7 @@
   "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). Designed as evidence for the deterministic-conformance regime (EAA Directive 2019/882); the Level 2 tagged PDF and per-page accessibility verdicts come from these steps. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
   "auditId": null,
   "runRevision": 1,
-  "lastWriteAt": "2026-09-25T08:04:15.727Z",
+  "lastWriteAt": "2026-09-30T20:22:33.982Z",
   "operator": "Tom Cranstoun",
   "parties": [
     {
@@ -120,12 +121,31 @@
       "root": "~/ai-log",
       "days": [
         "2026-09-24",
-        "2026-09-25"
+        "2026-09-25",
+        "2026-09-30"
       ],
       "header": "provenance.ai.json",
       "steps": "provenance.steps.jsonl",
       "index": "hash.index.csv",
-      "summary": {}
+      "summary": {
+        "2026-09-30": {
+          "calls": 4,
+          "artefacts": 8,
+          "models": {
+            "gpt-oss:20b": 8
+          },
+          "providers": {
+            "ollama": 8
+          },
+          "scripts": [
+            "content-draft-page.cjs"
+          ],
+          "inputTokens": 772,
+          "outputTokens": 5562,
+          "firstAt": "2026-09-30T12:39:51.132Z",
+          "lastAt": "2026-09-30T19:51:35.004Z"
+        }
+      }
     }
   },
   "steps": [
@@ -197,6 +217,30 @@
         "source": "mx-explained.md",
         "doctype": "info-doc",
         "sourceSha": "ac6f4ecdc29bf6b0bc64f860db341afc42e86176",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-09-30T20:21:51.008Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "mx-explained.md",
+        "doctype": "info-doc",
+        "sourceSha": "dd42234c7ba575aad2162f53d186f0307ea4e6b1",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-09-30T20:22:33.982Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "mx-explained.md",
+        "doctype": "info-doc",
+        "sourceSha": "22206775c9794ef86235f519a470fc6498d1f007",
         "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md"
       },
       "outcome": "pass"
