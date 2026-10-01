@@ -160,7 +160,7 @@ mx:
       <section class="lesson-step">
         <h2>Good intentions are not enough</h2>
         <p>Even well-intentioned implementations fail if you do not know the pitfalls. Teams add structured data, sprinkle ARIA attributes, and ship - then wonder why agents still misread the site.</p>
-        <p>These are the most common mistakes we see when organisations adopt Machine Experience. Each one looks like progress from the inside. Each one fails a machine in a specific, predictable way. Learn to spot the problem before an agent does.</p>
+        <p>These are the most common mistakes we see when organisations adopt Machine Experience. Every one of them looks like progress from the inside and fails a machine in a specific, predictable way. Learn to spot the problem before an agent does.</p>
       </section>
 
       <section class="lesson-step">
@@ -170,7 +170,7 @@ mx:
           <div class="card-head">Mistake: structure without validation <span class="card-cta">open</span></div>
           <div class="card-body">
             <p>The team implements Schema.org markup but never validates it. Syntax errors, wrong types, or missing required properties make the structured data useless - agents ignore invalid markup, so the effort earns nothing.</p>
-            <p><strong>The fix:</strong> validate every page with the Google Rich Results Test and the Schema.org validator, and then test with actual agents - ask ChatGPT questions about your page and see what it reports back.</p>
+            <p><strong>The fix:</strong> validate every page with the Google Rich Results Test and the Schema.org validator, and then test with actual agents - ask ChatGPT questions about your content and see what it reports back.</p>
           </div>
         </div>
         <div class="lesson-card" data-gate>
@@ -193,7 +193,7 @@ mx:
   &quot;@type&quot;: &quot;Thing&quot;,  // Too generic
   &quot;name&quot;: &quot;Widget&quot;
 }</pre>
-            <p>Agents cannot take specific actions on generic types. <code>Thing</code> tells them nothing useful: no price to quote, no availability to check, no offer to act on.</p>
+            <p>Agents cannot take specific actions on generic types. <code>Thing</code> tells them nothing useful: no price to quote, no availability to check, no actionable offer.</p>
             <p><strong>The fix:</strong> use the most specific type available - <code>Product</code> not <code>Thing</code>, <code>Article</code> not <code>CreativeWork</code>, <code>LocalBusiness</code> not <code>Organization</code>.</p>
           </div>
         </div>
@@ -202,12 +202,12 @@ mx:
 
       <section class="lesson-step">
         <h2>Data and state mistakes</h2>
-        <p>Markup that was right when it shipped can still lie today. Open both mistakes:</p>
+        <p>Markup that was right when it shipped can turn false. Open both mistakes:</p>
         <div class="lesson-card" data-gate>
           <div class="card-head">Mistake: stale data <span class="card-cta">open</span></div>
           <div class="card-body">
             <p>The structured data drifts out of sync with the page: prices that changed, products marked <code>InStock</code> but sold out, old phone numbers, outdated business hours.</p>
-            <p>It fails because agents confidently share wrong information. The agent quotes the stale price to a customer, the customer arrives to a different one, and it is your trust that pays for the gap.</p>
+            <p>It fails because agents confidently share wrong information. The agent quotes the stale price to a customer, who then arrives to find a different one, and it is your trust that pays for the gap.</p>
             <p><strong>The fix:</strong> update structured data whenever the content changes, and automate it from the database wherever possible so the two cannot drift.</p>
           </div>
         </div>
@@ -259,15 +259,15 @@ mx:
           <button type="button" class="quiz-option">Meta tags cannot carry prices</button>
           <button type="button" class="quiz-option" data-correct>Hidden structured data is treated as deceptive - only mark up content that is visible to users</button>
           <button type="button" class="quiz-option">It is not a mistake - agents prefer hidden metadata</button>
-          <div class="quiz-answer">Right: markup for content users cannot see is treated as deceptive, and search engines and agents penalise it. If humans cannot see it, do not mark it up.</div>
+          <div class="quiz-answer">Right: it is deceptive. Markup for content users cannot see is treated that way, and search engines and agents penalise it. If humans cannot see it, do not mark it up.</div>
           <div class="quiz-retry">Not quite. Think about what it means when the machine-readable story and the visible page tell two different stories, then try again.</div>
         </div>
         <p class="lesson-hint" data-counts data-done-text="Quiz done - you can spot the problem before an agent does.">Answer the quick check to continue.</p>
         <h2>What you now know</h2>
         <ul class="lesson-recap">
-          <li>Unvalidated markup is wasted markup: agents ignore invalid structured data, so validate with the Rich Results Test and the Schema.org validator, then test with actual agents.</li>
+          <li>Unvalidated markup is wasted effort: agents ignore invalid structured data, so validate with the Rich Results Test and the Schema.org validator, then test with actual agents.</li>
           <li>Hidden structured data is treated as deceptive, and generic types like Thing give agents nothing to act on - mark up only what is visible, with the most specific type available.</li>
-          <li>Stale data makes agents confidently share wrong information, and contradictory ARIA is accessibility theater - keep data in sync and prefer native HTML.</li>
+          <li>Stale data makes agents confidently share wrong information, so keep it in sync. Contradictory ARIA is accessibility theater, so prefer native HTML.</li>
           <li>Machines do not see visual cues or forgive broken outlines: declare required fields in markup and never skip heading levels.</li>
         </ul>
         <div class="lesson-aside">
