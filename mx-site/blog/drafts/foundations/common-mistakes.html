@@ -5,21 +5,26 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Common MX Mistakes - Anti-Patterns to Avoid"
 description: "Learn the most common Machine Experience mistakes and anti-patterns. Avoid these pitfalls when implementing MX methodology."
 author: Tom Cranstoun
-created: '2026-06-13'
+modified: 2026-10-01
+created: 2026-06-13
 
 type: blog-post
 tags: []
 mx:
+  mxSpecVersion: "0.9"
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/foundations/common-mistakes.md
   purpose: "Draft blog post for the mx-site."
   stability: draft
   runbook: "Draft source for the mx-site blog. Promote via npm run promote to publish."
+  contextProvides: ["Blog post draft: Common MX Mistakes - Anti-Patterns to Avoid"]
   blogUrl: https://mx.allabout.network/blog/drafts/foundations/common-mistakes.html
   blogFilename: common-mistakes
+  servedAt: https://mx.allabout.network/blog/drafts/foundations/common-mistakes.html
 
 ---
 -->
@@ -61,11 +66,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Common MX Mistakes - Anti-Patterns to Avoid">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -148,6 +151,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="/audit/">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -182,7 +186,7 @@ mx:
         <li><a href="#section-2-hidden-structured-data">2. Hidden Structured Data</a></li>
         <li><a href="#section-3-using-generic-schema-types">3. Using Generic Schema Types</a></li>
         <li><a href="#section-4-stale-data">4. Stale Data</a></li>
-        <li><a href="#section-5-accessibility-theater">5. Accessibility Theater</a></li>
+        <li><a href="#section-5-performative-accessibility">5. Performative Accessibility</a></li>
         <li><a href="#section-6-over-reliance-on-visual-cues">6. Over-Reliance on Visual Cues</a></li>
         <li><a href="#section-7-broken-heading-hierarchy">7. Broken Heading Hierarchy</a></li>
         <li><a href="#section-8-ambiguous-link-text">8. Ambiguous Link Text</a></li>
@@ -260,7 +264,7 @@ mx:
 </ul>
 <p>Why it fails: Agents confidently share wrong information. Users lose trust.</p>
 <p>Fix: Update structured data whenever content changes. Automate from database where possible.</p>
-<h2 id="section-5-accessibility-theater" tabindex="-1">5. Accessibility Theater</h2>
+<h2 id="section-5-performative-accessibility" tabindex="-1">5. Performative Accessibility</h2>
 <p>Mistake: Adding ARIA attributes without understanding them.</p>
 <p>Example:</p>
 <p>&lt;!-- BAD: Contradictory attributes --&gt;
@@ -375,7 +379,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="/audit/">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
