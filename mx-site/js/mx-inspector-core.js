@@ -32,15 +32,15 @@ export const PIVOT_COPY = {
     cta: 'Commission an audit',
     href: '/services/',
   },
-  'eaa-tagged': {
-    headline: 'This file is accessible. It is not attested.',
-    body: 'A tagged structure tree is here — a screen reader can walk it, and the file qualifies for EAA Directive 2019/882 conformance review. What it lacks is the MX evidence chain: provenance, responsible-person identifier, machine-readable claims. Without that chain, a regulator or AI agent cannot verify who authored the file or what canon it cites. We rebuild documents into MX Compatible PDFs that carry the full chain.',
+  tagged: {
+    headline: 'This file declares PDF/UA. It is not attested.',
+    body: 'The file declares PDF/UA-1 (pdfuaid:Part), the sign that it carries a tagged structure tree a screen reader can walk. This inspector reads that declaration; it does not validate the file against PDF/UA, and it gives no conformance verdict under any law. What it lacks is the MX evidence chain: provenance, responsible-person identifier, machine-readable claims. Without that chain, a regulator or AI agent cannot verify who authored the file or what canon it cites. We rebuild documents into MX Compatible PDFs that carry the full chain.',
     cta: 'Add the MX chain',
     href: '/services/',
   },
   plain: {
     headline: 'This file is a picture of a document.',
-    body: 'There is no tagged structure tree, so a screen reader has to guess and an AI agent has to do vision-based reconstruction. There is no MX metadata, so machines cannot verify what the file claims. This is the bar EAA Directive 2019/882 raised on 28 June 2025. We rebuild documents from source into accessible, machine-readable PDFs that carry their own evidence.',
+    body: 'There is no tagged structure tree, so a screen reader has to guess and an AI agent has to do vision-based reconstruction. There is no MX metadata, so machines cannot verify what the file claims. Without that structure the file is hard to read with assistive technology. We rebuild documents from source into accessible, machine-readable PDFs that carry their own evidence.',
     cta: 'Rebuild this to MX',
     href: '/services/',
   },
@@ -329,7 +329,9 @@ export function classify(findings) {
   if (findings.tagged.hasTaggedClaim && findings.mxMeta.present) {
     tier = 'mx';
   } else if (findings.tagged.hasTaggedClaim) {
-    tier = 'eaa-tagged';
+    // Tagged only: PDF/UA declared, no MX metadata. (Before 2026-10-09 this
+    // tier was called 'eaa-tagged'; readers of old reports should map it here.)
+    tier = 'tagged';
   } else {
     tier = 'plain';
   }

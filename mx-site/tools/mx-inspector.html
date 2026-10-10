@@ -9,8 +9,8 @@ title: "MX Inspector"
 description: "Drop any file on this page and inspect the MX metadata it carries. The browser reads it locally and bytes never leave your machine. PDFs are classified for tagged structure, MX metadata, and AI-governance provenance; images, SVG, HTML, and other carriers report the MX fields they embed."
 author: "Tom Cranstoun"
 created: 2026-05-31
-modified: 2026-09-17
-version: "1.5"
+modified: 2026-10-09
+version: "1.6"
 
 type: component:objectInspector
 
@@ -128,7 +128,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
-        <a href="/audit/">Audit</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -173,9 +173,9 @@ mx:
 
           <p><strong>This inspector reads any file in your browser. There is no upload. We have no server-side record of which files you inspect. The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time. The inspection is entirely a conversation between the file and your browser.</strong></p>
 
-          <p>Drop a file above. The inspector reads the MX metadata in the file and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, EAA tagged only, or plain, with every MX field listed in a table: status, audience, canonical URL, the source file and its content hash, licence, lifecycle dates, and the rest. Any other format, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in it and classified MX or plain, with every field listed the same way. When the file has an embedded provenance chain, the evidence-chain view opens so you can walk it. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.</p>
+          <p>Drop a file above. The inspector reads the MX metadata in the file and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, tagged only (no MX metadata), or plain, with every MX field listed in a table: status, audience, canonical URL, the source file and its content hash, licence, lifecycle dates, and the rest. Any other format, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in it and classified MX or plain, with every field listed the same way. When the file has an embedded provenance chain, the evidence-chain view opens so you can walk it. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.</p>
 
-          <p>For the conceptual background on PDFs, what each artefact is, why it matters under the European Accessibility Act and the EU AI Act, and how to verify any claim with three command-line tools, read the explainer: <a href="/learn/mx-for-pdfs.html">MX for PDFs</a>. The inspector is the interactive companion; the explainer is the walk-through.</p>
+          <p>For the conceptual background on PDFs, what each artefact is, the regulatory context (the European Accessibility Act, in force since 28 June 2025, and the EU AI Act), and how to verify any claim with three command-line tools, read the explainer: <a href="/learn/mx-for-pdfs.html">MX for PDFs</a>. The inspector is the interactive companion; the explainer is the walk-through.</p>
 
           <h2 id="what-you-are-looking-at">What you are looking at</h2>
 
@@ -187,7 +187,7 @@ mx:
 
           <h3 id="check-tagged-tree">Tagged structure (ISO 14289-1)</h3>
 
-          <p>An MX Compatible PDF declares <code>pdfuaid:part=1</code> in its XMP metadata packet, indicating PDF/UA-1 conformance to ISO 14289-1. The inspector reads the XMP packet and reports the declared Part. The tagged structure tree itself is the <code>/StructTreeRoot</code> entry in the PDF's <code>/Catalog</code> dictionary. It lets a screen reader walk the document the way a sighted person does, and it is what European Accessibility Act Directive 2019/882 expects for documents published from 28 June 2025 onwards.</p>
+          <p>An MX Compatible PDF declares <code>pdfuaid:part=1</code> in its XMP metadata packet, declaring PDF/UA-1 (ISO 14289-1). The inspector reads the XMP packet and reports the declared Part; it does not validate the file against PDF/UA. The tagged structure tree itself is the <code>/StructTreeRoot</code> entry in the PDF's <code>/Catalog</code> dictionary. It lets a screen reader walk the document the way a sighted person does.</p>
           <p><small><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</small></p>
 
           <h3 id="check-mx-namespace">MX XMP namespace</h3>
@@ -206,7 +206,7 @@ mx:
 
           <h3 id="check-responsible-person">Responsible Person Identifier</h3>
 
-          <p>The responsible person block names the human accountable for the file's audit chain: name, email, identifier URL, role, organisation, and country. The inspector reads it from the XMP packet (or from the embedded provenance payload as a fallback). The block is what regulators ask for under EU AI Act Article 4, the UK ICO accountability principle, the NIST AI Risk Management Framework, and EAA Directive 2019/882.</p>
+          <p>The responsible person block names the human accountable for the file's audit chain: name, email, identifier URL, role, organisation, and country. The inspector reads it from the XMP packet (or from the embedded provenance payload as a fallback). The block is what regulators ask for under EU AI Act Article 4, the UK ICO accountability principle, and the NIST AI Risk Management Framework.</p>
 
           <h2 id="what-the-three-tiers-mean">What the three tiers mean</h2>
 
@@ -217,13 +217,13 @@ mx:
               <span class="tool-tier-card-label">MX Compatible</span>
               <p class="tool-tier-card-body">The file declares a tagged structure tree and includes the MX XMP namespace. It is accessible, attested, and machine-readable. This is the bar the MX Compatible badge represents.</p>
             </div>
-            <div class="tool-tier-card is-eaa">
-              <span class="tool-tier-card-label">EAA Tagged Only</span>
-              <p class="tool-tier-card-body">The file declares a tagged structure tree but no MX namespace. It is accessible (screen readers can walk it; EAA Directive 2019/882 conformance is plausible) but it is not attested. A regulator or AI agent cannot verify what the file claims or who authored it.</p>
+            <div class="tool-tier-card is-tagged">
+              <span class="tool-tier-card-label">Tagged only (no MX metadata)</span>
+              <p class="tool-tier-card-body">The file declares PDF/UA-1, the sign of a tagged structure tree a screen reader can walk, but carries no MX namespace, so it is not attested. A regulator or AI agent cannot verify what the file claims or who authored it. The inspector reads the declaration; it does not validate the file against PDF/UA and gives no conformance verdict under any law.</p>
             </div>
             <div class="tool-tier-card is-plain">
               <span class="tool-tier-card-label">Plain PDF</span>
-              <p class="tool-tier-card-body">The file does not declare a tagged structure tree. A screen reader has to guess. An AI agent has to do vision-based reconstruction. The European Accessibility Act compliance bar set on 28 June 2025 is not met.</p>
+              <p class="tool-tier-card-body">The file does not declare a tagged structure tree. A screen reader has to guess. An AI agent has to do vision-based reconstruction. Without that structure the file is hard to read with assistive technology.</p>
             </div>
           </div>
 
@@ -233,9 +233,9 @@ mx:
 
           <p><img src="../images/mx-compatible-badge.svg" alt="The MX Compatible badge: the MX mark beside the words Machine Experience Compatible, above the strap line tagged, provenance, attested" width="220" height="92"></p>
 
-          <p>Under the wordmark, the badge prints one conformance line:</p>
+          <p>Under the wordmark, the badge prints one line:</p>
 
-          <p><code>ISO 14289-1 Level 2 &middot; pdfuaid:Part=1 &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF &middot; EAA Directive 2019/882</code></p>
+          <p><code>Tagged PDF &middot; PDF/UA-1 declared (pdfuaid:Part=1) &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF</code></p>
 
           <p>That line is built to be read by four audiences at once. A European reader, a British reader, and an American reader each find an instrument they know. The fourth reader is a machine. An AI agent, a screen reader, or a regulator's validator does not read the visible badge; it reads the tagged structure, the XMP packet, and the provenance record behind it. The badge is for eyes, the artefacts are for machines, and both say the same thing. All four share one international standards baseline that belongs to none of them.</p>
 
@@ -250,23 +250,18 @@ mx:
             </thead>
             <tbody>
               <tr>
-                <td><code>ISO 14289-1 Level 2</code></td>
-                <td>The document is tagged to the PDF/UA-1 standard at Level 2: a logical structure tree plus a declared conformance claim a validator can check.</td>
+                <td><code>Tagged PDF</code></td>
+                <td>The document carries a logical structure tree, so a screen reader can walk it in reading order.</td>
                 <td>International</td>
               </tr>
               <tr>
-                <td><code>pdfuaid:Part=1</code></td>
-                <td>The XMP metadata packet states PDF/UA Part 1, so the conformance claim is machine-readable, not only visual.</td>
+                <td><code>PDF/UA-1 declared (pdfuaid:Part=1)</code></td>
+                <td>The XMP metadata packet declares PDF/UA Part 1 (ISO 14289-1), so a validator knows which standard to check the file against. The declaration is not a validation result and not a conformance verdict under any law.</td>
                 <td>International</td>
               </tr>
               <tr>
                 <td><code>EU AI Act</code></td>
                 <td>The embedded provenance record is built as evidence for the European Union Artificial Intelligence Act.</td>
-                <td>European</td>
-              </tr>
-              <tr>
-                <td><code>EAA Directive 2019/882</code></td>
-                <td>The tagged structure is built as evidence for the European Accessibility Act, in force from 28 June 2025.</td>
                 <td>European</td>
               </tr>
               <tr>
@@ -306,7 +301,7 @@ mx:
 
           <p>Each layer reads from the same source. The detection core at <code>mx-site/js/mx-inspector-core.js</code> is shared by the inspector you are running and the gate that protects our outbound work. When the producer changes, when pdf.js changes, when the inspector changes, the same code path is exercised by both surfaces. A regression cannot quietly drift between them; if the test fails, the gate fails, and the inspector fails for every visitor in the same way.</p>
 
-          <p>This is the argument MX makes generally and that the inspector demonstrates specifically. Not "trust us, we did this carefully" but "here is the file, here is the rule, here is the check, run any of them yourself, decide for yourself." For the EU AI Act, the European Accessibility Act, and the AI-governance instruments emerging in adjacent jurisdictions, that distinction matters. An auditor holding the file can follow it to the rule and the check, and arrive at the same verdict the build saw. No proprietary intermediary, no closed-source verifier, no "ask the vendor."</p>
+          <p>This is the argument MX makes generally and that the inspector demonstrates specifically. Not "trust us, we did this carefully" but "here is the file, here is the rule, here is the check, run any of them yourself, decide for yourself." For the EU AI Act and the AI-governance instruments emerging in adjacent jurisdictions, that distinction matters. An auditor holding the file can follow it to the rule and the check, and arrive at the same verdict the build saw. No proprietary intermediary, no closed-source verifier, no "ask the vendor."</p>
 
           <p>The mechanism is the credibility. That is why every PDF we ship goes through this inspector, and why it runs in your browser whenever you ask.</p>
 
@@ -336,7 +331,7 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
-          <li><a href="/audit/">Audit</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/reginald/">REGINALD</a></li>
           <li><a href="/the-gathering/">The Gathering</a></li>

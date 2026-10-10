@@ -10,7 +10,7 @@ title: "I Built a Decider and Measured It"
 description: "A System One style decision model, rebuilt on a local Ollama model in an afternoon and run through five evals against the same model generating and against Claude, then against PDFs with and without an MX packet. The speed claims hold, and so does the part nobody advertises."
 author: Tom Cranstoun
 created: "2026-09-22"
-modified: 2026-09-30
+modified: 2026-10-02
 version: "1.2"
 type: blog-post
 tags:
@@ -147,7 +147,7 @@ refersToExternal:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 2263,
+        "wordCount": 2320,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -187,6 +187,7 @@ refersToExternal:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="/audit/">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -234,7 +235,7 @@ refersToExternal:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2263">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2320">
         <header class="article-header">
           <h1>I Built a Decider and Measured It</h1>
           <div class="article-meta"
@@ -276,9 +277,6 @@ refersToExternal:
 <th>Decisions</th>
 <th>Accuracy</th>
 <th>Unscoreable</th>
-<th>Median latency</th>
-<th>Mean latency</th>
-<th>Total cost</th>
 </tr>
 </thead>
 <tbody>
@@ -287,42 +285,69 @@ refersToExternal:
 <td>100</td>
 <td>72%</td>
 <td>0</td>
-<td>102 ms</td>
-<td>200.7 ms</td>
-<td>$0.0000</td>
 </tr>
 <tr>
 <td>Decider (llama3:latest)</td>
 <td>100</td>
 <td>87%</td>
 <td>0</td>
-<td>184 ms</td>
-<td>405.5 ms</td>
-<td>$0.0000</td>
 </tr>
 <tr>
 <td>Decider (gpt-oss:20b)</td>
 <td>100</td>
 <td>2%</td>
 <td>98</td>
-<td>270 ms</td>
-<td>524.7 ms</td>
-<td>$0.0000</td>
 </tr>
 <tr>
 <td>Local generation (llama3.2:latest)</td>
 <td>100</td>
 <td>74%</td>
 <td>0</td>
-<td>441 ms</td>
-<td>627 ms</td>
-<td>$0.0000</td>
 </tr>
 <tr>
 <td>Claude (haiku)</td>
 <td>100</td>
 <td>97%</td>
 <td>0</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Lane</th>
+<th>Median latency</th>
+<th>Mean latency</th>
+<th>Total cost</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decider (llama3.2:latest)</td>
+<td>102 ms</td>
+<td>200.7 ms</td>
+<td>$0.0000</td>
+</tr>
+<tr>
+<td>Decider (llama3:latest)</td>
+<td>184 ms</td>
+<td>405.5 ms</td>
+<td>$0.0000</td>
+</tr>
+<tr>
+<td>Decider (gpt-oss:20b)</td>
+<td>270 ms</td>
+<td>524.7 ms</td>
+<td>$0.0000</td>
+</tr>
+<tr>
+<td>Local generation (llama3.2:latest)</td>
+<td>441 ms</td>
+<td>627 ms</td>
+<td>$0.0000</td>
+</tr>
+<tr>
+<td>Claude (haiku)</td>
 <td>4995 ms</td>
 <td>5164 ms</td>
 <td>$0.2694</td>
@@ -344,38 +369,59 @@ refersToExternal:
 <tr>
 <th>Lane (Currency of a PDF: MX metadata peeled from the file versus text alone)</th>
 <th>Bare prose accuracy</th>
-<th>Bare mean confidence</th>
 <th>Declared accuracy</th>
-<th>Declared mean confidence</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Decider (llama3.2:latest)</td>
 <td>20%</td>
-<td>0.487</td>
 <td>100%</td>
-<td>0.84</td>
 </tr>
 <tr>
 <td>Decider (llama3:latest)</td>
 <td>90%</td>
-<td>0.807</td>
 <td>100%</td>
-<td>0.896</td>
 </tr>
 <tr>
 <td>Local generation (llama3.2:latest)</td>
 <td>20%</td>
-<td>n/a</td>
 <td>100%</td>
-<td>n/a</td>
 </tr>
 <tr>
 <td>Claude (haiku)</td>
 <td>100%</td>
-<td>n/a</td>
 <td>100%</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Lane (Currency of a PDF: MX metadata peeled from the file versus text alone)</th>
+<th>Bare mean confidence</th>
+<th>Declared mean confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decider (llama3.2:latest)</td>
+<td>0.487</td>
+<td>0.84</td>
+</tr>
+<tr>
+<td>Decider (llama3:latest)</td>
+<td>0.807</td>
+<td>0.896</td>
+</tr>
+<tr>
+<td>Local generation (llama3.2:latest)</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Claude (haiku)</td>
+<td>n/a</td>
 <td>n/a</td>
 </tr>
 </tbody>
@@ -385,38 +431,59 @@ refersToExternal:
 <tr>
 <th>Lane (Accountability for a PDF: does the file name who stands behind it?)</th>
 <th>Bare prose accuracy</th>
-<th>Bare mean confidence</th>
 <th>Declared accuracy</th>
-<th>Declared mean confidence</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Decider (llama3.2:latest)</td>
 <td>10%</td>
-<td>0.702</td>
 <td>100%</td>
-<td>0.889</td>
 </tr>
 <tr>
 <td>Decider (llama3:latest)</td>
 <td>90%</td>
-<td>0.889</td>
 <td>100%</td>
-<td>0.999</td>
 </tr>
 <tr>
 <td>Local generation (llama3.2:latest)</td>
 <td>70%</td>
-<td>n/a</td>
 <td>90%</td>
-<td>n/a</td>
 </tr>
 <tr>
 <td>Claude (haiku)</td>
 <td>100%</td>
-<td>n/a</td>
 <td>100%</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th>Lane (Accountability for a PDF: does the file name who stands behind it?)</th>
+<th>Bare mean confidence</th>
+<th>Declared mean confidence</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Decider (llama3.2:latest)</td>
+<td>0.702</td>
+<td>0.889</td>
+</tr>
+<tr>
+<td>Decider (llama3:latest)</td>
+<td>0.889</td>
+<td>0.999</td>
+</tr>
+<tr>
+<td>Local generation (llama3.2:latest)</td>
+<td>n/a</td>
+<td>n/a</td>
+</tr>
+<tr>
+<td>Claude (haiku)</td>
+<td>n/a</td>
 <td>n/a</td>
 </tr>
 </tbody>
@@ -503,7 +570,10 @@ refersToExternal:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="/audit/">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

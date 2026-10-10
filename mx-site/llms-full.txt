@@ -646,67 +646,6 @@ Tom Cranstoun
 
 ---
 
-## MX Audit | What an MX audit delivers, and how to verify it | CogNovaMX
-
-**URL:** https://mx.allabout.network/audit/
-
-**Description:** An MX audit shows what AI agents see on your site today and how to close the gap. This lander routes engineers, clients, and auditors to the read that fits them, and to the tools that let anyone verify the deliverable on their own machine.
-
-MX
-
-          Machine Experience
-
-          MX
-          Audit.
-
-        What an MX audit delivers, and how to verify it on your own machine.
-
-        An MX audit measures what AI agents and machines see on your site today, against the same standards human visitors expect. The deliverable is a tagged PDF carrying its own evidence chain, so a reader, a regulator, or an AI agent can verify the work without trusting our word for it.
-
-        Each audit travels with a provenance sidecar pair on disk, a Level 2 PDF/UA conformance declaration in the file itself, and the full AI evidence chain embedded inside the PDF's metadata. The same scoring vocabulary runs across every dimension. Findings written for the human reviewer ship in a separate sidecar so the client-facing report stays client-facing. The three reads below explain the deliverable from three angles. Pick the one that matches your seat.
-
-        See a sample report &rarr; - a full executive report, client identity anonymised, findings and scores unchanged.
-
-        Pick your read
-
-            For engineers
-
-            What changed in the audit pipeline and why. File paths, code references, the contract changes, the regression tests that hold the line.
-
-            Read the engineering view
-
-            For clients
-
-            What the report looks like in your hand and why it reads cleaner. One scoring language, a contents page on its own page, reviewer working set aside.
-
-            Read the client view
-
-            For auditors
-
-            How an MX audit proves itself. Evidence chain inside the PDF, sidecar pair on disk, framework citations naming EU AI Act, EAA Directive 2019/882, NIST AI RMF, and others.
-
-            Read the auditor view
-
-        Verify it yourself
-
-        Every MX audit deliverable is built so any reader can verify the evidence chain without leaving their own machine. Drop a PDF into the inspector to read the embedded provenance and conformance signals; read the explainer to see what each signal means and why it is there.
-
-            MX PDF inspector
-
-            Drop any PDF into the inspector to read the embedded MX metadata, the AI provenance sidecar payload, and the PDF/UA conformance declaration. Runs in your browser; nothing uploads.
-
-            Open the inspector
-
-            What MX Compatible means
-
-            The explainer walks through the five signals an MX Compatible PDF carries: tagged structure, MX-namespaced XMP fields, conformance declaration, provenance sidecar pair, and embedded AI evidence chain.
-
-            Read the explainer
-
-        Want an MX audit on your own site or content estate? Contact us or email info@cognovamx.com. The audit is the entry point; the discipline keeps the gain.
-
----
-
 ## 2 August 2026. €15 Million. Does Your CMS Know What It Published? | CogNovaMX
 
 **URL:** https://mx.allabout.network/blog/2-august-2026-article-50-reginald.html
@@ -1803,46 +1742,58 @@ Lane
 Decisions
 Accuracy
 Unscoreable
-Median latency
-Mean latency
-Total cost
 
 Decider (llama3.2:latest)
 100
 72%
 0
-102 ms
-200.7 ms
-$0.0000
 
 Decider (llama3:latest)
 100
 87%
 0
-184 ms
-405.5 ms
-$0.0000
 
 Decider (gpt-oss:20b)
 100
 2%
 98
-270 ms
-524.7 ms
-$0.0000
 
 Local generation (llama3.2:latest)
 100
 74%
 0
-441 ms
-627 ms
-$0.0000
 
 Claude (haiku)
 100
 97%
 0
+
+Lane
+Median latency
+Mean latency
+Total cost
+
+Decider (llama3.2:latest)
+102 ms
+200.7 ms
+$0.0000
+
+Decider (llama3:latest)
+184 ms
+405.5 ms
+$0.0000
+
+Decider (gpt-oss:20b)
+270 ms
+524.7 ms
+$0.0000
+
+Local generation (llama3.2:latest)
+441 ms
+627 ms
+$0.0000
+
+Claude (haiku)
 4995 ms
 5164 ms
 $0.2694
@@ -1865,62 +1816,82 @@ One script reads every PDF the same way: take whatever the packet declares, extr
 
 Lane (Currency of a PDF: MX metadata peeled from the file versus text alone)
 Bare prose accuracy
-Bare mean confidence
 Declared accuracy
-Declared mean confidence
 
 Decider (llama3.2:latest)
 20%
-0.487
 100%
-0.84
 
 Decider (llama3:latest)
 90%
-0.807
 100%
-0.896
 
 Local generation (llama3.2:latest)
 20%
-n/a
 100%
-n/a
 
 Claude (haiku)
 100%
-n/a
 100%
+
+Lane (Currency of a PDF: MX metadata peeled from the file versus text alone)
+Bare mean confidence
+Declared mean confidence
+
+Decider (llama3.2:latest)
+0.487
+0.84
+
+Decider (llama3:latest)
+0.807
+0.896
+
+Local generation (llama3.2:latest)
+n/a
+n/a
+
+Claude (haiku)
+n/a
 n/a
 
 Lane (Accountability for a PDF: does the file name who stands behind it?)
 Bare prose accuracy
-Bare mean confidence
 Declared accuracy
-Declared mean confidence
 
 Decider (llama3.2:latest)
 10%
-0.702
 100%
-0.889
 
 Decider (llama3:latest)
 90%
-0.889
 100%
-0.999
 
 Local generation (llama3.2:latest)
 70%
-n/a
 90%
-n/a
 
 Claude (haiku)
 100%
-n/a
 100%
+
+Lane (Accountability for a PDF: does the file name who stands behind it?)
+Bare mean confidence
+Declared mean confidence
+
+Decider (llama3.2:latest)
+0.702
+0.889
+
+Decider (llama3:latest)
+0.889
+0.999
+
+Local generation (llama3.2:latest)
+n/a
+n/a
+
+Claude (haiku)
+n/a
 n/a
 
 On the bare PDFs, the 3B decider guessed an answer either way for eight of ten documents that say neither. Asked whether a bare file names an owner, it said yes nine times out of ten, at confidence up to 0.86, for files that name nobody. That's a small model inventing accountability for a refund policy.
@@ -8458,6 +8429,17 @@ Blog
         Blockchain
         Announcements
 
+            I Built a Decider and Measured It
+
+            A System One style decision model, rebuilt on a local Ollama model in an afternoon and run through five evals against the same model generating and against Claude, then against PDFs with and without an MX packet. The speed claims hold, and so does the part nobody advertises.
+
+            22 September 2026
+            - AI agents
+
+- Practitioner
+
+- MX foundations
+
             Reduce Inference, Save Energy
 
             The AI-power debate is all about supply. The overlooked lever is demand: inference is most of AI's energy use, much of it redundant, and machine-readable content cuts the work per task.
@@ -8575,17 +8557,6 @@ Blog
 - Business case
 
 - Commentary
-
-            I Built a Decider and Measured It
-
-            A System One style decision model, rebuilt on a local Ollama model in an afternoon and run through five evals against the same model generating and against Claude, then against PDFs with and without an MX packet. The speed claims hold, and so does the part nobody advertises.
-
-            22 September 2026
-            - AI agents
-
-- Practitioner
-
-- MX foundations
 
             A Decider Is Only as Good as Its State
 
@@ -21916,7 +21887,7 @@ MX Books, Machine Experience by Tom Cranstoun
 
             The formal patterns and field-level specifications for an AI-readable web.
 
-              PDF £99, Available September 2026
+              PDF £99, Expected January 2027, join the waitlist
 
             ISBN: 978-1-0676384-2-9
 
@@ -22105,7 +22076,7 @@ Free
 
 **Description:** MX: The Protocols, the definitive technical reference for Machine Experience. Architecture, standards, enterprise patterns, and the five-stage machine journey.
 
-September 2026
+January 2027
 
             MX: The Protocols
 
@@ -22128,11 +22099,11 @@ September 2026
                 Language
                 English (en-GB)
                 Published
-                1 September 2026
+                January 2027 (expected)
                 Publisher
                 Digital Domain Technologies Ltd, trading as CogNovaMX
                 Price
-                £99 (pre-order available via waitlist)
+                £99 (join the waitlist for early access pricing)
                 Audience
                 Enterprise architects, MX consultants, CTOs, digital strategists, platform teams
 
@@ -22354,7 +22325,7 @@ Tom Cranstoun
 
                     - MX: The Handbook, Practical implementation guide (April 2026)
 
-                    - MX: The Protocols, The definitive reference (September 2026)
+                    - MX: The Protocols, The definitive reference (January 2027)
 
             What colleagues say
 
@@ -22712,17 +22683,17 @@ MX
 
             MX: The Handbook
 
-            Patterns you can implement this week.
+            Patterns you can put to work on your own site.
 
             MX: The Protocols
 
-            The definitive reference. Architecture, standards, and the five-stage journey.
+            The definitive reference. Architecture, standards, and the five stages a machine moves through before it buys.
 
         Consultancy
 
             MX audit
 
-            What an MX audit delivers, and how to verify it. Routes engineers, clients, and auditors to the read that fits them, plus the tools that let any reader verify the deliverable on their own machine.
+            See what AI agents find on your site, and what it takes to close the gap. Audits run through Tityra.
 
             Implementation
 
@@ -22736,7 +22707,7 @@ MX
 
             MX in practice. Real-world implementations across different industries and platforms.
 
-        New: Why an MX audit pays for itself. Three ways the work returns its cost: reduced inference cost across every reader, fewer hallucinated citations, and lower regulatory exposure under the EAA.
+        New: Why an MX audit pays for itself. Three ways the work pays its way: cheaper inference for every reader, fewer hallucinated citations, and lower regulatory exposure under the EAA.
 
         Verify it yourself
 
@@ -23252,7 +23223,7 @@ Why it fails: Agents confidently share wrong information. Users lose trust.
 
 Fix: Update structured data whenever content changes. Automate from database where possible.
 
-5. Accessibility Theater
+5. Performative Accessibility
 
 Mistake: Adding ARIA attributes without understanding them.
 
@@ -24076,7 +24047,7 @@ MX Learn
             05
 
               Common mistakes
-              Spot the problem: hidden markup, generic types, stale data, accessibility theater, broken hierarchy.
+              Spot the problem: hidden markup, generic types, stale data, performative accessibility, broken hierarchy.
 
         -
 
@@ -24156,13 +24127,13 @@ MX Learn · Lesson 1 of 6
 
           Search engine optimisation puts your page in front of the machine in the first place. Necessary, and only the first step.
 
-          GEO got you understood
+          GEO chases the citation
 
-          Generative engine optimisation and structured data help the machine parse what the page claims to be. Still the discovery layer.
+          Generative engine optimisation tunes pages so an AI answer might cite them; structured data helps the machine parse what the page claims to be. Still the discovery layer.
 
           MX gets you used
 
-          MX is where the agent that has already found and understood your page decides whether to trust it and act on it: quote your price, book your room, recommend your product.
+          MX is where the agent that has already found and parsed your page decides whether to trust it and act on it: quote your price, book your room, recommend your product.
 
         View all three layers to continue.
 
@@ -24190,14 +24161,14 @@ MX Learn · Lesson 1 of 6
 
         Quick check
 
-          Complete the MX one-liner: "SEO got you found. GEO got you understood. MX gets you ___."
+          Complete the MX one-liner: "SEO got you found. GEO chases the citation. MX gets you ___."
 
           ranked
           used
           indexed
-          Right: SEO got you found, GEO got you understood, MX gets you used. The answer is "used" because MX operates after discovery, where an agent decides whether to act on the page.
+          Right: SEO got you found, GEO chases the citation, MX gets you used. The answer is "used" because MX operates after discovery, where an agent decides whether to act on the page.
 
-          Not quite. Think about what happens after the agent has found and understood the page, then try again.
+          Not quite. Think about what happens after the agent has found and parsed the page, then try again.
 
         What you now know
 
@@ -24578,7 +24549,7 @@ MX Learn · Lesson 4 of 6
 
 **URL:** https://mx.allabout.network/learn/lessons/lesson-5-common-mistakes.html
 
-**Description:** Guided interactive lesson on the most common Machine Experience mistakes: unvalidated markup, hidden structured data, generic schema types, stale data, accessibility theater, visual-only cues, and broken heading hierarchy - with the fix for each.
+**Description:** Guided interactive lesson on the most common Machine Experience mistakes: unvalidated markup, hidden structured data, generic schema types, stale data, performative accessibility, visual-only cues, and broken heading hierarchy - with the fix for each.
 
 MX Learn · Lesson 5 of 6
 
@@ -24640,7 +24611,7 @@ MX Learn · Lesson 5 of 6
 
             The fix: update structured data whenever the content changes, and automate it from the database wherever possible so the two cannot drift.
 
-          Mistake: accessibility theater open
+          Mistake: performative accessibility open
 
             Bad: contradictory attributes on one element
 
@@ -24700,7 +24671,7 @@ MX Learn · Lesson 5 of 6
 
           - Hidden structured data is treated as deceptive, and generic types like Thing give agents nothing to act on - mark up only what is visible, with the most specific type available.
 
-          - Stale data makes agents confidently share wrong information, so keep it in sync. Contradictory ARIA is accessibility theater, so prefer native HTML.
+          - Stale data makes agents confidently share wrong information, so keep it in sync. Contradictory ARIA is performative accessibility, so prefer native HTML.
 
           - Machines do not see visual cues or forgive broken outlines: declare required fields in markup and never skip heading levels.
 
@@ -26040,7 +26011,7 @@ MX
 
           MX PDF Inspector CLI
 
-          The MX PDF Inspector CLI is the same detection core that runs the public PDF inspector, packaged as a command-line tool for operator pipelines. Drop it into a CI step or run it ad-hoc against a directory of deliverables. Each PDF is classified into one of three tiers (MX Compatible, EAA Tagged Only, Plain) with a full evidence table covering tagged structure, MX metadata, provenance schema version, and accountable parties. Exit codes are CI-clean: zero when every fixture meets the configured minimum tier, non-zero otherwise.
+          The MX PDF Inspector CLI is the same detection core that runs the public PDF inspector, packaged as a command-line tool for operator pipelines. Drop it into a CI step or run it ad-hoc against a directory of deliverables. Each PDF is classified into one of three tiers (MX Compatible, Tagged only (no MX metadata), Plain) with a full evidence table covering tagged structure, MX metadata, provenance schema version, and accountable parties. Exit codes are CI-clean: zero when every fixture meets the configured minimum tier, non-zero otherwise.
 
           The CLI is a tool, not a hosted service. PDFs an operator wants to verify are usually confidential (draft contracts, unpublished audit reports, regulatory submissions, board papers); the CLI runs locally, sees no network, and leaves no trace outside the operator's own environment. Verification belongs in the operator's pipeline, not in ours. Same code path the operator's clients can re-verify in the public inspector at any time, so the claim text and the published artefact agree by construction.
 
@@ -26560,7 +26531,7 @@ MX
 
             MX PDF Inspector CLI
 
-            A command-line tool for accredited operators: walks a PDF or directory tree, classifies each file as MX Compatible, EAA Tagged Only, or Plain, and exits non-zero when anything is below the bar. Same detection core as the public inspector. Bundled with active accreditation.
+            A command-line tool for accredited operators: walks a PDF or directory tree, classifies each file as MX Compatible, Tagged only (no MX metadata), or Plain, and exits non-zero when anything is below the bar. Same detection core as the public inspector. Bundled with active accreditation.
 
             See the offering
 
@@ -27959,9 +27930,9 @@ MX
 
           This inspector reads any file in your browser. There is no upload. We have no server-side record of which files you inspect. The parser itself ships from this site, with no third-party CDN call and no remote dependency at inspection time. The inspection is entirely a conversation between the file and your browser.
 
-          Drop a file above. The inspector reads the MX metadata in the file and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, EAA tagged only, or plain, with every MX field listed in a table: status, audience, canonical URL, the source file and its content hash, licence, lifecycle dates, and the rest. Any other format, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in it and classified MX or plain, with every field listed the same way. When the file has an embedded provenance chain, the evidence-chain view opens so you can walk it. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.
+          Drop a file above. The inspector reads the MX metadata in the file and reports what a machine sees. A PDF is read for its tagged structure tree, its XMP metadata packet, and the AI-governance provenance record if one is embedded, then classified MX Compatible, tagged only (no MX metadata), or plain, with every MX field listed in a table: status, audience, canonical URL, the source file and its content hash, licence, lifecycle dates, and the rest. Any other format, a raster image, an SVG, an HTML page, a markdown file, or a .mx.yaml sidecar, is read for the MX metadata embedded in it and classified MX or plain, with every field listed the same way. When the file has an embedded provenance chain, the evidence-chain view opens so you can walk it. You can download the inspection as machine-readable JSON, and for a PDF a markdown report and the extracted provenance record too.
 
-          For the conceptual background on PDFs, what each artefact is, why it matters under the European Accessibility Act and the EU AI Act, and how to verify any claim with three command-line tools, read the explainer: MX for PDFs. The inspector is the interactive companion; the explainer is the walk-through.
+          For the conceptual background on PDFs, what each artefact is, the regulatory context (the European Accessibility Act, in force since 28 June 2025, and the EU AI Act), and how to verify any claim with three command-line tools, read the explainer: MX for PDFs. The inspector is the interactive companion; the explainer is the walk-through.
 
           What you are looking at
 
@@ -27973,7 +27944,7 @@ MX
 
           Tagged structure (ISO 14289-1)
 
-          An MX Compatible PDF declares pdfuaid:part=1 in its XMP metadata packet, indicating PDF/UA-1 conformance to ISO 14289-1. The inspector reads the XMP packet and reports the declared Part. The tagged structure tree itself is the /StructTreeRoot entry in the PDF's /Catalog dictionary. It lets a screen reader walk the document the way a sighted person does, and it is what European Accessibility Act Directive 2019/882 expects for documents published from 28 June 2025 onwards.
+          An MX Compatible PDF declares pdfuaid:part=1 in its XMP metadata packet, declaring PDF/UA-1 (ISO 14289-1). The inspector reads the XMP packet and reports the declared Part; it does not validate the file against PDF/UA. The tagged structure tree itself is the /StructTreeRoot entry in the PDF's /Catalog dictionary. It lets a screen reader walk the document the way a sighted person does.
 
           Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
@@ -27993,7 +27964,7 @@ MX
 
           Responsible Person Identifier
 
-          The responsible person block names the human accountable for the file's audit chain: name, email, identifier URL, role, organisation, and country. The inspector reads it from the XMP packet (or from the embedded provenance payload as a fallback). The block is what regulators ask for under EU AI Act Article 4, the UK ICO accountability principle, the NIST AI Risk Management Framework, and EAA Directive 2019/882.
+          The responsible person block names the human accountable for the file's audit chain: name, email, identifier URL, role, organisation, and country. The inspector reads it from the XMP packet (or from the embedded provenance payload as a fallback). The block is what regulators ask for under EU AI Act Article 4, the UK ICO accountability principle, and the NIST AI Risk Management Framework.
 
           What the three tiers mean
 
@@ -28002,19 +27973,19 @@ MX
               MX Compatible
               The file declares a tagged structure tree and includes the MX XMP namespace. It is accessible, attested, and machine-readable. This is the bar the MX Compatible badge represents.
 
-              EAA Tagged Only
-              The file declares a tagged structure tree but no MX namespace. It is accessible (screen readers can walk it; EAA Directive 2019/882 conformance is plausible) but it is not attested. A regulator or AI agent cannot verify what the file claims or who authored it.
+              Tagged only (no MX metadata)
+              The file declares PDF/UA-1, the sign of a tagged structure tree a screen reader can walk, but carries no MX namespace, so it is not attested. A regulator or AI agent cannot verify what the file claims or who authored it. The inspector reads the declaration; it does not validate the file against PDF/UA and gives no conformance verdict under any law.
 
               Plain PDF
-              The file does not declare a tagged structure tree. A screen reader has to guess. An AI agent has to do vision-based reconstruction. The European Accessibility Act compliance bar set on 28 June 2025 is not met.
+              The file does not declare a tagged structure tree. A screen reader has to guess. An AI agent has to do vision-based reconstruction. Without that structure the file is hard to read with assistive technology.
 
           The MX Compatible badge
 
           If you arrived here by scanning a QR code, this is the badge you scanned. Every PDF this hub produces carries it: on the cover for reports and books, on the closing page for letters and briefings. The badge is not decoration. It is a short, readable summary of the evidence inside the file, and the QR resolves to this page so any reader can test the claim against their own copy.
 
-          Under the wordmark, the badge prints one conformance line:
+          Under the wordmark, the badge prints one line:
 
-          ISO 14289-1 Level 2 &middot; pdfuaid:Part=1 &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF &middot; EAA Directive 2019/882
+          Tagged PDF &middot; PDF/UA-1 declared (pdfuaid:Part=1) &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF
 
           That line is built to be read by four audiences at once. A European reader, a British reader, and an American reader each find an instrument they know. The fourth reader is a machine. An AI agent, a screen reader, or a regulator's validator does not read the visible badge; it reads the tagged structure, the XMP packet, and the provenance record behind it. The badge is for eyes, the artefacts are for machines, and both say the same thing. All four share one international standards baseline that belongs to none of them.
 
@@ -28024,20 +27995,16 @@ MX
                 What it asserts
                 Whose framework
 
-                ISO 14289-1 Level 2
-                The document is tagged to the PDF/UA-1 standard at Level 2: a logical structure tree plus a declared conformance claim a validator can check.
+                Tagged PDF
+                The document carries a logical structure tree, so a screen reader can walk it in reading order.
                 International
 
-                pdfuaid:Part=1
-                The XMP metadata packet states PDF/UA Part 1, so the conformance claim is machine-readable, not only visual.
+                PDF/UA-1 declared (pdfuaid:Part=1)
+                The XMP metadata packet declares PDF/UA Part 1 (ISO 14289-1), so a validator knows which standard to check the file against. The declaration is not a validation result and not a conformance verdict under any law.
                 International
 
                 EU AI Act
                 The embedded provenance record is built as evidence for the European Union Artificial Intelligence Act.
-                European
-
-                EAA Directive 2019/882
-                The tagged structure is built as evidence for the European Accessibility Act, in force from 28 June 2025.
                 European
 
                 UK ICO
@@ -28072,7 +28039,7 @@ MX
 
           Each layer reads from the same source. The detection core at mx-site/js/mx-inspector-core.js is shared by the inspector you are running and the gate that protects our outbound work. When the producer changes, when pdf.js changes, when the inspector changes, the same code path is exercised by both surfaces. A regression cannot quietly drift between them; if the test fails, the gate fails, and the inspector fails for every visitor in the same way.
 
-          This is the argument MX makes generally and that the inspector demonstrates specifically. Not "trust us, we did this carefully" but "here is the file, here is the rule, here is the check, run any of them yourself, decide for yourself." For the EU AI Act, the European Accessibility Act, and the AI-governance instruments emerging in adjacent jurisdictions, that distinction matters. An auditor holding the file can follow it to the rule and the check, and arrive at the same verdict the build saw. No proprietary intermediary, no closed-source verifier, no "ask the vendor."
+          This is the argument MX makes generally and that the inspector demonstrates specifically. Not "trust us, we did this carefully" but "here is the file, here is the rule, here is the check, run any of them yourself, decide for yourself." For the EU AI Act and the AI-governance instruments emerging in adjacent jurisdictions, that distinction matters. An auditor holding the file can follow it to the rule and the check, and arrive at the same verdict the build saw. No proprietary intermediary, no closed-source verifier, no "ask the vendor."
 
           The mechanism is the credibility. That is why every PDF we ship goes through this inspector, and why it runs in your browser whenever you ask.
 
@@ -28082,4 +28049,4 @@ MX
 
         For commissioning AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
 
-<!-- x-mx-sourceHash: 067d4851ac4a506d086c356a57ccfda6695756e4f55f37d78f9c3fadbaaf0eab -->
+<!-- x-mx-sourceHash: 40921da0e840c209fb1a11ef7e38db3e7b7ad0241feedde38b98c567b64bb783 -->

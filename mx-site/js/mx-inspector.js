@@ -55,7 +55,7 @@ const PDFJS_URL = '/js/vendor/pdfjs/pdf.min.js';
 const PDFJS_WORKER_URL = '/js/vendor/pdfjs/pdf.worker.min.js';
 
 const TIER_LABELS = {
-  mx: 'MX Compatible', 'eaa-tagged': 'EAA Tagged Only', plain: 'Plain', unsupported: 'Unsupported',
+  mx: 'MX Compatible', tagged: 'Tagged only (no MX metadata)', 'eaa-tagged': 'Tagged only (no MX metadata)', plain: 'Plain', unsupported: 'Unsupported',
 };
 
 // Carrier-neutral pivot copy for non-PDF carriers (the PDF-specific copy lives

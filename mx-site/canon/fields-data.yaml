@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.28'
+version: '6.42'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-09-27'
+modified: '2026-10-09'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -245,8 +245,11 @@ mx:
       explicit, never inside mx: block. Zone 2 (mx: block): all other fields. Optional Zone 2 fields with defined
       defaults may be omitted; tools treat absent optional fields as their documented default value.
     rule: >-
-      Only optional fields may have defaults. If an optional field's value matches its default, the field may be omitted
-      to reduce frontmatter size. Tools must handle absent optional fields by applying the documented default.
+      If an optional field's value matches its default, the field may be omitted to reduce frontmatter size. Tools must
+      handle absent optional fields by applying the documented default (fields-with-defaults). A required field with a
+      default is never omitted: a tool writes the default into the file, because a file is read away from the dictionary,
+      and the author may change it (written-defaults). A field whose authoring is defaulted takes its value from one of
+      these two lists (ADR 78).
     zones:
       top-level:
         fields:
@@ -300,13 +303,46 @@ mx:
       - field: aiGenerationReviewRequired
         default: true
         absent-means: AI-generated content requires human review
+      - field: personalIdentity
+        default: base
+        absent-means: The personal cog belongs to every identity
+      - field: declaredBy
+        default: self
+        absent-means: The owner made the declaration
+      - field: revisionTraces
+        default: kept
+        absent-means: Earlier versions stay recoverable by the owner alone
+    written-defaults:
+      - field: author
+        default-from: the operator registry entry (scripts/lib/operators.json) for the clone that writes the file
+      - field: created
+        default-from: the date of the file's first write
+      - field: modified
+        default-from: the date of the latest write, refreshed by the write-boundary heal
+      - field: audience
+        default: [humans, machines]
+      - field: stability
+        default: stable
+      - field: runbook
+        default-by-profile:
+          blog: >-
+            Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from
+            this file by the Intent CMS generator.
+        retired-wordings:
+          blog:
+            - Draft source for the mx-site blog. Promote via npm run promote to publish.
+      - field: servedAt
+        default-from: https://mx.allabout.network/blog/<slug>.html for a blog source, the generator's default route
+      - field: type
+        default-by-profile:
+          blog: blog-post
   contentTypeToProfile:
     info-doc: core
     field-dictionary: core
     specification: core
     briefing-doc: core
     guide: core
-    action-doc: cog
+    action-doc: action
     cog: cog
     eds-block: cog
     certificate-of-genuineness: cog
@@ -338,6 +374,7 @@ mx:
     aims:riskRegisterEntry: aims-risk-register
     aims:impactAssessment: aims-impact-assessment
     aims:policy: aims-policy
+    personal-cog: personal
   validationPolicy:
     keywords:
       - '@context'
@@ -458,6 +495,12 @@ mx:
     - old: x-mx-mount-upstream
       replacement: x-mx-mountUpstream
       notes: Renamed with x-mx-mount-type under NDR-14.
+    - old: x-mx-policy
+      replacement: x-mx-policyScope
+      notes: >-
+        A policy cog's governed scope (paths, boundary type, invariants) shared its name with the core policy field
+        (content handling rules for agents, inherited through effective-doc resolution). They are different items, so
+        the vendor block takes its own name and the core field is unchanged.
     - old: x-mx-riskLevel
       replacement: security.riskLevel
       notes: >-
@@ -472,6 +515,19 @@ mx:
     - old: x-mx-verifiability
       replacement: security.verifiability
       notes: Promoted with x-mx-riskLevel; see security.reversibility.
+    - old: x-mx-capabilities
+      replacement: security.capabilities
+      notes: >-
+        Promoted from the vendor layer into the open security block by operator decision, on the riskLevel
+        precedent: every x-mx- field is stripped from a published page (ADR 63), so a capability manifest declared
+        under the vendor name never reached the machine that needed it before running the artefact. One vocabulary
+        for every capability-bearing artefact. Narrative in field-cull-log.md.
+    - old: x-mx-automationConsent
+      replacement: security.automationConsent
+      notes: >-
+        Promoted into the open security block by operator decision, reversing its parking as a vendor stand-in:
+        how much an agent may do on its own is the autonomy half of excessive agency, and a declaration stripped on
+        publication cannot instruct the agent that meets the published page. Narrative in field-cull-log.md.
     - old: x-mx-contextRequired
       replacement: contextRequired
       notes: >-
@@ -505,6 +561,11 @@ mx:
     - old: bdr
       replacement: x-mx-bdr
       notes: CogNovaMX Business Decision Record registry pointer; vendor-specific.
+    - old: blogUrl
+      replacement: servedAt
+      notes: >-
+        Both named a source's public page, and servedAt is the routing input (ADR 76). Where a file declares both,
+        servedAt wins and blogUrl is dropped (ADR 78).
   blockTypes:
     - name: prose
       implicit: true
@@ -608,32 +669,62 @@ mx:
       implicit: false
       description: >-
         Trust and execution policy. Readers consult the security block to determine whether to execute action blocks or
-        render HTML blocks.
+        render HTML blocks. The block is written inline as an object, or names a profile from securityProfiles: the
+        string form (security: local-write) is shorthand for the object form (security: {profile: local-write}). A
+        reader resolves the named profile first, then applies the inline members on top. An inline member may only
+        tighten the profile, never loosen it. A member's tighten key says which direction is tighter: first (an earlier
+        validValues entry is tighter), last (a later entry is tighter), lower (a smaller number is tighter), subset (the
+        inline list must be a subset of the profile's), superset (the inline list must contain the profile's). A member
+        with no tighten key may be added when the profile leaves it unset, and must equal the profile's value when the
+        profile sets it. A name the registry does not hold is an error, never an empty block. A member's owaspLlmRisks
+        key lists the OWASP Top 10 for LLM Applications (2025) risks it speaks to, named in owaspLlmRiskNames below: it
+        records that a declaration is relevant to a risk, never that the risk is mitigated.
+      owaspLlmRiskReference: OWASP Top 10 for LLM Applications 2025
+      owaspLlmRiskNames:
+        LLM01: Prompt Injection
+        LLM02: Sensitive Information Disclosure
+        LLM03: Supply Chain
+        LLM04: Data and Model Poisoning
+        LLM05: Improper Output Handling
+        LLM06: Excessive Agency
+        LLM07: System Prompt Leakage
+        LLM08: Vector and Embedding Weaknesses
+        LLM09: Misinformation
+        LLM10: Unbounded Consumption
       fields:
-        - name: attestation
+        - name: profile
+          owaspLlmRisks: [LLM06]
           type: string
+          required: false
+          description: >-
+            The name of a named security profile in securityProfiles. Its members apply first; inline members of this
+            block override them and may only tighten.
+        - name: attestation
+          owaspLlmRisks: [LLM03]
+          type: string
+          tighten: first
           required: false
           validValues:
             - required
             - optional
           description: Whether cryptographic attestation is required
         - name: execution
+          owaspLlmRisks: [LLM06]
           type: string
+          tighten: first
           required: false
           validValues:
             - sandboxed
             - unrestricted
           description: Execution environment constraint
-        - name: trustLevel
-          type: number
-          required: false
-          description: Numeric trust tier (1-3)
         - name: policy
           type: string
           required: false
           description: Free text policy statement
         - name: riskLevel
+          owaspLlmRisks: [LLM06]
           type: string
+          tighten: last
           required: false
           validValues:
             - low
@@ -641,13 +732,15 @@ mx:
             - high
             - critical
           description: >-
-            Execution danger classification. Distinct from trustLevel (provenance quality). low = read-only, no side
+            Execution danger classification. Distinct from attestation (provenance quality). low = read-only, no side
             effects. medium = writes files or calls APIs. high = modifies system state, handles credentials. critical =
             destructive operations, financial transactions — SHOULD have a guardrail gate. With reversibility and
             verifiability, one of the three task properties a reader weighs before deciding whether to execute; riskLevel
             carries the stakes.
         - name: reversibility
+          owaspLlmRisks: [LLM06]
           type: string
+          tighten: last
           required: false
           validValues:
             - reversible
@@ -662,7 +755,9 @@ mx:
             behind a guardrail gate and name it in security.guardrail, the check the riskLevel definition asks for and
             cannot itself express.
         - name: verifiability
+          owaspLlmRisks: [LLM06, LLM09]
           type: string
+          tighten: last
           required: false
           validValues:
             - inspectable
@@ -677,6 +772,7 @@ mx:
             rather than a reason to add a sign-off. Delegation can rise when outputs are inspectable, errors are
             recoverable, and stakes are bounded.
         - name: guardrail
+          owaspLlmRisks: [LLM06]
           type: string
           required: false
           validValues:
@@ -692,7 +788,145 @@ mx:
             runs under execution: sandboxed, so its effect is confined. An action declaring reversibility irreversible
             at riskLevel high or critical names its guardrail here; a reader that finds none declared treats the action
             as one it may not run unattended. The free text of policy carries any detail the enum cannot.
+        - name: dryRunAction
+          owaspLlmRisks: [LLM06]
+          type: string
+          required: false
+          description: >-
+            The id of the execute action that rehearses this one with no effect. It backs guardrail dry-run-first as
+            allowedRoles backs allowed-roles: a reader runs the named action, reviews the rehearsal, and only then
+            runs the real one. The value is an execute.actions[].id in the same cog.
+        - name: recovery
+          owaspLlmRisks: [LLM06]
+          type: string
+          required: false
+          description: >-
+            How an error in this action is corrected: a short procedure, or the id of an execute action that performs
+            the correction. reversibility correctable promises a stated recovery procedure; this member states it, so
+            a reader knows the way back before it runs the action. For a skill or mod payload it names the uninstall
+            step.
+        - name: installs
+          owaspLlmRisks: [LLM03, LLM04]
+          type: string
+          tighten: first
+          required: false
+          validValues:
+            - none
+            - session
+            - persistent
+          description: >-
+            Whether the payload stays in the agent host after the action ends. none = it runs and ends (a script or
+            instructions). session = it stays for the rest of the session (a skill that registers hooks). persistent =
+            it stays for every later session until removed (an installed skill, mod or plugin). A skill or mod
+            payload never declares none; its risk is that of what it can do once installed, not of the copy.
+        - name: installScope
+          owaspLlmRisks: [LLM03, LLM06]
+          type: string
+          tighten: first
+          required: false
+          validValues:
+            - project
+            - user
+            - machine
+          description: >-
+            How far an install reaches: project = this repository only (under its own .claude/), user = every
+            project for this user (under ~/.claude/), machine = every user of the machine. A persistent install at
+            user or machine scope names guardrail human-approval and a recovery step that uninstalls it.
+        - name: host
+          owaspLlmRisks: [LLM03]
+          type: string
+          required: false
+          description: >-
+            The agent host and version range the payload needs, as host@range (claude-code@>=2.1). A reader checks
+            it before installing and refuses on a mismatch. testedWith (from the code-mod profile) records the last
+            version tested; host is the requirement.
+        - name: preApprovedTools
+          owaspLlmRisks: [LLM01, LLM06]
+          type: array
+          tighten: subset
+          required: false
+          description: >-
+            The host tool rules a skill payload grants itself without a permission prompt for the turn that invokes
+            it (Read, Bash(git add *)). It mirrors the skill's allowed-tools and widens access; it never restricts
+            it. Where payloadRef names a local skill, the two lists are equal. A shell, write or network rule in a
+            skill the model may load itself (invocation model or both) needs a guardrail.
+        - name: disallowedTools
+          owaspLlmRisks: [LLM06]
+          type: array
+          tighten: superset
+          required: false
+          description: >-
+            The host tools removed while a skill payload runs. It mirrors the skill's disallowed-tools, the
+            restricting half; where payloadRef names a local skill, the two lists are equal.
+        - name: invocation
+          owaspLlmRisks: [LLM01]
+          type: string
+          required: false
+          validValues:
+            - user
+            - both
+            - model
+          description: >-
+            Who can load a skill payload: user = only on the user's request (disable-model-invocation true), model =
+            only by the model (user-invocable false), both = either (neither set). A skill the model loads itself is
+            a prompt-injection surface: untrusted text that matches a trigger loads it. Where payloadRef names a
+            local skill, this equals what its frontmatter sets.
+        - name: components
+          owaspLlmRisks: [LLM03, LLM06]
+          type: array
+          required: false
+          validValues:
+            - skills
+            - commands
+            - agents
+            - hooks
+            - mcpServers
+            - lspServers
+            - mod
+            - monitors
+            - workflows
+            - outputStyles
+          description: >-
+            What a plugin payload adds to the host, named as the plugin manifest names its components. Each widens
+            what is installed; hooks and mcpServers in particular run code in every later session, so a payload
+            listing either declares capabilities that cover them.
+        - name: capabilities
+          owaspLlmRisks: [LLM02, LLM06]
+          type: array
+          tighten: subset
+          required: false
+          validValues:
+            - processSpawn
+            - credentialRead
+            - networkEgress
+            - filesystemWrite
+            - telemetryEmit
+            - terminalControl
+            - destructive
+            - hostExtend
+          description: >-
+            The capability tokens the executable content holds, from a closed vocabulary modelled on the Android
+            permission taxonomy so declarations compare across artefacts (an action cog, an editor extension, a
+            package). A machine-readable statement of what the artefact touches, verified against its own code
+            under Declare, Verify, Enforce, and held to by a governed runtime. Capability is read as risk against
+            publisher trust, not off the resource. An explicit empty list declares that the content holds none of
+            them, and is verified like any other value; an absent field declares nothing.
+        - name: automationConsent
+          owaspLlmRisks: [LLM06]
+          type: string
+          tighten: last
+          required: false
+          validValues:
+            - allowed
+            - advisory-only
+            - forbidden
+          description: >-
+            What a machine may do with this artefact on its own: act on it autonomously (allowed), read and recommend
+            while a human decides (advisory-only), or not act at all (forbidden). A declaration honest agents honour,
+            not an enforcement; attestation is what makes it attributable and dated. advisory-only carries the
+            human-decides meaning under Human-in-Command, so there is no separate per-action requiresHuman flag.
         - name: scope
+          owaspLlmRisks: [LLM06]
           type: object
           required: false
           description: >-
@@ -701,10 +935,12 @@ mx:
           fields:
             - name: filesystem
               type: array
+              tighten: subset
               required: false
               description: Glob patterns of allowed filesystem paths (e.g. [scripts/**, mx-outputs/pdf/**])
             - name: network
               type: string
+              tighten: first
               required: false
               validValues:
                 - none
@@ -713,6 +949,7 @@ mx:
               description: Network access permitted during execution
             - name: dataBoundary
               type: string
+              tighten: first
               required: false
               validValues:
                 - user
@@ -721,10 +958,12 @@ mx:
               description: Whose data the cog may access
             - name: maxRecords
               type: number
+              tighten: lower
               required: false
               description: Maximum records per operation — prevents bulk extraction
             - name: allowedOperations
               type: array
+              tighten: subset
               required: false
               validValues:
                 - read
@@ -734,12 +973,14 @@ mx:
                 - execute
               description: Permitted filesystem operations
         - name: audit
+          owaspLlmRisks: [LLM06]
           type: object
           required: false
           description: Audit trail requirements. Declares what should be logged when the cog executes.
           fields:
             - name: logLevel
               type: string
+              tighten: first
               required: false
               validValues:
                 - full
@@ -760,12 +1001,14 @@ mx:
               required: false
               description: Whether to log output results
         - name: dataProtection
+          owaspLlmRisks: [LLM02]
           type: object
           required: false
           description: Data protection policy for cog outputs. Declares sensitivity classification and redaction rules.
           fields:
             - name: outputClassification
               type: string
+              tighten: last
               required: false
               validValues:
                 - public
@@ -775,10 +1018,12 @@ mx:
               description: Sensitivity classification of the cog's outputs
             - name: prohibitedFields
               type: array
+              tighten: superset
               required: false
               description: Field names that must never appear in outputs (e.g. [ssn, creditCard, apiKey, password])
             - name: redaction
               type: string
+              tighten: first
               required: false
               validValues:
                 - auto
@@ -795,12 +1040,14 @@ mx:
                 - pass-through
               description: How personally identifiable information is treated in outputs
         - name: rateLimit
+          owaspLlmRisks: [LLM10]
           type: object
           required: false
           description: Rate limiting constraints. Prevents runaway execution and abuse.
           fields:
             - name: maxCalls
               type: number
+              tighten: lower
               required: false
               description: Maximum number of invocations within the time window
             - name: window
@@ -820,7 +1067,9 @@ mx:
                 - global
               description: Scope of rate limit tracking
         - name: allowedRoles
+          owaspLlmRisks: [LLM06]
           type: array
+          tighten: subset
           required: false
           description: >-
             Roles permitted to execute this cog. Bridges the guardrail pattern — declares which roles the gate should
@@ -880,6 +1129,56 @@ mx:
           type: string
           required: true
           description: Description of changes
+  securityProfiles:
+    - name: read-only
+      description: >-
+        An action that only reads. Nothing changes, so nothing needs undoing, and the output can be read in full. No
+        network.
+      members:
+        riskLevel: low
+        reversibility: reversible
+        verifiability: inspectable
+        scope:
+          network: none
+          allowedOperations: [read]
+    - name: local-write
+      description: >-
+        An action that reads and writes files on the machine it runs on, under version control, so any change can be
+        undone. No network.
+      members:
+        riskLevel: medium
+        reversibility: reversible
+        verifiability: inspectable
+        scope:
+          network: none
+          allowedOperations: [read, write, create]
+    - name: external-send
+      description: >-
+        An action whose effect leaves the machine and cannot be recalled: an email sent, a post made, a page published,
+        a payment made. A named person approves before the effect lands, and the run is logged in full.
+      members:
+        riskLevel: high
+        reversibility: irreversible
+        verifiability: inspectable
+        guardrail: human-approval
+        scope:
+          network: external
+        audit:
+          logLevel: full
+    - name: destructive
+      description: >-
+        An action that deletes or overwrites what cannot be restored. It runs confined, a named person approves it first,
+        and the run is logged in full.
+      members:
+        riskLevel: critical
+        reversibility: irreversible
+        verifiability: inspectable
+        guardrail: human-approval
+        execution: sandboxed
+        scope:
+          allowedOperations: [read, write, create, delete]
+        audit:
+          logLevel: full
   carrierFormats:
     - format: .cog.md
       metadataLocation: YAML frontmatter between --- delimiters
@@ -1132,6 +1431,9 @@ mx:
   fields:
     - name: title
       type: string
+      authoring: authored
+      inPlainWords: 'This document is called {value}.'
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
       definition: Human-readable document title. The canonical identity field for all documents including cog files.
       example: MX Field Dictionary
       alignsWith:
@@ -1139,9 +1441,11 @@ mx:
       notes: Required on every document. If both title in frontmatter and an H1 heading exist, avoid duplication.
       status: canonical
       profile: core
-      required: true
     - name: description
       type: string
+      authoring: authored
+      inPlainWords: 'In short: {value}'
+      requiredIn: [core, skill, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
       definition: One-line summary. Max 160 characters. Used by search engines, AI agents, and registry listings.
       example: Single source of truth for every YAML frontmatter field.
       alignsWith:
@@ -1150,9 +1454,11 @@ mx:
       notes: Max 160 characters. Used by search engines, AI agents, and the cog registry.
       status: canonical
       profile: core
-      required: true
     - name: author
       type: string
+      authoring: defaulted
+      inPlainWords: 'Written by {value}.'
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
       definition: Creator of the document. Person name or collaborative attribution.
       example: Tom Cranstoun and Maxine
       alignsWith:
@@ -1161,9 +1467,9 @@ mx:
       notes: Immutable after creation. For collaborative work, list all contributors. Distinct from maintainer.
       status: canonical
       profile: core
-      required: true
     - name: originator
       type: string
+      authoring: authored
       definition: >-
         The identity that originated this document or specification. Zone 1 (immutable, alongside author), distinct
         from the mutable Zone 2 stewardship object (steward, accountableContact, legalEntity, brand).
@@ -1175,9 +1481,11 @@ mx:
         external spec's vocabulary.
       status: canonical
       profile: core
-      required: optional
     - name: created
       type: string
+      authoring: defaulted
+      inPlainWords: 'First written on {value}.'
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
       definition: Creation date. ISO 8601 format (YYYY-MM-DD).
       example: '2026-03-01'
       alignsWith:
@@ -1186,9 +1494,11 @@ mx:
       notes: Immutable — set once, never updated. ISO 8601 (YYYY-MM-DD).
       status: canonical
       profile: core
-      required: true
     - name: modified
       type: string
+      authoring: defaulted
+      inPlainWords: 'Last changed on {value}.'
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
       definition: Last modification date. ISO 8601 format (YYYY-MM-DD).
       example: '2026-03-02'
       alignsWith:
@@ -1197,9 +1507,9 @@ mx:
       notes: Update every time file content changes. ISO 8601 (YYYY-MM-DD).
       status: canonical
       profile: core
-      required: true
     - name: reviewDate
       type: string
+      authoring: authored
       definition: >-
         The date by which this document's content must next be reviewed for accuracy, declared at Zone 1 (top
         level). ISO 8601 (YYYY-MM-DD).
@@ -1207,18 +1517,22 @@ mx:
       notes: Zone 1 sibling of expires. Pairs with the mx.reviewBy field used on cog-profile documents; both express the same concept at different zones.
       status: canonical
       profile: core
-      required: optional
     - name: contributors
       type: array
+      authoring: authored
       definition: Additional collaborators beyond the primary author.
       example:
         - Tom Cranstoun
       notes: Distinct from author (the primary/immutable creator attribution).
       status: canonical
       profile: core
-      required: optional
     - name: version
       type: string
+      authoring: authored
+      inPlainWords: 'This is version {value} of the document.'
+      requiredIn: [portable, aims-policy]
+      recommendedIn: [core, skill, book, blog, contact, report, audit, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, personal]
+      optionalIn: [folder]
       definition: Semantic version string. Lives in frontmatter, never in filenames.
       example: '2.0'
       alignsWith:
@@ -1226,9 +1540,13 @@ mx:
       notes: Always quote in YAML (prevents 1.0 being parsed as number). Lives in frontmatter, never in filenames.
       status: canonical
       profile: core
-      required: recommended
     - name: category
       type: string
+      authoring: authored
+      inPlainWords: 'It belongs to the {value} group.'
+      requiredIn: [skill]
+      recommendedIn: [cog, action]
+      optionalIn: [blog, contact]
       definition: >-
         The functional grouping a document belongs to, declared at Zone 1a (top level) beside its identity, so a
         registry, a graph or an agent can group documents without opening the mx: block. Controlled vocabulary; see
@@ -1318,9 +1636,12 @@ mx:
         a deprecated synonym in the deprecations table. Promoted by ADR 74.
       status: canonical
       profile: core
-      required: recommended
     - name: status
       type: string
+      authoring: authored
+      inPlainWords: 'Its status is {value}.'
+      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      recommendedIn: [core, book, contact, report, audit, component, personal]
       definition: >-
         Lifecycle state. Standard values: draft, active, published, deprecated, archived, unknown. Decision records:
         proposed, accepted, rejected, superseded. Workflow: pending, review, approved, planning, open, closed, sent.
@@ -1358,9 +1679,12 @@ mx:
         says why, and whom to contact, in statusNotice; a successor is named in supersededBy.
       status: canonical
       profile: core
-      required: recommended
     - name: tags
       type: array
+      authoring: authored
+      inPlainWords: 'It is about {value}.'
+      recommendedIn: [cog, book, blog, action]
+      optionalIn: [core, folder, migration, routing, skill, html, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal]
       definition: Discovery keywords. Array of strings for search, filtering, and agent matching.
       example:
         - metadata
@@ -1373,9 +1697,11 @@ mx:
       notes: Array of lowercase strings for search, filtering, and agent matching.
       status: canonical
       profile: core
-      required: optional
     - name: type
       type: string
+      authoring: authored
+      inPlainWords: 'It is a {value}.'
+      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action]
       definition: >-
         Document kind. OKF reserved top-level field naming what the file is, so a machine selects the right handling
         before reading the body. Common values include info-doc, action, blog-post, report, guide, skill, hook,
@@ -1388,9 +1714,11 @@ mx:
         own kinds (blog sources use blog-post, action cogs use action).
       status: canonical
       profile: core
-      required: true
     - name: resource
       type: string
+      inPlainWords: 'It describes the asset at {value}.'
+      authoring: authored
+      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action]
       definition: >-
         The URI of the one external asset this document describes. OKF reserved top-level field; absent on an
         abstract document (a playbook, a runbook, an info-doc) that describes no single asset.
@@ -1401,9 +1729,14 @@ mx:
         be a valid URI; consumers are permissive.
       status: canonical
       profile: core
-      required: optional
     - name: canonicalUri
       type: string
+      authoring: derived
+      derivation: path
+      inPlainWords: 'The authoritative copy lives at {value}.'
+      requiredIn: [portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      recommendedIn: [book, blog, contact, report, audit]
+      optionalIn: [skill]
       definition: >-
         The permanent, globally unique URI where the authoritative copy of this document lives. A reader that meets a
         copy anywhere can walk back to the source.
@@ -1415,9 +1748,9 @@ mx:
         presence and exact match are enforced at the write boundary.
       status: canonical
       profile: core
-      required: true
     - name: citeAs
       type: string
+      authoring: authored
       definition: >-
         The persistent identifier a reader uses when citing this document - a DOI, an ARK, a URN, or a stable URL -
         as a URI. canonicalUri says where the current copy lives; citeAs says what to write in a reference list, and
@@ -1432,9 +1765,9 @@ mx:
         served page. When absent, canonicalUri is the citation target.
       status: canonical
       profile: core
-      required: optional
     - name: alternateFormats
       type: array
+      authoring: authored
       definition: >-
         The other renderings of this same document a reader may fetch instead - the markdown behind an HTML page, the
         PDF beside a report, the JSON record beside a human-readable declaration - each an object naming the
@@ -1454,23 +1787,26 @@ mx:
         field.
       status: canonical
       profile: core
-      required: optional
     - name: alternateFormats.uri
       type: string
+      authoring: authored
       definition: The URI of one alternate rendering of this document.
       example: https://mx.allabout.network/blog/example.pdf
       status: canonical
       profile: core
-      required: optional
     - name: alternateFormats.format
       type: string
+      authoring: authored
       definition: The IANA media type of one alternate rendering of this document.
       example: application/pdf
       status: canonical
       profile: core
-      required: optional
     - name: audience
       type: string-or-array
+      authoring: defaulted
+      inPlainWords: 'It is written for {value}.'
+      requiredIn: [cog, blog, contact, report, audit, action]
+      optionalIn: [core, skill]
       definition: >-
         Intended readership. Broad enum category only. For specific named people, organisations, or roles, use
         `targetReaders` instead.
@@ -1498,9 +1834,9 @@ mx:
         and product managers'), put that in `targetReaders` and keep `audience` limited to this enum.
       status: canonical
       profile: core
-      required: optional
     - name: targetReaders
       type: string-or-array
+      authoring: authored
       definition: >-
         Specific named people, organisations, or roles this content addresses. Freetext companion to `audience` (which
         is enum-only). Use when you need to record 'Janus Boye, Founder, Boye & Company' or 'Business leaders, CTOs,
@@ -1511,9 +1847,9 @@ mx:
         `audience: [stakeholders]` and `targetReaders: 'Janus Boye'`.
       status: canonical
       profile: core
-      required: optional
     - name: applicability
       type: object
+      authoring: authored
       definition: >-
         The conditions under which this document's content is in force. A reader that does not match a declared
         condition treats the document as not applicable to it.
@@ -1530,9 +1866,9 @@ mx:
         rather than where it is in force, defer to Schema.org spatialCoverage.
       status: canonical
       profile: core
-      required: optional
     - name: applicability.jurisdiction
       type: array
+      authoring: authored
       definition: The legal or regulatory regimes in which this document's content is in force.
       example:
         - EU
@@ -1545,9 +1881,9 @@ mx:
         this document applies.
       status: canonical
       profile: core
-      required: optional
     - name: applicability.product
       type: string-or-array
+      authoring: authored
       definition: The product or products this document's content applies to.
       example: mx-registry
       notes: >-
@@ -1555,9 +1891,9 @@ mx:
         declaration to a range of releases.
       status: canonical
       profile: core
-      required: optional
     - name: applicability.productVersion
       type: string
+      authoring: authored
       definition: >-
         The range of product releases this document's content applies to, written as a semantic-version range
         expression.
@@ -1567,9 +1903,9 @@ mx:
         than the releases of the thing it describes.
       status: canonical
       profile: core
-      required: optional
     - name: applicability.role
       type: array
+      authoring: authored
       definition: The reader roles this document's content applies to.
       example:
         - administrator
@@ -1578,18 +1914,18 @@ mx:
         enum for who the content is written for; role narrows to whom it is operative for.
       status: canonical
       profile: core
-      required: optional
     - name: applicability.platform
       type: array
+      authoring: authored
       definition: The platforms or runtime environments this document's content applies to.
       example:
         - linux
         - macos
       status: canonical
       profile: core
-      required: optional
     - name: applicability.effectiveFrom
       type: string
+      authoring: authored
       definition: The date from which this document's content is in force. ISO 8601 date.
       example: '2026-09-01'
       notes: >-
@@ -1597,9 +1933,9 @@ mx:
         document can be published ahead of the date its content takes effect.
       status: canonical
       profile: core
-      required: optional
     - name: applicability.effectiveUntil
       type: string
+      authoring: authored
       definition: The date after which this document's content is no longer in force. ISO 8601 date.
       example: '2027-06-30'
       notes: >-
@@ -1607,9 +1943,9 @@ mx:
         review-or-archive prompt and leaves the content applicable until someone acts on it.
       status: canonical
       profile: core
-      required: optional
     - name: statusNote
       type: string
+      authoring: authored
       definition: >-
         Freetext detail accompanying `status`. Use when status has meaningful context beyond the enum value — e.g.
         status: active with statusNote: 'Phase 1 Complete, Phase 2 in design'.
@@ -1617,9 +1953,12 @@ mx:
       notes: Freetext. `status` stays constrained to its enum; nuance and workflow context go here.
       status: canonical
       profile: core
-      required: optional
     - name: purpose
       type: string
+      authoring: authored
+      inPlainWords: 'What it is for: {value}'
+      requiredIn: [cog, blog, contact, report, audit, aims-system-inventory, action]
+      optionalIn: [core, skill]
       definition: Free-text statement of why this document exists. Single sentence.
       example: Reference for any contributor adding metadata to non-markdown files.
       alignsWith:
@@ -1629,9 +1968,9 @@ mx:
         prose. Distinct from contentType (which classifies what the content is).
       status: canonical
       profile: core
-      required: optional
     - name: summary
       type: string
+      authoring: authored
       definition: >-
         A longer prose overview of what this document does, in paragraph form. Distinct from description (short,
         SEO-scoped, top-level) and purpose (single-sentence why, and on cog-spec documents a structured
@@ -1641,9 +1980,12 @@ mx:
         Defines the grammar, the conventional keys, and the equivalence rule.
       status: canonical
       profile: core
-      required: optional
     - name: license
       type: string
+      authoring: authored
+      inPlainWords: 'It is licensed under {value}.'
+      requiredIn: [portable]
+      optionalIn: [core]
       definition: SPDX license identifier.
       example: proprietary
       alignsWith:
@@ -1651,9 +1993,11 @@ mx:
       notes: 'SPDX identifier. Common values: proprietary, MIT, Apache-2.0, CC-BY-4.0.'
       status: canonical
       profile: core
-      required: optional
     - name: maintainer
       type: string
+      authoring: authored
+      inPlainWords: '{value} maintains it.'
+      optionalIn: [core]
       definition: >-
         Person or team responsible for maintaining this document. Distinct from author — maintainer handles ongoing
         updates.
@@ -1663,17 +2007,18 @@ mx:
       notes: Mutable. Distinct from author (immutable creator). The person handling ongoing updates.
       status: canonical
       profile: core
-      required: optional
     - name: ownership
       type: string-or-object
+      authoring: authored
+      optionalIn: [core]
       definition: Ownership details. Can be a string (owner name) or object with owner, delegate, and contact.
       example: Tom Cranstoun
       notes: Can be a string or object with owner, delegate, and contact fields.
       status: canonical
       profile: core
-      required: optional
     - name: stewardship
       type: object
+      authoring: authored
       definition: >-
         Zone 2 (mutable) authorship object grouping the four roles distinct from the immutable Zone 1 originator/author:
         steward, accountableContact, legalEntity, brand.
@@ -1688,9 +2033,12 @@ mx:
         Sub-keys are free-form strings, not separately registered.
       status: canonical
       profile: core
-      required: optional
     - name: domain
       type: string
+      inPlainWords: 'Its subject area is {value}.'
+      authoring: authored
+      requiredIn: [folder]
+      optionalIn: [core]
       definition: >-
         Business domain or subject area. In folder metadata, lives under the mx: object and is an identity field (never
         inherited). Values are context-specific. In the folder profile, the established estate convention writes this
@@ -1702,9 +2050,10 @@ mx:
       profile:
         - core
         - folder
-      required: optional
     - name: segment
       type: string
+      authoring: authored
+      optionalIn: [core]
       definition: >-
         Segment classifier. Used in two contexts: (1) audience segment — developer, author, agent, business; (2) time
         segment for session reports — morning, afternoon, evening.
@@ -1725,17 +2074,26 @@ mx:
       profile:
         - core
         - report
-      required: optional
     - name: partOf
       type: string
+      valueType: reference
+      alignsWith:
+        - dcterms:isPartOf
+      authoring: authored
+      inPlainWords: 'It is part of {value}.'
+      requiredIn: [cog, action]
+      optionalIn: [contact, report, audit]
       definition: Parent collection, suite, or initiative.
       example: mx-the-gathering
       notes: Required for cog files. Names the parent collection or initiative.
       status: canonical
       profile: cog
-      required: true
     - name: buildsOn
       type: array
+      valueType: reference
+      authoring: authored
+      inPlainWords: 'It builds on {value}.'
+      recommendedIn: [cog, action]
       definition: >-
         Context graph. Array of cog names this document builds upon. Soft dependency — provides context, not a hard
         requirement.
@@ -1745,9 +2103,9 @@ mx:
       notes: Soft dependency for context. Builds the cog knowledge graph.
       status: canonical
       profile: cog
-      required: optional
     - name: requires
       type: array
+      authoring: authored
       definition: Hard dependencies. Array of cog names that must exist for this cog to function.
       example:
         - node-runtime
@@ -1755,9 +2113,14 @@ mx:
       notes: Hard dependency. The cog cannot function without these.
       status: canonical
       profile: cog
-      required: optional
     - name: refersTo
       type: array
+      valueType: reference
+      alignsWith:
+        - dcterms:references
+      authoring: authored
+      inPlainWords: 'It refers to {value}.'
+      optionalIn: [cog, contact, report, audit, personal, action]
       definition: Related cogs or external resources. Informational links, not dependencies.
       example:
         - field-dictionary
@@ -1765,9 +2128,10 @@ mx:
       notes: Informational links, not dependencies.
       status: canonical
       profile: cog
-      required: optional
     - name: refersToExternal
       type: array
+      authoring: authored
+      inPlainWords: 'It cites {value}.'
       definition: >-
         The external works this document draws on or cites, one entry per work, each a citation string a reader can
         resolve without the repository: author, title, venue or publisher, date, and an identifier such as an arXiv
@@ -1785,10 +2149,12 @@ mx:
         Distinct from resource, the one asset a document describes; a value equal to any resource is an error.
       status: canonical
       profile: core
-      required: optional
       context: 'Declared on any document whose argument rests on named external works: papers, standards, essays, reports.'
     - name: corroboratedBy
       type: array
+      authoring: authored
+      optionalIn: [personal]
+      inPlainWords: 'Outside sources that make the same claims: {value}.'
       definition: >-
         The external authoritative sources that independently state this document's load-bearing claims: a flat list
         of http(s) URLs, each of which also appears as a citation in the body.
@@ -1804,10 +2170,10 @@ mx:
         Governing principle: Corroboration over Assertion.
       status: canonical
       profile: core
-      required: optional
       context: 'Declared on any document whose claims are load-bearing; enforced today on mx-site blog sources.'
     - name: contestedBy
       type: array
+      authoring: authored
       definition: >-
         The recorded disagreements behind this document's load-bearing claims: an array of objects, each naming the
         disputed claim, the contesting sources and what each actually states, whether the disagreement is resolved,
@@ -1828,10 +2194,191 @@ mx:
         scripts/check-blog-corroboration.cjs (Gate 27). Governing principle: Corroboration over Assertion.
       status: canonical
       profile: core
-      required: optional
       context: 'Declared on any document that states a claim authoritative sources disagree about.'
+    # --- Claim basis: how each load-bearing claim is known. Corroboration (above) records that an outside
+    # source agrees; this family records the standing of every claim, including the ones nobody has checked,
+    # so a machine can tell what it was told from what has been confirmed. Governing principle: Corroboration
+    # over Assertion. Enforced by scripts/lib/claim-basis.cjs through scripts/check-blog-corroboration.cjs (Gate 27).
+    - name: claimBasis
+      type: string
+      authoring: authored
+      optionalIn: [personal]
+      inPlainWords: 'Its load-bearing claims are {value}.'
+      definition: >-
+        How this document's load-bearing claims are known, taken as a whole: asserted, inferred, observed,
+        corroborated, contested, or mixed when the claims differ.
+      example: mixed
+      validValues:
+        - asserted
+        - inferred
+        - observed
+        - corroborated
+        - contested
+        - mixed
+      notes: >-
+        The document-level summary of claims. When claims is declared, claimBasis equals the one basis every entry
+        shares, or mixed. A reader that finds no basis for a claim treats it as asserted: a statement nobody has
+        checked. Repetition never changes a basis: a claim retrieved, quoted or restated many times is still
+        asserted until an outside source states it.
+      status: canonical
+      profile: core
+      context: 'Declared on any document, record or memory store whose claims a machine may act on.'
+    - name: claims
+      type: array
+      authoring: authored
+      inPlainWords: 'Its load-bearing claims, each with how it is known: {value}.'
+      definition: >-
+        The load-bearing claims this document or record makes, each an object naming the statement, its basis, and
+        the evidence that basis requires.
+      example:
+        - statement: The contract renews on 1 March 2027.
+          basis: corroborated
+          corroboratedBy:
+            - https://example.com/contracts/renewal-notice
+        - statement: The client prefers short answers.
+          basis: inferred
+          inferredFrom:
+            - session log 2026-10-02, three requests to shorten a reply
+          confidence: 0.6
+          confidenceBasis: Three requests in one session; no statement from the client.
+        - statement: The supplier is reliable.
+          basis: asserted
+          assertedBy: operator
+      notes: >-
+        Each basis carries its own evidence. asserted names who said it (assertedBy); corroborated names the outside
+        sources (corroboratedBy, external and cited in the body); inferred names what the conclusion rests on
+        (inferredFrom); observed names who or what recorded it and how (observedBy); contested requires the
+        document's contestedBy. A confidence value is allowed only on an inferred claim and always travels with its
+        reason, so a change in confidence can be explained. Aligns with W3C PROV-O wasAttributedTo and
+        wasDerivedFrom rather than defining a new derivation vocabulary.
+      status: canonical
+      profile: core
+      context: 'Declared on any document, record or memory store whose claims a machine may act on.'
+    - name: claims[].statement
+      type: string
+      alignsWith:
+        - schema:text
+      inPlainWords: 'The claim reads: {value}'
+      authoring: authored
+      definition: The claim as this document states it, in one sentence.
+      example: The contract renews on 1 March 2027.
+      status: canonical
+      profile: core
+    - name: claims[].basis
+      type: string
+      authoring: authored
+      inPlainWords: 'This claim is {value}.'
+      definition: How the claim is known.
+      example: asserted
+      validValues:
+        - asserted
+        - inferred
+        - observed
+        - corroborated
+        - contested
+      notes: >-
+        asserted - a party states it and nobody independent has confirmed it, including what a user or operator
+        tells a machine. inferred - concluded from other claims or behaviour; nobody stated it directly. observed -
+        recorded directly by a named system or person through a stated method. corroborated - an external
+        authoritative source independently states it. contested - authoritative sources disagree, and the
+        disagreement is recorded in contestedBy. There is no mixed value at claim level.
+      status: canonical
+      profile: core
+    - name: claims[].assertedBy
+      type: string
+      alignsWith:
+        - prov:wasAttributedTo
+      authoring: authored
+      inPlainWords: 'This claim was stated by {value}.'
+      definition: The person, party, or system that stated the claim; required when the basis is asserted.
+      example: operator
+      notes: >-
+        Names a role or a parties entry rather than a private individual where the record travels. Saying who
+        asserted a claim is what keeps an assertion from passing as a checked fact when it is retrieved later.
+      status: canonical
+      profile: core
+    - name: claims[].corroboratedBy
+      type: array
+      inPlainWords: 'Outside sources that state this claim: {value}.'
+      authoring: authored
+      definition: >-
+        The external authoritative sources that independently state this one claim; required when the basis is
+        corroborated, with each URL external to the publisher and cited in the body.
+      example:
+        - https://example.com/contracts/renewal-notice
+      notes: The per-claim form of the document-level corroboratedBy, under the same orphan and self-reference rules.
+      status: canonical
+      profile: core
+    - name: claims[].inferredFrom
+      type: array
+      alignsWith:
+        - prov:wasDerivedFrom
+      inPlainWords: 'This claim was concluded from {value}.'
+      authoring: authored
+      definition: >-
+        The claims, records, or sources an inferred claim was concluded from; required when the basis is inferred.
+      example:
+        - session log 2026-10-02, three requests to shorten a reply
+      notes: >-
+        An inference is never stronger than what it rests on: when an entry here is itself only asserted, the
+        inferred claim inherits that weakness.
+      status: canonical
+      profile: core
+    - name: claims[].observedBy
+      type: string
+      inPlainWords: 'This claim was recorded directly by {value}.'
+      authoring: authored
+      definition: >-
+        The system or person that recorded an observed claim directly, and the method used; required when the
+        basis is observed.
+      example: 'scripts/check-asset-links.cjs, HTTP status check'
+      status: canonical
+      profile: core
+    - name: claims[].confidence
+      type: number
+      authoring: authored
+      inPlainWords: 'Confidence in this inference is {value} on a scale of 0 to 1.'
+      definition: The confidence in an inferred claim, from 0 to 1; allowed only when the basis is inferred.
+      example: 0.6
+      notes: >-
+        A declared, asserted, observed or corroborated claim carries no confidence value, because it is a statement
+        of where the claim came from rather than an estimate. Never folded into a combined trust score.
+      status: canonical
+      profile: core
+    - name: claims[].confidenceBasis
+      type: string
+      inPlainWords: 'The confidence has that value because {value}'
+      authoring: authored
+      definition: Why the confidence value is what it is; required whenever confidence is given.
+      example: Three requests in one session; no statement from the client.
+      notes: >-
+        A bare number cannot say why it moved. Recording the reason beside the value lets a reader see what
+        evidence raised or lowered it.
+      status: canonical
+      profile: core
+    - name: claims[].recordedAt
+      type: string
+      inPlainWords: 'This claim was recorded on {value}.'
+      authoring: authored
+      definition: The ISO 8601 date or timestamp at which the claim and its basis were recorded.
+      example: '2026-10-06T14:00:00Z'
+      status: canonical
+      profile: core
+    - name: claims[].revisedBecause
+      type: string
+      inPlainWords: 'Its basis last changed because {value}'
+      authoring: authored
+      definition: The reason the claim's basis or confidence last changed, naming the evidence that changed it.
+      example: Renewal notice received from the supplier, so the claim moved from asserted to corroborated.
+      notes: >-
+        A basis moves only on evidence: an outside source, an observation, or a recorded disagreement. A claim
+        being repeated, retrieved or agreed with is not evidence and never revises a basis.
+      status: canonical
+      profile: core
     - name: quotes
       type: array
+      authoring: authored
+      optionalIn: [book, contact]
       definition: >-
         The verbatim spans in this document that are someone else's words, external blockquotes, cited passages and
         quoted fragments, each entry the exact text as it appears in the body.
@@ -1846,10 +2393,16 @@ mx:
         author's own prose from the dash rule.
       status: canonical
       profile: core
-      required: optional
       context: 'Declared on any document that reproduces external words verbatim.'
     - name: relatedTo
       type: array
+      valueType: reference
+      alignsWith:
+        - schema:isRelatedTo
+      authoring: authored
+      inPlainWords: 'Related documents: {value}.'
+      recommendedIn: [component]
+      optionalIn: [report, audit]
       definition: >-
         Sibling documents and resources this one relates to without depending on or describing them. The loosest of the
         relation fields: dependencies declares hard requirements, buildsOn declares conceptual ancestry, refersTo
@@ -1860,9 +2413,10 @@ mx:
       notes: Repo-root-relative paths or cog slugs. The MX graph resolves these into relatedTo edges. Aligns with Schema.org isRelatedTo.
       status: canonical
       profile: cog
-      required: optional
     - name: derivedFrom
       type: string
+      authoring: authored
+      optionalIn: [folder]
       definition: >-
         Upstream provenance — the source this content was derived from. A relative path within the repository pointing
         to the originating directory or file. Used by the MX graph to build lineage edges tracing content from source to
@@ -1875,7 +2429,6 @@ mx:
       profile:
         - folder
         - cog
-      required: optional
     # --- Component family: the fields a rendered component carries to its human and machine readers.
     # Defined by the MX Component Standard (mx-canon/ssot/papers/mx-component-standard.md). Every field is
     # optional and Zone 2; a component also carries the root fields (identity, provenance, relationships,
@@ -1883,6 +2436,9 @@ mx:
     # other kinds routed through contentTypeToProfile). Approved by The Gathering on 2026-09-17 (ADR 68).
     - name: displayMode
       type: string
+      inPlainWords: 'Its provenance badge is shown {value}.'
+      authoring: authored
+      optionalIn: [component]
       definition: How a provenance badge is rendered, collapsed to its origin and trust signals or expanded to the full record.
       example: compact
       validValues:
@@ -1893,16 +2449,18 @@ mx:
         never what is carried.
       status: canonical
       profile: component
-      required: optional
     - name: icon
       type: string
+      authoring: authored
+      optionalIn: [component]
       definition: The icon a provenance badge renders, as a URI or a styling token name.
       example: token:mx-badge-verified
       status: canonical
       profile: component
-      required: optional
     - name: verificationChanged
       type: string
+      authoring: authored
+      optionalIn: [component]
       definition: The ISO 8601 timestamp of the last change in the object's verification state.
       example: '2026-09-17T08:51:12Z'
       notes: >-
@@ -1910,9 +2468,10 @@ mx:
         alone; motion is optional on top.
       status: canonical
       profile: component
-      required: optional
     - name: attestation
       type: string-or-object
+      inPlainWords: 'Its registry attestation: {value}.'
+      authoring: authored
       definition: The registry's attestation record for the object, or a pointer to it, the trust signal that answers who published this and when.
       example: https://reginald.example.com/records/provenance-and-the-regulator
       notes: >-
@@ -1921,16 +2480,20 @@ mx:
         execution policy's flag for whether attestation is required before an action block runs.
       status: canonical
       profile: component
-      required: optional
     - name: preview
       type: string
+      inPlainWords: 'A preview is at {value}.'
+      authoring: authored
+      optionalIn: [component]
       definition: The URI of a preview rendering of the object an object card represents.
       example: https://mx.allabout.network/images/previews/provenance-regime-compatibility.png
       status: canonical
       profile: component
-      required: optional
     - name: actions
       type: array
+      inPlainWords: 'It offers these actions: {value}.'
+      authoring: authored
+      optionalIn: [component]
       definition: The actions an object card offers on its object, declared so a human and an agent see the same list.
       example:
         - name: open
@@ -1945,23 +2508,23 @@ mx:
         can see the withholding.
       status: canonical
       profile: component
-      required: optional
     - name: actions[].name
       type: string
+      authoring: authored
       definition: The name of one action an object card offers.
       example: open
       status: canonical
       profile: component
-      required: optional
     - name: actions[].target
       type: string
+      authoring: authored
       definition: The URI the action resolves to.
       example: https://mx.allabout.network/papers/provenance-regime-compatibility.html
       status: canonical
       profile: component
-      required: optional
     - name: actions[].verifiability
       type: string
+      authoring: authored
       definition: How the action's result can be checked, in the action-cog vocabulary.
       example: deterministic
       validValues:
@@ -1970,9 +2533,9 @@ mx:
         - external
       status: canonical
       profile: component
-      required: optional
     - name: actions[].withheldFrom
       type: array
+      authoring: authored
       definition: The audiences the action is not offered to.
       example:
         - humans
@@ -1982,9 +2545,10 @@ mx:
         - agents
       status: canonical
       profile: component
-      required: optional
     - name: relationshipField
       type: string
+      authoring: authored
+      optionalIn: [component]
       definition: The name of the relationship field a relationship line renders, which is also the line's direction.
       example: buildsOn
       validValues:
@@ -1997,9 +2561,10 @@ mx:
         - relatedTo
       status: canonical
       profile: component
-      required: optional
     - name: inferred
       type: boolean
+      authoring: authored
+      optionalIn: [component]
       definition: Whether the relationship a line renders was inferred rather than declared by the publisher.
       example: false
       notes: >-
@@ -2007,23 +2572,27 @@ mx:
         an estimate; an inferred one carries finalConfidence and confidenceMethod.
       status: canonical
       profile: component
-      required: optional
     - name: visualWeight
       type: string
+      authoring: authored
+      optionalIn: [component]
       definition: The styling token that sets a relationship line's weight, derived from confidence for an inferred relationship and fixed for a declared one.
       example: token:mx-line-declared
       status: canonical
       profile: component
-      required: optional
     - name: verificationSummary
       type: string
+      inPlainWords: 'Verification found: {value}'
+      authoring: authored
+      optionalIn: [component]
       definition: A one-line statement of the outcome of the verification trail a verification panel exposes.
       example: Attested by the publisher, current version, publisher active, one claim corroborated.
       status: canonical
       profile: component
-      required: optional
     - name: verificationSteps
       type: array
+      authoring: authored
+      optionalIn: [component]
       definition: The steps of the verification trail, each timestamped and attributed to the agent that performed it.
       example:
         - timestamp: '2026-09-17T08:51:12Z'
@@ -2039,30 +2608,30 @@ mx:
         the registry, never asserted by the object about itself.
       status: canonical
       profile: component
-      required: optional
     - name: verificationSteps[].timestamp
       type: string
+      authoring: authored
       definition: The ISO 8601 timestamp of one verification step.
       example: '2026-09-17T08:51:12Z'
       status: canonical
       profile: component
-      required: optional
     - name: verificationSteps[].agent
       type: string
+      authoring: authored
       definition: The person, system, or rule that performed the step.
       example: reginald.allabout.network
       status: canonical
       profile: component
-      required: optional
     - name: verificationSteps[].method
       type: string
+      authoring: authored
       definition: The method the step applied.
       example: ed25519-signature-check
       status: canonical
       profile: component
-      required: optional
     - name: verificationSteps[].outcome
       type: string
+      authoring: authored
       definition: The outcome of the step.
       example: pass
       validValues:
@@ -2072,9 +2641,11 @@ mx:
         - skipped
       status: canonical
       profile: component
-      required: optional
     - name: finalConfidence
       type: number
+      inPlainWords: 'Its verification confidence is {value} on a scale of 0 to 1.'
+      authoring: authored
+      optionalIn: [component]
       definition: The confidence a verification panel reports for its trail, from 0 to 1.
       example: 0.92
       notes: >-
@@ -2082,23 +2653,27 @@ mx:
         value describes the trail, not the object.
       status: canonical
       profile: component
-      required: optional
     - name: confidenceMethod
       type: string
+      inPlainWords: 'That confidence was worked out by {value}.'
+      authoring: authored
+      optionalIn: [component]
       definition: How a confidence value was derived.
       example: weighted-step-outcomes
       status: canonical
       profile: component
-      required: optional
     - name: cue
       type: string
+      authoring: authored
+      optionalIn: [component]
       definition: A short human-facing note a narrative layer carries beside a component, never in place of its metadata.
       example: Read alongside the regime registry before quoting a date.
       status: canonical
       profile: component
-      required: optional
     - name: narrativeContext
       type: string
+      authoring: authored
+      optionalIn: [component]
       definition: The URI of fuller editorial context a narrative layer points a human reader to.
       example: https://mx.allabout.network/blog/provenance-is-an-evidence-vehicle.html
       notes: >-
@@ -2106,16 +2681,18 @@ mx:
         Context Declaration pair). The narrative layer is optional and never obscures the structured fields.
       status: canonical
       profile: component
-      required: optional
     - name: gridUnit
       type: string
+      authoring: authored
+      optionalIn: [component]
       definition: The base layout unit a grid mount lays components out from.
       example: 8px
       status: canonical
       profile: component
-      required: optional
     - name: layoutConstraints
       type: array
+      authoring: authored
+      optionalIn: [component]
       definition: The declared layout constraints a grid mount places components by, so position carries no meaning the metadata does not also carry.
       example:
         - component: provenanceBadge
@@ -2127,9 +2704,10 @@ mx:
         domain constraint. Adjacency follows a declared relationship; adjacency alone never implies one.
       status: canonical
       profile: component
-      required: optional
     - name: snapPoints
       type: array
+      authoring: authored
+      optionalIn: [component]
       definition: The positions a grid mount lets a component occupy.
       example:
         - 0
@@ -2138,47 +2716,51 @@ mx:
         - 24
       status: canonical
       profile: component
-      required: optional
     - name: barState
       type: object
+      authoring: authored
+      optionalIn: [component]
       definition: The state a signal bar displays, bound to a named field and its value rather than to a state that exists only in the rendering.
       example:
         field: validationStatus
         value: valid
       status: canonical
       profile: component
-      required: optional
     - name: barState.field
       type: string
+      authoring: authored
       definition: The name of the field the signal bar is bound to.
       example: validationStatus
       status: canonical
       profile: component
-      required: optional
     - name: barState.value
       type: string
+      authoring: authored
       definition: The bound field's value the signal bar displays.
       example: valid
       status: canonical
       profile: component
-      required: optional
     - name: pulse
       type: boolean
+      authoring: authored
+      optionalIn: [component]
       definition: Whether a signal bar or badge animates a state change in addition to conveying it in text.
       example: false
       notes: Motion is always optional; the state is conveyed in text or a screen-reader equivalent first.
       status: canonical
       profile: component
-      required: optional
     - name: styleToken
       type: string
+      authoring: authored
+      optionalIn: [component]
       definition: The declared styling token for a signal bar's state, so one state looks the same everywhere it appears.
       example: token:mx-state-valid
       status: canonical
       profile: component
-      required: optional
     - name: inspectorSections
       type: array
+      authoring: authored
+      optionalIn: [component]
       definition: The sections an object inspector groups the object's fields into, each naming its fields.
       example:
         - name: identity
@@ -2186,22 +2768,22 @@ mx:
         - name: provenance
           fields: [authorship, generatedBy, provenanceUri]
         - name: trust
-          fields: [attestation, integritySignature, trustLevel, corroboratedBy, contestedBy]
+          fields: [attestation, integritySignature, corroboratedBy, contestedBy]
       notes: >-
         Named inspectorSections rather than sections, an existing extended field. The inspector shows every field
         under the name the dictionary gives it and presents the same order every time it opens on the same object.
       status: canonical
       profile: component
-      required: optional
     - name: inspectorSections[].name
       type: string
+      authoring: authored
       definition: The name of one inspector section.
       example: provenance
       status: canonical
       profile: component
-      required: optional
     - name: inspectorSections[].fields
       type: array
+      authoring: authored
       definition: The dictionary names of the fields the section groups.
       example:
         - authorship
@@ -2209,9 +2791,9 @@ mx:
         - provenanceUri
       status: canonical
       profile: component
-      required: optional
     - name: replacedBy
       type: string-or-object
+      authoring: authored
       definition: >-
         Pointer to the canonical document that supersedes this one. Either a path string or an object with named keys
         (e.g. {prose: ..., data: ...}) when the replacement spans multiple documents.
@@ -2221,9 +2803,9 @@ mx:
       profile:
         - cog
         - any
-      required: optional
     - name: subtitle
       type: string
+      authoring: authored
       definition: Secondary title displayed below the main title. Used by book chapters, presentations, and articles.
       example: Why this metadata matters for AI agents
       status: canonical
@@ -2231,16 +2813,19 @@ mx:
         - book
         - blog
         - any
-      required: optional
     - name: appendix
       type: string
+      authoring: authored
       definition: Appendix label or letter. Identifies an appendix within a manuscript volume.
       example: M
       status: canonical
       profile: book
-      required: optional
     - name: execute
       type: object
+      authoring: authored
+      inPlainWords: 'A machine can run it through these actions: {value}.'
+      requiredIn: [action]
+      optionalIn: [cog]
       definition: Action block. Contains runtime, command, actions, and policy. Its presence makes a cog an action-doc.
       example:
         runtime: node
@@ -2254,9 +2839,9 @@ mx:
         block.
       status: canonical
       profile: cog
-      required: false
     - name: hasDeterministicScript
       type: boolean
+      authoring: authored
       definition: True when the embedded or referenced script produces byte-identical output for the same inputs on every run; false when explicitly non-deterministic; absent means not applicable or not yet declared.
       example: true
       notes: >-
@@ -2268,9 +2853,9 @@ mx:
         makes no claim either way.
       status: canonical
       profile: cog
-      required: false
     - name: hasReasoning
       type: boolean
+      authoring: authored
       definition: True when every step in the cog carries both a Reason annotation (why the step exists) and an Expected results annotation (what success looks like); false when explicitly declared absent; absent means not applicable or not yet assessed.
       example: true
       notes: >-
@@ -2282,9 +2867,9 @@ mx:
         hasDeterministicScript (which applies to the embedded script); hasReasoning applies to the instructional prose.
       status: canonical
       profile: cog
-      required: false
     - name: blocks
       type: array
+      authoring: authored
       definition: >-
         Declares block types present in the document. Values: prose, action, definition, essence, provenance, version,
         code, html, sop, security.
@@ -2306,17 +2891,18 @@ mx:
       notes: Declares block types present in the document body.
       status: canonical
       profile: cog
-      required: optional
     - name: policy
       type: string-or-object
+      authoring: authored
       definition: Content handling rules for agents. Inherited from uber docs via effective doc resolution.
       example: inherit from parent uber-doc
       notes: Content handling rules for agents. Inherited via effective doc resolution.
       status: canonical
       profile: cog
-      required: optional
     - name: accessibility
       type: string-or-object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Accessibility compliance level or detailed accessibility metadata for a cog.
       example: WCAG 2.1 AA
       notes: >-
@@ -2324,17 +2910,19 @@ mx:
         quality scoring.
       status: canonical
       profile: cog
-      required: optional
     - name: convergence
       type: string-or-object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Convergence score or metadata. Measures how well the cog aligns human and machine experiences.
       example: high
       notes: 'Part of the quality triad: accessibility, semantic, convergence. Core to MX''s dual-experience philosophy.'
       status: canonical
       profile: cog
-      required: optional
     - name: publisher
       type: string-or-object
+      authoring: authored
+      optionalIn: [cog, contact, action]
       definition: Entity that publishes and stands behind this cog. Can be a string (name) or object with name, url, and contact.
       example: CogNovaMX Ltd
       notes: >-
@@ -2342,9 +2930,10 @@ mx:
         Used in Community Owned Governance Standard cogs.
       status: canonical
       profile: cog
-      required: optional
     - name: url
       type: string
+      authoring: authored
+      optionalIn: [contact]
       definition: >-
         The canonical external URL of the entity this record represents, per the Schema.org `url` property for the
         declared `schema` type (Person, Organization, BlogPosting). Distinct from `canonicalUri`, which is the
@@ -2357,9 +2946,9 @@ mx:
         published-content records (a BlogPosting's rendered page).
       status: canonical
       profile: cog
-      required: optional
     - name: cacheability
       type: string
+      authoring: authored
       definition: >-
         How long an agent or resolver may cache this document's content before it must be re-fetched. Named tiers map to
         durations. A custom duration string (e.g., '4h', '30d') is also accepted.
@@ -2393,6 +2982,7 @@ mx:
       profile: any
     - name: volatileValues
       type: array
+      authoring: authored
       definition: >-
         Declares that one or more values stated in the body (a price, an exchange rate, an interest rate, a stock
         level, an availability figure) are snapshots of a value that moves, records when each was observed and until
@@ -2444,9 +3034,9 @@ mx:
         it the pointer, never the live value.
       status: canonical
       profile: any
-      required: optional
     - name: temporalStance
       type: string
+      authoring: authored
       definition: >-
         Declares the document's relationship between its prose and the dates the prose describes: frozen (the prose
         records state at publication and its dates do not move), living (the prose reflects state at fetch time and
@@ -2464,9 +3054,9 @@ mx:
         moves, not a date).
       status: canonical
       profile: any
-      required: optional
     - name: temporalAnchors
       type: object
+      authoring: authored
       definition: >-
         Named date anchors the document's prose depends on. Each key is a stable kebab-case identifier; each value
         pairs the anchor's current date with a description and, where the authoritative value is published elsewhere,
@@ -2487,9 +3077,9 @@ mx:
         note.
       status: canonical
       profile: any
-      required: optional
     - name: temporalComputedFields
       type: object
+      authoring: authored
       definition: >-
         Fields whose values are computed from anchors at render time. Each key names a computed field; each value
         names the anchor it is computed from and the computation to apply. A render-time agent never caches the
@@ -2512,9 +3102,9 @@ mx:
         Temporal Stance note.
       status: canonical
       profile: any
-      required: optional
     - name: temporalProseGuidance
       type: object
+      authoring: authored
       definition: >-
         Author-supplied instructions telling a future steward, human or machine, what to review or rewrite in the
         prose when a named anchor moves. Each key is an anchor identifier from temporalAnchors.
@@ -2532,9 +3122,10 @@ mx:
         movement could leave the prose wrong. Defined by the Gathering's MX Temporal Stance note.
       status: canonical
       profile: any
-      required: optional
     - name: ai
       type: object
+      authoring: authored
+      optionalIn: [core]
       definition: AI-related metadata. Contains disclosure, attribution, freshness policies for AI-generated content.
       example:
         disclosure: true
@@ -2542,9 +3133,12 @@ mx:
       notes: 'Container for AI-specific metadata: disclosure, attribution, freshness.'
       status: canonical
       profile: core
-      required: optional
     - name: contextProvides
       type: string-or-array
+      authoring: authored
+      inPlainWords: 'What a reader gets from it: {value}'
+      requiredIn: [cog, blog, contact, report, audit, action]
+      optionalIn: [core]
       definition: What context this document provides to agents. Describes the knowledge or capability this document contributes.
       example: Field definitions and naming conventions for the MX ecosystem
       notes: >-
@@ -2553,9 +3147,9 @@ mx:
         code file), which describes what a source file contributes and stays with the carrier dictionary.
       status: canonical
       profile: core
-      required: optional
     - name: contextRequired
       type: array
+      authoring: authored
       definition: >-
         The files an agent must read before it can use this document safely. Repo-root-relative paths, no ../ segments,
         in reading order.
@@ -2568,9 +3162,11 @@ mx:
         empty list is a statement that nothing is prerequisite, not an omission.
       status: canonical
       profile: core
-      required: optional
     - name: aiAssistance
       type: string-or-object
+      authoring: defaulted
+      inPlainWords: 'AI assistance with this document is {value}.'
+      optionalIn: [core, folder, blog]
       definition: 'AI assistance policy. Values: welcome, restricted, prohibited. Inheritable.'
       default: welcome
       example: restricted
@@ -2583,9 +3179,10 @@ mx:
       profile:
         - core
         - folder
-      required: optional
     - name: aiEditable
       type: boolean
+      authoring: defaulted
+      optionalIn: [core, folder]
       definition: Whether this content can be edited by AI agents. In folder metadata defaults to true. Inheritable.
       default: false
       example: true
@@ -2594,9 +3191,10 @@ mx:
       profile:
         - core
         - folder
-      required: optional
     - name: aiTraining
       type: string
+      authoring: authored
+      optionalIn: [folder]
       definition: 'Training-data policy for this document or folder: whether its content may be used in AI training corpora. Values: allowed, prohibited, conditional. Inheritable. Trust lens.'
       example: conditional
       validValues:
@@ -2608,9 +3206,10 @@ mx:
       profile:
         - core
         - folder
-      required: optional
     - name: aiTrainingConditions
       type: array
+      authoring: authored
+      optionalIn: [folder]
       definition: Conditions under which AI training is permitted, as an array of strings describing exclusions or requirements.
       example:
         - exclude credentials
@@ -2620,9 +3219,10 @@ mx:
       profile:
         - core
         - folder
-      required: optional
     - name: aiSensitivePaths
       type: array
+      authoring: authored
+      optionalIn: [folder]
       definition: Glob patterns for paths that AI agents must not read or train on.
       example:
         - secrets/**
@@ -2631,9 +3231,10 @@ mx:
       notes: Glob patterns, applied recursively within the folder. Folder metadata only.
       status: canonical
       profile: folder
-      required: optional
     - name: aiPermittedAreas
       type: array
+      authoring: authored
+      optionalIn: [folder]
       definition: Glob patterns for paths where AI generation is allowed.
       example:
         - docs/**
@@ -2641,9 +3242,10 @@ mx:
       notes: Glob patterns for explicitly allowed AI generation. Folder metadata only.
       status: canonical
       profile: folder
-      required: optional
     - name: aiProhibitedAreas
       type: array
+      authoring: authored
+      optionalIn: [folder]
       definition: Glob patterns for paths where AI generation is prohibited.
       example:
         - legal/**
@@ -2651,9 +3253,10 @@ mx:
       notes: Glob patterns for explicitly forbidden AI generation. Folder metadata only.
       status: canonical
       profile: folder
-      required: optional
     - name: aiGenerationAllowed
       type: boolean
+      authoring: defaulted
+      optionalIn: [folder]
       definition: Whether AI agents may generate new content for this document or folder. Inheritable.
       default: true
       example: false
@@ -2662,9 +3265,10 @@ mx:
       profile:
         - core
         - folder
-      required: optional
     - name: aiGenerationReviewRequired
       type: boolean
+      authoring: defaulted
+      optionalIn: [folder]
       definition: Whether AI-generated content requires human review before it is trusted. Inheritable.
       default: true
       example: false
@@ -2673,9 +3277,13 @@ mx:
       profile:
         - core
         - folder
-      required: optional
     - name: mxSpecVersion
       type: string
+      authoring: derived
+      derivation: specVersion
+      inPlainWords: 'Its metadata follows version {value} of the MX specification.'
+      recommendedIn: [core]
+      optionalIn: [folder]
       definition: The version of the MX specification a document's metadata follows, so a machine knows which
         rules to read it by. Distinct from version, which is the document's own version.
       example: '0.9'
@@ -2688,9 +3296,10 @@ mx:
       profile:
         - core
         - folder
-      required: recommended
     - name: conventions
       type: object
+      authoring: authored
+      optionalIn: [folder]
       definition: Code conventions object. Contains style, testing, documentation, markdown, commits.
       example:
         style: ESLint + Prettier
@@ -2698,9 +3307,10 @@ mx:
       notes: Container for code and documentation conventions. Inheritable.
       status: canonical
       profile: folder
-      required: optional
     - name: inheritable
       type: array
+      authoring: authored
+      optionalIn: [folder]
       definition: List of field paths that child folders inherit from this folder's metadata.
       example:
         - author
@@ -2711,9 +3321,12 @@ mx:
       notes: Parent declares which fields children may inherit. Identity fields should never be listed.
       status: canonical
       profile: folder
-      required: optional
     - name: runbook
       type: string
+      authoring: defaulted
+      inPlainWords: 'How to use it: {value}'
+      requiredIn: [cog, blog, contact, report, audit, action]
+      optionalIn: [core]
       definition: Operational instructions for agents. Describes how to interpret and act on this document.
       example: Parse the fields array. Each entry has name, type, definition, status, and profile.
       notes: Instructions for AI agents. Write in imperative voice. Be specific.
@@ -2721,6 +3334,8 @@ mx:
       profile: core
     - name: contentType
       type: string
+      authoring: authored
+      optionalIn: [core, folder]
       definition: Machine-readable content type classification.
       example: field-dictionary
       notes: 'Free-form classification. Common: specification, guide, reference, info-doc, identity, report.'
@@ -2728,6 +3343,8 @@ mx:
       profile: core
     - name: words
       type: array
+      inPlainWords: 'The spell checker accepts {value}.'
+      authoring: authored
       definition: >-
         Spell-checker dictionary entries. Declares which terms are valid vocabulary. Distinct from tags — words
         validates spelling, tags enables discovery.
@@ -2741,6 +3358,8 @@ mx:
       profile: routing
     - name: keyFields
       type: array
+      inPlainWords: 'The fields that matter most here are {value}.'
+      authoring: authored
       definition: >-
         Route hint. Tells agents which YAML fields matter most when reading files in a given folder. Distinct from tags
         — keyFields directs attention, tags enables discovery.
@@ -2754,6 +3373,9 @@ mx:
       profile: routing
     - name: book
       type: string
+      inPlainWords: 'It belongs to the book {value}.'
+      authoring: authored
+      recommendedIn: [book]
       definition: Which book this chapter belongs to.
       example: 'MX: The Protocols'
       notes: Identifies which book a chapter belongs to.
@@ -2761,6 +3383,9 @@ mx:
       profile: book
     - name: chapter
       type: number
+      inPlainWords: 'It is chapter {value}.'
+      authoring: authored
+      recommendedIn: [book]
       definition: Chapter number within the book.
       example: 5
       notes: Numeric chapter number for ordering and cross-referencing.
@@ -2768,6 +3393,8 @@ mx:
       profile: book
     - name: copyright
       type: string
+      authoring: authored
+      optionalIn: [book]
       definition: Copyright notice.
       example: © 2026 Tom Cranstoun. All rights reserved.
       notes: Full copyright notice. Distinct from license (SPDX identifier).
@@ -2775,6 +3402,8 @@ mx:
       profile: book
     - name: publicationDate
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Publication or issuance date. ISO 8601 format (YYYY-MM-DD or full datetime). Used for blogs and cogs.
       example: 2026-03-01T00:00:00.000Z
       notes: ISO 8601. Distinct from created (file creation) and modified (last edit).
@@ -2784,6 +3413,9 @@ mx:
         - cog
     - name: slug
       type: string
+      inPlainWords: 'Its short handle is {value}.'
+      authoring: authored
+      recommendedIn: [contact]
       definition: >-
         Stable kebab-case handle for identities, contacts, and entities. Used as a routing key in Reginald, a lookup key
         in CRM, and the URL slug. NOT a document title; for that use `title`.
@@ -2794,6 +3426,8 @@ mx:
         - contact
     - name: confidential
       type: boolean
+      authoring: defaulted
+      optionalIn: [core, report]
       definition: Whether this record must be excluded from public outputs.
       default: false
       example: true
@@ -2804,6 +3438,9 @@ mx:
         - contact
     - name: folderType
       type: string
+      authoring: authored
+      inPlainWords: 'This folder holds {value} content.'
+      requiredIn: [folder]
       definition: Type of folder.
       example: content
       validValues:
@@ -2840,6 +3477,10 @@ mx:
       profile: folder
     - name: stability
       type: string-or-array
+      authoring: defaulted
+      inPlainWords: 'Its stability is {value}.'
+      requiredIn: [cog, folder, blog, contact, report, audit, action]
+      recommendedIn: [skill]
       definition: 'Content stability. Values: stable, evolving, experimental, deprecated, archived, draft, final, friable. friable means the file is regenerated from a source and must never be hand-edited; any given rendering is transient and is remade when its source changes. Use it for generated indexes and for generated outputs (such as published blog HTML) regenerated from source. A file may carry one value or several: the values combine, so an item that is both an unfinished draft and regenerated from source declares [draft, friable].'
       example: stable
       validValues:
@@ -2856,6 +3497,9 @@ mx:
       profile: folder
     - name: lifecycle
       type: string
+      authoring: authored
+      inPlainWords: 'Its lifecycle stage is {value}.'
+      requiredIn: [folder]
       definition: 'Folder lifecycle stage. Values: production, development, prototype, legacy, deprecated.'
       example: production
       validValues:
@@ -2869,6 +3513,8 @@ mx:
       profile: folder
     - name: hasSubfolders
       type: boolean
+      authoring: authored
+      optionalIn: [folder]
       definition: Whether the folder contains subfolders.
       example: true
       notes: Helps tools decide whether to recurse into subdirectories.
@@ -2876,6 +3522,8 @@ mx:
       profile: folder
     - name: inherits
       type: string
+      authoring: authored
+      inPlainWords: 'It inherits metadata from {value}.'
       definition: >-
         Path to the file this document extends. The inheriting file adds MX metadata on top of the target's content. The
         target can be any file type — .md, .cog.md, .html, .json, .yaml, or any other. Any MX-aware file (one carrying
@@ -2891,6 +3539,9 @@ mx:
       profile: any
     - name: primaryLanguages
       type: array
+      inPlainWords: 'Its main languages are {value}.'
+      authoring: authored
+      recommendedIn: [folder]
       definition: Primary programming or content languages in the folder.
       example:
         - javascript
@@ -2900,6 +3551,7 @@ mx:
       profile: folder
     - name: cogId
       type: string
+      authoring: authored
       definition: Unique cog identifier within the registry.
       example: field-dictionary
       notes: Typically derived from filename without .cog.md extension.
@@ -2907,6 +3559,8 @@ mx:
       profile: cog
     - name: cogType
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: 'Cog type classification. Values: info, action, routing, certificate-of-genuineness.'
       example: info
       validValues:
@@ -2921,6 +3575,8 @@ mx:
       profile: cog
     - name: maintainedDate
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Date the cog was last confirmed accurate by its maintainer. ISO 8601 format (YYYY-MM-DD).
       example: 2026-03-01T00:00:00.000Z
       notes: ISO 8601. Helps agents assess content freshness.
@@ -2928,6 +3584,8 @@ mx:
       profile: cog
     - name: maintainedBy
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Person or team who last confirmed the cog content is accurate.
       example: Tom Cranstoun
       notes: Names the maintainer responsible for ongoing accuracy.
@@ -2935,6 +3593,8 @@ mx:
       profile: cog
     - name: provenanceOrigin
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: How the content was created.
       example: human-directed
       validValues:
@@ -2951,6 +3611,8 @@ mx:
       profile: core
     - name: provenanceUri
       type: string
+      inPlainWords: 'Its provenance record is at {value}.'
+      authoring: authored
       definition: >-
         Canonical URL of the file's AI-governance provenance cog, the hosted record that stands beside the file and
         holds the parties, frameworks, and every recorded action. Lets a machine reach the live, authoritative
@@ -2962,8 +3624,25 @@ mx:
         record. Part of the provenance group.
       status: canonical
       profile: core
+    - name: servedPdfUri
+      type: string
+      authoring: authored
+      inPlainWords: 'Its PDF rendering is published at {value}.'
+      definition: >-
+        The public http(s) URL where the PDF rendered from this document is served, so a reader of the source can reach
+        the published rendering and a tool can link a reader of the PDF back to it.
+      example: https://mx.allabout.network/mx-explained.pdf
+      alignsWith:
+        - schema:encoding
+      notes: >-
+        Declared under mx: on a markdown source that renders to a published PDF. Must be an absolute http(s) URL; a
+        relative value is ignored by the PDF pipeline, which uses it to point the badge's walk link at the served copy.
+      status: canonical
+      profile: core
     - name: workflowId
       type: string
+      inPlainWords: 'It was produced under the workflow {value}.'
+      authoring: authored
       definition: >-
         Stable identifier of the workflow record that declares the boundary a document or a provenance chain was
         produced under: the tasks and authority given to the agent, the points where a human decides, and the
@@ -2978,6 +3657,7 @@ mx:
       profile: core
     - name: workflowRecord
       type: string
+      authoring: authored
       definition: >-
         Where the workflow record named by workflowId lives: a repo-root-relative path or a URL, so a reader walks
         from a document or a provenance chain to the declared boundary in one step.
@@ -2990,6 +3670,10 @@ mx:
       profile: core
     - name: residualRisk
       type: object
+      inPlainWords: 'The risk that remains after its controls: {value}.'
+      authoring: authored
+      recommendedIn: [aims-risk-register]
+      optionalIn: [aims-system-inventory]
       definition: >-
         The risk the operator judges to remain after the controls a document or a provenance chain records: a level
         drawn from the security.riskLevel vocabulary, the reason that level remains, the role that accepted it, and
@@ -3006,9 +3690,9 @@ mx:
         room (x-eu-ai-act.riskClassification); this is the regime-neutral statement. Part of the provenance group.
       status: canonical
       profile: core
-      required: optional
     - name: residualRisk.level
       type: string
+      authoring: authored
       definition: The residual-risk level, in the same vocabulary as security.riskLevel so one risk scale serves the action-cog, the workflow record and the chain.
       example: low
       validValues:
@@ -3019,37 +3703,39 @@ mx:
       notes: Required inside residualRisk; a block without a level is not a statement and a reader treats it as absent.
       status: canonical
       profile: core
-      required: optional
     - name: residualRisk.basis
       type: string
+      authoring: authored
       definition: One sentence stating why that level remains after the controls.
       example: Every model output is reviewed by the editor before it is filed; a misfiled draft is recoverable.
       notes: The reasoning a regulator reads first; without it the level is a number nobody can check.
       status: canonical
       profile: core
-      required: optional
     - name: residualRisk.acceptedBy
       type: string
+      authoring: authored
       definition: The role that accepted the residual risk, drawn from the provenance parties roles.
       example: deployer
       notes: A role, not a name; the named person behind the role is in parties[] or responsiblePerson.
       status: canonical
       profile: core
-      required: optional
     - name: residualRisk.reviewedAt
       type: string
+      authoring: authored
       definition: The date the residual-risk statement was last reviewed. ISO 8601 (YYYY-MM-DD).
       example: 2026-09-17
       notes: A statement with no review date is read as unreviewed; a periodic review updates it.
       status: canonical
       profile: core
-      required: optional
     # --- Evidence fields: accountability, regime evidence, standing, data preparation and resources. Any document
     # may carry them; the AIMS profile set requires several. parties and jurisdictionalEvidence share their shape with the
     # provenance record (provenance-ai.v2.schema.json), so a COG and its provenance chain name people and regimes the
     # same way. Approved by The Gathering on 2026-09-27 (ADR 73).
     - name: parties
       type: array
+      inPlainWords: 'The people and bodies accountable for it: {value}.'
+      authoring: authored
+      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
       definition: >-
         The role-attributed people and organisations accountable for a document, each entry carrying a role, a name,
         and optionally an email, an identifier URL, an organisation and an ISO 3166-1 country code.
@@ -3064,9 +3750,9 @@ mx:
         (residualRisk.acceptedBy, transformations[].actor).
       status: canonical
       profile: core
-      required: optional
     - name: parties.role
       type: string
+      authoring: authored
       definition: The accountability role an entry in parties holds.
       example: riskOwner
       validValues:
@@ -3092,9 +3778,12 @@ mx:
         tests/test-party-roles-lockstep.js holds this list, the provenance schema and the REGINALD primitive equal.
       status: canonical
       profile: core
-      required: optional
     - name: jurisdictionalEvidence
       type: object
+      inPlainWords: 'It is evidence for these regulatory provisions: {value}.'
+      authoring: authored
+      recommendedIn: [aims-system-inventory, aims-risk-register, aims-impact-assessment, aims-policy]
+      optionalIn: [aims-statement-of-applicability]
       definition: >-
         The clauses, articles, controls or functions of each regulatory regime a document provides evidence for, keyed
         by the regime identifier in the AI-regimes registry.
@@ -3113,9 +3802,10 @@ mx:
         its own duties. The document-level form of the per-step jurisdictionalEvidence a provenance record carries.
       status: canonical
       profile: core
-      required: optional
     - name: statusNotice
       type: object
+      authoring: authored
+      optionalIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
       definition: >-
         Why a document carries the status disputed or withdrawn, the date that standing began, and whom a reader
         contacts about it.
@@ -3128,9 +3818,10 @@ mx:
         the document-level notice a consumer reads before deciding whether to use the content at all.
       status: canonical
       profile: core
-      required: optional
     - name: transformations
       type: array
+      authoring: authored
+      optionalIn: [aims-system-inventory]
       definition: >-
         The preparation steps applied to the data a document derives from, each naming its type, method, tool, date
         and the parties role that performed it.
@@ -3146,9 +3837,10 @@ mx:
         record; this list is the summary that travels in the frontmatter.
       status: canonical
       profile: core
-      required: optional
     - name: resourceProfile
       type: object
+      authoring: authored
+      optionalIn: [aims-system-inventory]
       definition: >-
         The compute and energy a document's production or an AI system's operation uses, with the unit, whether the
         figure was measured, estimated or declared, the method, and the workload baseline it is compared against.
@@ -3165,9 +3857,9 @@ mx:
         energy statement.
       status: canonical
       profile: core
-      required: optional
     - name: resourceProfile.basis
       type: string
+      authoring: authored
       definition: Whether a resourceProfile figure was measured, estimated or declared by a third party.
       example: estimated
       validValues:
@@ -3176,7 +3868,6 @@ mx:
         - declared
       status: canonical
       profile: core
-      required: optional
     # --- AI management system (AIMS) records: the aims-* profile set. Each record is a COG whose kind is an aims: value of
     # the OKF type field. The fields describe structure only; MX supplies no risk, impact or applicability method, and
     # a well-formed record says nothing about whether the assessment it records is sound. JSON Schemas for the four
@@ -3184,22 +3875,29 @@ mx:
     # (ADR 73).
     - name: recordId
       type: string
+      inPlainWords: 'Its record identifier is {value}.'
+      authoring: authored
+      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
       definition: The organisation's own identifier for an AIMS record, stable across versions of the record.
       example: R-014
       status: canonical
       profile: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
-      required: optional
     - name: systemRef
       type: string
+      inPlainWords: 'It concerns the AI system recorded at {value}.'
+      authoring: authored
+      requiredIn: [aims-risk-register, aims-impact-assessment]
       definition: >-
         A reference to the AI system inventory entry an AIMS record concerns, as a repository path, an https URI or a
         REGINALD cogUrn.
       example: https://example.org/aims/systems/leaflet-summariser.md
       status: canonical
       profile: [aims-risk-register, aims-impact-assessment]
-      required: optional
     - name: intendedUse
       type: object
+      inPlainWords: 'What the system may and may not be used for: {value}.'
+      authoring: authored
+      recommendedIn: [aims-system-inventory]
       definition: >-
         The uses an AI system is intended for and the uses it must not be put to, as permitted and prohibited lists
         with free-text notes.
@@ -3216,24 +3914,30 @@ mx:
         trainingDataPolicy (training).
       status: canonical
       profile: aims-system-inventory
-      required: optional
     - name: dataSources
       type: array
+      inPlainWords: 'The system draws on {value}.'
+      authoring: authored
+      optionalIn: [aims-system-inventory]
       definition: The data an AI system draws on, as references to the COGs that describe each source.
       example:
         - https://example.org/data/product-licences.md
       status: canonical
       profile: aims-system-inventory
-      required: optional
     - name: aimsScope
       type: string
+      inPlainWords: 'The management system it covers: {value}'
+      authoring: authored
+      requiredIn: [aims-statement-of-applicability]
       definition: The boundary of the AI management system a statement of applicability covers.
       example: AI systems that produce patient-facing content in the UK business unit.
       status: canonical
       profile: aims-statement-of-applicability
-      required: optional
     - name: controlApplicability
       type: array
+      inPlainWords: 'How each control applies: {value}.'
+      authoring: authored
+      requiredIn: [aims-statement-of-applicability]
       definition: >-
         For each control of a regime, whether it applies within the AIMS scope, the justification, and the records that
         provide evidence for it.
@@ -3249,16 +3953,20 @@ mx:
         role). regime is an ai-regimes.json id.
       status: canonical
       profile: aims-statement-of-applicability
-      required: optional
     - name: approvedAt
       type: string
+      inPlainWords: 'It was approved on {value}.'
+      authoring: authored
+      requiredIn: [aims-statement-of-applicability, aims-policy]
       definition: The date an AIMS record was approved, ISO 8601 (YYYY-MM-DD); the approver is a parties entry with role approver.
       example: 2026-09-27
       status: canonical
       profile: [aims-statement-of-applicability, aims-policy]
-      required: optional
     - name: inherentRisk
       type: object
+      inPlainWords: 'The risk before treatment: {value}.'
+      authoring: authored
+      requiredIn: [aims-risk-register]
       definition: >-
         The risk an AIMS risk entry identifies before treatment, with the same level, basis and review keys as
         residualRisk.
@@ -3268,9 +3976,9 @@ mx:
       notes: Pairs with residualRisk, the risk judged to remain after treatment. One scale for both.
       status: canonical
       profile: aims-risk-register
-      required: optional
     - name: inherentRisk.level
       type: string
+      authoring: authored
       definition: The inherent-risk level, in the residualRisk.level vocabulary.
       example: high
       validValues:
@@ -3280,9 +3988,11 @@ mx:
         - critical
       status: canonical
       profile: aims-risk-register
-      required: optional
     - name: riskTreatment
       type: object
+      inPlainWords: 'How the risk is treated: {value}.'
+      authoring: authored
+      requiredIn: [aims-risk-register]
       definition: The treatment option chosen for an identified risk and the actions that carry it out.
       example:
         option: modify
@@ -3290,9 +4000,9 @@ mx:
           - A pharmacist reviews every summary before release.
       status: canonical
       profile: aims-risk-register
-      required: optional
     - name: riskTreatment.option
       type: string
+      authoring: authored
       definition: The treatment option chosen for a risk.
       example: modify
       validValues:
@@ -3302,18 +4012,22 @@ mx:
         - retain
       status: canonical
       profile: aims-risk-register
-      required: optional
     - name: affectedGroups
       type: array
+      inPlainWords: 'The people it may affect: {value}.'
+      authoring: authored
+      requiredIn: [aims-impact-assessment]
       definition: The individuals, groups or societies an impact assessment considers.
       example:
         - Patients reading the leaflets
         - Pharmacists reviewing summaries
       status: canonical
       profile: aims-impact-assessment
-      required: optional
     - name: impacts
       type: array
+      inPlainWords: 'The impacts identified: {value}.'
+      authoring: authored
+      requiredIn: [aims-impact-assessment]
       definition: >-
         The impacts an assessment identifies, each naming the group affected, the impact, and its severity in the
         residualRisk.level vocabulary.
@@ -3323,9 +4037,11 @@ mx:
           severity: high
       status: canonical
       profile: aims-impact-assessment
-      required: optional
     - name: mitigations
       type: array
+      inPlainWords: 'The measures that address them: {value}.'
+      authoring: authored
+      recommendedIn: [aims-impact-assessment]
       definition: The measures that address the impacts an assessment identifies, each naming the impact it addresses and its owning role.
       example:
         - impact: A misstated dosage could lead to harm.
@@ -3333,16 +4049,18 @@ mx:
           owner: riskOwner
       status: canonical
       profile: aims-impact-assessment
-      required: optional
     - name: assessedAt
       type: string
+      inPlainWords: 'The impact was assessed on {value}.'
+      authoring: authored
+      requiredIn: [aims-impact-assessment]
       definition: The date an impact assessment was carried out, ISO 8601 (YYYY-MM-DD).
       example: 2026-09-27
       status: canonical
       profile: aims-impact-assessment
-      required: optional
     - name: aiUsageDeclarationUri
       type: string
+      authoring: authored
       definition: >-
         The URL of the publisher's AI Usage Declaration that covers this document - the signed, scope-bounded record
         of what machines did and did not do in producing the work, per the Gathering's MX AI Usage Declaration note.
@@ -3355,9 +4073,10 @@ mx:
         provenanceUri, which names the per-file provenance chain rather than the publisher-level disclosure.
       status: canonical
       profile: core
-      required: optional
     - name: proofOfAuthorship
       type: object
+      authoring: authored
+      recommendedIn: [portable]
       definition: >-
         A verifiable link between the named author and the artefact: a cryptographic signature, a trust-chain
         identifier such as a DID, or a published-by-known-entity assertion. Answers "I made this, and I can prove it."
@@ -3372,9 +4091,9 @@ mx:
         in the artefact itself so it survives detachment from the registry.
       status: canonical
       profile: core
-      required: optional
     - name: integritySignature
       type: object
+      authoring: authored
       definition: >-
         A hash or cryptographic signature over the artefact's content that lets a reader detect tampering since
         publication. Answers "what you read is what was written."
@@ -3389,9 +4108,10 @@ mx:
         Signatures and Subresource Integrity for the algorithm and encoding vocabulary.
       status: canonical
       profile: core
-      required: optional
     - name: attestationRecord
       type: string
+      authoring: authored
+      recommendedIn: [component]
       definition: >-
         The registry attestation record for this artefact, or a pointer to it, naming who published the artefact and
         when. Answers "who vouched for this, and where can I check?"
@@ -3407,9 +4127,9 @@ mx:
         two things is the ambiguity MX exists to remove.
       status: canonical
       profile: core
-      required: optional
     - name: attestationStatus
       type: string
+      authoring: authored
       definition: >-
         Whether this artefact has been attested by a registry yet. Answers "has anyone vouched for this, and was that
         decision made deliberately?"
@@ -3427,9 +4147,10 @@ mx:
         attestation that once existed and was retracted is not the same as one that never existed.
       status: canonical
       profile: core
-      required: optional
     - name: provenancePedigree
       type: object
+      authoring: authored
+      recommendedIn: [portable]
       definition: >-
         The traceable chain from this artefact back to its source, including every transformation along the way,
         with the authority at each step. Answers "where did this come from, and through whom?"
@@ -3448,9 +4169,10 @@ mx:
         C2PA Content Credentials for media carriers rather than defining a new derivation vocabulary.
       status: canonical
       profile: core
-      required: optional
     - name: movedFrom
       type: string
+      authoring: authored
+      optionalIn: [migration]
       definition: Previous file path before content was relocated.
       example: datalake/knowledge/reference/field-definitions.md
       notes: Previous path. Used for redirect generation and link maintenance.
@@ -3458,6 +4180,8 @@ mx:
       profile: migration
     - name: ld
       type: object
+      authoring: authored
+      optionalIn: [core]
       definition: Inline JSON-LD structured data (Schema.org). Embeds structured data directly in YAML frontmatter.
       example:
         '@type': TechArticle
@@ -3467,6 +4191,9 @@ mx:
       profile: core
     - name: readingLevel
       type: string
+      authoring: authored
+      inPlainWords: 'It is written for a {value} reader.'
+      optionalIn: [core]
       definition: 'Content reading level. Values: beginner, intermediate, advanced, expert.'
       example: intermediate
       validValues:
@@ -3481,6 +4208,9 @@ mx:
       profile: core
     - name: mx:name
       type: string
+      inPlainWords: 'Its name is {value}.'
+      authoring: authored
+      requiredIn: [html, js, css]
       definition: Cog name. Equivalent to name in YAML frontmatter.
       example: <meta name="mx:name" content="field-dictionary">
       notes: HTML equivalent of YAML title/name.
@@ -3491,6 +4221,9 @@ mx:
         - css
     - name: mx:version
       type: string
+      inPlainWords: 'This is version {value}.'
+      authoring: authored
+      recommendedIn: [html, js, css]
       definition: Version. Equivalent to version in YAML frontmatter.
       example: <meta name="mx:version" content="2.0">
       notes: HTML equivalent of YAML version.
@@ -3501,12 +4234,18 @@ mx:
         - css
     - name: mx:type
       type: string
+      inPlainWords: 'It is a {value}.'
+      authoring: authored
+      recommendedIn: [html]
       definition: Domain type classification.
       example: <meta name="mx:type" content="specification">
       status: canonical
       profile: html
     - name: mx:purpose
       type: string
+      inPlainWords: 'What it is for: {value}'
+      authoring: authored
+      recommendedIn: [js, css]
       definition: Why this file exists.
       example: '@mx:purpose utility'
       notes: JSDoc and CSS comment contexts.
@@ -3516,6 +4255,8 @@ mx:
         - css
     - name: mx:audience
       type: string
+      authoring: authored
+      optionalIn: [html, js, css]
       definition: Intended readership.
       example: '@mx:audience developer'
       notes: JSDoc and CSS comment contexts.
@@ -3525,6 +4266,8 @@ mx:
         - css
     - name: mx:stability
       type: string
+      authoring: authored
+      optionalIn: [js, css]
       definition: 'Stability level. Values: stable, evolving, experimental, deprecated, archived, friable. friable means the file is regenerated from a source and must never be hand-edited; any given rendering is transient and is remade when its source changes.'
       example: '@mx:stability stable'
       validValues:
@@ -3540,6 +4283,8 @@ mx:
         - css
     - name: mx:category
       type: string
+      authoring: authored
+      optionalIn: [html, js, css]
       definition: Cog category.
       example: <meta name="mx:category" content="standard">
       status: canonical
@@ -3549,6 +4294,8 @@ mx:
         - css
     - name: mx:tags
       type: string
+      authoring: authored
+      optionalIn: [html, js, css]
       definition: Discovery keywords as comma-separated string.
       example: <meta name="mx:tags" content="metadata, yaml, frontmatter">
       notes: Comma-separated string in non-YAML contexts.
@@ -3559,6 +4306,8 @@ mx:
         - css
     - name: mx:buildsOn
       type: string
+      authoring: authored
+      optionalIn: [js]
       definition: Context dependencies as comma-separated cog names.
       example: '@mx:buildsOn cog-unified-spec, field-dictionary'
       status: canonical
@@ -3567,6 +4316,8 @@ mx:
         - css
     - name: mx:documentedIn
       type: string
+      authoring: authored
+      optionalIn: [js]
       definition: Path to companion documentation.
       example: '@mx:documentedIn ../docs/field-dictionary.cog.md'
       notes: Links code to its companion documentation.
@@ -3576,6 +4327,8 @@ mx:
         - css
     - name: mx:contextProvides
       type: string
+      authoring: authored
+      optionalIn: [js]
       definition: What context this file provides to agents.
       example: '@mx:contextProvides "Validation utilities for frontmatter"'
       status: canonical
@@ -3584,15 +4337,18 @@ mx:
         - css
     - name: reviewers
       type: array
+      authoring: authored
+      optionalIn: [code-file]
       definition: Required reviewers for changes to this file.
       example:
         - '@senior-dev'
         - '@security-team'
       status: canonical
       profile: code-file
-      required: false
     - name: mx:begin
       type: string
+      inPlainWords: 'A {value} block of code starts here.'
+      authoring: authored
       definition: >-
         Opens an annotated code block. Value is the block tag (security-critical, performance-critical, compatibility,
         workaround, generated, legacy).
@@ -3608,30 +4364,36 @@ mx:
       profile: code-inline
     - name: mx:end
       type: string
+      inPlainWords: 'The {value} block of code ends here.'
+      authoring: authored
       definition: Closes an annotated code block. Value matches the opening tag.
       example: // @mx:end security-critical
       status: canonical
       profile: code-inline
     - name: mx:sensitive
       type: string
+      authoring: authored
       definition: 'Line annotation marking sensitive data. Flags: no-log, no-expose.'
       example: const API_KEY = process.env.API_KEY; // @mx:sensitive no-log no-expose
       status: canonical
       profile: code-inline
     - name: mx:intentional
       type: string
+      authoring: authored
       definition: Line annotation marking deliberate unusual code.
       example: await sleep(100); // @mx:intentional rate-limiting
       status: canonical
       profile: code-inline
     - name: mx:todo
       type: string
+      authoring: authored
       definition: Line annotation for tasks to complete.
       example: // @mx:todo refactor Extract to separate function
       status: canonical
       profile: code-inline
     - name: mx:ai
       type: string
+      authoring: authored
       definition: >-
         Line annotation with AI-specific instructions. Values: do-not-remove, do-not-modify, preserve-logic,
         explain-before-changing, generated, reviewed.
@@ -3640,33 +4402,39 @@ mx:
       profile: code-inline
     - name: pages
       type: number
+      authoring: authored
       definition: Number of pages in a document, book, or PDF.
       example: 42
       status: canonical
       profile: core
-      required: false
     - name: cogs
       type: string
+      authoring: authored
       definition: 'Canonical field: cogs.'
       status: canonical
       profile: cog
     - name: replaces
       type: string
+      authoring: authored
       definition: 'Canonical field: replaces.'
       status: canonical
       profile: cog
     - name: machineOnly
       type: boolean
+      authoring: authored
       definition: 'Canonical field: machineOnly.'
       status: canonical
       profile: any
     - name: supersededBy
       type: string
+      authoring: authored
+      optionalIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
       definition: 'Canonical field: supersededBy.'
       status: canonical
       profile: cog
     - name: date
       type: string
+      authoring: authored
       definition: Publication or event date. ISO 8601. Aligns with Dublin Core dc:date and Schema.org Date.
       alignsWith:
         - dc:date
@@ -3675,6 +4443,7 @@ mx:
       profile: core
     - name: duration
       type: string
+      authoring: authored
       definition: Time length in ISO 8601 duration format (PT1H30M). Aligns with Schema.org duration.
       alignsWith:
         - schema:duration
@@ -3682,6 +4451,7 @@ mx:
       profile: core
     - name: format
       type: string
+      authoring: authored
       definition: >-
         Media type or file format. Aligns with Dublin Core dc:format and Schema.org encodingFormat. Prefer IANA media
         types.
@@ -3692,6 +4462,7 @@ mx:
       profile: core
     - name: rights
       type: string
+      authoring: authored
       definition: >-
         Rights statement or licence reference. Aligns with Dublin Core dc:rights and Schema.org license. Prefer SPDX
         identifiers.
@@ -3702,19 +4473,31 @@ mx:
       profile: core
     - name: conformsTo
       type: array
+      inPlainWords: 'It conforms to {value}.'
+      authoring: authored
+      recommendedIn: [portable]
+      optionalIn: [core]
       definition: >-
         The specification(s) this document claims structural or format conformance against - a Schema.org type, a
-        Dublin Core term set, an MX spec level. Aligns with Dublin Core dcterms:conformsTo.
+        Dublin Core term set, an MX spec level, or an MX profile beyond the one its type routes to. Aligns with Dublin
+        Core dcterms:conformsTo.
       example:
         - https://schema.org/PresentationDigitalDocument
-        - https://mx.allabout.network/specs/mx-core-level-1
+        - portable
+      notes: >-
+        An MX profile is claimed by its bare name (portable) or its canon URI
+        (https://mx.allabout.network/canon/fields-data.yaml#portable). Any document may claim any profile; the claim
+        is optional and adds to the profile its type routes to, never replaces it. A claim is a promise: a reader
+        judges the document against each claimed profile as well, the validator refuses a document missing a claimed
+        profile's required field, and a claimed name no profile carries is an error. Any other value (a Schema.org
+        type, an external specification) is not an MX profile claim.
       alignsWith:
         - dcterms:conformsTo
       status: canonical
       profile: core
-      required: optional
     - name: trainingDataPolicy
       type: string
+      authoring: authored
       definition: >-
         Whether and how this document's content may be used in AI training corpora - permitted, restricted, or
         conditional on attribution. Trust lens: states the terms under which the content may be reused for training.
@@ -3722,9 +4505,11 @@ mx:
       notes: The narrative document-level form of the reuse-for-training policy. For the enumerated allowed/prohibited/conditional form and the folder-level and path-glob controls, see aiTraining, aiTrainingConditions, aiSensitivePaths, aiPermittedAreas, and aiProhibitedAreas.
       status: canonical
       profile: core
-      required: optional
     - name: inLanguage
       type: string
+      inPlainWords: 'It is written in {value}.'
+      authoring: authored
+      recommendedIn: [portable, personal]
       definition: >-
         Primary language of the document content, as a BCP 47 language tag (en, es, en-GB). Aligns with Schema.org
         inLanguage and Dublin Core dc:language.
@@ -3736,6 +4521,7 @@ mx:
       profile: core
     - name: currency
       type: string
+      authoring: authored
       definition: >-
         The document's default currency for monetary references, as an ISO 4217 three-letter code (EUR, USD, GBP). The
         same code Schema.org priceCurrency uses.
@@ -3746,6 +4532,7 @@ mx:
       profile: any
     - name: dateFormat
       type: string
+      authoring: defaulted
       definition: >-
         Human display convention for dates in the document body. Machine-read dates in frontmatter are always ISO 8601
         (YYYY-MM-DD); this field only declares how dates are shown to a reader.
@@ -3760,6 +4547,7 @@ mx:
       profile: any
     - name: translationOfWork
       type: string
+      authoring: authored
       definition: >-
         On a translated document, the canonicalUri of the source work it was translated from. Aligns with Schema.org
         translationOfWork.
@@ -3770,6 +4558,7 @@ mx:
       profile: any
     - name: workTranslation
       type: array
+      authoring: authored
       definition: >-
         On a source document, the canonicalUris of works that are translations of it (the inverse of
         translationOfWork). Aligns with Schema.org workTranslation.
@@ -3781,6 +4570,7 @@ mx:
       profile: any
     - name: translator
       type: string
+      authoring: authored
       definition: >-
         Who or what performed a translation: a person's name or a model identifier. Aligns with Schema.org translator.
       example: Maxine (claude-opus-4-8)
@@ -3790,6 +4580,9 @@ mx:
       profile: any
     - name: displayName
       type: string
+      inPlainWords: 'It is shown as {value}.'
+      authoring: authored
+      recommendedIn: [contact]
       definition: Human-friendly name. Aligns with FOAF displayName and Schema.org alternateName.
       alignsWith:
         - foaf:displayName
@@ -3798,11 +4591,14 @@ mx:
       profile: core
     - name: schema
       type: string
+      authoring: authored
+      optionalIn: [contact]
       definition: 'Schema reference identifier. Context-dependent: Schema.org type URL, JSON Schema $id, database schema name.'
       status: canonical
       profile: core
     - name: validatesAgainst
       type: array
+      authoring: authored
       definition: >-
         The schema(s) or spec(s) this document claims conformance against. Describes the document's claimed
         conformance (trust lens).
@@ -3814,9 +4610,9 @@ mx:
         5 worked examples). Universal, not cog-specific - ruled IN - standard on the rubric's own table.
       status: canonical
       profile: core
-      required: optional
     - name: contractFields
       type: array
+      authoring: authored
       definition: >-
         The frontmatter fields that are contract-bearing - covered by this document's signature or attestation. A
         change to any listed field invalidates the signature; a change elsewhere does not.
@@ -3829,9 +4625,9 @@ mx:
         Section 5 - signing is a universal concern, not vendor-specific. Sibling of metadataFields.
       status: canonical
       profile: core
-      required: optional
     - name: metadataFields
       type: array
+      authoring: authored
       definition: >-
         The frontmatter fields that are mutable without invalidating the document's signature or attestation -
         editorial metadata such as created/modified dates, not normative content.
@@ -3843,9 +4639,9 @@ mx:
         Section 5. Sibling of contractFields.
       status: canonical
       profile: core
-      required: optional
     - name: usage
       type: string
+      authoring: authored
       definition: Usage classification. Free-form; prefer existing vocabularies (Schema.org usageInfo, Dublin Core audience).
       alignsWith:
         - schema:usageInfo
@@ -3853,11 +4649,13 @@ mx:
       profile: core
     - name: classification
       type: string
+      authoring: authored
       definition: Content classification identifier. Context-dependent; prefer existing taxonomies over local values.
       status: canonical
       profile: core
     - name: topic
       type: array
+      authoring: authored
       definition: >-
         The specific subject-area classification of this document, distinct from the general-discovery tags array.
         Aligns with Schema.org about.
@@ -3868,9 +4666,9 @@ mx:
         - schema:about
       status: canonical
       profile: core
-      required: optional
     - name: speakable
       type: string
+      authoring: authored
       definition: >-
         A voice-assistant-readable summary of this document, matching Schema.org's SpeakableSpecification intent -
         the passage a text-to-speech agent should read aloud.
@@ -3878,9 +4676,9 @@ mx:
         - schema:speakable
       status: canonical
       profile: core
-      required: optional
     - name: entities
       type: array
+      authoring: authored
       definition: >-
         The named things this document is about - people, organisations, products, places - each given as a stable
         identifier a machine can resolve (a Wikidata QID, an ORCID iD, an organisation's domain name) rather than a
@@ -3897,16 +4695,16 @@ mx:
         Defined in the Gathering's MX Core Metadata note section 7a.4 and read by the MX graph builder.
       status: canonical
       profile: core
-      required: optional
     - name: doNotIndex
       type: boolean
+      authoring: authored
       definition: Whether this document should be excluded from search-engine and agent indexing. A robots-noindex-style directive.
       example: false
       status: canonical
       profile: core
-      required: optional
     - name: contentPolicy
       type: string
+      authoring: authored
       definition: >-
         What a machine may do with this document's content at the point of reading it: a recognised token
         (summaries-allowed, full-extraction-allowed, extract-with-attribution, no-extraction, restricted) or a
@@ -3922,9 +4720,9 @@ mx:
         document.
       status: canonical
       profile: core
-      required: optional
     - name: attribution
       type: string
+      authoring: authored
       definition: >-
         Whether reuse of this document's content must credit its source. required means a citation or credit is a
         condition of reuse; requested means the publisher asks for one without making it a condition; not-required
@@ -3940,9 +4738,9 @@ mx:
         ai.attribution, which records the attribution of AI involvement in producing the content.
       status: canonical
       profile: core
-      required: optional
     - name: contentRating
       type: string
+      authoring: authored
       definition: >-
         The audience-suitability rating of this document's content, as a rating-scheme value a machine can act on
         before surfacing the content (general, mature, adult, or a named scheme's value such as PEGI 12). Aligns with
@@ -3956,25 +4754,27 @@ mx:
         content may be shown to a given reader at all.
       status: canonical
       profile: core
-      required: optional
     - name: reviewBy
       type: string
+      authoring: authored
+      inPlainWords: 'It is due for review by {value}.'
+      recommendedIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
       definition: >-
         The date by which this document's content must next be reviewed for accuracy. Distinct from reviewCycle
         (the review cadence) - reviewBy is the specific next deadline.
       example: 2026-11-07
       status: canonical
       profile: core
-      required: optional
     - name: supportContact
       type: string
+      authoring: authored
       definition: Contact address (email, URL) for questions about this document's content. Operational-governance lens.
       example: info@cognovamx.com
       status: canonical
       profile: core
-      required: optional
     - name: aiUsageDeclaration
       type: object
+      authoring: authored
       definition: >-
         A structured AI-usage declaration conforming to the draft-cranstoun-mx-ai-usage-declaration Gathering draft
         spec - conformance level, review schedule, subject, and publisher. Trust lens.
@@ -3988,9 +4788,10 @@ mx:
         Top-level object; sub-keys follow the draft spec, not separately registered here. Used on AI-USAGE.md pages.
       status: canonical
       profile: core
-      required: optional
     - name: accuracyCommitment
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Publisher's commitment to content accuracy.
       example: All factual claims verified against source documentation
       notes: >-
@@ -3998,9 +4799,10 @@ mx:
         correctionSla, reviewCycle.
       status: canonical
       profile: cog
-      required: optional
     - name: correctionSla
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: SLA for correcting errors in the cog content.
       example: 24 hours
       notes: Sets expectations for error correction urgency.
@@ -4008,6 +4810,9 @@ mx:
       profile: cog
     - name: expires
       type: string
+      authoring: authored
+      recommendedIn: [portable]
+      optionalIn: [cog, personal, action]
       definition: Expiry date for time-sensitive cogs. ISO 8601 format (YYYY-MM-DD).
       example: 2026-12-31T00:00:00.000Z
       notes: ISO 8601. For time-sensitive content. Review or archive after this date.
@@ -4015,6 +4820,10 @@ mx:
       profile: cog
     - name: generate
       type: object
+      inPlainWords: 'How to regenerate it: {value}.'
+      authoring: authored
+      recommendedIn: [audit]
+      optionalIn: [cog, blog, contact, report, action]
       definition: Generation instructions for AI agents. Describes how to regenerate this content if lost or outdated.
       example:
         prompt: Regenerate from source data
@@ -4022,9 +4831,10 @@ mx:
       notes: Part of MX OS metadata. Enables content regeneration from metadata alone.
       status: canonical
       profile: cog
-      required: optional
     - name: movedDate
       type: string
+      authoring: authored
+      optionalIn: [migration]
       definition: Date content was relocated. ISO 8601 format (YYYY-MM-DD).
       example: 2026-02-28T00:00:00.000Z
       notes: ISO 8601. When the content was relocated.
@@ -4032,22 +4842,26 @@ mx:
       profile: migration
     - name: mxCompliance
       type: string-or-object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: MX compliance level or detailed compliance metadata for a published cog.
       example: level-3
       notes: Declares MX compliance tier. Used with publisher, accuracyCommitment, and reviewCycle.
       status: canonical
       profile: cog
-      required: optional
     - name: reviewCycle
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: How often this cog's content is reviewed for accuracy.
       example: quarterly
       notes: Part of the trust metadata group. Helps agents assess content freshness expectations.
       status: canonical
       profile: cog
-      required: optional
     - name: semantic
       type: string-or-object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: >-
         Semantic quality level or detailed semantic metadata. Declares how well the cog uses semantic HTML and
         structured data.
@@ -4055,9 +4869,10 @@ mx:
       notes: 'Part of the quality triad: accessibility, semantic, convergence.'
       status: canonical
       profile: cog
-      required: optional
     - name: source
       type: string-or-array
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Origin source material or input files. References where the content was derived from.
       example: brainstorm.md
       notes: Content provenance. Distinct from provenance block type (which tracks lineage chain).
@@ -4065,9 +4880,10 @@ mx:
       profile:
         - cog
         - report
-      required: optional
     - name: updateTriggers
       type: array
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Conditions that trigger a cog update. Array of trigger descriptions.
       example:
         - specification-change
@@ -4075,6 +4891,142 @@ mx:
       notes: Events that should prompt a cog update.
       status: canonical
       profile: cog
+    # --- Personal cogs: the personal profile. A personal cog is a record a person keeps about themselves (a need, a
+    # consent, a preference, a skill) and holds on their own device. A reader app matches it against the cogs the world
+    # publishes, on the device, so no profile of the person is built anywhere else. The profile takes its model from the
+    # palimpsest, a manuscript written over an earlier text whose traces remain: the personal cog is the layer a person
+    # writes over the content they receive, and the publisher's attested layer stays beneath it, unaltered and
+    # verifiable. Approved by The Gathering on 2026-10-04 (draft-cranstoun-mx-personal-cogs v1.0).
+    - name: personalKind
+      type: string
+      inPlainWords: 'It records the person''s {value}.'
+      authoring: authored
+      requiredIn: [personal]
+      definition: >-
+        What a personal cog declares about its owner, from a fixed set of kinds a reader app matches against the cogs
+        it meets.
+      example: dietary
+      validValues:
+        - accessibility
+        - consent
+        - dietary
+        - health
+        - interests
+        - preferences
+        - reception
+        - skills
+      notes: >-
+        reception is the push-reception policy: which broadcast categories the person accepts, and how often.
+        preferences covers locale, marketplace, language, currency and display choices such as always opening the
+        reader view. A record that needs two kinds is two cogs, so each carries its own disclosureTier.
+      status: canonical
+      profile: personal
+    - name: personalIdentity
+      type: string
+      inPlainWords: 'It belongs to the {value} identity.'
+      authoring: defaulted
+      recommendedIn: [personal]
+      definition: >-
+        The identity a personal cog belongs to, such as personal, consultant or author; base places it in every
+        identity.
+      example: base
+      default: base
+      notes: >-
+        Identities keep a person's facets apart: only the active identity's cogs take part in a match, so one identity
+        never profiles another. base holds the human fundamentals (an access need, an allergy) that apply whichever
+        identity is active. Identity names are the person's own; the field does not fix a list.
+      status: canonical
+      profile: personal
+    - name: disclosureTier
+      type: string
+      inPlainWords: 'Its disclosure tier is {value}.'
+      authoring: authored
+      requiredIn: [personal]
+      definition: >-
+        How far a personal cog may travel from its owner's device: private never leaves it, derived sends only the
+        neutral preferences named in disclosesAs, and guarded may be shared whole on a transaction the owner starts.
+      example: derived
+      validValues:
+        - private
+        - derived
+        - guarded
+      notes: >-
+        A reader that finds no disclosureTier treats the cog as private. Discovery never discloses: a device that hears
+        the cogs around it announces nothing of itself, and a guarded cog travels only on a booking, a purchase or a
+        request the owner starts, through the guardrail, which reports what it shared. A self-declared need (health,
+        accessibility) is normally derived, so a venue learns the shape of the need and never the reason for it.
+      status: canonical
+      profile: personal
+    - name: disclosesAs
+      type: array
+      inPlainWords: 'It is shared only as {value}.'
+      authoring: authored
+      optionalIn: [personal]
+      definition: >-
+        The neutral preferences that travel in place of a derived personal cog, each saying what the content should do
+        rather than why the owner needs it.
+      example:
+        - audio-first
+        - reduced-motion
+      notes: >-
+        Expected whenever disclosureTier is derived; a derived cog with no disclosesAs discloses nothing. The values
+        are rendering preferences (audio-first, caption-ready, reduced-motion, plain-language), never the condition
+        behind them.
+      status: canonical
+      profile: personal
+    - name: discloseFor
+      type: array
+      inPlainWords: 'It may be shared for {value}.'
+      authoring: authored
+      optionalIn: [personal]
+      definition: The kinds of transaction for which the guardrail may disclose a personal cog, in the owner's own words.
+      example:
+        - dining
+        - travel
+      notes: >-
+        Narrows disclosure and never widens it: a private cog stays private whatever this lists. Absent, the guardrail
+        asks the owner before each disclosure and names the purpose; the confirmation covers that purpose and that
+        transaction only and is never reused.
+      status: canonical
+      profile: personal
+    - name: declaredBy
+      type: string
+      inPlainWords: 'It was declared by {value}.'
+      authoring: defaulted
+      optionalIn: [personal]
+      definition: >-
+        Who made a personal declaration: self for the owner, or delegate for someone acting with the owner's
+        authority, such as a carer or a parent.
+      example: self
+      default: self
+      validValues:
+        - self
+        - delegate
+      notes: >-
+        A declaration is an assertion by a person, never a signal a system inferred. A delegate declaration names the
+        delegate as a parties entry with role delegate.
+      status: canonical
+      profile: personal
+    - name: revisionTraces
+      type: string
+      inPlainWords: 'Earlier versions of it are {value}.'
+      authoring: defaulted
+      recommendedIn: [personal]
+      definition: >-
+        Whether earlier versions of a personal cog stay recoverable by its owner after a revision (kept) or are erased
+        when it is revised (scraped).
+      example: scraped
+      default: kept
+      validValues:
+        - kept
+        - scraped
+      notes: >-
+        Named for the palimpsest, where scraped text leaves traces a careful reader can recover. Traces are for the
+        owner alone and never travel: only the current version is matched or disclosed. A person withdrawing a health
+        declaration sets scraped, and the reader app then keeps no earlier version on the device or in its synced
+        history.
+      status: canonical
+      profile: personal
   profiles:
     - name: core
       description: Fields that apply to all MX documents.
@@ -4108,11 +5060,12 @@ mx:
         - mxSpecVersion
       optional:
         - tags
+        - type
+        - resource
         - audience
         - purpose
         - license
         - maintainer
-        - confidential
         - ownership
         - domain
         - segment
@@ -4120,13 +5073,13 @@ mx:
         - contextProvides
         - aiAssistance
         - aiEditable
-        - ld
-        - readingLevel
         - runbook
         - contentType
-        - name
-        - type
-        - resource
+        - confidential
+        - ld
+        - readingLevel
+        - conformsTo
+        - x-mx-pim
     - name: cog
       description: >-
         Fields specific to .cog.md files. Cogs are an optional layer on top of MX; the machine identifier is derived
@@ -4159,55 +5112,184 @@ mx:
           buildsOn: [fields]
         ---
       required:
-        - partOf
-        - purpose
         - audience
-        - stability
-        - runbook
+        - purpose
+        - partOf
         - contextProvides
+        - runbook
+        - stability
       recommended:
         - category
-        - buildsOn
         - tags
+        - buildsOn
       optional:
-        - dependencies
+        - type
+        - resource
         - refersTo
         - execute
-        - x-mx-blocks
-        - x-mx-policy
-        - x-mx-cogId
-        - cogType
+        - accessibility
+        - convergence
+        - publisher
         - publicationDate
-        - expires
-        - correctionSla
+        - cogType
         - maintainedDate
         - maintainedBy
         - provenanceOrigin
-        - updateTriggers
-        - accessibility
-        - semantic
-        - convergence
-        - mxCompliance
         - accuracyCommitment
-        - reviewCycle
-        - publisher
+        - correctionSla
+        - expires
         - generate
+        - mxCompliance
+        - reviewCycle
+        - semantic
         - source
-        - x-mx-adr
-        - x-mx-ndr
-        - x-mx-bdr
-        - deliverable
-        - includes
+        - updateTriggers
+        - dependencies
         - cogHeader
         - targetsSpecVersion
         - readiness
         - operatesOn
         - troubleshooting
         - produces
-        - actionType
         - defaultRemedy
+        - actionType
+        - includes
+        - deliverable
+        - x-mx-adr
+        - x-mx-ndr
+        - x-mx-bdr
+        - x-mx-cogRole
+        - x-mx-domainScope
+        - x-mx-obsession
+        - x-mx-blockContent
+        - x-mx-policyScope
+        - x-mx-persona
+        - x-mx-manifest
+        - x-mx-assessment
+        - x-mx-scores
+        - x-mx-benchmark
+        - x-mx-proposal
+        - x-mx-govRef
+        - x-mx-collaborateThread
+        - x-mx-collaborateParticipants
+        - x-mx-collaborateAgentEnabled
+        - x-mx-collaborateMessageCount
+        - x-mx-collaborateLastActivity
+    - name: action
+      description: >-
+        An action-cog: a cog whose execute block a machine runs, as a script, as instructions, as a skill it loads,
+        or as a mod it installs. It carries every cog field, and the security block is part of its contract: a reader
+        weighs riskLevel, reversibility, verifiability, capabilities and network scope before it decides whether to
+        run an action. securityLevels names the security members each conformance level adds; security is a block,
+        so its members are enforced by scripts/check-action-security-level.cjs (Gate 143) rather than by the field
+        lists. A new action-cog reaches Level 2 (Profiled); one that predates the profile holds the level it had, in a
+        shrink-only baseline, and works towards Level 1 (Declared).
+      header: |
+        ---
+        # Carrier: .cog.md file whose type is action-doc
+        # --- Zone 1a: Identity ---
+        title: "Purge the site cache"
+        description: "Action-cog that purges the CDN cache for one host, after a dry run lists what would go."
+        author: Tom Cranstoun
+        created: 2026-10-05
+        modified: 2026-10-05
+        category: mx-core
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: action-doc
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          partOf: mx-os
+          purpose: "One sentence on what this document is for."
+          audience: [humans, machines]
+          stability: stable
+          runbook: "Run the list action first; purge only what it named."
+          contextProvides: [profile-example]
+          buildsOn: [fields]
+          actionType: scripted
+          security:
+            riskLevel: medium
+            reversibility: correctable
+            verifiability: inspectable
+            guardrail: dry-run-first
+            dryRunAction: list
+            capabilities: [networkEgress, credentialRead]
+            scope:
+              network: true
+          execute:
+            runtime: bash
+            actions:
+              - payloadType: script
+                name: list
+                description: "List the cached paths a purge would remove."
+                usage: "Run mx exec cache-purge list <host>."
+              - payloadType: script
+                name: purge
+                description: "Purge the cached paths the list action named."
+                usage: "Run mx exec cache-purge purge <host> after reading the list."
+        ---
+      securityLevels:
+        declared:
+          - riskLevel
+        profiled:
+          - riskLevel
+          - reversibility
+          - verifiability
+          - capabilities
+          - scope.network
+      required:
+        - audience
+        - purpose
+        - partOf
+        - execute
+        - contextProvides
+        - runbook
+        - stability
+        - actionType
+      recommended:
+        - category
+        - tags
+        - buildsOn
+      optional:
         - type
         - resource
+        - refersTo
+        - accessibility
+        - convergence
+        - publisher
+        - publicationDate
+        - cogType
+        - maintainedDate
+        - maintainedBy
+        - provenanceOrigin
+        - accuracyCommitment
+        - correctionSla
+        - expires
+        - generate
+        - mxCompliance
+        - reviewCycle
+        - semantic
+        - source
+        - updateTriggers
+        - dependencies
+        - cogHeader
+        - targetsSpecVersion
+        - readiness
+        - operatesOn
+        - troubleshooting
+        - produces
+        - defaultRemedy
+        - modHooks
+        - modCapabilities
+        - modGuarantee
+        - testedWith
+        - includes
+        - deliverable
+        - x-mx-adr
+        - x-mx-ndr
+        - x-mx-bdr
+        - x-mx-cogRole
     - name: folder
       description: Fields for .mx.yaml.md folder metadata. Identity and OKF fields sit at the top level; the folder fields sit under mx:.
       header: |
@@ -4232,38 +5314,38 @@ mx:
           primaryLanguages: [markdown]
         ---
       required:
+        - domain
         - folderType
         - stability
         - lifecycle
-        - domain
       recommended:
         - primaryLanguages
       optional:
-        - hasSubfolders
-        - relatedFolders
         - version
+        - tags
+        - type
+        - resource
+        - derivedFrom
         - aiAssistance
         - aiEditable
-        - aiGenerationAllowed
-        - aiGenerationReviewRequired
         - aiTraining
         - aiTrainingConditions
         - aiSensitivePaths
         - aiPermittedAreas
         - aiProhibitedAreas
+        - aiGenerationAllowed
+        - aiGenerationReviewRequired
         - mxSpecVersion
-        - project
-        - context
-        - stack
         - conventions
         - inheritable
         - contentType
-        - mxWatchesFiles
-        - derivedFrom
+        - hasSubfolders
         - publishedTo
-        - type
-        - tags
-        - resource
+        - project
+        - context
+        - stack
+        - relatedFolders
+        - mxWatchesFiles
     - name: migration
       description: Fields for tracking content relocation.
       header: |
@@ -4282,11 +5364,11 @@ mx:
         mx:
         ---
       optional:
+        - tags
+        - type
+        - resource
         - movedFrom
         - movedDate
-        - type
-        - tags
-        - resource
     - name: routing
       description: Fields used exclusively in ROUTING.cog.md. Not for general documents.
       header: |
@@ -4311,8 +5393,8 @@ mx:
         - words
         - keyFields
       optional:
-        - type
         - tags
+        - type
         - resource
     - name: skill
       description: Fields for .claude/skills/*/skill.md files. Three-layer contract (Anthropic runtime, OKF discoverability, MX estate integration).
@@ -4337,20 +5419,22 @@ mx:
           stability: stable
         ---
       required:
-        - name
-        - category
         - description
+        - category
+        - name
       recommended:
         - version
         - stability
       optional:
+        - tags
+        - type
+        - resource
+        - canonicalUri
         - audience
         - purpose
-        - canonicalUri
         - dependencies
-        - type
-        - tags
-        - resource
+      externalRequired:
+        - name
     - name: html
       description: 'Fields for .cog.html files. Convention: <meta name=''mx:field''>.'
       header: |
@@ -4371,12 +5455,12 @@ mx:
         - mx:version
         - mx:type
       optional:
-        - mx:category
-        - mx:audience
-        - mx:tags
-        - type
         - tags
+        - type
         - resource
+        - mx:audience
+        - mx:category
+        - mx:tags
     - name: book
       description: >-
         Fields for book-manuscript chapters and appendices under datalake/manuscripts/mx-books/. Deliberately leaner
@@ -4411,18 +5495,18 @@ mx:
         - modified
       recommended:
         - version
-        - tags
         - status
+        - tags
+        - canonicalUri
         - book
         - chapter
-        - canonicalUri
       optional:
-        - quotes
-        - x-mx-createdHash
-        - copyright
-        - x-mx-wordCount
         - type
         - resource
+        - quotes
+        - copyright
+        - x-mx-wordCount
+        - x-mx-createdHash
     - name: blog
       description: Fields for mx-site blog posts authored as markdown in datalake/draft-site/blog/.
       header: |
@@ -4455,27 +5539,25 @@ mx:
         - author
         - created
         - modified
-        - purpose
         - audience
-        - stability
-        - runbook
+        - purpose
         - contextProvides
+        - runbook
+        - stability
+        - x-mx-contentState
       recommended:
         - version
         - tags
         - canonicalUri
-        - x-mx-contentState
       optional:
-        - x-mx-neededFor
-        - x-mx-managedBy
-        - servedAt
-        - generate
         - category
-        - aiAssistance
-        - blogUrl
-        - blogFilename
         - type
         - resource
+        - aiAssistance
+        - generate
+        - servedAt
+        - x-mx-neededFor
+        - x-mx-managedBy
     - name: contact
       description: Fields for CRM contact/person records under mx-crm/contacts/.
       header: |
@@ -4510,35 +5592,46 @@ mx:
         - author
         - created
         - modified
-        - purpose
         - audience
-        - stability
-        - runbook
+        - purpose
         - contextProvides
+        - runbook
+        - stability
       recommended:
         - version
-        - slug
-        - displayName
         - status
         - canonicalUri
+        - slug
+        - displayName
       optional:
-        - x-mx-contactKind
         - category
-        - agentType
+        - tags
+        - type
+        - resource
         - partOf
-        - schema
+        - refersTo
+        - quotes
         - publisher
         - url
-        - image
-        - dependencies
-        - refersTo
-        - x-mx-pdfDoctype
-        - x-mx-createdHash
+        - schema
         - generate
-        - quotes
-        - type
-        - tags
-        - resource
+        - dependencies
+        - image
+        - x-mx-createdHash
+        - x-mx-contactKind
+        - x-mx-pdfDoctype
+        - agentType
+        - x-mx-collaborateThread
+        - x-mx-collaborateFrom
+        - x-mx-collaborateTo
+        - x-mx-collaborateReplyTo
+        - x-mx-collaborateSequence
+        - x-mx-collaborateNeedsAgentReply
+        - x-mx-collaborateHandle
+        - x-mx-collaborateEmail
+        - x-mx-collaborateGitName
+        - x-mx-collaborateDisplayName
+        - x-mx-collaboratePreferredLanguage
     - name: report
       description: Fields for session reports, completion reports, and generated audit reports.
       header: |
@@ -4570,25 +5663,25 @@ mx:
         - author
         - created
         - modified
-        - purpose
         - audience
-        - stability
-        - runbook
+        - purpose
         - contextProvides
+        - runbook
+        - stability
       recommended:
         - version
         - status
         - canonicalUri
       optional:
-        - x-mx-createdHash
+        - tags
+        - type
+        - resource
         - partOf
         - refersTo
         - relatedTo
-        - generate
         - confidential
-        - type
-        - tags
-        - resource
+        - generate
+        - x-mx-createdHash
     - name: audit
       description: Fields for the MX web-audit pipeline's report/scoring outputs (mx-reginald/audit/).
       header: |
@@ -4622,24 +5715,26 @@ mx:
         - author
         - created
         - modified
-        - purpose
         - audience
-        - stability
-        - runbook
+        - purpose
         - contextProvides
+        - runbook
+        - stability
       recommended:
         - version
         - status
         - canonicalUri
         - generate
       optional:
-        - x-mx-createdHash
+        - tags
+        - type
+        - resource
         - partOf
         - refersTo
         - relatedTo
-        - type
-        - tags
-        - resource
+        - x-mx-createdHash
+        - x-mx-assessment
+        - x-mx-scores
     - name: event
       description: >-
         Fields for event, conference, and presentation records. Thin category; too few real examples in the estate
@@ -4667,8 +5762,8 @@ mx:
         - created
         - modified
       optional:
-        - type
         - tags
+        - type
         - resource
     - name: script
       description: >-
@@ -4697,12 +5792,12 @@ mx:
         - created
         - modified
       optional:
-        - type
         - tags
+        - type
         - resource
     - name: portable
       description: >-
-        A conformance level, not a document type: the fields a document must carry to remain interpretable by a
+        A portability profile, not a document type: the fields a document must carry to remain interpretable by a
         machine that meets it away from its source, with no access to the originating site. It is the Documents Are
         Self-Sufficient test made checkable. A document opts in by listing this profile's address in conformsTo
         (https://mx.allabout.network/canon/fields-data.yaml#portable), and scripts/check-portable-conformance.cjs
@@ -4745,14 +5840,14 @@ mx:
         - integritySignature
         - provenanceUri
       recommended:
-        - conformsTo
         - proofOfAuthorship
         - provenancePedigree
-        - expires
+        - conformsTo
         - inLanguage
+        - expires
       optional:
-        - type
         - tags
+        - type
         - resource
     - name: component
       description: >-
@@ -4810,8 +5905,8 @@ mx:
         - relatedTo
         - attestationRecord
       optional:
-        - type
         - tags
+        - type
         - resource
         - displayMode
         - icon
@@ -4875,9 +5970,32 @@ mx:
             ISO-42001:
               controls: [A.4.2, A.6.2.3, A.9.4]
         ---
-      required: [title, description, author, created, modified, canonicalUri, status, recordId, parties, purpose]
-      recommended: [version, reviewBy, jurisdictionalEvidence, intendedUse]
-      optional: [type, tags, resource, dataSources, resourceProfile, residualRisk, transformations, statusNotice, supersededBy]
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - status
+        - canonicalUri
+        - purpose
+        - parties
+        - recordId
+      recommended:
+        - version
+        - jurisdictionalEvidence
+        - intendedUse
+        - reviewBy
+      optional:
+        - tags
+        - type
+        - resource
+        - residualRisk
+        - statusNotice
+        - transformations
+        - resourceProfile
+        - dataSources
+        - supersededBy
     - name: aims-statement-of-applicability
       description: >-
         Which controls of a regime apply within the scope of an AI management system, the justification for each, and
@@ -4913,9 +6031,29 @@ mx:
               applicable: true
               justification: The summariser logs each generation event.
         ---
-      required: [title, description, author, created, modified, canonicalUri, status, recordId, parties, aimsScope, controlApplicability, approvedAt]
-      recommended: [version, reviewBy]
-      optional: [type, tags, resource, jurisdictionalEvidence, statusNotice, supersededBy]
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - status
+        - canonicalUri
+        - parties
+        - recordId
+        - aimsScope
+        - controlApplicability
+        - approvedAt
+      recommended:
+        - version
+        - reviewBy
+      optional:
+        - tags
+        - type
+        - resource
+        - jurisdictionalEvidence
+        - statusNotice
+        - supersededBy
     - name: aims-risk-register
       description: >-
         One identified AI risk: the system it concerns, its owner, its level before treatment, the treatment chosen,
@@ -4960,9 +6098,30 @@ mx:
             ISO-42001:
               clauses: ["6.1.2", "8.2", "8.3"]
         ---
-      required: [title, description, author, created, modified, canonicalUri, status, recordId, parties, systemRef, inherentRisk, riskTreatment]
-      recommended: [version, reviewBy, residualRisk, jurisdictionalEvidence]
-      optional: [type, tags, resource, statusNotice, supersededBy]
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - status
+        - canonicalUri
+        - parties
+        - recordId
+        - systemRef
+        - inherentRisk
+        - riskTreatment
+      recommended:
+        - version
+        - residualRisk
+        - jurisdictionalEvidence
+        - reviewBy
+      optional:
+        - tags
+        - type
+        - resource
+        - statusNotice
+        - supersededBy
     - name: aims-impact-assessment
       description: >-
         The record of an AI system impact assessment: the groups affected, each impact and its severity, the
@@ -5002,9 +6161,31 @@ mx:
               description: A pharmacist reviews every summary before release.
               owner: riskOwner
         ---
-      required: [title, description, author, created, modified, canonicalUri, status, recordId, parties, systemRef, affectedGroups, impacts, assessedAt]
-      recommended: [version, mitigations, reviewBy, jurisdictionalEvidence]
-      optional: [type, tags, resource, statusNotice, supersededBy]
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - status
+        - canonicalUri
+        - parties
+        - recordId
+        - systemRef
+        - affectedGroups
+        - impacts
+        - assessedAt
+      recommended:
+        - version
+        - jurisdictionalEvidence
+        - mitigations
+        - reviewBy
+      optional:
+        - tags
+        - type
+        - resource
+        - statusNotice
+        - supersededBy
     - name: aims-policy
       description: >-
         An AI policy kept as a document: its version, approver, approval date, next review, and the regime clauses it
@@ -5039,6 +6220,81 @@ mx:
             ISO-42001:
               controls: [A.2.2, A.2.4]
         ---
-      required: [title, description, author, created, modified, version, canonicalUri, status, recordId, parties, approvedAt]
-      recommended: [reviewBy, jurisdictionalEvidence]
-      optional: [type, tags, resource, statusNotice, supersededBy]
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - version
+        - status
+        - canonicalUri
+        - parties
+        - recordId
+        - approvedAt
+      recommended:
+        - jurisdictionalEvidence
+        - reviewBy
+      optional:
+        - tags
+        - type
+        - resource
+        - statusNotice
+        - supersededBy
+    - name: personal
+      description: >-
+        A personal cog: a record a person keeps about themselves and holds on their own device. It declares a need, a
+        consent, a preference, a skill or an interest, and a reader app matches it against the cogs it meets, on the
+        device. The record kind is personal-cog. The profile is the upper layer of the palimpsest: it shapes what the
+        person receives and never alters the publisher's attested layer beneath it. Approved by The Gathering on
+        2026-10-04.
+      header: |
+        ---
+        # Carrier: a personal cog, held on its owner's device
+        # --- Zone 1a: Identity ---
+        title: "Dietary needs"
+        description: "Coeliac and no nuts. Matched against menus and product labels."
+        author: Jane Doe
+        created: 2026-10-04
+        modified: 2026-10-04
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: personal-cog
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          personalKind: dietary
+          personalIdentity: base
+          disclosureTier: guarded
+          discloseFor: [dining, groceries]
+          declaredBy: self
+          revisionTraces: kept
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - personalKind
+        - disclosureTier
+      recommended:
+        - version
+        - status
+        - inLanguage
+        - personalIdentity
+        - revisionTraces
+      optional:
+        - tags
+        - type
+        - resource
+        - refersTo
+        - corroboratedBy
+        - claimBasis
+        - supersededBy
+        - expires
+        - disclosesAs
+        - discloseFor
+        - declaredBy

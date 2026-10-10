@@ -1,7 +1,7 @@
 title: MX Workflow Fields
-version: '1.2'
+version: '1.4'
 created: '2026-05-08'
-modified: '2026-09-17'
+modified: '2026-10-02'
 author: Tom Cranstoun
 description: 'Field dictionary for workflow and process metadata used by tooling artefacts that borrow markdown frontmatter syntax. These fields describe submission acts, build acts, audit acts, and similar process state. They are NOT part of the open MX standard and NOT vendor extensions to the content vocabulary; they are workflow vocabulary that lives in its own dictionary so the canon and the vendor-extensions file stay focused on document content.'
 mx:
@@ -59,8 +59,8 @@ mx:
           isNewNote: false
         ---
       optional:
-        - type
         - tags
+        - type
         - resource
     - name: workflow-record
       description: Fields carried by the record of one workflow that has an AI agent in it. The record
@@ -104,13 +104,15 @@ mx:
           reviewedAt: 2026-09-14
         ---
       optional:
-        - type
         - tags
+        - type
         - resource
 
   fields:
   - name: package
     type: string
+    inPlainWords: 'The submission package is {value}.'
+    authoring: authored
     definition: Stable identifier for a Stream-submission package. Conventionally the docname of the
       draft being submitted concatenated with the prepared-at date. Used as the package's
       machine-readable handle for tooling and in cross-references between the package and the
@@ -120,12 +122,13 @@ mx:
       identifier (different preparedAt date) so the historical record stays immutable.
     status: canonical
     profile: submission-package
-    required: required
     context: Carried in the frontmatter of files at mx-outputs/submissions/<docname>-<date>.md.
     description: Stable handle for a Stream-submission package, derived from docname + prepared-at date.
 
   - name: versionSubmitted
     type: string
+    inPlainWords: 'Version {value} of the draft was filed.'
+    authoring: authored
     definition: The version of the draft as it was filed in this package. Quoted so semantic-style
       versions like "1.0" preserve the trailing zero through YAML parsers that would otherwise
       coerce them to a number.
@@ -134,25 +137,27 @@ mx:
       package's versionSubmitted stays as the historical record.
     status: canonical
     profile: submission-package
-    required: required
     context: Tracks the submission lineage so reviewers can follow which version was discussed in a
       given Stream thread.
     description: Quoted version string of the draft at the moment of submission.
 
   - name: preparedAt
     type: date
+    inPlainWords: 'The package was prepared on {value}.'
+    authoring: authored
     definition: ISO 8601 date (YYYY-MM-DD) when the package was prepared. Distinct from the date the
       package was filed to Stream (which lives in the submissions registry as submittedAt).
     example: 2026-05-07
     notes: Disambiguates packages prepared for the same draft on different dates.
     status: canonical
     profile: submission-package
-    required: required
     context: Used together with docname to form the package's filename and the package field value.
     description: ISO 8601 date when the package was prepared.
 
   - name: draftPath
     type: string
+    inPlainWords: 'The draft lives at {value}.'
+    authoring: authored
     definition: Filesystem path to the source draft within the hub at the moment of preparation.
       Relative to the hub repository root.
     example: mx-shared-gathering/draft-cogs.md
@@ -161,12 +166,13 @@ mx:
       specific tree.
     status: canonical
     profile: submission-package
-    required: required
     context: Pairs with draftCommit to uniquely identify the bytes the package was prepared against.
     description: Hub-relative filesystem path to the source draft at preparation time.
 
   - name: draftCommit
     type: string
+    inPlainWords: 'The draft was taken at commit {value}.'
+    authoring: authored
     definition: Short SHA (typically 7 characters) of the submodule commit at which the source draft
       lived when the package was prepared. Anchors the package to a specific draft state.
     example: b75cbc4
@@ -174,12 +180,13 @@ mx:
       acceptable; the validator does not enforce length.
     status: canonical
     profile: submission-package
-    required: required
     context: A reviewer reading the package can fetch the exact draft bytes via this commit + draftPath.
     description: Submodule commit SHA at which the source draft was filed.
 
   - name: hubCommit
     type: string
+    inPlainWords: 'The package was prepared at hub commit {value}.'
+    authoring: authored
     definition: Short SHA of the hub commit at which the package was prepared. Provides a second
       anchor (alongside draftCommit) so the package's full preparation context is reproducible.
     example: cc969141
@@ -187,12 +194,13 @@ mx:
       reconstruct the full hub-plus-submodule state at preparation.
     status: canonical
     profile: submission-package
-    required: required
     context: Used when validating that the package's referenced state still exists.
     description: Hub commit SHA at which the package was prepared.
 
   - name: draftUrl
     type: string
+    inPlainWords: 'The exact draft filed is at {value}.'
+    authoring: authored
     definition: Stable, deep-linked URL to the source draft at the cited draftCommit. Resolves to
       the literal bytes the package was prepared against.
     example: https://github.com/ddttom/mx-shared-gathering/blob/b75cbc4/draft-cogs.md
@@ -200,13 +208,14 @@ mx:
       exactly what was filed.
     status: canonical
     profile: submission-package
-    required: required
     context: Quoted in the cover note posted to Stream so reviewers can read the draft without
       cloning the repository.
     description: Permalink to the draft at draftCommit.
 
   - name: isNewNote
     type: boolean
+    inPlainWords: 'Whether this files the draft for the first time: {value}.'
+    authoring: authored
     definition: True when the package is filing a draft for the first time; false when the package
       is filing a revision of a previously filed draft. Default false when omitted.
     example: true
@@ -214,7 +223,6 @@ mx:
       Stream thread) from revisions (which post into an existing thread).
     status: canonical
     profile: submission-package
-    required: optional
     context: Carried only when meaningful; can be omitted for revisions where the default false applies.
     description: Whether the package is filing a draft for the first time.
 
@@ -226,6 +234,8 @@ mx:
 
   - name: baselineProcess
     type: string
+    inPlainWords: 'How the work ran before the agent: {value}'
+    authoring: authored
     definition: The process as it ran before the agent was introduced, in enough detail that the
       redesign can be compared with it. Names the steps, who performed them, and the hand-offs.
     example: Two researchers wrote the instrument, a fieldwork team ran fixed-form interviews, a junior
@@ -234,12 +244,13 @@ mx:
       gains cannot be separated from work that moved elsewhere in the workflow.
     status: canonical
     profile: workflow-record
-    required: required
     context: Written once at design time and left unchanged; later reviews compare against it.
     description: The process before the agent, as the comparison point for every later claim.
 
   - name: objective
     type: string
+    inPlainWords: 'The intended outcome: {value}'
+    authoring: authored
     definition: The intended outcome of the redesign, stated so a later review can judge whether it was
       met. Names the stakeholders whose gain is expected, not only the headline metric.
     example: Reduce respondent burden and coding turnaround while keeping construct validity and the
@@ -248,12 +259,13 @@ mx:
       stated as a single productivity figure invites the failure mode the condition names.
     status: canonical
     profile: workflow-record
-    required: required
     context: Read at every periodic review alongside baselineProcess.
     description: The intended outcome of the redesign, stated for later judgement.
 
   - name: agentTasks
     type: array
+    inPlainWords: 'The agent does: {value}.'
+    authoring: authored
     definition: The tasks assigned to the agent, one entry per task, each naming what the agent does and
       the bound it works within. A task the agent may not perform is listed under reviewPoints as a
       human responsibility, not here.
@@ -264,12 +276,13 @@ mx:
       carries.
     status: canonical
     profile: workflow-record
-    required: required
     context: The declared scope the agent may not act outside without human direction.
     description: The tasks assigned to the agent and the bound each works within.
 
   - name: agentAuthority
     type: string
+    inPlainWords: 'The most the agent may do is {value}.'
+    authoring: authored
     definition: The highest level of authority the agent holds anywhere in the workflow. generate = it
       produces material a human then uses. recommend = it proposes an action or a decision a human
       takes. decide = it makes a decision that stands unless a human overrides it. execute = it carries
@@ -287,12 +300,13 @@ mx:
       declares the properties this value should be read against.
     status: canonical
     profile: workflow-record
-    required: required
     context: Compared across records so workflows in different sectors can be placed on one scale.
     description: The highest authority level the agent holds, from generate to execute.
 
   - name: reviewPoints
     type: array
+    inPlainWords: 'Where people review or decide: {value}.'
+    authoring: authored
     definition: Where human workers review, interpret, authorise, override, or intervene, one entry per
       point, each naming the stage, the human role, and the act. This is the human side of the division
       of labour that agentTasks states for the agent.
@@ -308,12 +322,13 @@ mx:
       four is the ceremonial-approval failure mode.
     status: canonical
     profile: workflow-record
-    required: required
     context: Where a provenance sidecar's human-check step should be found when the workflow runs.
     description: The stages, roles, and acts at which humans review, authorise, override, or intervene.
 
   - name: escalationPath
     type: string
+    inPlainWords: 'When the agent cannot be relied on: {value}'
+    authoring: authored
     definition: Who is reached, and how, when an output is unreliable, a case is unfamiliar, or the
       agent acts outside its scope. Names the human role that holds decision authority at each rung.
     example: Interviewer flags to the fieldwork lead; the lead halts the agent and refers to the
@@ -322,12 +337,13 @@ mx:
       at "the system" has no owner.
     status: canonical
     profile: workflow-record
-    required: required
     context: Read by the person who meets an exception, and by an auditor asking who was accountable.
     description: The human route an unreliable output or an out-of-scope action is escalated along.
 
   - name: fallbackProcedure
     type: string
+    inPlainWords: 'If the agent is unavailable: {value}'
+    authoring: authored
     definition: How the work continues when the agent is unavailable, degraded, or withdrawn. States the
       manual or alternative process and who performs it.
     example: Fieldwork reverts to the fixed-form instrument; coding reverts to the two-researcher manual
@@ -336,12 +352,13 @@ mx:
       run without the agent has handed the agent authority nobody declared.
     status: canonical
     profile: workflow-record
-    required: required
     context: Read when the agent stops, and at each review to confirm the fallback is still viable.
     description: How the work continues without the agent.
 
   - name: recoveryProcedure
     type: string
+    inPlainWords: 'How an agent error is found and undone: {value}'
+    authoring: authored
     definition: How an error or an unintended agent action is detected, corrected, and its effects
       undone or contained before serious harm. Names the step, the human who performs it, and the
       record it leaves.
@@ -352,12 +369,13 @@ mx:
       behind a security.reversibility value of correctable.
     status: canonical
     profile: workflow-record
-    required: required
     context: Read alongside escalationPath when an error is found, and by an auditor reconstructing one.
     description: How an error is detected, corrected, and contained.
 
   - name: verificationEffort
     type: string
+    inPlainWords: 'The human effort spent checking the agent: {value}'
+    authoring: authored
     definition: The human effort spent on verifying the agent's outputs, handling exceptions, reworking,
       and recovering, over a stated period, in the unit the organisation measures effort in. The
       hidden work a headline productivity figure omits.
@@ -367,13 +385,14 @@ mx:
       the period and the unit with the figure; a bare number cannot be reconciled later.
     status: canonical
     profile: workflow-record
-    required: optional
     context: Filled at each periodic review from the effort the review points and recovery procedure
       consumed.
     description: The human effort spent verifying, handling exceptions, and recovering, with its period.
 
   - name: unintendedActions
     type: array
+    inPlainWords: 'Errors and unapproved agent actions recorded: {value}.'
+    authoring: authored
     definition: Significant errors, unapproved actions, and unintended actions by the agent, one entry
       per event, each with the date, what happened, how it was found, and how it was recovered.
     example:
@@ -385,12 +404,13 @@ mx:
       to confirm failures were traceable and recoverable.
     status: canonical
     profile: workflow-record
-    required: optional
     context: Appended as events occur, never rewritten; the list is the record.
     description: The agent's significant errors and unintended actions, with detection and recovery.
 
   - name: capabilityEvidence
     type: string
+    inPlainWords: 'Evidence on the people in the workflow is at {value}.'
+    authoring: authored
     definition: Where the longitudinal evidence on the human side lives - the skills, AI literacy,
       learning opportunities, progression, agency, and satisfaction of the workers in the workflow. A
       path or a URL to the survey, the training record, or the study, not the evidence itself.
@@ -400,13 +420,14 @@ mx:
       purpose) are judged from what this points at, over repeated reviews.
     status: canonical
     profile: workflow-record
-    required: optional
     context: Read at each periodic review; a record with no pointer here cannot support a claim on the
       longitudinal conditions.
     description: Pointer to the longitudinal evidence on worker capability, progression, and purpose.
 
   - name: reviewedAt
     type: date
+    inPlainWords: 'The workflow was last reviewed on {value}.'
+    authoring: authored
     definition: ISO 8601 date (YYYY-MM-DD) of the most recent periodic operational review of the
       workflow against the record. Distinct from the record's own modified date, which moves on any edit.
     example: 2026-09-14
@@ -414,7 +435,6 @@ mx:
       makes the age of the last assessment legible rather than assumed.
     status: canonical
     profile: workflow-record
-    required: optional
     context: Stamped by the review, not by an editing pass.
     description: Date of the most recent periodic review of the workflow against this record.
 

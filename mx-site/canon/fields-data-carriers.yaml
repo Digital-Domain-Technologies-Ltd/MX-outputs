@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Carrier Formats Companion
-version: '5.2'
+version: '5.5'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-09-14'
+modified: '2026-10-02'
 author: The Gathering
 description: >-
   Open standard carrier-format metadata schemas for code (function/class/API/test/inline/dependency/repository).
@@ -29,6 +29,7 @@ mx:
   fields:
     - name: runtime
       type: string
+      authoring: authored
       definition: 'Execution environment. Values: node, browser, deno, bun.'
       example: node
       validValues:
@@ -39,9 +40,10 @@ mx:
       notes: Required for script profile.
       status: canonical
       profile: script
-      required: optional
     - name: dependencies
       type: array
+      authoring: authored
+      inPlainWords: 'It depends on {value}.'
       definition: Package dependencies. Array of package names or package@version strings.
       example:
         - markdownlint-cli2
@@ -49,166 +51,191 @@ mx:
       notes: Array of package names or package@version strings.
       status: canonical
       profile: script
-      required: optional
     - name: project.name
       type: string
+      authoring: authored
+      requiredIn: [code-repository]
       definition: Project name for code repository metadata.
       example: My Project
       status: canonical
       profile: code-repository
-      required: true
     - name: project.description
       type: string
+      authoring: authored
+      requiredIn: [code-repository]
       definition: Brief description of what this project does.
       example: API backend for order processing
       status: canonical
       profile: code-repository
-      required: true
     - name: project.repository
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Source repository URL.
       example: https://github.com/example/my-project
       status: canonical
       profile: code-repository
-      required: false
     - name: project.documentation
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Documentation site URL.
       example: https://docs.example.com/my-project
       status: canonical
       profile: code-repository
-      required: false
     - name: context.domain
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Business or technical domain of the project.
       example: e-commerce
       status: canonical
       profile: code-repository
-      required: false
     - name: context.purpose
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: What the project does (operational purpose, not document description).
       example: API backend for order processing
       status: canonical
       profile: code-repository
-      required: false
     - name: context.constraints
       type: array
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Non-functional requirements and constraints.
       example:
         - Must handle 10,000 requests per second
         - GDPR compliant
       status: canonical
       profile: code-repository
-      required: false
     - name: stack.language
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Primary programming language.
       example: typescript
       status: canonical
       profile: code-repository
-      required: false
     - name: stack.runtime
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Execution environment.
       example: node
       status: canonical
       profile: code-repository
-      required: false
     - name: stack.version
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Language or runtime version.
       example: 20.x
       status: canonical
       profile: code-repository
-      required: false
     - name: stack.framework
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Primary framework.
       example: express
       status: canonical
       profile: code-repository
-      required: false
     - name: conventions.style
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Code style tool or guide.
       example: prettier
       status: canonical
       profile: code-repository
-      required: false
     - name: conventions.testing
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Testing framework.
       example: jest
       status: canonical
       profile: code-repository
-      required: false
     - name: conventions.documentation
       type: string
+      authoring: authored
+      optionalIn: [code-repository]
       definition: Documentation format.
       example: jsdoc
       status: canonical
       profile: code-repository
-      required: false
     - name: owner
       type: string
+      inPlainWords: '{value} is responsible for it.'
+      authoring: authored
+      optionalIn: [code-file]
       definition: Team or person responsible for this file or resource.
       example: platform-team
       notes: Used at file and directory level in code metadata. Media rights and database tables defer to their own standards (Schema.org, DCAT, CSVW).
       status: canonical
       profile:
         - code-file
-      required: false
     - name: pure
       type: boolean
+      inPlainWords: 'Whether the function changes nothing outside itself: {value}.'
+      authoring: authored
+      optionalIn: [code-function]
       definition: Whether function has no side effects.
       example: true
       status: canonical
       profile: code-function
-      required: false
     - name: idempotent
       type: boolean
+      authoring: authored
+      optionalIn: [code-function, code-api]
       definition: Whether repeated calls produce the same result.
       example: true
       status: canonical
       profile:
         - code-function
         - code-api
-      required: false
     - name: complexity
       type: string
+      authoring: authored
+      optionalIn: [code-function]
       definition: Time complexity in Big O notation.
       example: O(n)
       status: canonical
       profile: code-function
-      required: false
     - name: throws
       type: array
+      authoring: authored
+      optionalIn: [code-function]
       definition: Exception types this function may throw. Use raises for Python.
       example:
         - InvalidDiscountError
         - NegativePriceError
       status: canonical
       profile: code-function
-      required: false
     - name: since
       type: string
+      authoring: authored
+      optionalIn: [code-function]
       definition: Version when this function was introduced.
       example: 1.2.0
       status: canonical
       profile: code-function
-      required: false
     - name: see
       type: array
+      authoring: authored
+      optionalIn: [code-function]
       definition: Related functions or documentation.
       example:
         - calculateSubtotal
         - docs/pricing.md
       status: canonical
       profile: code-function
-      required: false
     - name: pattern
       type: string
+      inPlainWords: 'It follows the {value} design pattern.'
+      authoring: authored
+      optionalIn: [code-class]
       definition: Design pattern used by this class.
       example: singleton
       validValues:
@@ -224,39 +251,44 @@ mx:
         - mediator
       status: canonical
       profile: code-class
-      required: false
     - name: threadSafe
       type: boolean
+      authoring: authored
+      optionalIn: [code-class]
       definition: Whether class is safe for concurrent access.
       example: false
       status: canonical
       profile: code-class
-      required: false
     - name: invariants
       type: array
+      authoring: authored
+      optionalIn: [code-class]
       definition: Conditions that must always be true for this class.
       example:
         - If currentUser is set, tokens must be valid
         - Token refresh happens before expiry
       status: canonical
       profile: code-class
-      required: false
     - name: dependency.purpose
       type: string
+      authoring: authored
+      optionalIn: [code-dependency]
       definition: Why this dependency exists.
       example: HTTP server framework
       status: canonical
       profile: code-dependency
-      required: false
     - name: dependency.critical
       type: boolean
+      authoring: authored
+      optionalIn: [code-dependency]
       definition: Whether this dependency is critical to the project.
       example: true
       status: canonical
       profile: code-dependency
-      required: false
     - name: dependency.upgradePolicy
       type: string
+      authoring: authored
+      optionalIn: [code-dependency]
       definition: How aggressively to upgrade this dependency.
       example: conservative
       validValues:
@@ -266,18 +298,21 @@ mx:
         - manual
       status: canonical
       profile: code-dependency
-      required: false
     - name: dependency.alternativesConsidered
       type: array
+      authoring: authored
+      optionalIn: [code-dependency]
       definition: Alternative packages considered before choosing this dependency.
       example:
         - fastify
         - koa
       status: canonical
       profile: code-dependency
-      required: false
     - name: testType
       type: string
+      inPlainWords: 'It is a {value} test.'
+      authoring: authored
+      requiredIn: [code-test]
       definition: Type of test file.
       example: integration
       validValues:
@@ -290,31 +325,37 @@ mx:
         - acceptance
       status: canonical
       profile: code-test
-      required: true
     - name: coverageTarget
       type: number
+      authoring: authored
+      optionalIn: [code-test]
       definition: Target code coverage percentage.
       example: 90
       status: canonical
       profile: code-test
-      required: false
     - name: subject
       type: string
+      inPlainWords: 'It tests {value}.'
+      authoring: authored
+      requiredIn: [code-test]
       definition: What this test file tests.
       example: src/services/pricing.ts
       status: canonical
       profile: code-test
-      required: true
     - name: fixtures
       type: array
+      authoring: authored
+      optionalIn: [code-test]
       definition: Test data files required.
       example:
         - __fixtures__/sample-cart.json
       status: canonical
       profile: code-test
-      required: false
     - name: method
       type: string
+      inPlainWords: 'The endpoint answers the HTTP {value} method.'
+      authoring: authored
+      requiredIn: [code-api]
       definition: HTTP method for API endpoint.
       example: POST
       validValues:
@@ -327,16 +368,19 @@ mx:
         - OPTIONS
       status: canonical
       profile: code-api
-      required: true
     - name: path
       type: string
+      inPlainWords: 'The endpoint is at {value}.'
+      authoring: authored
+      requiredIn: [code-api]
       definition: API endpoint path.
       example: /api/v1/orders
       status: canonical
       profile: code-api
-      required: true
     - name: auth
       type: string
+      authoring: authored
+      optionalIn: [code-api]
       definition: Authentication requirement for API endpoint.
       example: bearer
       validValues:
@@ -348,28 +392,84 @@ mx:
         - session
       status: canonical
       profile: code-api
-      required: false
     - name: rateLimit
       type: string
+      authoring: authored
+      optionalIn: [code-api]
       definition: Rate limiting configuration.
       example: 100/minute
       status: canonical
       profile: code-api
-      required: false
     - name: cache.enabled
       type: boolean
+      authoring: authored
+      optionalIn: [code-api]
       definition: Whether API response is cacheable.
       example: true
       status: canonical
       profile: code-api
-      required: false
     - name: cache.ttl
       type: number
+      authoring: authored
+      optionalIn: [code-api]
       definition: Cache time-to-live in seconds.
       example: 300
       status: canonical
       profile: code-api
-      required: false
+    - name: modHooks
+      type: array
+      authoring: authored
+      inPlainWords: 'As a mod it hooks these host events: {value}.'
+      requiredIn: [code-mod]
+      optionalIn: [action]
+      definition: Each host event a mod hooks, with its matcher and the move it makes on that event (observe, rewrite or answer).
+      example:
+        - tool.call{tool=Bash}:answer
+        - ui.render{component=AbovePrompt}:observe
+      status: canonical
+      profile: code-mod
+      notes: >-
+        Entry form is event{key=value,...}:move, with the matcher list omitted when the hook takes every event. Observe
+        passes the event on unchanged; rewrite passes on a changed event; answer returns without passing it on. The
+        grammar is ABNF (Appendix M 13.10): no whitespace, case-sensitive names, values of RFC 3986 unreserved or
+        pct-encoded characters. Canonical form sorts matchers by key with no duplicate keys and percent-encodes every
+        octet outside unreserved in uppercase hex; a checker canonicalises the declared and the host-derived hooks and
+        compares them byte for byte, failing any entry outside the grammar. Checked against the host's own static
+        analysis where one exists (claude plugin validate for Claude Code mods).
+    - name: modCapabilities
+      type: array
+      authoring: authored
+      inPlainWords: 'As a mod its code uses these host surfaces: {value}.'
+      requiredIn: [code-mod]
+      optionalIn: [action]
+      definition: The host API surfaces a mod's code uses, named as the host names them.
+      example:
+        - process
+        - ui
+        - session
+      status: canonical
+      profile: code-mod
+      notes: >-
+        A surface the source uses but the declaration omits is a failed check, never a warning; a declared surface the
+        source no longer uses is reported as stale.
+    - name: modGuarantee
+      type: string
+      authoring: authored
+      inPlainWords: 'What this mod promises, and what it does not: {value}'
+      optionalIn: [code-mod, action]
+      definition: One sentence stating what a mod promises and what it explicitly does not.
+      example: A safety net that reads the command text; not a permission system.
+      status: canonical
+      profile: code-mod
+    - name: testedWith
+      type: string
+      authoring: authored
+      inPlainWords: 'It was last tested with {value}.'
+      optionalIn: [code-mod, action]
+      definition: The host and version a mod was last tested against, written host@version.
+      example: claude-code@2.1.287
+      status: canonical
+      profile: code-mod
   profiles:
     # `script` profile intentionally not declared here. fields-data.yaml carries
     # the evidence-grounded version. scripts/cog-field-rules.js (the engine
@@ -394,6 +494,9 @@ mx:
         - project.name
         - project.description
       optional:
+        - tags
+        - type
+        - resource
         - project.repository
         - project.documentation
         - context.domain
@@ -406,9 +509,6 @@ mx:
         - conventions.style
         - conventions.testing
         - conventions.documentation
-        - type
-        - tags
-        - resource
     - name: code-file
       description: File-level metadata. Appears in @mx comment blocks at the top of source files.
       header: |
@@ -422,15 +522,15 @@ mx:
         owner: platform-team
         ---
       optional:
-        - owner
+        - tags
+        - type
+        - resource
         - reviewers
+        - owner
         - ai.contextRequired
         - ai.contextProvides
         - ai.generationNotes
         - ai.reason
-        - type
-        - tags
-        - resource
     - name: code-function
       description: Function-level metadata. Appears in @mx blocks within JSDoc or docstrings.
       header: |
@@ -444,21 +544,21 @@ mx:
         pure: true
         ---
       optional:
+        - tags
+        - type
+        - resource
         - pure
         - idempotent
         - complexity
         - throws
         - since
         - see
+        - ai.reason
         - ai.confidence
         - ai.testCoverage
         - ai.edgeCases
         - ai.refactorNotes
         - ai.doNotModify
-        - ai.reason
-        - type
-        - tags
-        - resource
     - name: code-class
       description: Class-level metadata. Appears in @mx blocks within class JSDoc or docstrings.
       header: |
@@ -472,18 +572,18 @@ mx:
         pattern: singleton
         ---
       optional:
+        - tags
+        - type
+        - resource
         - pattern
         - threadSafe
         - invariants
-        - ai.sensitive
-        - ai.modificationImpact
-        - ai.confidence
-        - ai.doNotModify
         - ai.contextRequired
         - ai.reason
-        - type
-        - tags
-        - resource
+        - ai.confidence
+        - ai.doNotModify
+        - ai.sensitive
+        - ai.modificationImpact
     - name: code-inline
       description: Inline code annotations. @mx:begin/@mx:end for blocks, @mx:tag for lines.
       header: |
@@ -505,8 +605,8 @@ mx:
         - mx:todo
         - mx:ai
       optional:
-        - type
         - tags
+        - type
         - resource
     - name: code-dependency
       description: Dependency metadata. Extends package.json or pyproject.toml with MX properties.
@@ -523,15 +623,15 @@ mx:
           critical: true
         ---
       optional:
+        - tags
+        - type
+        - resource
         - dependency.purpose
         - dependency.critical
         - dependency.upgradePolicy
         - dependency.alternativesConsidered
         - ai.replacementPermitted
         - ai.upgradePermitted
-        - type
-        - tags
-        - resource
     - name: code-test
       description: Test file metadata.
       header: |
@@ -549,15 +649,15 @@ mx:
         - testType
         - subject
       optional:
+        - tags
+        - type
+        - resource
         - coverageTarget
         - fixtures
+        - ai.edgeCases
         - ai.generationPermitted
         - ai.mustCover
-        - ai.edgeCases
         - ai.doNotMock
-        - type
-        - tags
-        - resource
     - name: code-api
       description: API endpoint metadata. OpenAPI extensions or route annotations.
       header: |
@@ -575,17 +675,39 @@ mx:
         - method
         - path
       optional:
+        - tags
+        - type
+        - resource
+        - idempotent
         - auth
         - rateLimit
         - cache.enabled
         - cache.ttl
-        - idempotent
-        - ai.safeToCall
         - ai.sensitive
+        - ai.safeToCall
         - ai.testMode
         - ai.sensitiveRequestFields
         - ai.sensitiveResponseFields
         - ai.sideEffects
-        - type
+    - name: code-mod
+      description: Host-extension (mod) metadata. A root mx object in the plugin manifest, or an @mx block at the top of the mod module.
+      header: |
+        ---
+        # Carrier: root mx object in a plugin manifest, or @mx block at the top of the mod module
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: code-mod
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Carrier fields (native comment or manifest form maps key for key) ---
+        modHooks: ["tool.call{tool=Bash}:answer"]
+        modCapabilities: [process, ui]
+        ---
+      required:
+        - modHooks
+        - modCapabilities
+      optional:
         - tags
+        - type
         - resource
+        - modGuarantee
+        - testedWith

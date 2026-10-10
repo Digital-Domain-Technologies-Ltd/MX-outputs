@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds"
+description: "A popular workflow puts TypeSafe's Jev in front of Opus 5.5: cheap judgement first, expensive reasoning second, every decision logged with its confidence. The shape is right. But a confidence score is a model's statement about its own answer, and a log is what the system says happened. Neither is provenance."
+author: Tom Cranstoun
+created: "2026-10-10"
+modified: 2026-10-10
+version: "0.1"
+type: blog-post
+tags: [agents, agentic-web, decision-models, jev, opus, provenance, action-cogs, skills, human-in-command, mx, machine-experience]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/confidence-scores-are-not-provenance.md
+  contextProvides:
+    - "Splitting a cheap decision model from an expensive generative one is a sound shape: the decider judges, the large model reasons only over what passes."
+    - "A confidence score is a model's statement about its own answer, not evidence about where the answer came from or what state it was shown."
+    - "A log is what a system says happened; provenance is a chain of custody a downstream party can check without trusting the system that produced it."
+    - "Skills are natural language read by a probabilistic model at runtime; action-cogs are versioned, executable units with an explicit contract, so thresholds and routing belong in action-cogs."
+    - "A judgement can carry a provenance record naming the action-cog, its version, the input state and the policy, so a consumer can accept or ignore it on what it can verify."
+  stability: draft
+  purpose: "Credit what the Opus 5.5 and Jev routing pattern gets right, show why its confidence-scored log stops short of provenance, and set out the action-cog and provenance-record version of the same shape."
+  servedAt: https://mx.allabout.network/blog/drafts/agent-web/confidence-scores-are-not-provenance.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file. Claims about Jev rest on TypeSafe's published material; the description of the routing pattern and its replies is the author's reading of the AI Edge post on X. Re-check both before editing any claim about them."
+  quotes:
+    - "cheaper, faster and more productive all in one article"
+    - "cheaper, faster and far more reliable"
+  corroboratedBy:
+    - https://typesafe.ai/blog/introducing-system-one-models-and-jev
+    - https://docs.typesafe.ai/confidence
+    - https://docs.typesafe.ai/primitives
+refersTo:
+  - https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html
+  - https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html
+  - https://mx.allabout.network/blog/agent-web/index.html
+refersToExternal:
+  - https://typesafe.ai/blog/introducing-system-one-models-and-jev
+  - https://docs.typesafe.ai/confidence
+  - https://docs.typesafe.ai/primitives
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A popular workflow puts TypeSafe's Jev in front of Opus 5.5: cheap judgement first, expensive reasoning second, every decision logged with its confidence. The shape is right. But a confidence score is a model's statement about its own answer, and a log is what the system says happened. Neither is provenance.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/agent-web/confidence-scores-are-not-provenance.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/agent-web/confidence-scores-are-not-provenance.html">
+  <meta property="og:title" content="Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds | CogNovaMX">
+  <meta property="og:description" content="A popular workflow puts TypeSafe's Jev in front of Opus 5.5: cheap judgement first, expensive reasoning second, every decision logged with its confidence. The shape is right. But a confidence score is a model's statement about its own answer, and a log is what the system says happened. Neither is provenance.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-10-10">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds | CogNovaMX">
+  <meta name="twitter:description" content="A popular workflow puts TypeSafe's Jev in front of Opus 5.5: cheap judgement first, expensive reasoning second, every decision logged with its confidence. The shape is right. But a confidence score is a model's statement about its own answer, and a log is what the system says happened. Neither is provenance.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="0.1">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/agent-web/confidence-scores-are-not-provenance.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds",
+        "headline": "Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds",
+        "description": "A popular workflow puts TypeSafe's Jev in front of Opus 5.5: cheap judgement first, expensive reasoning second, every decision logged with its confidence. The shape is right. But a confidence score is a model's statement about its own answer, and a log is what the system says happened. Neither is provenance.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-10-10",
+        "dateModified": "2026-10-10",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/agent-web/confidence-scores-are-not-provenance.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1484,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/agent-web/confidence-scores-are-not-provenance.html",
+        "name": "Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds",
+        "url": "https://mx.allabout.network/blog/drafts/agent-web/confidence-scores-are-not-provenance.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-the-pattern-is">What the Pattern Is</a></li>
+        <li><a href="#what-the-post-gets-right">What the Post Gets Right</a></li>
+        <li><a href="#where-it-stops-short">Where It Stops Short</a></li>
+        <li><a href="#skills-suggest-action-cogs-execute">Skills Suggest, Action-Cogs Execute</a></li>
+        <li><a href="#context-decays">Context Decays</a></li>
+        <li><a href="#what-i-would-build">What I Would Build</a></li>
+        <li><a href="#the-takeaway">The Takeaway</a></li>
+        <li><a href="#sources">Sources</a></li>
+        <li><a href="#related">Related</a></li>
+        <li><a href="#where-your-own-content-stands">Where Your Own Content Stands</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1484">
+        <header class="article-header">
+          <h1>Confidence Scores Are Not Provenance: What the Opus 5.5 and Jev Routing Pattern Gets Right, and What MX Adds</h1>
+          <div class="article-meta"
+               data-published="2026-10-10"
+               data-modified="2026-10-10"
+               data-reading-time="8 min">
+            <time datetime="2026-10-10">10 October 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>8 min read</span>
+          </div>
+        </header>
+
+
+<p>On 7 October 2026 at 14:10 UTC, AI Edge (@aiedge_) posted a workflow on X. Run Opus 5.5 for deep reasoning, and route the small, cheap decisions through a second model, TypeSafe's Jev. By the time I read it, it had 270 likes and 36 reposts. The replies were a fair snapshot of the mood. One reader asked for a source. Another warned that Jev's settings can silently override Opus defaults. A third noted that &quot;cheaper, faster and more productive all in one article&quot; sounds suspiciously perfect.</p>
+<p>I think the pattern is genuinely interesting. I also think the replies stumbled onto the real issue without naming it. This piece is about both.</p>
+<h2 id="what-the-pattern-is" tabindex="-1">What the Pattern Is</h2>
+<p>Strip away the setup steps and the post describes a division of labour.</p>
+<p>Jev is a pure decision model. You hand it a state, such as an email, a post, a task or a document, plus a typed question. It doesn't write prose. TypeSafe's own docs name the question types: a Choice picks one option from a list you supply, a Score rates the state on a scale you define, and a Noul gives the probability that a statement is true. Every answer comes back with a probability and a confidence number.</p>
+<p>Opus 5.5 does the thinking: writing, research, strategy, code. It only sees what Jev lets through.</p>
+<p>The worked examples are practical. In inbox triage, Jev ranks each email as urgent, needs a reply, or ignore. It also judges whether a real person sent it, and if it asks for action. Opus then reads only the urgent items, summarises them and drafts replies. The pattern also gives you a research filter, and a content grader that scores clarity and specificity before Opus touches the draft.</p>
+<p>The design advice is sound engineering. Map the workflow before you automate it. Write atomic questions that check one thing each. Give the judge the right context and route by confidence. Keep every question and threshold in one config file, and log every decision with its confidence score.</p>
+<p>That last piece of advice deserves a closer look.</p>
+<h2 id="what-the-post-gets-right" tabindex="-1">What the Post Gets Right</h2>
+<p>It separates judging from generating. Most agent failures I see come from asking one probabilistic model to decide, act and explain itself in a single breath. Splitting the cheap, narrow decision from the expensive, open-ended one is the right instinct. It's the same instinct behind MX: don't let a generative step hold authority it hasn't earned.</p>
+<p>It puts a gate in the path. Routing by confidence means something happens when the system is unsure, and the post even recommends an explicit &quot;uncertain&quot; option in Jev's filter. That's a Human-in-Command hook, whether or not the author calls it one. TypeSafe's docs make the same point from the other side, telling you to route a low-confidence call to a person or to a fallback.</p>
+<p>It asks for a log. Every decision, with its score, goes into a file you can read when something goes wrong. Nobody should build an agent workflow without one.</p>
+<h2 id="where-it-stops-short" tabindex="-1">Where It Stops Short</h2>
+<p>A confidence score is a statement a model makes about its own answer. It isn't evidence of the answer's origin.</p>
+<p>Look at what that config-file log records: a question, a threshold, a number. It can't tell me which version of Jev answered, what it was shown, or whether that input was current. Nor can it say who changed the threshold last Tuesday, or whether the instructions wiring the two models together were the ones I approved. The reply about Jev's settings silently overriding Opus defaults is exactly this failure. The system behaved differently, and nothing in the record said why.</p>
+<p>That's the difference between a log and provenance. A log is the system's own account of what happened. Provenance is a chain of custody that a downstream party can check without trusting the system that produced it.</p>
+<h2 id="skills-suggest-action-cogs-execute" tabindex="-1">Skills Suggest, Action-Cogs Execute</h2>
+<p>The post's fourth step is telling. It recommends TypeSafe's skill pack, which teaches Claude Code how Jev works, and suggests writing your own to describe how Opus should work with Jev.</p>
+<p>Skills are the usual way to drive agents in October 2026, and the word is honest: a skill is a suggestion. It's natural language placed in a context window and interpreted at runtime by a probabilistic model, so two runs can read it differently. It's a fine way to start and a poor home for anything you'll need to defend later.</p>
+<p>An action-cog is the deterministic alternative. A cog is a file that carries MX metadata, and an action-cog is a cog that also runs. Think of action-cogs as npm for agents: versioned, composable units that wrap real code, carry an explicit contract and record their provenance. In this pattern, the triage step, the threshold check and the routing decision are the parts that belong in action-cogs, not prose. A threshold belongs in a versioned contract, not in a paragraph a model might paraphrase.</p>
+<p>The model still does the judging. What changes is what can travel with the judgement: a provenance record naming the action-cog, its version, the input state and the policy it applied. A downstream consumer, human or machine, can then accept or ignore that output on the strength of what it can check. A confidence score can't give you that.</p>
+<h2 id="context-decays" tabindex="-1">Context Decays</h2>
+<p>The post says context is king in this system, and I agree. Notice what follows from that. Jev's answer is only as good as the state it was shown. If that state is stale, partial, or scraped from a page built for human eyes, a confidence of 0.94 is a precise number attached to an unreliable input. I made the longer version of this argument in <a href="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">A Decider Is Only as Good as Its State</a>.</p>
+<p>The fix is verifiable state. The input the judge sees should carry its own provenance, so that a high score means certainty about a checked fact, not about whatever was in the window. When I <a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">rebuilt a decider on a local model and measured it</a>, giving it documents that declared their own metadata changed what it got right.</p>
+<h2 id="what-i-would-build" tabindex="-1">What I Would Build</h2>
+<p>Taking this pattern into a real workflow, I'd keep the architecture and change the guarantees:</p>
+<ol>
+<li>Keep the Jev-then-Opus split. It's a good shape.</li>
+<li>Move thresholds and routing into a versioned action-cog, so they're deterministic, reviewable and diffable.</li>
+<li>Record provenance with every judgement, not just a confidence score: the model release, a reference to the input state, the policy version and a timestamp.</li>
+<li>Make &quot;uncertain&quot; a Human-in-Command gate, with a named person and a recorded decision rather than a silent fallback.</li>
+<li>Keep Jev as the closing quality check, as the post suggests with its Jev, Opus, Jev loop, and record that pass as a step of its own.</li>
+</ol>
+<p>None of this is hypothetical for us. Our provenance record already takes a decider's calls as steps: the state by hash, the question and its allowed labels, the probabilities, the bar that applied, and who confirmed. <a href="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">A Decider Is Only as Good as Its State</a> shows what that record holds, and the MX Inspector at <a href="https://mx.allabout.network/tell">mx.allabout.network/tell</a> opens one in your browser.</p>
+<h2 id="the-takeaway" tabindex="-1">The Takeaway</h2>
+<p>The Opus 5.5 and Jev pattern is a smart answer to a real problem: cheap judgement in front of expensive reasoning. I'd adopt it tomorrow.</p>
+<p>The claim that it's &quot;cheaper, faster and far more reliable&quot; deserves the scrutiny the reply thread gave it, though. Reliability isn't a property of the score. It's a property of what you can check afterwards. Confidence tells you how sure the model is, and provenance tells you whether to believe it.</p>
+<p>Skills suggest and action-cogs execute, and only one of them leaves you something you can audit.</p>
+<p><strong>A declared interest.</strong> CogNovaMX sells the discipline this post recommends. The claims about Jev stand on TypeSafe's own published material, linked below, and the description of the routing pattern is my reading of the post that prompted this one.</p>
+<h2 id="sources" tabindex="-1">Sources</h2>
+<ul>
+<li>TypeSafe AI, 15 September 2026: <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev">Introducing System One Models and Jev</a>, by Diogo Almeida.</li>
+<li>TypeSafe AI docs: <a href="https://docs.typesafe.ai/confidence">Confidence</a>, how confidence is derived and when to escalate.</li>
+<li>TypeSafe AI docs: <a href="https://docs.typesafe.ai/primitives">Primitives</a>, the Choice, Score and Noul question types.</li>
+<li>The routing-pattern post by AI Edge (@aiedge_) on X, 7 October 2026, and its replies, prompted this piece. It was the prompt, not a source for any claim about Jev here.</li>
+</ul>
+<h2 id="related" tabindex="-1">Related</h2>
+<ul>
+<li><a href="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">A Decider Is Only as Good as Its State</a>: what Jev is, why a calibrated probability is honest only about the state it was given, and the decision record that makes a threshold governance.</li>
+<li><a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">I Built a Decider and Measured It</a>: a local rebuild, and what embedded MX metadata did to its accuracy.</li>
+</ul>
+<h2 id="where-your-own-content-stands" tabindex="-1">Where Your Own Content Stands</h2>
+<p>A decider judges the state it's given. Whether your pages give it an honest one is what an MX audit measures.</p>
+<ul>
+<li><a href="https://tityra.com">Get in touch about an MX audit</a></li>
+<li><a href="https://mx.allabout.network/blog/agent-web/index.html">The agent web series</a></li>
+</ul>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-10.</li>
+            <li>Outside sources that make the same claims: <a href="https://typesafe.ai/blog/introducing-system-one-models-and-jev" rel="noopener">typesafe.ai/blog/introducing-system-one-models-and-jev</a>, <a href="https://docs.typesafe.ai/confidence" rel="noopener">docs.typesafe.ai/confidence</a> and <a href="https://docs.typesafe.ai/primitives" rel="noopener">docs.typesafe.ai/primitives</a>.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

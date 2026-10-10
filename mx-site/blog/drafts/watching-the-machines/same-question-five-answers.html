@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Same Question, Five Answers"
+description: "I asked the language model built into macOS 27 the same question five times and got five different answers, all correct. Asking again proves nothing, so the evidence has to be kept when the answer is given."
+author: Tom Cranstoun
+created: "2026-10-09"
+modified: 2026-10-09
+version: "1.0"
+category: mx-content
+type: blog-post
+tags: [watching-the-machines, apple, foundation-models, on-device, sampling, reproducibility, provenance, machine-experience]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  servedAt: https://mx.allabout.network/blog/drafts/watching-the-machines/same-question-five-answers.html
+  runbook: "Revise if Apple changes the fm command's flags, starts reporting the model build in its output, or makes greedy sampling the default; every factual claim about fm rests on the command's own help text and the runs described in the Method section. The AI trail is the sidecar beside this source (same-question-five-answers.provenance.ai.json), embedded in the generated page; record the author's review there as a human step, and revisit provenanceOrigin if the author rewrites the text."
+  audience:
+    - humans
+    - machines
+  aiAssistance: welcome
+  provenanceOrigin: ai-assisted
+  partOf: https://mx.allabout.network/blog/drafts/watching-the-machines/
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/watching-the-machines/same-question-five-answers.md
+  contextProvides:
+    - "A language model asked the same question several times gives different answers, so re-asking cannot recover what a person was told. The evidence has to be recorded when the answer is given, and the publisher's half of that record is what the page declares about itself."
+  stability: stable
+  quotes:
+    - "fast, safe, and easy to use"
+    - "designed for safety and performance"
+    - "fast, safe, and efficient"
+    - "Creating session with default instructions"
+    - "On-device Apple Foundation Model"
+    - "always chooses the most likely token"
+  purpose: "Show from a reproducible run of Apple's on-device fm command that a model's answer cannot be regenerated as evidence, and say what a record has to carry instead, including the part publishers supply."
+  corroboratedBy:
+    - https://developer.apple.com/documentation/foundationmodels/generationoptions/samplingmode-swift.struct
+refersTo:
+  - https://mx.allabout.network/blog/drafts/watching-the-machines/
+  - https://mx.allabout.network/blog/industry/geo-is-a-tactic-mx-is-the-specification.html
+refersToExternal:
+  - https://developer.apple.com/documentation/foundationmodels/generationoptions/samplingmode-swift.struct
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <script type="application/json" id="mx-provenance">{"$schema":"https://mx.allabout.network/schemas/provenance-ai/v2","schemaVersion":"2.0","mx":{"@context":"https://mx.allabout.network/canon/context.json","title":"AI provenance record for same-question-five-answers.md","description":"Evidence chain of the non-deterministic steps (model calls, agent work, human-committed actions) behind same-question-five-answers.md.","author":"Tom Cranstoun","created":"2026-10-09","modified":"2026-10-09","version":"1","type":"provenance-record","tags":["provenance","ai-evidence-chain","reginald"],"status":"active","purpose":"Let a reader (human, agent, or regulator) walk every non-deterministic step behind same-question-five-answers.md and find the accountable party for each. An evidence vehicle, not a compliance grant.","audience":["machines","humans"],"inLanguage":"en","isGenerated":true,"generatedBy":"mx-reginald/lib/provenance.js","canonicalUri":"https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/watching-the-machines/same-question-five-answers.provenance.ai.json","refersTo":["datalake/draft-site/blog/watching-the-machines/same-question-five-answers.md"]},"_description":"AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.","auditId":"blog-same-question-five-answers","runRevision":1,"lastWriteAt":"2026-10-09T16:52:27.014Z","operator":"info@cognovamx.com","parties":[{"role":"auditOperator","name":"Tom Cranstoun","email":"info@cognovamx.com","identifier":"https://allabout.network","organisation":"Digital Domain Technologies Ltd (trading as CogNovaMX)","country":"GB"}],"responsiblePerson":{"name":"Tom Cranstoun","email":"info@cognovamx.com","identifier":"https://allabout.network","role":"auditOperator","organisation":"Digital Domain Technologies Ltd (trading as CogNovaMX)","country":"GB"},"target":"Draft blog post \"Same Question, Five Answers\" (Watching the Machines column), source at datalake/draft-site/blog/watching-the-machines/same-question-five-answers.md, served at https://mx.allabout.network/blog/drafts/watching-the-machines/same-question-five-answers.html once published","workflowId":null,"workflowRecord":null,"residualRisk":null,"startedAt":"2026-10-09T10:40:58.749Z","frameworks":[{"id":"EU-AI-Act","title":"Regulation (EU) 2024/1689 — Artificial Intelligence Act","version":"2024/1689","jurisdiction":"EU","appliesTo":"all-steps","claim":"evidence-vehicle","x-eu-ai-act":{}},{"id":"EU-GDPR","title":"Regulation (EU) 2016/679 — General Data Protection Regulation","version":"2016/679","jurisdiction":"EU","appliesTo":"data-handling-steps","claim":"evidence-vehicle","x-eu-gdpr":{}},{"id":"Council-of-Europe-AI-Convention","title":"Framework Convention on Artificial Intelligence and Human Rights, Democracy and the Rule of Law","version":"2024-05","jurisdiction":"Council of Europe (open for ratification)","appliesTo":"all-steps","claim":"evidence-vehicle","x-coe-ai":{}},{"id":"UK-ICO-AI-guidance","title":"UK ICO Guidance on AI and Data Protection","version":"2024-09","jurisdiction":"UK","appliesTo":"all-steps","claim":"evidence-vehicle","x-uk-ico":{}},{"id":"UK-Data-Protection-Act-2018","title":"Data Protection Act 2018","version":"2018","jurisdiction":"UK","appliesTo":"data-handling-steps","claim":"evidence-vehicle","x-uk-dpa":{}},{"id":"US-NIST-AI-RMF","title":"NIST AI Risk Management Framework","version":"1.0","jurisdiction":"US (voluntary federal framework)","appliesTo":"all-steps","claim":"evidence-vehicle","x-us-nist-ai-rmf":{}},{"id":"US-Colorado-AI-Act","title":"Colorado SB 26-189 — Consumer Protections in Interactions with Artificial Intelligence Systems (repeals and replaces SB 24-205)","version":"SB-26-189","jurisdiction":"US-CO","appliesTo":"consequential-decision-steps","claim":"evidence-vehicle","x-us-colorado-ai-act":{}},{"id":"US-Texas-TRAIGA","title":"Texas Responsible AI Governance Act (HB 149)","version":"2025-HB-149","jurisdiction":"US-TX","appliesTo":"high-risk-steps","claim":"evidence-vehicle","x-us-texas-traiga":{}},{"id":"US-California-AB-2013","title":"California AB 2013 — Generative AI Training Data Transparency","version":"2024","jurisdiction":"US-CA","appliesTo":"training-data-steps","claim":"evidence-vehicle","x-us-ca-ab-2013":{}},{"id":"US-California-AB-2655","title":"California AB 2655 — Election Deepfake Disclosure","version":"2024","jurisdiction":"US-CA","appliesTo":"election-content-steps","claim":"evidence-vehicle","x-us-ca-ab-2655":{}},{"id":"US-Utah-AI-Policy-Act","title":"Utah AI Policy Act (SB 149)","version":"2024-SB-149","jurisdiction":"US-UT","appliesTo":"consumer-facing-steps","claim":"evidence-vehicle","x-us-utah-ai":{}},{"id":"US-NYC-Local-Law-144","title":"NYC Local Law 144 of 2021 — Automated Employment Decision Tools","version":"2023-07-effective","jurisdiction":"US-NY-NYC","appliesTo":"employment-decision-steps","claim":"evidence-vehicle","x-us-nyc-ll144":{}},{"id":"US-Illinois-HB-3773","title":"Illinois HB 3773 — Artificial Intelligence in Employment Decisions","version":"2024","jurisdiction":"US-IL","appliesTo":"employment-decision-steps","claim":"evidence-vehicle","x-us-illinois-hb-3773":{}},{"id":"China-Generative-AI-Interim-Measures","title":"Interim Measures for the Administration of Generative AI Services","version":"2023-08","jurisdiction":"CN","appliesTo":"generative-output-steps","claim":"evidence-vehicle","x-china-generative-ai":{}},{"id":"China-Algorithmic-Recommendation","title":"Provisions on the Administration of Algorithmic Recommendations","version":"2022-03","jurisdiction":"CN","appliesTo":"recommender-steps","claim":"evidence-vehicle","x-china-algo-rec":{}},{"id":"China-Deep-Synthesis","title":"Provisions on the Administration of Deep Synthesis Internet Information Services","version":"2023-01","jurisdiction":"CN","appliesTo":"synthetic-media-steps","claim":"evidence-vehicle","x-china-deep-synthesis":{}},{"id":"South-Korea-AI-Basic-Act","title":"Act on the Development of Artificial Intelligence and Establishment of Trust","version":"2025-01","jurisdiction":"KR","appliesTo":"all-steps","claim":"evidence-vehicle","x-kr-ai-basic":{}},{"id":"Brazil-PL-2338","title":"Marco Legal da Inteligência Artificial (PL 2338/2023)","version":"2023","jurisdiction":"BR","appliesTo":"all-steps","claim":"evidence-vehicle","x-br-pl-2338":{}},{"id":"Canada-AIDA","title":"Artificial Intelligence and Data Act (Bill C-27 part)","version":"2022-Bill-C-27","jurisdiction":"CA","appliesTo":"high-impact-steps","claim":"evidence-vehicle","x-ca-aida":{}},{"id":"Japan-METI-AI-Guidelines","title":"AI Guidelines for Business (METI / MIC)","version":"2024","jurisdiction":"JP","appliesTo":"all-steps","claim":"evidence-vehicle","x-jp-meti-ai":{}},{"id":"Singapore-Model-AI-Governance","title":"Model AI Governance Framework","version":"2024","jurisdiction":"SG","appliesTo":"all-steps","claim":"evidence-vehicle","x-sg-model-ai":{}},{"id":"Australia-AI-Ethics","title":"AI Ethics Framework","version":"2019","jurisdiction":"AU","appliesTo":"all-steps","claim":"evidence-vehicle","x-au-ai-ethics":{}},{"id":"India-Digital-India-Act-draft","title":"Digital India Act (draft)","version":"2024-draft","jurisdiction":"IN","appliesTo":"all-steps","claim":"evidence-vehicle","x-in-digital-india":{}},{"id":"OECD-AI-Principles","title":"OECD AI Principles","version":"2019-rev-2024","jurisdiction":"OECD (multilateral baseline)","appliesTo":"all-steps","claim":"evidence-vehicle","x-oecd-ai":{}},{"id":"G7-Hiroshima-AI-Code","title":"G7 Hiroshima AI Process Code of Conduct","version":"2023","jurisdiction":"G7 (voluntary)","appliesTo":"all-steps","claim":"evidence-vehicle","x-g7-hiroshima":{}},{"id":"ISO-42001","title":"ISO/IEC 42001 — Artificial Intelligence Management Systems","version":"2023","jurisdiction":"ISO (international standard)","appliesTo":"management-system","claim":"evidence-vehicle","x-iso-42001":{}},{"id":"ISO-23894","title":"ISO/IEC 23894 — Artificial Intelligence Risk Management","version":"2023","jurisdiction":"ISO (international standard)","appliesTo":"risk-management","claim":"evidence-vehicle","x-iso-23894":{}},{"id":"ISO-42005","title":"ISO/IEC 42005 — AI System Impact Assessment","version":"2025","jurisdiction":"ISO (international standard)","appliesTo":"impact-assessment","claim":"evidence-vehicle","x-iso-42005":{}},{"id":"prEN-18286","title":"prEN 18286 — AI Management System (candidate harmonised European standard, CEN-CENELEC JTC 21)","version":"draft","jurisdiction":"EU (CEN-CENELEC, in development)","appliesTo":"management-system","claim":"evidence-vehicle","x-pren-18286":{}},{"id":"ISO-IEC-27001","title":"ISO/IEC 27001 — Information Security Management Systems","version":"2022","jurisdiction":"ISO (international standard)","appliesTo":"information-security","claim":"evidence-vehicle","x-iso-27001":{}},{"id":"EU-DSA","title":"Regulation (EU) 2022/2065 — Digital Services Act","version":"2022/2065","jurisdiction":"EU","appliesTo":"recommender-platform-steps","claim":"evidence-vehicle","x-eu-dsa":{}},{"id":"EU-DORA","title":"Regulation (EU) 2022/2554 — Digital Operational Resilience Act","version":"2022/2554","jurisdiction":"EU","appliesTo":"operational-resilience-steps","claim":"evidence-vehicle","x-eu-dora":{}}],"frameworksCited":["EU-AI-Act","UK-ICO-AI-guidance","NIST-AI-RMF","Colorado-AI-Act"],"companion":"same-question-five-answers.provenance.deterministic.json","provenance":{"repo":"Digital-Domain-Technologies-Ltd/MX-hub","commit":{"sha":"e7dd546d08eccaa751b6016242f53a2a8974917c","shortSha":"e7dd546"},"branch":"worktree-fm-five-answers","dirty":true,"nodeVersion":"v26.10.0","host":"toms-MacBook-Pro-3.local","platform":"darwin","arch":"arm64","osRelease":"27.0.0","defaults":{"humanIntervention":"none","frameworks":["EU-AI-Act","UK-ICO-AI-guidance","NIST-AI-RMF","Colorado-AI-Act"]}},"monitoring":{"aiLog":{"enabled":true,"available":true,"root":"~/ai-log","days":["2026-10-09"],"header":"provenance.ai.json","steps":"provenance.steps.jsonl","index":"hash.index.csv","summary":{"2026-10-09":{"calls":6719,"artefacts":13438,"models":{"jev-1.13.0":1540,"llama3.2:latest":1576,"llama3:latest":1538,"claude-haiku-4-5-20251001":40,"system":8496,"gpt-oss:20b":248},"providers":{"typesafe":1540,"ollama":3362,"anthropic":40,"openai-compatible":8496},"scripts":["audience-classify.js","audit-fierce-critic.js","audit-llm-judgment.js","check-a11y-tree.js","check-page-quality.js","infill-report.js","jev-local-eval.cjs","jev-tool-call-class.cjs","provenance-gap-llm.js","repair-report-unified.js","rewrite-report.js","translate-report.js","typesafe-smoke"],"inputTokens":2837621,"outputTokens":298525,"firstAt":"2026-10-09T08:58:07.695Z","lastAt":"2026-10-09T16:51:19.090Z"}}}},"steps":[{"timestamp":"2026-10-09T10:40:59.724Z","stepId":"human-authorisation","agent":"human-committed","intent":"Create a blog post about this","inputs":{"authorisationPrompt":"Create a blog post about this","pastedContent":"~ fm respond 'what is swift?'\nSwift is a programming language developed by Apple.\n➜  ~ fm respond 'what is swift?'\nSwift is a programming language developed by Apple for building software. It is designed to be fast, safe, and easy to use, especially for developing apps on iOS, macOS, and other Apple platforms.\n➜  ~ fm respond 'what is swift?'\nSwift is a programming language developed by Apple, designed for safety and performance. It is used for developing applications, particularly for macOS, iOS, watchOS, and tvOS.\n➜  ~ fm respond 'what is swift?'\nSwift is a programming language developed by Apple for building software, particularly for macOS, iOS, watchOS, and tvOS. It is designed to be fast, safe, and easy to use, with a focus on performance and simplicity.\n➜  ~ fm respond 'what is swift?'\nSwift is a programming language developed by Apple, designed for writing fast, safe, and efficient software. It is particularly well-suited for iOS, macOS, watchOS, and tvOS development.\n➜  ~","promptAuthor":"Tom Cranstoun"},"humanIntervention":"review-before","outcome":"pass","notes":"Given at 2026-10-09T10:20:12Z. The pasted terminal session is the operator's own run of the fm command and is the post's primary evidence."},{"timestamp":"2026-10-09T10:41:00.039Z","stepId":"evidence-runs","agent":"claude-opus-5-5","intent":"Re-ran the operator's prompt through Apple's on-device Foundation Model to verify the variation and test whether greedy sampling repeats","inputs":{"model":"Apple on-device Foundation Model (system), via /usr/bin/fm on macOS 27.0.1 (build 26A434)","commands":["fm respond --no-stream 'what is swift?' (x5, outputs hashed with shasum)","fm respond --no-stream -g 'what is swift?' (x5, outputs hashed with shasum)","fm respond --no-stream -g -v 'what is swift?'"]},"outputs":{"defaultSampling":"five distinct output hashes","greedySampling":"five identical output hashes; text identical to the operator's fourth default run","verbose":"prints \"Creating session with default instructions\"; names no model build or version"},"outcome":"pass","notes":"The fm runs are model calls of a second AI system, made by the agent as evidence-gathering. Their findings are the Method section of the post."},{"timestamp":"2026-10-09T10:41:00.353Z","stepId":"human-brief-decision","agent":"human-committed","intent":"Chose the post's angle and placement: \"You can't re-check an answer\"; \"Watching the Machines (Recommended)\"","inputs":{"question1":"Is that the point the post should make?","answer1":"You can't re-check an answer","question2":"Where should it live?","answer2":"Watching the Machines (Recommended)"},"humanIntervention":"review-before","outcome":"pass","notes":"Answered through the agent's alignment checkpoint (blog-post cog interview step), 2026-10-09 about 10:22Z. The operator rejected the agent's recommended angle and chose the audit angle."},{"timestamp":"2026-10-09T10:41:00.696Z","stepId":"content-authoring","agent":"claude-opus-5-5","intent":"Drafted the markdown source from the brief, the pasted transcript, and the evidence runs, then cleared the deterministic prose scanners","inputs":{"source":"datalake/draft-site/blog/watching-the-machines/same-question-five-answers.md","template":"mx-canon/ssot/templates/blog-post.md","calibration":"datalake/draft-site/blog/watching-the-machines/a-smaller-reader-needs-a-clearer-page.md"},"outputs":{"commit":"61b9bc390"},"humanIntervention":"review-before","outcome":"pass"},{"timestamp":"2026-10-09T10:41:01.008Z","stepId":"human-directive-humanizer","agent":"human-committed","intent":"needs humanizer","inputs":{"authorisationPrompt":"needs humanizer","promptAuthor":"Tom Cranstoun"},"humanIntervention":"override","outcome":"pass","notes":"Given at 2026-10-09T10:30:15Z, after the draft had passed the deterministic humanizer backstop. The operator judged the draft still read as machine-written; the directive changed course from handover to rewrite."},{"timestamp":"2026-10-09T10:41:01.321Z","stepId":"humanizer-pass","agent":"claude-opus-5-5","intent":"Ran the full /humanizer pass (voice-blog): cleared distinctive-word overuse, clipped antitheses and an epigram, sentence-initial And/So, and a reader-frame time word; no facts changed","inputs":{"skill":".claude/skills/humanizer/skill.md","voice":"mx-canon/ssot/writing-guides/voices/voice-blog.cog.md"},"outputs":{"commit":"e7dd546d0","scanners":"all prose scanners clean"},"humanIntervention":"review-before","outcome":"pass"},{"timestamp":"2026-10-09T10:41:01.637Z","stepId":"human-directive-provenance","agent":"human-committed","intent":"ensure our ai provenance generator tool and  inspector suite will work with this","inputs":{"authorisationPrompt":"ensure our ai provenance generator tool and  inspector suite will work with this","promptAuthor":"Tom Cranstoun"},"humanIntervention":"review-before","outcome":"pass","notes":"Given at 2026-10-09T10:34:39Z. Authorises this trail and the tooling changes that carry it into the generated page."},{"timestamp":"2026-10-09T10:41:01.953Z","stepId":"provenance-attached","agent":"claude-opus-5-5","intent":"Recorded this trail beside the source so the page generator embeds it in the post's HTML for the MX Inspector to read","humanIntervention":"review-before","outcome":"pass","notes":"The operator has not yet reviewed the final text of the post. A human review step is to be recorded when that review happens; none is claimed here."},{"timestamp":"2026-10-09T14:42:34.244Z","stepId":"corroboration","agent":"claude-opus-5-5","intent":"Replaced the local-run corroboration with Apple's Foundation Models SamplingMode documentation, quoted and cited in the body, so the greedy-sampling claim points to an authoritative external source (Gate 27)","inputs":{"source":"https://developer.apple.com/documentation/foundationmodels/generationoptions/samplingmode-swift.struct","quoted":"always chooses the most likely token"},"humanIntervention":"review-before","outcome":"pass","notes":"Made during the push the operator approved with 'go'; the quoted wording was read from Apple's documentation JSON before it was cited."},{"timestamp":"2026-10-09T16:52:23.735Z","stepId":"human-directive-geo","agent":"human-committed","intent":"In the blog post, we talk abut randomness in these responses and  how it is hard to fix geo (look up blogs) , MX adds context","inputs":{"authorisationPrompt":"In the blog post, we talk abut randomness in these responses and  how it is hard to fix geo (look up blogs) , MX adds context","promptAuthor":"Tom Cranstoun"},"humanIntervention":"override","outcome":"pass","notes":"Given at 2026-10-09T16:46:44Z; adds an argument the draft did not make."},{"timestamp":"2026-10-09T16:52:27.014Z","stepId":"geo-section","agent":"claude-opus-5-5","intent":"Added the section 'You Can't Optimise a Dice Roll': sampled output is why GEO is hard to pin down, linking the published post GEO Is a Tactic. MX Is the Specification., and MX adds the context the model would otherwise guess; matching line in the LinkedIn teaser; scanners clean","inputs":{"linked":"https://mx.allabout.network/blog/industry/geo-is-a-tactic-mx-is-the-specification.html","searched":"blog sources mentioning GEO and randomness; only published posts linked (no draft-to-draft links)"},"humanIntervention":"review-before","outcome":"pass","notes":"The 38 percent citation-mismatch study in the draft post The Machine Rolls a Die was not quoted: it has no source a reader can follow, and that post is unpublished."}]}</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="I asked the language model built into macOS 27 the same question five times and got five different answers, all correct. Asking again proves nothing, so the evidence has to be kept when the answer is given.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/watching-the-machines/same-question-five-answers.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/watching-the-machines/same-question-five-answers.html">
+  <meta property="og:title" content="Same Question, Five Answers | CogNovaMX">
+  <meta property="og:description" content="I asked the language model built into macOS 27 the same question five times and got five different answers, all correct. Asking again proves nothing, so the evidence has to be kept when the answer is given.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-10-09">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Same Question, Five Answers | CogNovaMX">
+  <meta name="twitter:description" content="I asked the language model built into macOS 27 the same question five times and got five different answers, all correct. Asking again proves nothing, so the evidence has to be kept when the answer is given.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Same Question, Five Answers">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/watching-the-machines/same-question-five-answers.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Same Question, Five Answers | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Same Question, Five Answers",
+        "headline": "Same Question, Five Answers",
+        "description": "I asked the language model built into macOS 27 the same question five times and got five different answers, all correct. Asking again proves nothing, so the evidence has to be kept when the answer is given.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-10-09",
+        "dateModified": "2026-10-09",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/watching-the-machines/same-question-five-answers.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1408,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/watching-the-machines/same-question-five-answers.html",
+        "name": "Same Question, Five Answers",
+        "url": "https://mx.allabout.network/blog/drafts/watching-the-machines/same-question-five-answers.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-stayed-and-what-moved">What Stayed and What Moved</a></li>
+        <li><a href="#you-cant-optimise-a-dice-roll">You Can't Optimise a Dice Roll</a></li>
+        <li><a href="#you-cant-ask-again">You Can't Ask Again</a></li>
+        <li><a href="#the-switch-exists-and-it-isnt-yours">The Switch Exists, and It Isn't Yours</a></li>
+        <li><a href="#what-a-record-has-to-carry">What a Record Has to Carry</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#where-your-own-content-stands">Where Your Own Content Stands</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1408">
+        <header class="article-header">
+          <h1>Same Question, Five Answers</h1>
+          <div class="article-meta"
+               data-published="2026-10-09"
+               data-modified="2026-10-09"
+               data-reading-time="8 min">
+            <time datetime="2026-10-09">9 October 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>8 min read</span>
+          </div>
+        </header>
+
+
+<p>Part of <strong><a href="https://mx.allabout.network/blog/drafts/watching-the-machines/">Watching the Machines</a></strong>, a record of how the companies shipping AI treat the people who own the devices and write the content.</p>
+<p>macOS 27 ships with a command called <code>fm</code>. It's Apple's Foundation Models CLI, installed at <code>/usr/bin/fm</code>, and it talks to the language model Apple now puts on every supported Mac. No account, no API key, no network call. I typed the example from its own help screen, <code>fm respond 'what is swift?'</code>, pressed the up arrow, and ran it again. Then three more times.</p>
+<pre><code class="language-text">~ fm respond 'what is swift?'
+Swift is a programming language developed by Apple.
+
+~ fm respond 'what is swift?'
+Swift is a programming language developed by Apple for building software. It is designed to be fast, safe, and easy to use, especially for developing apps on iOS, macOS, and other Apple platforms.
+
+~ fm respond 'what is swift?'
+Swift is a programming language developed by Apple, designed for safety and performance. It is used for developing applications, particularly for macOS, iOS, watchOS, and tvOS.
+
+~ fm respond 'what is swift?'
+Swift is a programming language developed by Apple for building software, particularly for macOS, iOS, watchOS, and tvOS. It is designed to be fast, safe, and easy to use, with a focus on performance and simplicity.
+
+~ fm respond 'what is swift?'
+Swift is a programming language developed by Apple, designed for writing fast, safe, and efficient software. It is particularly well-suited for iOS, macOS, watchOS, and tvOS development.
+</code></pre>
+<p>They're all right. They just don't agree with each other.</p>
+<h2 id="what-stayed-and-what-moved" tabindex="-1">What Stayed and What Moved</h2>
+<p>Read them side by side and you can see which parts hold. Some facts turn up every time: Swift is a programming language, and Apple made it. Everything else moves. The first answer is a single sentence and names no platform at all. The second names iOS and macOS and waves at the rest. The third, fourth and fifth list four platforms, though not always in the same order. Swift is &quot;fast, safe, and easy to use&quot; twice, &quot;designed for safety and performance&quot; once, and &quot;fast, safe, and efficient&quot; at the end. The model repeats what every source says and improvises the rest.</p>
+<p>None of this is a fault. A language model picks each word from a ranked list of likely next words, and by default it doesn't always take the top one. That small dose of chance is deliberate, because it stops the writing from sounding mechanical. In a chat about Swift that's harmless. It turns into a problem the moment someone needs to check what was said.</p>
+<h2 id="you-cant-optimise-a-dice-roll" tabindex="-1">You Can't Optimise a Dice Roll</h2>
+<p>That same chance is why generative engine optimisation is so hard to pin down. GEO sets out to get a page cited, and a citation is part of what moves. When one prompt on one machine gets five different replies inside a minute, a tactic that earned a mention in one reply can lose it in the next with nothing on the page changed. Nobody broke anything. The dice came up differently.</p>
+<p>I've made the wider case in <strong><a href="https://mx.allabout.network/blog/industry/geo-is-a-tactic-mx-is-the-specification.html">GEO Is a Tactic. MX Is the Specification.</a></strong>, the post on why chasing citations needs a foundation underneath it. Those five replies show what that foundation does. All of them agreed on what every source states plainly, and the drift came where the model was left to fill gaps. MX works on those gaps by adding context the model would otherwise have to guess: what the page is, who wrote it, when it last changed, which version this is, and its intended use. No publisher can make a model deterministic. A page that declares more leaves the dice less to decide.</p>
+<h2 id="you-cant-ask-again" tabindex="-1">You Can't Ask Again</h2>
+<p>Here's the case that worries me. An assistant built on a model like this one tells a customer something about your product, and they act on it. A month later there's a dispute about what they were told. The obvious move is to put the same question to the same assistant and see what comes back.</p>
+<p>It won't work, and the transcript shows why: the same question, on the same machine, within the same minute, produced five different answers. Re-asking doesn't recover what the customer saw. You get a new one, which shows the model can say something like the original. What's in dispute is whether it actually did.</p>
+<p>If nobody saved the original reply when it was given, there's no getting it back.</p>
+<h2 id="the-switch-exists-and-it-isnt-yours" tabindex="-1">The Switch Exists, and It Isn't Yours</h2>
+<p>Apple does provide a way out. <code>fm respond</code> takes a <code>--greedy</code> flag, which tells the model to always take its most likely word. Apple's <a href="https://developer.apple.com/documentation/foundationmodels/generationoptions/samplingmode-swift.struct">developer documentation on sampling</a> says greedy &quot;always chooses the most likely token&quot;. I reran the question with it and hashed each result. The hashes all matched, byte for byte.</p>
+<p>That text is also identical to my fourth default run. That one just happened to pick the top word at every step, and the flag locks that path in.</p>
+<p>Repeatability, then, is a switch, and two things limit it. The first is who holds it. The developer of the app sets the sampling mode. The person asking never sees that setting, and neither does the publisher whose page supplied the facts. The second is that greedy repeats only against the same model build. Apple updates the on-device model with the operating system, so the same prompt after an update can return a different answer, just as fixed as the old one. The command doesn't help you pin it down either: <code>fm respond -v</code> reports that it's &quot;Creating session with default instructions&quot; and never names the model version that answered.</p>
+<p>Greedy gets you the same reply on one machine and one model version. Months later, after an update, it may not.</p>
+<h2 id="what-a-record-has-to-carry" tabindex="-1">What a Record Has to Carry</h2>
+<p>If you can't ask again, the answer has to carry its own evidence from the moment it's produced. For a machine-generated answer, that means writing down, at the time:</p>
+<ul>
+<li>the prompt and any added instructions</li>
+<li>the exact answer</li>
+<li>the model and its build</li>
+<li>the date</li>
+<li>the sampling mode</li>
+<li>the pages the model read, and their versions</li>
+</ul>
+<p>Whoever runs the model owns everything on that list except the pages. The pages are where publishers come in, and they're the part most often missing. An assistant that read your page can only record what your content declared about itself. If the page declares who wrote it, when it last changed, and which version this is, the record can point at a specific state of your content. If it declares none of that, the record can only say that something was read at a URL, and the content behind that URL has probably changed since.</p>
+<p>Machine Experience is built for this. MX writes provenance and dates into the file itself, along with its intended use, so the machine reading it can check them, and so can whoever audits that reader afterwards. I hold my own tooling to the same rule: every model call writes to a log, and every generated output keeps a provenance record beside it. Rerunning a model can't show me what it did the first time, so the log has to.</p>
+<p><strong>A declared interest.</strong> I wrote the books on MX and consult on it, so I have a stake in the practice this column recommends. The runs above are reproducible on any Mac with macOS 27; the method is below.</p>
+<h2 id="method" tabindex="-1">Method</h2>
+<p>All runs were made on 9 October 2026 on macOS 27.0.1 (build 26A434), using <code>/usr/bin/fm</code> with its default on-device model, which its help text lists as &quot;On-device Apple Foundation Model&quot;.</p>
+<ul>
+<li><strong>Default sampling.</strong> <code>fm respond 'what is swift?'</code>, run in succession; the transcripts above are those runs. A second set of the same size, run with <code>--no-stream</code> and hashed with <code>shasum</code>, also produced a distinct output every time.</li>
+<li><strong>Greedy sampling.</strong> <code>fm respond --no-stream --greedy 'what is swift?'</code>, five times, each output hashed with <code>shasum</code>. Every hash matched.</li>
+<li><strong>Model identification.</strong> <code>fm respond -v</code> prints the session setup line quoted above and no model build or version.</li>
+</ul>
+<h2 id="where-your-own-content-stands" tabindex="-1">Where Your Own Content Stands</h2>
+<p>Nobody will be able to replay what a machine told someone about your business. What survives is what the operator recorded and what you published, so make your half checkable: name the author, date the page, version the content, and declare its purpose in the file itself.</p>
+<ul>
+<li><a href="https://tityra.com">Get in touch about an MX audit</a></li>
+<li><a href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+</ul>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-09.</li>
+            <li>Outside sources that make the same claims: <a href="https://developer.apple.com/documentation/foundationmodels/generationoptions/samplingmode-swift.struct" rel="noopener">developer.apple.com/documentation/foundationmodels/generationoptions/samplingmode-swift.struct</a>.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

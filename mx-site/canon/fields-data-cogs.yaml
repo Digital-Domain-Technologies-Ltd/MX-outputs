@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Cog Layer
-version: '1.9'
+version: '1.11'
 created: 2026-04-27
-modified: '2026-09-19'
+modified: '2026-10-05'
 author: Tom Cranstoun
 description: >-
   Cog-specific structural vocabulary. Cogs are an OPTIONAL layer on top of MX,
@@ -34,6 +34,8 @@ mx:
   fields:
     - name: partOf
       type: array
+      authoring: authored
+      inPlainWords: 'It is part of {value}.'
       definition: Parent collection(s), suite(s), or initiative(s) the document belongs to.
       example:
         - mx-the-gathering
@@ -48,11 +50,12 @@ mx:
         series), but conformance is only required for cogs.
       status: canonical
       profile: cog
-      required: true
       description: Larger artefact(s) this document is part of. An array pointing to one or more books, series, collections, suites, or parent artefacts; a bare string is accepted as a single-element array.
 
     - name: buildsOn
       type: array
+      authoring: authored
+      inPlainWords: 'It builds on {value}.'
       definition: >-
         Context graph. Array of cog names this document builds upon. Soft
         dependency — provides context, not a hard requirement.
@@ -62,11 +65,13 @@ mx:
       notes: Soft dependency for context. Builds the cog knowledge graph.
       status: canonical
       profile: cog
-      required: optional
       description: Documents or standards this one extends or relies upon. Intellectual dependency chain.
 
     - name: dependencies
       type: array
+      authoring: authored
+      inPlainWords: 'It depends on {value}.'
+      optionalIn: [cog, skill, contact, action]
       definition: >-
         Array of objects describing what this cog depends upon. Each entry is an object with at minimum a `name`
         sub-key; optional sub-keys are `version` (a version constraint such as a SemVer range), `reason` (a
@@ -88,7 +93,6 @@ mx:
         rather than implicit.
       status: canonical
       profile: cog
-      required: required
       alignsWith:
         - MX Cogs note §6
         - cog-spec v1 §4.3
@@ -96,6 +100,8 @@ mx:
 
     - name: refersTo
       type: array
+      authoring: authored
+      inPlainWords: 'It refers to {value}.'
       definition: Related cogs or external resources. Informational links, not dependencies.
       example:
         - field-dictionary
@@ -103,11 +109,11 @@ mx:
       notes: Informational links, not dependencies.
       status: canonical
       profile: cog
-      required: optional
       description: Related documents cited or cross-referenced. Lateral relationship; aligns with Schema.org isRelatedTo.
 
     - name: relatedDocs
       type: array
+      authoring: authored
       definition: >-
         Prose citations to related documents - a title, a URL, or a free-text description of a source or companion
         reference. Not validated as a resolvable repo-root-relative path or a known cog slug (unlike refersTo).
@@ -119,10 +125,11 @@ mx:
         title, external URL, or prose mention with no repo-path form.
       status: canonical
       profile: cog
-      required: optional
 
     - name: triggers
       type: array
+      authoring: authored
+      inPlainWords: 'Ask for it with: {value}.'
       definition: >-
         Intent phrases that route a request to this cog. A router (a skill, the maxine dispatcher, the MX graph) matches
         a user's words against these to select the cog without the user knowing its name.
@@ -133,11 +140,11 @@ mx:
       notes: Top-level field on routing-capable cogs. Lowercase phrases; the graph indexes them for triggers queries.
       status: canonical
       profile: cog
-      required: optional
       description: Intent-routing phrases a dispatcher matches to select this cog. Indexed by the MX graph.
 
     - name: routes
       type: array
+      authoring: authored
       definition: >-
         The routing table for a routing-cog: an array of {intent, destination, description} objects mapping a user
         intent phrase to the destination cog it dispatches to.
@@ -148,7 +155,6 @@ mx:
       notes: Declared on routing-cog type files. The routing-cog template teaches this shape.
       status: canonical
       profile: cog
-      required: optional
       description: The intent-to-destination dispatch table for a routing-cog.
 
     - name: cogHeader
@@ -162,7 +168,8 @@ mx:
         same information as a YAML comment inside the frontmatter for
         consumers that scan raw bytes.
       type: object
-      required: false
+      authoring: authored
+      optionalIn: [cog, action]
       status: canonical
       alignsWith:
         - cog-spec v1 §2.5
@@ -175,6 +182,8 @@ mx:
 
     - name: targetsSpecVersion
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: The cog-spec version a cog (or conformance test, or implementation document) claims to target.
       example: "1.0"
       notes: >-
@@ -182,13 +191,14 @@ mx:
         used by conformance test suites and reference documentation to declare which spec version they are written against.
       status: canonical
       profile: cog
-      required: optional
       alignsWith:
         - cog-spec v1
       description: Spec version declaration for cog-format-related artefacts (tests, reference docs, validators).
 
     - name: readiness
       type: object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: >-
         Maturity declaration for a cog or spec document. Object with two arrays: sufficientFor (use cases the document is
         ready to support) and notYetSufficientFor (use cases the document is explicitly not ready for).
@@ -205,11 +215,12 @@ mx:
         meaningful in context; the dictionary does not constrain their values.
       status: canonical
       profile: cog
-      required: optional
       description: Maturity declaration. Says what the document is ready to be used for and what it is not yet ready for.
 
     - name: operatesOn
       type: object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: >-
         Meta-declaration of the artefact a cog operates on. Object with sub-keys including artefactType (e.g. cog,
         document, dataset) and fileExtension (e.g. .cog.md, .md, .yaml).
@@ -221,11 +232,12 @@ mx:
         sub-key shape is conventional, not strictly bound; implementations MAY add further sub-keys.
       status: canonical
       profile: cog
-      required: optional
       description: What kind of artefact this cog operates on. Cog-meta information for runners and catalogs.
 
     - name: troubleshooting
       type: array
+      authoring: authored
+      optionalIn: [cog, action]
       definition: >-
         Array of condition / remedy entries describing common failure modes for an action cog and the remedy a runtime
         SHOULD invoke.
@@ -239,11 +251,12 @@ mx:
         identifier or prose). Implementations MAY add further sub-keys (e.g. severity, owner).
       status: canonical
       profile: cog
-      required: optional
       description: Failure mode catalog for action cogs. Pairs each named condition with a runtime-resolvable remedy.
 
     - name: produces
       type: object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: >-
         Output contract. Declares the typed shape a successful execution of this cog produces, so consumers can validate
         and reason about the output without first running the cog. Sub-keys include shape (pointer to a JSON or YAML
@@ -261,13 +274,14 @@ mx:
         mismatch is treated as an unmodelled failure and triggers defaultRemedy if declared.
       status: canonical
       profile: cog
-      required: optional
       alignsWith:
         - MX Cogs note §6.7.1
       description: Output contract for an action cog. Names the typed shape of a successful execution result.
 
     - name: defaultRemedy
       type: string
+      authoring: authored
+      optionalIn: [cog, action]
       definition: >-
         Catch-all remedy. Names the runtime-resolvable remedy a runtime SHOULD invoke when a failure arises that does
         not match any entry in troubleshooting. Resolves through the same registry used for troubleshooting[].remedy
@@ -280,17 +294,21 @@ mx:
         treated as an unmodelled failure and defaultRemedy applies.
       status: canonical
       profile: cog
-      required: optional
       alignsWith:
         - MX Cogs note §6.7.2
       description: Catch-all remedy for unmodelled failure conditions. Pairs with troubleshooting.
 
     - name: actionType
       type: string
+      authoring: derived
+      derivation: actionPayloads
+      inPlainWords: 'Its actions are {value}.'
+      requiredIn: [action]
+      optionalIn: [cog]
       definition: >-
         Discriminator for action-doc cogs that names the cognitive class of the action — whether the cog is
-        deterministically scripted, an LLM-mediated SOP, or a hybrid. Lets a reader (human or agent) know which class
-        of action the cog implements without inferring from body content.
+        deterministically scripted, an LLM-mediated SOP, or a hybrid. Derived from the payloadType each execute
+        action declares: every action instructions is sop, no action instructions is scripted, a mix is hybrid.
       example: scripted
       validValues:
         - scripted
@@ -306,13 +324,80 @@ mx:
         combination — scripted-no-embedded, sop-no-usage-prose, and hybrid-needs-both are all errors.
       status: canonical
       profile: cog
-      required: optional
       alignsWith:
         - MX Cogs note §6.7.3
-      description: Action-cog discriminator. Names the cognitive class of an action-doc as scripted, sop, or hybrid.
+      description: Action-cog discriminator, derived from execute.actions[].payloadType as scripted, sop, or hybrid.
+
+    - name: execute.actions[].payloadType
+      type: string
+      authoring: authored
+      definition: >-
+        What one execute action carries for a reader to run: script (an embedded or referenced script a runtime
+        executes), instructions (usage prose an LLM reads and performs), skill (a skill installed into an agent
+        host, loaded when its triggers match), or mod (code installed into an agent host that hooks its session
+        events and can observe, rewrite or answer them).
+      example: script
+      validValues:
+        - script
+        - instructions
+        - skill
+        - mod
+      notes: >-
+        Declared per action, so one cog can hold a script action and a skill-install action. The cog-level
+        actionType is derived from this set (rule actionPayloads). A script or instructions payload runs once and
+        ends; a skill or mod payload stays in the host and changes what later sessions do, so the security a reader
+        weighs for an install is that of what the payload can do once installed. check-action-payload.cjs holds
+        every action of an action-doc to this vocabulary.
+      status: canonical
+      profile: cog
+      description: What one execute action carries - script, instructions, skill, or mod.
+
+    - name: execute.actions[].payloadRef
+      type: string
+      authoring: authored
+      definition: >-
+        Where a payload that is not embedded in the cog lives: a repository path (a skill folder, a plugin package,
+        a script file) or a URL. A skill or mod payload names one.
+      example: .claude/skills/step-catch-up
+      status: canonical
+      profile: cog
+      description: Where an action's payload lives when it is not embedded.
+
+    - name: execute.actions[].payloadDigest
+      type: string
+      authoring: authored
+      definition: >-
+        The digest of exactly the payload that was reviewed, as sha256-<base64> (the Subresource Integrity form).
+        For a file it is the SHA-256 of its bytes; for a folder, of each file's repository-relative path and bytes
+        in path order. check-action-payload.cjs recomputes it for a local payloadRef and refuses a mismatch, so a
+        payload changed after review cannot be installed under the old declaration.
+      example: sha256-47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=
+      status: canonical
+      profile: cog
+      description: The SHA-256 digest of the payload as reviewed.
+
+    - name: execute.actions[].security
+      type: object
+      authoring: authored
+      definition: >-
+        A partial security block for one execute action, overriding the cog-level block for that action alone. It
+        takes the members of the open security block (riskLevel, reversibility, verifiability, guardrail and the
+        rest). The cog-level block is the ceiling: the cog's riskLevel is at least every action's.
+      example:
+        riskLevel: high
+        reversibility: irreversible
+        guardrail: human-approval
+      notes: >-
+        Lets a cog whose actions differ in danger say so: a read-only listing beside a destructive reset, or a
+        script action beside a mod-install action. A reader applies the action's block where it is declared and the
+        cog's block elsewhere.
+      status: canonical
+      profile: cog
+      description: Per-action security override; the cog-level block is the ceiling.
 
     - name: execute.route
       type: string
+      authoring: authored
       definition: >-
         Execution route for scripted and hybrid action-doc cogs. Declares where the extracted script block is
         sent at runtime: bash runs the block directly as a subprocess (default, existing behaviour); ollama
@@ -333,7 +418,6 @@ mx:
         .sh.cog.md infix in their filename as a human-readable signal.
       status: canonical
       profile: cog
-      required: optional
       alignsWith:
         - MX Cogs note §6.7.3
       description: Execution route for scripted cog blocks. bash (default), ollama, or agent.

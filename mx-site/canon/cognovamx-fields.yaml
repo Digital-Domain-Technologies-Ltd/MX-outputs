@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '1.28'
+version: '1.34'
 created: '2026-04-15'
-modified: '2026-09-27'
+modified: '2026-10-06'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -36,6 +36,8 @@ mx:
   fields:
     - name: x-mx-mountType
       type: string
+      inPlainWords: 'It is a {value} mount.'
+      authoring: authored
       definition: 'Mount type for submodule repositories. Values: personal, team, product, standard.'
       example: personal
       validValues:
@@ -46,10 +48,10 @@ mx:
       notes: Categorises submodules in the hub mount table.
       status: canonical
       profile: x-mx-public
-      required: true
       context: Used in .mx.yaml.md folder metadata for git submodules to categorise them in the hub mount table.
     - name: x-mx-componentKind
       type: string
+      authoring: authored
       definition: 'The MX Component Standard kind an Intent CMS chunk renders, mirrored from the chunk registry into the chunk directory descriptor.'
       example: component:objectCard
       validValues:
@@ -67,10 +69,11 @@ mx:
         never this field. The registry (intent-cms/lib/chunks/registry.cjs) is the authority; the descriptor mirrors it.
       status: canonical
       profile: x-mx-public
-      required: optional
       context: Used in intent-cms/chunks/<name>/.mx.yaml.md folder metadata.
     - name: x-mx-mountSwappable
       type: string-or-boolean
+      inPlainWords: 'Whether the mount can be swapped: {value}.'
+      authoring: authored
       definition: 'Whether this mount can be swapped for a different repository. Values: true, false, fork.'
       example: true
       validValues:
@@ -80,72 +83,23 @@ mx:
       notes: Personal = swappable, product = not, standard = forkable.
       status: canonical
       profile: x-mx-public
-      required: true
       context: >-
         Personal mounts are swappable (each business mounts their own). Product mounts are not. Standard mounts are
         forkable.
     - name: x-mx-mountUpstream
       type: string
+      inPlainWords: 'Its upstream source is {value}.'
+      authoring: authored
       definition: Upstream source for standard-type mounts. URL or description of where to pull updates from.
       example: https://github.com/Digital-Domain-Technologies-Ltd/MX-Gathering
       notes: Only for standard mount type.
       status: canonical
       profile: x-mx-public
-      required: false
       context: Only used for standard mount type. Points to The Gathering open standard or equivalent upstream.
-    - name: x-mx-automationConsent
-      type: string
-      definition: >-
-        Structured automation consent for AI agents encountering this content. Declares what a machine may do with
-        the file the field travels on: act on it autonomously (allowed), read and recommend while a human decides
-        (advisory-only), or not act at all (forbidden). A declaration honest agents honour, not an enforcement;
-        REGINALD attestation is what makes the declaration attributable and dated.
-      example: advisory-only
-      validValues:
-        - allowed
-        - advisory-only
-        - forbidden
-      notes: >-
-        Vendor-tier stand-in while the open standard's structured consent vocabulary awaits W3C/NIST/IEEE
-        convergence (the parked ai.* family; see mx-canon/ssot/field-cull-log.md). Complements the plain-language
-        contentPolicy string rather than replacing it: contentPolicy explains for humans, this field instructs
-        machines. There is deliberately no per-action requiresHuman companion; advisory-only carries the
-        human-decides meaning under Human-in-Command.
-      status: canonical
-      profile: x-mx-public
-      required: false
-      context: 'Declared per artefact in the mx: block. Read by agents and the audit suite to decide whether acting on the content is sanctioned.'
-    - name: x-mx-capabilities
-      type: array
-      definition: >-
-        The declared capability tokens an executable artefact holds, drawn from the MX capability vocabulary
-        (processSpawn, credentialRead, networkEgress, filesystemWrite, telemetryEmit, terminalControl, destructive). A
-        machine-readable statement of what the artefact touches, a capability manifest that travels with the file.
-        Subject to Declare, Verify, Enforce: the tokens are verified against the artefact's own code, and a governed
-        runtime holds the artefact to the declared set. Capability is read as risk against publisher trust, not off the
-        resource.
-      example: '[networkEgress, credentialRead]'
-      validValues:
-        - processSpawn
-        - credentialRead
-        - networkEgress
-        - filesystemWrite
-        - telemetryEmit
-        - terminalControl
-        - destructive
-      notes: >-
-        The standardized, closed vocabulary is modelled on the Android permission taxonomy so declarations are
-        comparable across artefacts (an editor extension, a package, an action cog). Distinct from an unverified store
-        label because the declaration is checked against behaviour rather than asserted by the author. Editor-extension
-        descriptors are generated by scripts/lib/extension-capabilities.cjs; a cog's embedded-script scope is verified
-        by scripts/check-cog-capabilities.cjs against its security.scope. See Chapter 26 (Protocols) and the Declare,
-        Verify, Enforce principle.
-      status: canonical
-      profile: x-mx-public
-      required: false
-      context: 'Declared per capability-bearing artefact. Read by an agent, a marketplace, or a governed runtime before trusting or running the artefact.'
     - name: publishedTo
       type: string
+      authoring: authored
+      optionalIn: [folder]
       definition: >-
         Downstream provenance — where this content is published. Can be a relative path within the repository or an
         external URL. Used by the MX graph to build lineage edges tracing content from source to published destination.
@@ -157,9 +111,11 @@ mx:
       profile:
         - folder
         - cog
-      required: optional
     - name: servedAt
       type: string
+      authoring: defaulted
+      inPlainWords: 'It is published at {value}.'
+      optionalIn: [blog]
       definition: >-
         The public URL where the generated page for this source is served. Declared only when the page lives at a
         non-default path; the Intent CMS generator defaults blog posts to https://mx.allabout.network/blog/<slug>.html.
@@ -169,28 +125,9 @@ mx:
         and other non-default paths.
       status: canonical
       profile: cog
-      required: optional
-    - name: blogUrl
-      type: string
-      definition: The canonical public URL of the published blog post generated from this source.
-      example: https://mx.allabout.network/blog/example-post.html
-      notes: >-
-        Declared in the mx: block of blog-post sources in datalake/draft-site/blog/. Matches the slug filename.
-      status: canonical
-      profile: cog
-      required: optional
-    - name: blogFilename
-      type: string
-      definition: The slug of the blog post — the filename shared by the markdown source and the generated HTML.
-      example: example-post
-      notes: >-
-        Declared in the mx: block of blog-post sources. Lowercase, hyphen-separated; matches canonicalUri, servedAt,
-        and blogUrl.
-      status: canonical
-      profile: cog
-      required: optional
     - name: isGenerated
       type: boolean
+      authoring: defaulted
       definition: >-
         True if this content was produced by a deterministic script (not handwritten by a human and not produced by an
         AI agent). Use when a build step, code generator, or index-generator wrote the file. Distinct from
@@ -205,10 +142,10 @@ mx:
         - folder
         - cog
         - any
-      required: optional
       default: false
     - name: isAiGenerated
       type: boolean
+      authoring: defaulted
       definition: >-
         True if this content was produced by an AI agent (LLM or autonomous tool). Use when the file was written by
         Claude, ChatGPT, or any automated reasoning system, whether under human review or not. Distinct from
@@ -223,10 +160,10 @@ mx:
         - folder
         - cog
         - any
-      required: optional
       default: false
     - name: generatedBy
       type: string
+      authoring: authored
       definition: >-
         Identifier of the generator when isGenerated or isAiGenerated is true. For scripts: a relative path or script
         name (e.g. 'scripts/generate-index.sh'). For AI agents: a model or agent identifier (e.g. 'claude-opus-4-6',
@@ -238,9 +175,10 @@ mx:
         - folder
         - cog
         - any
-      required: optional
     - name: image
       type: string
+      authoring: authored
+      optionalIn: [contact]
       definition: >-
         Primary illustrative image — relative repository path or external URL. Used as the social-share preview and the
         lead visual.
@@ -250,9 +188,9 @@ mx:
         - book
         - blog
         - any
-      required: optional
     - name: contentFilename
       type: string
+      authoring: authored
       definition: >-
         Canonical filename of the content artefact, distinct from the path the document is stored at. Used by content
         cogs that may move.
@@ -261,9 +199,9 @@ mx:
       profile:
         - cog
         - any
-      required: optional
     - name: lastUpdated
       type: string
+      authoring: authored
       definition: >-
         Last substantive update timestamp (ISO 8601 date). Companion to `modified` — `modified` reflects file mtime,
         `lastUpdated` reflects when the content materially changed.
@@ -271,18 +209,18 @@ mx:
       status: canonical
       profile:
         - any
-      required: optional
     - name: fullName
       type: string
+      authoring: authored
       definition: Full personal or organisational name. Used in profile and contact documents.
       example: Tom Cranstoun
       status: canonical
       profile:
         - contact
         - any
-      required: optional
     - name: organisation
       type: string
+      authoring: authored
       definition: Organisation name. British spelling preferred for prose; the field is spelling-neutral for matching.
       example: CogNovaMX
       notes: 'See also: company. organisation is for the entity, company for a contact''s employer.'
@@ -290,26 +228,26 @@ mx:
       profile:
         - contact
         - any
-      required: optional
     - name: website
       type: string
+      authoring: authored
       definition: Primary website URL for the document subject (a person, organisation, or product).
       example: https://allabout.network
       status: canonical
       profile:
         - contact
         - any
-      required: optional
     - name: theme
       type: string
+      authoring: authored
       definition: Presentation or page theme identifier. Picks visual styling at render time.
       example: mx-light
       status: canonical
       profile:
         - any
-      required: optional
     - name: slides
       type: array
+      authoring: authored
       definition: Ordered list of slide titles or paths in a presentation document.
       example:
         - intro
@@ -319,9 +257,9 @@ mx:
       status: canonical
       profile:
         - any
-      required: optional
     - name: agentAction
       type: string
+      authoring: authored
       definition: Single-sentence instruction for an AI agent reading this document. What the agent should do or check.
       example: Sync mx-reginald registry before publishing.
       notes: Distinct from runbook (which is for humans + agents). Agent-only directive.
@@ -329,9 +267,9 @@ mx:
       profile:
         - cog
         - any
-      required: optional
     - name: whenToRead
       type: string
+      authoring: authored
       definition: >-
         Short prose hint telling the reader (human or agent) the situation in which this document is the right one to
         consult.
@@ -340,17 +278,17 @@ mx:
       profile:
         - cog
         - any
-      required: optional
     - name: updateInstructions
       type: string
+      authoring: authored
       definition: Runbook for keeping the document content fresh. When and how to update it.
       example: Regenerate via npm run cog:sync after any cog frontmatter change.
       status: canonical
       profile:
         - any
-      required: optional
     - name: clientUrl
       type: string
+      authoring: authored
       definition: URL of the client property being audited or reported on.
       example: https://example.com
       status: canonical
@@ -358,9 +296,9 @@ mx:
         - audit
         - contact
         - any
-      required: optional
     - name: clientSlug
       type: string
+      authoring: authored
       definition: Short identifier for the client (kebab-case slug used in file paths and report IDs).
       example: arrivefirst
       status: canonical
@@ -368,65 +306,65 @@ mx:
         - audit
         - contact
         - any
-      required: optional
     - name: auditTool
       type: string
+      authoring: authored
       definition: Name of the tool that produced the audit report.
       example: mx-audit
       status: canonical
       profile: audit
-      required: optional
     - name: auditDate
       type: string
+      authoring: authored
       definition: Date of the audit run (ISO 8601 date).
       example: '2026-04-15'
       status: canonical
       profile: audit
-      required: optional
     - name: accessibilityScore
       type: number
+      authoring: authored
       definition: Pa11y or equivalent accessibility score (0-100).
       example: 92
       status: canonical
       profile: audit
-      required: optional
     - name: totalIssues
       type: number
+      authoring: authored
       definition: Total count of issues found in an audit report.
       example: 47
       status: canonical
       profile: audit
-      required: optional
     - name: imagesAnalyzed
       type: number
+      authoring: authored
       definition: Number of images analysed during an audit run.
       example: 128
       status: canonical
       profile: audit
-      required: optional
     - name: bestPracticesScore
       type: number
+      authoring: authored
       definition: Lighthouse or equivalent best-practices score (0-100).
       example: 88
       status: canonical
       profile: audit
-      required: optional
     - name: htmlValidation
       type: string
+      authoring: authored
       definition: HTML validation result summary (passed, warnings, errors with counts).
       example: passed
       status: canonical
       profile: audit
-      required: optional
     - name: totalOpportunities
       type: number
+      authoring: authored
       definition: Count of improvement opportunities surfaced by an audit run.
       example: 12
       status: canonical
       profile: audit
-      required: optional
     - name: nextAction
       type: string
+      authoring: authored
       definition: Next concrete action this contact / opportunity / report needs.
       example: Schedule follow-up call after their MX audit lands.
       notes: Free-form text describing the next step. Pairs with nextActionDate, which carries the deadline.
@@ -435,9 +373,9 @@ mx:
         - contact
         - audit
         - any
-      required: optional
     - name: engagementOptions
       type: array
+      authoring: authored
       definition: List of possible engagement modes available with a contact (e.g. consulting, training, content, advisory).
       example:
         - consulting
@@ -445,39 +383,43 @@ mx:
         - advisory
       status: canonical
       profile: contact
-      required: optional
     - name: registry
       type: string
+      authoring: authored
       definition: Registry identifier this document belongs to (e.g. mx-reginald, content-registry).
       example: mx-reginald
       status: canonical
       profile:
         - cog
         - any
-      required: optional
     - name: security
       type: object-or-string
+      authoring: authored
+      inPlainWords: 'Before running it, a reader weighs this security declaration: {value}.'
       definition: >-
-        Security declaration for an action document. May be the string name of a security profile or an object with
-        attestation, execution, trustLevel, and policy fields.
+        Security declaration for an action document: the security block defined in the open standard
+        (fields-data.yaml, blockTypes: security). May be the string name of a profile in the standard's
+        securityProfiles, or an object that writes the block inline or names a profile and tightens it.
       example:
-        attestation: required
-        execution: sandboxed
+        profile: local-write
+        riskLevel: high
       notes: >-
-        When a string, references a named security profile. When an object, declares the security block inline. See
-        Appendix M for the security block fields.
+        The standard owns the block, its members and the named profiles; this entry only records how CogNovaMX
+        documents carry it. A string is shorthand for {profile: <name>}. Inline members may only tighten the named
+        profile, and Gate 116 refuses an unknown name or a loosening member. See Appendix M for the security block
+        fields and the named profiles.
       status: canonical
       profile: cog
-      required: optional
     - name: signature
       type: string
+      authoring: authored
       definition: Cryptographic signature attesting the cog's authorship and integrity.
       example: ed25519:0xabc123...
       status: canonical
       profile: cog
-      required: optional
     - name: provenance
       type: object-or-string
+      authoring: authored
       definition: >-
         Origin and lineage block. May be the string of a single provenance source, or an object with origin,
         derivedFrom, method, and date fields. See Appendix M for the provenance block fields.
@@ -488,9 +430,9 @@ mx:
       profile:
         - cog
         - any
-      required: optional
     - name: definition
       type: string
+      authoring: authored
       definition: >-
         Concise definition of the term or concept this document is about. Used in glossary entries and concept
         documents.
@@ -499,9 +441,9 @@ mx:
       profile:
         - cog
         - any
-      required: optional
     - name: affects
       type: array
+      authoring: authored
       definition: List of file paths, modules, or systems this change or document affects.
       example:
         - scripts/mx-audit.js
@@ -510,9 +452,9 @@ mx:
       profile:
         - cog
         - any
-      required: optional
     - name: action
       type: string
+      authoring: authored
       definition: >-
         Single-line description of the action this document performs or recommends. Companion to agentAction (for AI)
         and runbook (for humans + AI).
@@ -521,26 +463,26 @@ mx:
       profile:
         - cog
         - any
-      required: optional
     - name: note
       type: string
+      authoring: authored
       definition: Free-text note attached to the document. Used for short editorial annotations.
       example: Scheduled for review next week.
       status: canonical
       profile:
         - any
-      required: optional
     - name: thread
       type: string
+      authoring: authored
       definition: Conversation or message thread identifier (e.g. Slack thread URL, email subject).
       example: slack://team/C123/p456
       status: canonical
       profile:
         - contact
         - any
-      required: optional
     - name: related
       type: array
+      authoring: authored
       definition: List of related documents, contacts, or topics. Free-form references.
       example:
         - ./parent.md
@@ -549,18 +491,18 @@ mx:
       status: canonical
       profile:
         - any
-      required: optional
     - name: recipient
       type: string-or-array
+      authoring: authored
       definition: Target audience or addressee of a message, report, or proposal.
       example: Tom Cranstoun
       status: canonical
       profile:
         - contact
         - any
-      required: optional
     - name: links
       type: array
+      authoring: authored
       definition: List of URLs or paths the document links to.
       example:
         - https://allabout.network
@@ -568,9 +510,10 @@ mx:
       status: canonical
       profile:
         - any
-      required: optional
     - name: includes
       type: array
+      authoring: authored
+      optionalIn: [cog, action]
       definition: >-
         Cog composition — content reuse without duplication. Array of include declarations, each specifying a source cog
         (relative path or reginald:<name>), optional block filter, and resolution mode (build or read). Included content
@@ -585,9 +528,10 @@ mx:
         cog-unified-spec Section 3 for full specification including inline @include markers.
       status: canonical
       profile: cog
-      required: optional
     - name: deliverable
       type: string-or-array
+      authoring: authored
+      optionalIn: [cog, action]
       definition: >-
         What this cog produces or delivers. Declares the tangible output — a report, a validated artefact, a trained
         team, a published page. Particularly useful for action-docs where the deliverable is the reason the cog exists.
@@ -597,24 +541,24 @@ mx:
         describes the knowledge or artefact the cog represents. Array form for cogs with multiple deliverables.
       status: canonical
       profile: cog
-      required: optional
     - name: recordedFrom
       type: string
+      authoring: authored
       definition: Who this meeting-note or call-recap account was recorded from, and the context of the recording.
       example: "Tom Cranstoun (meeting recap, 2026-07-14 call)"
       notes: Free-text attribution + recording context. Distinct from source (input files a document was derived from).
       status: canonical
       profile: contact
-      required: optional
     - name: contentScope
       type: string
+      authoring: authored
       definition: Prose statement of what this document covers and, where useful, what it deliberately does not cover.
       example: "Covers the design specification and PRD; does not cover the implementation timeline."
       status: canonical
       profile: cog
-      required: optional
     - name: finishing
       type: object
+      authoring: authored
       definition: >-
         The finisher contract on a transfer-manifest cog (ADR: export-batch finishing block) - what may publish
         (items), the inventory proving the batch is intact, and the trust anchor.
@@ -623,47 +567,49 @@ mx:
         pipeline; hand-editing is not the normal path.
       status: canonical
       profile: cog
-      required: optional
     - name: members
       type: array
+      authoring: authored
       definition: The member filenames this folder-metadata (.mx.yaml.md) record indexes.
       example:
         - web-audit-management-summary-template.md
         - web-audit-technical-report-template.md
       status: canonical
       profile: folder
-      required: optional
     - name: sentAt
       type: string
+      authoring: authored
       definition: The date a message was actually sent, distinct from created (when it was authored/drafted).
       example: '2026-05-27'
       status: canonical
       profile: contact
-      required: optional
     - name: hold
       type: boolean
+      authoring: authored
       definition: Whether outreach to this contact is currently paused.
       example: false
       notes: Pairs with holdReason.
       status: canonical
       profile: contact
-      required: optional
     - name: holdReason
       type: string
+      authoring: authored
       definition: Why outreach to this contact is on hold, when hold is true.
       example: "Awaiting a scheduling window from their side."
       status: canonical
       profile: contact
-      required: optional
     - name: channel
       type: string
+      authoring: authored
       definition: The communication channel used for this outreach record.
       example: email
       status: canonical
       profile: contact
-      required: optional
     - name: project
       type: object
+      inPlainWords: 'The project: {value}.'
+      authoring: authored
+      optionalIn: [folder]
       definition: Project metadata object. Contains name, description, repository, documentation.
       example:
         name: MX Hub
@@ -671,9 +617,10 @@ mx:
       notes: Container for project-level metadata in root folder files.
       status: canonical
       profile: folder
-      required: optional
     - name: context
       type: object
+      authoring: authored
+      optionalIn: [folder]
       definition: Domain context object. Contains domain, purpose, constraints.
       example:
         domain: machine-experience
@@ -681,9 +628,10 @@ mx:
       notes: Container for domain context in folder metadata.
       status: canonical
       profile: folder
-      required: optional
     - name: stack
       type: object
+      authoring: authored
+      optionalIn: [folder]
       definition: Technical stack object. Contains language, runtime, version.
       example:
         language: javascript
@@ -691,9 +639,12 @@ mx:
       notes: Container for technical stack information.
       status: canonical
       profile: folder
-      required: optional
     - name: x-mx-wordCount
       type: number
+      authoring: derived
+      derivation: bodyWordCount
+      inPlainWords: 'Its body runs to {value} words.'
+      optionalIn: [book]
       definition: Word count of the document content.
       example: 3500
       notes: >-
@@ -702,8 +653,68 @@ mx:
         estimate before a draft exists, a different signal.
       status: canonical
       profile: book
+    - name: x-mx-createdHash
+      type: string
+      authoring: derived
+      derivation: gitCreation
+      inPlainWords: 'It was created in the commit that begins {value}.'
+      optionalIn: [book, contact, report, audit]
+      definition: >-
+        The first eight characters of the commit that first added this file, shared by every file added in that commit,
+        so the files created together can be found together.
+      example: 734140ed
+      notes: >-
+        Written by scripts/fix-co-creation-cohorts.cjs from the repository history, never by hand. A copied value
+        names the wrong cohort; leave the field absent and let the fixer assign it.
+      status: canonical
+      profile: x-mx-public
+    - name: x-mx-neededFor
+      type: array
+      authoring: authored
+      inPlainWords: 'It is needed for {value}.'
+      optionalIn: [blog]
+      definition: The miniMax tasks this object is needed for, each a task id in mx-canon/ssot/registries/minimax-tasks.json.
+      example: [publish]
+      notes: Gate 54 (scripts/check-needed-for.cjs) refuses a value that is not a task in the registry.
+      status: canonical
+      profile: any
+    - name: x-mx-contactKind
+      type: string
+      authoring: authored
+      inPlainWords: 'This contact is a {value}.'
+      optionalIn: [contact]
+      definition: A CRM contact's primary business relationship, declared on the contact's primary cog.
+      example: peer
+      notes: >-
+        camelCase values (NDR-02). Values in use include peer, prospect, businessSponsor, contact, advisor,
+        coDirector, contractor, editor, principalPartner and self. Operator status is not a kind: it is membership of
+        the operator registry. Seeded by scripts/backfill-contact-kind.cjs.
+      status: canonical
+      profile: contact
+    - name: x-mx-pdfDoctype
+      type: string
+      authoring: authored
+      inPlainWords: 'It renders as a {value} PDF.'
+      optionalIn: [contact]
+      definition: The doctype the unified PDF pipeline renders this file as, which selects its template.
+      example: letter
+      validValues:
+        - letter
+        - report
+        - blog-post
+        - agreement
+        - info-doc
+        - chapter
+        - book
+        - free-book
+        - briefing-2col
+        - document
+      notes: Read by scripts/lib/pdf/read-frontmatter.cjs for scripts/bin/mx.pdf.sh; templates under scripts/templates/pdf/.
+      status: canonical
+      profile: any
     - name: blogState
       type: string
+      authoring: authored
       definition: 'Blog lifecycle state. Values: draft, review, published.'
       example: published
       validValues:
@@ -715,6 +726,8 @@ mx:
       profile: blog
     - name: agentType
       type: string
+      authoring: authored
+      optionalIn: [contact]
       definition: >-
         Classification of the subject's agentic nature. Distinct from `contentType` (which describes the document) and
         `role` (which describes functional hat-wearing).
@@ -732,6 +745,7 @@ mx:
         - contact
     - name: relationship
       type: string
+      authoring: authored
       definition: Relationship type.
       example: advisory-board
       validValues:
@@ -756,18 +770,22 @@ mx:
       profile: contact
     - name: role
       type: string
+      authoring: authored
       definition: Job title or role.
       example: CTO
       status: canonical
       profile: contact
     - name: company
       type: string
+      authoring: authored
       definition: Organisation name.
       example: CogNovaMX Ltd
       status: canonical
       profile: contact
     - name: relatedFolders
       type: array
+      authoring: authored
+      optionalIn: [folder]
       definition: Related folders with path, relationship type, and description.
       example:
         - path: ../mx-audit
@@ -777,12 +795,14 @@ mx:
       profile: folder
     - name: email
       type: string
+      authoring: authored
       definition: Contact email address.
       example: info@cognovamx.com
       status: canonical
       profile: contact
     - name: phone
       type: string
+      authoring: authored
       definition: Contact phone number.
       example: +44 7700 900000
       notes: Include international dialling code. Quote to prevent YAML number parsing.
@@ -790,6 +810,7 @@ mx:
       profile: contact
     - name: whatsapp
       type: string
+      authoring: authored
       definition: WhatsApp contact number.
       example: +44 7700 900000
       notes: May differ from phone. Quote the value.
@@ -797,6 +818,7 @@ mx:
       profile: contact
     - name: linkedin
       type: string
+      authoring: authored
       definition: LinkedIn profile URL.
       example: https://linkedin.com/in/tomcranstoun
       notes: Full URL to LinkedIn profile.
@@ -804,6 +826,7 @@ mx:
       profile: contact
     - name: nickname
       type: string
+      authoring: authored
       definition: Informal name or abbreviation.
       example: Max
       notes: Informal name. Helps agents recognise conversational references.
@@ -811,6 +834,7 @@ mx:
       profile: contact
     - name: lastContact
       type: string
+      authoring: authored
       definition: Date of last contact. ISO 8601 format (YYYY-MM-DD).
       example: 2026-02-28T00:00:00.000Z
       notes: ISO 8601. Updated after each interaction.
@@ -818,6 +842,7 @@ mx:
       profile: contact
     - name: pipelineStage
       type: string
+      authoring: authored
       definition: This contact's current position in the sales/relationship pipeline.
       example: warm
       notes: 'Free-form values in practice: committed, warm, pending. Pairs with nextAction and nextActionDate.'
@@ -825,6 +850,7 @@ mx:
       profile: contact
     - name: offering
       type: string
+      authoring: authored
       definition: The product or service offering under discussion with this contact.
       example: audit
       notes: Free-form; names the specific CogNovaMX/Gathering offering, not a general classification.
@@ -832,6 +858,7 @@ mx:
       profile: contact
     - name: nextActionDate
       type: string
+      authoring: authored
       definition: The date the next action (declared in nextAction) is due. ISO 8601 (YYYY-MM-DD).
       example: '2026-07-14'
       notes: Pairs with the free-text nextAction field; this is the deadline, nextAction is the description.
@@ -839,6 +866,7 @@ mx:
       profile: contact
     - name: twinOf
       type: string
+      authoring: authored
       definition: Twin or paired contact reference.
       example: maxine
       notes: References a paired contact. Used for AI/human pairs.
@@ -846,6 +874,7 @@ mx:
       profile: contact
     - name: location
       type: string
+      authoring: authored
       definition: Physical location, city, or venue. Used for contacts (city/address) and events (venue name or details).
       example: London, UK
       notes: Physical location for contacts or events.
@@ -855,6 +884,7 @@ mx:
         - event
     - name: messages
       type: array
+      authoring: authored
       definition: Message history or communication templates.
       example:
         - date: 2026-02-28T00:00:00.000Z
@@ -865,6 +895,7 @@ mx:
       profile: contact
     - name: platform
       type: string
+      authoring: authored
       definition: Communication platform for contact/outreach. For a target site's technology stack, use `techStack` instead.
       example: email
       validValues:
@@ -884,6 +915,7 @@ mx:
       profile: contact
     - name: techStack
       type: string-or-array
+      authoring: authored
       definition: >-
         Technology stack of a target site or system. Freetext. Distinct from `platform` (which is a communication
         channel).
@@ -897,6 +929,7 @@ mx:
         - audit
     - name: reportType
       type: string
+      authoring: authored
       definition: >-
         Type of report. Values: session, completion, audit, directors, build, executive-sales-report,
         technical-audit-report.
@@ -917,6 +950,7 @@ mx:
       profile: report
     - name: reportId
       type: string
+      authoring: authored
       definition: Unique report identifier.
       example: RPT-2026-03-001
       notes: Unique identifier for cross-referencing.
@@ -924,6 +958,7 @@ mx:
       profile: report
     - name: client
       type: string
+      authoring: authored
       definition: Client name for audit or deliverable reports.
       example: Acme Corp
       notes: Client name for audit or deliverable reports.
@@ -931,6 +966,7 @@ mx:
       profile: report
     - name: sessionStart
       type: string
+      authoring: authored
       definition: Session start timestamp. ISO 8601 format.
       example: '2026-03-01T09:00:00Z'
       notes: ISO 8601 datetime with timezone.
@@ -938,6 +974,7 @@ mx:
       profile: report
     - name: sessionEnd
       type: string
+      authoring: authored
       definition: Session end timestamp. ISO 8601 format.
       example: '2026-03-01T17:00:00Z'
       notes: ISO 8601 datetime with timezone.
@@ -945,6 +982,7 @@ mx:
       profile: report
     - name: pagesAudited
       type: number
+      authoring: authored
       definition: Number of pages audited in an audit.
       example: 42
       notes: 'Spelling-neutral (NDR #3).'
@@ -952,6 +990,7 @@ mx:
       profile: audit
     - name: performanceScore
       type: number
+      authoring: authored
       definition: Performance score (0-100).
       example: 85
       notes: Score 0-100. Typically from Lighthouse.
@@ -959,6 +998,7 @@ mx:
       profile: audit
     - name: llmSuitabilityScore
       type: number
+      authoring: authored
       definition: LLM suitability score (0-100).
       example: 72
       notes: Score 0-100. MX-specific metric for AI agent compatibility.
@@ -966,6 +1006,7 @@ mx:
       profile: audit
     - name: seoScore
       type: number
+      authoring: authored
       definition: SEO score (0-100).
       example: 91
       notes: Score 0-100.
@@ -973,6 +1014,8 @@ mx:
       profile: audit
     - name: mxWatchesFiles
       type: array
+      authoring: authored
+      optionalIn: [folder]
       definition: >-
         Array of file paths this document watches for changes. Used by MX OS to trigger re-evaluation when watched files
         are modified.
@@ -984,6 +1027,7 @@ mx:
       profile: folder
     - name: event
       type: string-or-object
+      authoring: authored
       definition: Event name or event details object.
       example: CMS Summit Frankfurt 2026
       notes: Can be a string or structured object with event details.
@@ -991,6 +1035,7 @@ mx:
       profile: event
     - name: organiser
       type: string
+      authoring: authored
       definition: Event organiser name or organisation.
       example: Boye & Company
       notes: British English spelling.
@@ -998,6 +1043,7 @@ mx:
       profile: event
     - name: hours
       type: string-or-object
+      authoring: authored
       definition: Operating hours or event schedule.
       example: 09:00-17:00 CET
       notes: Can be a string or structured object. Include timezone.
@@ -1005,6 +1051,8 @@ mx:
       profile: event
     - name: ai.contextRequired
       type: array
+      authoring: authored
+      optionalIn: [code-file, code-class]
       definition: Files AI should read before editing this one.
       example:
         - src/types/user.ts
@@ -1015,27 +1063,30 @@ mx:
         - code-file
         - code-function
         - code-class
-      required: false
     - name: ai.contextProvides
       type: array
+      authoring: authored
+      optionalIn: [code-file]
       definition: Concepts this file defines that other files depend on.
       example:
         - User type definitions
         - Validation rules
       status: canonical
       profile: code-file
-      required: false
     - name: ai.generationNotes
       type: string
+      authoring: authored
+      optionalIn: [code-file]
       definition: Guidance for AI generating similar code.
       example: Follow the repository's error handling pattern using Result types
       status: canonical
       profile:
         - code-file
         - code-function
-      required: false
     - name: ai.reason
       type: string
+      authoring: authored
+      optionalIn: [code-file, code-function, code-class]
       definition: Explanation for AI restrictions on this resource.
       example: Handles authentication tokens — changes require security review
       notes: Used with ai.editable, ai.doNotModify, ai.sensitive to explain WHY.
@@ -1044,9 +1095,10 @@ mx:
         - code-file
         - code-function
         - code-class
-      required: false
     - name: ai.confidence
       type: number
+      authoring: authored
+      optionalIn: [code-function, code-class]
       definition: Confidence in implementation correctness (0-1).
       example: 0.9
       notes: 0.9 = high confidence, 0.5 = uncertain, below 0.5 = needs review.
@@ -1054,16 +1106,18 @@ mx:
       profile:
         - code-function
         - code-class
-      required: false
     - name: ai.testCoverage
       type: boolean
+      authoring: authored
+      optionalIn: [code-function]
       definition: Whether this function has test coverage.
       example: true
       status: canonical
       profile: code-function
-      required: false
     - name: ai.edgeCases
       type: array
+      authoring: authored
+      optionalIn: [code-function, code-test]
       definition: Known edge cases and expected behaviour.
       example:
         - Empty cart returns 0
@@ -1072,62 +1126,70 @@ mx:
       profile:
         - code-function
         - code-test
-      required: false
     - name: ai.refactorNotes
       type: string
+      authoring: authored
+      optionalIn: [code-function]
       definition: Guidance for refactoring this function.
       example: Extract discount logic to separate module when discount types exceed 5
       status: canonical
       profile: code-function
-      required: false
     - name: ai.doNotModify
       type: boolean
+      authoring: authored
+      optionalIn: [code-function, code-class]
       definition: AI should not change this function.
       example: true
       status: canonical
       profile:
         - code-function
         - code-class
-      required: false
     - name: ai.sensitive
       type: boolean
+      authoring: authored
+      optionalIn: [code-class, code-api]
       definition: Whether this class or resource handles sensitive data.
       example: true
       status: canonical
       profile:
         - code-class
         - code-api
-      required: false
     - name: ai.modificationImpact
       type: string
+      authoring: authored
+      optionalIn: [code-class]
       definition: What might break if this class changes.
       example: All authentication flows depend on this class
       status: canonical
       profile: code-class
-      required: false
     - name: ai.replacementPermitted
       type: boolean
+      authoring: authored
+      optionalIn: [code-dependency]
       definition: Whether AI may suggest replacing this dependency.
       example: false
       status: canonical
       profile: code-dependency
-      required: false
     - name: ai.upgradePermitted
       type: boolean
+      authoring: authored
+      optionalIn: [code-dependency]
       definition: Whether AI may suggest upgrading this dependency.
       example: true
       status: canonical
       profile: code-dependency
-      required: false
     - name: ai.generationPermitted
       type: boolean
+      authoring: authored
+      optionalIn: [code-test]
       definition: Whether AI may generate tests for this module.
       example: true
       status: canonical
       profile: code-test
-      required: false
     - name: ai.mustCover
       type: array
+      authoring: authored
+      optionalIn: [code-test]
       definition: Scenarios that tests must cover.
       example:
         - empty input
@@ -1135,52 +1197,58 @@ mx:
         - concurrent access
       status: canonical
       profile: code-test
-      required: false
     - name: ai.doNotMock
       type: array
+      authoring: authored
+      optionalIn: [code-test]
       definition: Dependencies that should not be mocked in tests.
       example:
         - database
         - auth-service
       status: canonical
       profile: code-test
-      required: false
     - name: ai.safeToCall
       type: boolean
+      authoring: authored
+      optionalIn: [code-api]
       definition: Whether AI agents may call this API endpoint.
       example: true
       notes: false means AI should never invoke this endpoint autonomously.
       status: canonical
       profile:
         - code-api
-      required: false
     - name: ai.testMode
       type: string
+      authoring: authored
+      optionalIn: [code-api]
       definition: Test mode availability for API endpoint.
       example: 'Use X-Test-Mode: true header'
       status: canonical
       profile: code-api
-      required: false
     - name: ai.sensitiveRequestFields
       type: array
+      authoring: authored
+      optionalIn: [code-api]
       definition: Request fields that contain sensitive data.
       example:
         - password
         - creditCard
       status: canonical
       profile: code-api
-      required: false
     - name: ai.sensitiveResponseFields
       type: array
+      authoring: authored
+      optionalIn: [code-api]
       definition: Response fields that contain sensitive data.
       example:
         - ssn
         - bankAccount
       status: canonical
       profile: code-api
-      required: false
     - name: ai.sideEffects
       type: array
+      authoring: authored
+      optionalIn: [code-api]
       definition: Side effects of calling this API endpoint.
       example:
         - Creates order record
@@ -1189,9 +1257,9 @@ mx:
       status: canonical
       profile:
         - code-api
-      required: false
     - name: documentType
       type: string
+      authoring: authored
       definition: >-
         Document classification within MX. Distinct from contentType (which is the cog/folder format). Values describe
         the document role: proposal, specification, manual, report, pitch, letter, interview, etc.
@@ -1199,456 +1267,549 @@ mx:
       profile: any
     - name: structure
       type: string
+      authoring: authored
       definition: Structural description of this cog. Enumerates the major sections or blocks the reader should expect.
       status: canonical
       profile: cog
     - name: access
       type: string
+      authoring: authored
       definition: 'Access level declaration. Values: public, internal, restricted, confidential.'
       status: canonical
       profile: cog
     - name: block
       type: string
+      authoring: authored
       definition: Block-type marker for inline content blocks within a cog.
       status: canonical
       profile: cog
     - name: clientId
       type: string
+      authoring: authored
       definition: Client identifier for audit/report infrastructure. Used in report file naming and cross-referencing.
       status: canonical
       profile: cog
     - name: founders
       type: string
+      authoring: authored
       definition: List of founding contributors or organisation founders.
       status: canonical
       profile: cog
     - name: file
       type: string
+      authoring: authored
       definition: Source file path reference. Points at the primary file this metadata describes.
       status: canonical
       profile: cog
     - name: cogMetadata
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: cog metadata.'
       status: canonical
       profile: cog
     - name: contentSummary
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: content summary.'
       status: canonical
       profile: cog
     - name: regeneration
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: regeneration.'
       status: canonical
       profile: cog
     - name: voice
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: voice.'
       status: canonical
       profile: cog
     - name: disclosureLevel
       type: string
+      authoring: authored
       definition: Information disclosure level for sensitive documents. Pre-NDA, post-NDA, public.
       status: canonical
       profile: cog
     - name: cogReference
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: cog reference.'
       status: canonical
       profile: cog
     - name: authorship
       type: string
+      inPlainWords: 'Its authorship is {value}.'
+      authoring: authored
+      requiredIn: [component]
       definition: 'Authorship classification. Values: solo, collaborative, generated, curated.'
       status: canonical
       profile: cog
     - name: services
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: services.'
       status: canonical
       profile: contact
     - name: portfolio
       type: string
+      authoring: authored
       definition: Portfolio reference. URL or path to a body of related work.
       status: canonical
       profile: contact
     - name: expertise
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: expertise.'
       status: canonical
       profile: contact
     - name: visibility
       type: string
+      authoring: authored
       definition: 'Content visibility classification. Values: public, internal, restricted, confidential.'
       status: canonical
       profile: contact
     - name: discoverable
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: discoverable.'
       status: canonical
       profile: contact
     - name: citable
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: citable.'
       status: canonical
       profile: contact
     - name: governance
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: governance.'
       status: canonical
       profile: cog
     - name: eventDate
       type: string
+      authoring: authored
       definition: event date. ISO 8601 format.
       status: canonical
       profile: event
     - name: estimatedPresentationTime
       type: string
+      authoring: authored
       definition: Estimated duration of a presentation in minutes.
       status: canonical
       profile: event
     - name: changes
       type: string
+      authoring: authored
       definition: 'Event/presentation metadata: changes.'
       status: canonical
       profile: event
     - name: coAuthor
       type: string
+      authoring: authored
       definition: Co-author name or identifier.
       status: canonical
       profile: event
     - name: focus
       type: string
+      authoring: authored
       definition: 'Event/presentation metadata: focus.'
       status: canonical
       profile: event
     - name: mxEnhancements
       type: string
+      authoring: authored
       definition: 'Event/presentation metadata: mx enhancements.'
       status: canonical
       profile: event
     - name: contentUrl
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: content url.'
       status: canonical
       profile: cog
     - name: mxAgentAction
       type: string
+      authoring: authored
       definition: 'Extended metadata field: mx agent action.'
       status: canonical
       profile: any
     - name: mxContext
       type: string
+      authoring: authored
       definition: 'Extended metadata field: mx context.'
       status: canonical
       profile: any
     - name: mxPriority
       type: string
+      authoring: authored
       definition: 'Extended metadata field: mx priority.'
       status: canonical
       profile: any
     - name: mxWhenToRead
       type: string
+      authoring: authored
       definition: 'Extended metadata field: mx when to read.'
       status: canonical
       profile: any
     - name: mxKeySections
       type: string-or-array
+      authoring: authored
       definition: mx key sections. String or array of values.
       status: canonical
       profile: any
     - name: lastModified
       type: string
+      authoring: authored
       definition: 'Extended metadata field: last modified.'
       status: canonical
       profile: any
     - name: relatedCommands
       type: string-or-array
+      authoring: authored
       definition: related commands. String or array of values.
       status: canonical
       profile: any
     - name: watchRegistry
       type: string
+      authoring: authored
       definition: 'Extended metadata field: watch registry.'
       status: canonical
       profile: any
     - name: keySections
       type: string-or-array
+      authoring: authored
       definition: key sections. String or array of values.
       status: canonical
       profile: any
     - name: watchesFiles
       type: string-or-array
+      authoring: authored
       definition: watches files. String or array of values.
       status: canonical
       profile: any
     - name: sections
       type: string
+      authoring: authored
       definition: 'Extended metadata field: sections.'
       status: canonical
       profile: any
     - name: trigger
       type: string
+      authoring: authored
       definition: 'Extended metadata field: trigger.'
       status: canonical
       profile: any
     - name: lastSync
       type: string
+      authoring: authored
       definition: 'Extended metadata field: last sync.'
       status: canonical
       profile: any
     - name: mxWatchRegistry
       type: string
+      authoring: authored
       definition: 'Extended metadata field: mx watch registry.'
       status: canonical
       profile: any
     - name: skillName
       type: string
+      authoring: authored
       definition: 'Extended metadata field: skill name.'
       status: canonical
       profile: any
     - name: skillVersion
       type: string
+      authoring: authored
       definition: 'Extended metadata field: skill version.'
       status: canonical
       profile: any
     - name: relatedSkills
       type: string
+      authoring: authored
       definition: 'Extended metadata field: related skills.'
       status: canonical
       profile: any
     - name: relatedDocuments
       type: string
+      authoring: authored
       definition: 'Extended metadata field: related documents.'
       status: canonical
       profile: any
     - name: seeAlso
       type: string
+      authoring: authored
       definition: 'Extended metadata field: see also.'
       status: canonical
       profile: any
     - name: companion
       type: string
+      authoring: authored
       definition: Reference to a companion document or resource that should be read alongside this one.
       status: canonical
       profile: any
     - name: longdescription
       type: string
+      authoring: authored
       definition: 'Extended metadata field: longdescription.'
       status: canonical
       profile: any
     - name: editor
       type: string
+      authoring: authored
       definition: Editor name or identifier. Person responsible for editorial review.
       status: canonical
       profile: any
     - name: readingTime
       type: string
+      authoring: authored
       definition: 'Extended metadata field: reading time.'
       status: canonical
       profile: any
     - name: coOwnership
       type: string
+      authoring: authored
       definition: 'Extended metadata field: co ownership.'
       status: canonical
       profile: any
     - name: state
       type: string
+      authoring: authored
       definition: 'Extended metadata field: state.'
       status: canonical
       profile: any
     - name: insight
       type: string
+      authoring: authored
       definition: 'Extended metadata field: insight.'
       status: canonical
       profile: any
     - name: template
       type: string
+      authoring: authored
       definition: 'Extended metadata field: template.'
       status: canonical
       profile: any
     - name: deliverables
       type: string
+      authoring: authored
       definition: List of deliverable outputs from this work item or project.
       status: canonical
       profile: cog
     - name: concepts
       type: string
+      authoring: authored
       definition: Key concepts this document covers. Array of concept names for discoverability.
       status: canonical
       profile: cog
     - name: commands
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: commands.'
       status: canonical
       profile: cog
     - name: generated
       type: boolean
+      authoring: authored
       definition: Whether generated. Boolean flag.
       status: canonical
       profile: cog
     - name: snapshot
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: snapshot.'
       status: canonical
       profile: cog
     - name: lastmod
       type: string
+      authoring: authored
       definition: 'Extended metadata field: lastmod.'
       status: canonical
       profile: any
     - name: keywords
       type: string
+      authoring: authored
       definition: 'Extended metadata field: keywords.'
       status: canonical
       profile: any
     - name: canonical
       type: string
+      authoring: authored
       definition: 'Extended metadata field: canonical.'
       status: canonical
       profile: any
     - name: aiContentPolicy
       type: string
+      authoring: authored
       definition: 'Extended metadata field: ai content policy.'
       status: canonical
       profile: any
     - name: aiFreshness
       type: string
+      authoring: authored
       definition: 'Extended metadata field: ai freshness.'
       status: canonical
       profile: any
     - name: aiAttribution
       type: string
+      authoring: authored
       definition: 'Extended metadata field: ai attribution.'
       status: canonical
       profile: any
     - name: co
       type: string
+      authoring: authored
       definition: 'Extended metadata field: co.'
       status: canonical
       profile: any
     - name: goal
       type: string
+      authoring: authored
       definition: 'Extended metadata field: goal.'
       status: canonical
       profile: any
     - name: demo
       type: string
+      authoring: authored
       definition: Demo or showcase reference. URL, path, or description of a demonstration for this content.
       status: canonical
       profile: any
     - name: archivedBy
       type: string
+      authoring: authored
       definition: 'Extended metadata field: archived by.'
       status: canonical
       profile: any
     - name: weekBoundary
       type: string
+      authoring: authored
       definition: 'Extended metadata field: week boundary.'
       status: canonical
       profile: any
     - name: styleRules
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: style rules.'
       status: canonical
       profile: cog
     - name: urgency
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: urgency.'
       status: canonical
       profile: cog
     - name: risk
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: risk.'
       status: canonical
       profile: cog
     - name: sopContentPolicy
       type: string
+      authoring: authored
       definition: 'Standard operating procedure: content policy. Defines the SOP aspect for this document or cog.'
       status: canonical
       profile: any
     - name: sopPreferredAccess
       type: string
+      authoring: authored
       definition: 'Standard operating procedure: preferred access. Defines the SOP aspect for this document or cog.'
       status: canonical
       profile: any
     - name: sopStructuredData
       type: string
+      authoring: authored
       definition: 'Standard operating procedure: structured data. Defines the SOP aspect for this document or cog.'
       status: canonical
       profile: any
     - name: siteName
       type: string
+      authoring: authored
       definition: 'Extended metadata field: site name.'
       status: canonical
       profile: any
     - name: decisionStatus
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: decision status.'
       status: canonical
       profile: cog
     - name: difficulty
       type: string
+      authoring: authored
       definition: 'Extended metadata field: difficulty.'
       status: canonical
       profile: any
     - name: entityType
       type: string
+      authoring: authored
       definition: 'Extended metadata field: entity type.'
       status: canonical
       profile: any
     - name: communityAuthors
       type: string-or-array
+      authoring: authored
       definition: Array of community contributors to this document.
       status: canonical
       profile: any
     - name: contributions
       type: string
+      authoring: authored
       definition: Array of contribution descriptions for this document.
       status: canonical
       profile: any
     - name: contributionProcess
       type: string
+      authoring: authored
       definition: Description of the process for contributing to this document or project.
       status: canonical
       profile: any
     - name: openSource
       type: string
+      authoring: authored
       definition: 'Extended metadata field: open source.'
       status: canonical
       profile: any
     - name: evolvingDocument
       type: boolean
+      authoring: authored
       definition: Boolean. Whether this document is expected to change frequently.
       status: canonical
       profile: any
     - name: versionControlled
       type: string
+      authoring: authored
       definition: 'Extended metadata field: version controlled.'
       status: canonical
       profile: any
     - name: principles
       type: string
+      authoring: authored
       definition: 'Extended metadata field: principles.'
       status: canonical
       profile: any
     - name: canonicalUrl
       type: string
+      authoring: authored
       definition: 'Extended metadata field: canonical url.'
       status: canonical
       profile: any
     - name: metadataPhilosophy
       type: string
+      authoring: authored
       definition: 'Extended metadata field: metadata philosophy.'
       status: canonical
       profile: any
     - name: imagesAudited
       type: number
+      authoring: authored
       definition: Count of images analysed during the audit.
       status: canonical
       profile: contact
     - name: geoVisibilityScore
       type: number
+      authoring: authored
       definition: >-
         GEO (Generative Engine Optimisation) visibility score (0-100). Measures likelihood of content appearing in
         AI-generated search results.
@@ -1656,71 +1817,94 @@ mx:
       profile: any
     - name: geoCategoryMentions
       type: string
+      authoring: authored
       definition: Count of category-level mentions in GEO analysis. How often the content is referenced by topic.
       status: canonical
       profile: any
     - name: geoCitationAccuracy
       type: string
+      authoring: authored
       definition: GEO citation accuracy score (0-100). Whether AI-generated citations of this content are factually correct.
       status: canonical
       profile: any
     - name: geoCompetitorGap
       type: string
+      authoring: authored
       definition: GEO competitor gap score. Measures the visibility difference between this content and competing sources.
       status: canonical
       profile: any
     - name: governedBy
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: governed by.'
       status: canonical
       profile: cog
     - name: supersedes
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: supersedes.'
       status: canonical
       profile: cog
     - name: pitchType
       type: string
+      inPlainWords: 'It is a {value} pitch.'
+      authoring: authored
+      requiredIn: [pitch]
       definition: 'Classification of the pitch approach. Values: investor, partner, client, advisory.'
       status: canonical
       profile: pitch
     - name: presentationFor
       type: string
+      inPlainWords: 'It is presented to {value}.'
+      authoring: authored
+      recommendedIn: [pitch]
       definition: Target audience for a presentation or talk. Freetext.
       status: canonical
       profile: pitch
     - name: pitchAsk
       type: string
+      inPlainWords: 'The ask: {value}'
+      authoring: authored
+      recommendedIn: [pitch]
       definition: The specific ask or call-to-action in a pitch deck or proposal.
       status: canonical
       profile: pitch
     - name: valuation
       type: string
+      authoring: authored
+      optionalIn: [pitch]
       definition: Company or product valuation figure. Used in investor pitch metadata.
       status: canonical
       profile: pitch
     - name: marketSize
       type: number
+      authoring: authored
+      optionalIn: [pitch]
       definition: Total addressable market size. Used in pitch/investor context.
       status: canonical
       profile: pitch
     - name: arrProjection
       type: string
+      authoring: authored
+      optionalIn: [pitch]
       definition: Annual Recurring Revenue projection. Financial metric for investor materials.
       status: canonical
       profile: pitch
     - name: logo
       type: string
+      authoring: authored
       definition: Logo URL or file path for an organisation or product.
       status: canonical
       profile: any
     - name: partnershipValue
       type: string
+      authoring: authored
       definition: Estimated value of a partnership. Financial or strategic metric.
       status: canonical
       profile: contact
     - name: x-mx-canonicalSource
       type: string
+      authoring: authored
       definition: The source a generated or mirrored document is derived from, as a repo-relative path or a statement naming the generator, so a reader edits the source and never the artefact.
       example: mx-canon/mx-maxine-lives/pim/records/
       notes: >-
@@ -1730,141 +1914,169 @@ mx:
       profile: cog
     - name: prerequisites
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: prerequisites.'
       status: canonical
       profile: cog
     - name: installSteps
       type: string-or-array
+      authoring: authored
       definition: install steps. String or array of values.
       status: canonical
       profile: cog
     - name: verify
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: verify.'
       status: canonical
       profile: cog
     - name: mxEnvironment
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: mx environment.'
       status: canonical
       profile: cog
     - name: timestamp
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: timestamp.'
       status: canonical
       profile: contact
     - name: validationTarget
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: validation target.'
       status: canonical
       profile: contact
     - name: filesChecked
       type: number
+      authoring: authored
       definition: Count of files. Integer.
       status: canonical
       profile: contact
     - name: filesValid
       type: number
+      authoring: authored
       definition: 'Contact/identity metadata: files valid.'
       status: canonical
       profile: contact
     - name: filesInvalid
       type: number
+      authoring: authored
       definition: 'Contact/identity metadata: files invalid.'
       status: canonical
       profile: contact
     - name: totalErrors
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: total errors.'
       status: canonical
       profile: contact
     - name: totalWarnings
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: total warnings.'
       status: canonical
       profile: contact
     - name: durationSeconds
       type: number
+      authoring: authored
       definition: Duration in seconds. Used for session reports and media.
       status: canonical
       profile: contact
     - name: validationStatus
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: validation status.'
       status: canonical
       profile: contact
     - name: prospect
       type: string
+      authoring: authored
       definition: CRM prospect stage classification. Tracks where a contact sits in the sales pipeline.
       status: canonical
       profile: report
     - name: workEmail
       type: string
+      authoring: authored
       definition: Professional email address. Distinct from personal email.
       status: canonical
       profile: contact
     - name: contractEnd
       type: string
+      authoring: authored
       definition: Contract end date. ISO 8601. CRM/contact metadata.
       status: canonical
       profile: contact
     - name: github
       type: string
+      authoring: authored
       definition: GitHub username or profile URL.
       status: canonical
       profile: contact
     - name: twitter
       type: string
+      authoring: authored
       definition: Twitter/X handle or profile URL.
       status: canonical
       profile: contact
     - name: emoji
       type: string
+      authoring: authored
       definition: Representative emoji for this identity or entity.
       status: canonical
       profile: contact
     - name: amazon
       type: string
+      authoring: authored
       definition: Amazon author page or product URL.
       status: canonical
       profile: contact
     - name: paternity
       type: string
+      authoring: authored
       definition: Family relationship classification. CRM/contact context.
       status: canonical
       profile: contact
     - name: knownAs
       type: string
+      authoring: authored
       definition: Informal name, nickname, or professional title (e.g. "The AEM Guy").
       status: canonical
       profile: contact
     - name: site
       type: string
+      authoring: authored
       definition: 'Report infrastructure metadata: site.'
       status: canonical
       profile: report
     - name: business
       type: string
+      authoring: authored
       definition: 'Report infrastructure metadata: business.'
       status: canonical
       profile: report
     - name: overallScore
       type: number
+      authoring: authored
       definition: Weighted aggregate of all individual audit scores. Summary metric for report headers.
       status: canonical
       profile: report
     - name: securityScore
       type: number
+      authoring: authored
       definition: Security posture score (0-100). Evaluates headers (CSP, HSTS, X-Frame-Options), mixed-content, and protocol.
       status: canonical
       profile: report
     - name: totalPa11yIssues
       type: string
+      authoring: authored
       definition: Count of Pa11y accessibility issues found across all audited pages.
       status: canonical
       profile: report
     - name: a11yIssues
       type: number
+      authoring: authored
       definition: >-
         Raw count of WCAG AA accessibility issues found across all audited pages. Read by the audit-delta cross-run
         comparison feature to report the "Change Since Last Audit" section.
@@ -1872,11 +2084,13 @@ mx:
       profile: report
     - name: metadataStackCompleteness
       type: string
+      authoring: authored
       definition: Metadata stack completeness score (0-100). Measures how many MX-recommended metadata layers are present.
       status: canonical
       profile: report
     - name: structuredDataQuality
       type: string
+      authoring: authored
       definition: >-
         Structured-data quality score (0-100). Measures Schema.org completeness, required-property coverage, and nesting
         depth.
@@ -1884,26 +2098,31 @@ mx:
       profile: report
     - name: agentReadability
       type: string
+      authoring: authored
       definition: Agent readability assessment. How easily an AI agent can parse and act on this content.
       status: canonical
       profile: report
     - name: mxStackScore
       type: number
+      authoring: authored
       definition: MX stack compliance score (0-100). Similar to metadataStackCompleteness but weighted by field importance.
       status: canonical
       profile: report
     - name: pipelineSurvivabilityScore
       type: number
+      authoring: authored
       definition: Pipeline survivability score (0-100). Numeric form of pipelineSurvivability.
       status: canonical
       profile: report
     - name: agentReadabilityScore
       type: number
+      authoring: authored
       definition: Agent readability score (0-100). Numeric form of agentReadability assessment.
       status: canonical
       profile: report
     - name: htmlPagesAudited
       type: number
+      authoring: authored
       definition: >-
         Count of HTML pages the audit run actually reached and analysed. The report's canonical page denominator:
         every page-relative figure in the deliverable reconciles to it.
@@ -1915,9 +2134,9 @@ mx:
       profile:
         - audit
         - report
-      required: optional
     - name: llmServedHtmlScore
       type: number
+      authoring: authored
       definition: >-
         AI-suitability score (0-100) computed on the served HTML, the bytes an agent receives before any client-side
         JavaScript runs.
@@ -1929,9 +2148,9 @@ mx:
       profile:
         - audit
         - report
-      required: optional
     - name: auditCommand
       type: string
+      authoring: authored
       definition: >-
         The one-line command that re-runs the audit which produced this report, captured at collect time so an
         operator never has to reconstruct the entry URL and flags.
@@ -1943,9 +2162,9 @@ mx:
       profile:
         - audit
         - report
-      required: optional
     - name: pipelineVersion
       type: string
+      authoring: authored
       definition: Version of the audit pipeline that produced the report, read from the audit package version.
       example: '2.4.0'
       notes: >-
@@ -1955,14 +2174,46 @@ mx:
       profile:
         - audit
         - report
-      required: optional
+    - name: probeVersions
+      type: string
+      authoring: authored
+      inPlainWords: 'It was measured with these probe versions: {value}.'
+      definition: >-
+        The version of each cached origin probe the audit ran, as comma-separated name=version pairs sorted by probe
+        name.
+      example: 'agent-nav.json=1,platform.json=4,wellknown.json=10'
+      notes: >-
+        Read from the audit pipeline's probe cache versions. A probe's detection logic can change without a pipeline
+        version bump, so a cross-run comparison credits a score movement to the site only when both runs record the
+        same probe versions.
+      status: canonical
+      profile:
+        - audit
+        - report
+    - name: pageSetSha256
+      type: string
+      authoring: authored
+      inPlainWords: 'The audited page set hashes to {value}.'
+      definition: >-
+        SHA-256 of the de-duplicated, sorted list of URLs the audit examined, joined one per line, as 64 lowercase
+        hex characters.
+      example: '0b9f1e7217be6fca16bb151653143116cc06a270e3244b2bda582db9d98f4092'
+      notes: >-
+        Two runs can examine the same number of pages and still examine different pages, so a cross-run comparison
+        reports a changed page set rather than crediting a score movement to the site.
+      status: canonical
+      profile:
+        - audit
+        - report
     - name: mxStackCompleteness
       type: string
+      authoring: authored
       definition: MX stack completeness percentage. Ratio of present-to-expected MX metadata fields.
       status: canonical
       profile: report
     - name: pipelineSurvivability
       type: string
+      authoring: authored
       definition: >-
         Pipeline survivability assessment. Whether content survives transformation through AI pipelines without data
         loss.
@@ -1970,6 +2221,7 @@ mx:
       profile: report
     - name: commerceVisibilityScore
       type: number
+      authoring: authored
       definition: >-
         Commerce visibility score (0-100). How well e-commerce content (products, offers, pricing) is surfaced to
         shopping agents.
@@ -1977,236 +2229,283 @@ mx:
       profile: report
     - name: catalogueVisibilityAnswered
       type: string
+      authoring: authored
       definition: Whether the audit addressed catalogue/product-listing visibility. Boolean flag.
       status: canonical
       profile: report
     - name: templateSelection
       type: string
+      authoring: authored
       definition: Template file used to generate this report. Path relative to mx-audit/templates/.
       status: canonical
       profile: report
     - name: variables
       type: string
+      authoring: authored
       definition: Template variables for report generation. Object of key-value pairs passed to the infill pipeline.
       status: canonical
       profile: report
     - name: canonicalReference
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: canonical reference.'
       status: canonical
       profile: contact
     - name: opportunity
       type: string
+      authoring: authored
       definition: 'Contact/identity metadata: opportunity.'
       status: canonical
       profile: contact
     - name: existingConnection
       type: string
+      authoring: authored
       definition: Description of pre-existing relationship with a contact or organisation.
       status: canonical
       profile: report
     - name: topics
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: topics.'
       status: canonical
       profile: cog
     - name: speakers
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: speakers.'
       status: canonical
       profile: cog
     - name: networking
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: networking.'
       status: canonical
       profile: cog
     - name: product
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: product.'
       status: canonical
       profile: cog
     - name: features
       type: string
+      authoring: authored
       definition: Feature list. Array of capability descriptions for a tool, product, or service.
       status: canonical
       profile: cog
     - name: warranty
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: warranty.'
       status: canonical
       profile: cog
     - name: maintenance
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: maintenance.'
       status: canonical
       profile: cog
     - name: sustainability
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: sustainability.'
       status: canonical
       profile: cog
     - name: dietary
       type: string
+      authoring: authored
       definition: Dietary classification. Vegetarian, vegan, gluten-free, etc.
       status: canonical
       profile: cog
     - name: specialities
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: specialities.'
       status: canonical
       profile: cog
     - name: cuisine
       type: string
+      authoring: authored
       definition: Cuisine type. Used for restaurant/venue metadata in demo content.
       status: canonical
       profile: cog
     - name: dietaryOptions
       type: string-or-array
+      authoring: authored
       definition: Array of dietary options available. Restaurant/venue metadata.
       status: canonical
       profile: cog
     - name: priceRange
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: price range.'
       status: canonical
       profile: cog
     - name: booking
       type: string
+      authoring: authored
       definition: Booking or reservation reference. URL or identifier.
       status: canonical
       profile: cog
     - name: newMacPrerequisites
       type: string-or-array
+      authoring: authored
       definition: new mac prerequisites. String or array of values.
       status: canonical
       profile: cog
     - name: newMacSteps
       type: string-or-array
+      authoring: authored
       definition: new mac steps. String or array of values.
       status: canonical
       profile: cog
     - name: certification
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: certification.'
       status: canonical
       profile: cog
     - name: defaultAuthor
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: default author.'
       status: canonical
       profile: cog
     - name: paths
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: paths.'
       status: canonical
       profile: cog
     - name: social
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: social.'
       status: canonical
       profile: cog
     - name: defaults
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: defaults.'
       status: canonical
       profile: cog
     - name: interview
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: interview.'
       status: canonical
       profile: cog
     - name: marp
       type: string
+      authoring: authored
       definition: Marp presentation framework flag. Boolean or configuration object.
       status: canonical
       profile: event
     - name: paginate
       type: string
+      authoring: authored
       definition: 'Event/presentation metadata: paginate.'
       status: canonical
       profile: event
     - name: backgroundColor
       type: string
+      authoring: authored
       definition: Background colour for presentations or documents. Hex, RGB, or named.
       status: canonical
       profile: event
     - name: color
       type: string
+      authoring: authored
       definition: Primary brand colour. Hex, RGB, or named colour.
       status: canonical
       profile: event
     - name: outputs
       type: string
+      authoring: authored
       definition: 'Event/presentation metadata: outputs.'
       status: canonical
       profile: event
     - name: skillsUsed
       type: string
+      authoring: authored
       definition: Array of Claude Code skills invoked during a session. Used in session/completion reports.
       status: canonical
       profile: report
     - name: toolsUsed
       type: string
+      authoring: authored
       definition: Array of tools exercised during a session (e.g. Bash, Edit, Grep). Session metadata.
       status: canonical
       profile: report
     - name: sessionType
       type: string
+      authoring: authored
       definition: 'Session classification for directors reports. Values: morning, afternoon, evening, full-day.'
       status: canonical
       profile: report
     - name: reviewedBy
       type: string
+      authoring: authored
       definition: Name or identifier of the person who reviewed this document or report.
       status: canonical
       profile: report
     - name: manuals
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: manuals.'
       status: canonical
       profile: cog
     - name: sortOrder
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: sort order.'
       status: canonical
       profile: cog
     - name: subSort
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: sub sort.'
       status: canonical
       profile: cog
     - name: output
       type: string
+      authoring: authored
       definition: 'Cog operational metadata: output.'
       status: canonical
       profile: cog
     - name: mx.contact
       type: string-or-object
+      authoring: authored
       definition: Nested contact reference inside mx block (email or object). Complements top-level contact field.
       status: canonical
       profile: contact
     - name: mx.scope
       type: string-or-object
+      authoring: authored
       definition: Scope declaration inside mx block. Used by routing and cog definitions to declare applicability.
       status: canonical
       profile: cog
     - name: mx.cog
       type: object
+      authoring: authored
       definition: Cog metadata block inside mx namespace. Contains cog-specific configuration.
       status: canonical
       profile: cog
     - name: mx.attestation
       type: object
+      authoring: authored
       definition: Attestation block inside mx namespace. Provenance, authorship, and verification claims.
       status: canonical
       profile: cog
     - name: mx.routing
       type: object
+      authoring: authored
       definition: Routing table inside mx namespace. Used by Reginald to direct requests to handlers.
       status: canonical
       profile: cog
     - name: x-mx-frictionLog
       type: array
+      authoring: authored
       definition: >-
         The friction classes an action cog knows it can produce when run. Each entry declares id, when (trigger),
         signal (how it is detected), and severity (error, warn, info). Design-time declaration; runtime friction is
@@ -2217,10 +2516,10 @@ mx:
         mx-canon/ssot/schemas/friction-resolver.v1.schema.json; gated by scripts/check-friction-resolver.cjs.
       status: canonical
       profile: x-mx-public
-      required: true
       context: 'Declared under the mx block on action cogs so every executable cog states its failure modes machine-readably.'
     - name: x-mx-resolver
       type: array
+      authoring: authored
       definition: >-
         One owner-routed disposition per declared friction. Each entry declares frictionId, owner (ours, site-owner,
         operator, environment, upstream), action (auto-fix, manual-fix, propose, update-detector, report, skip), and
@@ -2231,10 +2530,12 @@ mx:
         site-owner becomes a detector plus a report, never a fix on their behalf. Reuses audit-findings.v1 vocabulary.
       status: canonical
       profile: x-mx-public
-      required: true
       context: 'Declared under the mx block on action cogs so every friction has a machine-readable, owner-routed resolution.'
     - name: x-mx-contentState
       type: string
+      authoring: defaulted
+      inPlainWords: 'Its publishing state is {value}.'
+      requiredIn: [blog]
       definition: >-
         Content workflow position. Distinct from status - x-mx-contentState tracks where content is in the editorial
         pipeline and drives publish routing (draft routes to the noindex draft tree, published to the live tree).
@@ -2248,13 +2549,16 @@ mx:
       notes: >-
         CogNovaMX editorial-pipeline concept, not a Gathering open-standard field. The enum matches the routing
         generator, its single consumer. The bare `contentState` name is a deprecated synonym; see fields-data.yaml's
-        deprecations table.
+        deprecations table. Required in the blog profile, so it is published metadata: the ADR 63 strip keeps a
+        prefixed key an open profile requires, and a generated draft or live page carries its state (draft or
+        published) for the reader that inspects it. Written by the heal from the page-path rules (draft, or
+        published when the live page exists), so it is not on the author's checklist.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on blog posts and other Intent-CMS-managed content to drive draft-vs-published routing.'
     - name: x-mx-sessionState
       type: string
+      authoring: authored
       definition: >-
         Lifecycle position of a worktree session record. open means a session holds the worktree now; paused means the
         worktree still exists with no session in it; closed means the work is finished and the worktree may be removed.
@@ -2269,19 +2573,19 @@ mx:
         hooks own the value; a human sets closed through npm run fleet:session:close.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a worktree session record (handover/sessions/<name>.cog.md) so any machine can tell a live worktree from a spent one.'
     - name: x-mx-sessionId
       type: string
+      authoring: authored
       definition: The assistant session identifier that last wrote this session record, so a record can be traced to the conversation that produced it.
       example: 1100e8d9
       notes: Written by the fleet session hooks from the harness payload; unknown when the harness supplies none.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a worktree session record to bind it to one session rather than one machine.'
     - name: x-mx-operator
       type: string
+      authoring: authored
       definition: The operator slug that opened a worktree session, resolved from the git email through the operator register.
       example: tom
       notes: >-
@@ -2289,10 +2593,10 @@ mx:
         no register entry matches, which is a gap to fix rather than a value to invent.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a worktree session record so a collision names who holds the worktree.'
     - name: x-mx-machineId
       type: string
+      authoring: authored
       definition: The pinned machine slug that opened a worktree session, the same enduring identity the machine identity cogs key on.
       example: host-ad4c56ff-6136-52f3-986d-7093105c90c9
       notes: >-
@@ -2303,38 +2607,38 @@ mx:
         identity cog, which holds that machine's observed facts rather than a reference to it.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a worktree session record so the fleet index can group worktrees by machine.'
     - name: x-mx-worktree
       type: string
+      authoring: authored
       definition: Absolute path of the worktree a session record belongs to, as git reports it on the machine that wrote the record.
       example: /Users/tom/GitHub/MX-hub/.claude/worktrees/fleet-sessions
       notes: Machine-specific by nature; a reader on another machine treats it as a label, never a path to open.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a worktree session record so an index entry and its record can be matched without re-deriving the path.'
     - name: x-mx-branch
       type: string
+      authoring: authored
       definition: The git branch checked out in the worktree a session record belongs to.
       example: worktree-fleet-sessions
       notes: Recorded at creation; the fleet index carries the live value, which the branch may outgrow if the worktree switches.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a worktree session record so the fleet index reads as branches rather than paths.'
     - name: x-mx-artefact
       type: string
+      authoring: authored
       definition: >-
         What the worktree exists to produce, in the operator's own words - a pull request, a report, a feature.
       example: PR 482
       notes: Defaults to the worktree name; an operator replaces it with the real artefact so the fleet index reads as work rather than slugs.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a worktree session record so another machine can tell what a worktree is for without opening it.'
     - name: x-mx-lastActive
       type: string
+      authoring: authored
       definition: ISO 8601 instant when a worktree session was last active, refreshed on every save and close.
       example: '2026-09-05T20:00:00Z'
       notes: >-
@@ -2342,10 +2646,47 @@ mx:
         it, so a hand-typed value would launder an abandoned worktree into a live one.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a worktree session record so the fleet index can sort and age its entries.'
+    - name: x-mx-sessionRef
+      type: string
+      authoring: authored
+      inPlainWords: 'It is the working memory of the session recorded at {value}.'
+      definition: Repository-relative path of the worktree session record a session memory cog belongs to.
+      example: handover/sessions/fleet-sessions.cog.md
+      notes: Set when the memory cog is created by scripts/lib/session-memory.cjs; the memory cog sits beside that record and closes with it.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a session memory cog (handover/sessions/<name>.memory.cog.md) so the memory and its session record can be matched without re-deriving the path.'
+    - name: x-mx-memoryState
+      type: string
+      authoring: authored
+      inPlainWords: 'Its memory is {value}.'
+      definition: >-
+        Lifecycle position of a session memory cog. open means the session is still adding and curating entries; folded
+        means the session closed and the memory's hashes and statuses were written into the session's AI provenance
+        sidecar.
+      example: open
+      validValues:
+        - open
+        - folded
+      notes: Set by scripts/lib/session-memory.cjs; a folded memory cog is not appended to again.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a session memory cog so a reader can tell working memory from memory already folded into provenance.'
+    - name: x-mx-memoryAgent
+      type: string
+      authoring: authored
+      inPlainWords: 'It holds the working memory of the agent {value}.'
+      definition: The agent identity that writes a session memory cog, so a multi-agent session keeps one memory cog per agent.
+      example: maxine
+      notes: Defaults to maxine. Reconciliation across agents' memory cogs pairs entries by this field and the entry source.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a session memory cog so the reconciliation pass can tell whose memory an entry came from.'
     - name: x-mx-adr
       type: string-or-object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Architecture Decision Record reference. Links to the ADR that governs this cog's architectural choices.
       example: mx-canon/mx-maxine-lives/registers/ADR/2026-02-13-mx-web-architecture.cog.md
       notes: >-
@@ -2354,10 +2695,11 @@ mx:
         deprecations table.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on cog files whose architecture is governed by a recorded ADR.'
     - name: x-mx-ndr
       type: string-or-object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Naming Decision Record reference. Links to the NDR that governs naming conventions.
       example: mx-canon/mx-maxine-lives/registers/NDR/2026-02-16-camelcase-naming.cog.md
       notes: >-
@@ -2365,10 +2707,11 @@ mx:
         a deprecated synonym; see fields-data.yaml's deprecations table.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on cog files whose naming conventions are governed by a recorded NDR.'
     - name: x-mx-bdr
       type: string-or-object
+      authoring: authored
+      optionalIn: [cog, action]
       definition: Business Decision Record reference. Links to the BDR that governs business decisions.
       example: mx-canon/mx-maxine-lives/registers/BDR/2026-02-28-company-rename.cog.md
       notes: >-
@@ -2376,10 +2719,335 @@ mx:
         a deprecated synonym; see fields-data.yaml's deprecations table.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on cog files whose scope is governed by a recorded Business Decision Record.'
+    - name: x-mx-cogRole
+      type: string
+      authoring: authored
+      inPlainWords: 'Its role in the estate is {value}.'
+      optionalIn: [cog, action]
+      definition: The job a cog does inside the estate, from a controlled vocabulary; one role per cog.
+      example: guide
+      validValues: [architecture, guide, sop, explainer, notes, tool, prd, reference, definition, template, method, domain-discipline, overview, building-brief, routing, control-plane, example, policy, ubercog, domaincog, obsession]
+      notes: >-
+        The vocabulary's single source is COG_ROLES in scripts/lib/cog-subtype.cjs, which the frontmatter validator
+        enforces at write time; tests/test-cog-templates.js fails if this list and COG_ROLES differ. Each role has a
+        template in mx-canon/ssot/templates/ (npm run cog:new -- --list). ubercog is reserved for UBERCOG.cog.md.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a cog whose role a graph query or a checker relies on.'
+    - name: x-mx-domainScope
+      type: array
+      authoring: authored
+      inPlainWords: 'As a domain briefing it consolidates {value}.'
+      optionalIn: [cog]
+      definition: The domain path segments a domaincog consolidates and anchors in the ubercog chain.
+      example: [products]
+      notes: >-
+        Read by check-ubercog-chain (Gate 64) and its backfill to resolve a cog's partOf anchor. Declared only on a
+        domaincog (x-mx-cogRole domaincog).
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a domaincog.'
+    - name: x-mx-obsession
+      type: object
+      authoring: authored
+      inPlainWords: 'It keeps a generated file in step with its source: {value}.'
+      optionalIn: [cog]
+      definition: One source-to-dependent lockstep and the command that regenerates the dependent.
+      example: '{sources: [mx-canon/ssot/principles.cog.md], dependents: [mx-canon/ssot/principles-index.json], regen: [npm, run, "principles:sync"], autoRegen: false}'
+      notes: >-
+        Members sources, dependents, regen (an argv list) and autoRegen. Enforced only on a cog whose x-mx-cogRole is
+        obsession, by scripts/lib/obsessions.cjs; see scripts/cogs/what-is-an-obsession.cog.md.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on an obsession cog.'
+    - name: x-mx-blockContent
+      type: string-or-object
+      authoring: authored
+      inPlainWords: 'Its blocks carry this content: {value}.'
+      optionalIn: [cog]
+      definition: Content a cog's blocks carry in the frontmatter itself - a prose block's source, a definition's standards, an essence's type.
+      example: '[{prose: {source: README.md, description: "The repository overview."}}, {essence: {type: license, spdx: MIT}}]'
+      notes: >-
+        Holds payloads the core blocks field cannot: blocks only names the block types present (a closed list),
+        while this field carries what a block declares. x-mx-blocks was the former name for both; its list form
+        moved to blocks and its payload form here (scripts/migrate-x-mx-blocks.cjs).
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a cog whose blocks are described in its frontmatter.'
+    - name: x-mx-policyScope
+      type: object
+      authoring: authored
+      inPlainWords: 'It governs this scope: {value}.'
+      optionalIn: [cog]
+      definition: The scope a policy cog governs, its boundary type, and the invariants that must hold inside it.
+      example: '{scope: [mx-reginald/**], boundaryType: read-only, invariants: ["Nothing here is edited by hand."]}'
+      notes: >-
+        Members scope (repo-root-relative globs), boundaryType (terminal-consumer, pass-through, generated-output,
+        read-only, protected), invariants, permittedOperations, forbiddenOperations, promotedFrom and enforcedBy.
+        A different item from the core policy field (content handling rules for agents, inherited through
+        effective-doc resolution); x-mx-policy is its deprecated former name.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a policy cog.'
+    - name: x-mx-persona
+      type: object
+      authoring: authored
+      inPlainWords: 'It defines the persona {value}.'
+      optionalIn: [cog]
+      definition: The identity and operating contract of a named persona; the cog is the persona, so nothing undeclared may be invented.
+      example: '{name: Maxine, type: assistant, operator: CogNovaMX, scope: [mx-hub]}'
+      notes: Members name, type (agent, assistant, registry, reviewer, other), operator and scope, plus the persona template's further members.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a persona cog.'
+    - name: x-mx-manifest
+      type: object
+      authoring: authored
+      inPlainWords: 'It lists the members of a subsystem: {value}.'
+      optionalIn: [cog]
+      definition: Every member cog of one subsystem with its role, so a reader discovers them without walking the tree.
+      example: '{subsystem: audit, entryPoint: mx-audit, authorityCog: mx-audit-architecture, members: [{cogId: mx-audit, path: scripts/cogs/mx-audit.cog.md}]}'
+      notes: Members subsystem, entryPoint, authorityCog and members (each with cogId, path and role).
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a manifest cog.'
+    - name: x-mx-assessment
+      type: object
+      authoring: authored
+      inPlainWords: 'It records a readiness assessment: {value}.'
+      optionalIn: [cog, audit]
+      definition: A machine-readiness verdict for a named subject and the date it was conducted.
+      example: '{subject: example.com, assessmentType: site-audit, conductedDate: 2026-06-18, assessor: Tom Cranstoun, lifecycle: draft, overallBand: partial}'
+      notes: >-
+        Members subject, assessmentType (mx-readiness, repo-audit, site-audit, accessibility, ai-agent-compatibility),
+        conductedDate, assessor, lifecycle and overallBand (machine-ready, mostly-ready, partial, machine-opaque).
+        Per-dimension scores travel beside it in x-mx-scores.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on an assessment cog.'
+    - name: x-mx-scores
+      type: array
+      authoring: authored
+      inPlainWords: 'Its assessment scores are {value}.'
+      optionalIn: [cog, audit]
+      definition: The per-dimension scores behind an assessment's overall band.
+      example: '[{dimension: metadata, score: 72, band: medium, summary: "Most pages carry descriptions."}]'
+      notes: Each entry carries dimension, score (0-100), band (high, medium, low) and a one-sentence summary.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared beside x-mx-assessment.'
+    - name: x-mx-benchmark
+      type: object
+      authoring: authored
+      inPlainWords: 'It records a benchmark: {value}.'
+      optionalIn: [cog]
+      definition: A baseline measurement, its pass and fail criteria, and how to reproduce or challenge it.
+      example: '{metric: lcp, baselineValue: 1800, unit: ms, passCriteria: value < 2500, failCriteria: value > 4000, measuredDate: 2026-06-18}'
+      notes: Members metric, baselineValue, unit, passCriteria, failCriteria, measuredDate, and the reproduction and history members in the template.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a benchmark cog.'
+    - name: x-mx-proposal
+      type: object
+      authoring: authored
+      inPlainWords: 'It is a Gathering proposal: {value}.'
+      optionalIn: [cog]
+      definition: The identity and review stage of a pre-ratification Gathering proposal.
+      example: '{proposalId: mx-prop-0001, shortTitle: corroboration, stage: review, proposer: Tom Cranstoun, proposedDate: 2026-06-18}'
+      notes: Members proposalId, shortTitle, stage (proposed, review, consensus, ratified, withdrawn), proposer, proposedDate and reviewDeadline. A ratified standard becomes a separate cogs-type cog.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a Gathering proposal cog.'
+    - name: x-mx-govRef
+      type: object
+      authoring: authored
+      inPlainWords: 'Its governing documents are {value}.'
+      optionalIn: [cog]
+      definition: The governing documents of a product requirements document, by path.
+      example: '{prd: mx-canon/mx-os/intent-cms-prd.cog.md, architecture: mx-canon/ssot/architecture/llms-txt-management.cog.md}'
+      notes: Members prd (the PRD's own path) and architecture (its architecture cog, omitted until one exists).
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a PRD cog, beside x-mx-prdState.'
+    - name: x-mx-collaborateThread
+      type: string
+      authoring: authored
+      inPlainWords: 'It belongs to the collaboration thread {value}.'
+      optionalIn: [cog, contact]
+      definition: The slug of the collaboration thread a control cog or message belongs to.
+      example: which-machine-is-host-75f472d6
+      notes: Equal to the thread's folder name under collaborate/. Read by scripts/cockpit/collaborations.js.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration thread control cog and on every message in it.'
+    - name: x-mx-collaborateParticipants
+      type: array
+      authoring: authored
+      inPlainWords: 'The thread is between {value}.'
+      optionalIn: [cog]
+      definition: The profile handles taking part in a collaboration thread.
+      example: [tom-cranstoun, scott-mcgregor]
+      notes: A handle is a profile filename under collaborate/_users/ without .cog.md.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration thread control cog.'
+    - name: x-mx-collaborateAgentEnabled
+      type: boolean
+      authoring: authored
+      inPlainWords: 'Agent replies are enabled in the thread: {value}.'
+      optionalIn: [cog]
+      definition: Whether Maxine may write agent replies in the thread when tagged.
+      example: true
+      validValues: [true, false]
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration thread control cog.'
+    - name: x-mx-collaborateMessageCount
+      type: number
+      authoring: authored
+      inPlainWords: 'The thread holds {value} messages.'
+      optionalIn: [cog]
+      definition: The number of numbered message cogs in the thread.
+      example: 2
+      notes: Bumped by each reply; a count below the messages on disk is the thread-counters-drift friction in scripts/cogs/collaborate.cog.md.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration thread control cog.'
+    - name: x-mx-collaborateLastActivity
+      type: date
+      authoring: authored
+      inPlainWords: 'The thread was last active on {value}.'
+      optionalIn: [cog]
+      definition: The ISO 8601 date of the thread's latest message.
+      example: 2026-10-09
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration thread control cog.'
+    - name: x-mx-collaborateFrom
+      type: string
+      authoring: authored
+      inPlainWords: 'The message is from {value}.'
+      optionalIn: [contact]
+      definition: The profile handle of the message's author.
+      example: tom-cranstoun
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration message (type direct-message).'
+    - name: x-mx-collaborateTo
+      type: array
+      authoring: authored
+      inPlainWords: 'The message is addressed to {value}.'
+      optionalIn: [contact]
+      definition: The profile handles a message is addressed to; an empty list broadcasts to every participant.
+      example: [scott-mcgregor]
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration message.'
+    - name: x-mx-collaborateReplyTo
+      type: string
+      authoring: authored
+      inPlainWords: 'It answers message {value}.'
+      optionalIn: [contact]
+      definition: The sequence of the message this one answers, or null on a thread's opening message.
+      example: '"001"'
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration message.'
+    - name: x-mx-collaborateSequence
+      type: string
+      authoring: authored
+      inPlainWords: 'It is message {value} in its thread.'
+      optionalIn: [contact]
+      definition: The message's three-digit position in its thread, matching its filename prefix.
+      example: '"002"'
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration message.'
+    - name: x-mx-collaborateNeedsAgentReply
+      type: boolean
+      authoring: authored
+      inPlainWords: 'It awaits an agent reply: {value}.'
+      optionalIn: [contact]
+      definition: Whether the message tags @maxine and still awaits an agent reply.
+      example: false
+      validValues: [true, false]
+      notes: Set by the post-write hook scripts/collaborate-flag-agent.cjs when the body tags @maxine; cleared when the reply is written.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a collaboration message.'
+    - name: x-mx-collaborateHandle
+      type: string
+      authoring: authored
+      inPlainWords: 'Its owner goes by the handle {value}.'
+      optionalIn: [contact]
+      definition: The short display handle on a collaboration profile.
+      example: scott
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a profile under collaborate/_users/.'
+    - name: x-mx-collaborateEmail
+      type: string
+      authoring: authored
+      inPlainWords: 'Its owner commits as {value}.'
+      optionalIn: [contact]
+      definition: The git email the cockpit matches to identify the profile's owner.
+      example: scott@lpc.co.uk
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a profile under collaborate/_users/.'
+    - name: x-mx-collaborateGitName
+      type: string
+      authoring: authored
+      inPlainWords: 'Its owner commits under the name {value}.'
+      optionalIn: [contact]
+      definition: The git author name of the profile's owner.
+      example: Scott McGregor
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a profile under collaborate/_users/.'
+    - name: x-mx-collaborateDisplayName
+      type: string
+      authoring: authored
+      inPlainWords: 'The cockpit shows its owner as {value}.'
+      optionalIn: [contact]
+      definition: The name the cockpit shows for the profile's owner.
+      example: Scott
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a profile under collaborate/_users/.'
+    - name: x-mx-collaboratePreferredLanguage
+      type: string
+      authoring: authored
+      inPlainWords: 'Its owner reads the cockpit in {value}.'
+      optionalIn: [contact]
+      definition: The BCP 47 language the cockpit uses for the profile owner's labels.
+      example: es
+      notes: The cockpit carries label sets for en and es; message content may be in any language.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a profile under collaborate/_users/.'
+    - name: x-mx-pim
+      type: object
+      authoring: authored
+      inPlainWords: 'It is an mx-pim record: {value}.'
+      optionalIn: [core]
+      definition: The mx-pim record block - the record's kind, area and, on an action, its priority and workflow state.
+      example: '{recordType: action, area: publishing, priority: urgent, state: open}'
+      notes: >-
+        Members recordType (action, learning, understanding), area, and on an action record priority (urgent,
+        this-week, upcoming), state (open, doing, blocked, done), and the optional snoozeUntil, doingBy and doingSince,
+        needsHardware, blocks, followsAdr, fromCog and relatesToMemory. The workflow state lives here, not in
+        mx.status. The schema is mx-canon/mx-maxine-lives/pim/pim-record-schema.cog.md; npm run pim:new builds a
+        record and check-pim-records.cjs validates it. Read by scripts/cockpit/pim-triage.js.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on every record under mx-canon/mx-maxine-lives/pim/records/.'
     - name: x-mx-managedBy
       type: string
+      authoring: authored
+      inPlainWords: '{value} manages it.'
+      optionalIn: [blog]
       definition: >-
         The cog, or failing that the script, that manages this artefact as it travels through its pipeline. Present-tense
         stewardship: who is responsible for the file now.
@@ -2391,10 +3059,10 @@ mx:
         a PDF in the XMP packet.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on an artefact that moves through a pipeline with a responsible handler.'
     - name: x-mx-productionCanonical
       type: string
+      authoring: authored
       definition: >-
         The production URL a noindex draft will occupy once promoted, so the eventual canonical location is known before
         the page goes live.
@@ -2404,10 +3072,41 @@ mx:
         Declared while a page is still in the draft zone; the promoted page carries canonicalUri instead.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a noindex draft page whose production home is already decided.'
+    - name: x-mx-siteTags
+      type: array
+      inPlainWords: 'The blog index files it under {value}.'
+      authoring: authored
+      definition: >-
+        The tags that file a blog post on the mx-site blog index, each a key of the tag vocabulary in
+        intent-cms/site.json. Publishing reads it in place of a tags argument.
+      example:
+        - open-standards
+        - provenance
+      notes: >-
+        Distinct from the top-level tags, the free keywords that describe the post: a keyword that happens to match a
+        vocabulary tag never files a post, because only this field does. A value outside the vocabulary is an error.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a blog post source in datalake/draft-site/blog.'
+    - name: x-mx-schemaType
+      type: string
+      inPlainWords: 'Its structured data calls it a {value}.'
+      authoring: authored
+      definition: >-
+        The Schema.org type a page's JSON-LD declares, where it differs from the default the site.json profile table
+        gives the page's type.
+      example: AboutPage
+      notes: >-
+        Absent on most pages: the profile table maps each page type to a Schema.org type, and this field overrides one
+        page (an about page as AboutPage, a question page as FAQPage). A Schema.org type name, never the free-form
+        contentType label.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a draft-site page source whose JSON-LD type is not its type''s default.'
     - name: x-mx-domainTerms
       type: array
+      authoring: authored
       definition: >-
         The document's central vocabulary: terms of art the prose-quality tooling exempts from distinctive-word-overuse
         detection. Each entry is a single content word, matched case-insensitively.
@@ -2420,10 +3119,10 @@ mx:
         document says so. Read by the frequency-analysis scanners under scripts/lib/prose/.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a document whose subject forces heavy repetition of a few domain words.'
     - name: x-mx-runtimeProbe
       type: object
+      authoring: authored
       definition: >-
         The environment signals that identify each known runtime, so an agent rules cog can recognise its host without
         naming a tool.
@@ -2436,10 +3135,10 @@ mx:
         recoverable by inference.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on an agent rules cog that must serve more than one runtime.'
     - name: x-mx-priority
       type: string
+      authoring: authored
       definition: 'Vendor workflow priority. Allowed values: high, medium, low.'
       example: high
       notes: >-
@@ -2447,10 +3146,10 @@ mx:
         synonym.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a work item ranked within a CogNovaMX workflow.'
     - name: x-mx-prdState
       type: string
+      authoring: authored
       definition: 'PRD delivery state. Allowed values: draft, inProgress, complete, superseded.'
       example: inProgress
       notes: >-
@@ -2458,10 +3157,10 @@ mx:
         and from x-mx-contentState, which routes blog publication.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a PRD whose delivery progress is tracked separately from its document status.'
     - name: x-mx-kanban
       type: object
+      authoring: authored
       definition: >-
         A card's place on the chain kanban: rank, a whole number where 1 is the top of its column, and assignee,
         either operator or agent. The column itself is mx.status.
@@ -2474,10 +3173,10 @@ mx:
         scripts/check-chain.cjs. Acceptance is recorded in the core reviewedBy and statusNote fields, not here.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a chain card so the board and agents share one order of work.'
     - name: x-mx-thresholds
       type: object
+      authoring: authored
       definition: The numeric limits a workflow contract enforces before an action may proceed.
       example:
         maxChangedFiles: 50
@@ -2486,44 +3185,43 @@ mx:
         cogs.
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a workflow contract cog that gates an action on measured limits.'
     - name: x-mx-approvers
       type: array
+      authoring: authored
       definition: The roles or identities whose approval a workflow contract requires.
       example:
         - role:hic-admin
       notes: 'A Workflow Contract Extension. Names roles rather than people wherever a role exists, so the contract survives a change of staff.'
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a workflow contract cog whose action needs human sign-off.'
     - name: x-mx-approvalProcedure
       type: string
+      authoring: authored
       definition: How approval is sought and recorded for this workflow contract.
       example: 'Operator confirms in chat; the approving message is quoted in the commit.'
       notes: 'A Workflow Contract Extension. States the mechanism, so an approval cannot be claimed without a record of it.'
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared alongside x-mx-approvers on a workflow contract cog.'
     - name: x-mx-reviewProcedure
       type: string
+      authoring: authored
       definition: How the output of this workflow contract is reviewed after the action completes.
       example: 'Re-run the gate suite and read the served page before closing.'
       notes: 'A Workflow Contract Extension. The counterpart to x-mx-approvalProcedure: one governs going, this one governs having gone.'
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a workflow contract cog whose result needs checking rather than assuming.'
     - name: x-mx-targetEnvironment
       type: string
+      authoring: authored
       definition: The environment a workflow contract's action applies to.
       example: production
       notes: 'A Workflow Contract Extension. Makes the blast radius explicit, so a contract written for staging cannot be read as covering production.'
       status: canonical
       profile: x-mx-public
-      required: false
       context: 'Declared on a workflow contract cog whose action reaches a named environment.'
   profiles:
     # book/blog/contact/report/audit/event profiles intentionally not declared
@@ -2553,6 +3251,9 @@ mx:
         - mx:version
         - mx:purpose
       optional:
+        - tags
+        - type
+        - resource
         - mx:audience
         - mx:stability
         - mx:category
@@ -2560,9 +3261,6 @@ mx:
         - mx:buildsOn
         - mx:documentedIn
         - mx:contextProvides
-        - type
-        - tags
-        - resource
     - name: css
       description: 'Fields for .cog.css files. Convention: @mx:field in comment blocks.'
       header: |
@@ -2583,13 +3281,13 @@ mx:
         - mx:version
         - mx:purpose
       optional:
+        - tags
+        - type
+        - resource
         - mx:audience
         - mx:stability
         - mx:category
         - mx:tags
-        - type
-        - tags
-        - resource
     - name: pitch
       description: >-
         Fields for pitch decks, proposals, and investor materials authored as markdown. A CogNovaMX vendor profile,
@@ -2620,12 +3318,12 @@ mx:
         - presentationFor
         - pitchAsk
       optional:
+        - tags
+        - type
+        - resource
         - valuation
         - marketSize
         - arrProjection
-        - type
-        - tags
-        - resource
     - name: x-mx-public
       description: 'MX-public extension fields. Prefix: x-mx-. Visible in a cog''s source; stripped from every published artefact per ADR 63. CogNovaMX vendor extensions.'
       header: |
@@ -2677,8 +3375,8 @@ mx:
         - x-mx-reviewProcedure
         - x-mx-targetEnvironment
       optional:
-        - type
         - tags
+        - type
         - resource
     - name: x-mx-private
       description: 'MX-private extension fields. Obfuscated. Prefix: x-mx-p-. Field names are not listed publicly.'
@@ -2701,6 +3399,6 @@ mx:
         ---
       fields: []
       optional:
-        - type
         - tags
+        - type
         - resource
