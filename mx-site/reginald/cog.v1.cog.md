@@ -9,7 +9,7 @@
 # rule between the two.
 #
 # A spec cog rather than an info cog. Classified under
-# x-mx-cogType: cogs per Note 3 §6.5.1 - a Community Owned
+# x-mx-governanceClass: cogs per Note 3 §6.5.1 - a Community Owned
 # Governance Standard, owned by The Gathering, not by any
 # single vendor.
 # ─────────────────────────────────────────────────────────────
@@ -25,7 +25,7 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-09-29
+modified: 2026-10-10
 version: "1.1"
 
 schema: ./schemas/mx-spec.v1.yaml
@@ -96,7 +96,7 @@ mx:
     legalEntity: "The Gathering"
     brand: "tg.community"
 
-  x-mx-domain: "machine-experience"
+  domain: "machine-experience"
   readingLevel: advanced
 
   runbook: >
@@ -163,11 +163,11 @@ mx:
     - https://datatracker.ietf.org/doc/html/rfc2119
 
   # ── Cog classification (Note 3 §6.5) ──
-  # cogType: cogs is the Community Owned Governance Standard
+  # governanceClass: cogs is the Community Owned Governance Standard
   # classification per Note 3 §6.5.1. Governance lives at
   # The Gathering, not at a single vendor.
-  x-mx-cogId: cog-v1-spec
-  x-mx-cogType: cogs
+  cogId: cog-v1-spec
+  x-mx-governanceClass: cogs
   x-mx-cogCategory: tg-mx-specification
   x-mx-cogsGovernanceBody: tg.community
 

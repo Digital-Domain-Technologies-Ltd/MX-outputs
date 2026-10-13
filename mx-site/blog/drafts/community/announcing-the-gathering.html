@@ -6,21 +6,25 @@
 <!--
 ---
 
+"@context": https://mx.allabout.network/canon/context.json
 title: "Announcing The Gathering"
+description: "An open standards body for metadata that helps machines understand documents."
 version: "1.0"
 created: 2026-02-08
-modified: 2026-02-23
+modified: 2026-10-11
 author: Tom Cranstoun
 
 type: blog-post
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   purpose: "Draft blog post for the mx-site."
   stability: draft
-  runbook: "Draft source for the mx-site blog. Promote via npm run promote to publish."
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides: ["Blog post draft: Announcing The Gathering"]
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/community/announcing-the-gathering.md
-  blogUrl: https://mx.allabout.network/blog/drafts/community/announcing-the-gathering.html
-  blogFilename: announcing-the-gathering
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/community/announcing-the-gathering.md
+  servedAt: https://mx.allabout.network/blog/drafts/community/announcing-the-gathering.html
 
 ---
 -->
@@ -28,7 +32,7 @@ mx:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
-  <meta name="description" content="">
+  <meta name="description" content="An open standards body for metadata that helps machines understand documents.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://mx.allabout.network/blog/drafts/community/announcing-the-gathering.html">
 
@@ -36,7 +40,7 @@ mx:
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://mx.allabout.network/blog/drafts/community/announcing-the-gathering.html">
   <meta property="og:title" content="Announcing The Gathering | CogNovaMX">
-  <meta property="og:description" content="">
+  <meta property="og:description" content="An open standards body for metadata that helps machines understand documents.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta property="og:image:width" content="1200">
@@ -49,7 +53,7 @@ mx:
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Announcing The Gathering | CogNovaMX">
-  <meta name="twitter:description" content="">
+  <meta name="twitter:description" content="An open standards body for metadata that helps machines understand documents.">
   <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta name="twitter:site" content="@ddttomtom">
@@ -62,11 +66,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Announcing The Gathering">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -86,7 +88,7 @@ mx:
         "@type": "BlogPosting",
         "name": "Announcing The Gathering",
         "headline": "Announcing The Gathering",
-        "description": "",
+        "description": "An open standards body for metadata that helps machines understand documents.",
         "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
         "datePublished": "2026-02-08",
         "dateModified": "2026-02-08",
@@ -109,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1037,
+        "wordCount": 1048,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -149,6 +151,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -193,7 +196,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1037">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1048">
         <header class="article-header">
           <h1>Announcing The Gathering</h1>
           <div class="article-meta"
@@ -223,10 +226,10 @@ mx:
 <h2 id="there-is-no-standard-for-making-documents-machine-readable" tabindex="-1">There is no standard for making documents machine-readable</h2>
 <p>We have <a href="https://schema.org">Schema.org</a> for structured data. We have WCAG for accessibility. We have robots.txt for crawling permissions. But there is no standard for the thing that matters most to AI agents: <strong>understanding what a document actually says.</strong></p>
 <p>AI agents do not browse the web the way humans do. They do not scan a page, squint at the layout, and infer meaning from proximity and font size. They need structured metadata - explicit, machine-readable descriptions of what a document is, who published it, whether it is current, and how to use it.</p>
-<p>That metadata does not exist today. Not in any standard form. Every AI provider scrapes the web independently, interprets HTML differently, and guesses when the formatting is ambiguous.</p>
+<p>That metadata does not exist in any standard form. Every AI provider scrapes the web independently, interprets HTML differently, and guesses when the formatting is ambiguous.</p>
 <hr>
 <h2 id="structured-documents-the-atomic-unit" tabindex="-1">Structured documents: the atomic unit</h2>
-<p>Today I am announcing <strong>The Gathering</strong> - an independent, open standards body with a single focus: metadata that helps machines understand documents.</p>
+<p>I am announcing <strong>The Gathering</strong> - an independent, open standards body with a single focus: metadata that helps machines understand documents.</p>
 <p>The standard is built on a simple concept: <strong>structured documents.</strong></p>
 <p>A structured document is a markdown file with YAML frontmatter. Machine-readable metadata at the top; human-readable documentation below. Any AI agent - Claude, Gemini, GPT, Perplexity, Copilot - can parse the YAML and understand the document without guessing.</p>
 <pre><code class="language-yaml">---
@@ -247,7 +250,7 @@ The Danube Classic cruise is priced at £2,030 per person...
 <h2 id="why-a-standards-body" tabindex="-1">Why a standards body</h2>
 <p>I could have built this as a product. I chose not to.</p>
 <p>The web works because HTML is an open standard. Browsers compete on implementation, not on the spec itself. The W3C governs the standard; browser vendors build products on it. Nobody owns HTML.</p>
-<p>The Gathering follows the same model. The metadata standard is MIT licensed. Anyone can implement it. Anyone can build a registry, a signing engine, a validation tool, a content enrichment platform. The standard belongs to the community.</p>
+<p>The Gathering follows the same model. The metadata standard is MIT licensed. Anyone can implement it. Anyone can build a registry, a signing engine, a validation tool, a content enrichment platform. MX will come to The Gathering as a donation once its live test is complete. Until then its authors maintain it.</p>
 <p>Commercial implementers are contributors, not controllers. They build products on the standard. They do not own it. If The Gathering becomes a vehicle for any single company, it has failed.</p>
 <hr>
 <h2 id="what-the-gathering-governs" tabindex="-1">What The Gathering governs</h2>
@@ -315,7 +318,7 @@ The Danube Classic cruise is priced at £2,030 per person...
 </table>
 <hr>
 <h2 id="join-us" tabindex="-1">Join us</h2>
-<p>No fees. No barriers. The standard belongs to the community.</p>
+<p>No fees. No barriers. Anyone may implement the standard.</p>
 <p>Read the specification. Build a structured document. Enrich your documentation. Share what you learned.</p>
 <p>The web was not designed for AI agents. We can fix that - together, in the open, with a standard that belongs to everyone.</p>
 <p><strong><a href="mailto:mx.machine.experience@gmail.com?subject=The%20Gathering%20%E2%80%94%20Interest">Express interest</a></strong></p>
@@ -324,6 +327,14 @@ The Danube Classic cruise is priced at £2,030 per person...
 <p><em>8 February 2026</em></p>
 <p><em>&quot;The standard belongs to the community.&quot;</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-11.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -365,7 +376,10 @@ The Danube Classic cruise is priced at £2,030 per person...
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

@@ -6,7 +6,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
-modified: 2026-07-29
+modified: 2026-10-10
 created: 2026-01-22
 description: "Detailed analysis of the £203,000 cruise pricing error demonstrating why agent creators must build validation layers and confidence scoring."
 
@@ -14,6 +14,7 @@ title: Appendix I - Pipeline Failure Case Study
 tags: [pipeline-failure, validation-layers, confidence-scoring, data-extraction-errors, guardrails, case-study]
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
   book: "Shared"
   appendix: "I"
@@ -30,7 +31,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -174,20 +175,24 @@ validation layers that should have prevented it.</p>
 <hr />
 <h2 id="error-summary">Error Summary</h2>
 <p><strong>Source of Error:</strong> This analysis is based on output
-from the author's AI assistant (Claude for Chrome, early beta version)
-when researching cruise options in December 2024. The agent was asked to
-find Danube cruises ending in Budapest in May 2026.</p>
+from the author's AI assistant (Claude for Chrome, beta version) when
+researching cruise options in December 2025. Anthropic first released
+Claude for Chrome as a research preview in August 2025 (TechCrunch, 26
+August 2025: <a
+href="https://techcrunch.com/2025/08/26/anthropic-launches-a-claude-ai-agent-that-lives-in-chrome/"
+class="uri">https://techcrunch.com/2025/08/26/anthropic-launches-a-claude-ai-agent-that-lives-in-chrome/</a>).
+The agent was asked to find Danube cruises ending in Budapest in May
+2026.</p>
 <p><strong>The Error:</strong> The AI-generated cruise itinerary
 incorrectly listed one luxury river cruise operator's pricing as
 <strong>£203,000-£402,000</strong> when the actual pricing was likely
 <strong>£2,030-£4,020</strong> per person.</p>
-<p>This represents a <strong>100x multiplication error</strong> - two
+<p>This represents a <strong>100x multiplication error</strong>: two
 extra zeros added to the correct price.</p>
 <p><strong>Note on Anonymisation:</strong> Operator names have been
 anonymised in this appendix. The error occurred in the agent's reasoning
 and data extraction, not due to any fault by the cruise operators
-themselves. All operators mentioned in the original output (Saga
-Cruises, Uniworld River Cruises, Viking River Cruises) provide
+themselves. All operators mentioned in the original output provide
 legitimate services with accurate pricing on their websites.</p>
 <p>This appendix provides the complete error analysis that informed
 Chapter 13's discussion of pipeline failures, validation layers, and
@@ -233,11 +238,11 @@ Route"</h4>
 </ul>
 <p><strong>Critical observation</strong>: The agent provided pricing for
 only one of three operators. Operators A and C showed "not specified" or
-were presented without price data. Only Operator B included pricing -
-and that pricing was erroneous.</p>
+were presented without price data. Only Operator B included pricing, and
+that pricing was erroneous.</p>
 <p><strong>What comparative analysis should have revealed</strong>: Even
 without pricing for all operators, Operator B's £203,000-£402,000 is
-100x higher than typical river cruise pricing (£2,000-£6,000). This
+100x higher than typical river cruise pricing (£2,000-£8,000). This
 extreme outlier should have triggered immediate validation flags,
 especially given the absence of pricing data for peer operators with
 which to compare.</p>
@@ -266,15 +271,15 @@ format, it would misread the number by 100x.</p>
 <h4 id="scenario-b-number-concatenation">Scenario B: Number
 Concatenation</h4>
 <pre class="text" data-role="code-block" data-language="text"><code>Original Source:
-  Early Booking: £2,030
-  Standard Rate: £4,020
+  Early Booking: £2,030.00
+  Standard Rate: £4,020.00
 
 AI Misread:
-  Concatenated without separators: 20304020
-  Split incorrectly: 203,040 and 402,000
+  All separators stripped, decimal point included: 203000 and 402000
   Formatted: £203,000-£402,000</code></pre>
 <p>HTML might present pricing across multiple elements without clear
-separators. Incorrect concatenation produces magnitude errors.</p>
+separators. Stripping the decimal point along with the thousands
+separator turns pence into pounds and multiplies each figure by 100.</p>
 <h4 id="scenario-c-wrong-data-field">Scenario C: Wrong Data Field</h4>
 <pre class="text" data-role="code-block" data-language="text"><code>Original Table:
 | Cruise      | Per Person | Total Revenue | Fleet Value |
@@ -283,7 +288,7 @@ separators. Incorrect concatenation produces magnitude errors.</p>
 
 AI Selected: Total Revenue column instead of Per Person column</code></pre>
 <p>The agent extracted the wrong field entirely. The table showed
-multiple price points - per person, total voyage revenue, fleet
+multiple price points: per person, total voyage revenue, fleet
 valuation. Selecting the wrong column produced the error.</p>
 <h4 id="scenario-d-htmlcss-parsing-error">Scenario D: HTML/CSS Parsing
 Error</h4>
@@ -292,37 +297,37 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;currency&quot;</span><span class="dt">&gt;</span>£<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;thousands&quot;</span><span class="dt">&gt;</span>2<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;hundreds&quot;</span><span class="dt">&gt;</span>030<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>AI Read: Concatenated spans without proper separators</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>Result: £2030 → reformatted with UK thousands separator → £203,000</span></code></pre></div>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;pence&quot;</span><span class="dt">&gt;</span>00<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>AI Read: Concatenated span digits without the decimal point</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>Result: 2 + 030 + 00 → 203000 → reformatted with UK thousands separator → £203,000</span></code></pre></div>
 <p>CSS formatting might visually separate elements that are adjacent in
 HTML. Parsing without CSS awareness produces concatenation errors.</p>
 <h3 id="stage-3a-the-locale-gap-schema.org-does-not-close">Stage 3a: The
 locale gap Schema.org does not close</h3>
-<p>Read literally, <code>€2.030,00</code> is two euros and three cents
-under Anglo notation, or two thousand and thirty euros under European
-notation. Both readings are syntactically valid. Schema.org's
+<p>Read without context, <code>€2.030,00</code> is two euros and three
+cents under Anglo notation, or two thousand and thirty euros under
+European notation. Both readings are syntactically valid. Schema.org's
 <code>Offer</code> and <code>PriceSpecification</code> types name the
 figure and the currency code; ISO 4217 covers the currency itself.
 Neither requires the publisher to declare which decimal grouping is in
-force, which timezone the validity window sits in, or which booking
-conditions the figure is attached to. JSON-LD did the job it was built
-to do: it expressed the field. The job it was not built to do is
-announce <em>how to read</em> the field.</p>
+force, the timezone of the validity window, or the booking conditions
+attached to the figure. JSON-LD did the job it was built to do: it
+expressed the field. The job it was not built to do is announce <em>how
+to read</em> the field.</p>
 <p>That is the gap MX fills above Schema.org. An MX record on the same
-page carries <code>priceLocale</code> so the agent knows whether
-<code>,</code> is a decimal mark or a thousands separator; carries
-<code>validFrom</code> and <code>validUntil</code> so the agent knows
-the figure is current; carries the operator's signature so the agent can
-verify the version it parsed is the version the operator issued; carries
-a canonical URI so the same record can be re-read off the web (PDF
-brochure, contract, confirmation email). The decimal misread in Scenario
-A is not a Schema.org failure. Schema.org never claimed jurisdiction
-over locale conventions, lifecycle, or provenance. It claimed
-jurisdiction over the field name. MX claims jurisdiction over the
-envelope around the field - and the envelope is where this error has to
-be closed.</p>
+page declares <code>priceLocale</code>, so the agent knows whether
+<code>,</code> is a decimal mark or a thousands separator. It states
+<code>validFrom</code> and <code>validUntil</code>, so the agent knows
+the figure is current. It bears the operator's signature, so the agent
+can verify the version it parsed is the version the operator issued. It
+includes a canonical URI, so the same record can be re-read off the web
+(PDF brochure, contract, confirmation email). The decimal misread in
+Scenario A is not a Schema.org failure. Schema.org never claimed
+jurisdiction over locale conventions, lifecycle, or provenance. It
+claimed jurisdiction over the field name. MX claims jurisdiction over
+all three, and that is where this error has to be closed.</p>
 <h3 id="stage-4-validation-failure-missing-guardrails">Stage 4:
 Validation Failure (Missing Guardrails)</h3>
 <p><strong>Missing Sanity Check:</strong></p>
@@ -330,7 +335,7 @@ Validation Failure (Missing Guardrails)</h3>
 <ul>
 <li>£203,000 per person = £406,000 per couple for one week</li>
 <li>This exceeds typical round-the-world luxury cruise pricing</li>
-<li>Luxury river cruise operators typically price £3,000-£8,000</li>
+<li>River cruise operators typically price £2,000-£8,000</li>
 <li>No contextual warnings about "ultra-luxury" or "suite-only"
 pricing</li>
 </ul>
@@ -352,7 +357,8 @@ document</p>
 <li>Incorrect price passed through without correction</li>
 <li>Presented alongside accurate information (dates, routes,
 ratings)</li>
-<li>Mixed with legitimate high-end pricing from other operators</li>
+<li>Listed beside other operators that carried no pricing, so nothing on
+the page contradicted it</li>
 <li>No caveats or verification notes added</li>
 </ul>
 <p><strong>Format creates false confidence</strong>: Professional
@@ -366,7 +372,8 @@ impossibility</p>
 <ul>
 <li>Immediate recognition that price was absurd</li>
 <li>Context awareness (river cruises don't cost £200k)</li>
-<li>Comparative reasoning (other operators priced reasonably)</li>
+<li>Comparative reasoning (river cruises are typically priced
+£2k-£8k)</li>
 </ul>
 <p><strong>This reveals the gap</strong>: The human had validation
 layers (domain knowledge, comparative context, scepticism) that the
@@ -494,9 +501,9 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">// Usage</span></span>
 <span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="fu">validateAgainstPeers</span>(<span class="dv">203000</span><span class="op">,</span> [<span class="dv">2030</span><span class="op">,</span> <span class="dv">3450</span><span class="op">,</span> <span class="dv">5200</span><span class="op">,</span> <span class="dv">2800</span>])<span class="op">;</span></span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Returns: { valid: false, confidence: 10, warning: &quot;Price 58.8x higher...&quot; }</span></span></code></pre></div>
-<p><strong>This would have caught the error</strong>: £203,000 is 58x
-higher than peer average → obvious anomaly</p>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">// Returns: { valid: false, confidence: 10, warning: &quot;Price 60.2x higher...&quot; }</span></span></code></pre></div>
+<p><strong>This would have caught the error</strong>: £203,000 is 60x
+higher than the peer average of £3,370 → obvious anomaly</p>
 <h4 id="structured-data-cross-reference">3. Structured Data
 Cross-Reference</h4>
 <div class="sourceCode" id="cb7" data-role="code-container"><pre
@@ -629,8 +636,8 @@ suggests:</p>
 <li>Copy-paste error in training data or retrieval source</li>
 <li>Systematic parsing rule misapplied to European number format</li>
 </ul>
-<p><strong>The key insight</strong>: This wasn't a reasoning failure.
-The agent didn't think £203,000 was reasonable. It never had the chance
+<p><strong>The key insight</strong>: The failure lay outside reasoning,
+and the agent never judged £203,000 reasonable. It never had the chance
 to reason about the data because validation layers were absent.</p>
 <hr />
 <h2 id="lessons-learned">Lessons Learned</h2>
@@ -683,7 +690,7 @@ than plain text, even when data quality is identical.</p>
 <p>This error was caught through:</p>
 <ul>
 <li>Human domain knowledge (cruises don't cost £200k)</li>
-<li>Contextual comparison (other operators were £2k-£6k)</li>
+<li>Contextual comparison (river cruises typically cost £2k-£8k)</li>
 <li>Questioning anomalies (asking "does this really say £203,000?")</li>
 </ul>
 <p>Not through:</p>
@@ -706,29 +713,30 @@ detection?</p>
 <h2 id="conclusion">Conclusion</h2>
 <p>This £203,000 pricing error illustrates a different failure mode than
 initially appears. The error likely occurred during <strong>initial data
-retrieval or parsing</strong> - not during decision-making.</p>
+retrieval or parsing</strong>, not during decision-making.</p>
 <h3 id="the-real-failure-point">The Real Failure Point</h3>
 <p>An AI agent doing comparison shopping would <strong>reject or
-flag</strong> this price as an outlier when comparing:</p>
+flag</strong> this price as an outlier once it held prices for the other
+operators. With illustrative figures of the kind a complete retrieval
+would return:</p>
 <ul>
 <li>Operator A: £2,000-£4,000</li>
-<li>Operator B: £3,500-£6,500</li>
-<li>Operator C: £203,000-£402,000 ← Obvious anomaly</li>
-<li>Operator D: £2,800-£5,200</li>
+<li>Operator B: £203,000-£402,000 ← Obvious anomaly</li>
+<li>Operator C: £2,800-£5,200</li>
 </ul>
 <p>The actual failure was probably:</p>
 <ol type="1">
-<li><strong>Bad data retrieval</strong> - Wrong field extracted from
+<li><strong>Bad data retrieval:</strong> Wrong field extracted from
 source</li>
-<li><strong>No comparative validation</strong> - Each operator
-researched in isolation</li>
-<li><strong>No sanity checking</strong> - Price accepted without
+<li><strong>No comparative validation:</strong> Each operator researched
+in isolation</li>
+<li><strong>No sanity checking:</strong> Price accepted without
 cross-referencing</li>
-<li><strong>Single-source reliance</strong> - No verification against
+<li><strong>Single-source reliance:</strong> No verification against
 official operator site</li>
 </ol>
 <h3 id="what-this-reveals">What This Reveals</h3>
-<p>This wasn't an AI "not understanding that £203,000 is expensive" - it
+<p>This wasn't an AI "not understanding that £203,000 is expensive"; it
 was a <strong>data pipeline failure</strong>:</p>
 <ul>
 <li>Wrong data extracted from source (most likely)</li>
@@ -742,7 +750,7 @@ Chapter 13:</p>
 <ul>
 <li><strong>Range validation</strong>: £203,000 &gt; £15,000 maximum →
 flag</li>
-<li><strong>Comparative analysis</strong>: 58x higher than peers →
+<li><strong>Comparative analysis</strong>: 60x higher than peers →
 flag</li>
 <li><strong>Structured data cross-reference</strong>: HTML != JSON-LD →
 flag</li>
@@ -765,32 +773,31 @@ pricing errors.</p>
 powerful research tools but inconsistent validators. When making
 important decisions (bookings, purchases, financial commitments), always
 check multiple sources.</p>
-<p>The error was instructive because it was obviously wrong to human
-domain knowledge. More concerning are errors that fall within plausible
-ranges - where comparative analysis and validation become the only
+<p>The error was instructive because human domain knowledge exposed it
+at a glance. More concerning are errors that fall within plausible
+ranges, where comparative analysis and validation become the only
 defence against propagating incorrect data.</p>
 <hr />
 <h2 id="the-44-false-positive-waf-cluster">The 44-False-Positive WAF
 Cluster</h2>
 <p>A web audit pipeline that probes a target site for performance data
 has to interpret the responses the site returns. Some sites are easy to
-read - a normal page returns 200 OK with the bytes the probe expects.
+read: a normal page returns 200 OK with the bytes the probe expects.
 Other responses need classification: a 429 might mean rate-limiting (the
 site is throttling the probe under normal load) or it might mean a Web
 Application Firewall is blocking the probe outright. The two
 classifications imply different actions. A rate-limited probe waits and
-retries; a WAF-blocked probe should report the block honestly to the
+retries; a WAF-blocked probe should state the block plainly in the
 report's narrative because the audit cannot collect data the firewall is
 refusing.</p>
 <p>The failure mode this case study records is what happens when the
 classifier conflates the two. A pipeline configured to read any 429 or
 503 status as "WAF blocked" produces a report that names a firewall the
 target site does not run. The reader of the report, who may be the
-prospective client, sees claims about their infrastructure that are not
-true. The audit's credibility collapses; the relationship may not
-survive it.</p>
+prospective client, sees false claims about their infrastructure. The
+audit's credibility collapses; the relationship may not survive it.</p>
 <h3 id="symptom">Symptom</h3>
-<p>An audit pass against <code>dkd.de/de</code> produced a slowest-page
+<p>An audit pass against an agency site (Site A) produced a slowest-page
 performance JSON that flagged forty-four URLs as
 <code>wafBlocked: true</code>. The site runs nginx in front of a TYPO3
 backend, with rate-limiting configured at the nginx layer for crawler
@@ -813,14 +820,15 @@ number.</p>
 <h3 id="fix">Fix</h3>
 <p>The fix replaces bare-status inference with positive-evidence
 classification. A response is classified as <code>wafBlocked</code> only
-when the probe finds at least one of: a <code>cf-ray</code> header
-(Cloudflare's request identifier), a server vendor name in the
-<code>server</code> header matching a known WAF
-(<code>Cloudflare</code>, <code>Akamai</code>, <code>Imperva</code>,
-<code>F5</code>, <code>Sucuri</code>, <code>AWS WAF</code>), a known WAF
-cookie name in the <code>Set-Cookie</code> header (<code>__cf_bm</code>,
-<code>incap_ses_</code>, <code>imperva_*</code>), or a known WAF
-block-page substring in the response body
+when the probe finds at least one positive signal. The first is a
+<code>cf-ray</code> header (Cloudflare's request identifier). The second
+is a server vendor name in the <code>server</code> header matching a
+known WAF (<code>Cloudflare</code>, <code>Akamai</code>,
+<code>Imperva</code>, <code>F5</code>, <code>Sucuri</code>,
+<code>AWS WAF</code>). The third is a known WAF cookie name in the
+<code>Set-Cookie</code> header (<code>__cf_bm</code>,
+<code>incap_ses_</code>, <code>imperva_*</code>). The fourth is a known
+WAF block-page substring in the response body
 (<code>Attention Required! | Cloudflare</code>,
 <code>Reference #18.</code>, similar regex-matched markers). A response
 that returns 429 or 503 without any of these signals is classified as
@@ -830,15 +838,14 @@ attempt preserves the <code>rateLimited</code> classification from the
 first attempt; the retry helper does not overwrite the verdict the
 classifier produced.</p>
 <h3 id="validation">Validation</h3>
-<p>A four-site re-audit confirms the fix end-to-end. On
-<code>dkd.de/de</code>, the forty-four <code>wafBlocked: true</code>
-records collapse to zero; six pages classify correctly as
-<code>rateLimited</code>. On <code>typo3.com</code> (which fronts with
-Cloudflare), the existing <code>wafBlocked: true</code> records persist
-with the positive <code>cf-ray</code> evidence intact. On
-<code>dotfusion.com</code>, where soft-404 responses had previously been
-mis-classified as broken, a separate dual-signal check (status-200 with
-body containing 404 markers) catches the soft-404 cases correctly. On
+<p>A four-site re-audit confirms the fix end-to-end. On Site A, the
+forty-four <code>wafBlocked: true</code> records collapse to zero; six
+pages classify correctly as <code>rateLimited</code>. On Site B (which
+fronts with Cloudflare), the existing <code>wafBlocked: true</code>
+records persist with the positive <code>cf-ray</code> evidence intact.
+On Site C, where soft-404 responses had previously been mis-classified
+as broken, a separate dual-signal check (status-200 with body containing
+404 markers) catches the soft-404 cases correctly. On
 <code>mx.allabout.network</code>, no false positives appear in the
 baseline.</p>
 <h3 id="lessons">Lessons</h3>
@@ -847,23 +854,22 @@ code alone when the same status code carries different meanings
 depending on the responder. The broad lesson is methodological: an audit
 pipeline that produces claims about a target's infrastructure has the
 same evidence standard as the regulatory chain it supports. The pipeline
-that says "your site runs a WAF" should produce the evidence - the
-cookie, the header, the body marker - that backs the claim. A pipeline
-that infers infrastructure from one data point will eventually infer
-wrongly; the harm scales with how many readers depend on the report.
-Writing the audit chain into a structured provenance record, with
-<code>inputs</code> containing the actual response headers and body
-markers the classifier saw, means the next reader of the report can walk
-back to what the pipeline actually observed and check whether the
-classification it produced was justified. The audit becomes its own
-evidence.</p>
-<p>The fix has a third-order consequence worth naming. A report that the
-audit pipeline is confident about - backed by positive evidence rather
-than inference - is a report the audit pipeline can stand behind in a
-sales conversation, a regulatory inquiry, or a credentialing check. The
-classifier's calibration is itself part of the chain's trustworthiness;
-an over-eager classifier degrades every report the pipeline produces,
-not just the ones where the over-eagerness happens to bite.</p>
+that says "your site runs a WAF" should produce the evidence that backs
+the claim: the cookie, the header, the body marker. A pipeline that
+infers infrastructure from one data point will eventually infer wrongly;
+the harm scales with how many readers depend on the report. Write the
+audit chain into a structured provenance record, with
+<code>inputs</code> containing the response headers and body markers the
+classifier saw. The next reader of the report can then walk back to what
+the pipeline observed and check whether the classification it produced
+was justified. The audit becomes its own evidence.</p>
+<p>The fix has a third-order consequence. A report the audit pipeline is
+confident in, backed by positive evidence rather than inference, is a
+report the audit pipeline can stand behind in a sales conversation, a
+regulatory inquiry, or a credentialing check. The classifier's
+calibration is itself part of the chain's trustworthiness; an over-eager
+classifier degrades every report the pipeline produces, not just the
+ones where the over-eagerness happens to bite.</p>
 <hr />
 <p><strong>Cross-reference</strong>: See Chapter 13 for implementation
 patterns based on this case study.</p>

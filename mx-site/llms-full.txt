@@ -2014,6 +2014,106 @@ The Agent Web
 
 ---
 
+## Most AI Assistants Do Not Actually Check robots.txt. Here Is the Proof. | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/agent-web/most-ai-assistants-ignore-robots-txt-canary-test.html
+
+**Description:** A canary-based test of 12 AI assistants found only ChatGPT, Claude and Perplexity respected a disallowed URL. The other nine fetched it anyway, and most read the page back to the user.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - A test built so the assistant can't lie by accident
+
+        - Nine out of twelve ignored the disallow
+
+        - The blind spot this creates
+
+        - Why this matters beyond the numbers
+
+        - Where this leaves anyone building for AI
+
+        - Further reading
+
+          Most AI Assistants Do Not Actually Check robots.txt. Here Is the Proof.
+
+            5 July 2026
+            ·
+            Tom Cranstoun
+            ·
+            5 min read
+
+I have written before that robots.txt isn't a reliable barrier against AI assistants. That argument rested on vendor documentation, OpenAI's own admission that "because these actions are initiated by a user, robots.txt rules may not apply," and Cloudflare's report on Perplexity's undeclared crawlers. All good evidence, but all secondhand: a vendor's word, or a third party's traffic analysis.
+
+Search Engine World ran the actual experiment, and the result is worse than the anecdotes suggested.
+
+A test built so the assistant can't lie by accident
+
+The methodology is the part worth reading closely, because it closes off the usual objection: "that traffic could have been anything." Each of the 12 assistants tested got its own secret, unguessable URL, never linked from anywhere, absent from every sitemap and every browser history. The only way that URL gets a hit is if the assistant fetched it directly.
+
+Next to each open URL sat a twin, identical in every way except one line in robots.txt: Disallow. A hit on the twin isn't ambiguous. It's a system reading a page it was explicitly told to leave alone.
+
+Every page also had a unique canary string. If an assistant echoed that string back in its answer, the fetch was proven, not inferred, because a server-side logger recorded full HTTP headers on every hit. The log was the source of truth, not the assistant's own account of what it did.
+
+Nine out of twelve ignored the disallow
+
+Only ChatGPT, Claude and Perplexity left the blocked twin alone. The other nine, including Gemini, Microsoft Copilot, Meta AI, Mistral, Grok, DeepSeek, Qwen, ERNIE and Kimi, fetched the disallowed page anyway. Most of them then read the canary string straight back to the user, proof that the content had genuinely been consumed, not merely requested and discarded.
+
+That's three respecters out of twelve, on a rule with one purpose: telling an automated system where not to go.
+
+The blind spot this creates
+
+The line that stuck with me most is about monitoring, not compliance. If your AI-bot reporting keys off recognisable, declared user agents such as GPTBot or ClaudeBot, you're watching the minority that already behaves. The other nine either don't identify themselves as cleanly, or do and ignore the file anyway. Either way, a dashboard built on named-agent detection is showing you the well-behaved slice of traffic and calling it the whole picture.
+
+My earlier post described this exact problem with Perplexity's undeclared crawlers and ByteDance's Bytespider, both documented rotating identities to get past a Disallow rule and the firewall behind it. The new study shows this is most of the field, not two rogue exceptions.
+
+Why this matters beyond the numbers
+
+robots.txt is an honour system. It works exactly as well as the goodwill of whatever reads it, and this test is the first rigorous measurement of how much of that actually exists. The answer, for now, isn't much: a quarter of the systems tested.
+
+That doesn't mean access control is pointless. It means robots.txt alone is the wrong tool to rely on if exclusion genuinely matters to you, and it means the presence of unwanted content in an AI answer can't be explained away as "we told them not to." The file said no. Nine out of twelve fetched it regardless.
+
+It also reframes what a robots.txt buys you. For the minority that respects it, the file is a real, working access control. For the rest, it's closer to a polite note left on an unlocked door. Both things can be true about the same file at once, and the honest response is to plan for the door being unlocked.
+
+Where this leaves anyone building for AI
+
+If access control genuinely matters, robots.txt can't be the only layer. Server-side access controls and authentication are the real barrier; robots.txt is a courtesy on top of them, honoured by a minority.
+
+If your goal is the opposite, being read accurately rather than being kept out, the lesson runs the other way. Assume most AI systems will read your page regardless of what you ask them to do. The question that matters isn't whether they can reach your content. It's whether what they find is structured and accurate, or a raw page they have to interpret unaided. robots.txt controls access. It has never controlled quality, and this study is a clean demonstration of just how little of the access side it controls either.
+
+An MX audit tests both halves on your live site: what your robots.txt actually allows, and what a model or agent finds once it gets there regardless of what the file says.
+
+Further reading
+
+This continues the wider agent-web series: Your Site Is Already Training AI Models on Common Crawl, What Most robots.txt Guides Get Wrong About AI Crawlers on why treating them as one block-or-allow category is wrong, and What AI Crawlers See When They Can't Run Your JavaScript on what those systems actually read once they arrive.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-12.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
 ## The Crawl Still Speaks English | CogNovaMX
 
 **URL:** https://mx.allabout.network/blog/agent-web/the-crawl-still-speaks-english.html
@@ -3180,7 +3280,7 @@ Reviewer notes belong to the reviewer
 
 Every audit goes through automated checks before a human reviewer signs it off for delivery. The checks catch the kind of thing a tired writer might miss. A claim that the site has "no schema markup" when actually it has a small set. A sentence written in the present tense that should be past. A scope phrase that mixes per-page numbers with site-wide language.
 
-Those checks generate working notes for the reviewer. The notes don't belong inside the report you receive. They live in a companion file that travels alongside it, named after the report itself (for example, dkd-de-de-report-findings.md next to dkd-de-de-report.pdf). Same prose, same evidence. The reviewer reads the companion before sign-off; you read the report. If you ever want to see the reviewer's working, the file is right there alongside the deliverable, and we're happy to walk you through it.
+Those checks generate working notes for the reviewer. The notes don't belong inside the report you receive. They live in a companion file that travels alongside it, named after the report itself (for example, sealed-4e3eda239a.invalid-de-report-findings.md next to sealed-4e3eda239a.invalid-de-report.pdf). Same prose, same evidence. The reviewer reads the companion before sign-off; you read the report. If you ever want to see the reviewer's working, the file is right there alongside the deliverable, and we're happy to walk you through it.
 
 Why this shape matters
 
@@ -8428,6 +8528,28 @@ Blog
         Commentary
         Blockchain
         Announcements
+
+            Most AI Assistants Do Not Actually Check robots.txt. Here Is the Proof.
+
+            A canary-based test of 12 AI assistants found only ChatGPT, Claude and Perplexity respected a disallowed URL. The other nine fetched it anyway, and most read the page back to the user.
+
+            5 July 2026
+            - AI agents
+
+- Practitioner
+
+- SEO / GEO / AEO
+
+            The Cheapest Bot Is an Honest One
+
+            Most of your traffic is machines now, and the reflex is to meet the cost with a wall. The cheaper move runs the other way: fix the plumbing you built against yourself, serve machines a small structured version of your content, and give the agents that say what they are a fast lane. Save the rate limiter for whoever will not knock.
+
+            28 July 2026
+            - AI agents
+
+- Commentary
+
+- Business case
 
             I Built a Decider and Measured It
 
@@ -16407,6 +16529,116 @@ Machine traffic isn't going back down. The organisations that treat it as an aud
 Stop fighting the machines. Start governing their experience.
 
 If you want to know what agents currently see when they visit you, and what it's costing both sides, an MX audit tests your live site the way the machines read it and reports back in a form you can verify yourself.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
+## The Cheapest Bot Is an Honest One | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/the-cheapest-bot-is-an-honest-one.html
+
+**Description:** Most of your traffic is machines now, and the reflex is to meet the cost with a wall. The cheaper move runs the other way: fix the plumbing you built against yourself, serve machines a small structured version of your content, and give the agents that say what they are a fast lane. Save the rate limiter for whoever will not knock.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - The wall is aimed at the wrong thing
+
+        - First, stop paying to be slow to yourself
+
+        - Then make honesty the easy path
+
+        - Legible and cheap are the same property
+
+        - The honest caveat
+
+          The Cheapest Bot Is an Honest One
+
+            28 July 2026
+            ·
+            Tom Cranstoun
+            ·
+            6 min read
+
+Most of what visits your website now isn't a person. A large and growing part of your traffic is machines, and the direction is only one way. Every one of those visits costs you something real: origin load, bandwidth, the compute behind a render, the crawl budget you were saving for the pages that matter. The bill is machine-shaped, and it's growing.
+
+The usual response is a wall. Fingerprint the traffic, score it, and block whatever looks automated. That works, and it's also where I want to push back.
+
+The wall is aimed at the wrong thing
+
+Start with which machines are actually expensive.
+
+The crawlers that identify themselves are the easy ones. A search engine's crawler, one of the named AI crawlers, a partner's integration: they announce themselves, they behave, they respect a rate limit, and you can plan for them. Predictable machines are cheap to serve.
+
+The expensive visits are the ones that hide. A scraper wearing a copied browser user agent. A monitoring script pretending to be a person. You pay for these not because they're clever but because you can't tell them apart from a real visitor, so you hand them the whole heavy page each time they call.
+
+So the cost isn't that machines visit; it's that some of them won't say what they are. A firewall rule treats the whole machine web as the threat, then spends forever trying to guess which visitor is lying. Scrapers rotate their addresses and copy fresh fingerprints the week after you block the old ones. It's a treadmill, and you don't get off it by running faster.
+
+First, stop paying to be slow to yourself
+
+Before blaming anyone outside, look at what your own stack is doing. A surprising amount of machine cost is self-inflicted:
+
+- Dead pages answered with a success code instead of a "not found", so every broken-link probe and scraper miss counts as a live page served.
+
+- Uptime checks that fetch a whole page every minute when a lightweight header request would answer the same question.
+
+- A proxy somewhere in the chain that strips the original user agent, so the honest crawlers you meant to wave through arrive looking anonymous, and get served the expensive way after all.
+
+That isn't a bot problem. It's plumbing, and fixing it costs nothing but attention. Do this first. It's the least glamorous part of the work and often the largest number on the page.
+
+Then make honesty the easy path
+
+Here's the move I'd make instead of building the wall higher.
+
+You can't tell an honest agent from a scraper by guessing harder. You can tell them apart by giving the honest one a cheaper, better path it'll actually take, and letting your rate limiter handle whoever refuses it.
+
+Two parts to that.
+
+Serve machines the cheap version. An agent that wants your content doesn't need your fonts, your analytics, your consent banner, or the JavaScript that assembles the page inside a browser. It needs the content. Give it a light, structured representation, clean markdown or a JSON view or a description file it can read directly, and a well-behaved agent will take that instead of rendering the heavy page. That's cheaper for you and better for the agent at once. Nobody loses. And the scraper that insists on rendering the whole thing anyway is now the obvious outlier, easy to slow down without touching anyone real.
+
+Price honesty, don't gate it. You're not banning the anonymous traffic. You're giving the identified traffic the fast lane: the clean structured payload, a fresher cache, a little more room on the rate limit. Whatever won't name itself gets the slow lane. You never have to decide who to block. You make declaring yourself the path of least resistance, and let the rest queue.
+
+Legible and cheap are the same property
+
+The thing worth seeing is that these aren't two projects.
+
+The structured version that lets a machine read your content is the very thing that makes you cheap to serve it. An agent that proves it's well-behaved hands you the same signal that lets you shape traffic without a fight. Readable by a machine and cheap to serve it are one property, seen from two sides.
+
+This is most of what we mean by machine experience: a page, a document, a feed that says plainly what it holds and how to use it. The payoff people reach for first is that agents can then understand you, cite you correctly, act on your content, send you the customer. The quieter payoff is the one on the invoice. A machine that reads you in a single small fetch is the cheap kind. The machine that announces itself and its purpose is the one you can safely wave through.
+
+The honest caveat
+
+This is a slower fix than a firewall rule, and I won't pretend otherwise. A rule at the edge cuts your bill straight away. The structured route cuts it for good, but only once you've built it and meant it, which is real work.
+
+There's a reason to prefer it beyond cost. The machine web isn't going to get smaller. Today's anonymous scraper is sometimes tomorrow's paying customer's shopping agent, sent to buy from you. A strategy whose only tool is "block what I don't recognise" is at war with its own future traffic. Better to build the front door than to keep raising the wall.
+
+None of this is only theory. You can watch the honest-and-hiding split get measured in the open. One independent experiment runs honeypot paths blocked in its robots.txt and publishes, live, the crawlers that respect the rule and the ones that trip the trap. The column worth watching verifies a crawler's cryptographic signature, and that's the part that answers an objection I stepped past. A copied user agent buys anonymity; a signed request doesn't, and the honest crawlers are starting to sign. Once an agent can prove its identity rather than just assert it, a scraper can't fake its way into the fast lane.
+
+You can spend the next few years getting better at spotting the liars. Or you can make honesty the easy path, serve the honest ones cheaply, and keep the wall for whoever still won't knock.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-09-29.
 
             About the author
 
@@ -28049,4 +28281,4 @@ MX
 
         For commissioning AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
 
-<!-- x-mx-sourceHash: acd2df88121d956a1e5922936d07f53bfd58d678cddf90389a0312e0bf3d37c2 -->
+<!-- x-mx-sourceHash: a8b370d2e012799701dd554ddae709d91ed82e1109dbe0684de70a44928a0a1d -->

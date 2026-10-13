@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.42'
+version: '6.7'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-10-09'
+modified: '2026-10-13'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -137,6 +137,27 @@ mx:
           example: <meta name='mx:contentType' content='field-dictionary'>
           rationale: The meta tag carries the field's own name; a reader compares strings and converts nothing.
           enforcement: mandatory (Gate 117, scripts/check-mx-carrier-names.cjs)
+        html-element:
+          syntax: 'data-mx-<word> attribute on the element that acts; camelCase members inside the value'
+          example: >-
+            <button data-mx-action="cancelBooking" data-mx-effect="Cancels the booking and refunds 40 GBP"
+            data-mx-security="riskLevel: critical; reversibility: irreversible; guardrail: human-approval">Cancel</button>
+          attributes:
+            data-mx-action: The action's id, the same value as execute.actions[].id in an action-cog. Case-sensitive.
+            data-mx-effect: The effect field.
+            data-mx-security: >-
+              The security block. Inline form as name: value pairs separated by semicolons, the members spelled as
+              the open security block spells them; a value with no colon names a profile from securityProfiles, as
+              the string form does in YAML.
+          rationale: >-
+            HTML lowercases attribute names, so a camelCase name cannot survive as an attribute (data-mx-riskLevel is
+            read as data-mx-risklevel). Each attribute name is one lowercase word, and the camelCase names travel in
+            the value, where case is kept. One spelling still holds in every carrier.
+          scope: >-
+            Declared on the element a person or agent activates (a button, a link, a form) so the declaration sits
+            where the action is taken. A reader never infers an action, its effect, or its risk from the label or the
+            markup; an element that acts with no data-mx-action is one a reader may not use unattended.
+          enforcement: mandatory
         jsdoc:
           syntax: 'camelCase with @mx: tag'
           example: '@mx:contentType script'
@@ -388,9 +409,9 @@ mx:
       - expires
       - maintainedDate
     scoreFields:
-      - performanceScore
-      - llmSuitabilityScore
-      - seoScore
+      - x-mx-performanceScore
+      - x-mx-llmSuitabilityScore
+      - x-mx-seoScore
     lenientEnums:
       - field: blocks
         reason: >-
@@ -399,6 +420,165 @@ mx:
     excludeFromTopLevel:
       rule: 'Auto: any field whose name contains ''.'''
   deprecations:
+    - old: email
+      replacement: x-mx-email
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: lastContact
+      replacement: x-mx-lastContact
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: location
+      replacement: x-mx-location
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: nextActionDate
+      replacement: x-mx-nextActionDate
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: offering
+      replacement: x-mx-offering
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: pipelineStage
+      replacement: x-mx-dealStage
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: sentAt
+      replacement: x-mx-sentAt
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: social
+      replacement: x-mx-social
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: durationSeconds
+      replacement: x-mx-durationSeconds
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: filesChecked
+      replacement: x-mx-filesChecked
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: filesInvalid
+      replacement: x-mx-filesInvalid
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: filesValid
+      replacement: x-mx-filesValid
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: totalErrors
+      replacement: x-mx-totalErrors
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: totalWarnings
+      replacement: x-mx-totalWarnings
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: validationTarget
+      replacement: x-mx-validationTarget
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: a11yIssues
+      replacement: x-mx-a11yIssues
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: accessibilityScore
+      replacement: x-mx-accessibilityScore
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: agentAction
+      replacement: x-mx-agentAction
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: agentReadabilityScore
+      replacement: x-mx-agentReadabilityScore
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: auditCommand
+      replacement: x-mx-auditCommand
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: auditDate
+      replacement: x-mx-auditDate
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: auditTool
+      replacement: x-mx-auditTool
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: client
+      replacement: x-mx-client
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: clientSlug
+      replacement: x-mx-clientSlug
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: clientUrl
+      replacement: x-mx-clientUrl
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: contentFilename
+      replacement: x-mx-contentFilename
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: htmlPagesAudited
+      replacement: x-mx-htmlPagesAudited
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: lastUpdated
+      replacement: x-mx-lastUpdated
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: llmServedHtmlScore
+      replacement: x-mx-llmServedHtmlScore
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: llmSuitabilityScore
+      replacement: x-mx-llmSuitabilityScore
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: pageSetSha256
+      replacement: x-mx-pageSetSha256
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: pagesAudited
+      replacement: x-mx-pagesAudited
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: performanceScore
+      replacement: x-mx-performanceScore
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: pipelineVersion
+      replacement: x-mx-pipelineVersion
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: probeVersions
+      replacement: x-mx-probeVersions
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: reportId
+      replacement: x-mx-reportId
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: reportType
+      replacement: x-mx-reportType
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: seoScore
+      replacement: x-mx-seoScore
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: arrProjection
+      replacement: x-mx-arrProjection
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: channel
+      replacement: x-mx-channel
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: event
+      replacement: x-mx-event
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: generatedBy
+      replacement: x-mx-generatedBy
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: maintenance
+      replacement: x-mx-maintenance
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: marketSize
+      replacement: x-mx-marketSize
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: nextAction
+      replacement: x-mx-nextAction
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: pitchAsk
+      replacement: x-mx-pitchAsk
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: pitchType
+      replacement: x-mx-pitchType
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: presentationFor
+      replacement: x-mx-presentationFor
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: provenance
+      replacement: x-mx-provenance
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: recipient
+      replacement: x-mx-recipient
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: theme
+      replacement: x-mx-theme
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: thread
+      replacement: x-mx-thread
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
+    - old: valuation
+      replacement: x-mx-valuation
+      notes: A vendor field carries the vendor prefix; the vendor dictionaries hold no bare names.
     - old: x-mx-corroboratedBy
       replacement: corroboratedBy
       notes: >-
@@ -495,12 +675,125 @@ mx:
     - old: x-mx-mount-upstream
       replacement: x-mx-mountUpstream
       notes: Renamed with x-mx-mount-type under NDR-14.
+    - old: x-mx-provenanceOrigin
+      replacement: provenanceOrigin
+      notes: FC8 fold. Same item as the core field (how the content was created); one name.
+    - old: x-mx-refersToExternal
+      replacement: refersToExternal
+      notes: >-
+        FC8 fold. Same item as the core field (external works cited). The private x-mx-p-refersToExternal is a
+        deliberate private twin and is not folded.
+    - old: x-mx-relatedTo
+      replacement: relatedTo
+      notes: FC8 fold. Same item as the core field (sibling documents and resources); one name.
+    - old: x-mx-cogId
+      replacement: cogId
+      notes: FC8 fold. Same item as the core field (the cog's registry identifier); one name.
+    - old: x-mx-accessibility
+      replacement: accessibility
+      notes: FC8 fold. Same item as the core field (accessibility level or metadata); one name.
+    - old: x-mx-convergence
+      replacement: convergence
+      notes: FC8 fold. Same item as the core field (human and machine convergence); one name.
     - old: x-mx-policy
       replacement: x-mx-policyScope
       notes: >-
         A policy cog's governed scope (paths, boundary type, invariants) shared its name with the core policy field
         (content handling rules for agents, inherited through effective-doc resolution). They are different items, so
         the vendor block takes its own name and the core field is unchanged.
+    - old: x-mx-domain
+      replacement: domain
+      notes: >-
+        Extension names never match a standard name. The folder generator's subject area was always the standard
+        domain field under a vendor prefix; one name. scripts/migrate-extension-clash.cjs holds the rename table.
+    - old: x-mx-ai
+      replacement: ai
+      notes: >-
+        Same-name extension. An access-policy block (preferred-access, content-policy, freshness) is the standard ai
+        field; a summary block for AI readers (summary, key_concepts) is x-mx-aiBrief, split by shape in
+        scripts/migrate-extension-clash.cjs.
+    - old: x-mx-cogType
+      replacement: cogType
+      notes: >-
+        Same-name extension, same item; action.scripted and action.sop fold to action (actionType carries the
+        subtype). The COGS governance classification (cogs) is x-mx-governanceClass.
+    - old: x-mx-attestation
+      replacement: attestation
+      notes: Same-name extension, same item (the registry's attestation record).
+    - old: x-mx-temporalStance
+      replacement: temporalStance
+      notes: Same-name extension, same item.
+    - old: x-mx-temporalAnchors
+      replacement: temporalAnchors
+      notes: Same-name extension, same item; check-regulatory-claims.cjs reads the standard name.
+    - old: x-mx-temporalComputedFields
+      replacement: temporalComputedFields
+      notes: Same-name extension, same item.
+    - old: x-mx-temporalProseGuidance
+      replacement: temporalProseGuidance
+      notes: Same-name extension, same item.
+    - old: x-mx-aiTraining
+      replacement: aiTraining
+      notes: Same-name extension, same item (allowed, prohibited, conditional).
+    - old: x-mx-aiTrainingConditions
+      replacement: aiTrainingConditions
+      notes: Same-name extension, same item.
+    - old: x-mx-contentType
+      replacement: contentType
+      notes: Same-name extension, same item.
+    - old: x-mx-workflowId
+      replacement: workflowId
+      notes: Same-name extension, same item.
+    - old: x-mx-metadataFields
+      replacement: metadataFields
+      notes: Same-name extension, same item.
+    - old: x-mx-format
+      replacement: x-mx-talkFormat
+      notes: The form of a talk (lightning talk, keynote), a different item from the standard format (a media type).
+    - old: x-mx-usage
+      replacement: x-mx-usagePolicy
+      notes: A structured agent-usage policy block, a different item from the free-form standard usage classification.
+    - old: x-mx-classification
+      replacement: x-mx-dataSensitivity
+      notes: A data-sensitivity label (pii), a different item from the standard content classification.
+    - old: x-mx-p-partOf
+      replacement: x-mx-p-engagement
+      notes: The private engagement a CRM document belongs to, named in words, a different item from the standard partOf.
+    - old: x-mx-p-refersTo
+      replacement: x-mx-p-relatedWork
+      notes: Related work named in words; the standard refersTo holds repo-root paths a link gate resolves.
+    - old: x-mx-p-refersToExternal
+      replacement: x-mx-p-externalParties
+      notes: The outside organisations a private agreement names, a different item from the standard refersToExternal.
+    - old: x-mx-pipelineStage
+      replacement: x-mx-reportStage
+      notes: The namespace example's report pipeline stage, a different item from a contact's pipelineStage.
+    - old: x-mx-members
+      replacement: x-mx-memberContacts
+      notes: The people an organisation contact groups, a different item from a folder descriptor's members.
+    - old: x-mx-reviewedAt
+      replacement: x-mx-draftReviewedAt
+      notes: When a message draft was last reviewed, a different item from a workflow's reviewedAt.
+    - old: x-mx-concepts
+      replacement: x-mx-conceptTiers
+      notes: A primary and secondary concept block, a different item from the flat concepts list.
+    - old: x-mx-p-updateInstructions
+      replacement: x-mx-p-revisionRules
+      notes: How a private agreement may be revised, kept private.
+    - old: x-mx-p-pipelineStage
+      replacement: x-mx-p-dealStage
+      notes: A contact's pipeline position kept private, apart from the shared pipelineStage.
+    - old: x-mx-p-nextActionDate
+      replacement: x-mx-p-followUpDate
+      notes: The date of a private follow-up, apart from the shared nextActionDate.
+    - old: x-mx-p-offering
+      replacement: x-mx-p-offerMade
+      notes: What was offered to a contact, kept private, apart from the shared offering.
+    - old: x-mx-blocks
+      replacement: blocks
+      notes: >-
+        Two items under one name: the list of block-type names is the standard blocks field, block-content payloads
+        are x-mx-blockContent. scripts/migrate-x-mx-blocks.cjs splits by value shape; run it, not a plain rename.
     - old: x-mx-riskLevel
       replacement: security.riskLevel
       notes: >-
@@ -546,7 +839,9 @@ mx:
       replacement: aiAssistance
       notes: >-
         aiAssistance is an open-standard field declared in this dictionary; the x-mx- form was a
-        vendor prefix on a standard name, which the extensions standard forbids. ADR 63.
+        vendor prefix on a standard name, which the extensions standard forbids. ADR 63. Only a
+        permission value (welcome, restricted, prohibited) moves here; an AI-involvement value
+        (unknown, none, used, ai-generated) or a sentence about how AI took part is x-mx-aiInvolvement.
     - old: x-mx-aiEditable
       replacement: aiEditable
       notes: >-
@@ -1189,7 +1484,7 @@ mx:
       narrativeSection: 'Carrier: YAML Frontmatter'
     - format: .cog.html
       metadataLocation: <meta> tags in <head>
-      mxIdentity: <meta name="mx:*"> tags, data-mx-* attributes on elements
+      mxIdentity: <meta name="mx:*"> tags, data-mx-action / data-mx-effect / data-mx-security on elements that act (html-element context)
       nativeBlocks: Schema.org JSON-LD = definition, <meta name='description'> = prose excerpt, <main> = essence
       parsingRule: 'Parse <meta> tags; strip the mx: prefix; the remainder is the camelCase field name (no conversion)'
       backwardCompatible: true
@@ -2041,11 +2336,9 @@ mx:
       optionalIn: [core]
       definition: >-
         Business domain or subject area. In folder metadata, lives under the mx: object and is an identity field (never
-        inherited). Values are context-specific. In the folder profile, the established estate convention writes this
-        as x-mx-domain (the .mx.yaml.md generator's own default); the accepted x-mx- form satisfies the requirement
-        equally, so a folder metadata file need not carry both.
+        inherited). Values are context-specific.
       example: machine-experience
-      notes: Identity field in folder metadata — never inherited. Values are context-specific. In the folder profile, x-mx-domain is an accepted alias.
+      notes: Identity field in folder metadata, never inherited. Values are context-specific. x-mx-domain is its deprecated former name.
       status: canonical
       profile:
         - core
@@ -2839,6 +3132,24 @@ mx:
         block.
       status: canonical
       profile: cog
+    - name: effect
+      type: string
+      authoring: authored
+      inPlainWords: 'Doing this: {value}.'
+      optionalIn: [action, html]
+      definition: >-
+        What carrying out an action changes, in plain words: the state it alters, the money it moves, the message it
+        sends, the record it removes.
+      example: Cancels the booking and refunds 40 GBP to the card used
+      notes: >-
+        The plain-language half of an action declaration; the security block is the machine-checkable half
+        (riskLevel, reversibility, guardrail). A reader shows effect to the human before a guardrail human-approval
+        go-ahead, so it names the consequence, not the mechanism. A read-only action says so (Changes nothing). In an
+        action-cog it sits on each execute.actions[] entry; on an HTML element that acts it is the data-mx-effect
+        attribute (see the html-element carrier context). Never inferred from a button label or a form's markup:
+        an action with no declared effect is one a reader may not run unattended.
+      status: canonical
+      profile: [action, html]
     - name: hasDeterministicScript
       type: boolean
       authoring: authored
@@ -2900,18 +3211,18 @@ mx:
       status: canonical
       profile: cog
     - name: accessibility
-      type: string-or-object
+      type: boolean-string-or-object
       authoring: authored
       optionalIn: [cog, action]
       definition: Accessibility compliance level or detailed accessibility metadata for a cog.
       example: WCAG 2.1 AA
       notes: >-
         Declares the accessibility standard the cog content targets. Used alongside semantic and convergence for content
-        quality scoring.
+        quality scoring; each of the three may be a plain true or false answer, a level, or a structured object.
       status: canonical
       profile: cog
     - name: convergence
-      type: string-or-object
+      type: boolean-string-or-object
       authoring: authored
       optionalIn: [cog, action]
       definition: Convergence score or metadata. Measures how well the cog aligns human and machine experiences.
@@ -4859,7 +5170,7 @@ mx:
       status: canonical
       profile: cog
     - name: semantic
-      type: string-or-object
+      type: boolean-string-or-object
       authoring: authored
       optionalIn: [cog, action]
       definition: >-
@@ -4989,6 +5300,44 @@ mx:
         transaction only and is never reused.
       status: canonical
       profile: personal
+    - name: appliesToSites
+      type: array
+      inPlainWords: 'It applies only on {value}.'
+      authoring: authored
+      optionalIn: [personal]
+      definition: >-
+        The sites a personal cog takes part on, as host patterns: an exact host such as shop.example.com, or a leading
+        wildcard such as *.example.com or *.de that covers the domain and every host under it.
+      example:
+        - '*.de'
+        - shop.example.com
+      notes: >-
+        Absent, the cog applies on every site. Among cogs of the same personalKind that apply on a site, the most
+        specific wins and the others stand down for that site: an exact host beats a wildcard, a longer domain beats a
+        shorter one, and a scoped cog beats an unscoped one. The winner replaces the others whole, so a less specific
+        cog's content never travels under the winner's disclosureTier. A pattern carries no scheme, path or port; a
+        reader treats a cog with a malformed pattern as applying nowhere. Scope narrows where a cog takes part and never
+        widens its disclosure. The patterns are the owner's alone and never travel, because they would tell a site
+        which other sites its visitor uses. With no site known, only unscoped cogs take part.
+      status: canonical
+      profile: personal
+    - name: excludeSites
+      type: array
+      inPlainWords: 'It never applies on {value}.'
+      authoring: authored
+      optionalIn: [personal]
+      definition: >-
+        The sites a personal cog never takes part on, as host patterns in the form appliesToSites uses; an exclusion
+        always beats an inclusion.
+      example:
+        - '*.ads.example'
+      notes: >-
+        Holds whether or not appliesToSites is set, so an unscoped cog can apply everywhere except the sites listed.
+        No inclusion, however specific, overrides an exclusion. A reader treats a cog with a malformed pattern as
+        applying nowhere rather than ignoring the pattern, because a dropped exclusion would widen the cog's reach.
+        Like appliesToSites, the patterns never travel.
+      status: canonical
+      profile: personal
     - name: declaredBy
       type: string
       inPlainWords: 'It was declared by {value}.'
@@ -5027,6 +5376,239 @@ mx:
         history.
       status: canonical
       profile: personal
+    - name: publishedTo
+      type: string
+      inPlainWords: 'It is published to {value}.'
+      authoring: authored
+      optionalIn: [folder]
+      definition: >-
+        Downstream provenance — where this content is published. Can be a relative path within the repository or an
+        external URL. Used by the MX graph to build lineage edges tracing content from source to published destination.
+      example: https://allabout.network/blogs/mx/
+      notes: >-
+        Declared in the mx: block. Never inherited — always per-folder or per-cog. Value can be a path (internal) or URL
+        (external). The MX graph resolves these into publishedTo edges.
+      status: canonical
+      profile:
+        - folder
+        - cog
+    - name: servedAt
+      type: string
+      authoring: defaulted
+      inPlainWords: 'It is published at {value}.'
+      optionalIn: [blog]
+      definition: >-
+        The public URL where the generated page for this source is served. Declared only when the page lives at a
+        non-default path; the Intent CMS generator defaults blog posts to https://mx.allabout.network/blog/<slug>.html.
+      example: https://mx.allabout.network/blog/governance/example-post.html
+      notes: >-
+        Declared in the mx: block of draft-site sources. Optional at the default path; required for series subfolders
+        and other non-default paths.
+      status: canonical
+      profile: cog
+    - name: isGenerated
+      type: boolean
+      inPlainWords: 'A script generated it: {value}.'
+      authoring: defaulted
+      definition: >-
+        True if this content was produced by a deterministic script (not handwritten by a human and not produced by an
+        AI agent). Use when a build step, code generator, or index-generator wrote the file. Machine authorship by an
+        AI agent is declared in provenanceOrigin instead.
+      example: true
+      notes: >-
+        Declared in the mx: block. Default: false (human-authored). Generated files should also carry x-mx-generatedBy
+        (the script path or name) when possible so readers can locate the generator. An AI agent run through a scripted
+        wrapper carries isGenerated: true and provenanceOrigin: ai-generated.
+      status: canonical
+      profile:
+        - folder
+        - cog
+        - any
+      default: false
+    - name: image
+      type: string
+      inPlainWords: 'Its primary image is {value}.'
+      authoring: authored
+      optionalIn: [contact]
+      definition: >-
+        Primary illustrative image — relative repository path or external URL. Used as the social-share preview and the
+        lead visual.
+      example: /images/og-default.png
+      status: canonical
+      profile:
+        - book
+        - blog
+        - any
+    - name: security
+      type: object-or-string
+      authoring: authored
+      inPlainWords: 'Before running it, a reader weighs this security declaration: {value}.'
+      definition: >-
+        Security declaration for an action document: the security block defined in the open standard
+        (fields-data.yaml, blockTypes: security). May be the string name of a profile in the standard's
+        securityProfiles, or an object that writes the block inline or names a profile and tightens it.
+      example:
+        profile: local-write
+        riskLevel: high
+      notes: >-
+        The standard owns the block, its members and the named profiles; this entry only records how CogNovaMX
+        documents carry it. A string is shorthand for {profile: <name>}. Inline members may only tighten the named
+        profile, and Gate 116 refuses an unknown name or a loosening member. See Appendix M for the security block
+        fields and the named profiles.
+      status: canonical
+      profile: cog
+    - name: includes
+      type: array
+      inPlainWords: 'It reuses content from {value}.'
+      authoring: authored
+      optionalIn: [cog, action]
+      definition: >-
+        Cog composition — content reuse without duplication. Array of include declarations, each specifying a source cog
+        (relative path or reginald:<name>), optional block filter, and resolution mode (build or read). Included content
+        is merged into the cog; the including cog's own content overrides included content of the same type.
+      example:
+        - source: shared/validation-policy.cog.md
+          blocks:
+            - sop
+          resolution: build
+      notes: >-
+        Structural composition. Distinct from builds-on (soft recommendation) and requires (hard dependency). See
+        cog-unified-spec Section 3 for full specification including inline @include markers.
+      status: canonical
+      profile: cog
+    - name: deliverable
+      type: object-or-string
+      inPlainWords: 'It delivers {value}.'
+      authoring: authored
+      optionalIn: [cog, action]
+      definition: >-
+        What this cog produces or delivers. Declares the tangible output — a report, a validated artefact, a trained
+        team, a published page. Particularly useful for action-docs where the deliverable is the reason the cog exists.
+      example: validated cog registered in REGINALD
+      notes: >-
+        Declares the output of a cog. For action-docs, describes what running the actions produces. For info-docs,
+        describes the knowledge or artefact the cog represents. Array form for cogs with multiple deliverables.
+      status: canonical
+      profile: cog
+    - name: project
+      type: object
+      inPlainWords: 'The project: {value}.'
+      authoring: authored
+      optionalIn: [folder]
+      definition: Project metadata object. Contains name, description, repository, documentation.
+      example:
+        name: MX Hub
+        repository: https://github.com/...
+      notes: Container for project-level metadata in root folder files.
+      status: canonical
+      profile: folder
+    - name: context
+      type: object
+      inPlainWords: 'Its domain context is {value}.'
+      authoring: authored
+      optionalIn: [folder]
+      definition: Domain context object. Contains domain, purpose, constraints.
+      example:
+        domain: machine-experience
+        purpose: specification
+      notes: Container for domain context in folder metadata.
+      status: canonical
+      profile: folder
+    - name: stack
+      type: object
+      inPlainWords: 'Its technical stack is {value}.'
+      authoring: authored
+      optionalIn: [folder]
+      definition: Technical stack object. Contains language, runtime, version.
+      example:
+        language: javascript
+        runtime: node
+      notes: Container for technical stack information.
+      status: canonical
+      profile: folder
+    - name: agentType
+      type: string
+      inPlainWords: 'Its agentic nature is {value}.'
+      authoring: authored
+      optionalIn: [contact]
+      definition: >-
+        Classification of the subject's agentic nature. Distinct from `contentType` (which describes the document) and
+        `role` (which describes functional hat-wearing).
+      example: ai-agent
+      validValues:
+        - ai-agent
+        - human
+        - organisation
+        - system
+      notes: >-
+        Use when the record describes an actor that can produce actions, send messages, or be the subject of
+        attribution.
+      status: canonical
+      profile:
+        - contact
+    - name: relatedFolders
+      type: array
+      inPlainWords: 'Its related folders are {value}.'
+      authoring: authored
+      optionalIn: [folder]
+      definition: Related folders with path, relationship type, and description.
+      example:
+        - path: ../mx-audit
+          relationship: sibling
+      notes: Array of objects with path, relationship, and description.
+      status: canonical
+      profile: folder
+    - name: mxWatchesFiles
+      type: array
+      inPlainWords: 'It is re-evaluated when these files change: {value}.'
+      authoring: authored
+      optionalIn: [folder]
+      definition: >-
+        Array of file paths this document watches for changes. Used by MX OS to trigger re-evaluation when watched files
+        are modified.
+      example:
+        - ../README.md
+        - ../package.json
+      notes: MX OS monitors these and triggers re-evaluation when they change.
+      status: canonical
+      profile: folder
+    - name: authorship
+      type: string
+      inPlainWords: 'Its authorship is {value}.'
+      authoring: authored
+      requiredIn: [component]
+      definition: 'Authorship classification. Values: solo, collaborative, generated, curated.'
+      status: canonical
+      profile: cog
+    - name: validationStatus
+      type: string
+      authoring: authored
+      inPlainWords: 'Its last validation came out {value}.'
+      example: PASS
+      definition: 'Outcome of the most recent validation of this document or of the run it reports, such as PASS or FAIL. A signal bar can bind to it.'
+      status: canonical
+      profile: component
+    - name: supersedes
+      type: string-or-array
+      authoring: authored
+      inPlainWords: 'It replaces {value}.'
+      definition: >-
+        The document or documents this one replaces, by path, identifier or versioned name. The inverse of
+        supersededBy, so a reader can walk a replacement in either direction.
+      example: mx-machine-readiness@2.1
+      status: canonical
+      profile: cog
+    - name: reviewedBy
+      type: string
+      authoring: authored
+      inPlainWords: 'It was reviewed by {value}.'
+      definition: >-
+        The named person who reviewed this document and accepted or rejected it. Records that a human checked the
+        work; it is never set by the author of the work under review, and a placeholder means nobody has yet.
+      example: Jane Smith
+      notes: Read by chain and evidence-pack checkers, which refuse a card that left Backlog with nobody named here.
+      status: canonical
+      profile: core
   profiles:
     - name: core
       description: Fields that apply to all MX documents.
@@ -5144,6 +5726,8 @@ mx:
         - semantic
         - source
         - updateTriggers
+        - includes
+        - deliverable
         - dependencies
         - cogHeader
         - targetsSpecVersion
@@ -5153,8 +5737,6 @@ mx:
         - produces
         - defaultRemedy
         - actionType
-        - includes
-        - deliverable
         - x-mx-adr
         - x-mx-ndr
         - x-mx-bdr
@@ -5255,6 +5837,7 @@ mx:
         - type
         - resource
         - refersTo
+        - effect
         - accessibility
         - convergence
         - publisher
@@ -5272,6 +5855,8 @@ mx:
         - semantic
         - source
         - updateTriggers
+        - includes
+        - deliverable
         - dependencies
         - cogHeader
         - targetsSpecVersion
@@ -5284,8 +5869,6 @@ mx:
         - modCapabilities
         - modGuarantee
         - testedWith
-        - includes
-        - deliverable
         - x-mx-adr
         - x-mx-ndr
         - x-mx-bdr
@@ -5458,6 +6041,7 @@ mx:
         - tags
         - type
         - resource
+        - effect
         - mx:audience
         - mx:category
         - mx:tags
@@ -5615,12 +6199,12 @@ mx:
         - url
         - schema
         - generate
-        - dependencies
         - image
+        - agentType
+        - dependencies
         - x-mx-createdHash
         - x-mx-contactKind
         - x-mx-pdfDoctype
-        - agentType
         - x-mx-collaborateThread
         - x-mx-collaborateFrom
         - x-mx-collaborateTo
@@ -6297,4 +6881,6 @@ mx:
         - expires
         - disclosesAs
         - discloseFor
+        - appliesToSites
+        - excludeSites
         - declaredBy

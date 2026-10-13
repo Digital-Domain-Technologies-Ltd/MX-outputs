@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Carrier Formats Companion
-version: '5.5'
+version: '5.6'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-10-02'
+modified: '2026-10-12'
 author: The Gathering
 description: >-
   Open standard carrier-format metadata schemas for code (function/class/API/test/inline/dependency/repository).
@@ -470,6 +470,235 @@ mx:
       example: claude-code@2.1.287
       status: canonical
       profile: code-mod
+    - name: ai.contextRequired
+      type: array
+      inPlainWords: 'An AI should read these files before editing it: {value}.'
+      authoring: authored
+      optionalIn: [code-file, code-class]
+      definition: Files AI should read before editing this one.
+      example:
+        - src/types/user.ts
+        - src/config/schema.ts
+      notes: Prevents AI from making changes without understanding dependencies.
+      status: canonical
+      profile:
+        - code-file
+        - code-function
+        - code-class
+    - name: ai.contextProvides
+      type: array
+      inPlainWords: 'Other files depend on these concepts it defines: {value}.'
+      authoring: authored
+      optionalIn: [code-file]
+      definition: Concepts this file defines that other files depend on.
+      example:
+        - User type definitions
+        - Validation rules
+      status: canonical
+      profile: code-file
+    - name: ai.generationNotes
+      type: string
+      inPlainWords: 'An AI generating similar code should note: {value}.'
+      authoring: authored
+      optionalIn: [code-file]
+      definition: Guidance for AI generating similar code.
+      example: Follow the repository's error handling pattern using Result types
+      status: canonical
+      profile:
+        - code-file
+        - code-function
+    - name: ai.reason
+      type: string
+      inPlainWords: 'AI restrictions on it exist because {value}.'
+      authoring: authored
+      optionalIn: [code-file, code-function, code-class]
+      definition: Explanation for AI restrictions on this resource.
+      example: Handles authentication tokens — changes require security review
+      notes: Used with ai.editable, ai.doNotModify, ai.sensitive to explain WHY.
+      status: canonical
+      profile:
+        - code-file
+        - code-function
+        - code-class
+    - name: ai.confidence
+      type: number
+      inPlainWords: 'Confidence in its correctness is {value}.'
+      authoring: authored
+      optionalIn: [code-function, code-class]
+      definition: Confidence in implementation correctness (0-1).
+      example: 0.9
+      notes: 0.9 = high confidence, 0.5 = uncertain, below 0.5 = needs review.
+      status: canonical
+      profile:
+        - code-function
+        - code-class
+    - name: ai.testCoverage
+      type: boolean
+      inPlainWords: 'It has test coverage: {value}.'
+      authoring: authored
+      optionalIn: [code-function]
+      definition: Whether this function has test coverage.
+      example: true
+      status: canonical
+      profile: code-function
+    - name: ai.edgeCases
+      type: array
+      inPlainWords: 'Its known edge cases are {value}.'
+      authoring: authored
+      optionalIn: [code-function, code-test]
+      definition: Known edge cases and expected behaviour.
+      example:
+        - Empty cart returns 0
+        - Negative discounts are rejected
+      status: canonical
+      profile:
+        - code-function
+        - code-test
+    - name: ai.refactorNotes
+      type: string
+      inPlainWords: 'Refactoring it should follow: {value}.'
+      authoring: authored
+      optionalIn: [code-function]
+      definition: Guidance for refactoring this function.
+      example: Extract discount logic to separate module when discount types exceed 5
+      status: canonical
+      profile: code-function
+    - name: ai.doNotModify
+      type: boolean
+      inPlainWords: 'An AI must not change it: {value}.'
+      authoring: authored
+      optionalIn: [code-function, code-class]
+      definition: AI should not change this function.
+      example: true
+      status: canonical
+      profile:
+        - code-function
+        - code-class
+    - name: ai.sensitive
+      type: boolean
+      inPlainWords: 'It handles sensitive data: {value}.'
+      authoring: authored
+      optionalIn: [code-class, code-api]
+      definition: Whether this class or resource handles sensitive data.
+      example: true
+      status: canonical
+      profile:
+        - code-class
+        - code-api
+    - name: ai.modificationImpact
+      type: string
+      inPlainWords: 'Changing it may break {value}.'
+      authoring: authored
+      optionalIn: [code-class]
+      definition: What might break if this class changes.
+      example: All authentication flows depend on this class
+      status: canonical
+      profile: code-class
+    - name: ai.replacementPermitted
+      type: boolean
+      inPlainWords: 'An AI may suggest replacing this dependency: {value}.'
+      authoring: authored
+      optionalIn: [code-dependency]
+      definition: Whether AI may suggest replacing this dependency.
+      example: false
+      status: canonical
+      profile: code-dependency
+    - name: ai.upgradePermitted
+      type: boolean
+      inPlainWords: 'An AI may suggest upgrading this dependency: {value}.'
+      authoring: authored
+      optionalIn: [code-dependency]
+      definition: Whether AI may suggest upgrading this dependency.
+      example: true
+      status: canonical
+      profile: code-dependency
+    - name: ai.generationPermitted
+      type: boolean
+      inPlainWords: 'An AI may generate tests for it: {value}.'
+      authoring: authored
+      optionalIn: [code-test]
+      definition: Whether AI may generate tests for this module.
+      example: true
+      status: canonical
+      profile: code-test
+    - name: ai.mustCover
+      type: array
+      inPlainWords: 'Its tests must cover {value}.'
+      authoring: authored
+      optionalIn: [code-test]
+      definition: Scenarios that tests must cover.
+      example:
+        - empty input
+        - maximum values
+        - concurrent access
+      status: canonical
+      profile: code-test
+    - name: ai.doNotMock
+      type: array
+      inPlainWords: 'Its tests must not mock {value}.'
+      authoring: authored
+      optionalIn: [code-test]
+      definition: Dependencies that should not be mocked in tests.
+      example:
+        - database
+        - auth-service
+      status: canonical
+      profile: code-test
+    - name: ai.safeToCall
+      type: boolean
+      inPlainWords: 'An AI agent may call this endpoint: {value}.'
+      authoring: authored
+      optionalIn: [code-api]
+      definition: Whether AI agents may call this API endpoint.
+      example: true
+      notes: false means AI should never invoke this endpoint autonomously.
+      status: canonical
+      profile:
+        - code-api
+    - name: ai.testMode
+      type: string
+      inPlainWords: 'Its test mode is {value}.'
+      authoring: authored
+      optionalIn: [code-api]
+      definition: Test mode availability for API endpoint.
+      example: 'Use X-Test-Mode: true header'
+      status: canonical
+      profile: code-api
+    - name: ai.sensitiveRequestFields
+      type: array
+      inPlainWords: 'Its sensitive request fields are {value}.'
+      authoring: authored
+      optionalIn: [code-api]
+      definition: Request fields that contain sensitive data.
+      example:
+        - password
+        - creditCard
+      status: canonical
+      profile: code-api
+    - name: ai.sensitiveResponseFields
+      type: array
+      inPlainWords: 'Its sensitive response fields are {value}.'
+      authoring: authored
+      optionalIn: [code-api]
+      definition: Response fields that contain sensitive data.
+      example:
+        - ssn
+        - bankAccount
+      status: canonical
+      profile: code-api
+    - name: ai.sideEffects
+      type: array
+      inPlainWords: 'Calling it has these side effects: {value}.'
+      authoring: authored
+      optionalIn: [code-api]
+      definition: Side effects of calling this API endpoint.
+      example:
+        - Creates order record
+        - Sends confirmation email
+        - Charges payment method
+      status: canonical
+      profile:
+        - code-api
   profiles:
     # `script` profile intentionally not declared here. fields-data.yaml carries
     # the evidence-grounded version. scripts/cog-field-rules.js (the engine

@@ -6,7 +6,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
-modified: 2026-07-29
+modified: 2026-10-10
 created: 2026-01-22
 description: "Quick reference guide for AI assistants generating HTML, covering data attributes, core rules, and semantic patterns."
 
@@ -14,6 +14,9 @@ title: 'Appendix E: AI Patterns Quick Reference'
 tags: [quick-reference, mx-patterns, data-attributes, semantic-markup, validation, state-management]
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
+  quotes:
+    - "Quick reference for AI assistants generating HTML that works for both humans and machines. Use explicit state, semantic markup, and machine-readable data attributes."
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
   book: "Shared"
   appendix: "E"
@@ -30,7 +33,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -175,12 +178,11 @@ machines.</p>
 <h2 id="core-rules">Core Rules</h2>
 <ol type="1">
 <li>State goes in data attributes, not just CSS classes</li>
-<li>Errors persist until fixed - no toast notifications</li>
-<li>All information on one page - avoid pagination</li>
-<li>Prices shown are complete and upfront - no "from £X"</li>
-<li>Forms validate synchronously - show all errors at once</li>
-<li>Use semantic HTML elements - nav, main, article, section,
-dialog</li>
+<li>Errors persist until fixed; no toast notifications</li>
+<li>All information on one page; avoid pagination</li>
+<li>Prices shown are complete and upfront; no "from £X"</li>
+<li>Forms validate synchronously; show all errors at once</li>
+<li>Use semantic HTML elements: nav, main, article, section, dialog</li>
 </ol>
 <hr />
 <h2 id="the-three-roles-an-ai-plays">The Three Roles an AI Plays</h2>
@@ -213,7 +215,7 @@ of three roles, and they behave differently.</p>
 <tr>
 <td>Persistent brain</td>
 <td>An identity riding on whichever engine is current</td>
-<td>The work, held in files in the repository, not in the engine</td>
+<td>The work, held in the project's own files, not in the engine</td>
 </tr>
 </tbody>
 </table>
@@ -722,9 +724,8 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Quantity with explicit unit --&gt;</span></span>
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">data</span><span class="ot"> value</span><span class="op">=</span><span class="st">&quot;5&quot;</span><span class="ot"> data-unit</span><span class="op">=</span><span class="st">&quot;kg&quot;</span><span class="dt">&gt;</span>5 kg<span class="dt">&lt;/</span><span class="kw">data</span><span class="dt">&gt;</span></span></code></pre></div>
-<p>The <code>value</code> attribute carries the machine value; the
-element content carries the display. Agents read <code>value</code>;
-humans read the content.</p>
+<p>Agents read the machine value from the <code>value</code> attribute;
+humans read the display text in the element content.</p>
 <h3 id="table-with-data">Table with Data</h3>
 <div class="sourceCode" id="cb17" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">table</span><span class="dt">&gt;</span></span>
@@ -801,20 +802,20 @@ typed edges to other pages.</p>
 directory:</p>
 <p><strong>Platform Configurations:</strong></p>
 <ul>
-<li>Apache: <code>code-examples/apache/.htaccess</code> - HTTP Link
-headers</li>
+<li>Apache: <code>code-examples/apache/.htaccess</code> (HTTP Link
+headers)</li>
 <li>Nginx: <code>code-examples/nginx/ai-headers.conf</code> +
-<code>rate-limiting.conf</code> - Headers and rate limiting</li>
-<li>Next.js: <code>code-examples/nextjs/</code> - Config, components,
-API routes</li>
-<li>WordPress: <code>code-examples/wordpress/</code> - PHP functions
-with <code>posts_per_page</code> (not deprecated
+<code>rate-limiting.conf</code> (headers and rate limiting)</li>
+<li>Next.js: <code>code-examples/nextjs/</code> (config, components, API
+routes)</li>
+<li>WordPress: <code>code-examples/wordpress/</code> (PHP functions with
+<code>posts_per_page</code>, not deprecated
 <code>numberposts</code>)</li>
-<li>Adobe EDS: <code>code-examples/eds/helix-query.yaml</code> - Query
-index</li>
+<li>Adobe EDS: <code>code-examples/eds/helix-query.yaml</code> (query
+index)</li>
 <li>Static Sites:
-<code>code-examples/static-site/generate-index.js</code> - Universal
-generator</li>
+<code>code-examples/static-site/generate-index.js</code> (universal
+generator)</li>
 </ul>
 <p><strong>Validation &amp; Monitoring:</strong></p>
 <ul>
@@ -828,11 +829,16 @@ generator</li>
 <li>Analytics:
 <code>code-examples/monitoring/analytics-tracking.js</code></li>
 </ul>
-<p>All examples use 2025 AI agent user-agents: GPTBot, ClaudeBot,
-PerplexityBot, OAI-SearchBot, google-extended, anthropic-ai, cohere-ai,
-DeepSeek-Bot, Gemini-Bot.</p>
+<p>The examples match these AI agent user-agent names: GPTBot,
+ClaudeBot, PerplexityBot, OAI-SearchBot, anthropic-ai, cohere-ai, plus
+the illustrative placeholders DeepSeek-Bot and Gemini-Bot, which no
+operator documents as a crawler name. Check each name against the
+operator's own documentation before relying on it, because crawler names
+change. <code>Google-Extended</code> also appears in the robots.txt
+examples. It is a robots.txt product token, not a user-agent string sent
+with requests.</p>
 <p><strong>HTTP Link Header Format (RFC 8288)</strong>: Angle brackets
-wrap URI only - parameters go outside. Example:
+wrap the URI only; parameters go outside. Example:
 <code>Link: &lt;https://site.com/llms.txt&gt;; rel="llms-txt"</code></p>
 <hr />
 <h2 id="do-not">Do Not</h2>

@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Cog Layer
-version: '1.11'
+version: '1.12'
 created: 2026-04-27
-modified: '2026-10-05'
+modified: '2026-10-12'
 author: Tom Cranstoun
 description: >-
   Cog-specific structural vocabulary. Cogs are an OPTIONAL layer on top of MX,
@@ -394,6 +394,20 @@ mx:
       status: canonical
       profile: cog
       description: Per-action security override; the cog-level block is the ceiling.
+
+    - name: execute.actions[].effect
+      type: string
+      authoring: authored
+      definition: >-
+        What carrying out this action changes, in plain words: the effect field for one execute action. A cog whose
+        actions differ declares each one's effect; the HTML carrier of the same value is data-mx-effect.
+      example: Deletes the worktree folder and its local branch
+      notes: >-
+        Pairs with execute.actions[].security: the security block is what a reader checks, effect is what it shows
+        the human before a guardrail human-approval go-ahead. A read-only action declares Changes nothing.
+      status: canonical
+      profile: cog
+      description: What one action changes, in plain words.
 
     - name: execute.route
       type: string

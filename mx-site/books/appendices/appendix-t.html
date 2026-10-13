@@ -6,7 +6,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
-modified: 2026-09-05
+modified: 2026-10-10
 created: 2026-04-10
 description: "Proposed MX field vocabulary - complete reference of standard fields, profiles, naming conventions, inheritance rules, and namespace policy offered to the MX community via tg.community."
 
@@ -14,6 +14,7 @@ title: 'Appendix T: MX Field Dictionary'
 tags: [field-dictionary, metadata, vocabulary, proposed-standard, the-gathering, mx-os, fields, profiles, inheritance]
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
   runbook: |
     This document is copyrighted material. No part may be reproduced without permission.
@@ -28,7 +29,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -149,6 +150,13 @@ Policy</a></li>
 <li><a href="#core-fields" id="toc-core-fields">Core Fields</a></li>
 <li><a href="#relationship-fields"
 id="toc-relationship-fields">Relationship Fields</a></li>
+<li><a href="#component-fields" id="toc-component-fields">Component
+Fields</a></li>
+<li><a href="#ai-management-system-records"
+id="toc-ai-management-system-records">AI Management System
+Records</a></li>
+<li><a href="#personal-cogs" id="toc-personal-cogs">Personal
+Cogs</a></li>
 <li><a href="#cog-fields" id="toc-cog-fields">Cog Fields</a></li>
 <li><a href="#ai-policy-fields" id="toc-ai-policy-fields">AI Policy
 Fields</a></li>
@@ -177,15 +185,20 @@ Community</a></li>
 <h2 id="appendix-t-mx-field-dictionary">Appendix T: MX Field
 Dictionary</h2>
 <p><strong>Purpose:</strong> Complete reference of the proposed MX field
-vocabulary - the standard fields, profiles, naming conventions,
+vocabulary: the standard fields, profiles, naming conventions,
 inheritance model, and namespace policy offered to the MX community via
 <a href="https://tg.community">tg.community</a>. This appendix presents
 the vocabulary as a proposed standard for community review, adoption,
 and governance by The Gathering.</p>
-<p><strong>Status:</strong> Proposed. This vocabulary is in active use
-within the CogNovaMX implementation of MX OS. It is offered to The
-Gathering community as a candidate for standardisation. The canonical
-machine-readable source is <code>mx-canon/ssot/fields.cog.md</code>.</p>
+<p><strong>Status:</strong> Proposed as a whole, with individual field
+families approved by The Gathering: the component fields, the AI
+management system records and the personal cogs, each dated in its own
+section. This vocabulary is in active use within the CogNovaMX
+implementation of MX OS. The remainder is offered to The Gathering
+community as a candidate for standardisation. The canonical
+machine-readable source is the published dictionary at <a
+href="https://mx.allabout.network/canon/fields-data.yaml"
+class="uri">https://mx.allabout.network/canon/fields-data.yaml</a>.</p>
 <hr />
 <h2 id="how-this-dictionary-works">How This Dictionary Works</h2>
 <p>Every MX metadata field has a name, a type, a definition, and a
@@ -194,11 +207,11 @@ function: core identity, relationships, governance, AI policy, folder
 metadata, and specialist profiles.</p>
 <p><strong>Conformance levels:</strong></p>
 <ul>
-<li><strong>Required</strong> - must be present. Tools report errors
-when missing.</li>
-<li><strong>Recommended</strong> - should be present. Tools report
+<li><strong>Required:</strong> must be present. Tools report errors when
+missing.</li>
+<li><strong>Recommended:</strong> should be present. Tools report
 warnings when missing.</li>
-<li><strong>Optional</strong> - may be present. Tools accept silently
+<li><strong>Optional:</strong> may be present. Tools accept silently
 when absent.</li>
 </ul>
 <p><strong>Profiles</strong> determine which fields apply to which
@@ -224,9 +237,8 @@ Vocabularies use camelCase.</p>
 English differ, use an abbreviation or synonym that avoids the
 conflict.</p>
 <ul>
-<li><code>org</code> (not organisation/organization) - W3C
-precedent</li>
-<li><code>license</code> (not licence) - SPDX universal standard</li>
+<li><code>org</code> (not organisation/organization): W3C precedent</li>
+<li><code>license</code> (not licence): SPDX universal standard</li>
 <li><code>imagesAudited</code> (not imagesAnalysed/imagesAnalyzed)</li>
 </ul>
 <p>MX is a global standard. Spelling-neutral names prevent regional
@@ -255,18 +267,18 @@ formats:</p>
 </tr>
 <tr>
 <td>HTML meta tags</td>
-<td>kebab-case with <code>mx:</code> prefix</td>
+<td>camelCase with <code>mx:</code> prefix</td>
 <td><code>&lt;meta name="mx:contentType" content="field-dictionary"&gt;</code></td>
 </tr>
 <tr>
 <td>JSDoc comments</td>
-<td>kebab-case with <code>@mx:</code> tag</td>
-<td><code>@mx:runtime node</code></td>
+<td>camelCase with <code>@mx:</code> tag</td>
+<td><code>@mx:contentType script</code></td>
 </tr>
 <tr>
 <td>CSS comments</td>
-<td>kebab-case with <code>@mx:</code> comment</td>
-<td><code>/* @mx:type utility */</code></td>
+<td>camelCase with <code>@mx:</code> comment</td>
+<td><code>/* @mx:contentType theme */</code></td>
 </tr>
 <tr>
 <td>Shell comments</td>
@@ -286,12 +298,13 @@ standard namespace.</p>
 <hr />
 <h2 id="two-zone-metadata-structure">Two-Zone Metadata Structure</h2>
 <p>Every MX document uses a two-zone frontmatter model:</p>
-<p><strong>Zone 1 - Document identity (top-level):</strong>
+<p><strong>Zone 1, document identity (top-level):</strong>
 <code>title</code>, <code>description</code>, <code>author</code>,
-<code>created</code>, <code>modified</code>, <code>version</code>.
-Always explicit. Never nested under <code>mx:</code>.</p>
-<p><strong>Zone 2 - MX-operational (under <code>mx:</code>):</strong>
-Everything else - <code>status</code>, <code>contentType</code>,
+<code>created</code>, <code>modified</code>, <code>version</code>, and
+the optional <code>category</code>. Always explicit. Never nested under
+<code>mx:</code>.</p>
+<p><strong>Zone 2, MX-operational (under <code>mx:</code>):</strong>
+Everything else: <code>status</code>, <code>contentType</code>,
 <code>tags</code>, <code>audience</code>, <code>runbook</code>, AI
 policy fields, and all governance metadata.</p>
 <div class="sourceCode" id="cb1" data-role="code-container"><pre
@@ -299,8 +312,8 @@ class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Document Title&quot;</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Brief summary for search and AI agents&quot;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Tom Cranstoun&quot;</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">created</span><span class="kw">:</span><span class="at"> 2026-02-24</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">modified</span><span class="kw">:</span><span class="at"> 2026-03-03</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">created</span><span class="kw">:</span><span class="at"> </span><span class="bn">2026-02-24</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">modified</span><span class="kw">:</span><span class="at"> </span><span class="bn">2026-03-03</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1.0&quot;</span></span>
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
@@ -356,14 +369,15 @@ optional fields as their documented default value.</p>
 <hr />
 <h2 id="namespace-policy">Namespace Policy</h2>
 <p>MX uses a three-level attribute namespace, and the prefix IS the
-policy - no additional visibility markers are needed. Standard fields
+policy; no additional visibility markers are needed. Standard fields
 carry no prefix, belong to The Gathering open standard, and are the
 subject of this dictionary. A vendor extending MX declares its fields
 under its own prefix, so an extension never squats on the shared
 namespace.</p>
 <p>The three levels, the prefix rule, and the way it adapts to each
-carrier are set out in Appendix M, "Namespace policy". This dictionary
-covers the standard vocabulary only.</p>
+carrier are set out in the "Namespace policy" section of Appendix M:
+Index of Metadata. This dictionary covers the standard vocabulary
+only.</p>
 <hr />
 <h2 id="core-fields">Core Fields</h2>
 <p>These fields apply to all MX documents regardless of type. Profile:
@@ -428,16 +442,46 @@ file content changes.</td>
 <code>1.0</code> being parsed as a number). Lives in frontmatter, never
 in filenames.</td>
 </tr>
+<tr>
+<td><code>citeAs</code></td>
+<td>string</td>
+<td>optional</td>
+<td>The persistent identifier to cite (a DOI, an ARK, a URN, or a stable
+URL). <code>canonicalUri</code> says where the current copy lives;
+<code>citeAs</code> says what to write in a reference list. HTML carrier
+form: <code>&lt;link rel="cite-as"&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>category</code></td>
+<td>string</td>
+<td>recommended on cogs</td>
+<td>The functional grouping a document belongs to (<code>mx-core</code>,
+<code>mx-tool</code>, <code>architecture</code>, <code>manual</code>,
+<code>reference</code>, and the rest of the dictionary's list), declared
+at the top level so a registry or agent groups documents without opening
+the <code>mx:</code> block. A Claude skill file carries the same
+field.</td>
+</tr>
+<tr>
+<td><code>alternateFormats</code></td>
+<td>array</td>
+<td>optional</td>
+<td>The other renderings of the same document, each an object with
+<code>uri</code> and <code>format</code> (IANA media type). HTML carrier
+form: <code>&lt;link rel="alternate" type="..."&gt;</code>. A
+translation is <code>workTranslation</code>, not an alternate
+format.</td>
+</tr>
 </tbody>
 </table>
 <p>The quoting rule on <code>version</code> generalises: any
 string-typed field whose value is written in digits must be quoted, or
-YAML silently converts it - an unquoted <code>version: 1.0</code>
-reaches every consumer as the number <code>1</code>, and
-<code>2.0</code> as <code>2</code>. The string the author wrote is
-unrecoverable after parsing, so the fix belongs at authoring time: quote
-the value (<code>version: "1.0"</code>). MX validators flag the class as
-a <code>number-string</code> warning, and the repair is mechanical (the
+YAML silently converts it. An unquoted <code>version: 1.0</code> reaches
+every consumer as the number <code>1</code>, and <code>2.0</code> as
+<code>2</code>. The string the author wrote is unrecoverable after
+parsing, so the fix belongs at authoring time: quote the value
+(<code>version: "1.0"</code>). MX validators flag the class as a
+<code>number-string</code> warning, and the repair is mechanical (the
 fixer re-quotes the original digits in place).</p>
 <h3 id="lifecycle-and-classification">Lifecycle and Classification</h3>
 <table>
@@ -465,7 +509,20 @@ fixer re-quotes the original digits in place).</p>
 <code>unknown</code>. Decision records add: <code>proposed</code>,
 <code>accepted</code>, <code>rejected</code>, <code>superseded</code>.
 Workflow adds: <code>pending</code>, <code>review</code>,
-<code>approved</code>.</td>
+<code>approved</code>. AI management system records add:
+<code>disputed</code>, <code>withdrawn</code>.</td>
+</tr>
+<tr>
+<td><code>mxSpecVersion</code></td>
+<td>string</td>
+<td>recommended</td>
+<td>The version of the MX specification a document's metadata follows,
+so a machine knows which rules to read it by. Distinct from
+<code>version</code>, the document's own version. MX is the 0.9 draft;
+it leaves draft on 1 January 2027 and reaches the public 1.0 no later
+than 18 months after that. The current value is declared in the header
+of the machine-readable dictionary, as
+<code>mx.specification</code>.</td>
 </tr>
 <tr>
 <td><code>expires</code></td>
@@ -522,6 +579,25 @@ contentType says what it is, purpose says why it exists.</td>
 <td>Business or functional domain. Used for grouping and graph
 queries.</td>
 </tr>
+<tr>
+<td><code>entities</code></td>
+<td>array</td>
+<td>optional</td>
+<td>The named things the document is about, as stable identifiers
+(Wikidata QIDs, ORCID iDs, organisation domains). Aligns with Schema.org
+<code>mentions</code>. Distinct from <code>topic</code> (subject areas)
+and <code>tags</code> (discovery keywords).</td>
+</tr>
+<tr>
+<td><code>contentRating</code></td>
+<td>string</td>
+<td>optional</td>
+<td>Audience suitability (<code>general</code>, <code>mature</code>,
+<code>adult</code>, or a named scheme's value). Aligns with Schema.org
+<code>contentRating</code>; HTML carrier form:
+<code>&lt;meta name="rating"&gt;</code>. Absent means no rating is
+claimed.</td>
+</tr>
 </tbody>
 </table>
 <h3 id="ownership-and-maintenance">Ownership and Maintenance</h3>
@@ -571,10 +647,11 @@ queries.</td>
 <p>The provenance sidecar schema declared at
 <code>https://mx.allabout.network/schemas/provenance-ai/v2</code>
 carries the structured fields a regulator walking from a finding to its
-evidence expects to find. The fields below sit alongside the
-single-block <code>responsiblePerson</code> documented earlier; both
-shapes are written on every output so simple scripts and structured
-readers find the same answers.</p>
+evidence expects to find. The fields below accompany the sidecar's
+single-block <code>responsiblePerson</code>, which mirrors the
+<code>auditOperator</code> entry in <code>parties</code>; both shapes
+are written on every output so simple scripts and structured readers
+find the same answers.</p>
 <table>
 <colgroup>
 <col style="width: 20%" />
@@ -605,7 +682,10 @@ entries per role permitted. Role enum: <code>auditOperator</code>,
 <code>distributor</code>, <code>auditor</code>,
 <code>dataController</code>, <code>dataProcessor</code>,
 <code>dpo</code>, <code>modelDeveloper</code>,
-<code>modelEvaluator</code>.</td>
+<code>modelEvaluator</code>, and the AI management system roles
+<code>systemOwner</code>, <code>riskOwner</code>, <code>assessor</code>,
+<code>approver</code>. The same field and vocabulary are core on any
+document (see AI Management System Records).</td>
 </tr>
 <tr>
 <td><code>frameworks</code></td>
@@ -614,11 +694,10 @@ entries per role permitted. Role enum: <code>auditOperator</code>,
 <td>Regulatory regimes the chain claims relevance to. Each entry carries
 <code>id</code>, <code>title</code>, <code>version</code>,
 <code>jurisdiction</code>, <code>appliesTo</code>, and a reserved
-<code>x-&lt;framework&gt;</code> extension namespace. Default registry
-lives at <code>mx-canon/ssot/registries/ai-regimes.json</code> and
-enumerates thirty regimes; per-audit entries may extend the list or
-downgrade an entry to <code>appliesTo: not-applicable</code> with a
-<code>reason</code>.</td>
+<code>x-&lt;framework&gt;</code> extension namespace. A default registry
+of regimes ships with the implementation; per-audit entries may extend
+the list or downgrade an entry to <code>appliesTo: not-applicable</code>
+with a <code>reason</code>.</td>
 </tr>
 <tr>
 <td><code>runRevision</code></td>
@@ -741,13 +820,13 @@ absolute.</td>
 </tbody>
 </table>
 <h3 id="the-mx-graph">The MX Graph</h3>
-<p>The relationship fields - particularly <code>buildsOn</code>,
-<code>derivedFrom</code>, and <code>publishedTo</code> - form the edges
+<p>The relationship fields, particularly <code>buildsOn</code>,
+<code>derivedFrom</code>, and <code>publishedTo</code>, form the edges
 of a queryable metadata graph. The MX graph builder scans all
 <code>.mx.yaml.md</code> and <code>.cog.md</code> files, resolves
 inheritance chains, and outputs a JSON graph enabling dependency
-queries, lineage tracing, and validation across the entire
-ecosystem.</p>
+queries, lineage tracing, and validation across every repository it
+scans.</p>
 <p><strong>Edge types in the graph:</strong></p>
 <table>
 <colgroup>
@@ -791,6 +870,536 @@ ecosystem.</p>
 </tbody>
 </table>
 <hr />
+<h2 id="component-fields">Component Fields</h2>
+<p>A component is the unit in which an MX-described object reaches a
+reader: a card, a badge, a panel, an inspector view. The MX Component
+Standard defines the fields a rendered component carries so that its
+human reader and its machine reader receive the same metadata. A
+component carries the core and relationship fields above, and optionally
+the fields below. The component kind is a value of the OKF
+<code>type</code> field (<code>component:provenanceBadge</code>,
+<code>component:objectCard</code>,
+<code>component:relationshipLine</code>,
+<code>component:verificationPanel</code>,
+<code>component:narrativeLayer</code>, <code>component:gridMount</code>,
+<code>component:signalBar</code>,
+<code>component:objectInspector</code>); the <code>component</code>
+profile declares the set. Every field is optional.</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 17%" />
+<col style="width: 26%" />
+<col style="width: 35%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Profile</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>attestationRecord</code></td>
+<td>string</td>
+<td>core</td>
+<td>The registry attestation record for this artefact, or a pointer to
+it, naming who published it and when. Points AT a record rather than
+embedding one: the record is itself a data file carrying its own
+signature, digest and inclusion proof. Named
+<code>attestationRecord</code> because <code>attestation</code> already
+means an execution policy inside the security block.</td>
+</tr>
+<tr>
+<td><code>attestationStatus</code></td>
+<td>string</td>
+<td>core</td>
+<td>Whether this artefact has been attested yet:
+<code>unattested</code>, <code>pending</code>, <code>attested</code>,
+<code>withdrawn</code>. Distinct from <code>attestationRecord</code>,
+which says where the attestation is rather than whether there is one. An
+explicit <code>unattested</code> is a considered position; both fields
+absent means nobody has looked.</td>
+</tr>
+<tr>
+<td><code>displayMode</code></td>
+<td>string</td>
+<td>component</td>
+<td>How a provenance badge is rendered: <code>compact</code> or
+<code>expanded</code>. Every trust signal stays one interaction away in
+either mode.</td>
+</tr>
+<tr>
+<td><code>icon</code></td>
+<td>string</td>
+<td>component</td>
+<td>The icon a provenance badge renders, as a URI or a styling token
+name.</td>
+</tr>
+<tr>
+<td><code>verificationChanged</code></td>
+<td>string</td>
+<td>component</td>
+<td>The ISO 8601 timestamp of the last change in the object's
+verification state, conveyed in text before any motion.</td>
+</tr>
+<tr>
+<td><code>preview</code></td>
+<td>string</td>
+<td>component</td>
+<td>The URI of a preview rendering of the object an object card
+represents.</td>
+</tr>
+<tr>
+<td><code>actions</code></td>
+<td>array</td>
+<td>component</td>
+<td>The actions an object card offers, each with <code>name</code>,
+<code>target</code>, <code>verifiability</code>, and an optional
+<code>withheldFrom</code>. A withheld action is declared, never silently
+omitted.</td>
+</tr>
+<tr>
+<td><code>relationshipField</code></td>
+<td>string</td>
+<td>component</td>
+<td>The relationship field a relationship line renders, which is also
+the line's direction.</td>
+</tr>
+<tr>
+<td><code>inferred</code></td>
+<td>boolean</td>
+<td>component</td>
+<td>Whether the rendered relationship was inferred rather than declared
+by the publisher.</td>
+</tr>
+<tr>
+<td><code>visualWeight</code></td>
+<td>string</td>
+<td>component</td>
+<td>The styling token for a relationship line's weight: derived from
+confidence when inferred, fixed when declared.</td>
+</tr>
+<tr>
+<td><code>verificationSummary</code></td>
+<td>string</td>
+<td>component</td>
+<td>A one-line statement of the verification trail's outcome.</td>
+</tr>
+<tr>
+<td><code>verificationSteps</code></td>
+<td>array</td>
+<td>component</td>
+<td>The verification trail, each step with <code>timestamp</code>,
+<code>agent</code>, <code>method</code>, <code>outcome</code>
+(<code>pass</code>, <code>warn</code>, <code>fail</code>,
+<code>skipped</code>).</td>
+</tr>
+<tr>
+<td><code>finalConfidence</code></td>
+<td>number</td>
+<td>component</td>
+<td>Confidence in the trail, 0 to 1. Never a combined trust score.</td>
+</tr>
+<tr>
+<td><code>confidenceMethod</code></td>
+<td>string</td>
+<td>component</td>
+<td>How a confidence value was derived.</td>
+</tr>
+<tr>
+<td><code>cue</code></td>
+<td>string</td>
+<td>component</td>
+<td>A short human-facing note a narrative layer carries beside a
+component.</td>
+</tr>
+<tr>
+<td><code>narrativeContext</code></td>
+<td>string</td>
+<td>component</td>
+<td>The URI of fuller editorial context a narrative layer points a human
+reader to. Distinct from <code>context</code>, the folder-metadata
+domain object.</td>
+</tr>
+<tr>
+<td><code>gridUnit</code></td>
+<td>string</td>
+<td>component</td>
+<td>The base layout unit a grid mount lays components out from.</td>
+</tr>
+<tr>
+<td><code>layoutConstraints</code></td>
+<td>array</td>
+<td>component</td>
+<td>The declared layout a grid mount places components by. Distinct from
+<code>context.constraints</code>.</td>
+</tr>
+<tr>
+<td><code>snapPoints</code></td>
+<td>array</td>
+<td>component</td>
+<td>The positions a grid mount lets a component occupy.</td>
+</tr>
+<tr>
+<td><code>barState</code></td>
+<td>object</td>
+<td>component</td>
+<td>The <code>field</code> a signal bar is bound to and its
+<code>value</code>, never a state that exists only in the
+rendering.</td>
+</tr>
+<tr>
+<td><code>pulse</code></td>
+<td>boolean</td>
+<td>component</td>
+<td>Whether a state change also animates. Motion is never the only
+carrier of a state.</td>
+</tr>
+<tr>
+<td><code>styleToken</code></td>
+<td>string</td>
+<td>component</td>
+<td>The declared styling token for a signal bar's state.</td>
+</tr>
+<tr>
+<td><code>inspectorSections</code></td>
+<td>array</td>
+<td>component</td>
+<td>The groups an object inspector presents fields in, each with
+<code>name</code> and <code>fields</code>. Distinct from
+<code>sections</code>, an existing extended field.</td>
+</tr>
+</tbody>
+</table>
+<p>Trust signals (attestation, currency, freshness, corroboration) are
+reported separately by every component; an implementation never combines
+them into one score in the metadata. The Gathering approved the family
+on 2026-09-17.</p>
+<hr />
+<h2 id="ai-management-system-records">AI Management System Records</h2>
+<p>An organisation running an AI management system keeps records an
+auditor reads: an inventory of its AI systems, a statement of which
+controls apply and why, a risk register, impact assessments, and its AI
+policies. Each record kind is a value of the OKF <code>type</code>
+field, and each has its own profile, so a record declares the fields it
+cannot do without and nothing more:</p>
+<table>
+<thead>
+<tr>
+<th>Record kind (<code>type</code>)</th>
+<th>Profile</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>aims:systemInventoryEntry</code></td>
+<td><code>aims-system-inventory</code></td>
+</tr>
+<tr>
+<td><code>aims:statementOfApplicability</code></td>
+<td><code>aims-statement-of-applicability</code></td>
+</tr>
+<tr>
+<td><code>aims:riskRegisterEntry</code></td>
+<td><code>aims-risk-register</code></td>
+</tr>
+<tr>
+<td><code>aims:impactAssessment</code></td>
+<td><code>aims-impact-assessment</code></td>
+</tr>
+<tr>
+<td><code>aims:policy</code></td>
+<td><code>aims-policy</code></td>
+</tr>
+</tbody>
+</table>
+<p>The profiles are named for the management system rather than for one
+standard. The same records carry evidence for ISO/IEC 42001, the NIST AI
+Risk Management Framework or the EU AI Act through
+<code>jurisdictionalEvidence</code>, keyed by the regime identifier.</p>
+<blockquote>
+<p><strong>Note:</strong> This page describes regulatory frameworks in
+general terms only. Nothing here is legal advice. Requirements vary by
+jurisdiction, organisation type, and use case. Consult qualified legal
+specialists for guidance specific to your situation.</p>
+</blockquote>
+<h3 id="evidence-fields">Evidence Fields</h3>
+<p>These fields are core: any document may carry them, and the AIMS
+profiles require some of them.</p>
+<table>
+<colgroup>
+<col style="width: 28%" />
+<col style="width: 24%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>parties</code></td>
+<td>array of objects</td>
+<td>The role-attributed people and organisations accountable for a
+document. Each entry carries a <code>role</code>, a <code>name</code>,
+and optionally an <code>email</code>, an <code>identifier</code> URL, an
+<code>organisation</code> and an ISO 3166-1 <code>country</code>. The
+role vocabulary is the one the provenance record uses (see Provenance
+Chain).</td>
+</tr>
+<tr>
+<td><code>jurisdictionalEvidence</code></td>
+<td>object</td>
+<td>The clauses, articles, controls or functions of each regime a
+document provides evidence for, keyed by the regime identifier
+(<code>ISO-42001</code>, <code>EU-AI-Act</code>).</td>
+</tr>
+<tr>
+<td><code>statusNotice</code></td>
+<td>object</td>
+<td>Why a document carries the status <code>disputed</code> or
+<code>withdrawn</code>, the date that standing began, and whom a reader
+contacts about it.</td>
+</tr>
+<tr>
+<td><code>transformations</code></td>
+<td>array</td>
+<td>The preparation steps applied to the data a document derives from,
+each naming its type, method, tool, date and the role that performed
+it.</td>
+</tr>
+<tr>
+<td><code>resourceProfile</code></td>
+<td>object</td>
+<td>The compute and energy a document's production or an AI system's
+operation uses, with the unit, whether the figure was measured,
+estimated or declared, the method, and the baseline it is compared
+against.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="record-fields">Record Fields</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 17%" />
+<col style="width: 28%" />
+<col style="width: 34%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Profiles</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>recordId</code></td>
+<td>string</td>
+<td>every AIMS profile</td>
+<td>The organisation's own identifier for the record, stable across its
+versions.</td>
+</tr>
+<tr>
+<td><code>systemRef</code></td>
+<td>string</td>
+<td>risk register, impact assessment</td>
+<td>The AI system inventory entry the record concerns, as a repository
+path, an https URI or a registry cogUrn.</td>
+</tr>
+<tr>
+<td><code>intendedUse</code></td>
+<td>object</td>
+<td>system inventory</td>
+<td>The permitted and prohibited uses of the AI system, with notes.</td>
+</tr>
+<tr>
+<td><code>dataSources</code></td>
+<td>array</td>
+<td>system inventory</td>
+<td>The data the system draws on, as references to the COGs that
+describe each source.</td>
+</tr>
+<tr>
+<td><code>aimsScope</code></td>
+<td>string</td>
+<td>statement of applicability</td>
+<td>The boundary of the management system the statement covers.</td>
+</tr>
+<tr>
+<td><code>controlApplicability</code></td>
+<td>array</td>
+<td>statement of applicability</td>
+<td>For each control, whether it applies, the justification, and the
+records that evidence it.</td>
+</tr>
+<tr>
+<td><code>approvedAt</code></td>
+<td>string</td>
+<td>statement of applicability, policy</td>
+<td>The approval date; the approver is a <code>parties</code> entry with
+role <code>approver</code>.</td>
+</tr>
+<tr>
+<td><code>inherentRisk</code></td>
+<td>object</td>
+<td>risk register</td>
+<td>The risk before treatment, with the same level, basis and review
+keys as <code>residualRisk</code>.</td>
+</tr>
+<tr>
+<td><code>riskTreatment</code></td>
+<td>object</td>
+<td>risk register</td>
+<td>The treatment option chosen and the actions that carry it out.</td>
+</tr>
+<tr>
+<td><code>affectedGroups</code></td>
+<td>array</td>
+<td>impact assessment</td>
+<td>The individuals, groups or societies the assessment considers.</td>
+</tr>
+<tr>
+<td><code>impacts</code></td>
+<td>array</td>
+<td>impact assessment</td>
+<td>Each impact, the group it affects, and its severity in the
+<code>residualRisk</code> level vocabulary.</td>
+</tr>
+<tr>
+<td><code>mitigations</code></td>
+<td>array</td>
+<td>impact assessment</td>
+<td>The measures that address each impact, with the owning role.</td>
+</tr>
+<tr>
+<td><code>assessedAt</code></td>
+<td>string</td>
+<td>impact assessment</td>
+<td>The date the assessment was carried out.</td>
+</tr>
+</tbody>
+</table>
+<p><code>status</code> gains two values for these records:
+<code>disputed</code> and <code>withdrawn</code>, each explained by a
+<code>statusNotice</code>. The profiles define a record's structure and
+nothing about whether the assessment it holds is sound. The Gathering
+approved the family on 2026-09-27.</p>
+<hr />
+<h2 id="personal-cogs">Personal Cogs</h2>
+<p>A personal cog is a record a person keeps about themselves and holds
+on their own device: an access need, an allergy, a consent choice, a
+skill. A reader app matches it against the cogs it meets, on the device,
+so no profile of the person is built anywhere else. The record kind is
+the OKF <code>type</code> value <code>personal-cog</code>, and the
+<code>personal</code> profile lists its fields.</p>
+<p>The profile takes its model from the palimpsest, a manuscript written
+over an earlier text whose traces remain. The personal cog is the layer
+a person writes over the content they receive. The publisher's attested
+layer stays beneath it and can still be verified. The personal cog
+directs what the person is shown and never rewrites what the publisher
+signed.</p>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 15%" />
+<col style="width: 34%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Type</th>
+<th>Requirement</th>
+<th>Definition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>personalKind</code></td>
+<td>string</td>
+<td>required</td>
+<td>What the cog declares: <code>accessibility</code>,
+<code>consent</code>, <code>dietary</code>, <code>health</code>,
+<code>interests</code>, <code>preferences</code>, <code>reception</code>
+or <code>skills</code>.</td>
+</tr>
+<tr>
+<td><code>disclosureTier</code></td>
+<td>string</td>
+<td>required</td>
+<td>How far the cog may travel from its owner's device:
+<code>private</code> never leaves it, <code>derived</code> sends only
+the neutral preferences in <code>disclosesAs</code>,
+<code>guarded</code> may be shared whole on a transaction the owner
+starts. Absent, a reader treats the cog as <code>private</code>.</td>
+</tr>
+<tr>
+<td><code>personalIdentity</code></td>
+<td>string</td>
+<td>recommended</td>
+<td>The identity the cog belongs to; <code>base</code>, the default,
+places it in every identity.</td>
+</tr>
+<tr>
+<td><code>revisionTraces</code></td>
+<td>string</td>
+<td>recommended</td>
+<td>Whether earlier versions stay recoverable by the owner
+(<code>kept</code>, the default) or are erased on revision
+(<code>scraped</code>). Only the current version is matched or
+disclosed.</td>
+</tr>
+<tr>
+<td><code>disclosesAs</code></td>
+<td>array</td>
+<td>optional</td>
+<td>The neutral preferences that travel in place of a
+<code>derived</code> cog, such as <code>audio-first</code>, never the
+condition behind them.</td>
+</tr>
+<tr>
+<td><code>discloseFor</code></td>
+<td>array</td>
+<td>optional</td>
+<td>The kinds of transaction the guardrail may disclose the cog for. It
+narrows disclosure and never widens it.</td>
+</tr>
+<tr>
+<td><code>declaredBy</code></td>
+<td>string</td>
+<td>optional</td>
+<td><code>self</code>, the default, or <code>delegate</code> for someone
+acting with the owner's authority. A declaration, never an inferred
+signal.</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Sight&quot;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Low vision. Content should be spoken and described.&quot;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">author</span><span class="kw">:</span><span class="at"> Jane Doe</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">created</span><span class="kw">:</span><span class="at"> </span><span class="bn">2026-03-02</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">modified</span><span class="kw">:</span><span class="at"> </span><span class="bn">2026-03-02</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="fu">type</span><span class="kw">:</span><span class="at"> personal-cog</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">personalKind</span><span class="kw">:</span><span class="at"> accessibility</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">personalIdentity</span><span class="kw">:</span><span class="at"> base</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">disclosureTier</span><span class="kw">:</span><span class="at"> derived</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">disclosesAs</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">audio-first</span><span class="kw">,</span><span class="at"> described-images</span><span class="kw">]</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">revisionTraces</span><span class="kw">:</span><span class="at"> kept</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>The Gathering approved the family on 2026-10-04.</p>
+<hr />
 <h2 id="cog-fields">Cog Fields</h2>
 <p>Fields specific to <code>.cog.md</code> files. Profile:
 <code>cog</code>.</p>
@@ -810,16 +1419,6 @@ ecosystem.</p>
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><code>category</code></td>
-<td>string</td>
-<td>required</td>
-<td>Primary classification. Values include: <code>standard</code>,
-<code>mx-core</code>, <code>mx-tool</code>, <code>manual</code>,
-<code>reference</code>, <code>specification</code>,
-<code>architecture</code>, <code>communication</code>,
-<code>commerce</code>, and others.</td>
-</tr>
 <tr>
 <td><code>execute</code></td>
 <td>object</td>
@@ -942,7 +1541,9 @@ content a section carries:</p>
 <tr>
 <td><code>security</code></td>
 <td>Security and access policy</td>
-<td><code>security.riskLevel</code>, <code>security.dataBoundary</code>,
+<td><code>security.riskLevel</code>, <code>security.guardrail</code>,
+<code>security.capabilities</code>,
+<code>security.automationConsent</code>,
 <code>security.allowedRoles</code></td>
 </tr>
 <tr>
@@ -1042,6 +1643,35 @@ on.</td>
 <td>-</td>
 <td>Glob patterns for paths where AI generation is prohibited.</td>
 </tr>
+<tr>
+<td><code>contentPolicy</code></td>
+<td>string</td>
+<td>-</td>
+<td>What a machine may do with the content when it reads it:
+<code>summaries-allowed</code>, <code>full-extraction-allowed</code>,
+<code>extract-with-attribution</code>, <code>no-extraction</code>,
+<code>restricted</code>, or a plain-language statement. The
+inference-time half of the consumption policy; <code>aiTraining</code>
+and <code>trainingDataPolicy</code> are the training half. HTML carrier
+form: <code>&lt;meta name="mx:contentPolicy"&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>attribution</code></td>
+<td>string</td>
+<td>-</td>
+<td>Whether reuse must credit the source. Values: <code>required</code>,
+<code>requested</code>, <code>not-required</code>. HTML carrier form:
+<code>&lt;meta name="mx:attribution"&gt;</code>.</td>
+</tr>
+<tr>
+<td><code>aiUsageDeclarationUri</code></td>
+<td>string</td>
+<td>-</td>
+<td>The URL of the publisher's AI Usage Declaration that covers this
+document. HTML carrier form: <code>&lt;link rel="ai-usage"&gt;</code>.
+The pointer to the record; <code>aiUsageDeclaration</code> is the record
+itself.</td>
+</tr>
 </tbody>
 </table>
 <hr />
@@ -1126,8 +1756,9 @@ Path or URL.</td>
 <tr>
 <td><code>mxSpecVersion</code></td>
 <td>string</td>
-<td>optional</td>
-<td>MX specification version this metadata conforms to.</td>
+<td>recommended</td>
+<td>The MX specification version this metadata follows. Also a core
+field (see Lifecycle and Classification).</td>
 </tr>
 <tr>
 <td><code>mxWatchesFiles</code></td>
@@ -1138,40 +1769,39 @@ Path or URL.</td>
 </tbody>
 </table>
 <h3 id="lineage-example">Lineage Example</h3>
-<div class="sourceCode" id="cb2" data-role="code-container"><pre
-class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;MX Blog&quot;</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Machine Experience blog posts — published HTML&quot;</span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">folderType</span><span class="kw">:</span><span class="at"> content</span></span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">status</span><span class="kw">:</span><span class="at"> active</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">domain</span><span class="kw">:</span><span class="at"> mx-blog</span></span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">derivedFrom</span><span class="kw">:</span><span class="at"> mx-canon/mx-maxine-lives/communications/blogs/md/</span></span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">publishedTo</span><span class="kw">:</span><span class="at"> https://allabout.network/blogs/mx/</span></span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p>This declares a provenance chain: blog content is authored in the
-brain (<code>mx-canon/mx-maxine-lives/</code>), compiled into HTML in
-this folder, and published to the live website. The MX graph resolves
-these declarations into edges, enabling an AI agent to trace any piece
-of content from source to destination.</p>
+<div class="sourceCode" id="cb3" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;MX Blog&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Machine Experience blog posts - published HTML&quot;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">folderType</span><span class="kw">:</span><span class="at"> content</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">status</span><span class="kw">:</span><span class="at"> active</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">domain</span><span class="kw">:</span><span class="at"> mx-blog</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">derivedFrom</span><span class="kw">:</span><span class="at"> mx-canon/mx-maxine-lives/communications/blogs/md/</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">publishedTo</span><span class="kw">:</span><span class="at"> https://allabout.network/blogs/mx/</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
+<p>This declares a provenance chain: blog content is authored in a
+source folder, compiled into HTML in this folder, and published to the
+live website. The MX graph resolves these declarations into edges, so an
+AI agent can trace any piece of content from source to destination.</p>
 <hr />
 <h2 id="folder-metadata-inheritance">Folder Metadata Inheritance</h2>
-<p>Every directory in the MX ecosystem can have a
+<p>Every directory in an MX repository can have a
 <code>.mx.yaml.md</code> file. Child directories inherit from their
 parent automatically. The parent declares which fields are inheritable
 via the <code>inheritable</code> array.</p>
 <h3 id="identity-fields-never-inherited">Identity Fields (Never
 Inherited)</h3>
-<p>These fields are always per-folder - a child never inherits them from
+<p>These fields are always per-folder; a child never inherits them from
 a parent:</p>
 <ul>
-<li><code>title</code>, <code>description</code>, <code>purpose</code> -
+<li><code>title</code>, <code>description</code>, <code>purpose</code>:
 what makes this folder unique</li>
-<li><code>created</code>, <code>modified</code> - per-file
+<li><code>created</code>, <code>modified</code>: per-file
 timestamps</li>
-<li><code>domain</code> - the folder's business domain</li>
-<li><code>derivedFrom</code>, <code>publishedTo</code> - per-folder
+<li><code>domain</code>: the folder's business domain</li>
+<li><code>derivedFrom</code>, <code>publishedTo</code>: per-folder
 provenance</li>
 </ul>
 <h3 id="inheritable-fields">Inheritable Fields</h3>
@@ -1199,8 +1829,8 @@ submodule boundaries</li>
 <h3 id="vendor-extension-fields-never-inherited">Vendor Extension Fields
 (Never Inherited)</h3>
 <p>A vendor extension field is per-folder and never inherited. It
-configures the repository it sits in, so passing it down a subtree would
-carry a claim the child folder never made.</p>
+configures the repository that contains it, so passing it down a subtree
+would carry a claim the child folder never made.</p>
 <hr />
 <h2 id="specialist-profiles">Specialist Profiles</h2>
 <p>Beyond <code>core</code>, <code>cog</code>, and <code>folder</code>,
@@ -1270,6 +1900,22 @@ the vocabulary defines profiles for specific content types:</p>
 <td>Script-specific metadata</td>
 </tr>
 <tr>
+<td><strong>aims-system-inventory</strong>,
+<strong>aims-statement-of-applicability</strong>,
+<strong>aims-risk-register</strong>,
+<strong>aims-impact-assessment</strong>,
+<strong>aims-policy</strong></td>
+<td>AI management system records</td>
+<td><code>recordId</code>, <code>parties</code>,
+<code>jurisdictionalEvidence</code>, and the record fields above</td>
+</tr>
+<tr>
+<td><strong>personal</strong></td>
+<td>Personal cogs held on their owner's device</td>
+<td><code>personalKind</code>, <code>disclosureTier</code>, and the
+personal-cog fields above</td>
+</tr>
+<tr>
 <td><strong>x-mx-public</strong></td>
 <td>Public vendor extensions</td>
 <td>Declared by the vendor, not by this dictionary</td>
@@ -1284,6 +1930,12 @@ standard namespace. Those fields are documented in the vendor's own
 extension pack, never here: the prefix is the honest declaration that
 the field is vendor-defined, and the vendor is who says what it
 means.</p>
+<p>An extension should not reuse a standard field's name behind its
+prefix. A reader sees <code>x-vendor-domain</code> beside
+<code>domain</code> and assumes one field, when the two may hold
+different things. If the extension is the same item, use the standard
+field; if it is not, give it a name that says what it holds (Appendix M,
+Namespace policy).</p>
 <hr />
 <h2 id="carrier-formats">Carrier Formats</h2>
 <p>MX metadata extends beyond markdown. The same vocabulary applies
@@ -1369,26 +2021,27 @@ where both embedded and sidecar metadata exist.</p>
 <p>Database/Schema → Table → Column → Relationship → View/Query → Stored
 procedure → Data classification → Data dictionary. SQL comment blocks or
 companion <code>.mx.yaml.md</code> files carry the metadata.</p>
-<p>Full definitions for these domains are in the canonical field
-dictionary (<code>mx-canon/ssot/fields.cog.md</code>, Sections
-13-15).</p>
+<p>Full definitions for these domains are in the published
+carrier-format dictionary at <a
+href="https://mx.allabout.network/canon/fields-data-carriers.yaml"
+class="uri">https://mx.allabout.network/canon/fields-data-carriers.yaml</a>.</p>
 <hr />
 <h2 id="related-documents">Related Documents</h2>
 <ul>
-<li><strong>Canonical source:</strong>
-<code>mx-canon/ssot/fields.cog.md</code> - the machine-readable SSOT for
-all field definitions</li>
-<li><strong>Cog specification:</strong>
-<code>mx-canon/mx-the-gathering/specifications/cog-unified-spec.cog.md</code></li>
+<li><strong>Canonical source:</strong> <a
+href="https://mx.allabout.network/canon/fields-data.yaml"
+class="uri">https://mx.allabout.network/canon/fields-data.yaml</a>, the
+machine-readable source for all field definitions</li>
+<li><strong>Cog specification:</strong> <a
+href="https://mx.allabout.network/cog.html"
+class="uri">https://mx.allabout.network/cog.html</a></li>
 <li><strong>MX draft notes:</strong> Core Metadata, Extensions,
-Provenance, Carrier Formats, Contract Fingerprinting, Cog Identification
-- public at <a
+Provenance, Carrier Formats, Contract Fingerprinting, Cog
+Identification; public at <a
 href="https://github.com/ddttom/mx-shared-gathering">ddttom/mx-shared-gathering</a></li>
-<li><strong>MX OS manual:</strong> Appendix M: Building MX OS</li>
+<li><strong>MX OS manual:</strong> Appendix W: Building MX OS</li>
 <li><strong>Metadata index:</strong> Appendix M: Index of Metadata
 (external standards)</li>
-<li><strong>MX principles:</strong>
-<code>mx-canon/ssot/principles.cog.md</code></li>
 <li><strong>The Gathering community:</strong> <a
 href="https://tg.community">tg.community</a></li>
 </ul>
@@ -1396,20 +2049,22 @@ href="https://tg.community">tg.community</a></li>
 <h2 id="for-the-community">For the Community</h2>
 <p>This vocabulary is offered to the MX community via <a
 href="https://tg.community">tg.community</a> as a proposed standard. The
-Gathering governs the standard namespace (fields without prefix).
-CogNovaMX's implementation demonstrates the vocabulary in production use
-across a multi-repository ecosystem with folder metadata, cog files,
-carrier formats, and graph-based lineage tracing.</p>
+standard namespace (fields without prefix) is published under the MIT
+licence, so anyone may implement it, and it will be donated to The
+Gathering as an open standard. CogNovaMX's implementation demonstrates
+the vocabulary in production use across multiple repositories with
+folder metadata, cog files, carrier formats, and graph-based lineage
+tracing.</p>
 <p>The vocabulary is designed for adoption:</p>
 <ul>
-<li><strong>No vendor lock-in</strong> - standard fields belong to The
+<li><strong>No vendor lock-in:</strong> standard fields belong to The
 Gathering, not CogNovaMX</li>
-<li><strong>Extension-friendly</strong> - the
+<li><strong>Extension-friendly:</strong> the
 <code>x-&lt;vendor&gt;-</code> prefix convention lets any implementation
 add fields without namespace collision</li>
-<li><strong>Carrier-agnostic</strong> - the same vocabulary works in
+<li><strong>Carrier-agnostic:</strong> the same vocabulary works in
 YAML, HTML, JavaScript, CSS, shell scripts, and database comments</li>
-<li><strong>Graph-ready</strong> - relationship fields
+<li><strong>Graph-ready:</strong> relationship fields
 (<code>buildsOn</code>, <code>derivedFrom</code>,
 <code>publishedTo</code>) create a navigable knowledge graph from
 existing metadata</li>

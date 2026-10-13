@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer"
+description: "Building Machine Experience solo is one thing; scaling it with a partner requires inter-cog negotiation the current web isn't ready for. How and why we set up a shared agentic layer on Discord - with the practical steps to build your own."
+author: Tom Cranstoun
+created: "2026-07-04"
+modified: 2026-10-11
+version: "1.0"
+type: blog-post
+tags:
+  - mx
+  - discord
+  - agents
+  - collaboration
+  - ubercog
+  - provenance
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  contextProvides:
+    - "The case for moving from a solo human-plus-agent arrangement to a shared agentic layer between partners, hosted on Discord: shared channel history as a state handshake, provenance visible to every participant, and the context economy of never re-explaining the same problem twice. Includes a practical walkthrough for setting up the Discord environment: server and channel structure, bot applications per agent, permissions and roles as governance, and the conventions that make channel history function as a verifiable ledger."
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/profiles/from-solo-pilot-to-flight-deck.md
+  aiAssistance: "welcome"
+  purpose: "Explain why a shared Discord-based agentic layer beats siloed chatbots for a two-person MX partnership, and give readers the concrete steps to build one."
+  stability: draft
+  inLanguage: en-GB
+  runbook: "Markdown source lives in the claude-created Google Drive folder. The folder's index.md catalogues the current version; edit via Claude and re-upload, then update the index."
+  servedAt: https://mx.allabout.network/blog/drafts/profiles/from-solo-pilot-to-flight-deck.html
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Building Machine Experience solo is one thing; scaling it with a partner requires inter-cog negotiation the current web isn't ready for. How and why we set up a shared agentic layer on Discord - with the practical steps to build your own.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/profiles/from-solo-pilot-to-flight-deck.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/profiles/from-solo-pilot-to-flight-deck.html">
+  <meta property="og:title" content="From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer | CogNovaMX">
+  <meta property="og:description" content="Building Machine Experience solo is one thing; scaling it with a partner requires inter-cog negotiation the current web isn't ready for. How and why we set up a shared agentic layer on Discord - with the practical steps to build your own.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-04">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer | CogNovaMX">
+  <meta name="twitter:description" content="Building Machine Experience solo is one thing; scaling it with a partner requires inter-cog negotiation the current web isn't ready for. How and why we set up a shared agentic layer on Discord - with the practical steps to build your own.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/profiles/from-solo-pilot-to-flight-deck.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer",
+        "headline": "From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer",
+        "description": "Building Machine Experience solo is one thing; scaling it with a partner requires inter-cog negotiation the current web isn't ready for. How and why we set up a shared agentic layer on Discord - with the practical steps to build your own.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-04",
+        "dateModified": "2026-07-04",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/profiles/from-solo-pilot-to-flight-deck.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1267,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/profiles/from-solo-pilot-to-flight-deck.html",
+        "name": "From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer",
+        "url": "https://mx.allabout.network/blog/drafts/profiles/from-solo-pilot-to-flight-deck.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#why-discord-of-all-places">Why Discord, of all places</a></li>
+        <li><a href="#how-to-set-it-up">How to set it up</a></li>
+        <li><a href="#what-this-proves">What this proves</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1267">
+        <header class="article-header">
+          <h1>From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer</h1>
+          <div class="article-meta"
+               data-published="2026-07-04"
+               data-modified="2026-07-04"
+               data-reading-time="7 min">
+            <time datetime="2026-07-04">4 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+
+<p>Building Machine Experience (MX) as a solo architect is one thing. Scaling it with a partner requires a level of inter-cog negotiation that the current web just isn't ready for.</p>
+<p>Scott and I aren't just &quot;using an AI app.&quot; We are creating a collaborative UBERCOG environment on Discord. By connecting our respective Wingmen - mine is Maxine - to a shared channel, we are moving past the siloed chatbot model and into a verifiable ledger of partnership.</p>
+<p>Here is the goal. When I tell Maxine to draft a technical autopsy of a failed Amazon delivery, Scott doesn't just see a final result. He sees the provenance of the data. He sees shared context at work - tokens aren't being burned re-explaining the same problem twice, because the agent already has the state handshake from our shared channel history.</p>
+<p>We are building a web where agents from different users can verify each other's signatures and act on a single, shared reality without leaking private data. By bringing Scott and others into this Discord-based MX envelope, we are proving that the future of work isn't just &quot;human + machine&quot; - it's &quot;team + governed agentic layer.&quot;</p>
+<p>No more detective work. No more replaying the same mistakes. Just deterministic collaboration.</p>
+<h2 id="why-discord-of-all-places" tabindex="-1">Why Discord, of all places</h2>
+<p>It is a fair question. Discord looks like a gaming chat app, and that is exactly why it works.</p>
+<p>The properties an agentic layer needs are the properties Discord ships by default. Persistent, append-only channel history - a ledger nobody edits retroactively. First-class bot accounts, so an agent is a named participant with its own identity rather than a puppet typing through a human's account. Fine-grained roles and permissions, so governance is enforced by the platform rather than promised in prose. Threads for isolating a single job's working. And an API mature enough that a decade of tooling already speaks it.</p>
+<p>Compare that with the alternatives. Email has no shared state. Shared documents have state but no conversation. Slack comes close but prices per seat and treats bots as second-class. Discord gives every agent a face, a name, a role, and a permanent transcript - for nothing.</p>
+<p>The deeper point is an MX one. A shared channel is common ground made literal: one history both humans and both agents read identically. Maxine doesn't need me to re-explain what Scott's agent said the day before; the channel <em>is</em> the state handshake. That is the same argument as the folder index that runs my Drive workspace - explicit, shared, dual-audience ground truth beats private context every time. The Discord channel is that index, extended in time.</p>
+<h2 id="how-to-set-it-up" tabindex="-1">How to set it up</h2>
+<p>This is the part people ask about, so here is the actual recipe. Nothing below requires a paid plan.</p>
+<h3 id="section-1-create-the-server-the-envelope" tabindex="-1">1. Create the server - the envelope</h3>
+<p>One partner creates a Discord server (the &quot;+&quot; in the left rail → Create My Own). This server is the MX envelope: everything inside it is shared reality, everything outside stays private. Name it accordingly - ours is the Flight Deck.</p>
+<p>Set the server to invite-only from the start: Server Settings → enable Community features later if needed, but keep membership to the people whose agents you trust.</p>
+<h3 id="section-2-structure-the-channels-the-zones" tabindex="-1">2. Structure the channels - the zones</h3>
+<p>Channels are the zones of the shared environment, and it pays to separate them by function, the same way frontmatter separates identity from governance:</p>
+<ul>
+<li><strong>#flight-deck</strong> - the main working channel. Humans and agents both post here. This history is the ledger.</li>
+<li><strong>#provenance</strong> - agents post their sources, working, and artefact references here, one message per deliverable, so the audit trail doesn't drown the conversation.</li>
+<li><strong>#ops</strong> - configuration, downtime, and &quot;my agent is misbehaving&quot; chatter. Keeps operational noise out of the ledger.</li>
+</ul>
+<p>Pin an index message in #flight-deck stating the conventions - who the agents are, what they may do, where artefacts live. Discord's pin is your <code>index.md</code>: the entry point every new participant (human or machine) reads first.</p>
+<h3 id="section-3-give-each-agent-an-identity-the-bot-application" tabindex="-1">3. Give each agent an identity - the bot application</h3>
+<p>Each partner registers their own agent, so identity and accountability stay separate:</p>
+<ol>
+<li>Go to the <a href="https://discord.com/developers/applications">Discord Developer Portal</a> and select <strong>New Application</strong>. Name it after the agent - Maxine, not &quot;Tom's bot&quot;.</li>
+<li>Under <strong>Bot</strong>, add the bot user. This issues a token: this is the agent's credential. Treat it like a password - it goes in your agent runtime's configuration, never in a channel message.</li>
+<li>Under <strong>Privileged Gateway Intents</strong>, enable <strong>Message Content Intent</strong> - without it the bot can be mentioned but cannot read the channel history that makes the state handshake work.</li>
+<li>Under <strong>OAuth2 → URL Generator</strong>, tick the <code>bot</code> scope, then grant the minimum permissions the agent needs: View Channels, Send Messages, Create Public Threads, Embed Links, Read Message History. Do not grant Administrator; governance means least privilege.</li>
+<li>Open the generated URL, choose the shared server, and authorise. The agent now appears in the member list with its own name and face.</li>
+</ol>
+<p>Repeat per agent. Two partners, two applications, two tokens, two identities - which is precisely what lets the ledger attribute every message.</p>
+<h3 id="section-4-wire-the-agent-runtime-to-the-bot" tabindex="-1">4. Wire the agent runtime to the bot</h3>
+<p>The bot user is a socket; your agent plugs into it. How depends on your stack: a Discord MCP server or connector lets a Claude-based wingman read and post through the bot's credentials; a small bridge script using any Discord API library does the same for custom runtimes; and for output-only integrations, a channel webhook (Channel Settings → Integrations → Webhooks) posts formatted messages with no bot at all - though it cannot read, so it cannot handshake.</p>
+<p>Whichever route, the configuration lives with the agent's owner. Scott never holds Maxine's token; I never hold his agent's. Verification without credential sharing.</p>
+<h3 id="section-5-encode-the-governance-roles-as-rules" tabindex="-1">5. Encode the governance - roles as rules</h3>
+<p>Create an <strong>agents</strong> role and assign it to every bot. Give the role exactly the channel permissions agreed in the pinned conventions, and nothing more. If the partnership later agrees agents may, say, manage threads, that is one role edit - visible to everyone, applied to all agents at once, and recorded in the audit log. Server Settings → Audit Log is the governance ledger behind the content ledger.</p>
+<h3 id="section-6-agree-the-message-conventions-cogs-in-the-channel" tabindex="-1">6. Agree the message conventions - cogs in the channel</h3>
+<p>The last layer is not a Discord feature; it is discipline, and it is where MX earns its keep. Our conventions:</p>
+<ul>
+<li>Every agent deliverable is posted with a short structured header - who produced it, at whose instruction, from what sources, and the URN of the artefact it refers to. A cog's frontmatter, compressed into a message.</li>
+<li>Artefacts themselves live in governed storage (our Drive folder of cogs, the MX-hub repository); the channel carries references and provenance, not payloads. Private data stays home - the channel gets the claim, the signature, and the pointer.</li>
+<li>Agents never edit or delete channel messages. Corrections are new messages. Append-only is what makes history a ledger.</li>
+</ul>
+<h2 id="what-this-proves" tabindex="-1">What this proves</h2>
+<p>None of the pieces is exotic. A free chat server, two bot registrations, a role, and a pinned set of conventions. The point is what the assembly demonstrates: two people's agents sharing one verifiable reality, with provenance attached to every claim and governance enforced by the platform rather than by goodwill.</p>
+<p>The web will eventually need all of this natively - signed cogs, inter-agent verification, shared state that survives any one participant's session. Until it does, a Discord server is a perfectly good place to rehearse the future.</p>
+<hr>
+<p><em>Tom Cranstoun founded the MX community and wrote the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-11.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

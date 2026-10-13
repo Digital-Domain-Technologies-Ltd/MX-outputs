@@ -89,7 +89,7 @@ mx:
     legalEntity: "Digital Domain Technologies Ltd"
     brand: "CogNovaMX"
 
-  x-mx-domain: "machine-experience"
+  domain: "machine-experience"
   readingLevel: advanced
 
   runbook: >
@@ -165,8 +165,8 @@ mx:
     - https://tg.community
 
   # ── Cog classification (Note 3 §6.5) ──
-  x-mx-cogId: mx-machine-readiness-meta
-  x-mx-cogType: info
+  cogId: mx-machine-readiness-meta
+  cogType: info
   x-mx-cogCategory: mx-meta-cog
 
   # ── REGINALD signing service (Note 4 §6.3) ──

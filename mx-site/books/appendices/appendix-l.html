@@ -6,7 +6,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
-modified: 2026-08-09
+modified: 2026-10-10
 created: 2026-01-22
 description: "Formal proposal document for experimental MX metadata patterns including mx: meta tags, data-agent-visible attributes, and Pandoc YAML frontmatter."
 
@@ -14,6 +14,9 @@ title: 'Appendix L: Proposed AI Metadata Patterns'
 tags: [proposed-patterns, mx-metadata, experimental-standards, forward-compatible, meta-tags, pandoc-yaml-frontmatter]
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
+  quotes:
+    - "Content Policy: summaries-allowed Attribution: required"
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
   book: "Shared"
   appendix: "L"
@@ -30,7 +33,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -197,15 +200,15 @@ AI Metadata Patterns</h2>
 <p>A formal proposal document for experimental AI metadata patterns that
 extend existing web standards.</p>
 <h2 id="status-and-classification">Status and Classification</h2>
-<p><strong>Document Status:</strong> Experimental Proposal - Not Yet
+<p><strong>Document Status:</strong> Experimental Proposal, Not Yet
 Standardised</p>
 <p><strong>Maturity Level:</strong> Forward-compatible proposals that do
 not break if machines do not recognise them</p>
 <p>This appendix consolidates all proposed and experimental patterns
 mentioned throughout "MX: The Protocols". These patterns follow
 established conventions (like robots meta tags or viewport meta tags)
-and represent logical extensions that may standardise as the AI agent
-ecosystem matures.</p>
+and represent logical extensions that may standardise as AI agent
+adoption matures.</p>
 <p><strong>Important:</strong> These are NOT established standards. They
 are proposals based on production implementations and logical extensions
 of existing patterns.</p>
@@ -217,11 +220,14 @@ the training and generation fields (<code>aiTraining</code>,
 <code>aiPermittedAreas</code>, <code>aiProhibitedAreas</code>,
 <code>aiGenerationAllowed</code>,
 <code>aiGenerationReviewRequired</code>) are core dictionary fields,
-defined in Appendix M and Appendix T. A publisher who wants a
-machine-checkable training-data policy today declares it in frontmatter;
-the <code>mx:contentPolicy</code> and <code>mx:attribution</code> meta
-tags below are the forward-compatible way to carry the same intent on a
-rendered HTML page while their token vocabulary settles.</p>
+defined in Appendix M and Appendix T. The inference-time policy is
+standardised the same way. <code>contentPolicy</code> (what a machine
+may do with the content when it reads it) and <code>attribution</code>
+(whether reuse must credit the source) are core dictionary fields. The
+<code>mx:contentPolicy</code> and <code>mx:attribution</code> meta tags
+below are their HTML carrier form. A publisher declares the policy in
+frontmatter; the rendered page carries the same values in the tags, and
+the two must agree.</p>
 <h2 id="relationship-to-established-standards">Relationship to
 Established Standards</h2>
 <p><strong>The standards hierarchy is absolute.</strong> Established web
@@ -229,26 +235,26 @@ standards come first. MX fills gaps that standards do not yet cover. MX
 never duplicates what standards already provide.</p>
 <p><strong>Implementation order:</strong></p>
 <ol type="1">
-<li><strong>Semantic HTML</strong> (established) - Use
+<li><strong>Semantic HTML</strong> (established): Use
 <code>&lt;main&gt;</code>, <code>&lt;nav&gt;</code>,
 <code>&lt;article&gt;</code> always</li>
-<li><strong>Schema.org JSON-LD</strong> (established) - Primary
+<li><strong>Schema.org JSON-LD</strong> (established): Primary
 structured data method</li>
-<li><strong>ARIA attributes</strong> (established) - Critical for
+<li><strong>ARIA attributes</strong> (established): Critical for
 accessibility</li>
-<li><strong>HTTP headers</strong> (established) - Cache-Control,
+<li><strong>HTTP headers</strong> (established): Cache-Control,
 Content-Type, status codes</li>
-<li><strong>robots.txt / sitemap.xml</strong> (established) - Discovery
+<li><strong>robots.txt / sitemap.xml</strong> (established): Discovery
 and crawl guidance</li>
-<li><strong>llms.txt</strong> (emerging) - Early adoption phase, gaining
+<li><strong>llms.txt</strong> (emerging): Early adoption phase, gaining
 traction</li>
-<li><strong>mx: meta tags</strong> (proposed) - Fill gaps not covered by
+<li><strong>mx: meta tags</strong> (proposed): Fill gaps not covered by
 the above</li>
-<li><strong>data-agent-visible</strong> (proposed) - Semantic marker for
+<li><strong>data-agent-visible</strong> (proposed): Semantic marker for
 agent-only metadata</li>
-<li><strong>Common data attributes</strong> (proposed) - Explicit state
+<li><strong>Common data attributes</strong> (proposed): Explicit state
 management patterns</li>
-<li><strong>Pandoc YAML frontmatter</strong> (established) - Universal
+<li><strong>Pandoc YAML frontmatter</strong> (established): Universal
 markdown metadata standard</li>
 </ol>
 <p><strong>If a standard already covers the need, use the
@@ -260,7 +266,7 @@ proposed).</p>
 <h2 id="pattern-1-mx-framework-meta-tag-namespace">Pattern 1: MX
 Framework Meta Tag Namespace</h2>
 <h3 id="status">Status</h3>
-<p><strong>Proposed Pattern</strong> - Not yet standardised,
+<p><strong>Proposed Pattern:</strong> Not yet standardised,
 forward-compatible</p>
 <h3 id="rationale">Rationale</h3>
 <p>Page-specific AI agent guidance needs to override site-wide defaults
@@ -293,19 +299,19 @@ documenting how MX should work, we create the operating system that
 defines machine experience.</p>
 <h3 id="how-mx-os-evolves">How MX OS Evolves</h3>
 <ul>
-<li><strong>Version-controlled principles</strong> - All changes tracked
+<li><strong>Version-controlled principles:</strong> All changes tracked
 in git history</li>
-<li><strong>LEARNINGS.md captures failures</strong> - Document what went
+<li><strong>LEARNINGS.md captures failures:</strong> Document what went
 wrong and how to prevent it</li>
-<li><strong>Community contributions</strong> - Both human and machine
+<li><strong>Community contributions:</strong> Both human and machine
 contributors</li>
-<li><strong>Evidence trumps theory</strong> - Real-world implementation
+<li><strong>Evidence trumps theory:</strong> Real-world implementation
 guides evolution</li>
-<li><strong>No principle is sacred</strong> - If practice proves a
+<li><strong>No principle is sacred:</strong> If practice proves a
 principle wrong, we change it</li>
 </ul>
 <p>For detailed documentation of how MX OS is built collaboratively, see
-Appendix M: Building the MX Operating System.</p>
+Appendix W: Building the MX Operating System.</p>
 <hr />
 <h2 id="part-2-mx-namespace-architecture">Part 2: MX Namespace
 Architecture</h2>
@@ -317,11 +323,11 @@ here as part of the MX Operating System.</p>
 <p><strong>Top-level namespace:</strong> <code>mx:</code></p>
 <p><strong>Sub-namespaces:</strong></p>
 <ul>
-<li><code>mx.ai:</code> - Machine-readable metadata (agent behaviour,
+<li><code>mx.ai:</code> for machine-readable metadata (agent behaviour,
 runbooks, content editability)</li>
-<li><code>mx.co:</code> - Content operations metadata (workflow,
+<li><code>mx.co:</code> for content operations metadata (workflow,
 publishing, lifecycle)</li>
-<li><code>mx.ho:</code> - Hosting metadata (deployment, caching,
+<li><code>mx.ho:</code> for hosting metadata (deployment, caching,
 infrastructure)</li>
 </ul>
 <p><strong>Example YAML:</strong></p>
@@ -345,9 +351,9 @@ divides into three sub-namespaces: <code>mx.ai:</code> for AI-specific
 metadata (editability, preferred access, runbooks), <code>mx.co:</code>
 for content operations (workflow state, content type, review
 requirements), and <code>mx.ho:</code> for hosting concerns (cache
-strategy, CDN). This separation ensures each concern has clear ownership
+strategy, CDN). This separation gives each concern clear ownership
 without field-name collisions.</em></p>
-<p>MX namespace structure - three sub-namespaces for AI, content
+<p>MX namespace structure: three sub-namespaces for AI, content
 operations, and hosting</p>
 <h3 id="html-meta-tags-colon-prefix-pattern">HTML Meta Tags: Colon
 Prefix Pattern</h3>
@@ -381,9 +387,10 @@ community</li>
 <p>The namespace architecture is extensible. Future namespaces might
 include:</p>
 <ul>
-<li><code>mx.sec:</code> - Security metadata</li>
-<li><code>mx.perf:</code> - Performance optimisation hints</li>
-<li><code>mx.a11y:</code> - Accessibility enhancements beyond WCAG</li>
+<li><code>mx.sec:</code> for security metadata</li>
+<li><code>mx.perf:</code> for performance optimisation hints</li>
+<li><code>mx.a11y:</code> for accessibility enhancements beyond
+WCAG</li>
 </ul>
 <p><strong>Guidelines for extension:</strong></p>
 <ul>
@@ -395,10 +402,7 @@ include:</p>
 <hr />
 <h2 id="part-3-mx-attributes-by-namespace">Part 3: MX Attributes by
 Namespace</h2>
-<p>This section consolidates MX attributes organised by namespace. For
-complete Registry with all attributes, see
-mx-canon/mx-maxine-lives/registers/mx-attributes-registry.md (deprecated
-- refer to this appendix).</p>
+<p>This section consolidates MX attributes organised by namespace.</p>
 <h3 id="mx.ai-ai-specific-metadata">3.1 mx.ai: AI-Specific Metadata</h3>
 <p>Attributes that control AI agent behaviour and content
 interpretation.</p>
@@ -525,11 +529,11 @@ HTML Meta Tags</h3>
 <ul>
 <li>Page-specific agent behaviour overrides</li>
 <li>Content policies and permissions</li>
-<li>Freshness indicators</li>
-<li>Access preferences</li>
+<li>Attribution requirements</li>
+<li>Jurisdiction signals</li>
 </ul>
 <h3 id="json-ld-format-decision">JSON-LD Format Decision</h3>
-<p><strong>Use JSON-LD only</strong> - do not combine with microdata or
+<p><strong>Use JSON-LD only:</strong> do not combine with microdata or
 RDFa.</p>
 <p><strong>Rationale:</strong></p>
 <ul>
@@ -609,7 +613,7 @@ summary-only</li>
 policies</li>
 </ol>
 <h3 id="proposed-meta-tags">Proposed Meta Tags</h3>
-<h4 id="mxpreferred-access">mx:preferredAccess</h4>
+<h4 id="mxpreferredaccess">mx:preferredAccess</h4>
 <p><strong>Deprecated.</strong> Do not implement this tag.</p>
 <p>Previously proposed to indicate how machines should access
 content.</p>
@@ -623,21 +627,26 @@ confirming that they serve HTML.</p>
 <code>&lt;link rel="api" href="/api/v1/products"&gt;</code> instead.
 Link elements are the standard mechanism for declaring related
 resources.</p>
-<h4 id="mxcontent-policy">mx:contentPolicy</h4>
+<h4 id="mxcontentpolicy">mx:contentPolicy</h4>
 <p><strong>Active.</strong> What machines are permitted to do with
 content.</p>
 <p><strong>Values:</strong></p>
 <ul>
-<li><code>summaries-allowed</code> - Can create summaries</li>
-<li><code>full-extraction-allowed</code> - Can extract complete
+<li><code>summaries-allowed</code>: Can create summaries</li>
+<li><code>full-extraction-allowed</code>: Can extract complete
 content</li>
-<li><code>extract-with-attribution</code> - Can extract with attribution
+<li><code>extract-with-attribution</code>: Can extract with attribution
 required</li>
-<li><code>restricted</code> - Contact required</li>
+<li><code>no-extraction</code>: Read only; nothing may be
+reproduced</li>
+<li><code>restricted</code>: Contact required</li>
 </ul>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb4" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Frontmatter field:</strong> <code>contentPolicy</code>. The
+tag is the carrier form of the field; a page generated from a markdown
+source carries the value the source declares.</p>
 <p><strong>Rationale:</strong> More granular than robots.txt
 <code>noindex</code>. Allows summaries whilst restricting full
 extraction.</p>
@@ -648,20 +657,20 @@ extraction.</p>
 headers already communicate cache duration to all clients, including AI
 agents. Schema.org <code>dateModified</code> in JSON-LD tells machines
 when content last changed. Adding a meta tag that restates this
-information creates a maintenance burden - when the HTTP headers say one
+information creates a maintenance burden: when the HTTP headers say one
 thing and the meta tag says another, they must decide which to trust.
 The HTTP header is the canonical source. Use it.</p>
-<h4 id="mxstructured-data">mx:structuredData</h4>
+<h4 id="mxstructureddata">mx:structuredData</h4>
 <p><strong>Deprecated.</strong> Do not implement this tag.</p>
 <p>Previously proposed to indicate where to find structured data.</p>
 <p><strong>Why deprecated:</strong> The JSON-LD
 <code>&lt;script type="application/ld+json"&gt;</code> block is
 self-evident. Any machine capable of parsing structured data already
-knows to look for this standard element - it is defined by the JSON-LD
-specification and universally supported. Adding a meta tag that says
-"there is JSON-LD on this page" when the JSON-LD is right there on the
-page is pure noise. It would be like adding a meta tag that says "this
-page contains HTML."</p>
+knows to look for this standard element, because it is defined by the
+JSON-LD specification and universally supported. Adding a meta tag that
+says "there is JSON-LD on this page" when the JSON-LD is right there on
+the page is pure noise. It would be like adding a meta tag that says
+"this page contains HTML."</p>
 <h4 id="mxattribution">mx:attribution</h4>
 <p><strong>Active.</strong> Attribution requirements for content.</p>
 <p><strong>Values:</strong> <code>required</code>,
@@ -669,13 +678,23 @@ page contains HTML."</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb5" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Frontmatter field:</strong> <code>attribution</code>, with
+the same three values. The credit itself is built from
+<code>author</code> and <code>citeAs</code>; the field only states
+whether the credit is owed.</p>
 <p><strong>Rationale:</strong> Explicit statement of attribution
-expectations, ensuring consistent attribution across all AI-generated
-content that references this material.</p>
-<h4 id="mxjurisdiction-restriction">mx:jurisdictionRestriction</h4>
+expectations, so that all AI-generated content that references this
+material attributes it consistently.</p>
+<h4 id="mxjurisdictionrestriction">mx:jurisdictionRestriction</h4>
 <p>Indicates content was created, published, or ingested from a
 jurisdiction with content restrictions, allowing machines to understand
 potential legal and content limitations.</p>
+<blockquote>
+<p><strong>Note:</strong> This page describes regulatory frameworks in
+general terms only. Nothing here is legal advice. Requirements vary by
+jurisdiction, organisation type, and use case. Consult qualified legal
+specialists for guidance specific to your situation.</p>
+</blockquote>
 <p><strong>Values:</strong></p>
 <ul>
 <li>ISO 3166-1 alpha-2 country codes: <code>CN</code> (China),
@@ -707,7 +726,7 @@ jurisdictions. Content creators could use robots.txt directives or the
 <code>noindex</code> meta tag to prevent AI ingestion entirely, but this
 is an all-or-nothing approach that excludes content from all search
 engines, all AI agents, and all automated discovery mechanisms. The
-<code>mx-jurisdiction-restriction</code> meta tag offers a more nuanced
+<code>mx:jurisdictionRestriction</code> meta tag offers a finer-grained
 solution: content remains discoverable and accessible whilst signaling
 jurisdictional constraints that might affect how agents use it. Helps
 agents:</p>
@@ -741,15 +760,17 @@ implications.</p>
 <p>Points to site-wide llms.txt file.</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb7" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;llms-txt&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;/llms.txt&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;llms-txt&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/llms.txt&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Rationale:</strong> Helps machines discover llms.txt when not
-at standard location.</p>
+at standard location. A link element is the standard mechanism for
+declaring a related resource, so the reference is a
+<code>&lt;link rel&gt;</code>, not a meta tag.</p>
 <h3 id="complete-implementation-example">Complete Implementation
 Example</h3>
-<p>Three of the tags described above - <code>mx-preferred-access</code>,
-<code>mx-freshness</code>, and <code>mx-structured-data</code> - are
-unnecessary because they duplicate information already available through
-HTTP headers, Schema.org <code>dateModified</code>, and the self-evident
+<p>The tags <code>mx:preferredAccess</code>, <code>mx:freshness</code>,
+and <code>mx:structuredData</code> described above are unnecessary
+because they duplicate information already available through HTTP
+headers, Schema.org <code>dateModified</code>, and the self-evident
 presence of JSON-LD blocks. See the individual tag entries above for
 rationale. The example below includes only tags that contribute unique
 information.</p>
@@ -791,18 +812,15 @@ support without requiring it.</p>
 <h3 id="cross-references">Cross-References</h3>
 <ul>
 <li><strong>Mentioned in:</strong> Chapter 12 (Technical Advice)</li>
-<li><strong>Implemented in:</strong> Appendix D examples (lines
-1556-1568)</li>
+<li><strong>Implemented in:</strong> Appendix D examples</li>
 <li><strong>Used in:</strong>
 <code>agent-friendly-starter-kit/good/index.html</code></li>
-<li><strong>Enhanced by:</strong>
-<code>scripts/enhance-appendix-html.cjs</code> (lines 40-47)</li>
 </ul>
 <hr />
 <h2 id="pattern-2-data-agent-visible-attribute">Pattern 2:
 data-agent-visible Attribute</h2>
 <h3 id="status-data-agent-visible">Status (data-agent-visible)</h3>
-<p><strong>Proposed Pattern</strong> - Not yet standardised,
+<p><strong>Proposed Pattern:</strong> Not yet standardised,
 experimental</p>
 <h3 id="rationale-data-agent-visible">Rationale
 (data-agent-visible)</h3>
@@ -911,7 +929,7 @@ support, but doesn't break without it.</p>
 <h3 id="cross-references-data-agent-visible">Cross-References
 (data-agent-visible)</h3>
 <ul>
-<li><strong>Documented in:</strong> Appendix D (lines 1294-1326)</li>
+<li><strong>Documented in:</strong> Appendix D</li>
 <li><strong>Mentioned in:</strong> Chapter 11 (agent purchase
 instructions)</li>
 <li><strong>Not yet implemented in:</strong> Most code examples
@@ -922,7 +940,7 @@ instructions)</li>
 Attributes</h2>
 <h3 id="status-common-data-attributes">Status (Common Data
 Attributes)</h3>
-<p><strong>Proposed Pattern</strong> - Not yet standardised, emerging
+<p><strong>Proposed Pattern:</strong> Not yet standardised, emerging
 convention</p>
 <h3 id="rationale-common-data-attributes">Rationale (Common Data
 Attributes)</h3>
@@ -1362,11 +1380,11 @@ Considerations (Common Data Attributes)</h3>
 Established Patterns</h3>
 <p>These data attributes extend established conventions:</p>
 <ul>
-<li><strong>HTML5 data-* attributes</strong> (established) - Custom data
+<li><strong>HTML5 data-* attributes</strong> (established): Custom data
 storage mechanism</li>
-<li><strong>ARIA state attributes</strong> (established) - Complement,
+<li><strong>ARIA state attributes</strong> (established): Complement,
 don't replace (use aria-invalid AND data-validation-state)</li>
-<li><strong>Microdata attributes</strong> (established) - Different
+<li><strong>Microdata attributes</strong> (established): Different
 purpose (structured data vs state management)</li>
 </ul>
 <p><strong>Critical distinction:</strong> Data attributes describe
@@ -1375,8 +1393,8 @@ purpose (structured data vs state management)</li>
 <h3 id="cross-references-common-data-attributes">Cross-References
 (Common Data Attributes)</h3>
 <ul>
-<li><strong>Documented in:</strong> Appendix D (lines 119-133, Common
-Data Attributes table)</li>
+<li><strong>Documented in:</strong> Appendix D (Common Data Attributes
+table)</li>
 <li><strong>Implemented in:</strong> All e-commerce examples
 (product-page.html, shopping-cart.html)</li>
 <li><strong>Implemented in:</strong> All form examples
@@ -1389,15 +1407,15 @@ pagination examples)</li>
 4: Pandoc YAML Frontmatter for Markdown Metadata</h2>
 <h3 id="status-pandoc-yaml-frontmatter">Status (Pandoc YAML
 Frontmatter)</h3>
-<p><strong>Established Standard</strong> - Universal markdown
-frontmatter supported by Pandoc, Hugo, Jekyll, Gatsby, Quarto, and all
-major static site generators</p>
+<p><strong>Established Standard:</strong> Universal markdown frontmatter
+supported by Pandoc, Hugo, Jekyll, Gatsby, Quarto, and all major static
+site generators</p>
 <h3 id="rationale-pandoc-yaml-frontmatter">Rationale (Pandoc YAML
 Frontmatter)</h3>
 <p>Markdown converters (like converturltomd.com) strip critical metadata
 when converting HTML to markdown. Machines lose JSON-LD structured data,
-HTML meta tags, and Schema.org markup - exactly the signals they need
-for accurate citation and source attribution.</p>
+HTML meta tags, and Schema.org markup, which are exactly the signals
+they need for accurate citation and source attribution.</p>
 <p>Pandoc YAML frontmatter solves this by embedding metadata directly in
 markdown files using a standardised YAML header block. Instead of
 converting HTML→markdown and losing metadata, you write markdown WITH
@@ -1418,16 +1436,16 @@ Quarto)</li>
 <h3 id="use-cases-pandoc-yaml-frontmatter">Use Cases (Pandoc YAML
 Frontmatter)</h3>
 <ol type="1">
-<li><strong>Static Site Generators</strong> - Markdown-based blogs and
+<li><strong>Static Site Generators:</strong> Markdown-based blogs and
 documentation (Hugo, Jekyll, Gatsby, Quarto)</li>
-<li><strong>Pandoc Document Processing</strong> - Converting markdown to
+<li><strong>Pandoc Document Processing:</strong> Converting markdown to
 PDF, HTML, DOCX with metadata</li>
-<li><strong>AI Agent Content Ingestion</strong> - Preserving metadata
+<li><strong>AI Agent Content Ingestion:</strong> Preserving metadata
 when agents read markdown directly</li>
-<li><strong>Multi-format Publishing</strong> - Single source for HTML,
+<li><strong>Multi-format Publishing:</strong> Single source for HTML,
 PDF, and agent consumption</li>
-<li><strong>Academic Publishing</strong> - Papers, articles, and
-research documentation with complete metadata</li>
+<li><strong>Academic Publishing:</strong> Papers, articles, and research
+documentation with complete metadata</li>
 </ol>
 <h3 id="implementation-pattern-pandoc-yaml-frontmatter">Implementation
 Pattern (Pandoc YAML Frontmatter)</h3>
@@ -1453,21 +1471,21 @@ class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><
 <span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="kw">[</span><span class="at">Article content begins...</span><span class="kw">]</span></span></code></pre></div>
 <p><strong>Standard Pandoc fields:</strong></p>
 <ul>
-<li><code>title</code> - Document title</li>
-<li><code>author</code> - Content creator (can be array for multiple
+<li><code>title</code>: Document title</li>
+<li><code>author</code>: Content creator (can be array for multiple
 authors)</li>
-<li><code>date</code> - Publication date (YYYY-MM-DD format)</li>
-<li><code>abstract</code> - Extended summary for AI agents and academic
+<li><code>date</code>: Publication date (YYYY-MM-DD format)</li>
+<li><code>abstract</code>: Extended summary for AI agents and academic
 contexts</li>
-<li><code>keywords</code> - Array of topic tags for categorisation</li>
+<li><code>keywords</code>: Array of topic tags for categorisation</li>
 </ul>
 <p><strong>Custom fields for AI agents:</strong></p>
 <ul>
-<li><code>description</code> - Brief SEO-style summary</li>
-<li><code>runbook</code> - Specific guidance for AI agents parsing the
+<li><code>description</code>: Brief SEO-style summary</li>
+<li><code>runbook</code>: Specific guidance for AI agents parsing the
 document</li>
-<li><code>purpose</code> - Why this document exists</li>
-<li><code>context</code> - Background information AI agents need</li>
+<li><code>purpose</code>: Why this document exists</li>
+<li><code>context</code>: Background information AI agents need</li>
 </ul>
 <p><strong>Advanced Pandoc capabilities:</strong></p>
 <p>For full documentation on all available YAML header options, see: <a
@@ -1513,7 +1531,7 @@ automatically</li>
 </ul>
 <h3 id="relationship-to-chapter-10-markdown-problem">Relationship to
 Chapter 10 Markdown Problem</h3>
-<p><strong>The problem (Chapter 10, lines 51-68):</strong></p>
+<p><strong>The problem (Chapter 10):</strong></p>
 <p>Markdown converters strip critical metadata when converting HTML to
 markdown:</p>
 <ul>
@@ -1649,12 +1667,12 @@ get metadata</li>
 <td>"humans and machines", "community-driven"</td>
 </tr>
 <tr>
-<td>ai-contributions</td>
+<td>contributions</td>
 <td>Signals whether AI contributions are accepted</td>
 <td>"welcome", "by-request-only", "not-accepted"</td>
 </tr>
 <tr>
-<td>ai-contribution-process</td>
+<td>contribution-process</td>
 <td>Describes how AI agents can contribute</td>
 <td>"AI assistants can contribute via pull requests or add observations
 to TODO.txt for side notices"</td>
@@ -1759,9 +1777,9 @@ DOCX)</li>
 </ul>
 <p><strong>Wait if:</strong></p>
 <ul>
-<li>Using traditional CMS (WordPress, Drupal) - use HTML meta tags
+<li>Using traditional CMS (WordPress, Drupal): use HTML meta tags
 instead</li>
-<li>Publishing only in HTML format - use Pattern 1 (AI meta tags)</li>
+<li>Publishing only in HTML format: use Pattern 1 (AI meta tags)</li>
 <li>Content doesn't need AI citation (internal docs, drafts)</li>
 <li>Using a system that doesn't support YAML frontmatter</li>
 </ul>
@@ -1780,14 +1798,14 @@ with Pandoc PDF workflow</li>
 (Pandoc YAML Frontmatter)</h3>
 <ul>
 <li><strong>Mentioned in:</strong> Chapter 10 (markdown converter
-problem, lines 51-68)</li>
+problem)</li>
 <li><strong>Mentioned in:</strong> Chapter 10 (extended llms.txt
-metadata, line 112 - "at the top of the file")</li>
+metadata: "at the top of the file")</li>
 <li><strong>Documented in:</strong> Appendix H (Markdown Metadata
 Standards for AI Agents section)</li>
 <li><strong>Reference:</strong> <a
-href="https://www.codestudy.net/blog/what-can-i-control-with-yaml-header-options-in-pandoc/">Pandoc
-YAML Header Options</a></li>
+href="https://pandoc.org/MANUAL.html">Pandoc User's Guide (YAML metadata
+blocks)</a></li>
 <li><strong>Related to:</strong> Pattern 1 (AI meta tags provide similar
 metadata in HTML)</li>
 <li><strong>Complements:</strong> llms.txt extended metadata (Appendix
@@ -1797,11 +1815,14 @@ H)</li>
 <h2 id="pattern-5-webmcp-tool-registration-active-metadata">Pattern 5:
 WebMCP Tool Registration (Active Metadata)</h2>
 <h3 id="status-webmcp">Status (WebMCP)</h3>
-<p><strong>W3C Draft Standard</strong> - Shipping in Chrome 146 Canary
-(February 2026), developed by Google and Microsoft</p>
+<p><strong>Draft Community Group Report:</strong> Published by the W3C
+Web Machine Learning Community Group, developed by engineers at Google
+and Microsoft, first shipped in Chrome 146 Canary (February 2026). The
+specification states that it is not a W3C Standard and is not on the W3C
+Standards Track.</p>
 <h3 id="rationale-webmcp">Rationale (WebMCP)</h3>
-<p>Patterns 1-4 address passive metadata -- information that machines
-read to understand content, policies, and structure. WebMCP (Web Model
+<p>Patterns 1-4 address passive metadata: information that machines read
+to understand content, policies, and structure. WebMCP (Web Model
 Context Protocol) introduces active metadata: callable tools that
 machines invoke through a standardised browser API. Where MX meta tags
 tell machines what content means, WebMCP tools tell machines what
@@ -1810,90 +1831,181 @@ actions are available.</p>
 <ul>
 <li>Extends the machine-readable web from understanding (MX) to action
 (WebMCP)</li>
-<li>Uses the browser as the integration layer -- no server-side agent
+<li>Uses the browser as the integration layer, with no server-side agent
 infrastructure required</li>
 <li>Two APIs serve different needs: Declarative (HTML forms) for simple
 actions, Imperative (JavaScript) for rich interactions</li>
-<li>Complements MX metadata rather than replacing it -- tools without
-context produce poor machine experiences</li>
+<li>Complements MX metadata rather than replacing it, because tools
+without context produce poor machine experiences</li>
 </ul>
 <h3 id="implementation-pattern-webmcp">Implementation Pattern
 (WebMCP)</h3>
-<p><strong>Imperative API -- <code>registerTool()</code> for rich
+<p><strong>Imperative API (<code>registerTool()</code>) for rich
 interactions:</strong></p>
 <div class="sourceCode" id="cb20" data-role="code-container"><pre
-class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">navigator</span><span class="op">.</span><span class="at">modelContext</span><span class="op">.</span><span class="fu">registerTool</span>({</span>
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">await</span> <span class="bu">document</span><span class="op">.</span><span class="at">modelContext</span><span class="op">.</span><span class="fu">registerTool</span>({</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;searchProducts&quot;</span><span class="op">,</span></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Search the product catalogue by keyword, category, and price&quot;</span><span class="op">,</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">parameters</span><span class="op">:</span> {</span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">query</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;string&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Search terms&quot;</span> }<span class="op">,</span></span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">category</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;string&quot;</span><span class="op">,</span> <span class="dt">enum</span><span class="op">:</span> [<span class="st">&quot;electronics&quot;</span><span class="op">,</span> <span class="st">&quot;clothing&quot;</span><span class="op">,</span> <span class="st">&quot;home&quot;</span>] }<span class="op">,</span></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">maxPrice</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;number&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Maximum price in GBP&quot;</span> }</span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">handler</span><span class="op">:</span> <span class="kw">async</span> ({ query<span class="op">,</span> category<span class="op">,</span> maxPrice }) <span class="kw">=&gt;</span> {</span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> results <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`/api/search?q=</span><span class="sc">${</span>query<span class="sc">}</span><span class="vs">&amp;cat=</span><span class="sc">${</span>category<span class="sc">}</span><span class="vs">&amp;max=</span><span class="sc">${</span>maxPrice<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
-<p><strong>Declarative API -- HTML forms as agent-accessible
-tools:</strong></p>
-<p>Standard HTML forms with proper <code>action</code>,
-<code>method</code>, and <code>name</code> attributes are automatically
-discoverable by machines through WebMCP. No JavaScript required for
-basic tool exposure.</p>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">title</span><span class="op">:</span> <span class="st">&quot;Search products&quot;</span><span class="op">,</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Search the product catalogue by keyword, category, and price&quot;</span><span class="op">,</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">inputSchema</span><span class="op">:</span> {</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;object&quot;</span><span class="op">,</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">properties</span><span class="op">:</span> {</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>      <span class="dt">query</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;string&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Search terms&quot;</span> }<span class="op">,</span></span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>      <span class="dt">category</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;string&quot;</span><span class="op">,</span> <span class="dt">enum</span><span class="op">:</span> [<span class="st">&quot;electronics&quot;</span><span class="op">,</span> <span class="st">&quot;clothing&quot;</span><span class="op">,</span> <span class="st">&quot;home&quot;</span>] }<span class="op">,</span></span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>      <span class="dt">maxPrice</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;number&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Maximum price in GBP&quot;</span> }</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">required</span><span class="op">:</span> [<span class="st">&quot;query&quot;</span>]</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">annotations</span><span class="op">:</span> { <span class="dt">readOnlyHint</span><span class="op">:</span> <span class="kw">true</span> }<span class="op">,</span></span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">execute</span><span class="op">:</span> <span class="kw">async</span> ({ query<span class="op">,</span> category<span class="op">,</span> maxPrice }) <span class="kw">=&gt;</span> {</span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> params <span class="op">=</span> <span class="kw">new</span> <span class="fu">URLSearchParams</span>({ <span class="dt">q</span><span class="op">:</span> query<span class="op">,</span> <span class="dt">cat</span><span class="op">:</span> category <span class="op">??</span> <span class="st">&quot;&quot;</span><span class="op">,</span> max<span class="op">:</span> maxPrice <span class="op">??</span> <span class="st">&quot;&quot;</span> })<span class="op">;</span></span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> results <span class="op">=</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="vs">`/api/search?</span><span class="sc">${</span>params<span class="sc">}</span><span class="vs">`</span>)<span class="op">;</span></span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> results<span class="op">.</span><span class="fu">json</span>()<span class="op">;</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true" tabindex="-1"></a>})<span class="op">;</span></span></code></pre></div>
+<p>The tool object needs a <code>name</code>, an optional display
+<code>title</code>, a natural-language <code>description</code>, a JSON
+Schema <code>inputSchema</code>, and an <code>execute</code> callback
+that receives the agent's input. <code>registerTool()</code> returns a
+promise, which rejects on a duplicate or empty name, an empty
+description, or an invalid schema. Passing an <code>AbortSignal</code>
+in the options unregisters the tool when aborted.</p>
+<p><strong>Annotations (what the tool does to the world):</strong></p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Annotation</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>readOnlyHint</code></td>
+<td>The tool reads and changes nothing</td>
+</tr>
+<tr>
+<td><code>consequentialHint</code></td>
+<td>The tool has real-world or non-reversible effects (a booking, a
+payment); the agent can require the user to confirm first</td>
+</tr>
+<tr>
+<td><code>untrustedContentHint</code></td>
+<td>The tool returns content the site does not vouch for (user reviews,
+forum posts); the agent should treat it with care</td>
+</tr>
+</tbody>
+</table>
+<p>These are the only trust signals WebMCP itself carries, and they
+describe the tool, not the publisher. They are hints the site sets about
+itself.</p>
+<p><strong>Declarative API (HTML forms as agent-accessible
+tools):</strong></p>
+<p>A form becomes a tool when it has the attributes defined in the
+WebMCP declarative API explainer. The specification's own declarative
+section is still marked as work in progress, so treat these names as
+provisional:</p>
+<div class="sourceCode" id="cb21" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="ot"> action</span><span class="op">=</span><span class="st">&quot;/reservations&quot;</span><span class="ot"> method</span><span class="op">=</span><span class="st">&quot;post&quot;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="ot">      toolname</span><span class="op">=</span><span class="st">&quot;bookTable&quot;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="ot">      tooldescription</span><span class="op">=</span><span class="st">&quot;Book a table at the restaurant&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;date&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;date&quot;</span><span class="ot"> required</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="ot">         toolparamdescription</span><span class="op">=</span><span class="st">&quot;Date of the booking&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;number&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;guests&quot;</span><span class="ot"> min</span><span class="op">=</span><span class="st">&quot;1&quot;</span><span class="ot"> max</span><span class="op">=</span><span class="st">&quot;12&quot;</span><span class="ot"> required</span></span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="ot">         toolparamdescription</span><span class="op">=</span><span class="st">&quot;Number of guests&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;submit&quot;</span><span class="dt">&gt;</span>Book<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>The browser builds the input schema from the form controls. Without
+the <code>toolautosubmit</code> attribute, the agent fills the form and
+the user checks and submits it, which suits consequential actions. A
+plain form without these attributes is still readable through the DOM,
+but it is not registered as a tool.</p>
 <h3 id="how-webmcp-complements-mx-meta-tags">How WebMCP Complements MX
 Meta Tags</h3>
 <p>MX meta tags and WebMCP tools address different layers of the same
 problem:</p>
-<div class="sourceCode" id="cb21" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX: Understanding layer (passive metadata) --&gt;</span></span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- WebMCP: Action layer (active metadata) --&gt;</span></span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">navigator</span><span class="op">.</span><span class="at">modelContext</span><span class="op">.</span><span class="fu">registerTool</span>({</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;bookTable&quot;</span><span class="op">,</span></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Book a restaurant table&quot;</span><span class="op">,</span></span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">parameters</span><span class="op">:</span> {</span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">date</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;string&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Date in YYYY-MM-DD format&quot;</span> }<span class="op">,</span></span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">guests</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;number&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Number of guests&quot;</span> }<span class="op">,</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>      <span class="dt">time</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;string&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Preferred time (HH:MM)&quot;</span> }</span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>    <span class="dt">handler</span><span class="op">:</span> <span class="kw">async</span> ({ date<span class="op">,</span> guests<span class="op">,</span> time }) <span class="kw">=&gt;</span> {</span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;/api/reservations&quot;</span><span class="op">,</span> {</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>        <span class="dt">method</span><span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        <span class="dt">body</span><span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({ date<span class="op">,</span> guests<span class="op">,</span> time })</span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>      })<span class="op">.</span><span class="fu">then</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="fu">json</span>())<span class="op">;</span></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
-<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb22" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX: Understanding layer (passive metadata) --&gt;</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">body</span><span class="dt">&gt;</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- WebMCP: Action layer (active metadata) --&gt;</span></span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">document</span><span class="op">.</span><span class="at">modelContext</span><span class="op">.</span><span class="fu">registerTool</span>({</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="dt">name</span><span class="op">:</span> <span class="st">&quot;bookTable&quot;</span><span class="op">,</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Book a restaurant table&quot;</span><span class="op">,</span></span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="dt">inputSchema</span><span class="op">:</span> {</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;object&quot;</span><span class="op">,</span></span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>      <span class="dt">properties</span><span class="op">:</span> {</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>        <span class="dt">date</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;string&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Date in YYYY-MM-DD format&quot;</span> }<span class="op">,</span></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>        <span class="dt">guests</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;number&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Number of guests&quot;</span> }<span class="op">,</span></span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>        <span class="dt">time</span><span class="op">:</span> { <span class="dt">type</span><span class="op">:</span> <span class="st">&quot;string&quot;</span><span class="op">,</span> <span class="dt">description</span><span class="op">:</span> <span class="st">&quot;Preferred time (HH:MM)&quot;</span> }</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>      }<span class="op">,</span></span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>      <span class="dt">required</span><span class="op">:</span> [<span class="st">&quot;date&quot;</span><span class="op">,</span> <span class="st">&quot;guests&quot;</span><span class="op">,</span> <span class="st">&quot;time&quot;</span>]</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>    <span class="dt">annotations</span><span class="op">:</span> { <span class="dt">consequentialHint</span><span class="op">:</span> <span class="kw">true</span> }<span class="op">,</span></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>    <span class="dt">execute</span><span class="op">:</span> <span class="kw">async</span> ({ date<span class="op">,</span> guests<span class="op">,</span> time }) <span class="kw">=&gt;</span> {</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>      <span class="cf">return</span> <span class="cf">await</span> <span class="fu">fetch</span>(<span class="st">&quot;/api/reservations&quot;</span><span class="op">,</span> {</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">method</span><span class="op">:</span> <span class="st">&quot;POST&quot;</span><span class="op">,</span></span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">body</span><span class="op">:</span> <span class="bu">JSON</span><span class="op">.</span><span class="fu">stringify</span>({ date<span class="op">,</span> guests<span class="op">,</span> time })</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>      })<span class="op">.</span><span class="fu">then</span>(r <span class="kw">=&gt;</span> r<span class="op">.</span><span class="fu">json</span>())<span class="op">;</span></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">body</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Division of responsibility:</strong></p>
 <ul>
 <li><strong>MX meta tags (Patterns 1-4):</strong> What the content is,
-how to access it, what policies apply, attribution requirements</li>
+what policies apply, attribution requirements</li>
 <li><strong>WebMCP tools (Pattern 5):</strong> What actions machines can
 perform, with what parameters, returning what results</li>
 </ul>
 <p>A machine with WebMCP alone can call <code>bookTable()</code>. A
-machine with MX and WebMCP knows the restaurant's content policy,
-attribution requirements, and freshness expectations before calling
-<code>bookTable()</code>.</p>
+machine with MX and WebMCP knows the restaurant's content policy and
+attribution requirements before calling <code>bookTable()</code>.</p>
+<h3 id="worked-example-webmcp">Worked Example (WebMCP)</h3>
+<p>The Los Granainos restaurant reference implementation (Chapter 17 of
+<em>MX: The Protocols</em>) carries both layers in one
+<code>.cog.html</code> file. The cog frontmatter is an HTML comment at
+the top of the file and names WebMCP in its <code>definition</code>
+block. The page script registers its tools with
+<code>registerTool()</code>: the information tools (menu search, booking
+details, location) carry <code>readOnlyHint</code>, and a reservation
+request tool carries <code>consequentialHint</code>.</p>
+<p>A scripted demo agent beside the page follows a fixed order:</p>
+<ol type="1">
+<li>Read the cog and the Schema.org data: business, opening hours,
+publisher, version, and the standard the tools follow.</li>
+<li>Check the claims it can. The cog claims certification, but its
+signature field holds a placeholder and the demo has no registry
+connection, so the agent records the page as unverified.</li>
+<li>List the tools with <code>getTools()</code> and read their
+annotations.</li>
+<li>Call a read-only tool (the menu search) without asking.</li>
+<li>Before the consequential tool, show the user the business, the
+unverified status, the request and its effect, and wait for
+approval.</li>
+</ol>
+<p>The annotation in step 5 comes from the tool. The status line comes
+from the cog. Without the cog, the agent could still ask for approval,
+but it could not tell the user anything about who would receive the
+request.</p>
 <h3 id="forward-compatibility-webmcp">Forward Compatibility
 (WebMCP)</h3>
 <p><strong>If machines don't support WebMCP:</strong> They fall back to
 DOM parsing, form interaction, and the passive metadata patterns in this
 appendix. No breakage.</p>
 <p><strong>If machines do support WebMCP:</strong> They discover and
-invoke tools through <code>navigator.modelContext</code>, producing
+invoke tools through <code>document.modelContext</code>, producing
 faster and more reliable interactions than DOM scraping.</p>
 <p><strong>Progressive enhancement:</strong> WebMCP tools layer on top
-of existing HTML. Pages work without them; pages work better with
-them.</p>
+of existing HTML. Pages work without them and work better with them.</p>
 <h3 id="adoption-considerations-webmcp">Adoption Considerations
 (WebMCP)</h3>
 <p><strong>Adopt now if:</strong></p>
@@ -1911,14 +2023,18 @@ channels</li>
 sufficient)</li>
 <li>Require cross-browser support before implementation (Safari, Firefox
 timelines unknown)</li>
-<li>Prefer to wait for W3C standard to reach Recommendation status</li>
+<li>Prefer to wait until the specification moves from a Community Group
+Report onto the W3C Standards Track</li>
 </ul>
 <h3 id="cross-references-webmcp">Cross-References (WebMCP)</h3>
 <ul>
 <li><strong>Specification:</strong> <a
-href="https://webmachinelearning.github.io/webmcp/">W3C WebMCP
-Draft</a></li>
-<li><strong>Mentioned in:</strong> Appendix J (Industry Developments --
+href="https://webmachinelearning.github.io/webmcp/">WebMCP, Draft
+Community Group Report</a></li>
+<li><strong>Declarative API explainer:</strong> <a
+href="https://github.com/webmachinelearning/webmcp/blob/main/declarative-api-explainer.md">WebMCP
+declarative API</a></li>
+<li><strong>Mentioned in:</strong> Appendix J (Industry Developments,
 WebMCP entry, February 2026)</li>
 <li><strong>Complements:</strong> Pattern 1 (MX meta tags provide
 understanding; WebMCP provides action)</li>
@@ -2012,13 +2128,13 @@ proposals seeking vendor consensus)</p>
 <h3 id="path-to-standardisation">Path to Standardisation</h3>
 <p>These patterns could standardise if:</p>
 <ol type="1">
-<li><strong>Multiple machines adopt</strong> - Different AI systems
+<li><strong>Multiple machines adopt:</strong> Different AI systems
 recognise tags</li>
-<li><strong>Production validation</strong> - Measurable benefits in real
+<li><strong>Production validation:</strong> Measurable benefits in real
 deployments</li>
-<li><strong>Vendor support</strong> - Browser makers, CMS platforms
+<li><strong>Vendor support:</strong> Browser makers, CMS platforms
 include by default</li>
-<li><strong>Community refinement</strong> - Usage reveals improvements
+<li><strong>Community refinement:</strong> Usage reveals improvements
 needed</li>
 </ol>
 <p><strong>No guarantees:</strong> Patterns might evolve, change, or be
@@ -2026,16 +2142,16 @@ superseded by better approaches.</p>
 <h3 id="examples-of-similar-evolution">Examples of Similar
 Evolution</h3>
 <ul>
-<li><strong>viewport meta tag</strong> - Started as Apple proprietary,
+<li><strong>viewport meta tag:</strong> Started as Apple proprietary,
 now standard</li>
-<li><strong>robots meta tag</strong> - Community convention, now
+<li><strong>robots meta tag:</strong> Community convention, now
 universally recognised</li>
-<li><strong>Open Graph meta tags</strong> - Facebook proposal, now
-widely adopted</li>
-<li><strong>Schema.org</strong> - Multi-vendor collaboration, now
+<li><strong>Open Graph meta tags:</strong> Facebook proposal, now widely
+adopted</li>
+<li><strong>Schema.org:</strong> Multi-vendor collaboration, now
 established standard</li>
 </ul>
-<p>These AI patterns follow similar trajectory.</p>
+<p>These AI patterns follow a similar trajectory.</p>
 <hr />
 <h2 id="monitoring-and-feedback">Monitoring and Feedback</h2>
 <h3 id="how-to-track-adoption">How to Track Adoption</h3>
@@ -2053,11 +2169,11 @@ worked/failed</li>
 Evolution</h3>
 <p>If you implement these patterns:</p>
 <ol type="1">
-<li><strong>Document results</strong> - What worked, what didn't</li>
-<li><strong>Share learnings</strong> - Blog posts, conference talks</li>
-<li><strong>Propose improvements</strong> - Suggest refinements based on
+<li><strong>Document results:</strong> What worked, what didn't</li>
+<li><strong>Share learnings:</strong> Blog posts, conference talks</li>
+<li><strong>Propose improvements:</strong> Suggest refinements based on
 experience</li>
-<li><strong>Participate in standards</strong> - Join relevant working
+<li><strong>Participate in standards:</strong> Join relevant working
 groups</li>
 </ol>
 <p><strong>Contact:</strong> <a href="mailto:info@cognovamx.com"
@@ -2069,24 +2185,24 @@ evolution</p>
 Consolidated</h3>
 <ol type="1">
 <li><strong>AI Meta Tag Namespace</strong> (4 active tags, 3
-unnecessary) - Page-level machine guidance</li>
-<li><strong>data-agent-visible Attribute</strong> - Hidden
+unnecessary): Page-level machine guidance</li>
+<li><strong>data-agent-visible Attribute:</strong> Hidden
 machine-readable instructions</li>
-<li><strong>Common Data Attributes</strong> (25+ attributes) - Explicit
+<li><strong>Common Data Attributes</strong> (25+ attributes): Explicit
 state management and e-commerce data</li>
-<li><strong>Pandoc YAML Frontmatter</strong> - Universal markdown
+<li><strong>Pandoc YAML Frontmatter:</strong> Universal markdown
 metadata standard</li>
-<li><strong>WebMCP Tool Registration</strong> - Active, callable
-metadata through browser API (W3C draft)</li>
+<li><strong>WebMCP Tool Registration:</strong> Active, callable metadata
+through browser API (W3C Community Group draft)</li>
 </ol>
 <h3 id="key-principles">Key Principles</h3>
 <ul>
-<li><strong>Forward-compatible</strong> - Won't break if ignored</li>
-<li><strong>Progressive enhancement</strong> - Works better with
-support, doesn't require it</li>
-<li><strong>Established patterns</strong> - Extends existing conventions
+<li><strong>Forward-compatible:</strong> Won't break if ignored</li>
+<li><strong>Progressive enhancement:</strong> Works better with support,
+doesn't require it</li>
+<li><strong>Established patterns:</strong> Extends existing conventions
 (meta tags, data attributes)</li>
-<li><strong>Production-tested</strong> - Used in real
+<li><strong>Production-tested:</strong> Used in real
 implementations</li>
 </ul>
 <h3 id="next-steps">Next Steps</h3>
@@ -2119,23 +2235,23 @@ standards. This section explains how to integrate MX patterns into your
 existing infrastructure.</p>
 <h4 id="integration-with-schema.org-1">Integration with Schema.org</h4>
 <p><strong>MX meta tags + Schema.org JSON-LD work together:</strong></p>
-<div class="sourceCode" id="cb22" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX meta tags for agent behaviour --&gt;</span></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Schema.org for structured data --&gt;</span></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;application/ld+json&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  {</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@context&quot;</span><span class="op">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="op">,</span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;BlogPosting&quot;</span><span class="op">,</span></span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;headline&quot;</span><span class="op">:</span> <span class="st">&quot;Understanding MX Patterns&quot;</span><span class="op">,</span></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;dateModified&quot;</span><span class="op">:</span> <span class="st">&quot;2026-03-04&quot;</span><span class="op">,</span></span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;author&quot;</span><span class="op">:</span> {<span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Person&quot;</span><span class="op">,</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Tom Cranstoun&quot;</span>}</span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb23" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX meta tags for agent behaviour --&gt;</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Schema.org for structured data --&gt;</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">script</span><span class="ot"> type=</span><span class="st">&quot;application/ld+json&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@context&quot;</span><span class="op">:</span> <span class="st">&quot;https://schema.org&quot;</span><span class="op">,</span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;BlogPosting&quot;</span><span class="op">,</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;headline&quot;</span><span class="op">:</span> <span class="st">&quot;Understanding MX Patterns&quot;</span><span class="op">,</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;dateModified&quot;</span><span class="op">:</span> <span class="st">&quot;2026-03-04&quot;</span><span class="op">,</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;author&quot;</span><span class="op">:</span> {<span class="st">&quot;@type&quot;</span><span class="op">:</span> <span class="st">&quot;Person&quot;</span><span class="op">,</span> <span class="st">&quot;name&quot;</span><span class="op">:</span> <span class="st">&quot;Tom Cranstoun&quot;</span>}</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;/</span><span class="kw">script</span><span class="dt">&gt;</span></span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Division of responsibility:</strong></p>
 <ul>
 <li><strong>Schema.org:</strong> What the content IS (article, product,
@@ -2146,21 +2262,21 @@ policy, attribution, jurisdiction)</li>
 <h4 id="integration-with-open-graph-and-twitter-cards">Integration with
 Open Graph and Twitter Cards</h4>
 <p><strong>MX complements social media metadata:</strong></p>
-<div class="sourceCode" id="cb23" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Open Graph for social sharing --&gt;</span></span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:type&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;article&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:title&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Understanding MX Patterns&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:url&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://example.com/article&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Twitter Cards for Twitter --&gt;</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;twitter:card&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summary_large_image&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;twitter:title&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Understanding MX Patterns&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX for AI agent behaviour --&gt;</span></span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb24" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">head</span><span class="dt">&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Open Graph for social sharing --&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:type&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;article&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:title&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Understanding MX Patterns&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> property</span><span class="op">=</span><span class="st">&quot;og:url&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;https://example.com/article&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- Twitter Cards for Twitter --&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;twitter:card&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summary_large_image&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;twitter:title&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Understanding MX Patterns&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  <span class="co">&lt;!-- MX for AI agent behaviour --&gt;</span></span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">head</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Why all three?</strong></p>
 <ul>
 <li><strong>Open Graph:</strong> Social media platforms (Facebook,
@@ -2179,11 +2295,11 @@ Allow: /
 
 User-agent: GPTBot
 Disallow: /private/</code></pre>
-<div class="sourceCode" id="cb25" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Page-level override with MX meta tags --&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;robots&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;index, follow&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summaries-allowed&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="ot"> text</span><span class="op">=</span><span class="st">&quot;Source: Example.com&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb26" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Page-level override with MX meta tags --&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;robots&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;index, follow&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;summaries-allowed&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="ot"> text</span><span class="op">=</span><span class="st">&quot;Source: Example.com&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Hierarchy of control:</strong></p>
 <ol type="1">
 <li><strong>robots.txt:</strong> Site-wide policies</li>
@@ -2198,34 +2314,34 @@ page overrides:</strong></p>
 # Site-wide defaults
 &gt; Content Policy: summaries-allowed
 &gt; Attribution: required</code></pre>
-<div class="sourceCode" id="cb27" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Page overrides site-wide defaults --&gt;</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;not-required&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;llms-txt&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/llms.txt&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb28" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Page overrides site-wide defaults --&gt;</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;full-extraction-allowed&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;not-required&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;llms-txt&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/llms.txt&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Pattern:</strong> Site-wide defaults in llms.txt,
 page-specific overrides in HTML meta tags.</p>
 <h4 id="integration-with-wcag-accessibility-standards">Integration with
 WCAG Accessibility Standards</h4>
 <p><strong>MX convergence principle: Accessibility patterns benefit
 machines:</strong></p>
-<div class="sourceCode" id="cb28" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ARIA for screen readers --&gt;</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">&quot;Add to cart&quot;</span><span class="ot"> aria-describedby</span><span class="op">=</span><span class="st">&quot;cart-status&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;icon&quot;</span><span class="dt">&gt;</span>🛒<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;cart-status&quot;</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;status&quot;</span><span class="ot"> aria-live</span><span class="op">=</span><span class="st">&quot;polite&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  2 items in cart</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Data attributes for AI agents --&gt;</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> data-action</span><span class="op">=</span><span class="st">&quot;add-to-cart&quot;</span></span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a><span class="ot">        data-product-id</span><span class="op">=</span><span class="st">&quot;WH-1000&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;icon&quot;</span><span class="dt">&gt;</span>🛒<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> data-item-count</span><span class="op">=</span><span class="st">&quot;2&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  2 items in cart</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb29" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- ARIA for screen readers --&gt;</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> aria-label</span><span class="op">=</span><span class="st">&quot;Add to cart&quot;</span><span class="ot"> aria-describedby</span><span class="op">=</span><span class="st">&quot;cart-status&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;icon&quot;</span><span class="dt">&gt;</span>🛒<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;cart-status&quot;</span><span class="ot"> role</span><span class="op">=</span><span class="st">&quot;status&quot;</span><span class="ot"> aria-live</span><span class="op">=</span><span class="st">&quot;polite&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  2 items in cart</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- Data attributes for AI agents --&gt;</span></span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> data-action</span><span class="op">=</span><span class="st">&quot;add-to-cart&quot;</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a><span class="ot">        data-product-id</span><span class="op">=</span><span class="st">&quot;WH-1000&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">span</span><span class="ot"> class</span><span class="op">=</span><span class="st">&quot;icon&quot;</span><span class="dt">&gt;</span>🛒<span class="dt">&lt;/</span><span class="kw">span</span><span class="dt">&gt;</span></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> data-item-count</span><span class="op">=</span><span class="st">&quot;2&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  2 items in cart</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
 <p><strong>Both patterns serve similar goals:</strong></p>
 <ul>
 <li><strong>ARIA:</strong> Explicit semantics for assistive
@@ -2237,50 +2353,50 @@ markup</li>
 <h4 id="integration-with-existing-cms-platforms">Integration with
 Existing CMS Platforms</h4>
 <p><strong>WordPress example:</strong></p>
-<div class="sourceCode" id="cb29" data-role="code-container"><pre
-class="sourceCode php"><code class="sourceCode php" data-role="code-content"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Add MX meta tags to WordPress head</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>add_action(<span class="st">&#39;wp_head&#39;</span><span class="ot">,</span> <span class="kw">function</span>() {</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (is_single()) {</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&#39;&lt;meta name=&quot;mx:contentPolicy&quot; content=&quot;extract-with-attribution&quot;&gt;&#39;</span> <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&#39;&lt;meta name=&quot;mx:attribution&quot; content=&quot;required&quot;&gt;&#39;</span> <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>})<span class="ot">;</span></span></code></pre></div>
-<p><strong>Next.js example:</strong></p>
 <div class="sourceCode" id="cb30" data-role="code-container"><pre
-class="sourceCode jsx"><code class="sourceCode javascriptreact" data-role="code-content"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">BlogPost</span>({ post }) {</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;&gt;</span></span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">&lt;Head&gt;</span></span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;meta</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span> <span class="ot">content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span> <span class="kw">/&gt;</span></span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;meta</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span> <span class="ot">content</span><span class="op">=</span><span class="st">&quot;required&quot;</span> <span class="kw">/&gt;</span></span>
-<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">&lt;/Head&gt;</span></span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;article&gt;</span><span class="va">{</span>post<span class="op">.</span><span class="at">content</span><span class="va">}</span><span class="kw">&lt;/article&gt;</span></span>
-<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/&gt;</span></span>
-<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
-<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+class="sourceCode php"><code class="sourceCode php" data-role="code-content"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Add MX meta tags to WordPress head</span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>add_action(<span class="st">&#39;wp_head&#39;</span><span class="ot">,</span> <span class="kw">function</span>() {</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (is_single()) {</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&#39;&lt;meta name=&quot;mx:contentPolicy&quot; content=&quot;extract-with-attribution&quot;&gt;&#39;</span> <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&#39;&lt;meta name=&quot;mx:attribution&quot; content=&quot;required&quot;&gt;&#39;</span> <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>})<span class="ot">;</span></span></code></pre></div>
+<p><strong>Next.js example:</strong></p>
+<div class="sourceCode" id="cb31" data-role="code-container"><pre
+class="sourceCode jsx"><code class="sourceCode javascriptreact" data-role="code-content"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="im">export</span> <span class="im">default</span> <span class="kw">function</span> <span class="fu">BlogPost</span>({ post }) {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> (</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;&gt;</span></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">&lt;Head&gt;</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;meta</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span> <span class="ot">content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>        <span class="kw">&lt;meta</span> <span class="ot">name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span> <span class="ot">content</span><span class="op">=</span><span class="st">&quot;required&quot;</span> <span class="kw">/&gt;</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>      <span class="fu">&lt;/Head&gt;</span></span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>      <span class="kw">&lt;article&gt;</span><span class="va">{</span>post<span class="op">.</span><span class="at">content</span><span class="va">}</span><span class="kw">&lt;/article&gt;</span></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">&lt;/&gt;</span></span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <h4 id="migration-path-from-generic-ai--prefix">Migration Path from
 Generic ai- Prefix</h4>
 <p><strong>If you previously used ai- prefix, migrate to mx: colon
 prefix:</strong></p>
-<div class="sourceCode" id="cb31" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- OLD (deprecated ai- prefix) --&gt;</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- NEW (mx: namespace) --&gt;</span></span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
-<p><strong>Deprecated tags (do not migrate - remove
-entirely):</strong></p>
 <div class="sourceCode" id="cb32" data-role="code-container"><pre
-class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- These are deprecated - they duplicate existing standards --&gt;</span></span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-preferred-access&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;html&quot;</span><span class="dt">&gt;</span>  <span class="co">&lt;!-- deprecated: self-evident --&gt;</span></span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-freshness&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;monthly&quot;</span><span class="dt">&gt;</span>       <span class="co">&lt;!-- deprecated: use HTTP Cache-Control + Schema.org dateModified --&gt;</span></span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-structured-data&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;json-ld&quot;</span><span class="dt">&gt;</span>  <span class="co">&lt;!-- deprecated: self-evident from JSON-LD block --&gt;</span></span></code></pre></div>
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- OLD (deprecated ai- prefix) --&gt;</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-content-policy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- NEW (mx: namespace) --&gt;</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:contentPolicy&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;extract-with-attribution&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;mx:attribution&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;required&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p><strong>Deprecated tags (do not migrate; remove
+entirely):</strong></p>
+<div class="sourceCode" id="cb33" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="co">&lt;!-- These are deprecated - they duplicate existing standards --&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-preferred-access&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;html&quot;</span><span class="dt">&gt;</span>  <span class="co">&lt;!-- deprecated: self-evident --&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-freshness&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;monthly&quot;</span><span class="dt">&gt;</span>       <span class="co">&lt;!-- deprecated: use HTTP Cache-Control + Schema.org dateModified --&gt;</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;ai-structured-data&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;json-ld&quot;</span><span class="dt">&gt;</span>  <span class="co">&lt;!-- deprecated: self-evident from JSON-LD block --&gt;</span></span></code></pre></div>
 <p><strong>Migration strategy:</strong></p>
 <ol type="1">
 <li>Remove <code>ai-preferred-access</code>, <code>ai-freshness</code>,
-and <code>ai-structured-data</code> - they are deprecated</li>
+and <code>ai-structured-data</code>, which are deprecated</li>
 <li>Rename <code>ai-content-policy</code> to
 <code>mx:contentPolicy</code></li>
 <li>Rename <code>ai-attribution</code> to
@@ -2293,10 +2409,10 @@ unrecognised tags)</li>
 <h3 id="implementation-checklist">Implementation Checklist</h3>
 <p><strong>Phase 1: Foundations (Week 1)</strong></p>
 <ul>
-<li>✓ Add MX meta tags (<code>mx-content-policy</code>,
-<code>mx-attribution</code>) to <code>&lt;head&gt;</code> template</li>
-<li>✓ Omit unnecessary tags (<code>mx-preferred-access</code>,
-<code>mx-freshness</code>, <code>mx-structured-data</code>)</li>
+<li>✓ Add MX meta tags (<code>mx:contentPolicy</code>,
+<code>mx:attribution</code>) to <code>&lt;head&gt;</code> template</li>
+<li>✓ Omit unnecessary tags (<code>mx:preferredAccess</code>,
+<code>mx:freshness</code>, <code>mx:structuredData</code>)</li>
 <li>✓ Implement Schema.org JSON-LD for key content types (including
 <code>dateModified</code>)</li>
 <li>✓ Ensure semantic HTML elements (<code>&lt;main&gt;</code>,
@@ -2330,39 +2446,39 @@ data-validation-state)</li>
 <h2 id="part-7-relationship-to-web-standards">Part 7: Relationship to
 Web Standards</h2>
 <h3 id="standards-landscape">Standards Landscape</h3>
-<p>MX Framework operates within the broader web standards ecosystem.
+<p>MX Framework operates within the wider body of web standards.
 Understanding where MX fits helps clarify when to use which pattern.</p>
 <h4 id="established-standards-universal-adoption">Established Standards
 (Universal Adoption)</h4>
 <p><strong>W3C and WHATWG Standards:</strong></p>
 <ul>
-<li><strong>HTML5 semantic elements</strong> - <code>&lt;nav&gt;</code>,
+<li><strong>HTML5 semantic elements:</strong> <code>&lt;nav&gt;</code>,
 <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>,
 <code>&lt;aside&gt;</code>, <code>&lt;section&gt;</code></li>
-<li><strong>ARIA attributes</strong> - <code>aria-label</code>,
+<li><strong>ARIA attributes:</strong> <code>aria-label</code>,
 <code>aria-describedby</code>, <code>role</code>,
 <code>aria-live</code></li>
-<li><strong>HTML5 data attributes</strong> - <code>data-*</code> custom
+<li><strong>HTML5 data attributes:</strong> <code>data-*</code> custom
 attributes</li>
-<li><strong>HTTP status codes</strong> - 200, 303, 400, 401, 404, 422,
+<li><strong>HTTP status codes:</strong> 200, 303, 400, 401, 404, 422,
 503</li>
-<li><strong><code>&lt;meta&gt;</code> tags</strong> -
+<li><strong><code>&lt;meta&gt;</code> tags:</strong>
 <code>robots</code>, <code>viewport</code>, <code>description</code>,
 <code>canonical</code></li>
 </ul>
 <p><strong>IETF Standards:</strong></p>
 <ul>
-<li><strong>robots.txt</strong> (RFC 9309) - Site-wide crawling
+<li><strong>robots.txt</strong> (RFC 9309): Site-wide crawling
 policies</li>
-<li><strong>HTTP headers</strong> - Cache-Control, Content-Type, Status
+<li><strong>HTTP headers:</strong> Cache-Control, Content-Type, Status
 codes</li>
 </ul>
 <p><strong>De Facto Standards:</strong></p>
 <ul>
-<li><strong>Schema.org</strong> - Structured data vocabulary (Google,
+<li><strong>Schema.org:</strong> Structured data vocabulary (Google,
 Microsoft, Yahoo, Yandex)</li>
-<li><strong>Open Graph</strong> - Social media metadata (Facebook)</li>
-<li><strong>Twitter Cards</strong> - Twitter-specific metadata</li>
+<li><strong>Open Graph:</strong> Social media metadata (Facebook)</li>
+<li><strong>Twitter Cards:</strong> Twitter-specific metadata</li>
 </ul>
 <p><strong>MX position:</strong> Builds on these foundations, never
 replaces them.</p>
@@ -2436,26 +2552,25 @@ that work in production.</p>
 <p><strong>If MX patterns prove valuable, they might standardise
 through:</strong></p>
 <ol type="1">
-<li><strong>Multiple machine adoption</strong> - Different AI systems
+<li><strong>Multiple machine adoption:</strong> Different AI systems
 recognise patterns</li>
-<li><strong>Production validation</strong> - Measurable benefits in real
+<li><strong>Production validation:</strong> Measurable benefits in real
 deployments</li>
-<li><strong>Community refinement</strong> - Usage reveals
+<li><strong>Community refinement:</strong> Usage reveals
 improvements</li>
-<li><strong>Vendor support</strong> - Platforms include MX patterns by
+<li><strong>Vendor support:</strong> Platforms include MX patterns by
 default</li>
-<li><strong>Formal proposal</strong> - Community brings patterns to
+<li><strong>Formal proposal:</strong> Community brings patterns to
 standards bodies</li>
 </ol>
 <p><strong>Examples of similar evolution:</strong></p>
 <ul>
-<li><strong>viewport meta tag</strong> - Apple proprietary → universal
+<li><strong>viewport meta tag:</strong> Apple proprietary → universal
 standard</li>
-<li><strong>robots meta tag</strong> - Community convention → universal
+<li><strong>robots meta tag:</strong> Community convention → universal
 recognition</li>
-<li><strong>Open Graph</strong> - Facebook proposal → widely
-adopted</li>
-<li><strong>Schema.org</strong> - Vendor consortium → established
+<li><strong>Open Graph:</strong> Facebook proposal → widely adopted</li>
+<li><strong>Schema.org:</strong> Vendor consortium → established
 standard</li>
 </ul>
 <p><strong>MX follows this trajectory:</strong> Start with practical
@@ -2474,8 +2589,8 @@ standard exists in:</p>
 <li>Community standards (Microformats, Schema.org)</li>
 </ul>
 <p><strong>Implication:</strong> <code>ai-</code> prefix was not
-following any established pattern. MX Framework chose <code>mx-</code>
-to:</p>
+following any established pattern. MX Framework chose the
+<code>mx:</code> prefix to:</p>
 <ol type="1">
 <li>Establish framework identity (like <code>twitter:</code>,
 <code>og:</code>)</li>
@@ -2485,11 +2600,11 @@ community)</li>
 </ol>
 <p><strong>Pattern precedent:</strong></p>
 <ul>
-<li><code>twitter:card</code>, <code>twitter:title</code> - Twitter's
+<li><code>twitter:card</code>, <code>twitter:title</code>: Twitter's
 framework-specific metadata</li>
-<li><code>og:type</code>, <code>og:title</code> - Open Graph's
+<li><code>og:type</code>, <code>og:title</code>: Open Graph's
 framework-specific metadata</li>
-<li><code>mx-content-policy</code>, <code>mx-attribution</code> - MX
+<li><code>mx:contentPolicy</code>, <code>mx:attribution</code>: MX
 Framework's metadata</li>
 </ul>
 <h3 id="relationship-to-html-living-standard">Relationship to HTML
@@ -2543,11 +2658,11 @@ examples</li>
 <h3 id="summary-standards-hierarchy">Summary: Standards Hierarchy</h3>
 <p><strong>Use this hierarchy when making decisions:</strong></p>
 <ol type="1">
-<li><strong>Established standards FIRST</strong> - HTML5, ARIA,
+<li><strong>Established standards FIRST:</strong> HTML5, ARIA,
 Schema.org, HTTP</li>
-<li><strong>Emerging conventions SECOND</strong> - llms.txt, community
+<li><strong>Emerging conventions SECOND:</strong> llms.txt, community
 patterns</li>
-<li><strong>MX patterns THIRD</strong> - Framework-specific metadata and
+<li><strong>MX patterns THIRD:</strong> Framework-specific metadata and
 extensions</li>
 </ol>
 <p><strong>Never replace established standards with MX

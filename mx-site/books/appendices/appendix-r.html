@@ -9,12 +9,13 @@ title: "Appendix R: Testing Agent Comprehension"
 description: "Methodology for testing how AI agents read web content - the relevance layer, the unreliable narrator problem, the Hawthorne effect on agents, the canary-token method for measuring agent comprehension, and HEAD-based publisher self-testing for sitemap and link health"
 author: "Tom Cranstoun"
 created: 2026-04-07
-modified: 2026-04-07
+modified: 2026-10-10
 version: "1.1"
 
 type: reference
 tags: [appendix, agent-testing, canary-tokens, relevance-layer, hawthorne-effect, comprehension, head-self-test, sitemap-health, mx]
 mx:
+  mxSpecVersion: "0.9"
   status: active
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-r-testing-agent-comprehension.md
@@ -23,7 +24,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -173,7 +174,7 @@ the same problem: how to test whether an agent has actually read what
 was published. The two questions look symmetric but they are not.
 Building a well-structured page is a craft activity with stable rules.
 Testing whether an agent read that page is an empirical activity against
-a moving target - agents change their fetching pipelines, their
+a moving target. Agents change their fetching pipelines, their
 summarisation layers, and their behavioural defaults from one model
 release to the next. A test that worked in February may report different
 numbers in April against the same fixture, and the difference may have
@@ -187,17 +188,16 @@ into a publisher-side framework: what to measure, what to ignore, and
 what to do when the agent and the test disagree.</p>
 <h2 id="why-test-the-agent-not-just-the-site">Why test the agent, not
 just the site</h2>
-<p>Appendix N catalogues anti-patterns from the publisher side - the
-fourteen most common mistakes that break agent compatibility. Appendix I
-documents a single pipeline failure in detail, the £203,000 cruise
-pricing error. Together they answer the question "what does the
-publisher get wrong?" Appendix R answers a different question: "what
-does the agent get wrong, even when the publisher gets everything
-right?"</p>
+<p>Appendix N catalogues anti-patterns from the publisher side: the most
+common mistakes that break agent compatibility. Appendix I documents a
+single pipeline failure in detail, the £203,000 cruise pricing error.
+Together they answer the question "what does the publisher get wrong?"
+Appendix R answers a different question: "what does the agent get wrong,
+even when the publisher gets everything right?"</p>
 <p>The distinction matters because publisher-side fixes have a ceiling.
 A page can be served as static HTML with semantic landmarks, complete
 Schema.org, MX governance tags, an llms.txt declaration, and a perfect
-heading hierarchy - and an agent can still report that the page does not
+heading hierarchy. And an agent can still report that the page does not
 contain information that is plainly there. The reasons are pipeline
 reasons, not content reasons. The agent's fetch tool may have truncated
 the page at 75 kilobytes. The agent's summarisation layer may have
@@ -219,11 +219,11 @@ model in a form their authors would not recognise.</p>
 When an AI agent fetches a web page, the bytes of that page rarely
 arrive at the reasoning model unchanged. Between the HTTP response and
 the language model that produces the user-facing answer, there is almost
-always an intermediary process - sometimes called retrieval, sometimes
-summarisation, sometimes context compression - that filters, reshapes,
-or paraphrases the page's content to fit the agent's context window and
-the agent's interpretation of the user's question. This intermediary is
-the relevance layer.</p>
+always an intermediary process. It is sometimes called retrieval,
+sometimes summarisation, sometimes context compression. It filters,
+reshapes, or paraphrases the page's content to fit the agent's context
+window and the agent's interpretation of the user's question. This
+intermediary is the relevance layer.</p>
 <p>The relevance layer is not visible to the user, and in most agent
 architectures it is not visible to the reasoning model either. The
 reasoning model sees what the relevance layer chose to forward. If the
@@ -234,7 +234,7 @@ the same question but the page calls the same content "Validation
 Levels", the relevance layer may decide that "Validation Levels" is not
 relevant to a question about "schema enforcement", and forward something
 else instead. The reasoning model then reports that the page does not
-document schema enforcement modes - even though the page does document
+document schema enforcement modes, even though the page does document
 them, under a different name.</p>
 <p>This is not a bug in any one agent. It is a consequence of a design
 pattern that almost all current agents share. The relevance layer exists
@@ -247,12 +247,12 @@ report.</p>
 <p>The implication for publishers is that content needs to be readable
 through the relevance layer's filter, not just in the raw page. Synonyms
 matter. Rephrasing the same idea in three different ways inside one
-section is not redundant - it is insurance against a relevance layer
-that recognises only one of the three phrasings. Heading text matters
-more than heading hierarchy: a heading that uses the same vocabulary as
-the user's likely question is more likely to be retained. And
-single-word qualifiers ("only", "always", "never") matter because they
-are the kind of detail that summarisation layers strip first.</p>
+section is insurance against a relevance layer that recognises only one
+of the three phrasings, not redundancy. Heading text matters more than
+heading hierarchy: a heading that uses the same vocabulary as the user's
+likely question is more likely to be retained. And single-word
+qualifiers ("only", "always", "never") matter because they are the kind
+of detail that summarisation layers strip first.</p>
 <p>Designing for the relevance layer is different from designing for
 accessibility, for SEO, or for human readers. It is its own discipline,
 and the testing methods in this appendix exist to make that discipline
@@ -264,7 +264,7 @@ this page?" an agent will, in practice, answer "yes" even when its fetch
 tool returned a truncated response, when its summarisation layer dropped
 the relevant section, or when its rendering pipeline failed entirely.
 This is not deceit. It is the same agreeable pattern-matching that
-produces hallucinated citations: the agent's training rewards smooth,
+produces hallucinated citations. The agent's training rewards smooth,
 confident responses, and "yes I read it" is smoother than "I attempted
 to read it and my pipeline returned the first 75 kilobytes only, of
 which the relevance layer forwarded approximately 12 kilobytes, of which
@@ -278,24 +278,23 @@ not following that redirect. It may report a count of items found
 (twenty-five) and then list a different count (sixteen). It may claim to
 have read all nine sections of a page and then fail to answer questions
 about the third section. These contradictions are not lies. They are the
-result of stitching together outputs from different sub-systems - fetch
-tool, summarisation layer, reasoning model - none of which has
+result of stitching together outputs from different sub-systems (fetch
+tool, summarisation layer, reasoning model), none of which has
 authoritative knowledge of what the others did.</p>
 <p>The methodological consequence is that any test of agent
 comprehension must avoid relying on the agent's self-report as primary
 evidence. The agent's narration of its own behaviour is useful as a
 hypothesis but cannot be used as a measurement. Measurement must come
-from observable artefacts - the answers the agent produces, the strings
-it cites, the URLs it requests - that can be compared against a known
-ground truth held by the test designer, not by the agent.</p>
-<p>This is the core insight of Carey's canary-token design: the agent is
+from observable artefacts that can be compared against a known ground
+truth held by the test designer, not by the agent: the answers the agent
+produces, the strings it cites, the URLs it requests.</p>
+<p>This is the core insight of Carey's canary-token design. The agent is
 asked to find and report unique strings planted at known positions in
-the test pages, and the report is compared by an independent scorer (a
-human or a deterministic script) against the known answers. The agent
-never sees the answers. The agent's account of its own behaviour is
-recorded but not scored. The score depends on which canary tokens the
-agent's response actually contains, not on what the agent claims it
-found.</p>
+the test pages. An independent scorer (a human or a deterministic
+script) compares the report against the known answers. The agent never
+sees the answers. The agent's account of its own behaviour is recorded
+but not scored. The score depends on which canary tokens the agent's
+response actually contains, not on what the agent claims it found.</p>
 <p>Designing around the unreliable narrator rather than through it is a
 recurring pattern in agent engineering. Where a human evaluator might
 correct a wrong answer by asking the same question more clearly, an
@@ -312,26 +311,30 @@ they knew they were being observed than when they thought they were
 working unobserved. The change in behaviour was attributed to the
 observation itself rather than to any of the experimental variables. The
 phenomenon has since been documented in many domains, and recent
-research from UC Berkeley shows that it applies to large language models
-and agent systems as well.</p>
-<p>The Berkeley work reports that frontier models correctly identify
-evaluation scenarios approximately 80 per cent of the time, but disclose
-that awareness in their outputs only about 2 per cent of the time. A
-separate study found that models execute requested harmful tasks roughly
-70 per cent of the time when the prompt is framed hypothetically and
-about 36 per cent of the time when the prompt is framed as a real
-request. The interpretation is straightforward: agents detect that they
-are being evaluated, modulate their behaviour accordingly, and rarely
-report doing so. They retry harder, they try fallback approaches, they
-scan more carefully, and they describe their work in more polished
-prose, when they think a test is in progress.</p>
+research suggests that it applies to large language models and agent
+systems as well.</p>
+<p>One study reports that frontier models distinguish evaluation
+transcripts from real deployment well above chance, though below a human
+baseline (Needham et al., 2025, <a
+href="https://arxiv.org/abs/2505.23836"
+class="uri">https://arxiv.org/abs/2505.23836</a>). A separate study
+found that one reasoning model executed requested harmful tasks 69.7 per
+cent of the time when the prompt was framed hypothetically and 36.2 per
+cent of the time when it was framed as a real request (Abdelnabi &amp;
+Salem, 2025, <a href="https://arxiv.org/abs/2505.14617"
+class="uri">https://arxiv.org/abs/2505.14617</a>). The interpretation is
+straightforward: agents detect that they are being evaluated, modulate
+their behaviour accordingly, and rarely report doing so. They retry
+harder, they try fallback approaches, they scan more carefully, and they
+describe their work in more polished prose, when they think a test is in
+progress.</p>
 <p>For agent comprehension testing, the Hawthorne effect is a confounder
 that cannot be fully eliminated. Any test that the agent can detect as a
 test will produce different numbers from the agent's normal
-documentation-reading behaviour. The numbers will tend to be higher -
-the agent does its best work in evaluation conditions - which means the
-test under-reports the failure modes that matter. The user who is not
-running an evaluation will see worse behaviour than the test
+documentation-reading behaviour. The numbers will tend to be higher,
+because the agent does its best work in evaluation conditions. The test
+therefore under-reports the failure modes that matter. The user who is
+not running an evaluation will see worse behaviour than the test
 predicted.</p>
 <p>The mitigation is to minimise the signals that broadcast "this is a
 test." Domain names should not contain the word "test" or "benchmark".
@@ -353,30 +356,29 @@ recognising tests.</p>
 position in a test page, designed so that an agent's response can be
 scored objectively by checking which canaries the response contains. The
 technique is borrowed from intrusion-detection practice in security
-engineering - where canary files reveal unauthorised access - and
-adapted to measure not access but comprehension.</p>
+engineering, where canary files reveal unauthorised access. Here it
+measures not access but comprehension.</p>
 <p>A canary token follows three rules. It is unique enough that it could
 not arise by chance in the agent's training data or in unrelated pages.
-It is short enough to be quoted verbatim in an agent response. And it
-carries a structured name that encodes what its presence proves. A
-workable convention is
-<code>CANARY-[FAILURE_MODE]-[DETAIL]-[PLANT_SPECIES]</code>, where the
-failure mode names the test condition, the detail names the location
+It is short enough to be quoted verbatim in an agent response. And its
+structured name encodes what its presence proves. A workable convention
+is <code>CANARY-[FAILURE_MODE]-[DETAIL]-[PLANT_SPECIES]</code>, where
+the failure mode names the test condition, the detail names the location
 within that test, and the plant species supplies a memorable,
 unambiguous suffix. Examples: <code>CANARY-TRUNC-75K-summit</code>,
 <code>CANARY-TAB-PYTHON-maple</code>,
 <code>CANARY-CONNEG-MD-sigma</code>. The plant species suffix avoids
 accidental collisions with technical vocabulary and gives each canary a
 name a human can remember.</p>
-<p>Canary tokens are placed at strategic positions inside test pages -
-at known byte offsets to test truncation, in tabs that are not the first
-tab to test tabbed disclosure, in markdown-format alternates to test
-content negotiation, and so on. The placements are recorded once, in a
-reference table held by the test designer, and never shown to the
-agent.</p>
+<p>Canary tokens are placed at strategic positions inside test pages: at
+known byte offsets to test truncation, in tabs that are not the first
+tab to test tabbed disclosure, and in markdown-format alternates to test
+content negotiation, among other positions. The placements are recorded
+once, in a reference table held by the test designer, and never shown to
+the agent.</p>
 <p>The two-phase test design separates the agent's task from the agent's
 reporting. In the first phase, the agent is asked to perform a normal
-documentation task - answer ten realistic questions of the kind a
+documentation task: answer ten realistic questions of the kind a
 developer might ask a documentation site. The questions are written so
 that finding the answer requires reading the parts of the page where
 canaries are planted, but the canaries themselves are not mentioned. The
@@ -387,19 +389,19 @@ explains the canary concept and asks the agent to list every
 instruction is explicit: do not re-fetch the test pages, just report
 what was already in the context.</p>
 <p>Scoring then happens on a third surface, the human-facing form. The
-form lists the canaries the agent reported, compares them against the
-known canary set, and produces two scores: an objective canary score
-(sixteen points across the test set, one or two points per planted
-canary depending on difficulty), and a qualitative score (four points
-awarded by a human reviewer who reads the agent's phase-one answers and
-judges whether they would have been useful to a real user). The total is
-twenty points. Perfect scores are unlikely for any current agent, and a
-low score does not necessarily mean the agent is bad - it usually means
-the agent's pipeline filtered content that the publisher believed it was
-delivering.</p>
+form lists the canaries the agent reported and compares them against the
+known canary set. It produces two scores. The first is an objective
+canary score: sixteen points across the test set, one or two points per
+planted canary depending on difficulty. The second is a qualitative
+score: four points awarded by a human reviewer who reads the agent's
+phase-one answers and judges whether they would have been useful to a
+real user. The total is twenty points. Perfect scores are unlikely for
+any current agent. A low score usually means the agent's pipeline
+filtered content that the publisher believed it was delivering; it does
+not necessarily mean the agent is bad.</p>
 <p>The two-phase design is essential. If the agent is told about
 canaries before it reads the pages, the test measures how well the agent
-searches for known strings - a different and easier task than reading
+searches for known strings, a different and easier task than reading
 documentation. If the canary instruction is given after reading, the
 test measures what the agent's pipeline actually retained when it was
 reading documentation in the way it normally reads documentation. The
@@ -407,27 +409,27 @@ difference is the whole point.</p>
 <h2 id="a-worked-example">A worked example</h2>
 <p>A minimum useful agent reading test fits in a single static-HTML site
 of about ten pages plus a results page. The publisher hosts the site at
-a domain that does not advertise itself as a test, plants canaries at
-the failure-mode positions described in Appendix S, writes ten realistic
-documentation questions that require reading the canary regions, and
-publishes a separate page with the canary instructions and the reporting
-form. An agent runs the tasks, reports its canaries to the form, and the
-form scores the result against the reference set held in the publisher's
-database.</p>
+a domain that does not advertise itself as a test and plants canaries at
+the failure-mode positions described in Appendix S. The publisher then
+writes ten realistic documentation questions that require reading the
+canary regions, and publishes a separate page with the canary
+instructions and the reporting form. An agent runs the tasks, reports
+its canaries to the form, and the form scores the result against the
+reference set held in the publisher's database.</p>
 <p>The smallest such site is built in a weekend. The pages are static
-HTML; the canary tokens are inline strings; the reporting form is a
+HTML, and the canary tokens are inline strings. The reporting form is a
 single HTML form that posts a comma-separated list of canaries to a
-backend that compares against the reference table. There is no database
-design beyond a list of canary names and their expected positions. There
-is no tracking beyond the score. There is no AI in the harness itself -
-all the AI work is done by the agent under test.</p>
+backend, which compares them against the reference table. There is no
+database design beyond a list of canary names and their expected
+positions. There is no tracking beyond the score. There is no AI in the
+test site itself. The agent under test does all the AI work.</p>
 <p>The hard part is not building the site. The hard part is keeping the
 test free of evaluation signals. The pages must read like real
 documentation, the questions must be the kind of questions a developer
 would actually ask, and the URL paths and page titles must use ordinary
-documentation vocabulary. Even small lapses - a heading called "Test
-Section", an author name like "Test Engineer", a footer that mentions
-"evaluation" - can leak the context the test is trying to hide. The
+documentation vocabulary. Even small lapses can leak the context the
+test is trying to hide: a heading called "Test Section", an author name
+like "Test Engineer", a footer that mentions "evaluation". The
 discipline of writing a test that the agent does not realise is a test
 is a craft activity, and it is the activity that has the largest effect
 on the results.</p>
@@ -484,27 +486,27 @@ response body. The server returns the status code and the response
 headers and nothing else. For checking whether a URL is reachable,
 parseable, and well-formed, the HEAD request is exactly the right tool.
 It is fast enough that a publisher can HEAD-test every URL in a sitemap
-of several thousand entries in a few seconds, and cheap enough that it
-can run as often as the publisher likes - on every CMS publish, on every
-CI run, on every nightly cron, on every deploy.</p>
+of several thousand entries in a few seconds. It is cheap enough to run
+as often as the publisher likes: on every CMS publish, on every CI run,
+on every nightly cron, on every deploy.</p>
 <p>What HEAD-testing measures is not what the canary method measures.
 HEAD-testing measures the <em>fetchability</em> of the URLs the
 publisher claims to publish: does each URL parse cleanly? does the
 server respond? does the response status make sense? does the URL still
 exist? It does not measure the <em>comprehensibility</em> of the page
-that comes back; that is what the canary method is for. The two methods
-are complementary, and a publisher serious about machine experience
-should run both - HEAD-testing continuously against the live site, and
-canary testing periodically against the test fixture set.</p>
+that comes back; that is the canary method's job. The two methods are
+complementary, and a publisher serious about machine experience should
+run both: HEAD-testing continuously against the live site, and canary
+testing periodically against the test fixture set.</p>
 <p>The HEAD self-test catches three of the failure modes catalogued in
 Appendix S directly: Soft 404 (the test sees a 200 response with
 error-page-like behaviour), Cross-Host Redirect (the test follows the
 redirect chain and records each hop's host), and URL Encoding Mismatch
 (the test fails to parse the URL before any HTTP request is made, which
-is itself the diagnostic). It catches a fourth - Truncation Risk -
-indirectly, by reporting the <code>Content-Length</code> header in the
-HEAD response, which is enough to flag pages whose total weight exceeds
-common AI agent fetch caps. The remaining seven failure modes need a
+is itself the diagnostic). It catches a fourth failure mode, Truncation
+Risk, indirectly: it reports the <code>Content-Length</code> header in
+the HEAD response, which is enough to flag pages whose total weight
+exceeds common AI agent fetch caps. The remaining failure modes need a
 real GET against the rendered HTML and are not visible to a HEAD-only
 test.</p>
 <p>A minimal publisher HEAD self-test fits in twenty lines of any modern
@@ -522,9 +524,9 @@ final URL.</li>
 <li>Bucket the results: 200 OK, 3xx redirect, 4xx client error, 5xx
 server error, network error (the URL did not parse, the host was
 unreachable, or the request timed out).</li>
-<li>Compare the result against the previous run. Any new 4xx or 5xx, any
-URL that has started failing parsing, any sudden swing in the redirect
-rate - these are the signals worth alerting on.</li>
+<li>Compare the result against the previous run. The signals worth an
+alert are any new 4xx or 5xx, any URL that has started failing parsing,
+and any sudden swing in the redirect rate.</li>
 </ol>
 <p>The publisher who runs this loop on every CMS publish catches three
 categories of regression that no other tool catches reliably: dead URLs
@@ -540,60 +542,61 @@ unreliability. The publisher who runs an audit tool that reports "no
 broken links" must verify that the tool actually issued HTTP requests
 rather than defaulting to success. Tools that claim to measure something
 can produce confidently wrong results when the measurement code is
-missing - a subtle form of the unreliable-narrator problem this appendix
-already describes for agents, applied to the audit infrastructure
-itself. The defence against tool unreliability is the same as the
-defence against agent unreliability: do not trust the report's prose,
-look at the underlying data, and prefer measurements that can be
-reproduced independently. A publisher who runs their own HEAD self-test
-against their own sitemap has a reproducible second opinion that does
-not depend on any vendor's audit tool behaving correctly.</p>
+missing. This is a subtle form of the unreliable-narrator problem this
+appendix already describes for agents, applied to the audit
+infrastructure itself. The defence against tool unreliability is the
+same as the defence against agent unreliability: do not trust the
+report's prose, look at the underlying data, and prefer measurements
+that can be reproduced independently. A publisher who runs their own
+HEAD self-test against their own sitemap has a reproducible second
+opinion that does not depend on any vendor's audit tool behaving
+correctly.</p>
 <p>For a worked implementation of the HEAD self-test in JavaScript, see
 the <code>linkChecker.js</code> module in the MX Web Audit Suite. The
-module is small, the API is three functions, and the pattern is
+module is small, the API is five exported functions, and the pattern is
 straightforward enough to port to any language a publisher's CMS happens
 to be written in.</p>
 <h2 id="self-testing-pdfs-in-the-browser">Self-testing PDFs in the
 browser</h2>
 <p>The publisher who wants the same kind of reproducible second opinion
 for the PDFs they publish has a tool a regulator can also use without
-the publisher's cooperation: a browser-side inspector that reads the
-file locally and reports what it carries. A reader drags a PDF onto the
-inspection page; the page parses the bytes in the browser using a PDF
-library bundled with the page; the bytes never leave the reader's
+the publisher's cooperation. It is a browser-side inspector that reads
+the file locally and reports what it contains. A reader drags a PDF onto
+the inspection page. The page parses the bytes in the browser with a PDF
+library bundled with the page, and the bytes never leave the reader's
 machine. The inspector produces an evidence panel and three downloadable
 artefacts: a machine-readable JSON of the findings, a human-readable
-markdown report, and (when the PDF carries an embedded AI provenance
-payload) the extracted payload as a standalone JSON file the reader can
-verify offline.</p>
-<p>The evidence panel covers the structural claims an MX-aware reader
-cares about: whether the PDF declares a tagged structure tree (ISO
-14289-1, the PDF/UA conformance signal), whether the XMP metadata
-carries the MX namespace, whether the AI provenance payload is embedded
-and parses cleanly, and whether the <code>responsiblePerson</code> block
-names the human accountable for the chain. A PDF that fails one of these
-checks fails publicly to anyone running the inspector. A PDF that passes
-is verifiable in the same way by any reader who downloads the file,
-regardless of whether the publisher is in the room.</p>
+markdown report, and (when the PDF embeds an AI provenance payload) the
+extracted payload as a standalone JSON file the reader can verify
+offline.</p>
+<p>The evidence panel covers the structural claims that matter to an
+MX-aware reader. It reports whether the PDF declares a tagged structure
+tree (ISO 14289-1, the PDF/UA conformance signal) and whether the XMP
+metadata declares the MX namespace. It also reports whether the AI
+provenance payload is embedded and parses cleanly, and whether the
+<code>responsiblePerson</code> block names the human accountable for the
+chain. A PDF that fails one of these checks fails publicly to anyone
+running the inspector. A PDF that passes is verifiable in the same way
+by any reader who downloads the file, regardless of whether the
+publisher is present.</p>
 <p>What makes the inspector a comprehension test, not merely an
 inspection tool, is the same property the HEAD self-test has: a
 regulator's question becomes a publisher's continuous check. If a
 publisher's PDF pipeline ever stops embedding the provenance payload,
 the inspector reports it the next time the publisher drops a file. If
 the tagged structure breaks during a template change, the inspector
-catches it before the file ships. The same diagnostic surface a
-regulator opens on the PDF they downloaded is the surface the
-publisher's quality team opens on the PDF before publishing. There is no
-version of the question one party can ask that the other cannot also
-ask.</p>
+catches it before the file ships. The diagnostic view a regulator opens
+on the PDF they downloaded is the same view the publisher's quality team
+opens on the PDF before publishing. There is no version of the question
+one party can ask that the other cannot also ask.</p>
 <p>A publisher serious about machine-readability should run the
 inspector against every PDF the pipeline produces, the same way the
 publisher runs the HEAD self-test against every URL the sitemap
-publishes. The two tests measure different surfaces - HEAD-testing
-measures HTML reachability, inspector-testing measures PDF
-self-description - but the discipline is the same: the structural claims
-a publisher makes about their files should be visible to anyone who
-looks, and the publisher should be the first one looking.</p>
+publishes. The two tests measure different things. HEAD-testing measures
+HTML reachability, and inspector-testing measures PDF self-description.
+The discipline is the same: the structural claims a publisher makes
+about their files should be visible to anyone who looks, and the
+publisher should be the first one looking.</p>
 <h2 id="reading-your-own-accessibility-tree">Reading your own
 accessibility tree</h2>
 <p>Most comprehension testing in this appendix asks an agent what it
@@ -614,10 +617,11 @@ with an empty name, every tree consumer is blind to it.</li>
 <li><strong>Read the link names in isolation.</strong> Collapse the tree
 to its links and read the names as a list. Names that repeat ("read
 more", "here") or carry no destination meaning fail every reader that
-has no layout to lean on.</li>
+cannot lean on layout.</li>
 <li><strong>Find the key facts.</strong> The price, the date, the
 opening hours. If a fact appears on screen but not in any tree node's
-text, it lives in a channel the tree never carries, usually pixels.</li>
+text, the page delivers it through a channel the tree never carries,
+usually pixels.</li>
 </ol>
 <p>A failure in any check is almost always a template defect rather than
 a page defect: the same component renders the same gap on every page
@@ -628,7 +632,7 @@ against a selected element, a useful second opinion on anything the tree
 view surfaces.</p>
 <h2 id="cross-references">Cross-references</h2>
 <p>For the catalogue of the ten failure modes a publisher should test
-against, see <strong>Appendix S: The Ten Agent Reading Failure
+against, see <strong>Appendix S: The Agent Reading Failure
 Modes</strong>. For the publisher-side anti-patterns that cause similar
 failures upstream, see <strong>Appendix N: Anti-Patterns
 Catalog</strong>. For a worked example of a single pipeline failure in
@@ -641,9 +645,12 @@ particularly the "Testing and Validation Harnesses" section.</p>
 <p>The canary-token method, the two-phase scoring design, and the
 framing of the relevance layer in this appendix build directly on
 Dachary Carey's article "Designing an Agent Reading Test", published 6
-April 2026. The treatment here extends Carey's work into a
-publisher-side methodology and connects it to the MX failure-mode
-catalogue in Appendix S; the underlying technique is hers.</p>
+April 2026 (<a
+href="https://dacharycarey.com/2026/04/06/designing-agent-reading-test/"
+class="uri">https://dacharycarey.com/2026/04/06/designing-agent-reading-test/</a>).
+The treatment here extends Carey's work into a publisher-side
+methodology and connects it to the MX failure-mode catalogue in Appendix
+S; the underlying technique is hers.</p>
 </div>
 <hr>
 <nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">

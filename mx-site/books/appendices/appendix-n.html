@@ -6,7 +6,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
-modified: 2026-07-16
+modified: 2026-10-11
 created: 2026-01-24
 description: "Complete reference of the most common mistakes that break AI agent compatibility, with detection methods and complete fixes for each pattern."
 
@@ -14,6 +14,7 @@ title: 'Appendix N: Anti-Patterns Catalog'
 tags: [anti-patterns, common-mistakes, visual-only-state, client-rendering, broken-hierarchy, accessibility-failures, detection-methods, quick-wins, context-free-references]
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
   runbook: |
     This document is copyrighted material. No part may be reproduced without permission.
@@ -28,7 +29,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -185,6 +186,13 @@ id="toc-machine-shaped-prose">Machine-Shaped Prose</a></li>
 <li><a href="#model-memory-as-a-source-of-truth"
 id="toc-model-memory-as-a-source-of-truth">Model Memory as a Source of
 Truth</a></li>
+<li><a href="#the-remembered-shape" id="toc-the-remembered-shape">The
+Remembered Shape</a></li>
+<li><a href="#the-operators-word-as-evidence"
+id="toc-the-operators-word-as-evidence">The Operator's Word as
+Evidence</a></li>
+<li><a href="#the-prefixed-twin" id="toc-the-prefixed-twin">The Prefixed
+Twin</a></li>
 <li><a href="#quick-wins-summary" id="toc-quick-wins-summary">Quick Wins
 Summary</a></li>
 <li><a href="#validation-checklist"
@@ -212,14 +220,17 @@ features</li>
 </ol>
 <hr />
 <h2 id="the-invisible-barriers">The Invisible Barriers</h2>
-<p>You can implement every GEO pattern correctly-semantic HTML,
-Schema.org markup, proper navigation-and still make your site invisible
+<p>You can implement every GEO pattern correctly (semantic HTML,
+Schema.org markup, proper navigation) and still make your site invisible
 to AI agents with a few specific mistakes. These anti-patterns appear
 repeatedly in production sites, often introduced with good intentions
 but catastrophic results for agent compatibility.</p>
 <p>This appendix catalogs the most common anti-patterns, explains why
-they fail, and provides complete fixes with before/after code
-examples.</p>
+they fail, and provides complete fixes with before/after code examples.
+Where a fix lists WCAG success criteria, it names the criteria the fix
+addresses. A single fix does not make a page conform to WCAG;
+conformance is judged for the whole page against every applicable
+criterion.</p>
 <hr />
 <h2 id="quick-reference-table">Quick Reference Table</h2>
 <table>
@@ -323,13 +334,13 @@ examples.</p>
 <td>Hard</td>
 </tr>
 <tr>
-<td>16. Semantics that never reach the tree</td>
+<td>16. Service outlived, no expiry declared</td>
 <td>High</td>
 <td>2 min</td>
 <td>Easy</td>
 </tr>
 <tr>
-<td>17. Service outlived, no expiry declared</td>
+<td>17. Semantics that never reach the tree</td>
 <td>High</td>
 <td>2 min</td>
 <td>Easy</td>
@@ -344,6 +355,18 @@ examples.</p>
 <td>19. Model memory as a source of truth</td>
 <td>High</td>
 <td>2 min</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>20. The remembered shape</td>
+<td>Medium</td>
+<td>5 min</td>
+<td>Medium</td>
+</tr>
+<tr>
+<td>21. The operator's word as evidence</td>
+<td>High</td>
+<td>5 min</td>
 <td>Medium</td>
 </tr>
 </tbody>
@@ -377,7 +400,7 @@ planning</li>
 <h3 id="the-problem">The Problem</h3>
 <p>Information conveyed purely through visual styling (colour, size,
 position, borders) without semantic backing in HTML.</p>
-<p>Humans perceive visual cues immediately-a gold border indicates
+<p>Humans perceive visual cues immediately: a gold border indicates
 "recommended", larger size suggests importance, green means "success".
 AI agents and screen readers parse HTML structure and content, not CSS
 styling. When critical information exists only in CSS, it's invisible to
@@ -501,8 +524,8 @@ explicit text without requiring visual parsing</li>
 businesses" with proper context</li>
 <li><strong>Search indexing:</strong> Search engines understand content
 hierarchy, relative importance, and recommendations</li>
-<li><strong>Maintainability:</strong> Semantic HTML is
-self-documenting-developers understand intent from structure</li>
+<li><strong>Maintainability:</strong> Semantic HTML is self-documenting:
+developers understand intent from structure</li>
 <li><strong>CSS-independent:</strong> Content retains meaning even when
 CSS fails to load or is overridden by user stylesheets</li>
 <li><strong>Testing capability:</strong> Automated accessibility tests
@@ -516,7 +539,7 @@ weight to recommended content, improving discoverability</li>
 <li><strong>Universal accessibility:</strong> Pattern works for AI
 agents, screen readers, keyboard users, and visual users without
 modification</li>
-<li><strong>WCAG 2.1 AA compliance:</strong> Satisfies success criteria
+<li><strong>WCAG 2.1 AA alignment:</strong> Addresses success criteria
 1.3.1 (Info and Relationships) and 1.4.1 (Use of Colour)</li>
 <li><strong>Reduced CSS dependency:</strong> Semantic HTML provides
 meaning even when CSS is disabled or overridden</li>
@@ -582,21 +605,21 @@ buttons that lack semantic distinction from other buttons</li>
 <h3 id="related-patterns">Related Patterns</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 5: Semantic HTML Structure (Chapter 12.5) - Provides
-semantic alternatives to visual-only patterns</li>
-<li>Pattern 18: Explicit State Attributes (Appendix M) - Shows how to
-make application state machine-readable</li>
-<li>Pattern 12: WCAG 2.1 AA Compliance (Chapter 12.12) - Ensures visual
-information has non-visual alternatives</li>
+<li><strong>Pattern 5: Semantic HTML Structure (Chapter 12.5):</strong>
+Provides semantic alternatives to visual-only patterns</li>
+<li><strong>Pattern 18: Explicit State Attributes (Appendix M):</strong>
+Shows how to make application state machine-readable</li>
+<li><strong>Pattern 12: WCAG 2.1 AA Compliance (Chapter 12.12):</strong>
+Gives visual information non-visual alternatives</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Hidden Content Without Fallback - Similar CSS-dependence issue where
-content is inaccessible without styles</li>
-<li>Auto-Playing Content - Also assumes visual presentation without
-considering alternative access methods</li>
-<li>Generic Link Text - Another pattern where visual context
-(surrounding content) isn't available to non-visual users</li>
+<li><strong>Hidden Content Without Fallback:</strong> Similar
+CSS-dependence issue where content is inaccessible without styles</li>
+<li><strong>Auto-Playing Content:</strong> Also assumes visual
+presentation without considering alternative access methods</li>
+<li><strong>Generic Link Text:</strong> Another pattern where visual
+context (surrounding content) isn't available to non-visual users</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -642,7 +665,7 @@ text.</p>
 <p>When critical information exists only as pixels in an image, it's
 completely inaccessible to non-visual users. AI agents cannot extract
 text from images (OCR is unreliable and not universally available), and
-screen readers can only announce the alt text-which is often generic or
+screen readers can only announce the alt text, which is often generic or
 missing entirely.</p>
 <p><strong>Impact:</strong></p>
 <ul>
@@ -670,13 +693,13 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <li>Cloud Infrastructure: AWS and Azure deployment</li>
 <li>DevOps: CI/CD pipelines</li>
 </ul>
-<p><strong>What AI agents see:</strong> "Our services" - no detail
+<p><strong>What AI agents see:</strong> "Our services", with no detail
 whatsoever. The alt text provides no information about the actual
 services offered.</p>
-<p><strong>What screen readers announce:</strong> "Image: Our services"
-- users with vision impairments receive no information about the four
+<p><strong>What screen readers announce:</strong> "Image: Our services".
+Users with vision impairments receive no information about the four
 service categories or their descriptions.</p>
-<p><strong>What search engines index:</strong> Only "Our services" - the
+<p><strong>What search engines index:</strong> Only "Our services". The
 detailed service descriptions remain invisible to Google, Bing, and
 other search engines.</p>
 <h3 id="forces-content-in-images">Forces (Content in Images)</h3>
@@ -790,7 +813,7 @@ Images)</h3>
 <ul>
 <li><strong>Universal accessibility:</strong> Content accessible to AI
 agents, screen readers, search engines, and translation tools</li>
-<li><strong>WCAG 2.1 AA compliance:</strong> Satisfies success criteria
+<li><strong>WCAG 2.1 AA alignment:</strong> Addresses success criteria
 1.1.1 (Non-text Content) and 1.4.5 (Images of Text)</li>
 <li><strong>Better SEO:</strong> Search engines index detailed text
 content, not just generic alt text</li>
@@ -807,8 +830,8 @@ recreating images</li>
 <ul>
 <li><strong>More initial work:</strong> Requires creating both visual
 design and equivalent HTML text</li>
-<li><strong>Design complexity:</strong> Need to ensure text content
-works visually without relying on image</li>
+<li><strong>Design complexity:</strong> Need to make text content work
+visually without relying on image</li>
 <li><strong>File size:</strong> Additional HTML text increases page
 weight (usually minimal compared to images)</li>
 <li><strong>Visual consistency:</strong> May be harder to maintain exact
@@ -850,21 +873,21 @@ timetables</li>
 Images)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 4: Text Alternatives for Images (Chapter 12.4) - Complete
-guidance on alt text and text alternatives</li>
-<li>Pattern 5: Semantic HTML Structure (Chapter 12.5) - Shows how to
-structure text content properly</li>
-<li>Pattern 21: Responsive Images (Appendix M) - Modern image handling
-with appropriate text alternatives</li>
+<li><strong>Pattern 4: Text Alternatives for Images (Chapter
+12.4):</strong> Complete guidance on alt text and text alternatives</li>
+<li><strong>Pattern 5: Semantic HTML Structure (Chapter 12.5):</strong>
+Shows how to structure text content properly</li>
+<li><strong>Pattern 21: Responsive Images (Appendix M):</strong> Modern
+image handling with appropriate text alternatives</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>PDF-Only Content - Similar content trap where information is locked
-in non-HTML format</li>
-<li>Content in iframes - Another pattern where content is inaccessible
-to parsing</li>
-<li>Visual-Only Information - Related pattern of relying on visual
-presentation</li>
+<li><strong>PDF-Only Content:</strong> Similar content trap where
+information is locked in non-HTML format</li>
+<li><strong>Content in iframes:</strong> Another pattern where content
+is inaccessible to parsing</li>
+<li><strong>Visual-Only Information:</strong> Related pattern of relying
+on visual presentation</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -878,10 +901,9 @@ everyone)</li>
 <h2 id="generic-link-text">Generic Link Text</h2>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.html.generic-link-text</code>
-<strong>Status:</strong> active <strong>Intent:</strong> Ensure link
-text provides meaningful context about destinations, enabling AI agents
-and screen reader users to understand links without surrounding
-context</p>
+<strong>Status:</strong> active <strong>Intent:</strong> Give link text
+meaningful context about destinations, enabling AI agents and screen
+reader users to understand links without surrounding context</p>
 <h3 id="context-generic-link-text">Context (Generic Link Text)</h3>
 <p>This anti-pattern commonly appears in:</p>
 <ul>
@@ -913,8 +935,8 @@ content editors don't customise</li>
 <p>Links with meaningless text like "click here", "read more", "learn
 more", "see more", "view details" that provide no information about
 destinations when read without surrounding context.</p>
-<p>Sighted users see links in context-a "Learn more" link below a
-heading about "Edge Delivery Services Migration" is obviously about that
+<p>Sighted users see links in context: a "Learn more" link below a
+heading about "Edge Delivery Services Migration" is plainly about that
 topic. AI agents and screen reader users often navigate by extracting
 all links from a page as a list. When every link says "Learn more",
 "Read more", or "Click here", the list becomes useless:</p>
@@ -940,7 +962,7 @@ want to activate</li>
 </ul>
 <h3 id="detection-method-generic-link-text">Detection Method (Generic
 Link Text)</h3>
-<p>Extract all links and read as list - are they self-explanatory?</p>
+<p>Extract all links and read as list: are they self-explanatory?</p>
 <div class="sourceCode" id="cb7" data-role="code-container"><pre
 class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">Array</span><span class="op">.</span><span class="fu">from</span>(<span class="bu">document</span><span class="op">.</span><span class="fu">querySelectorAll</span>(<span class="st">&#39;a&#39;</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="op">.</span><span class="fu">map</span>(a <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">textContent</span><span class="op">.</span><span class="fu">trim</span>())</span>
@@ -972,14 +994,14 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>We help companies migrate from traditional CMS platforms...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/services/eds-migration&quot;</span><span class="dt">&gt;</span>Learn more<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span></code></pre></div>
-<p><strong>After (best approach - descriptive link text):</strong></p>
+<p><strong>After (best approach: descriptive link text):</strong></p>
 <div class="sourceCode" id="cb9" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">section</span><span class="dt">&gt;</span></span>
 <span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">h3</span><span class="dt">&gt;</span>Edge Delivery Services Migration<span class="dt">&lt;/</span><span class="kw">h3</span><span class="dt">&gt;</span></span>
 <span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">p</span><span class="dt">&gt;</span>We help companies migrate from traditional CMS platforms...<span class="dt">&lt;/</span><span class="kw">p</span><span class="dt">&gt;</span></span>
 <span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/services/eds-migration&quot;</span><span class="dt">&gt;</span>Explore our EDS migration services<span class="dt">&lt;/</span><span class="kw">a</span><span class="dt">&gt;</span></span>
 <span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">section</span><span class="dt">&gt;</span></span></code></pre></div>
-<p><strong>Alternative (if design requires short text - use
+<p><strong>Alternative (if design requires short text: use
 aria-label):</strong></p>
 <div class="sourceCode" id="cb10" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">a</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/services/eds-migration&quot;</span></span>
@@ -1014,7 +1036,7 @@ Text)</h3>
 <ul>
 <li><strong>Universal accessibility:</strong> Works for AI agents,
 screen readers, voice interfaces, and keyboard navigation</li>
-<li><strong>WCAG 2.1 AA compliance:</strong> Satisfies success criteria
+<li><strong>WCAG 2.1 AA alignment:</strong> Addresses success criteria
 2.4.4 (Link Purpose in Context) and 2.4.9 (Link Purpose)</li>
 <li><strong>Better SEO:</strong> Search engines understand link context
 and anchor text relevance</li>
@@ -1074,21 +1096,22 @@ by generic "Click here" links</li>
 Link Text)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 5: Semantic HTML Structure (Chapter 12.5) - Demonstrates
-proper link text within semantic context</li>
-<li>Pattern 14: Clear Navigation Labels (Appendix M) - Provides guidance
-on descriptive navigation text</li>
-<li>Pattern 3: Keyboard Navigation (Chapter 12.3) - Shows how keyboard
-users navigate links and why descriptive text matters</li>
+<li><strong>Pattern 5: Semantic HTML Structure (Chapter 12.5):</strong>
+Demonstrates proper link text within semantic context</li>
+<li><strong>Pattern 14: Clear Navigation Labels (Appendix M):</strong>
+Provides guidance on descriptive navigation text</li>
+<li><strong>Pattern 3: Keyboard Navigation (Chapter 12.3):</strong>
+Shows how keyboard users navigate links and why descriptive text
+matters</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Context-Free References - Similar problem where meaning depends on
-visual context</li>
-<li>Visual-Only Information - Related pattern of assuming visual context
-is always available</li>
-<li>Broken Heading Hierarchy - Also impacts content structure
-comprehension</li>
+<li><strong>Context-Free References:</strong> Similar problem where
+meaning depends on visual context</li>
+<li><strong>Visual-Only Information:</strong> Related pattern of
+assuming visual context is always available</li>
+<li><strong>Broken Heading Hierarchy:</strong> Also impacts content
+structure comprehension</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -1139,14 +1162,14 @@ appearance, not structure</li>
 Hierarchy)</h3>
 <p>Headings used for styling rather than structure, creating illogical
 hierarchies that confuse semantic understanding. Common patterns include
-skipping levels (h1 → h3), reversing hierarchy (h2 under h3), or using
+skipping levels (h1 to h3), reversing hierarchy (h2 under h3), or using
 headings purely for visual sizing.</p>
 <p>Screen readers and AI agents rely on heading hierarchy to understand
 document structure and create navigation outlines. A properly structured
 page uses headings like a table of contents: h1 for page title, h2 for
-major sections, h3 for subsections, and so on. When headings are chosen
-for visual appearance rather than semantic meaning, the document outline
-becomes incoherent.</p>
+major sections, h3 for subsections, and so on down the levels. When
+headings are chosen for visual appearance rather than semantic meaning,
+the document outline becomes incoherent.</p>
 <p><strong>Example of broken outline generated by poor heading
 hierarchy:</strong></p>
 <pre class="text" data-role="code-block" data-language="text"><code>H1 Welcome to Digital Domain
@@ -1269,8 +1292,8 @@ accurate page outlines and understand content organisation</li>
 navigate by heading level and understand document structure</li>
 <li><strong>Search indexing:</strong> Search engines correctly
 understand content hierarchy and relative section importance</li>
-<li><strong>Accessibility compliance:</strong> WCAG 2.1 success
-criterion 1.3.1 (Info and Relationships) satisfied</li>
+<li><strong>Accessibility alignment:</strong> Addresses WCAG 2.1 success
+criterion 1.3.1 (Info and Relationships)</li>
 <li><strong>Browser reader modes:</strong> Reader views correctly parse
 article structure and presentation</li>
 <li><strong>Content extraction:</strong> Automated tools produce
@@ -1284,7 +1307,7 @@ Heading Hierarchy)</h3>
 <ul>
 <li><strong>Universal accessibility:</strong> Logical structure benefits
 AI agents, screen readers, search engines, and reader modes</li>
-<li><strong>WCAG 2.1 AA compliance:</strong> Satisfies success criterion
+<li><strong>WCAG 2.1 AA alignment:</strong> Addresses success criterion
 1.3.1 (Info and Relationships)</li>
 <li><strong>Better SEO:</strong> Search engines understand content
 hierarchy and weigh sections appropriately</li>
@@ -1344,21 +1367,21 @@ of page structure</li>
 (Broken Heading Hierarchy)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 5: Semantic HTML Structure (Chapter 12.5) - Complete
-semantic HTML guidance including heading hierarchy</li>
-<li>Pattern 12: WCAG 2.1 AA Compliance (Chapter 12.12) - Covers
-accessibility requirements for heading structure</li>
-<li>Pattern 1: HTML Document Structure (Chapter 12.1) - Demonstrates
-proper document outline organisation</li>
+<li><strong>Pattern 5: Semantic HTML Structure (Chapter 12.5):</strong>
+Complete semantic HTML guidance including heading hierarchy</li>
+<li><strong>Pattern 12: WCAG 2.1 AA Compliance (Chapter 12.12):</strong>
+Covers accessibility requirements for heading structure</li>
+<li><strong>Pattern 1: HTML Document Structure (Chapter 12.1):</strong>
+Demonstrates proper document outline organisation</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Table Abuse for Layout - Similar misuse of semantic elements for
-visual purposes</li>
-<li>Visual-Only Information - Related pattern of prioritising visual
-presentation over semantic meaning</li>
-<li>Generic Link Text - Also impacts content navigation and
-comprehension</li>
+<li><strong>Table Abuse for Layout:</strong> Similar misuse of semantic
+elements for visual purposes</li>
+<li><strong>Visual-Only Information:</strong> Related pattern of
+prioritising visual presentation over semantic meaning</li>
+<li><strong>Generic Link Text:</strong> Also impacts content navigation
+and comprehension</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -1373,9 +1396,9 @@ everyone)</li>
 <h2 id="javascript-only-navigation">JavaScript-Only Navigation</h2>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.javascript.client-only-navigation</code>
-<strong>Status:</strong> active <strong>Intent:</strong> Ensure
-navigation menus exist in served HTML so AI agents and non-JavaScript
-environments can discover and navigate site structure</p>
+<strong>Status:</strong> active <strong>Intent:</strong> Put navigation
+menus in served HTML so AI agents and non-JavaScript environments can
+discover and navigate site structure</p>
 <h3 id="context-javascript-only-navigation">Context (JavaScript-Only
 Navigation)</h3>
 <p>This anti-pattern commonly appears in:</p>
@@ -1435,7 +1458,7 @@ navigation</li>
 </ul>
 <h3 id="detection-method-javascript-only-navigation">Detection Method
 (JavaScript-Only Navigation)</h3>
-<p>View page source (Ctrl+U or View → Page Source) - is
+<p>View page source (Ctrl+U or View &gt; Page Source): is the
 <code>&lt;nav&gt;</code> element empty in served HTML?</p>
 <div class="sourceCode" id="cb16" data-role="code-container"><pre
 class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check served HTML without JavaScript execution</span></span>
@@ -1554,8 +1577,8 @@ waiting for JavaScript execution (better FCP, LCP metrics)</li>
 everywhere, enhancements available where supported</li>
 <li><strong>Resilient UX:</strong> Site remains navigable if JavaScript
 fails to load or execute</li>
-<li><strong>Accessibility compliance:</strong> WCAG 2.1 AA criterion
-2.4.1 (Bypass Blocks) requires navigation landmarks</li>
+<li><strong>Accessibility alignment:</strong> Supports WCAG 2.1 AA
+criterion 2.4.1 (Bypass Blocks), which landmarks help meet</li>
 <li><strong>Testing simplicity:</strong> Navigation can be verified
 without complex JavaScript execution in tests</li>
 </ul>
@@ -1606,21 +1629,21 @@ fallback</li>
 (JavaScript-Only Navigation)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 23: Progressive Enhancement (Chapter 12.8) - Core principle
-of building HTML-first with JavaScript enhancement</li>
-<li>Pattern 7: Server-Side Rendering (Appendix M) - Technical
-implementation of SSR for frameworks</li>
-<li>Pattern 14: Clear Navigation Labels (Appendix M) - Guidance on
-navigation structure and labeling</li>
+<li><strong>Pattern 23: Progressive Enhancement (Chapter 12.8):</strong>
+Core principle of building HTML-first with JavaScript enhancement</li>
+<li><strong>Pattern 7: Server-Side Rendering (Appendix M):</strong>
+Technical implementation of SSR for frameworks</li>
+<li><strong>Pattern 14: Clear Navigation Labels (Appendix M):</strong>
+Guidance on navigation structure and labeling</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Hidden Content with No Fallback - Similar JavaScript-dependency
-issue</li>
-<li>Content in iframes - Another pattern making content inaccessible to
-parsers</li>
-<li>Visual-Only Information - Related pattern of information
-inaccessible without specific rendering</li>
+<li><strong>Hidden Content with No Fallback:</strong> Similar
+JavaScript-dependency issue</li>
+<li><strong>Content in iframes:</strong> Another pattern making content
+inaccessible to parsers</li>
+<li><strong>Visual-Only Information:</strong> Related pattern of
+information inaccessible without specific rendering</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -1636,9 +1659,9 @@ everyone)</li>
 Fallback</h2>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.css.hidden-content-no-fallback</code>
-<strong>Status:</strong> active <strong>Intent:</strong> Ensure content
-is accessible by default with JavaScript providing optional
-interactions, not required functionality</p>
+<strong>Status:</strong> active <strong>Intent:</strong> Make content
+accessible by default, with JavaScript providing optional interactions,
+not required functionality</p>
 <h3 id="context-hidden-content-with-no-fallback">Context (Hidden Content
 with No Fallback)</h3>
 <p>This anti-pattern commonly appears in:</p>
@@ -1693,13 +1716,13 @@ pages</li>
 patterns</li>
 <li>Automated testing requires JavaScript execution to verify content
 presence</li>
-<li>Poor initial page rendering (FOUC - Flash of Unstyled Content) when
-JavaScript delays</li>
+<li>Poor initial page rendering (Flash of Unstyled Content, or FOUC)
+when JavaScript delays</li>
 <li>SEO penalties for "thin content" when hidden text isn't indexed</li>
 </ul>
 <h3 id="detection-method-hidden-content-with-no-fallback">Detection
 Method (Hidden Content with No Fallback)</h3>
-<p>Disable JavaScript in browser settings, then reload page - does
+<p>Disable JavaScript in browser settings, then reload page: does
 critical content remain hidden?</p>
 <p><strong>Browser-based test:</strong></p>
 <div class="sourceCode" id="cb21" data-role="code-container"><pre
@@ -1802,12 +1825,12 @@ agents, search engines, screen readers, and JavaScript-disabled
 users</li>
 <li><strong>Better SEO:</strong> All content indexed by search engines,
 improving content depth signals</li>
-<li><strong>WCAG 2.1 AA compliance:</strong> Satisfies criterion 4.1.2
+<li><strong>WCAG 2.1 AA alignment:</strong> Addresses criterion 4.1.2
 (Name, Role, Value) for interactive controls</li>
 <li><strong>Improved performance:</strong> Content visible without
 JavaScript execution delay</li>
-<li><strong>Resilient UX:</strong> Progressive enhancement ensures
-functionality without JavaScript</li>
+<li><strong>Resilient UX:</strong> Progressive enhancement keeps
+functionality working without JavaScript</li>
 <li><strong>Testing simplicity:</strong> Content can be verified in
 served HTML without JavaScript execution</li>
 <li><strong>Future-proof:</strong> Works with emerging AI systems that
@@ -1861,21 +1884,21 @@ Plans" toggle</li>
 Patterns (Hidden Content with No Fallback)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 23: Progressive Enhancement (Chapter 12.8) - Core principle
-of building functionality in layers</li>
-<li>Pattern 8: Client-Side JavaScript (Chapter 12.8) - Guidance on
-JavaScript as enhancement, not requirement</li>
-<li>Pattern 12: Explicit State Management (Appendix M) - How to make
-interactive states accessible</li>
+<li><strong>Pattern 23: Progressive Enhancement (Chapter 12.8):</strong>
+Core principle of building functionality in layers</li>
+<li><strong>Pattern 8: Client-Side JavaScript (Chapter 12.8):</strong>
+Guidance on JavaScript as enhancement, not requirement</li>
+<li><strong>Pattern 18: Explicit State Attributes (Appendix M):</strong>
+How to make interactive states accessible</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>JavaScript-Only Navigation - Similar JavaScript-dependency
-issue</li>
-<li>Content in iframes - Another pattern trapping content from
-parsers</li>
-<li>Visual-Only Information - Related pattern of inaccessible
-information</li>
+<li><strong>JavaScript-Only Navigation:</strong> Similar
+JavaScript-dependency issue</li>
+<li><strong>Content in iframes:</strong> Another pattern trapping
+content from parsers</li>
+<li><strong>Visual-Only Information:</strong> Related pattern of
+inaccessible information</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -1932,9 +1955,9 @@ about site structure.</p>
 <p>Search engines and AI agents use sitemaps as authoritative sources
 for discovering content. When sitemaps are missing, outdated, or
 incorrect, agents may miss new content, waste crawl budget on deleted
-pages, or fail to prioritise recently-updated pages. This is especially
-problematic for large sites where navigation links don't reach all pages
-or for dynamic content that changes frequently.</p>
+pages, or fail to prioritise pages updated since their last crawl. This
+is especially problematic for large sites where navigation links don't
+reach all pages or for dynamic content that changes frequently.</p>
 <p><strong>Impact:</strong></p>
 <ul>
 <li>AI agents cannot efficiently discover all site pages, missing
@@ -1952,7 +1975,7 @@ indexing</li>
 </ul>
 <h3 id="detection-method-no-sitemap-or-outdated-sitemap">Detection
 Method (No Sitemap or Outdated Sitemap)</h3>
-<p>Visit <code>/sitemap.xml</code> - does it exist? Check dates and URLs
+<p>Visit <code>/sitemap.xml</code>: does it exist? Check dates and URLs
 for currency.</p>
 <div class="sourceCode" id="cb24" data-role="code-container"><pre
 class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Check if sitemap exists</span></span>
@@ -1969,7 +1992,7 @@ class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><
 <li>Sitemap contains URLs that return 404 (broken links)</li>
 <li><code>&lt;lastmod&gt;</code> dates are years old despite recent
 content updates</li>
-<li>Sitemap is missing recently added pages</li>
+<li>Sitemap is missing pages added since it was generated</li>
 <li>Sitemap contains URLs that redirect (should be canonical URLs)</li>
 </ul>
 <h3 id="forces-no-sitemap-or-outdated-sitemap">Forces (No Sitemap or
@@ -1995,7 +2018,7 @@ platform migrations or redesigns</li>
 <h3 id="solution-no-sitemap-or-outdated-sitemap">Solution (No Sitemap or
 Outdated Sitemap)</h3>
 <p>Generate sitemaps automatically as part of build/deployment process,
-ensuring they always reflect current site structure.</p>
+so they always reflect current site structure.</p>
 <p><strong>Automated generation (Node.js/Express example):</strong></p>
 <div class="sourceCode" id="cb25" data-role="code-container"><pre
 class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Dynamic sitemap generation (Node.js/Express example)</span></span>
@@ -2069,7 +2092,8 @@ results</li>
 <li><strong>Accurate priorities:</strong> <code>&lt;priority&gt;</code>
 values help search engines understand page importance</li>
 <li><strong>Fresh content signals:</strong> <code>&lt;lastmod&gt;</code>
-dates tell search engines which pages changed recently</li>
+dates tell search engines which pages changed since their last
+crawl</li>
 <li><strong>Monitoring capability:</strong> Can track sitemap errors
 through Search Console</li>
 </ul>
@@ -2089,8 +2113,8 @@ within hours instead of weeks</li>
 lastmod dates help SEO</li>
 <li><strong>Monitoring:</strong> Search Console reports sitemap errors
 for proactive fixes</li>
-<li><strong>Compliance:</strong> Meets search engine best practices and
-AI agent discovery standards</li>
+<li><strong>Standards alignment:</strong> Follows search engine guidance
+and AI agent discovery conventions</li>
 </ul>
 <p><strong>Negative/Trade-offs:</strong></p>
 <ul>
@@ -2138,18 +2162,21 @@ pages</li>
 Patterns (No Sitemap or Outdated Sitemap)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 19: XML Sitemaps (Chapter 10) - Complete sitemap
-implementation guidance</li>
-<li>Pattern 15: robots.txt Configuration (Chapter 10) - Sitemap
-declaration in robots.txt</li>
-<li>Pattern 11: Content Discoverability (Appendix M) - Overall content
-discovery strategies</li>
+<li><strong>Pattern 19: XML Sitemaps (Chapter 10):</strong> Complete
+sitemap implementation guidance</li>
+<li><strong>Pattern 15: robots.txt Configuration (Chapter 10):</strong>
+Sitemap declaration in robots.txt</li>
+<li><strong>Pattern 11: Content Discoverability (Appendix M):</strong>
+Overall content discovery strategies</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>JavaScript-Only Navigation - Similar discoverability issue</li>
-<li>Content in iframes - Content that's hard for agents to discover</li>
-<li>PDF-Only Content - Content that sitemaps can't help with</li>
+<li><strong>JavaScript-Only Navigation:</strong> Similar discoverability
+issue</li>
+<li><strong>Content in iframes:</strong> Content that's hard for agents
+to discover</li>
+<li><strong>PDF-Only Content:</strong> Content that sitemaps can't help
+with</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -2161,9 +2188,9 @@ discovery strategies</li>
 <h2 id="inconsistent-schema.org">Inconsistent Schema.org</h2>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.metadata.inconsistent-schema</code>
-<strong>Status:</strong> active <strong>Intent:</strong> Ensure
-Schema.org structured data matches visible content exactly, providing
-trustworthy machine-readable information</p>
+<strong>Status:</strong> active <strong>Intent:</strong> Keep Schema.org
+structured data matching visible content exactly, providing trustworthy
+machine-readable information</p>
 <h3 id="context-inconsistent-schema.org">Context (Inconsistent
 Schema.org)</h3>
 <p>This anti-pattern commonly appears in:</p>
@@ -2275,7 +2302,7 @@ synchronised Schema.org management</li>
 <h3 id="solution-inconsistent-schema.org">Solution (Inconsistent
 Schema.org)</h3>
 <p>Bind Schema.org properties to the same data sources as visible HTML,
-ensuring automatic synchronisation.</p>
+so the two synchronise automatically.</p>
 <p><strong>After (synchronised Schema.org):</strong></p>
 <div class="sourceCode" id="cb28" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">h1</span><span class="dt">&gt;</span>Professional Standing Desk - White Oak Finish<span class="dt">&lt;/</span><span class="kw">h1</span><span class="dt">&gt;</span></span>
@@ -2337,8 +2364,8 @@ as accurate and current</li>
 see identical information</li>
 <li><strong>Better SEO:</strong> Google rewards accurate structured data
 with rich snippets</li>
-<li><strong>Compliance:</strong> No risk of consumer protection
-violations (price misrepresentation)</li>
+<li><strong>Consumer protection:</strong> Lower risk of price
+misrepresentation</li>
 <li><strong>Easier maintenance:</strong> Single data source reduces
 update errors</li>
 <li><strong>Validation success:</strong> Passes Schema.org validators
@@ -2354,8 +2381,8 @@ Schema.org)</h3>
 data for accurate decision-making</li>
 <li><strong>Better SEO:</strong> Rich snippets in search results (star
 ratings, prices, availability)</li>
-<li><strong>Legal compliance:</strong> No price misrepresentation or
-false advertising violations</li>
+<li><strong>Lower legal risk:</strong> Consistent prices reduce the risk
+of price misrepresentation or false advertising claims</li>
 <li><strong>Improved conversions:</strong> Accurate information in rich
 snippets drives qualified traffic</li>
 <li><strong>Trust building:</strong> Consistent data builds confidence
@@ -2412,20 +2439,21 @@ outdated</li>
 (Inconsistent Schema.org)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 18: Schema.org Metadata (Chapter 12.18) - Complete
-Schema.org implementation guide</li>
-<li>Pattern 16: Structured Data Testing (Appendix M) - Testing and
-validation strategies</li>
-<li>Pattern 2: Page Metadata (Chapter 12.2) - General metadata
-synchronisation principles</li>
+<li><strong>Pattern 18: Schema.org Metadata (Chapter 12.18):</strong>
+Complete Schema.org implementation guide</li>
+<li><strong>Pattern 16: Structured Data Testing (Appendix M):</strong>
+Testing and validation strategies</li>
+<li><strong>Pattern 2: Page Metadata (Chapter 12.2):</strong> General
+metadata synchronisation principles</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Visual-Only Information - Related issue of information
-inaccessibility</li>
-<li>Context-Free References - Similar inconsistency problem</li>
-<li>Content in Images - Information not available in machine-readable
-format</li>
+<li><strong>Visual-Only Information:</strong> Related issue of
+information inaccessibility</li>
+<li><strong>Context-Free References:</strong> Similar inconsistency
+problem</li>
+<li><strong>Content in Images:</strong> Information not available in
+machine-readable format</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -2489,7 +2517,7 @@ browsers</li>
 <li>Form auto-fill features cannot correctly match labels to inputs</li>
 <li>Users cannot see field purpose once they start typing (placeholder
 disappears)</li>
-<li>Validation errors are ambiguous ("Email address is required" - which
+<li>Validation errors are ambiguous ("Email address is required": which
 field was that?)</li>
 <li>Automated testing cannot reliably identify form fields</li>
 <li>Browser password managers cannot correctly associate credentials
@@ -2497,7 +2525,7 @@ with fields</li>
 </ul>
 <h3 id="detection-method-forms-without-labels">Detection Method (Forms
 Without Labels)</h3>
-<p>Inspect forms - does each input have an associated
+<p>Inspect forms: does each input have an associated
 <code>&lt;label&gt;</code> element?</p>
 <div class="sourceCode" id="cb30" data-role="code-container"><pre
 class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Check for inputs without labels</span></span>
@@ -2591,7 +2619,7 @@ Labels)</h3>
 <ul>
 <li><strong>Universal accessibility:</strong> Works for AI agents,
 screen readers, keyboard navigation, form auto-fill</li>
-<li><strong>WCAG 2.1 AA compliance:</strong> Satisfies success criteria
+<li><strong>WCAG 2.1 AA alignment:</strong> Addresses success criteria
 1.3.1 (Info and Relationships), 3.3.2 (Labels or Instructions), 4.1.2
 (Name, Role, Value)</li>
 <li><strong>Better form completion rates:</strong> Clear labels reduce
@@ -2650,20 +2678,21 @@ inputs</li>
 Without Labels)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 13: Form Accessibility (Chapter 12.13) - Complete form
-accessibility guidance</li>
-<li>Pattern 5: Semantic HTML Structure (Chapter 12.5) - Proper HTML form
-elements</li>
-<li>Pattern 3: Keyboard Navigation (Chapter 12.3) - Form keyboard
-accessibility</li>
+<li><strong>Pattern 13: Form Accessibility (Chapter 12.13):</strong>
+Complete form accessibility guidance</li>
+<li><strong>Pattern 5: Semantic HTML Structure (Chapter 12.5):</strong>
+Proper HTML form elements</li>
+<li><strong>Pattern 3: Keyboard Navigation (Chapter 12.3):</strong> Form
+keyboard accessibility</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Generic Link Text - Similar issue of unclear element purpose</li>
-<li>Visual-Only Information - Related pattern of inaccessible
-information</li>
-<li>Broken Heading Hierarchy - Also impacts document structure
-understanding</li>
+<li><strong>Generic Link Text:</strong> Similar issue of unclear element
+purpose</li>
+<li><strong>Visual-Only Information:</strong> Related pattern of
+inaccessible information</li>
+<li><strong>Broken Heading Hierarchy:</strong> Also impacts document
+structure understanding</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -2850,7 +2879,7 @@ for Layout)</h3>
 <ul>
 <li><strong>Universal accessibility:</strong> Tables understandable by
 AI agents, screen readers, and search engines</li>
-<li><strong>WCAG 2.1 AA compliance:</strong> Satisfies criterion 1.3.1
+<li><strong>WCAG 2.1 AA alignment:</strong> Addresses criterion 1.3.1
 (Info and Relationships)</li>
 <li><strong>Data extraction:</strong> Search engines can extract and
 display table data in rich results</li>
@@ -2910,19 +2939,20 @@ relationships</li>
 Abuse for Layout)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 5: Semantic HTML Structure (Chapter 12.5) - Complete
-semantic HTML guidance including tables</li>
-<li>Pattern 6: Data Tables (Appendix M) - Complete table accessibility
-patterns</li>
-<li>Pattern 12: WCAG 2.1 AA Compliance (Chapter 12.12) - Accessibility
-requirements for tables</li>
+<li><strong>Pattern 5: Semantic HTML Structure (Chapter 12.5):</strong>
+Complete semantic HTML guidance including tables</li>
+<li><strong>Pattern 6: Data Tables (Appendix M):</strong> Complete table
+accessibility patterns</li>
+<li><strong>Pattern 12: WCAG 2.1 AA Compliance (Chapter 12.12):</strong>
+Accessibility requirements for tables</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Broken Heading Hierarchy - Similar misuse of semantic elements</li>
-<li>Visual-Only Information - Related pattern of ignoring semantic
-meaning</li>
-<li>Forms Without Labels - Also about missing semantic
+<li><strong>Broken Heading Hierarchy:</strong> Similar misuse of
+semantic elements</li>
+<li><strong>Visual-Only Information:</strong> Related pattern of
+ignoring semantic meaning</li>
+<li><strong>Forms Without Labels:</strong> Also about missing semantic
 relationships</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
@@ -2939,8 +2969,8 @@ everyone)</li>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.html.iframe-content-trap</code>
 <strong>Status:</strong> active <strong>Intent:</strong> Render critical
-content directly in HTML rather than loading it through iframes,
-ensuring AI agent accessibility</p>
+content directly in HTML rather than loading it through iframes, so AI
+agents can access it</p>
 <h3 id="context-content-in-iframes">Context (Content in Iframes)</h3>
 <p>This anti-pattern commonly appears in:</p>
 <ul>
@@ -2972,10 +3002,10 @@ index.</p>
 <p>Iframes create content boundaries that AI agents typically cannot
 cross. When agents parse a page containing
 <code>&lt;iframe src="external-url"&gt;</code>, they see only the iframe
-element itself, not the content within. This is by design - iframes are
-security boundaries preventing cross-origin access. For agents to access
-iframe content, they must separately fetch and parse the iframe source
-URL, which many agents don't do automatically.</p>
+element itself, not the content inside it. This is by design: iframes
+are security boundaries preventing cross-origin access. For agents to
+access iframe content, they must separately fetch and parse the iframe
+source URL, which many agents don't do automatically.</p>
 <p><strong>Impact:</strong></p>
 <ul>
 <li>CLI agents cannot see content within iframes, missing critical
@@ -3128,21 +3158,21 @@ contact/survey</li>
 in Iframes)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 17: Server-Side Rendering (Appendix M) - Technical approach
-for rendering external content</li>
-<li>Pattern 19: API Integration (Appendix M) - Best practices for
-third-party API usage</li>
-<li>Pattern 5: Semantic HTML Structure (Chapter 12.5) - Proper HTML
-content structure</li>
+<li><strong>Pattern 17: Server-Side Rendering (Appendix M):</strong>
+Technical approach for rendering external content</li>
+<li><strong>Pattern 19: API Integration (Appendix M):</strong> Best
+practices for third-party API usage</li>
+<li><strong>Pattern 5: Semantic HTML Structure (Chapter 12.5):</strong>
+Proper HTML content structure</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>JavaScript-Only Navigation - Similar content accessibility
-issue</li>
-<li>Hidden Content with No Fallback - Related content isolation
-problem</li>
-<li>PDF-Only Content - Another pattern trapping content in inaccessible
-formats</li>
+<li><strong>JavaScript-Only Navigation:</strong> Similar content
+accessibility issue</li>
+<li><strong>Hidden Content with No Fallback:</strong> Related content
+isolation problem</li>
+<li><strong>PDF-Only Content:</strong> Another pattern trapping content
+in inaccessible formats</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -3191,7 +3221,7 @@ HTML</li>
 accessibility barriers for AI agents and many human users who cannot
 easily parse or navigate PDF content.</p>
 <p>PDF files are designed for print, not digital accessibility. AI
-agents struggle to extract structured information from PDFs - text order
+agents struggle to extract structured information from PDFs: text order
 may not match visual layout, tables become plain text, headings aren't
 semantic, and forms aren't interactive. Many mobile users find PDFs
 difficult to read, and screen reader users encounter unpredictable PDF
@@ -3200,15 +3230,14 @@ accessibility depending on how the file was created.</p>
 <ul>
 <li>CLI agents cannot reliably extract structured information from
 PDFs</li>
-<li>Search engines index PDFs less effectively than HTML, reducing
-SEO</li>
+<li>Search engines index PDFs less well than HTML, reducing SEO</li>
 <li>Mobile users struggle with PDF navigation and zooming</li>
 <li>Screen readers encounter variable PDF accessibility (often
 poor)</li>
 <li>Users must download files to view content, adding friction</li>
 <li>Content not searchable within page (need to download and open)</li>
 <li>Analytics cannot track user engagement with PDF content</li>
-<li>No responsive design - PDFs don't adapt to screen sizes</li>
+<li>No responsive design: PDFs don't adapt to screen sizes</li>
 </ul>
 <h3 id="forces-pdf-only-content">Forces (PDF-Only Content)</h3>
 <ul>
@@ -3348,20 +3377,21 @@ downloads</li>
 Content)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 5: Semantic HTML Structure (Chapter 12.5) - How to structure
-content in HTML</li>
-<li>Pattern 20: Accessible Documents (Appendix M) - When PDFs are
-necessary, making them accessible</li>
-<li>Pattern 2: Page Metadata (Chapter 12.2) - Proper metadata for HTML
-content</li>
+<li><strong>Pattern 5: Semantic HTML Structure (Chapter 12.5):</strong>
+How to structure content in HTML</li>
+<li><strong>Pattern 20: Accessible Documents (Appendix M):</strong> When
+PDFs are necessary, making them accessible</li>
+<li><strong>Pattern 2: Page Metadata (Chapter 12.2):</strong> Proper
+metadata for HTML content</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Content in Images - Similar content trap in non-HTML format</li>
-<li>Content in Iframes - Another pattern isolating content from
-agents</li>
-<li>Hidden Content with No Fallback - Related accessibility barrier
-pattern</li>
+<li><strong>Content in Images:</strong> Similar content trap in non-HTML
+format</li>
+<li><strong>Content in Iframes:</strong> Another pattern isolating
+content from agents</li>
+<li><strong>Hidden Content with No Fallback:</strong> Related
+accessibility barrier pattern</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -3375,8 +3405,8 @@ everyone)</li>
 <h2 id="auto-playing-content">Auto-Playing Content</h2>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.media.auto-playing</code> <strong>Status:</strong>
-active <strong>Intent:</strong> Ensure all content is statically
-accessible in HTML with auto-play as optional visual enhancement, not a
+active <strong>Intent:</strong> Make all content statically accessible
+in HTML, with auto-play as optional visual enhancement, not a
 requirement for content access</p>
 <h3 id="context-auto-playing-content">Context (Auto-Playing
 Content)</h3>
@@ -3509,8 +3539,8 @@ via anchor IDs</li>
 immediately, no forced waiting</li>
 <li><strong>Search indexing:</strong> All carousel items indexed by
 search engines</li>
-<li><strong>WCAG compliance:</strong> Satisfies 2.2.2 (Pause, Stop,
-Hide) by avoiding auto-play</li>
+<li><strong>WCAG alignment:</strong> Addresses 2.2.2 (Pause, Stop, Hide)
+by avoiding auto-play</li>
 <li><strong>Analytics tracking:</strong> Can measure actual user
 interaction with each item</li>
 <li><strong>User control:</strong> Users can navigate carousel at their
@@ -3522,7 +3552,7 @@ Content)</h3>
 <ul>
 <li><strong>Universal accessibility:</strong> All content accessible to
 AI agents, screen readers, search engines</li>
-<li><strong>WCAG 2.1 AA compliance:</strong> Satisfies criterion 2.2.2
+<li><strong>WCAG 2.1 AA alignment:</strong> Addresses criterion 2.2.2
 (Pause, Stop, Hide) and 2.1.1 (Keyboard)</li>
 <li><strong>Better SEO:</strong> All items indexed, not just the first
 slide</li>
@@ -3578,20 +3608,21 @@ homepage</li>
 (Auto-Playing Content)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 23: Progressive Enhancement (Chapter 12.8) - Carousel as
-visual enhancement, not requirement</li>
-<li>Pattern 12: Explicit State Management (Appendix M) - Making carousel
-state accessible</li>
-<li>Pattern 22: Animation and Motion (Appendix M) - Accessible animation
-patterns</li>
+<li><strong>Pattern 23: Progressive Enhancement (Chapter 12.8):</strong>
+Carousel as visual enhancement, not requirement</li>
+<li><strong>Pattern 12: Explicit State Management (Appendix M):</strong>
+Making carousel state accessible</li>
+<li><strong>Pattern 22: Animation and Motion (Appendix M):</strong>
+Accessible animation patterns</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Hidden Content with No Fallback - Similar content hiding issue</li>
-<li>Visual-Only Information - Related assumption of visual
-presentation</li>
-<li>JavaScript-Only Navigation - Similar dependence on JavaScript for
-core functionality</li>
+<li><strong>Hidden Content with No Fallback:</strong> Similar content
+hiding issue</li>
+<li><strong>Visual-Only Information:</strong> Related assumption of
+visual presentation</li>
+<li><strong>JavaScript-Only Navigation:</strong> Similar dependence on
+JavaScript for core functionality</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -3640,12 +3671,10 @@ extracted, downloaded, printed to PDF, or processed by AI agents outside
 the repository structure.</p>
 <p>When AI agents fetch individual documentation files (via API, web
 scraping, or direct download), they receive files without repository
-context. A link like
-<code>[README.md](../../README.md) ("MX: The Handbook" at &lt;&gt;)</code>
-becomes meaningless - what's two directories up from a standalone file?
-Where does the path resolve to? Which repository? What branch? The link
-destination cannot be determined without the original file system
-structure.</p>
+context. A link like <code>[README.md](../../README.md)</code> becomes
+meaningless. What's two directories up from a standalone file? Where
+does the path lead? Which repository? What branch? The link destination
+cannot be determined without the original file system structure.</p>
 <p><strong>Impact:</strong></p>
 <ul>
 <li>AI agents cannot follow cross-document references in extracted
@@ -3671,7 +3700,7 @@ meaningless. What's two directories up? Where is this file located? What
 repository? Context is completely lost.</p>
 <h3 id="detection-method-context-free-references">Detection Method
 (Context-Free References)</h3>
-<p>Extract or print a single documentation file - can you still find
+<p>Extract or print a single documentation file: can you still find
 referenced documents?</p>
 <div class="sourceCode" id="cb44" data-role="code-container"><pre
 class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Test: Extract single file and check if links work</span></span>
@@ -3711,7 +3740,7 @@ class="sourceCode markdown"><code class="sourceCode markdown" data-role="code-co
 <ul>
 <li>✅ All cross-document references (links to other files in repo)</li>
 <li>❌ Internal section anchors within same document
-(<code>#contents</code> - these maintain context)</li>
+(<code>#contents</code>; these maintain context)</li>
 <li>❌ External links (already absolute, no relative path to
 preserve)</li>
 </ul>
@@ -3811,20 +3840,20 @@ references</li>
 (Context-Free References)</h3>
 <p><strong>Fixes this anti-pattern:</strong></p>
 <ul>
-<li>Pattern 2: Page Metadata (Chapter 12.2) - Complete metadata
-including canonical URLs</li>
-<li>Pattern 21: Documentation Structure (Appendix M) - Best practices
-for cross-document references</li>
-<li>Pattern 11: Content Discoverability (Appendix M) - Making content
-findable across contexts</li>
+<li><strong>Pattern 2: Page Metadata (Chapter 12.2):</strong> Complete
+metadata including canonical URLs</li>
+<li><strong>Pattern 21: Documentation Structure (Appendix M):</strong>
+Best practices for cross-document references</li>
+<li><strong>Pattern 11: Content Discoverability (Appendix M):</strong>
+Making content findable across contexts</li>
 </ul>
 <p><strong>Related anti-patterns:</strong></p>
 <ul>
-<li>Inconsistent Schema.org - Similar problem of context/reference
-mismatches</li>
-<li>Generic Link Text - Also about providing meaningful link
-context</li>
-<li>No Sitemap - Related discoverability issue</li>
+<li><strong>Inconsistent Schema.org:</strong> Similar problem of
+context/reference mismatches</li>
+<li><strong>Generic Link Text:</strong> Also about providing meaningful
+link context</li>
+<li><strong>No Sitemap:</strong> Related discoverability issue</li>
 </ul>
 <p><strong>Related chapters:</strong></p>
 <ul>
@@ -4109,8 +4138,8 @@ verdict per page; see Appendix C for the suite.</p>
 the Tree</h2>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.aria.semantics-never-reach-tree</code>
-<strong>Status:</strong> active <strong>Intent:</strong> Ensure every
-interactive element, name, and label declared on screen also exists in
+<strong>Status:</strong> active <strong>Intent:</strong> Make every
+interactive element, name, and label declared on screen also exist in
 the accessibility tree, the structural channel screen readers and
 several machine readers consume</p>
 <h3 id="context-4">Context</h3>
@@ -4180,12 +4209,13 @@ never the document's shape.</p>
 <h3 id="the-problem-machine-shaped-prose">The Problem (Machine-Shaped
 Prose)</h3>
 <p>Language models converge structurally. Research comparing 61,608
-stories from five different models against human writers on identical
-prompts (Russell et al., 2026, arXiv:2604.03136) found AI output
-clustering in one region of narrative space - tidy single-track
-structure, themes spelled out, a clean moral at the end - while human
-writing scattered. Document structure alone, with every word-level cue
-removed, identified the machine author at 93.2% macro-F1.</p>
+stories, written for the same 10,272 prompts by five different models
+and by human writers (Russell et al., 2026, arXiv:2604.03136), found AI
+output clustering in one region of narrative space while human writing
+scattered. The AI cluster had tidy single-track structure, themes
+spelled out, and a clean moral at the end. Document structure alone,
+with every word-level cue removed, identified the machine author at
+93.2% macro-F1.</p>
 <p>The convergent shape decomposes into four recurring signals:</p>
 <ul>
 <li>A moral or takeaway spelled out in the closing paragraphs ("the
@@ -4204,7 +4234,7 @@ no one's</li>
 <li>The brand voice the content was meant to carry dissolves into the
 model's average</li>
 <li>Detection is moving from research into platform policy and
-procurement, so the shape becomes a liability that compounds</li>
+procurement, so the convergent form becomes a compounding liability</li>
 <li>Word-level "humanising" passes do not fix it: a piece can pass every
 vocabulary check and keep the machine shape</li>
 </ul>
@@ -4239,7 +4269,7 @@ less</li>
 <h3 id="detection-machine-shaped-prose">Detection (Machine-Shaped
 Prose)</h3>
 <p>Each signal is deterministic and position-aware: a phrase that is
-legitimate mid-document is the tell when it sits in the closing
+legitimate mid-document is the tell when it appears in the closing
 paragraphs, and a script can test closer phrases, opening-to-ending word
 overlap, length variance, and section-shape uniformity the same way on
 every run. Spot-check by hand: read only your last three pieces' final
@@ -4249,17 +4279,17 @@ reader the moral.</p>
 Truth</h2>
 <p><strong>Pattern ID:</strong>
 <code>mx.anti-pattern.governance.model-memory-as-truth</code>
-<strong>Status:</strong> active <strong>Intent:</strong> Ensure that a
-rule, a lesson, or a fact an organisation relies on lives in a file it
-owns, never in an AI assistant's private memory.</p>
+<strong>Status:</strong> active <strong>Intent:</strong> Keep every
+rule, lesson, or fact an organisation relies on in a file it owns, never
+in an AI assistant's private memory.</p>
 <h3 id="context-model-memory-as-a-source-of-truth">Context (Model Memory
 as a Source of Truth)</h3>
 <ul>
 <li>A team teaches an AI assistant over weeks or months: corrections,
 house conventions, the judgement about what the business actually
 needs.</li>
-<li>The assistant appears to remember, so the team lets the knowledge
-live in the assistant's memory and stops writing it down.</li>
+<li>The assistant appears to remember, so the team leaves the knowledge
+in the assistant's memory and stops writing it down.</li>
 <li>The knowledge is real and hard-won, and nobody notices it has no
 home outside the tool.</li>
 </ul>
@@ -4318,19 +4348,225 @@ of the organisation's held inside it.</li>
 Memory as a Source of Truth)</h3>
 <p>Deterministic-first: an artefact whose only cited source is "memory"
 or "an earlier draft" is unverifiable by construction, and a review can
-flag any deliverable that names no file it was built from. Ask of any
-AI-produced artefact under audit whether it can be reproduced from a
-named, committed source on a second machine; if it cannot, its
-provenance is the assistant's private memory, and the finding is a
-governance gap. The MX Web Audit Suite treats a load-bearing claim with
-no resolvable source as a corroboration failure.</p>
+flag any deliverable that names no source file. Ask of any AI-produced
+artefact under audit whether it can be reproduced from a named,
+committed source on a second machine; if it cannot, its provenance is
+the assistant's private memory, and the finding is a governance gap. The
+MX Web Audit Suite treats a central claim with no resolvable source as a
+corroboration failure.</p>
+<h2 id="the-remembered-shape">The Remembered Shape</h2>
+<p><strong>Pattern ID:</strong>
+<code>mx.anti-pattern.governance.remembered-shape</code>
+<strong>Status:</strong> active <strong>Intent:</strong> Ensure every
+new structured file is copied from the template for its kind, so its
+fields are spelled the way their readers look them up.</p>
+<h3 id="context-the-remembered-shape">Context (The Remembered
+Shape)</h3>
+<ul>
+<li>An estate holds many kinds of structured file: decision records,
+guides, registry files, messages, each with fields a reader
+consumes.</li>
+<li>Authors write the fifth or fiftieth file of a kind from memory, or
+from a field list copied into a procedure's prose.</li>
+<li>The files look complete, so nobody checks whether the readers can
+actually find what was written.</li>
+</ul>
+<h3 id="the-problem-the-remembered-shape">The Problem (The Remembered
+Shape)</h3>
+<p>A shape held in memory, or restated in prose, is a second copy of the
+real one, and second copies drift. One field name is spelled the way the
+author remembers it, the reader looks it up the way the standard spells
+it, and the two never meet. Nothing fails at the moment of writing. The
+field is silently ignored, and the file passes every eye that checks
+it.</p>
+<p><strong>Impact:</strong></p>
+<ul>
+<li>Fields that no reader consumes, in files that look correct.</li>
+<li>Errors surface late, at a push gate or a confused reader, far from
+the author who made them.</li>
+<li>Every procedure that restates a shape becomes a separate place the
+shape can go wrong.</li>
+</ul>
+<h3 id="real-example-the-remembered-shape">Real Example (The Remembered
+Shape)</h3>
+<p>A collaboration procedure listed the fields a thread's control file
+needed. The list spelled the vendor-extension names in kebab-case, while
+every existing thread, every user profile, and the cockpit that renders
+threads used camelCase. A thread built faithfully from the procedure
+would have carried fields the cockpit never read, and the naming gate
+would have refused it at push.</p>
+<h3 id="the-fix-solution-the-remembered-shape">The Fix (Solution) (The
+Remembered Shape)</h3>
+<ul>
+<li><strong>One template per kind</strong>, carrying every field its
+readers consume, spelled as they look it up.</li>
+<li><strong>Copy by command</strong>: a scaffold that copies the
+template and stamps the new file's name, dates, and address.</li>
+<li><strong>Procedures point at the template</strong> instead of listing
+fields, so there is one copy of the shape.</li>
+<li><strong>Check coverage</strong>: a test that fails when a kind in
+the vocabulary has no template.</li>
+</ul>
+<h3 id="detection-the-remembered-shape">Detection (The Remembered
+Shape)</h3>
+<p>Deterministic-first: diff each procedure's prose for field lists that
+restate a template, and compare every kind in the controlled vocabulary
+against the registered templates. A kind with no template, or a
+procedure that spells a field differently from the template it should
+point at, is the anti-pattern in waiting.</p>
+<h2 id="the-operators-word-as-evidence">The Operator's Word as
+Evidence</h2>
+<p><strong>Pattern ID:</strong>
+<code>mx.anti-pattern.governance.operator-word-as-evidence</code>
+<strong>Status:</strong> active <strong>Intent:</strong> Record what a
+person tells a machine as their assertion, so it never returns as a
+checked fact.</p>
+<h3 id="context-the-operators-word-as-evidence">Context (The Operator's
+Word as Evidence)</h3>
+<ul>
+<li>An operator works with an AI assistant daily and tells it things as
+they go: a supplier is reliable, a client prefers short answers, a page
+was fine when last checked.</li>
+<li>The assistant stores these statements, or keeps them in its context,
+and uses them in later work.</li>
+<li>Assistants trained on human feedback tend to agree with the person
+they serve, so the operator's statements are the ones least likely to be
+questioned.</li>
+</ul>
+<h3 id="the-problem-the-operators-word-as-evidence">The Problem (The
+Operator's Word as Evidence)</h3>
+<p>A store that ranks by similarity cannot tell a statement the operator
+made from a fact that was checked. Both are text; both come back with a
+relevance score. Once a remark has been retrieved a few times, the model
+reads it like any other grounding and starts to defend it. The more the
+operator uses the system, the more of their own claims return to them
+with the weight of retrieved context, and the model's agreement reads as
+confirmation although the only source is still the person who said it.
+Asking for approval does not help when a conclusion depends on that
+person's unchecked statement: the approval passes the error on instead
+of catching it.</p>
+<p><strong>Impact:</strong></p>
+<ul>
+<li>Unchecked statements harden into apparent facts through repetition
+alone.</li>
+<li>Decisions depend on the operator's word while appearing to be backed
+by evidence.</li>
+<li>An audit cannot separate what was verified from what was said.</li>
+<li>Errors the operator makes are confirmed back to them rather than
+caught.</li>
+</ul>
+<h3 id="real-example-the-operators-word-as-evidence">Real Example (The
+Operator's Word as Evidence)</h3>
+<p>An assistant counted entries in a log with a quick text search,
+concluded that the counting tool was wrong, and asked the operator
+whether to fix it. The operator agreed. The counter had been right all
+along; the search had counted the template's own examples, which the
+counter excludes by design. Both the question and the approval were
+sincere, and neither was a check.</p>
+<h3 id="the-fix-solution-the-operators-word-as-evidence">The Fix
+(Solution) (The Operator's Word as Evidence)</h3>
+<p>Record how each claim is known, next to its statement:</p>
+<ul>
+<li><strong>Label the operator's statements as asserted</strong>, with
+<code>assertedBy</code>, in any record or memory a machine reads back
+(Appendix M, 22.AH).</li>
+<li><strong>Promote a claim only on evidence.</strong> An outside source
+(<code>corroboratedBy</code>), a direct observation
+(<code>observedBy</code>), or a recorded disagreement
+(<code>contestedBy</code>) moves a basis; retrieval, repetition, and
+agreement never do.</li>
+<li><strong>Keep a score with its reason.</strong> A confidence value
+belongs only to an inference and travels with
+<code>confidenceBasis</code>, so a change in it can be explained.</li>
+<li><strong>Tell the model what it is reading.</strong> A prompt that
+includes stored statements says, statement by statement, which are the
+operator's word and which are checked.</li>
+</ul>
+<h3 id="detection-the-operators-word-as-evidence">Detection (The
+Operator's Word as Evidence)</h3>
+<p>Deterministic-first: a record or memory store whose claims carry no
+basis is read as wholly asserted, and a deterministic validator checks
+any declared <code>claims</code> block, refusing a corroborated entry
+with no external source, an inferred entry with no
+<code>inferredFrom</code>, and a confidence value with no reason. Review
+any prompt assembled from stored notes: if a statement the operator made
+appears without a label saying so, the finding is a provenance gap.</p>
+<h2 id="the-prefixed-twin">The Prefixed Twin</h2>
+<p><strong>Pattern ID:</strong>
+<code>mx.anti-pattern.metadata.prefixed-twin</code>
+<strong>Status:</strong> active <strong>Intent:</strong> Keep every
+extension field distinguishable from the standard by its name, so a
+reader never mistakes one for the other.</p>
+<h3 id="context-the-prefixed-twin">Context (The Prefixed Twin)</h3>
+<ul>
+<li>A vendor builds on MX and declares its own fields under its own
+prefix, as the namespace policy asks.</li>
+<li>Some of those fields cover ground the standard also covers: a
+subject area, an AI flag, a cog type.</li>
+<li>The quickest choice is the standard field's name with the prefix in
+front.</li>
+</ul>
+<h3 id="the-problem-the-prefixed-twin">The Problem (The Prefixed
+Twin)</h3>
+<p>A prefixed twin reads as the standard field with a label attached. A
+person scanning frontmatter sees <code>x-mx-domain</code> and
+<code>domain</code> and assumes one field spelled two ways. An agent
+that strips prefixes to normalise names merges them. When the two really
+are the same item, the estate splits in half for no reason, and every
+query has to ask for both names. When they are different items, the
+shared name hides the difference until a value turns up that the
+standard field cannot hold.</p>
+<p><strong>Impact:</strong></p>
+<ul>
+<li>Readers and agents assume two fields mean the same thing because
+their names match.</li>
+<li>One item spread across two names halves every search and every
+count.</li>
+<li>A value valid for the extension is rejected, or worse accepted,
+under the standard field's rules.</li>
+<li>A migration that "drops the prefix" silently moves values into a
+field with a different meaning.</li>
+</ul>
+<h3 id="real-example-the-prefixed-twin">Real Example (The Prefixed
+Twin)</h3>
+<p>An image library carried <code>x-mx-aiAssistance: unknown</code> on
+dozens of sidecars. The standard <code>aiAssistance</code> field is a
+permission policy: welcome, restricted, prohibited. The sidecars were
+answering a different question, whether AI had been involved in making
+the image, and an earlier rename had already moved some of those values
+into the policy field, where "unknown" means nothing. The extension
+became <code>x-mx-aiInvolvement</code>. In the same estate, folder
+descriptors carried <code>x-mx-domain</code> for exactly what the
+standard <code>domain</code> holds, so that one folded into
+<code>domain</code> itself.</p>
+<h3 id="the-fix-solution-the-prefixed-twin">The Fix (Solution) (The
+Prefixed Twin)</h3>
+<p>Check every new extension name against the standard before using
+it:</p>
+<ul>
+<li><strong>Same item:</strong> drop the prefix and use the standard
+field. A rename map records the old name so stragglers heal.</li>
+<li><strong>Different item:</strong> choose a name that says what it
+holds, so a reader knows at a glance it is not the standard field.</li>
+<li><strong>Private fields too:</strong> the rule binds the private
+tier, because people with the decode registry read those names.</li>
+<li><strong>Counter-examples are marked:</strong> a guide that shows the
+twin as a mistake says so on the same line.</li>
+</ul>
+<h3 id="detection-the-prefixed-twin">Detection (The Prefixed Twin)</h3>
+<p>Deterministic-first: strip the prefix from every extension key in
+every carrier and every vendor dictionary entry, and look the remainder
+up in the standard's field list. Any match is the anti-pattern. The
+reference implementation runs this check over frontmatter, HTML meta
+tags, SVG metadata, sidecars and JSON-LD on every push, against a
+baseline that may only shrink.</p>
 <h2 id="quick-wins-summary">Quick Wins Summary</h2>
 <p>If you can only fix 5 things immediately, prioritise these for
 maximum impact:</p>
 <h3 id="add-proper-heading-hierarchy-30-minutes">1. Add Proper Heading
 Hierarchy (30 minutes)</h3>
-<p>Run through all pages and ensure h1 → h2 → h3 logical structure. Use
-CSS to adjust visual sizes if needed.</p>
+<p>Run through all pages and fix each one to a logical h1, h2, h3
+structure. Use CSS to adjust visual sizes if needed.</p>
 <p><strong>Impact:</strong> Enables agents to understand document
 structure and content relationships.</p>
 <h3 id="fix-link-text-1-2-hours">2. Fix Link Text (1-2 hours)</h3>
@@ -4348,7 +4584,7 @@ parsers and screen readers.</p>
 hour)</h3>
 <p>Generate sitemap.xml automatically from your content management
 system or build process.</p>
-<p><strong>Impact:</strong> Ensures agents can discover all your pages
+<p><strong>Impact:</strong> Lets agents discover all your pages
 systematically.</p>
 <h3 id="add-basic-schema.org-to-homepage-1-hour">5. Add Basic Schema.org
 to Homepage (1 hour)</h3>
@@ -4356,24 +4592,26 @@ to Homepage (1 hour)</h3>
 and key information.</p>
 <p><strong>Impact:</strong> Enables accurate citations and "find near
 me" queries.</p>
-<p><strong>Total time investment:</strong> 6-8 hours
-<strong>Impact:</strong> Solves 80% of common agent-readability
-problems</p>
+<p><strong>Total time investment:</strong> roughly 5.5-7.5 hours, the
+sum of the estimates above <strong>Impact:</strong> Addresses several of
+the most common agent-readability problems</p>
 <hr />
 <h2 id="validation-checklist">Validation Checklist</h2>
-<p>Use this checklist to audit pages for all the anti-patterns:</p>
+<p>Use this checklist to audit pages for the page-level anti-patterns, 1
+to 14. The later patterns are checked by the detection steps in their
+own sections.</p>
 <ul class="task-list">
 <li><label><input type="checkbox" />1. Check for visual-only information
 (gold borders, colour coding without text)</label></li>
 <li><label><input type="checkbox" />2. Verify images have meaningful alt
 text or HTML alternatives</label></li>
-<li><label><input type="checkbox" />3. Extract links - are they
+<li><label><input type="checkbox" />3. Extract links: are they
 self-explanatory?</label></li>
-<li><label><input type="checkbox" />4. Validate heading hierarchy -
-logical h1 → h2 → h3?</label></li>
-<li><label><input type="checkbox" />5. View source - is navigation in
+<li><label><input type="checkbox" />4. Validate heading hierarchy:
+logical h1, h2, h3 order?</label></li>
+<li><label><input type="checkbox" />5. View source: is navigation in
 HTML?</label></li>
-<li><label><input type="checkbox" />6. Disable JS - does essential
+<li><label><input type="checkbox" />6. Disable JS: does essential
 content appear?</label></li>
 <li><label><input type="checkbox" />7. Check sitemap.xml exists and is
 current</label></li>
@@ -4381,8 +4619,8 @@ current</label></li>
 visible content</label></li>
 <li><label><input type="checkbox" />9. Verify forms have proper label
 elements</label></li>
-<li><label><input type="checkbox" />10. Ensure data tables use th,
-caption, scope</label></li>
+<li><label><input type="checkbox" />10. Confirm data tables use th,
+caption, and scope</label></li>
 <li><label><input type="checkbox" />11. Identify iframes with critical
 content</label></li>
 <li><label><input type="checkbox" />12. Find PDF-only
@@ -4405,6 +4643,10 @@ agents</li>
 <li><strong>Chapter 12:</strong> Technical implementation and
 testing</li>
 <li><strong>Appendix M:</strong> Complete metadata index</li>
+<li>Russell, J., Rajendhran, R., Pham, C. M., Iyyer, M., &amp; Wieting,
+J. (2026). StoryScope: Investigating idiosyncrasies in AI fiction.
+arXiv:2604.03136. <a href="https://arxiv.org/abs/2604.03136"
+class="uri">https://arxiv.org/abs/2604.03136</a></li>
 </ul>
 <hr />
 <p><strong>Document Status:</strong> Complete anti-patterns catalog

@@ -6,7 +6,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
-modified: 2026-07-29
+modified: 2026-10-10
 created: 2026-01-22
 description: "Quick-reference code recipes for implementing machine compatibility patterns, including persistent errors, explicit state, and semantic forms."
 
@@ -14,6 +14,7 @@ title: 'Appendix A: Implementation Cookbook'
 tags: [implementation-cookbook, code-recipes, quick-reference, persistent-errors, explicit-state, semantic-forms]
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
   book: "Shared"
   appendix: "A"
@@ -30,7 +31,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -1249,18 +1250,21 @@ an untagged PDF is unreadable beyond its plain text stream. To an AI
 agent, an untagged PDF is a wall of positioned glyphs that requires
 expensive vision-based reconstruction to navigate. The same structural
 omission breaks both audiences.</p>
-<p>ISO 14289-1 (PDF/UA) has become the de facto international baseline
-for accessible PDFs, mandated through different legal instruments across
-major markets: the European Accessibility Act (Directive (EU) 2019/882,
-in force across the EU since 28 June 2025); Section 508 of the US
-Rehabilitation Act as applied to federal agencies and recipients of
-federal funding; the UK Public Sector Bodies Accessibility Regulations
-2018; and obligations flowing from national disability discrimination
-legislation in Australia and Canada. Wherever the legal obligation
-originates, the mandate exists for human disability accommodation. The
-artefact the law produces - a structure tree of headings, paragraphs,
-lists, tables, figures, captions, and reading order - is exactly what an
-AI agent needs to read the document without inference.</p>
+<p>ISO 14289-1 (PDF/UA) is the PDF-specific accessibility standard and a
+common way to meet the document requirements that different legal
+instruments set across major markets: the European Accessibility Act
+(Directive (EU) 2019/882, in force across the EU since 28 June 2025),
+through EN 301 549, the European standard prepared to support it, which
+applies WCAG-based requirements to downloadable documents; Section 508
+of the US Rehabilitation Act, whose standards apply WCAG 2.0 Level AA to
+the electronic documents of federal agencies; the UK Public Sector
+Bodies Accessibility Regulations 2018; and obligations flowing from
+national disability discrimination legislation in Australia and Canada.
+Wherever the legal obligation originates, the mandate exists for human
+disability accommodation. The artefact the law produces - a structure
+tree of headings, paragraphs, lists, tables, figures, captions, and
+reading order - is exactly what an AI agent needs to read the document
+without inference.</p>
 <p>Two consequences of an untagged PDF:</p>
 <ul>
 <li><strong>Hallucination.</strong> An agent that has reconstructed a
@@ -1338,17 +1342,20 @@ read of it forever after.</p></li>
 </ol>
 <h3 id="the-broader-metadata-layer">The Broader Metadata Layer</h3>
 <p>The Level 2 conformance claim and the structure tree are the
-load-bearing pieces of EAA compliance. The XMP packet that carries the
-conformance claim has room for considerably more, and an agent that has
-just opened a PDF is asking more questions than "is this tagged". The
-same fields belong in the source markdown's YAML frontmatter and ride
-through to the PDF's XMP packet via the same injection step.</p>
+load-bearing pieces of PDF accessibility. The XMP packet that carries
+the conformance claim has room for considerably more, and an agent that
+has just opened a PDF is asking more questions than "is this tagged".
+The same fields belong in the source markdown's YAML frontmatter and
+ride through to the PDF's XMP packet via the same injection step.</p>
 <p>Five groups of fields are useful here. The implementation in this
 cookbook recommends declaring them all in YAML frontmatter and injecting
 them via an exiftool config that registers an <code>mx</code> namespace
 at <code>https://schemas.cognovamx.com/mx/1.0/</code>.</p>
 <p><strong>Identity and provenance.</strong> <code>canonicalUrl</code>
-(where the official copy lives), <code>sourceRepo</code> and
+(where the official copy lives), <code>citeAs</code> (the persistent
+identifier to cite, when it differs from the location),
+<code>alternateFormats</code> (the other renderings of the same
+document, each with its media type), <code>sourceRepo</code> and
 <code>commitSha</code> (precise build identification),
 <code>supersedes</code> and <code>supersededBy</code> (version
 chain).</p>
@@ -1370,9 +1377,13 @@ documents describing services or datasets), <code>supportContact</code>
 (voice-friendly read-aloud summary), <code>conformsTo</code> (list of
 standards the document claims conformance to).</p>
 <p><strong>Negative space.</strong> <code>trainingDataPolicy</code>
-(training-corpus inclusion stance), <code>noLLMReprocess</code> (request
-quotation rather than rewriting), <code>doNotIndex</code> (suppress
-public indexing).</p>
+(training-corpus inclusion stance), <code>contentPolicy</code> and
+<code>attribution</code> (what a machine may do with the content when it
+reads it, and whether reuse must credit the source),
+<code>noLLMReprocess</code> (request quotation rather than rewriting),
+<code>doNotIndex</code> (suppress public indexing),
+<code>contentRating</code> (audience suitability, so a reader knows
+whether to surface the content at all).</p>
 <p>None of these fields need to be invented. Most have analogues in
 Dublin Core, Schema.org, IPTC, or IETF metadata vocabularies. The
 contribution MX makes is consolidating them into one namespace and

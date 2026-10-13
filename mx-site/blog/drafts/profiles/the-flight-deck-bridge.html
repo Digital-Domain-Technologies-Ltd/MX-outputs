@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "The Flight Deck Bridge: Planning a Discord MCP Server"
+description: "No Discord connector exists in Anthropic's registry, so we're building our own. The plan for a minimal-dependency MCP server that seats a Claude wingman in the shared Flight Deck channel - tool surface, governance by construction, build phases, and acceptance test."
+author: Tom Cranstoun
+created: "2026-07-04"
+modified: 2026-10-11
+version: "1.0"
+type: blog-post
+tags:
+  - mx
+  - discord
+  - mcp
+  - agents
+  - plan
+  - flight-deck
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  contextProvides:
+    - "The build plan for a custom Discord MCP server (the Flight Deck Bridge) that connects a Claude agent to the shared Discord channel described in 'From Solo Pilot to Flight Deck'. Covers the design constraints (plain JavaScript, minimal dependencies, stdio transport, bot-token auth from environment), the v1 tool surface (whoami, read channel, get pins, post message, create thread - deliberately no edit or delete so the ledger is append-only by construction), the MX governance mapping, four build phases following the mcp-builder methodology, and the acceptance test: an agent answering from shared channel history without re-briefing."
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/profiles/the-flight-deck-bridge.md
+  purpose: "Turn the Flight Deck concept into a buildable engineering plan for the Discord MCP server, precise enough for any agent or human to execute phase by phase."
+  stability: draft
+  inLanguage: en-GB
+  runbook: "Markdown source lives in the claude-created Google Drive folder. The folder's index.md catalogues the current version; edit via Claude and re-upload, then update the index."
+  servedAt: https://mx.allabout.network/blog/drafts/profiles/the-flight-deck-bridge.html
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="No Discord connector exists in Anthropic's registry, so we're building our own. The plan for a minimal-dependency MCP server that seats a Claude wingman in the shared Flight Deck channel - tool surface, governance by construction, build phases, and acceptance test.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/profiles/the-flight-deck-bridge.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/profiles/the-flight-deck-bridge.html">
+  <meta property="og:title" content="The Flight Deck Bridge: Planning a Discord MCP Server | CogNovaMX">
+  <meta property="og:description" content="No Discord connector exists in Anthropic's registry, so we're building our own. The plan for a minimal-dependency MCP server that seats a Claude wingman in the shared Flight Deck channel - tool surface, governance by construction, build phases, and acceptance test.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-04">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Flight Deck Bridge: Planning a Discord MCP Server | CogNovaMX">
+  <meta name="twitter:description" content="No Discord connector exists in Anthropic's registry, so we're building our own. The plan for a minimal-dependency MCP server that seats a Claude wingman in the shared Flight Deck channel - tool surface, governance by construction, build phases, and acceptance test.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="The Flight Deck Bridge: Planning a Discord MCP Server">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/profiles/the-flight-deck-bridge.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Flight Deck Bridge: Planning a Discord MCP Server | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The Flight Deck Bridge: Planning a Discord MCP Server",
+        "headline": "The Flight Deck Bridge: Planning a Discord MCP Server",
+        "description": "No Discord connector exists in Anthropic's registry, so we're building our own. The plan for a minimal-dependency MCP server that seats a Claude wingman in the shared Flight Deck channel - tool surface, governance by construction, build phases, and acceptance test.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-04",
+        "dateModified": "2026-07-04",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/profiles/the-flight-deck-bridge.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 912,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/profiles/the-flight-deck-bridge.html",
+        "name": "The Flight Deck Bridge: Planning a Discord MCP Server",
+        "url": "https://mx.allabout.network/blog/drafts/profiles/the-flight-deck-bridge.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-we-are-building">What we are building</a></li>
+        <li><a href="#design-constraints">Design constraints</a></li>
+        <li><a href="#the-v1-tool-surface">The v1 tool surface</a></li>
+        <li><a href="#build-phases">Build phases</a></li>
+        <li><a href="#acceptance">Acceptance</a></li>
+        <li><a href="#risks-named-now">Risks, named now</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="912">
+        <header class="article-header">
+          <h1>The Flight Deck Bridge: Planning a Discord MCP Server</h1>
+          <div class="article-meta"
+               data-published="2026-07-04"
+               data-modified="2026-07-04"
+               data-reading-time="5 min">
+            <time datetime="2026-07-04">4 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>5 min read</span>
+          </div>
+        </header>
+
+
+<p>In the previous post, &quot;From Solo Pilot to Flight Deck&quot;, we described the Flight Deck: a shared Discord server where Tom's wingman and Scott's agent work from one verifiable channel history. Step 4 of that recipe - wire the agent runtime to the bot - glossed over an inconvenient fact we have since confirmed: Anthropic's connector registry has no Discord connector. Slack, yes. Discord, no.</p>
+<p>So we build the bridge ourselves. This is the plan, written before the code, so that the code has something to be checked against.</p>
+<h2 id="what-we-are-building" tabindex="-1">What we are building</h2>
+<p>A small MCP (Model Context Protocol) server - working name <strong>flight-deck-bridge</strong> - that a Claude agent loads as a custom connector. It authenticates as one Discord bot (one bot per partner, per the Flight Deck rules) and exposes the narrow set of operations an agent needs to participate in the shared channel: read the history, read the pinned conventions, post with provenance, open a thread. Nothing else.</p>
+<p>MCP is the right shape for this because it is the same protocol every other connector in the session already speaks. To the agent, Discord becomes another tool surface, no different in kind from Drive or Gmail - which is precisely the MX argument: agents should meet new systems through declared, inspectable interfaces, not bespoke glue.</p>
+<h2 id="design-constraints" tabindex="-1">Design constraints</h2>
+<p>Four constraints, all deliberate:</p>
+<p><strong>Plain JavaScript, minimal dependencies.</strong> The implementation is Node with exactly one dependency: the official <code>@modelcontextprotocol/sdk</code>. Discord's REST API is spoken through Node's built-in <code>fetch</code> - no discord.js, no gateway library. Fewer dependencies means less to audit, and this bridge handles a credential.</p>
+<p><strong>stdio transport, local first.</strong> The server runs on the owner's machine alongside their agent, connected over stdio - the MCP norm for local servers. No hosting, no public endpoint, no session state. Each partner runs their own copy with their own token.</p>
+<p><strong>Token from the environment, never from the conversation.</strong> The bot token arrives as an environment variable in the server's launch configuration. It never appears in a tool argument, a channel message, or a log line. Scott never holds Maxine's token; the code enforces what the previous post promised.</p>
+<p><strong>Append-only by construction.</strong> The server exposes no edit and no delete. The Flight Deck's ledger property is not a convention the agent must remember to honour; it is a capability the agent simply does not have. Governance as code, not as goodwill.</p>
+<h2 id="the-v1-tool-surface" tabindex="-1">The v1 tool surface</h2>
+<p>Five tools, named for discoverability, most of them read-only:</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>What it does</th>
+<th>Writes?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>discord_whoami</code></td>
+<td>Confirms the bot identity and lists the channels it can see. The state handshake's opening move.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>discord_read_channel</code></td>
+<td>Paginated read of a channel's message history, newest first, with author, timestamp, and message ID on every item.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>discord_get_pins</code></td>
+<td>Fetches a channel's pinned messages - the Flight Deck's <code>index.md</code>, read before anything else.</td>
+<td>No</td>
+</tr>
+<tr>
+<td><code>discord_post_message</code></td>
+<td>Posts to a channel. Enforces the provenance header: the tool requires <code>onBehalfOf</code>, <code>sources</code>, and an optional artefact URN, and formats them into the message.</td>
+<td>Yes</td>
+</tr>
+<tr>
+<td><code>discord_create_thread</code></td>
+<td>Opens a thread on a message, for isolating one job's working.</td>
+<td>Yes</td>
+</tr>
+</tbody>
+</table>
+<p>Every tool returns message IDs, and the read tools accept them as cursors. Identity, never position - the channel equivalent of the folder index's rule.</p>
+<h2 id="build-phases" tabindex="-1">Build phases</h2>
+<p>Following the mcp-builder methodology already installed in this workspace:</p>
+<p><strong>Phase 1 - research.</strong> Confirm current MCP spec details (streamable transports, tool annotations) from the protocol documentation, and the exact Discord REST endpoints and permission bits for the five tools. Output: a one-page API map appended to this cog.</p>
+<p><strong>Phase 2 - implement.</strong> One file if it stays readable, two if not: an API client wrapping <code>fetch</code> with the auth header, rate-limit handling (Discord returns <code>429</code> with a <code>retry_after</code> - the client waits and retries once), and actionable error messages; then the five tool registrations with input schemas, descriptions, and <code>readOnlyHint</code>/<code>destructiveHint</code> annotations set truthfully.</p>
+<p><strong>Phase 3 - test.</strong> Compile-free by design; test against a scratch Discord server with the MCP Inspector, then live from a Cowork session. The button-was-below rule applies to testing too: verify by fetching, never by assuming.</p>
+<p><strong>Phase 4 - evaluate.</strong> Ten read-only evaluation questions against seeded channel history (&quot;what did the other agent report as the root cause on the delivery autopsy thread?&quot;), each with one verifiable answer, per the mcp-builder evaluation format.</p>
+<h2 id="acceptance" tabindex="-1">Acceptance</h2>
+<p>One test decides success, and it is the scenario from the original post. Seed the channel with a discussion between the two humans and one agent. Then ask the second agent - cold, no briefing - a question whose answer lives only in that history. If it answers correctly, citing message IDs, the state handshake works: context carried by the shared channel, not by a human re-explaining. That is the saving on context, measured.</p>
+<h2 id="risks-named-now" tabindex="-1">Risks, named now</h2>
+<p>Discord could tighten bot rules or rate limits - the bridge's single-client design keeps the blast radius to one file. The Message Content intent must be enabled per bot or reads come back empty - the whoami tool will check and say so rather than fail quietly. And custom local connectors depend on the agent platform's support for adding them - verified before Phase 2 starts, not after Phase 3 finishes.</p>
+<p>The plan is the cog; the code comes next. When the bridge posts its first provenance-headed message into #flight-deck, this file's <code>x-mx-contentState</code> flips, and the Flight Deck stops being an essay.</p>
+<hr>
+<p><em>Written by Claude, at Tom Cranstoun's request, as the build plan for the environment described in &quot;From Solo Pilot to Flight Deck&quot;.</em></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-11.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

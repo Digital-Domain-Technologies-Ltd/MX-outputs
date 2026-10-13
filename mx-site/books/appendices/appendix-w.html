@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-GB" xml:lang="en-GB">
+<head>
+    <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Appendix W: Building the MX Operating System"
+description: "How MX documentation is created through human-machine collaboration - a meta-reflective look at the process"
+author: "Tom Cranstoun"
+modified: 2026-10-10
+created: 2026-02-03
+
+type: "process-documentation"
+tags: [mx-os, collaboration, documentation-as-specification, meta-reflective, human-machine-partnership]
+mx:
+  mxSpecVersion: "0.9"
+  book: "Shared"
+  appendix: "M"
+  documentType: "meta-reflective"
+  purpose: "process-documentation"
+  runbook: |
+    audience: both
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-w-building-mx-os.md
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+<meta charset="utf-8" />
+  <meta name="generator" content="pandoc 3.12" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Tom Cranstoun" />
+  <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
+  <title>Appendix W: Building the MX Operating System</title>
+  
+
+  <link rel="canonical" href="https://mx.allabout.network/books/appendices/appendix-w.html">
+  <!-- MX metadata -->
+  <meta name="mx:status" content="active">
+  <meta name="mx:contentType" content="reference">
+  <meta name="mx:audience" content="humans, machines">
+  <meta name="mx:aiAssistance" content="welcome">
+  <meta name="mx:aiEditable" content="false">
+  <meta name="mx:contentPolicy" content="extract-with-attribution">
+  <meta name="mx:attribution" content="required">
+  <link rel="llms-txt" href="/llms.txt">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/books/appendices/appendix-w.html">
+  <meta property="og:title" content="Appendix W: Building the MX Operating System">
+  <meta property="og:description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites">
+  <meta property="og:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta property="og:image:alt" content="MX: The Protocols — book cover">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://mx.allabout.network/books/appendices/appendix-w.html">
+  <meta name="twitter:title" content="Appendix W: Building the MX Operating System">
+  <meta name="twitter:description" content="Implementation guide from MX-Protocols book">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/book-cover-3d.png">
+  <meta name="twitter:image:alt" content="MX: The Protocols — book cover">
+  <meta name="twitter:creator" content="@ddttomtom">
+
+  <!-- Additional SEO — appendices are companion content to the books, not standalone destinations: noindex, nofollow per memory rule project_appendices_noindex.md -->
+  <meta name="robots" content="noindex, nofollow">
+  <!-- Schema.org structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "name": "Appendix W: Building the MX Operating System",
+    "description": "Practical guidance from MX-Protocols book on designing AI agent-friendly websites",
+    "author": {
+      "@type": "Person",
+      "name": "Tom Cranstoun",
+      "email": "info@cognovamx.com",
+      "url": "https://allabout.network"
+    },
+    "inLanguage": "en-GB",
+    "timeRequired": "PT60M",
+    "educationalLevel": "Intermediate",
+    "datePublished": "2026-01-10",
+    "dateModified": "2026-01-10",
+    "isPartOf": {
+      "@type": "Book",
+      "name": "MX-Protocols",
+      "author": {
+        "@type": "Person",
+        "name": "Tom Cranstoun"
+      },
+      "url": "https://mx.allabout.network/books/appendices"
+    }
+  }
+  </script>
+  <link rel="stylesheet" href="appendix.css">
+</head>
+<body>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+<hr>
+<header id="title-block-header">
+<h1 class="title">Appendix W: Building the MX Operating System</h1>
+<p class="subtitle">MX-Protocols</p>
+<p class="author">Tom Cranstoun</p>
+<p class="date">January 2026</p>
+</header>
+<nav id="TOC" role="navigation" aria-label="Table of Contents">
+<ul>
+<li><a href="#appendix-w-building-the-mx-operating-system"
+id="toc-appendix-w-building-the-mx-operating-system">Appendix W:
+Building the MX Operating System</a>
+<ul>
+<li><a href="#what-is-mx-os" id="toc-what-is-mx-os">What is MX
+OS?</a></li>
+<li><a href="#the-partnership-model" id="toc-the-partnership-model">The
+Partnership Model</a></li>
+<li><a href="#the-collaborative-process"
+id="toc-the-collaborative-process">The Collaborative Process</a></li>
+<li><a href="#case-study-creating-appendix-l-namespace-architecture"
+id="toc-case-study-creating-appendix-l-namespace-architecture">Case
+Study: Creating Appendix L Namespace Architecture</a></li>
+<li><a href="#key-principles-demonstrated"
+id="toc-key-principles-demonstrated">Key Principles
+Demonstrated</a></li>
+<li><a href="#the-role-of-learnings.md"
+id="toc-the-role-of-learnings.md">The Role of LEARNINGS.md</a></li>
+<li><a href="#how-to-contribute-to-mx-os"
+id="toc-how-to-contribute-to-mx-os">How to Contribute to MX OS</a></li>
+<li><a href="#meta-reflection-this-document-itself"
+id="toc-meta-reflection-this-document-itself">Meta-Reflection: This
+Document Itself</a></li>
+<li><a href="#relationship-to-other-documentation"
+id="toc-relationship-to-other-documentation">Relationship to Other
+Documentation</a></li>
+<li><a href="#the-future-of-mx-os" id="toc-the-future-of-mx-os">The
+Future of MX OS</a></li>
+<li><a href="#practical-example-using-this-process"
+id="toc-practical-example-using-this-process">Practical Example: Using
+This Process</a></li>
+<li><a href="#the-mx-metadata-system"
+id="toc-the-mx-metadata-system">The MX Metadata System</a></li>
+<li><a href="#what-this-process-built-the-cog-system"
+id="toc-what-this-process-built-the-cog-system">What This Process Built:
+The Cog System</a></li>
+<li><a href="#conclusion" id="toc-conclusion">Conclusion</a></li>
+</ul></li>
+</ul>
+</nav>
+<div data-content-type="appendix">
+<h2 id="appendix-w-building-the-mx-operating-system">Appendix W:
+Building the MX Operating System</h2>
+<p>How MX documentation evolves through human-machine partnership.</p>
+<hr />
+<h2 id="what-is-mx-os">What is MX OS?</h2>
+<p>The MX documentation <strong>IS</strong> the MX Operating System (MX
+OS).</p>
+<p>When we document patterns here, we define how Machine Experience
+works. This isn't documentation <strong>about</strong> a system; this
+<strong>IS</strong> the system.</p>
+<p><strong>MX OS is:</strong></p>
+<ul>
+<li>Documentation that specifies behaviour</li>
+<li>Patterns that practitioners follow</li>
+<li>Standards that machines implement</li>
+<li>A living system that evolves through practice</li>
+</ul>
+<p><strong>Key principle:</strong> Documentation as specification. By
+documenting how MX should work, we create the operating system that
+defines machine experience.</p>
+<h3 id="the-repository-as-a-governed-execution-surface">The repository
+as a governed execution surface</h3>
+<p>MX OS is not only a thing agents read; it is a place agents act.
+Point Machine Experience at the repository and the repository stops
+being a passive store an agent writes to and becomes a <strong>governed
+execution surface</strong>: the place an AI agent acts on the work
+safely and on the record. The reference implementation states it in one
+line:</p>
+<blockquote>
+<p>Maxine is where AI agents act on a repository safely and on the
+record: bounded by Human-in-Command, enforced by gates, and logged as
+provenance.</p>
+</blockquote>
+<p>Three mechanisms carry three guarantees:</p>
+<ul>
+<li><strong>Authority (Human-in-Command).</strong> A human decides what
+the agent may do and where it must stop. The machine executes within
+that boundary and does not act outside it without direction.</li>
+<li><strong>Conformance (deterministic gates).</strong> A check decides
+whether a change is allowed to land, and refuses the non-conforming
+change at the boundary rather than trusting a reviewer to catch it
+later.</li>
+<li><strong>Provenance (the logged record).</strong> Every consequential
+action leaves an attributable, machine-readable record that travels with
+the work.</li>
+</ul>
+<p>This completes the two pillars from the agent's side: MX makes the
+work readable, REGINALD makes it trustworthy, and the governed execution
+surface is where a machine then acts on it under control. It is an
+honest claim only with its shipped-versus-planned split kept in view.
+Shipped, and running on this estate: the governance layer, the gate
+suite, provenance written as changes land, and Human-in-Command
+boundaries on every automated system. Planned, and marked as such:
+packaging the surface as a turnkey product another team installs on its
+own repository, and the full attestation surface around it. We run on
+this ourselves, and we are building it into something others can
+run.</p>
+<hr />
+<h2 id="the-partnership-model">The Partnership Model</h2>
+<p>MX OS is built through human-machine collaboration:</p>
+<p><strong>Tom Cranstoun brings:</strong></p>
+<ul>
+<li>Vision and editorial judgment</li>
+<li>Domain expertise (20+ years web standards)</li>
+<li>Discipline and philosophy</li>
+<li>Final decision authority</li>
+</ul>
+<p><strong>Claude (Maxine) brings:</strong></p>
+<ul>
+<li>Research (web standards, existing patterns)</li>
+<li>Structure and synthesis</li>
+<li>Pattern scaling across contexts</li>
+<li>Metadata clarity and implementation</li>
+</ul>
+<p><strong>Together we create:</strong></p>
+<ul>
+<li>Thorough, evidence-based documentation</li>
+<li>Patterns grounded in web standards</li>
+<li>Clear, machine-readable specifications</li>
+<li>Transparent collaborative process</li>
+</ul>
+<p>This is not symbolic partnership; it's operational. Both parties
+contribute essential capabilities that neither possesses alone.</p>
+<hr />
+<h2 id="the-collaborative-process">The Collaborative Process</h2>
+<h3 id="the-4-phase-pattern">The 4-Phase Pattern</h3>
+<p><strong>Every significant MX documentation change follows this
+pattern:</strong></p>
+<ol type="1">
+<li><strong>Investigate:</strong> Research existing standards, analyse
+codebase, gather context</li>
+<li><strong>Interview:</strong> Clarify requirements, identify goals,
+surface constraints</li>
+<li><strong>Iterate:</strong> Expand scope as discovery reveals deeper
+needs</li>
+<li><strong>Document:</strong> Create clear, complete
+specifications</li>
+</ol>
+<p>This pattern is documented in SOUL.md, the identity file that defines
+Maxine, and demonstrated in the case study below.</p>
+<hr />
+<h2 id="case-study-creating-appendix-l-namespace-architecture">Case
+Study: Creating Appendix L Namespace Architecture</h2>
+<h3 id="how-it-started">How It Started</h3>
+<p><strong>The question:</strong> "Should we use <code>ai-</code> or
+<code>mx-</code> prefix for HTML meta tags?"</p>
+<p><strong>Simple answer expected:</strong> Rename tags, commit,
+done.</p>
+<p><strong>What actually happened:</strong> 7 plans, 7 commits, complete
+namespace architecture.</p>
+<p>This case study demonstrates how MX OS evolves, from simple question
+to systematic documentation.</p>
+<hr />
+<h3 id="phase-1-investigate">Phase 1: Investigate</h3>
+<p><strong>What Maxine Did:</strong></p>
+<ol type="1">
+<li><strong>Researched web standards</strong> (January 2026)
+<ul>
+<li>Searched W3C specifications</li>
+<li>Searched WHATWG standards</li>
+<li>Searched IETF RFCs</li>
+<li>Searched vendor proposals (Google, Microsoft, Meta, Apple)</li>
+<li>Searched community standards (Microformats, Schema.org)</li>
+</ul></li>
+<li><strong>Finding:</strong> NO <code>ai-</code> prefix standard exists
+anywhere
+<ul>
+<li>Not in W3C specs</li>
+<li>Not in WHATWG standards</li>
+<li>Not in vendor proposals</li>
+<li>Not in community conventions</li>
+</ul></li>
+<li><strong>Pattern recognition:</strong> Framework-specific prefixes
+exist:
+<ul>
+<li><code>twitter:</code> for Twitter Cards</li>
+<li><code>og:</code> for Open Graph</li>
+<li>No generic <code>ai-</code> prefix</li>
+</ul></li>
+</ol>
+<p><strong>Conclusion:</strong> <code>ai-</code> was NOT following any
+established pattern. Need to evaluate alternatives.</p>
+<hr />
+<h3 id="phase-2-interview">Phase 2: Interview</h3>
+<p><strong>Maxine used AskUserQuestion to understand true
+goals:</strong></p>
+<p><strong>Questions asked:</strong></p>
+<ol type="1">
+<li><strong>Goal clarity:</strong> "What's the primary goal - generic AI
+compatibility or MX brand identity?"
+<ul>
+<li><strong>Answer:</strong> MX brand identity, not generic AI</li>
+</ul></li>
+<li><strong>Scope understanding:</strong> "Should this be a simple
+rename or complete namespace documentation?"
+<ul>
+<li><strong>Answer:</strong> Need complete namespace architecture</li>
+</ul></li>
+<li><strong>Documentation level:</strong> "How much rationale and
+context should be included?"
+<ul>
+<li><strong>Answer:</strong> Full documentation explaining the decision
+process</li>
+</ul></li>
+<li><strong>Overlap analysis:</strong> "How does this relate to existing
+Registry and Appendix D?"
+<ul>
+<li><strong>Answer:</strong> Should consolidate into Appendix L</li>
+</ul></li>
+</ol>
+<p><strong>Key insight from interview:</strong> This wasn't a simple
+rename; it was an opportunity to document complete MX namespace
+architecture.</p>
+<hr />
+<h3 id="phase-3-iterate-scope-expansion">Phase 3: Iterate (Scope
+Expansion)</h3>
+<p><strong>As work progressed, scope expanded through
+discovery:</strong></p>
+<p><strong>Initial scope:</strong> Rename <code>ai-</code> to
+<code>mx-</code> in a few files</p>
+<p><strong>After investigation:</strong> Document namespace
+architecture</p>
+<p><strong>After interview:</strong> Consolidate Registry and Appendix
+D</p>
+<p><strong>After first draft:</strong> Add SOUL.md explaining
+partnership</p>
+<p><strong>After second draft:</strong> Add Appendix W (this
+document!)</p>
+<p><strong>Pattern:</strong> Each phase of work revealed deeper
+architectural needs.</p>
+<p><strong>Example of scope expansion:</strong></p>
+<pre><code>Original question: &quot;ai- or mx- prefix?&quot;
+  ↓
+Research finding: &quot;No ai- standard exists&quot;
+  ↓
+Interview revealed: &quot;Need MX brand identity&quot;
+  ↓
+Documentation revealed: &quot;Need namespace architecture&quot;
+  ↓
+Implementation revealed: &quot;Need integration guidelines&quot;
+  ↓
+Completion revealed: &quot;Need process documentation&quot;</code></pre>
+<p>This isn't scope creep; it's <strong>scope discovery through
+systematic investigation</strong>.</p>
+<hr />
+<h3 id="phase-4-document-the-7-plans">Phase 4: Document (The 7
+Plans)</h3>
+<p><strong>Breaking the full scope of work into manageable
+plans:</strong></p>
+<p><strong>Plan 1: Create SOUL.md</strong></p>
+<ul>
+<li>Document Maxine identity and role</li>
+<li>Explain human-machine partnership</li>
+<li>Establish transparent collaboration model</li>
+</ul>
+<p><strong>Plan 2: Research and Document Web Standards</strong></p>
+<ul>
+<li>Create research documentation commit</li>
+<li>Document findings: NO ai- prefix standard</li>
+<li>Establish evidence base for decisions</li>
+</ul>
+<p><strong>Plan 3: Add MX Namespace Architecture to Appendix
+L</strong></p>
+<ul>
+<li>Add Part 1: MX Operating System Philosophy</li>
+<li>Add Part 2: MX Namespace Architecture (mx:, mx.ai:, mx.co:,
+mx.ho:)</li>
+<li>Document flat HTML prefix pattern vs nested YAML</li>
+</ul>
+<p><strong>Plan 4: Merge Registry and Appendix D Content</strong></p>
+<ul>
+<li>Add Part 3: MX Attributes by Namespace</li>
+<li>Add Part 5: JSON-LD Structured Data</li>
+<li>Consolidate three sources into one</li>
+</ul>
+<p><strong>Plan 5: Update Pattern Specifications and Change ai- to
+mx-</strong></p>
+<ul>
+<li>Update Part 4: Pattern Specifications</li>
+<li>Change all <code>ai-</code> → <code>mx-</code> across
+repository</li>
+<li>Update content-template.html and examples</li>
+</ul>
+<p><strong>Plan 6: Add Cross-References and Deprecate
+Registry</strong></p>
+<ul>
+<li>Add Part 6: Integration Guidelines</li>
+<li>Add Part 7: Relationship to Web Standards</li>
+<li>Update Appendix D cross-references</li>
+<li>Deprecate MX Attributes Registry</li>
+</ul>
+<p><strong>Plan 7: Create Appendix W</strong></p>
+<ul>
+<li>Document the collaborative process (this document)</li>
+<li>Use Appendix L creation as case study</li>
+<li>Meta-reflective documentation</li>
+</ul>
+<p><strong>Total: 7 plans, 7 commits</strong></p>
+<hr />
+<h2 id="key-principles-demonstrated">Key Principles Demonstrated</h2>
+<h3 id="investigation-before-action">1. Investigation Before Action</h3>
+<p><strong>Anti-pattern:</strong> Assume <code>ai-</code> is standard,
+rename, commit</p>
+<p><strong>MX pattern:</strong> Research web standards, find NO ai-
+standard exists, document evidence, then decide</p>
+<p><strong>Result:</strong> Evidence-based decision with clear
+rationale</p>
+<h3 id="interview-to-clarify-intent">2. Interview to Clarify Intent</h3>
+<p><strong>Anti-pattern:</strong> Guess what user wants, implement, hope
+it's right</p>
+<p><strong>MX pattern:</strong> Use AskUserQuestion to understand true
+goals (MX brand vs generic AI)</p>
+<p><strong>Result:</strong> Solution aligned with actual
+requirements</p>
+<h3 id="iterate-as-scope-expands">3. Iterate as Scope Expands</h3>
+<p><strong>Anti-pattern:</strong> Stick to original narrow scope, miss
+architectural opportunities</p>
+<p><strong>MX pattern:</strong> Allow scope to expand as investigation
+reveals deeper needs</p>
+<p><strong>Result:</strong> Complete namespace architecture instead of
+simple rename</p>
+<h3 id="document-transparently">4. Document Transparently</h3>
+<p><strong>Anti-pattern:</strong> Make changes silently, don't explain
+reasoning</p>
+<p><strong>MX pattern:</strong> Document process (SOUL.md), rationale
+(Appendix L), and method (Appendix W)</p>
+<p><strong>Result:</strong> Replicable process, transparent
+decision-making</p>
+<h3 id="plan-complex-work">5. Plan Complex Work</h3>
+<p><strong>Anti-pattern:</strong> Try to do everything at once, get
+overwhelmed</p>
+<p><strong>MX pattern:</strong> Break into 7 sequential plans, execute
+systematically</p>
+<p><strong>Result:</strong> Manageable execution, clear progress
+tracking</p>
+<hr />
+<h2 id="the-role-of-learnings.md">The Role of LEARNINGS.md</h2>
+<p><strong>Every MX principle</strong> is proven through practice.</p>
+<p>When something goes wrong, we document it in LEARNINGS.md:</p>
+<ul>
+<li>What went wrong</li>
+<li>Why it happened</li>
+<li>How to prevent it</li>
+<li>New rule or principle</li>
+</ul>
+<p><strong>Example from LEARNINGS.md:</strong></p>
+<div class="sourceCode" id="cb2" data-role="code-container"><pre
+class="sourceCode markdown"><code class="sourceCode markdown" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>❌ **DON&#39;T**: Assume a prefix is standard without researching</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>✅ **DO**: Research web standards before proposing new patterns</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>**Why**: We almost used ai- prefix without realising no standard exists.</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>Research revealed we should establish MX brand identity instead.</span></code></pre></div>
+<p><strong>Pattern:</strong> Failure → Documentation → Prevention →
+Principle</p>
+<p><strong>MX OS evolves through documented failures</strong>, not just
+successes.</p>
+<hr />
+<h2 id="how-to-contribute-to-mx-os">How to Contribute to MX OS</h2>
+<h3 id="for-human-contributors">For Human Contributors</h3>
+<p><strong>1. Question assumptions</strong></p>
+<ul>
+<li>Don't assume patterns are standard</li>
+<li>Research before proposing changes</li>
+<li>Document your findings</li>
+</ul>
+<p><strong>2. Interview to clarify</strong></p>
+<ul>
+<li>Ask questions when requirements are unclear</li>
+<li>Surface constraints early</li>
+<li>Identify competing goals</li>
+</ul>
+<p><strong>3. Iterate openly</strong></p>
+<ul>
+<li>Allow scope to expand when discovery reveals needs</li>
+<li>Break complex work into manageable plans</li>
+<li>Commit frequently with clear messages</li>
+</ul>
+<p><strong>4. Document rationale</strong></p>
+<ul>
+<li>Explain WHY, not just WHAT</li>
+<li>Link to evidence (web standards, research)</li>
+<li>Make decisions replicable</li>
+</ul>
+<h3 id="for-machine-contributors">For Machine Contributors</h3>
+<p><strong>1. Investigate thoroughly</strong></p>
+<ul>
+<li>Research existing standards</li>
+<li>Search codebase for patterns</li>
+<li>Analyse related work</li>
+</ul>
+<p><strong>2. Interview systematically</strong></p>
+<ul>
+<li>Use structured questions</li>
+<li>Clarify goals, priorities, constraints</li>
+<li>Surface uncertainties</li>
+</ul>
+<p><strong>3. Synthesise clearly</strong></p>
+<ul>
+<li>Organise findings by theme</li>
+<li>Present options with rationale</li>
+<li>Link related concepts</li>
+</ul>
+<p><strong>4. Document transparently</strong></p>
+<ul>
+<li>Explain research process</li>
+<li>Show evidence for decisions</li>
+<li>Make collaboration visible</li>
+</ul>
+<hr />
+<h2 id="meta-reflection-this-document-itself">Meta-Reflection: This
+Document Itself</h2>
+<p><strong>This very document demonstrates MX OS
+principles:</strong></p>
+<ul>
+<li><strong>Documentation as specification:</strong> By documenting the
+process, we define it</li>
+<li><strong>Transparency:</strong> We openly acknowledge human-machine
+partnership</li>
+<li><strong>Replicability:</strong> Others can follow this pattern</li>
+<li><strong>Convergence:</strong> This helps both humans and machines
+understand the process</li>
+<li><strong>Machine-readable:</strong> YAML frontmatter makes this
+parseable</li>
+</ul>
+<p><strong>The case study (Appendix L) was created using the process
+this document describes.</strong></p>
+<p>We're not just documenting a process; we're demonstrating it through
+the act of documentation.</p>
+<p>This is MX: Where documentation, specification, and practice
+converge.</p>
+<hr />
+<h2 id="relationship-to-other-documentation">Relationship to Other
+Documentation</h2>
+<p><strong>This appendix connects to:</strong></p>
+<ul>
+<li><strong>SOUL.md:</strong> Explains Maxine identity and partnership
+model</li>
+<li><strong><a
+href="appendix-l-proposed-ai-metadata-patterns.md">Appendix
+L</a>:</strong> The product of this process</li>
+<li><strong>LEARNINGS.md:</strong> Proven principles from failures</li>
+<li><strong>The Maxine skill:</strong> Operational definition of
+collaboration</li>
+<li><strong>The Gathering launch statement</strong> (<a
+href="https://mx.allabout.network/the-gathering/"
+class="uri">https://mx.allabout.network/the-gathering/</a>): Community
+partnership model</li>
+</ul>
+<p><strong>Read these together to understand:</strong></p>
+<ul>
+<li><strong>WHO</strong> is building MX (SOUL.md)</li>
+<li><strong>HOW</strong> we work together (Appendix W, this
+document)</li>
+<li><strong>WHAT</strong> we create (Appendix L and other specs)</li>
+<li><strong>WHY</strong> we make decisions (LEARNINGS.md)</li>
+<li><strong>WHERE</strong> this fits (The Gathering launch
+statement)</li>
+</ul>
+<hr />
+<h2 id="the-future-of-mx-os">The Future of MX OS</h2>
+<h3 id="how-mx-os-evolves">How MX OS Evolves</h3>
+<p><strong>MX OS is a living system:</strong></p>
+<ol type="1">
+<li><strong>Practice reveals needs:</strong> Implementation exposes
+gaps</li>
+<li><strong>Investigation gathers evidence:</strong> Research informs
+decisions</li>
+<li><strong>Interview clarifies intent:</strong> Questions surface
+requirements</li>
+<li><strong>Documentation specifies behaviour:</strong> Writing defines
+the system</li>
+<li><strong>Iteration refines patterns:</strong> Usage improves
+specifications</li>
+<li><strong>Failures document lessons:</strong> LEARNINGS.md captures
+principles</li>
+</ol>
+<p><strong>This cycle never stops.</strong> MX OS evolves through
+continuous practice and documentation.</p>
+<h3 id="version-control-as-history">Version Control as History</h3>
+<p><strong>Every MX change is tracked in git:</strong></p>
+<div class="sourceCode" id="cb3" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View the creation of Appendix L</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--oneline</span> <span class="at">--grep</span><span class="op">=</span><span class="st">&quot;namespace&quot;</span> <span class="at">--grep</span><span class="op">=</span><span class="st">&quot;Appendix L&quot;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># See specific changes</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> show <span class="op">&lt;</span>commit-hash<span class="op">&gt;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># View evolution over time</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> log <span class="at">--follow</span> datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md</span></code></pre></div>
+<p><strong>The git history IS the evolution history of MX
+OS.</strong></p>
+<p>Practitioners can see:</p>
+<ul>
+<li>Why decisions were made</li>
+<li>How patterns evolved</li>
+<li>What alternatives were considered</li>
+<li>Who contributed (humans and machines)</li>
+</ul>
+<h3 id="no-principle-is-sacred">No Principle is Sacred</h3>
+<p><strong>If practice proves a principle wrong, we change
+it.</strong></p>
+<p><strong>Example from this very case study:</strong></p>
+<ul>
+<li><strong>Old pattern:</strong> Use generic <code>ai-</code>
+prefix</li>
+<li><strong>Investigation:</strong> No standard exists</li>
+<li><strong>Interview:</strong> Need MX brand identity</li>
+<li><strong>New pattern:</strong> Use <code>mx-</code> prefix with
+namespace architecture</li>
+<li><strong>Result:</strong> Complete reorganization into Appendix
+L</li>
+</ul>
+<p><strong>MX OS adapts based on evidence and practice.</strong></p>
+<hr />
+<h2 id="practical-example-using-this-process">Practical Example: Using
+This Process</h2>
+<p><strong>Scenario:</strong> You want to add a new metadata pattern to
+MX</p>
+<p><strong>Step 1: Investigate</strong></p>
+<div class="sourceCode" id="cb4" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Search for existing patterns</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">rg</span> <span class="st">&quot;meta name=&quot;</span> datalake/manuscripts/mx-books/mx-appendices/</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Read related documentation</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> datalake/manuscripts/mx-books/mx-appendices/appendix-l-proposed-ai-metadata-patterns.md</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Check web standards</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="co"># (search W3C, WHATWG, Schema.org)</span></span></code></pre></div>
+<p><strong>Step 2: Interview</strong> (ask yourself or AI assistant)</p>
+<ul>
+<li>What problem does this pattern solve?</li>
+<li>Does an established standard already exist?</li>
+<li>How does this relate to existing MX patterns?</li>
+<li>Is this MX-specific or should it be proposed to standards
+bodies?</li>
+</ul>
+<p><strong>Step 3: Iterate</strong></p>
+<ul>
+<li>Draft the pattern</li>
+<li>Get feedback</li>
+<li>Refine based on evidence</li>
+<li>Test in practice</li>
+</ul>
+<p><strong>Step 4: Document</strong></p>
+<ul>
+<li>Add to appropriate appendix</li>
+<li>Explain rationale</li>
+<li>Link to research</li>
+<li>Provide examples</li>
+<li>Update cross-references</li>
+</ul>
+<p><strong>Step 5: Commit</strong></p>
+<div class="sourceCode" id="cb5" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> add datalake/manuscripts/mx-books/mx-appendices/appendix-<span class="pp">*</span>.md</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> commit <span class="at">-m</span> <span class="st">&quot;docs: add &lt;pattern-name&gt; to Appendix &lt;X&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="st">Rationale: &lt;why this pattern is needed&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="st">Research: &lt;link to standards or evidence&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="st">Examples: &lt;where implemented&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="st">Co-Authored-By: &lt;your-name-or-machine&gt;&quot;</span></span></code></pre></div>
+<hr />
+<h2 id="the-mx-metadata-system">The MX Metadata System</h2>
+<h3 id="mx.yaml.md-files-dual-purpose-metadata">.mx.yaml.md Files:
+Dual-Purpose Metadata</h3>
+<p>Every folder in MX repositories contains a <code>.mx.yaml.md</code>
+file combining:</p>
+<ol type="1">
+<li><strong>YAML frontmatter</strong> (machine-readable metadata)</li>
+<li><strong>Markdown narrative</strong> (human-readable
+documentation)</li>
+</ol>
+<p><strong>Example:</strong></p>
+<div class="sourceCode" id="cb6" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Build Tools and Automation Scripts&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;Build automation and repository management scripts&quot;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="fu">audience</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;humans&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;machines&quot;</span><span class="kw">]</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="fu">inherits</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;../.mx.yaml.md&quot;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">primaryLanguages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;javascript&quot;</span><span class="kw">,</span><span class="at"> </span><span class="st">&quot;bash&quot;</span><span class="kw">]</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1.0&quot;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">domain</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;build-automation&quot;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">ai</span><span class="kw">:</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">aiAssistance</span><span class="kw">:</span><span class="at"> welcome</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">aiEditable</span><span class="kw">:</span><span class="at"> </span><span class="ch">true</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Build Tools - Narrative</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="at">This folder contains scripts for building...</span></span></code></pre></div>
+<p><strong>Why both formats?</strong></p>
+<ul>
+<li><strong>For Humans:</strong> Read narrative to understand
+purpose</li>
+<li><strong>For Machines:</strong> Parse YAML for automation and
+navigation</li>
+<li><strong>MX Principle:</strong> Design for Both</li>
+</ul>
+<h3 id="inheritance-resolution-.mx.effective.yaml">Inheritance
+Resolution: .mx.effective.yaml</h3>
+<p><strong>Problem:</strong> Inheritance chains can be deep (child →
+parent → grandparent → root)</p>
+<p><strong>Solution:</strong> <code>.mx.effective.yaml</code> files
+contain <strong>computed effective values</strong>: the final result
+after resolving complete inheritance chains.</p>
+<p><strong>Think of it like CSS computed styles:</strong></p>
+<ul>
+<li><code>.mx.yaml.md</code> = authored styles (what you write)</li>
+<li><code>.mx.effective.yaml</code> = computed styles (what the browser
+sees)</li>
+</ul>
+<h3 id="how-inheritance-works">How Inheritance Works</h3>
+<p><strong>Parent</strong> (<code>/.mx.yaml.md</code>):</p>
+<div class="sourceCode" id="cb7" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">audience</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;both&quot;</span><span class="kw">]</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">primaryLanguages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;javascript&quot;</span><span class="kw">]</span></span></code></pre></div>
+<p><strong>Child</strong> (<code>/scripts/.mx.yaml.md</code>):</p>
+<div class="sourceCode" id="cb8" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">inherits</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;../.mx.yaml.md&quot;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">audience</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;humans&quot;</span><span class="kw">]</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">primaryLanguages</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="st">&quot;bash&quot;</span><span class="kw">]</span></span></code></pre></div>
+<p><strong>Effective</strong>
+(<code>/scripts/.mx.effective.yaml</code>):</p>
+<div class="sourceCode" id="cb9" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Generated automatically - DO NOT EDIT</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">audience</span><span class="kw">:</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">- </span><span class="at">both        # From parent</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">- </span><span class="at">humans      # From child (merged)</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="fu">primaryLanguages</span><span class="kw">:</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">- </span><span class="at">javascript  # From parent</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="kw">- </span><span class="at">bash        # From child (merged)</span></span></code></pre></div>
+<h3 id="inheritance-rules">Inheritance Rules</h3>
+<ol type="1">
+<li><p><strong>Scalars:</strong> Child overrides parent</p>
+<div class="sourceCode" id="cb10" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parent: title: &quot;Parent Title&quot;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Child:  title: &quot;Child Title&quot;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: &quot;Child Title&quot;</span></span></code></pre></div></li>
+<li><p><strong>Arrays:</strong> Merged and deduplicated</p>
+<div class="sourceCode" id="cb11" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parent: tags: [&quot;api&quot;, &quot;rest&quot;]</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Child:  tags: [&quot;graphql&quot;]</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: [&quot;api&quot;, &quot;rest&quot;, &quot;graphql&quot;]</span></span></code></pre></div></li>
+<li><p><strong>mx: section:</strong> Child replaces parent entirely (no
+deep merge)</p>
+<div class="sourceCode" id="cb12" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Parent: mx: { ai: { assistance: welcome } }</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Child:  mx: { domain: &quot;build&quot; }</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Result: { domain: &quot;build&quot; }  # Parent mx: section discarded</span></span></code></pre></div></li>
+<li><p><strong>Repository Boundaries:</strong> Inheritance stops at git
+submodule boundaries</p></li>
+</ol>
+<h3 id="the-onboarding-workflow">The Onboarding Workflow</h3>
+<p>MX repositories use a 7-step onboarding process
+(<code>npm run mx:onboard</code>):</p>
+<ol type="1">
+<li><strong>Generate</strong> <code>.mx.yaml.md</code> files (folder
+classification)</li>
+<li><strong>Install</strong> pre-commit hooks (validation)</li>
+<li><strong>Add</strong> npm scripts (<code>mx:generate</code>,
+<code>mx:validate</code>, <code>mx:enhance</code>,
+<code>mx:effective</code>)</li>
+<li><strong>Update</strong> documentation (README, CLAUDE.md)</li>
+<li><strong>Enrich</strong> metadata from README (extract description,
+keywords)</li>
+<li><strong>Compute</strong> effective values (generate
+<code>.mx.effective.yaml</code> files) ← <strong>NEW</strong></li>
+<li><strong>Validate</strong> setup (check all files are valid)</li>
+</ol>
+<p><strong>Step 6 Implementation:</strong></p>
+<p>File: <code>mx-effective.cjs</code></p>
+<p><strong>Key algorithm:</strong></p>
+<div class="sourceCode" id="cb13" data-role="code-container"><pre
+class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">resolveInheritanceChain</span>(dirPath) {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> chain <span class="op">=</span> []<span class="op">;</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> currentPath <span class="op">=</span> dirPath<span class="op">;</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Build chain from child to root</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> metadataPath <span class="op">=</span> path<span class="op">.</span><span class="fu">join</span>(currentPath<span class="op">,</span> <span class="st">&#39;.mx.yaml.md&#39;</span>)<span class="op">;</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (fs<span class="op">.</span><span class="fu">existsSync</span>(metadataPath)) {</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>      chain<span class="op">.</span><span class="fu">unshift</span>({ <span class="dt">path</span><span class="op">:</span> metadataPath<span class="op">,</span> <span class="dt">data</span><span class="op">:</span> <span class="fu">extractYamlFrontmatter</span>(metadataPath) })<span class="op">;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> parentMetadata <span class="op">=</span> <span class="fu">findParentMetadata</span>(currentPath)<span class="op">;</span></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>parentMetadata) <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>    currentPath <span class="op">=</span> path<span class="op">.</span><span class="fu">dirname</span>(parentMetadata)<span class="op">;</span></span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Merge chain (parent → child)</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">mergeMetadata</span>(chain)<span class="op">;</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><strong>Features:</strong></p>
+<ul>
+<li>Respects git repository boundaries (stops at <code>.git</code>
+files)</li>
+<li>Skips "output" and "outputs" folders (no-inherit policy)</li>
+<li>Tracks missing <code>.mx.yaml.md</code> files (inheriting from
+parent)</li>
+<li>Generates <code>.mx-missing.log</code> report</li>
+</ul>
+<p><strong>Why separate effective values?</strong></p>
+<ol type="1">
+<li><strong>Performance:</strong> AI agents read one file instead of
+traversing inheritance</li>
+<li><strong>Clarity:</strong> See final values without mental
+computation</li>
+<li><strong>Debugging:</strong> Compare authored vs. computed
+values</li>
+<li><strong>Automation:</strong> Build tools use resolved values
+directly</li>
+</ol>
+<p><strong>When to regenerate:</strong></p>
+<div class="sourceCode" id="cb14" data-role="code-container"><pre
+class="sourceCode bash"><code class="sourceCode bash" data-role="code-content"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># After editing .mx.yaml.md files</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run mx:effective</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Check what would change</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="ex">npm</span> run mx:effective:dry-run</span></code></pre></div>
+<h3 id="mx-os-in-practice">MX OS in Practice</h3>
+<p>The <code>.mx.yaml.md</code> and <code>.mx.effective.yaml</code>
+system is MX OS in action:</p>
+<ul>
+<li><strong>Explicit Over Implicit:</strong> Folder metadata states
+purpose (not inferred from name)</li>
+<li><strong>Design for Both:</strong> Single system serves humans and
+machines</li>
+<li><strong>Size-Neutral:</strong> No file counts (descriptions don't
+break when files added/removed)</li>
+<li><strong>Context Preservation:</strong> Explicit relationships
+between folders</li>
+<li><strong>Machine-First:</strong> But humans benefit from
+documentation</li>
+</ul>
+<p><strong>This metadata system IS part of MX OS</strong>: it
+demonstrates how machine-readable structure improves human
+understanding.</p>
+<h3 id="the-mx-graph-making-metadata-navigable">The MX Graph: Making
+Metadata Navigable</h3>
+<p>Individual <code>.mx.yaml.md</code> files describe individual
+folders. Cog files, which carry the COG (Community Owned Governance
+Standard), describe individual documents. The MX graph connects them
+into a single queryable structure.</p>
+<p>The graph builder scans every <code>.mx.yaml.md</code> and
+<code>.cog.md</code> file across the MX repositories, resolves
+inheritance chains, and outputs a JSON graph to
+<code>~/.mx/graph.json</code>. Each folder becomes a node. Each cog
+becomes a node. Relationships between them become edges.</p>
+<p><strong>Five edge types capture the structure:</strong></p>
+<ul>
+<li><strong>inherits:</strong> a folder inherits metadata from its
+parent <code>.mx.yaml.md</code></li>
+<li><strong>contains:</strong> a parent folder contains a child
+folder</li>
+<li><strong>buildsOn:</strong> a cog depends on another cog (the
+builds-on graph from the cog specification)</li>
+<li><strong>derivedFrom:</strong> content originated from another source
+(upstream provenance)</li>
+<li><strong>publishedTo:</strong> content is published to a destination,
+which may be a path or a URL (downstream provenance)</li>
+</ul>
+<p><strong>Lineage fields</strong> make provenance explicit. Any
+<code>.mx.yaml.md</code> or <code>.cog.md</code> file can declare
+<code>derivedFrom</code> and <code>publishedTo</code> in its
+<code>mx:</code> block:</p>
+<div class="sourceCode" id="cb15" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mx</span><span class="kw">:</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">derivedFrom</span><span class="kw">:</span><span class="at"> mx-canon/mx-maxine-lives/communications/blogs/md/</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">publishedTo</span><span class="kw">:</span><span class="at"> https://allabout.network/blogs/mx/</span></span></code></pre></div>
+<p>The graph resolves these into edges, enabling full lineage tracing
+from authoring source to published destination. An AI agent can ask
+"what is the source of this blog?" and follow the derivation chain back
+to the original markdown in the brain. Or ask "where does this content
+end up?" and follow the publication chain forward to the live URL.</p>
+<p><strong>What the graph enables:</strong></p>
+<ul>
+<li><strong>Querying:</strong> find all active cogs, all folders in a
+domain, all content tagged with a topic. Query by any metadata field:
+<code>status:active</code>, <code>domain:mx-core</code>,
+<code>tags:manual</code>, <code>folderType:content</code>.</li>
+<li><strong>Dependency tracking:</strong> for any cog, see what it
+builds on (upstream) and what depends on it (downstream). This is the
+builds-on graph from the cog specification, made queryable.</li>
+<li><strong>Lineage tracing:</strong> follow derivedFrom/publishedTo
+chains across repositories. Trace content from authoring directory
+through processing pipeline to published URL.</li>
+<li><strong>Validation:</strong> detect missing required fields,
+deprecated patterns, and broken references across every metadata file
+simultaneously.</li>
+<li><strong>Orphan detection:</strong> find directories without
+<code>.mx.yaml.md</code> files. These are gaps in the metadata
+layer.</li>
+<li><strong>Staleness detection:</strong> identify nodes not modified
+within a threshold, surfacing content that may need review.</li>
+</ul>
+<p>The graph is exposed through three interfaces: a command-line tool
+(<code>mx graph query "status:active"</code>), npm scripts
+(<code>npm run mx:graph</code>), and an MCP server that makes the graph
+directly queryable from AI agent conversations. The MCP integration
+means an AI assistant working in a repository can query the graph
+without leaving the conversation, asking about dependencies, tracing
+lineage, or checking validation status in real time.</p>
+<p>The graph does not add new information. Every fact it contains
+already exists in the <code>.mx.yaml.md</code> and <code>.cog.md</code>
+files. What the graph adds is navigability: the ability to traverse
+relationships that span the entire filesystem, resolve inheritance
+chains that cross directory boundaries, and answer questions that no
+single metadata file can settle alone.</p>
+<p>This is the MX OS filesystem made queryable. The metadata was always
+there. The graph makes it a network.</p>
+<hr />
+<h2 id="what-this-process-built-the-cog-system">What This Process Built:
+The Cog System</h2>
+<p>The process described above went on to produce something nobody
+planned.</p>
+<h3 id="the-problem-the-process-revealed">The Problem the Process
+Revealed</h3>
+<p>The Investigate-Interview-Iterate-Document pattern, applied to the
+question "How do AI agents actually read content?", surfaced a gap:
+there was no simple, universal format for machine-readable documents. AI
+agents scrape web pages, guess at meaning, and get it wrong. A
+documented developer command goes denied. A patient's drug-interaction
+check returns "no interactions" because the contraindications are
+written in prose paragraphs the parser flattens. The information is
+there. It was never structured for machines to parse.</p>
+<h3 id="what-emerged-cogs">What Emerged: Cogs</h3>
+<p>A <strong>cog</strong> is the atomic unit of MX: any document that
+carries MX metadata. In its canonical form, it is a markdown file with
+YAML frontmatter (<code>.cog.md</code>). An HTML page with Schema.org
+JSON-LD and <code>&lt;meta name="mx:*"&gt;</code> tags is also a cog.
+Machine-readable metadata in the native carrier format, human-readable
+content alongside. Any AI agent can parse it.</p>
+<div class="sourceCode" id="cb16" data-role="code-container"><pre
+class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">name</span><span class="kw">:</span><span class="at"> river-cruise-pricing</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;1.0&quot;</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> Pricing for 2026 Rhine river cruises</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">category</span><span class="kw">:</span><span class="at"> commerce</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="fu">tags</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">pricing</span><span class="kw">,</span><span class="at"> cruise</span><span class="kw">,</span><span class="at"> rhine</span><span class="kw">,</span><span class="at"> </span><span class="dv">2026</span><span class="kw">]</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a><span class="fu">audience</span><span class="kw">:</span><span class="at"> ai-agents</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Rhine River Cruise Pricing</span></span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="fu">Standard cabin</span><span class="kw">:</span><span class="at"> £2,030 per person.</span></span></code></pre></div>
+<p>The metadata tells the machine what the document is before it starts
+guessing. The format is deliberately simple: markdown and YAML. Every
+developer knows it. Every AI agent reads it.</p>
+<h3 id="cogs-as-programs">Cogs as Programs</h3>
+<p>This appendix stated: "The MX documentation IS the MX Operating
+System." The cog system made that literal.</p>
+<ul>
+<li><strong>Info-cogs</strong> are the data files of MX OS, documents
+that describe themselves</li>
+<li><strong>Action-cogs</strong> are the programs, cogs with an
+<code>execute</code> block that define actions</li>
+<li><strong>The runtime</strong> is any AI agent, because every machine
+can read markdown and parse YAML</li>
+<li><strong>The Gathering specification</strong> defines the system
+API</li>
+<li><strong>The cog registry</strong> is the package index</li>
+</ul>
+<p>The <code>runtime:</code> field in an action-cog's execute block
+works like a shebang line in Unix; it tells the system how to run the
+program. Runtimes include <code>bash</code>, <code>node</code>,
+<code>python</code>, and <code>runbook</code> (where the action-cog IS
+the instruction set and the AI agent IS the executor).</p>
+<h3 id="the-companion-web">The Companion Web</h3>
+<p>Cogs solve the document problem. The <strong>companion web</strong>
+solves the web problem.</p>
+<p>Every web page has two readers: the human and the AI agent. The
+companion web adds structured metadata to HTML so both get what they
+need from the same URL:</p>
+<div class="sourceCode" id="cb17" data-role="code-container"><pre
+class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;cog:name&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;river-cruise-pricing&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">meta</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;cog:description&quot;</span><span class="ot"> content</span><span class="op">=</span><span class="st">&quot;Pricing for 2026 Rhine river cruises&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">link</span><span class="ot"> rel</span><span class="op">=</span><span class="st">&quot;cog&quot;</span><span class="ot"> href</span><span class="op">=</span><span class="st">&quot;/cogs/river-cruise-pricing.cog.md&quot;</span><span class="dt">&gt;</span></span></code></pre></div>
+<p>Metadata in the HTML head, like OpenGraph, but for AI agents. No new
+infrastructure. No API. Just HTML tags that any web server already
+supports.</p>
+<p>QR codes on physical objects point to companion web pages. A machine
+scans a product and knows what it is: not from a database, not from
+computer vision, but because the object describes itself. This extends
+to robotics: warehouse robots, delivery systems, any physical
+machine.</p>
+<h3 id="both-directions">Both Directions</h3>
+<p>The companion web is the world speaking to the machine. The
+<strong>personal cog</strong> is the person speaking to the machine.</p>
+<p>A personal cog is a collection of cogs on the user's device:
+accessibility needs, interests, dietary requirements, health, skills.
+The user's AI agent controls what gets shared. A restaurant gets the
+dietary cog. A hospital gets the health cog. Nobody gets everything. It
+decides.</p>
+<p>Each personal cog also declares how far it may travel. The
+<code>personal</code> profile, set out in section 22.AG of the <a
+href="appendix-m-index-of-metadata.md">Index of Metadata</a>, gives
+every personal cog a <code>disclosureTier</code> (<code>private</code>,
+<code>derived</code> or <code>guarded</code>), names the identity that
+holds it, and records whether its earlier versions are kept or scraped.
+The agent honours the tier before any sharing rule.</p>
+<p>The companion web is the world speaking cog. The personal cog is the
+person speaking cog. The machine reads both sides. That is the Machine
+Experience.</p>
+<h3 id="the-gathering">The Gathering</h3>
+<p>The cog specification is part of MX, which CogNovaMX stewards and
+publishes under the MIT licence. It is to be donated to <strong>The
+Gathering</strong>, an independent standards body on the W3C model,
+which will then govern it. Anyone may implement it now and build
+products on it.</p>
+<h3 id="what-the-process-produced">What the Process Produced</h3>
+<p>Starting from the pattern described in this appendix:</p>
+<table>
+<thead>
+<tr>
+<th>Output</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cog specification</td>
+<td>Draft</td>
+</tr>
+<tr>
+<td>Working cogs</td>
+<td>Registered and in use</td>
+</tr>
+<tr>
+<td>The Gathering</td>
+<td>Founded</td>
+</tr>
+<tr>
+<td>Companion web embedding</td>
+<td>Specified</td>
+</tr>
+<tr>
+<td>Personal cog model</td>
+<td>Specified</td>
+</tr>
+<tr>
+<td>MX OS runtime model</td>
+<td>Documented</td>
+</tr>
+<tr>
+<td>Access control layer</td>
+<td>Specified</td>
+</tr>
+<tr>
+<td>Agent delegation model</td>
+<td>Specified</td>
+</tr>
+</tbody>
+</table>
+<p>The Investigate-Interview-Iterate-Document pattern, described here as
+a way to build documentation, turned out to be the pattern for building
+the system itself.</p>
+<p><strong>Canonical specification:</strong> <a
+href="https://mx.allabout.network/cog.html"
+class="uri">https://mx.allabout.network/cog.html</a></p>
+<hr />
+<h2 id="conclusion">Conclusion</h2>
+<p><strong>MX OS is built through:</strong></p>
+<ul>
+<li>Systematic investigation (research web standards)</li>
+<li>Structured interview (clarify requirements)</li>
+<li>Iterative refinement (expand scope as needs emerge)</li>
+<li>Transparent documentation (explain process and rationale)</li>
+</ul>
+<p><strong>This isn't documentation about a system.</strong></p>
+<p><strong>This IS the system.</strong></p>
+<p>The cog system proved it. The process documented in this appendix,
+applied to itself, produced an open metadata standard, a standards body,
+and a runtime model where the files are the platform and every AI agent
+is the runtime.</p>
+<p>When we document how MX works, we create MX OS, the Operating System
+for Machine Experience.</p>
+<hr />
+<p><strong>See Also:</strong></p>
+<ul>
+<li>SOUL.md: Who Maxine is</li>
+<li><a href="appendix-l-proposed-ai-metadata-patterns.md">Appendix
+L</a>: Product of this process</li>
+<li>LEARNINGS.md: Proven principles</li>
+<li>The Maxine skill: Operational collaboration pattern</li>
+<li><a href="https://mx.allabout.network/cog.html">Cog
+Specification</a>: The canonical cog metadata specification</li>
+</ul>
+<hr />
+<p><em>This document was created through the collaborative process it
+describes: written by Claude (Maxine) based on Tom Cranstoun's vision.
+It documents the investigation that produced Appendix L, and what the
+same process produced when applied to the web itself: the cog system,
+the companion web, and The Gathering.</em></p>
+</div>
+<hr>
+<nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
+    <p><a href="index.html">← Back to Appendices Index</a></p>
+    <p>Quick navigation:
+        <a href="appendix-a.html">A</a> |
+        <a href="appendix-b.html">B</a> |
+        <a href="appendix-c.html">C</a> |
+        <a href="appendix-d.html">D</a> |
+        <a href="appendix-e.html">E</a> |
+        <a href="appendix-f.html">F</a> |
+        <a href="appendix-g.html">G</a> |
+        <a href="appendix-h.html">H</a> |
+        <a href="appendix-i.html">I</a> |
+        <a href="appendix-j.html">J</a> |
+        <a href="appendix-k.html">K</a> |
+        <a href="appendix-l.html">L</a> |
+        <a href="appendix-m.html">M</a> |
+        <a href="appendix-n.html">N</a> |
+        <a href="appendix-o.html">O</a> |
+        <a href="appendix-p.html">P</a> |
+        <a href="appendix-q.html">Q</a> |
+        <a href="appendix-r.html">R</a> |
+        <a href="appendix-s.html">S</a> |
+        <a href="appendix-t.html">T</a> |
+        <a href="appendix-u.html">U</a>
+    </p>
+</nav>
+
+  <!-- Floating home button (top-left) -->
+  <a href="index.html" class="floating-home-button" aria-label="Back to Home">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 0L0 8h3v8h10V8h3L8 0zm0 2.5L13.5 8H11v6H5V8H2.5L8 2.5z"/>
+    </svg>
+    Home
+  </a>
+  <!-- Floating back to top button (bottom-left) -->
+  <a href="#main" class="floating-top-button" aria-label="Back to Top" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+      <path d="M8 3.5l-5.5 5.5L4 10.5l3-3v8.5h2V7.5l3 3L13.5 9z"/>
+    </svg>
+    Top
+  </a>
+
+  <script>
+    // Add copy buttons to all code blocks
+    document.addEventListener('DOMContentLoaded', function() {
+      // Find both wrapped code blocks (div.sourceCode) and standalone pre blocks
+      const wrappedBlocks = document.querySelectorAll('div.sourceCode');
+      const standaloneBlocks = document.querySelectorAll('pre[data-role="code-block"]:not(.sourceCode)');
+
+      // Process wrapped code blocks (HTML, JavaScript, etc.)
+      wrappedBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          let text = '';
+          const spans = codeElement.querySelectorAll('span[id^="cb"]');
+          spans.forEach(function(span) {
+            const nodes = Array.from(span.childNodes);
+            nodes.forEach(function(node) {
+              if (node.nodeType === Node.TEXT_NODE) {
+                text += node.textContent;
+              } else if (node.nodeName !== 'A') {
+                text += node.textContent;
+              }
+            });
+          });
+          return text;
+        });
+      });
+
+      // Process standalone pre blocks (text, robots.txt, etc.)
+      standaloneBlocks.forEach(function(block) {
+        addCopyButton(block, function(block) {
+          const codeElement = block.querySelector('code');
+          return codeElement ? codeElement.textContent : block.textContent;
+        });
+      });
+
+      // Helper function to add copy button to any block
+      function addCopyButton(block, extractTextFn) {
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.textContent = 'Copy';
+        button.setAttribute('aria-label', 'Copy code to clipboard');
+
+        button.addEventListener('click', function() {
+          const text = extractTextFn(block);
+
+          navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'Copied';
+            button.classList.add('copied');
+            setTimeout(function() {
+              button.textContent = 'Copy';
+              button.classList.remove('copied');
+            }, 2000);
+          }).catch(function(err) {
+            console.error('Failed to copy:', err);
+            button.textContent = 'Failed';
+            setTimeout(function() {
+              button.textContent = 'Copy';
+            }, 2000);
+          });
+        });
+
+        block.insertBefore(button, block.firstChild);
+      }
+    });
+  </script>
+</body>
+</html>

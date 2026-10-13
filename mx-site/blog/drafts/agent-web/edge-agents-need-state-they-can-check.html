@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Edge Agents Need State They Can Check"
+description: "Moving inference to the edge cuts latency, and it also cuts the agent off from the context it would use to check what it holds. Here is what goes wrong, what metadata in the file can fix, and why the decision belongs in an action-cog rather than a skill."
+author: "Tom Cranstoun"
+created: 2026-10-11
+modified: 2026-10-11
+version: "0.1"
+
+type: blog-post
+tags: [edge, agents, agentic-web, distributed-systems, provenance, action-cogs, skills, verifiable-state, genuineness, mx]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  audience: [humans, machines]
+  purpose: "Extend Once Agents Talk to agents running at the edge: name the three failures that follow when inference moves away from the source, show what MX metadata in the file lets the agent check locally and what it does not, and argue that the edge agent's decisions belong in action-cogs."
+  partOf: "https://mx.allabout.network/blog/"
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator (npm run promote). The four edge-governance corrections in the stewardship and edge-framing plan bind every edit; run node scripts/check-stewardship-claims.cjs on this file after any change."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/edge-agents-need-state-they-can-check.md
+  contextProvides:
+    - "Why an agent at the edge decides on what it holds, and the three failures that follow: stale local decisions, untraceable provenance, and conflicting assumptions between agents"
+    - "What the agent can check locally from MX metadata in the file: identity, the master copy's address, and the genuineness family of authorship, integrity and pedigree"
+    - "What MX does not do: provenance does not travel on every transaction automatically, and the registry records attestations without reconciling state"
+    - "Why thresholds and refusal rules belong in scripted action-cogs rather than skills"
+  stability: draft
+  servedAt: https://mx.allabout.network/blog/drafts/agent-web/edge-agents-need-state-they-can-check.html
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Moving inference to the edge cuts latency, and it also cuts the agent off from the context it would use to check what it holds. Here is what goes wrong, what metadata in the file can fix, and why the decision belongs in an action-cog rather than a skill.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/agent-web/edge-agents-need-state-they-can-check.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/agent-web/edge-agents-need-state-they-can-check.html">
+  <meta property="og:title" content="Edge Agents Need State They Can Check | CogNovaMX">
+  <meta property="og:description" content="Moving inference to the edge cuts latency, and it also cuts the agent off from the context it would use to check what it holds. Here is what goes wrong, what metadata in the file can fix, and why the decision belongs in an action-cog rather than a skill.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-10-11">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Edge Agents Need State They Can Check | CogNovaMX">
+  <meta name="twitter:description" content="Moving inference to the edge cuts latency, and it also cuts the agent off from the context it would use to check what it holds. Here is what goes wrong, what metadata in the file can fix, and why the decision belongs in an action-cog rather than a skill.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Edge Agents Need State They Can Check">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="0.1">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/agent-web/edge-agents-need-state-they-can-check.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Edge Agents Need State They Can Check | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Edge Agents Need State They Can Check",
+        "headline": "Edge Agents Need State They Can Check",
+        "description": "Moving inference to the edge cuts latency, and it also cuts the agent off from the context it would use to check what it holds. Here is what goes wrong, what metadata in the file can fix, and why the decision belongs in an action-cog rather than a skill.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-10-11",
+        "dateModified": "2026-10-11",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/agent-web/edge-agents-need-state-they-can-check.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 803,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/agent-web/edge-agents-need-state-they-can-check.html",
+        "name": "Edge Agents Need State They Can Check",
+        "url": "https://mx.allabout.network/blog/drafts/agent-web/edge-agents-need-state-they-can-check.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-goes-wrong">What Goes Wrong</a></li>
+        <li><a href="#metadata-that-travels-with-the-payload">Metadata That Travels With the Payload</a></li>
+        <li><a href="#skills-suggest-action-cogs-execute">Skills Suggest, Action-Cogs Execute</a></li>
+        <li><a href="#confidence-and-logs-dont-close-the-gap">Confidence and Logs Don't Close the Gap</a></li>
+        <li><a href="#if-youre-deploying-edge-agents">If You're Deploying Edge Agents</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="803">
+        <header class="article-header">
+          <h1>Edge Agents Need State They Can Check</h1>
+          <div class="article-meta"
+               data-published="2026-10-11"
+               data-modified="2026-10-11"
+               data-reading-time="5 min">
+            <time datetime="2026-10-11">11 October 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>5 min read</span>
+          </div>
+        </header>
+
+
+<p>Moving inference to the edge cuts latency but strips the agent of verifiable context. That trade is worth making. It's also worth naming what you've traded.</p>
+<p>In <a href="once-agents-talk-ai-is-a-distributed-systems-problem.md">Once Agents Talk, AI Is a Distributed Systems Problem</a> I took Tony Seale's point that once agents talk to each other, AI becomes a distributed systems problem. Push the agent out to a device, a branch or an edge node, and those problems get sharper. A central agent that doubts a document can fetch the master copy. An edge agent was put there so it wouldn't have to.</p>
+<h2 id="what-goes-wrong" tabindex="-1">What Goes Wrong</h2>
+<p>The edge agent decides on what it holds. A cached page. A file synced last night. A message relayed by a peer.</p>
+<p><strong>Stale local decisions.</strong> The copy was superseded an hour ago, and nothing in the bytes says so. A price fetched then looks exactly like one fetched a second ago.</p>
+<p><strong>Provenance you can't trace back.</strong> The payload arrived, so you know which pipe it came down. You don't know who wrote it, and the author isn't there to ask.</p>
+<p><strong>Agents acting on conflicting assumptions.</strong> Two agents hold different versions of the same policy. Each acts correctly on its own copy, and their actions disagree. Neither can see the other's input.</p>
+<h2 id="metadata-that-travels-with-the-payload" tabindex="-1">Metadata That Travels With the Payload</h2>
+<p>The fix is state the agent can check where it stands, without the round trip you moved to the edge to avoid.</p>
+<p>MX puts that state in the file. A cog is any file carrying MX metadata, and those fields go wherever it goes. The identity fields tell the agent what the document is, who wrote it, when it changed, and where the master copy lives. The genuineness family does the harder work, and each field defers to a standard that already exists. <code>proofOfAuthorship</code> follows W3C Verifiable Credentials and Signed Exchanges. <code>integritySignature</code> follows RFC 9421 and Subresource Integrity, with a digest the agent recomputes over the body. <code>provenancePedigree</code> borrows from W3C PROV-O and C2PA to record the chain back to the source.</p>
+<p>None of those checks needs the origin to be reachable. That's how provenance can carry back to the authoring cog: through declared integrity fields and signature standards the agent can verify on its own.</p>
+<p>The limits matter just as much.</p>
+<p>Provenance doesn't travel on every transaction automatically. Somebody has to declare the fields and sign. A payload that leaves without them arrives without them, and the honest reading is &quot;unverified&quot;.</p>
+<p>The registry records attestations. It doesn't reconcile state. A registry can tell an agent that the owner published this copy unaltered. It can also say a newer version exists. That check costs one lookup, so you decide which decisions earn it. When two agents disagree, MX shows each which version it holds. Settling the disagreement stays with the agents and the people who run them.</p>
+<h2 id="skills-suggest-action-cogs-execute" tabindex="-1">Skills Suggest, Action-Cogs Execute</h2>
+<p>Checkable inputs are half of it. The other half is what the agent does next.</p>
+<p>A skill is prose in a context window, interpreted by a probabilistic model, and two runs can take it differently. That's fine for guidance. It's the wrong home for &quot;refuse to act on a copy older than the attested version&quot;.</p>
+<p>An action-cog runs. Its <code>actionType</code> says how: <code>scripted</code> means an embedded script, same inputs and same outputs; <code>sop</code> means a model reads the steps and performs them; <code>hybrid</code> splits the work between the two. Its <code>security</code> block declares the risk, whether the action can be undone, and the guardrail in front of anything irreversible. Put the threshold and the refusal rule in a scripted action-cog. At the edge there's no central reviewer to catch a model that read the paragraph differently this time.</p>
+<h2 id="confidence-and-logs-dont-close-the-gap" tabindex="-1">Confidence and Logs Don't Close the Gap</h2>
+<p>Edge deployments love a confidence score and a log line. Keep both. Just don't mistake either for provenance.</p>
+<p>Confidence tells you how sure the model is; provenance tells you whether to believe it. A 0.94 on a stale copy is a precise number about the wrong fact. I made the longer case in <a href="confidence-scores-are-not-provenance.md">my post on confidence scores and provenance</a>.</p>
+<p>A log is the system's own account; provenance is a chain of custody someone else can check. The agent's log is the agent vouching for itself. A provenance record names the action-cog, its version, the input and the policy, so someone downstream can check the decision without taking the agent's word.</p>
+<h2 id="if-youre-deploying-edge-agents" tabindex="-1">If You're Deploying Edge Agents</h2>
+<p>Ask your publishers for authorship and integrity fields, and verify them before the agent trusts a payload. Write down which decisions justify a currency lookup. Move thresholds and refusal rules out of skills and into scripted action-cogs. Record provenance beside the confidence score. Put a named human in front of anything that can't be undone.</p>
+<p>Keep the latency win. Give the agent something it can check.</p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-11.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

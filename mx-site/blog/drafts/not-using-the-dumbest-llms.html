@@ -5,27 +5,32 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "No, You're Not Using the Dumbest LLMs"
 description: "A Reddit user noticed LLMs recommend firms for services they don't offer and mistake fame for expertise, while GEO case studies claim citation lifts. They're right. GEO measures visibility and calls it expertise recognition. Here is what's actually missing."
 author: Tom Cranstoun
 created: "2026-06-19"
-modified: "2026-06-19"
+modified: "2026-10-11"
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [geo, generative-engine-optimisation, hallucination, mx-foundations, reginald, corroboration]
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   servedAt: https://mx.allabout.network/blog/drafts/not-using-the-dumbest-llms.html
-  generate:
-    script: scripts/generate-content-html.cjs
   audience:
     - humans
     - machines
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/not-using-the-dumbest-llms.md
+  aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/not-using-the-dumbest-llms.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides:
+    - "A language model has no expertise-recognition step; 'best firm for X' returns the brand with the strongest co-occurrence, which is a visibility signal, not a judgement of relevance."
+    - "GEO citation lifts are real but hollow: they move a visibility metric and let the reader mistake it for expertise recognition."
+    - "The fix for hallucinated recommendations is not more visibility but Readable, attributable, corroborated content - MX, REGINALD, and Corroboration over Assertion."
   stability: stable
   purpose: "Answer a Reddit question about GEO by showing that language models pattern-match on visibility rather than recognising expertise, and that the structural fix is machine-readable, attested, corroborated content."
-  blogUrl: https://mx.allabout.network/blog/drafts/not-using-the-dumbest-llms.html
-  blogFilename: not-using-the-dumbest-llms
 refersTo:
   - sitecore-scrunch-not-an-mx-strategy.md
   - the-pool-is-not-the-source.md
@@ -70,11 +75,9 @@ refersTo:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="No, You're Not Using the Dumbest LLMs">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -103,7 +106,7 @@ refersTo:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -117,7 +120,7 @@ refersTo:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1146,
+        "wordCount": 1264,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -157,6 +160,7 @@ refersTo:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -171,7 +175,7 @@ refersTo:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -198,18 +202,18 @@ refersTo:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1146">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1264">
         <header class="article-header">
           <h1>No, You're Not Using the Dumbest LLMs</h1>
           <div class="article-meta"
                data-published="2026-06-19"
                data-modified="2026-06-19"
-               data-reading-time="6 min">
+               data-reading-time="7 min">
             <time datetime="2026-06-19">19 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>6 min read</span>
+            <span>7 min read</span>
           </div>
         </header>
 
@@ -233,6 +237,7 @@ refersTo:
 <p>The fix is not to win the hallucination. It is to give the machine content it does not have to hallucinate about. Three properties do that, and none of them are GEO tactics.</p>
 <p><strong>Readable.</strong> The content states what you do, and what you do not, in structure a machine can parse without interpretation, instead of prose it has to second-guess. This is what MX (Machine Experience) is for: metadata that travels with the file and tells a machine what it is looking at, who it is for, and how it may be used.</p>
 <p><strong>Attributable.</strong> The claim carries an attestation - who published it, when, verifiable against a signed record. So an agent can confirm &quot;this firm offers X&quot; by looking it up, instead of inferring it from how often your name appears near the word. That is the job REGINALD does: it makes the content machine-trustworthy, not just machine-readable.</p>
+<p>Trustworthy, when you unpack it, is four checks an agent runs separately. Attestation - who said it and when. Currency - is this still the version that stands, the newer one superseding it while the old one stays queryable. Freshness - is the firm still behind it, a liveness signal that holds while they keep their registry account current and freezes if they go quiet, so a stale page still resolves but reads as unmaintained. And corroboration, the next property below, which is the one the content carries rather than the registry.</p>
 <p><strong>Corroborated.</strong> Your load-bearing claims point to authoritative outside sources that independently state them. Attestation proves you said it; corroboration is what lets an evaluator prefer the specialist who can prove relevance over the generalist who merely has reach. Readable, attributable, corroborated - that is the actual readiness, and it is the opposite of buying more footprint.</p>
 <h2 id="the-honest-caveat" tabindex="-1">The Honest Caveat</h2>
 <p>None of this makes today's consumer chatbot behave. Ask it &quot;best firm for X&quot; and it will still answer off its weights and still not query anyone's registry. I am not going to pretend otherwise.</p>
@@ -241,8 +246,16 @@ refersTo:
 <p>You are not missing anything about the models. You have them pegged. What is missing is in the method. GEO is a visibility discipline wearing an expertise costume, and you noticed the seams.</p>
 <p>The question worth asking is not &quot;how do I rank inside the hallucination.&quot; It is &quot;how do I make my content the thing the machine does not have to hallucinate about.&quot; Make it readable, make it attributable, make it corroborated. Then it stops mattering how loud the generalist is, because the machine has something better than a guess to reach for.</p>
 <hr>
-<p><em>MX is an open standard governed by The Gathering. REGINALD is the proprietary CogNovaMX implementation that runs on it. Neither grants regulatory compliance; both produce verifiable, queryable evidence - the documentation you must keep anyway, made structured and machine-checkable.</em></p>
+<p><em>MX is published under the MIT licence, so anyone may implement it; CogNovaMX stewards it while we run it live as a test, and it will be donated to The Gathering as an open standard. REGINALD is the proprietary CogNovaMX implementation that runs on it. Neither grants regulatory compliance; both produce verifiable, queryable evidence - the documentation you must keep anyway, made structured and machine-checkable.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-11.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -250,7 +263,7 @@ refersTo:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -284,7 +297,10 @@ refersTo:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -301,5 +317,6 @@ refersTo:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

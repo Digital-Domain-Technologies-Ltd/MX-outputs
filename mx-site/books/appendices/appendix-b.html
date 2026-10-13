@@ -6,7 +6,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
-modified: 2026-07-29
+modified: 2026-10-10
 created: 2026-01-22
 description: "Real-world learnings from production implementations: mistakes to avoid and solutions that work."
 
@@ -14,6 +14,7 @@ title: 'Appendix B: Proven Lessons'
 tags: [proven-lessons, production-learnings, progressive-enhancement, common-mistakes, proven-solutions]
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
   book: "Shared"
   appendix: "B"
@@ -30,7 +31,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -200,6 +201,9 @@ Participation</a></li>
 <li><a href="#memory-does-not-travel-files-do"
 id="toc-memory-does-not-travel-files-do">21. Memory Does Not Travel;
 Files Do</a></li>
+<li><a href="#a-shape-written-from-memory-drifts"
+id="toc-a-shape-written-from-memory-drifts">22. A Shape Written From
+Memory Drifts</a></li>
 <li><a href="#key-takeaways" id="toc-key-takeaways">Key
 Takeaways</a></li>
 </ul></li>
@@ -227,7 +231,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="op">&lt;/</span>script<span class="op">&gt;</span></span></code></pre></div>
 <p>Machines saw "Loading..." because JavaScript replaced the
 server-rendered content before fetching completed.</p>
-<p><strong>Solution:</strong> Never replace server-rendered content -
+<p><strong>Solution:</strong> Never replace server-rendered content;
 only enhance it:</p>
 <div class="sourceCode" id="cb2" data-role="code-container"><pre
 class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Server renders baseline</span></span>
@@ -371,7 +375,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;phone&quot;</span><span class="dt">&gt;</span> <span class="co">&lt;!-- Missing state --&gt;</span></span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;postcode&quot;</span><span class="ot"> data-validation-state</span><span class="op">=</span><span class="st">&quot;invalid&quot;</span><span class="dt">&gt;</span> <span class="co">&lt;!-- Has state --&gt;</span></span></code></pre></div>
 <p>Machines couldn't determine phone field status.</p>
-<p><strong>Solution:</strong> Validation framework ensures consistent
+<p><strong>Solution:</strong> A validation framework enforces consistent
 state:</p>
 <div class="sourceCode" id="cb11" data-role="code-container"><pre
 class="sourceCode javascript"><code class="sourceCode javascript" data-role="code-content"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> FormValidator {</span>
@@ -390,8 +394,9 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>    field<span class="op">.</span><span class="fu">setAttribute</span>(<span class="st">&#39;aria-invalid&#39;</span><span class="op">,</span> state <span class="op">===</span> <span class="st">&#39;invalid&#39;</span>)<span class="op">;</span></span>
 <span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p><strong>Lesson:</strong> Establish patterns that ensure consistency.
-If one field has state attributes, all fields should have them.</p>
+<p><strong>Lesson:</strong> Establish patterns that keep fields
+consistent. If one field has state attributes, all fields should have
+them.</p>
 <h2 id="hidden-state-in-checkout-flow">6. Hidden State in Checkout
 Flow</h2>
 <p><strong>The Problem:</strong> Checkout steps tracked in JavaScript,
@@ -405,7 +410,7 @@ class="sourceCode javascript"><code class="sourceCode javascript" data-role="cod
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  currentStep<span class="op">++;</span></span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">updateUI</span>()<span class="op">;</span></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<p>Machines couldn't tell which checkout step they were on. Refreshing
+<p>Machines couldn't tell which checkout step was current. Refreshing
 the page lost progress.</p>
 <p><strong>Solution:</strong> Explicit state in URL and DOM:</p>
 <div class="sourceCode" id="cb13" data-role="code-container"><pre
@@ -454,7 +459,7 @@ but machines still didn't know how long to wait.</p>
 <p><strong>First attempt:</strong></p>
 <div class="sourceCode" id="cb16" data-role="code-container"><pre
 class="sourceCode html"><code class="sourceCode html" data-role="code-content"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">div</span><span class="ot"> data-state</span><span class="op">=</span><span class="st">&quot;loading&quot;</span><span class="dt">&gt;</span>Loading...<span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
-<p>Better, but machines timeout randomly - some after 5 seconds, some
+<p>Better, but machines time out at random: some after 5 seconds, some
 after 30 seconds.</p>
 <p><strong>Solution:</strong> Provide expected duration:</p>
 <div class="sourceCode" id="cb17" data-role="code-container"><pre
@@ -465,7 +470,7 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">div</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>Machines can now make informed timeout decisions.</p>
 <p><strong>Lesson:</strong> Loading states should indicate expected
-duration. "Loading..." is insufficient - specify how long.</p>
+duration. "Loading..." is insufficient; specify how long.</p>
 <h2 id="inline-styles-bloat-html-for-machines">9. Inline Styles Bloat
 HTML for Machines</h2>
 <p><strong>The Problem:</strong> Used inline styles for convenience
@@ -503,12 +508,12 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 parse clean HTML without style noise.</p>
 <p><strong>Lesson:</strong> Separate presentation from content. Inline
 styles waste bandwidth for machines that don't render them and make HTML
-harder to parse. External CSS benefits everyone - machines get faster
+harder to parse. External CSS benefits everyone: machines get faster
 parsing, browsers get caching, developers get maintainability.</p>
 <h2 id="pre-converting-pages-to-markdown-stripped-metadata">10.
 Pre-Converting Pages to Markdown Stripped Metadata</h2>
 <p><strong>The Problem:</strong> Built a "chatbot-friendly" site by
-converting all pages to markdown. In 2023, this seemed smart - simpler
+converting all pages to markdown. In 2023, this seemed smart: simpler
 format, easier parsing, clean text. By 2025, machines struggled to cite
 us accurately. Prices were often wrong, publication dates got
 hallucinated, author attribution disappeared.</p>
@@ -523,8 +528,8 @@ URLs)</li>
 <li>Semantic attributes (data-price, data-currency, data-formats)</li>
 </ul>
 <p>We had optimised for the 2023 paradigm (chatbots that just answered
-questions) whilst the market moved to 2026 reality (machines that
-discover, evaluate, compare, and cite sources with accuracy).</p>
+questions) whilst the market moved on to machines that discover,
+evaluate, compare, and cite sources with accuracy.</p>
 <p><strong>What we saw:</strong></p>
 <p>Machines reading our markdown would cite "approximately £30" when
 price was exactly £24.99. They'd say "published recently" when we had
@@ -551,14 +556,14 @@ class="sourceCode html"><code class="sourceCode html" data-role="code-content"><
 <span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">article</span><span class="dt">&gt;</span></span></code></pre></div>
 <p>Citation accuracy improved dramatically. Machines now reference exact
 prices, correct dates, proper author attribution. If a platform needs
-markdown, they can extract it from our rich HTML - we don't pre-strip
-the signals they need.</p>
+markdown, it can extract it from our rich HTML. We don't pre-strip the
+signals it needs.</p>
 <p><strong>Lesson:</strong> Don't optimise for yesterday's paradigm.
-Machines in 2026 need structured metadata for accurate citation, not
-stripped markdown that loses context. Provide rich source material and
-let platforms convert to simpler formats if needed. You can't add
-structure back to stripped markdown, but you can always extract markdown
-from rich HTML.</p>
+Machines that cite sources need structured metadata for accurate
+citation, not stripped markdown that loses context. Provide rich source
+material and let platforms convert to simpler formats if needed. You
+can't add structure back to stripped markdown, but you can always
+extract markdown from rich HTML.</p>
 <h2 id="robots.txt-missing-sitemap-declaration">11. robots.txt Missing
 Sitemap Declaration</h2>
 <p><strong>The Problem:</strong> Created robots.txt but forgot sitemap
@@ -795,8 +800,8 @@ control for legitimate use cases.</p>
 <p><strong>Key insight:</strong> Tools must respect website policies
 whilst enabling legitimate analysis. Interactive prompts give users
 agency without sacrificing ethics.</p>
-<p><strong>Book reference:</strong> Chapter 5 discusses content creator
-concerns about automated access.</p>
+<p><strong>Book reference:</strong> Protocols Chapter 5 discusses
+content creator concerns about automated access.</p>
 <h3 id="robots.txt-quality-analysis">robots.txt Quality Analysis</h3>
 <p><strong>Context:</strong> Many robots.txt files provide minimal
 guidance for machines.</p>
@@ -809,15 +814,15 @@ protection, llms.txt references, comments, completeness).</p>
 machine guidance.</p>
 <p><strong>Key insight:</strong> Educational tools that explain "why"
 drive adoption better than binary pass/fail judgments.</p>
-<p><strong>Book reference:</strong> Chapter 10 covers robots.txt best
-practices for machines.</p>
+<p><strong>Book reference:</strong> Protocols Chapter 10 covers
+robots.txt best practices for machines.</p>
 <h2 id="architecture-of-participation">20. Architecture of
 Participation</h2>
 <h3 id="standard-adoption-requires-self-interest-not-altruism">Standard
 adoption requires self-interest, not altruism</h3>
 <p><strong>Context:</strong> The MX standard and REGINALD registry need
 adoption to be valuable, but asking organisations to contribute to a
-standard for the good of the ecosystem rarely works in practice.</p>
+standard for the common good rarely works in practice.</p>
 <p><strong>Problem:</strong> Compliance-driven adoption atrophies.
 Organisations adopt a standard under external pressure, maintain it
 minimally, and stop maintaining it when the pressure lifts. The standard
@@ -825,14 +830,14 @@ stalls at whatever adoption level initial enthusiasm produced.</p>
 <p><strong>Solution:</strong> Design the system so that using it and
 contributing to it are the same act. An organisation that writes a COG
 to make its own repository machine-readable for its own agents
-simultaneously creates a provenanced artefact the broader ecosystem can
-use. An organisation that registers with REGINALD because it wants
+simultaneously creates a provenanced artefact every other organisation
+can use. An organisation that registers with REGINALD because it wants
 external discovery simultaneously compounds the registry's value for
 every other querying agent. The self-interest and the contribution are
 the same file, the same registration, the same act.</p>
-<p><strong>Impact:</strong> Adoption that is grounded in self-interest
-is durable because the incentive is intrinsic. Organisations maintain
-COGs for the same reason they maintain code: the COGs run their own
+<p><strong>Impact:</strong> Adoption grounded in self-interest is
+durable because the incentive is intrinsic. Organisations maintain COGs
+for the same reason they maintain code: the COGs run their own
 machines.</p>
 <p><strong>Key insight:</strong> Ask whether your system asks users to
 do extra work for the good of the commons, or whether using the system
@@ -841,16 +846,17 @@ compounds. Tim O'Reilly named this principle "the architecture of
 participation" in 2004. It is the structural reason the open web grew
 while closed platforms hit ceilings. Design for it from the start; it
 cannot be bolted on later.</p>
-<p><strong>Book reference:</strong> Chapters 20 and 21 explore this
-principle in the context of COGs, REGINALD, and The Gathering. Blog
-post:
-<code>datalake/draft-site/blog/foundations/architecture-of-participation.md</code>.</p>
+<p><strong>Book reference:</strong> Protocols Chapters 20 and 21 explore
+this principle in the context of COGs, REGINALD, and The Gathering. Blog
+post: "The Architecture of Participation" (<a
+href="https://mx.allabout.network/blog/drafts/foundations/architecture-of-participation.html"
+class="uri">https://mx.allabout.network/blog/drafts/foundations/architecture-of-participation.html</a>).</p>
 <h2 id="memory-does-not-travel-files-do">21. Memory Does Not Travel;
 Files Do</h2>
 <h3 id="an-ais-working-memory-is-device-local-and-vendor-specific">An
 AI's working memory is device-local and vendor-specific</h3>
-<p><strong>Context:</strong> A team teaches an AI assistant over months
-- corrections, conventions, the house voice - and comes to rely on it
+<p><strong>Context:</strong> Over months, a team teaches an AI assistant
+its corrections, conventions, and house voice, and comes to rely on it
 knowing how the business works. The knowledge feels like an asset the
 business owns.</p>
 <p><strong>Problem:</strong> That memory is held on one machine, tied to
@@ -879,10 +885,40 @@ Determinism over inference and file-not-memory are the same discipline:
 a fact a file can carry, a file carries, so no machine has to remember
 it and no machine can quietly forget it.</p>
 <p><strong>Book reference:</strong> Protocols Chapter 20 and Handbook
-Chapter 12 develop the file-not-memory rule. Blog posts:
-<code>datalake/draft-site/blog/who-owns-what-your-ai-learned.md</code>
-and
-<code>datalake/draft-site/blog/which-ai-are-you-talking-to.md</code>.</p>
+Chapter 12 develop the file-not-memory rule. Blog posts: "Who Owns What
+Your AI Learned?" and "Which AI Are You Talking To?".</p>
+<h2 id="a-shape-written-from-memory-drifts">22. A Shape Written From
+Memory Drifts</h2>
+<h3 id="a-field-list-restated-in-prose-is-a-second-copy-of-the-shape">A
+field list restated in prose is a second copy of the shape</h3>
+<p><strong>Context:</strong> A procedure for starting a collaboration
+thread listed, in its own prose, every field the thread's control file
+and first message needed. Authors and agents followed the list
+faithfully.</p>
+<p><strong>Problem:</strong> The list spelled the vendor-extension field
+names in kebab-case. Every real thread, every user profile, and the
+cockpit that reads threads used camelCase, and the naming gate refuses
+kebab-case after a vendor prefix. A thread built from the list carried
+fields no reader consumed. Nothing was visibly wrong at the moment of
+writing; the error would have surfaced only at push, or as a thread the
+cockpit could not render properly.</p>
+<p><strong>Solution:</strong> Replace the field list with a template for
+each kind of file, and a command that copies the template and stamps the
+new file's name, dates, and address. The procedure now says "copy the
+thread template" and lists nothing. A check runs every kind in the
+controlled vocabulary against the set of templates and fails when one is
+missing.</p>
+<p><strong>Impact:</strong> One copy of each shape instead of one per
+procedure. New files are born with the field names their readers look
+up, and a kind added to the vocabulary without a template turns the
+build red rather than leaving the next author to improvise.</p>
+<p><strong>Key insight:</strong> Every procedure that restates a
+structure gives it one more place to go wrong. Point at the template;
+never transcribe it. This is the file-not-memory rule applied to the
+shape of a file rather than its contents.</p>
+<p><strong>Book reference:</strong> Handbook Chapter 12 and Protocols
+Chapter 20 ("The Kind Fixes the Shape"). Anti-pattern: Appendix N, "The
+Remembered Shape".</p>
 <h2 id="key-takeaways">Key Takeaways</h2>
 <ol type="1">
 <li><strong>Progressive enhancement requires discipline:</strong>

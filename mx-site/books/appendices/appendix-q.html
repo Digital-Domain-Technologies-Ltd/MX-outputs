@@ -9,12 +9,13 @@ title: "Appendix Q: Agent-Readable Content Patterns"
 description: "Patterns that make web content effective for AI agent consumption - per-page structure and cross-site consistency"
 author: "Tom Cranstoun"
 created: 2026-04-04
-modified: 2026-04-04
+modified: 2026-10-10
 version: "1.0"
 
 type: reference
 tags: [appendix, agent-readability, patterns, documentation, mx]
 mx:
+  mxSpecVersion: "0.9"
   status: active
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/manuscripts/mx-books/mx-appendices/appendix-q-agent-readable-content-patterns.md
@@ -23,7 +24,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -149,18 +150,17 @@ id="toc-patterns-by-document-type">Patterns by Document Type</a></li>
 Agent-Readable Content Patterns</h2>
 <p>Human-readable content and agent-readable content share most
 characteristics, but they are not identical. AI agents consume web
-content in fundamentally different ways from human visitors - through
-search and fetch, through retrieval-augmented generation (RAG) chunking,
-and through tool-calling protocols. Each consumption mode creates
-specific requirements that standard web development practices do not
-address.</p>
+content differently from human visitors: through search and fetch,
+through retrieval-augmented generation (RAG) chunking, and through
+tool-calling protocols. Each consumption mode creates specific
+requirements that standard web development practices do not address.</p>
 <p>This appendix documents the patterns that make content effective for
 all three modes. These patterns complement the semantic HTML, metadata,
 and structured data practices covered in the main chapters; they operate
 at the content authoring level rather than the markup level.</p>
 <h2 id="how-agents-consume-content">How Agents Consume Content</h2>
-<p>Understanding the three consumption modes is essential. Each imposes
-different constraints on content structure.</p>
+<p>Each of the three consumption modes imposes its own constraints on
+content structure.</p>
 <h3 id="search-and-fetch">Search and Fetch</h3>
 <p>Agents use search tools that return page titles and URLs without body
 text, then fetch the full page. The HTML-to-markdown conversion
@@ -171,23 +171,22 @@ whether an agent selects a page for fetching.</p>
 <p>Support bots and knowledge systems chunk documentation by heading
 structure, typically at H2 or H3 level. Multiple chunks from different
 sections appear together in the agent's context. Each chunk must be
-independently comprehensible - it cannot rely on information from a
-different chunk.</p>
+independently comprehensible, because it cannot rely on information from
+a different chunk.</p>
 <h3 id="tool-calling-mcp">Tool Calling (MCP)</h3>
 <p>The Model Context Protocol enables programmatic agent interaction
-with documentation. Research demonstrates that terminology consistency
-across tool descriptions and documentation significantly affects tool
-selection accuracy. Agents choose tools based on semantic alignment with
-user queries, making consistent terminology a functional
-requirement.</p>
+with documentation. Terminology consistency across tool descriptions and
+documentation affects how accurately agents select tools. Agents choose
+tools based on semantic alignment with user queries, making consistent
+terminology a functional requirement.</p>
 <h2 id="per-page-patterns">Per-Page Patterns</h2>
 <h3 id="self-contained-sections">Self-Contained Sections</h3>
 <p>Sections retrieved by RAG systems lack their surrounding context.
-Backward references - "see above", "as mentioned earlier", "refer to the
-previous section" - cause hallucination when agents cannot locate the
-referenced information. Research on RAG performance shows that spreading
-critical information across multiple sections reduces accuracy by up to
-20%.</p>
+Backward references ("see above", "as mentioned earlier", "refer to the
+previous section") cause hallucination when agents cannot locate the
+referenced information. Spreading critical information across multiple
+sections makes it less likely that the retrieved chunk carries
+everything the answer needs, which lowers accuracy.</p>
 <p><strong>The pattern:</strong> Restate critical information rather
 than referencing other sections. If a section depends on a prerequisite,
 include the prerequisite inline or in an expandable block. Every section
@@ -195,12 +194,30 @@ should be comprehensible when read in isolation.</p>
 <p><strong>Detection:</strong> The MX audit tool scans page text for
 backward reference phrases and reports a self-containment score per
 page.</p>
+<h3 id="every-page-is-the-only-page">Every Page Is the Only Page</h3>
+<p>Most agents read one file and decide. They do not follow the
+navigation, open the next step, or return for the terms. Mark Baker's
+<em>Every Page Is Page One</em> sets the rule for human readers who
+arrive from search; for an agent it is stricter, because the first file
+it reads is usually the only one.</p>
+<p><strong>The pattern:</strong> Declare in each page what a reader with
+nothing else would need: what it is, its place in the sequence, who
+stands behind it, and whether it is current. Keep the step-by-step path
+for human readers, who want a drip feed, and give the machine everything
+at once in the page's metadata.</p>
+<p><strong>Detection:</strong> Fetch the page on its own, with nothing
+else loaded, and list what a reader would know. Anything the answer
+depends on from elsewhere is a gap an agent fills with a guess.</p>
 <h3 id="code-example-quality">Code Example Quality</h3>
-<p>Research on LLM-based code generation reveals a stark finding:
-removing code examples from API documentation collapses task completion
-rates from 66-82% to 22-39%. Removing parameter descriptions has minimal
-impact. Code examples are more valuable than prose for agent
-comprehension.</p>
+<p>Research on retrieval-augmented code generation with less common
+Python libraries found that example code contributes more than
+descriptive text or parameter lists. Deleting the example code from
+retrieved API documents cut one model's pass rates from 0.66-0.82 to
+0.22-0.39 across four libraries, a larger drop than deleting the
+parameter list or the description (Chen et al., 2025, <a
+href="https://arxiv.org/abs/2503.15231"
+class="uri">https://arxiv.org/abs/2503.15231</a>). Code examples are
+more valuable than prose for agent comprehension.</p>
 <p>Three factors determine code example effectiveness:</p>
 <p><strong>Language annotation.</strong> Code blocks annotated with
 their language (via <code>class="language-javascript"</code> or
@@ -208,29 +225,27 @@ equivalent) allow agents to determine the execution context without
 inference. Unannotated blocks force agents to guess the language,
 increasing error rates.</p>
 <p><strong>Inline comments.</strong> Comments inside code blocks reduce
-dependency on surrounding markdown. Research shows agents sometimes
-treat code examples as additional tasks rather than illustrations. Clear
-inline comments distinguish "this is an example" from "execute
-this."</p>
-<p><strong>Diversity.</strong> Research on few-shot learning
-demonstrates that diverse examples outperform similar ones, with
-accuracy gains of 10.72% on complex tasks versus 5.11% on simple ones. A
-set of three examples covering different scenarios teaches more
-effectively than ten examples of the same pattern.</p>
+dependency on surrounding markdown. Agents sometimes treat code examples
+as additional tasks rather than illustrations. Clear inline comments
+distinguish "this is an example" from "execute this."</p>
+<p><strong>Diversity.</strong> Research on few-shot learning identifies
+the diversity of demonstrations as a factor in their effectiveness, so
+varied examples tend to teach more than similar ones. A set of three
+examples covering different scenarios teaches more than ten examples of
+the same pattern.</p>
 <p><strong>Detection:</strong> The MX audit tool analyses code blocks
 for language annotations, inline comments, and language diversity,
 producing a code quality score per page.</p>
 <h3 id="section-length">Section Length</h3>
-<p>Agent performance degrades as context lengthens. Meaningful
-degradation begins around 30,000 tokens (approximately 22,000 words). In
-practice, agents accumulate execution logs, reasoning traces, and tool
-outputs as they work, reducing available context substantially. By step
-ten of a multi-step task, the documentation share of context is
-compressed.</p>
+<p>Agent performance degrades as context lengthens, and the point where
+degradation becomes meaningful varies by model and task. In practice,
+agents accumulate execution logs, reasoning traces, and tool outputs as
+they work, reducing available context substantially. By step ten of a
+multi-step task, the documentation share of context is compressed.</p>
 <p>Context compression (where agents summarise conversation history to
 free context) preferentially discards repetitive information, verbose
-prose, and formatting tokens. Structured formats - tables, YAML schemas,
-callout blocks - survive compression better than narrative prose.</p>
+prose, and formatting tokens. Structured formats (tables, YAML schemas,
+callout blocks) survive compression better than narrative prose.</p>
 <p><strong>The pattern:</strong> Signal importance explicitly using
 terms like "required", "critical", "optional", "forbidden". Use
 structured formats for constraints and defaults. Keep sections
@@ -241,14 +256,13 @@ shorter with clear checkpoints.</p>
 section (between headings) and flags sections exceeding 500 words as
 potential agent readability issues.</p>
 <h3 id="error-documentation">Error Documentation</h3>
-<p>Research on resilient agent architecture demonstrates that structured
-failure information improves agent performance significantly compared to
-reasoning from general knowledge. Explicit edge case documentation
-improves accuracy by 10-37%.</p>
+<p>Structured failure information gives an agent something better to
+work from than reasoning from general knowledge, and explicit edge case
+documentation reduces the guesses an agent has to make.</p>
 <p><strong>The pattern:</strong> Create dedicated error or
 troubleshooting sections. Quote error strings exactly as they appear in
-code - agents match error messages by string comparison. Source edge
-case content from real support interactions. Place error reference
+code, because agents match error messages by string comparison. Source
+edge case content from real support interactions. Place error reference
 information centrally; embed context-specific edge cases in the relevant
 page.</p>
 <p><strong>Detection:</strong> The MX audit tool checks for
@@ -260,13 +274,12 @@ agents (ChatGPT, Claude, Perplexity). Expandable sections implemented
 with native HTML
 (<code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code>) are visible
 in served HTML. Expandable sections implemented with JavaScript
-frameworks load empty containers - their content exists only in the
+frameworks load empty containers, and their content exists only in the
 rendered DOM.</p>
 <p><strong>The pattern:</strong> Use native HTML progressive disclosure
 (<code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code>) rather than
-JavaScript-driven accordions. If JavaScript frameworks are required,
-ensure the content is present in the served HTML using server-side
-rendering.</p>
+JavaScript-driven accordions. If JavaScript frameworks are required, use
+server-side rendering so the content is present in the served HTML.</p>
 <p><strong>Detection:</strong> The MX audit tool detects
 <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code> elements and
 compares served HTML against rendered HTML to identify
@@ -276,8 +289,8 @@ Representation</h3>
 <p>A server-side agent that wants your content does not need the fonts,
 the analytics, the consent scripts, or the JavaScript that assembles the
 page in a browser. It needs the content. A page that offers a small
-structured copy - clean markdown, a JSON view, or the complete data in
-the raw markup - lets a cooperative reader take a response a tenth the
+structured copy (clean markdown, a JSON view, or the complete data in
+the raw markup) lets a cooperative reader take a response a tenth the
 size of the full render. The exchange is cheaper for the origin to serve
 and more accurate for the agent to parse, and it makes the client that
 insists on a full render the visible outlier. This is also the cheapest
@@ -296,11 +309,10 @@ returns a structured representation or the full HTML regardless.</p>
 <h2 id="cross-page-patterns">Cross-Page Patterns</h2>
 <h3 id="terminology-consistency">Terminology Consistency</h3>
 <p>Agents select actions based on semantic alignment with user queries.
-When documentation alternates between synonyms - "rate limit" and
-"quota" and "throttle" for the same concept, or "archive" and
-"deactivate" and "disable" for the same action - agents lose confidence
-in term matching and may select incorrect tools or retrieve irrelevant
-documentation.</p>
+When documentation alternates between synonyms ("rate limit" and "quota"
+and "throttle" for the same concept, or "archive" and "deactivate" and
+"disable" for the same action), agents lose confidence in term matching
+and may select incorrect tools or retrieve irrelevant documentation.</p>
 <p><strong>The pattern:</strong> Establish a terminology glossary and
 enforce it across all pages. Each concept gets one canonical term. If
 synonyms must appear (for SEO or user familiarity), designate the
@@ -335,15 +347,17 @@ backend Python), establish clear conventions for each and annotate every
 block with its language.</p>
 <h3 id="content-position-strategy---lost-in-the-middle">Content Position
 Strategy - Lost in the Middle</h3>
-<p>Research on long-context LLM behaviour demonstrates that models
-attend more reliably to the beginning and end of their input, with
-degraded attention to material in the middle. The degree of this bias
-varies between models and context lengths, but the publisher cannot
+<p>Research on long-context LLM behaviour demonstrates that models use
+information at the beginning and end of their input more reliably than
+material in the middle (Liu et al., 2024, "Lost in the Middle", <a
+href="https://arxiv.org/abs/2307.03172"
+class="uri">https://arxiv.org/abs/2307.03172</a>). The degree of this
+bias varies between models and context lengths, but the publisher cannot
 determine which model reads the page.</p>
 <p>The defensive strategy follows the MX design-for-the-worst-agent
 principle: important content first, call to action last. The beginning
-of the page establishes identity and purpose - H1, description, key
-proposition. The end provides the action path - contact, purchase, next
+of the page establishes identity and purpose: H1, description, key
+proposition. The end provides the action path: contact, purchase, next
 step, CTA. Material in the middle is supporting detail that enriches
 comprehension but does not gate it. If an agent with a limited context
 window reads only the first and last sections, it should still
@@ -380,16 +394,16 @@ long workflows into independently executable phases.</p>
 <h3 id="reference">Reference</h3>
 <p>Reference pages are looked up, not read sequentially. Lookup tasks
 degrade less sharply with context length than planning tasks, so
-reference pages can be longer. Prioritise code examples over prose -
-research shows stripping examples hurts significantly more than removing
-parameter descriptions. Use stable, consistent heading patterns and
-unified terminology.</p>
+reference pages can be longer. Prioritise code examples over prose,
+because research shows stripping examples hurts significantly more than
+removing parameter descriptions. Use stable, consistent heading patterns
+and unified terminology.</p>
 <h3 id="explanation">Explanation</h3>
 <p>Explanations provide conceptual understanding. Agents compress
 explanatory content more aggressively than structured reference content.
 Include centralised definitions and comparison tables ("X versus Y",
-"when to use which") - these structured formats survive compression
-well.</p>
+"when to use which"), because these structured formats survive
+compression well.</p>
 <h2 id="mx-alignment">MX Alignment</h2>
 <p>Agent-readable content patterns map directly to the MX five-stage
 journey:</p>

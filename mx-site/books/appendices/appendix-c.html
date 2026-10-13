@@ -7,7 +7,7 @@
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
 created: "2026-01-22"
-modified: "2026-06-12"
+modified: 2026-10-10
 version: "2.1"
 description: "Web Audit Suite - the CogNovaMX commercial service that measures how well a site works for the machines reading it. Outcomes, deliverables, and how to engage."
 
@@ -15,6 +15,7 @@ title: 'Appendix C: Web Audit Suite'
 tags: [web-audit-suite, machine-readiness, audit-service, cognovamx]
 type: info-doc
 mx:
+  mxSpecVersion: "0.9"
   status: published
   copyright: "Copyright © 2026 Tom Cranstoun. All rights reserved."
   partOf: [mx-audit]
@@ -37,7 +38,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.10.1" />
+  <meta name="generator" content="pandoc 3.12" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -175,8 +176,8 @@ engage</a></li>
 for the machines reading it.</p>
 <h2 id="what-it-is">What it is</h2>
 <p>Web Audit Suite is a measurement service. It crawls a site the way
-the machines that matter actually crawl it - large language models,
-training pipelines, agents, Common Crawl, search indexers - and reports
+the machines that matter actually crawl it (large language models,
+training pipelines, agents, Common Crawl, search indexers) and reports
 what those machines see, what they miss, and what changes most when
 fixed. The service is delivered by CogNovaMX as part of an engagement;
 it is not a self-serve tool.</p>
@@ -193,29 +194,30 @@ visitor can:</p>
 at fetch time, before any JavaScript runs. The single highest-impact
 dimension; most machine readers never execute JavaScript.</li>
 <li><strong>Structured data presence and correctness.</strong>
-Schema.org markup, JSON-LD blocks, type disambiguation - the standards
-that let machines know what a page is about without inferring it from
-prose.</li>
+Schema.org markup, JSON-LD blocks, and type disambiguation: the
+standards that let machines know what a page is about without inferring
+it from prose.</li>
 <li><strong>Pricing, availability, and other commercial facts.</strong>
 Whether the numbers and states a buyer needs are present in the HTML or
 hidden behind a render step.</li>
 <li><strong>Document and page accessibility.</strong> WCAG conformance,
-semantic HTML, ARIA usage - what assistive technologies and machine
-readers both depend on.</li>
+semantic HTML, and ARIA usage, which assistive technologies and machine
+readers both need.</li>
 <li><strong>Discovery surface.</strong> Sitemap completeness, robots.txt
 correctness, llms.txt presence, in-page link discoverability, canonical
 declarations. The probe extends beyond the well-known trio: every entry
 in the IANA Well-Known URIs registry that a machine reader might check
-is probed - agent-card.json (A2A protocol), did.json (W3C decentralised
-identity), oauth-authorization-server / oauth-protected-resource /
-jwks.json (identity and signing), caldav / carddav (calendar and contact
-discovery), mta-sts.txt (mail transport security), the IoT and
-device-provisioning family (brski / cmp / coap / core), and others.
-Where a JSON discovery file is present, the audit parses its body and
-reports the structured contents in the report tables rather than
-presenting an unhelpful "yes / unknown / unknown" row. Where a path is
-absent the report stays silent - only the IANA registry pointer is
-surfaced so the reader knows where to look up the full catalogue.</li>
+is probed, including agent-card.json (A2A protocol), did.json (W3C
+decentralised identity), oauth-authorization-server /
+oauth-protected-resource / jwks.json (identity and signing), caldav /
+carddav (calendar and contact discovery), mta-sts.txt (mail transport
+security), the IoT and device-provisioning family (brski / cmp / coap /
+core), and others. Where a JSON discovery file is present, the audit
+parses its body and reports the structured contents in the report tables
+rather than presenting an unhelpful "yes / unknown / unknown" row. Where
+a path is absent the report stays silent, surfacing only the IANA
+registry pointer so the reader knows where to look up the full
+catalogue.</li>
 <li><strong>Provenance and trust signals.</strong> Whether the page
 declares who published it, when, under what licence, and how a reader
 can verify those claims.</li>
@@ -241,12 +243,12 @@ every fix serves human visitors and machine visitors at once.</li>
 against the behaviour of the major machine readers in production. The
 thresholds move when the readers move; the service tracks the drift.</p>
 <p>Beyond the per-dimension scores, the suite applies a
-machine-readability adjustment. Where a site carries gaps that a machine
-cannot work around across the whole estate - an audience the audit had
-to infer rather than read, a sitemap that is ambiguous to a parser,
-content that appears only once JavaScript has run, markup so deeply
-nested that the meaning is buried, an automated visitor that is blocked
-outright, or an origin too slow to finish a fetch - the overall
+machine-readability adjustment. Some gaps are ones a machine cannot work
+around anywhere on the estate: an audience the audit had to infer rather
+than read, a sitemap that is ambiguous to a parser, content that appears
+only once JavaScript has run, markup so deeply nested that the meaning
+is buried, an automated visitor that is blocked outright, or an origin
+too slow to finish a fetch. Where a site carries such gaps, the overall
 machine-readability score is reduced to reflect that a real agent would
 struggle to use the site. Every reduction is named in the report, so the
 reader sees exactly what drove the number down rather than facing an
@@ -256,11 +258,11 @@ already accounts for is never counted twice.</p>
 <p>Occasionally a site refuses the interrogation altogether: every page
 request from every automated visitor is turned away. The audit still
 delivers, because the refusal is itself the finding. The report sets out
-what a refused machine can still observe - which visitors are turned
-away and how, what the error handling looks like from outside, which
-discovery files the site publishes - and names the consequence: every AI
+what a refused machine can still observe (which visitors are turned away
+and how, what the error handling looks like from outside, which
+discovery files the site publishes) and names the consequence: every AI
 search surface, recommendation engine, and buying agent meets the same
-closed door. For some organisations that posture is deliberate and
+closed door. For some organisations that refusal is deliberate and
 correct. Either way, the audit gives it a dated, evidenced record.</p>
 <h2 id="running-the-audit-inside-your-network">Running the audit inside
 your network</h2>
@@ -278,12 +280,12 @@ read, understand, and run in their own environment. The inference layer
 is small by design, a single judgement pass that turns a body of
 verified evidence into a readable report.</p>
 <p>The inference layer can run against a hosted model or a locally
-served one. Ollama, LM Studio, or an on-premise Llama deployment each
-give the same surface from the audit's point of view. When the customer
-specifies a local inference target at scoping, the audit runs end-to-end
-inside their network, no audit data leaves, and the resulting report is
-the same shape as the hosted-inference equivalent. The choice is theirs;
-the audit's output is identical.</p>
+served one. Ollama, LM Studio, and an on-premise Llama deployment look
+identical from the audit's point of view. When the customer specifies a
+local inference target at scoping, the audit runs end-to-end inside
+their network, no audit data leaves, and the resulting report matches
+the hosted-inference equivalent. The choice is theirs; the audit's
+output does not change.</p>
 <h2 id="what-you-receive">What you receive</h2>
 <p>Each engagement produces:</p>
 <ol type="1">
@@ -293,14 +295,14 @@ scorecard, what is working, the issues that matter in plain language,
 and the next steps. Part two is a technical appendix the implementing
 team works from: every finding in detail, page by page, with a
 recommended fix per blocker. The executive can stop at part one; the
-appendix carries the depth.</li>
+appendix holds the depth.</li>
 <li><strong>Four covering letters, one per audience.</strong> Short
 letters addressed to the site owner, the development team, the agency,
-and the compliance function, each framing the findings in the terms that
-audience acts on.</li>
-<li><strong>A prioritised action plan.</strong> What to fix this week,
-this month, this quarter. Each action carries an estimate of the score
-uplift it unlocks.</li>
+and the compliance function, each framing the findings so that audience
+can act on them.</li>
+<li><strong>A prioritised action plan.</strong> What to fix in the first
+week, the first month, and the first quarter. Each action comes with an
+estimate of the score uplift it unlocks.</li>
 <li><strong>A regression baseline.</strong> A snapshot of the site's
 current state so the next audit can measure the delta. Engagements that
 span multiple cycles produce a trend report alongside the per-cycle
@@ -309,8 +311,9 @@ deliverables.</li>
 findings, severity-ranked, mapped to the relevant Web Content
 Accessibility Guidelines success criteria.</li>
 <li><strong>Optional document-accessibility supplement.</strong>
-Coverage of every PDF, DOCX, and EPUB the site links to, ranked against
-the European Accessibility Act's conformance bar.</li>
+Coverage of every PDF, DOCX, and EPUB the site links to, ranked by an
+automated structural accessibility check (tagging, document language,
+PDF/UA declaration) that does not establish legal conformance.</li>
 </ol>
 <p>Reports are delivered in PDF for the executive audience, plus
 structured data for technical teams who want to feed findings into their
@@ -323,8 +326,7 @@ being found by AI search and recommendation surfaces.</li>
 needs to reach the agents now placing transactions on behalf of
 buyers.</li>
 <li><strong>Government and public sector teams</strong> whose
-accessibility obligations under the European Accessibility Act and
-equivalent regulations have moved from policy to enforced.</li>
+accessibility obligations have moved from policy to enforced.</li>
 <li><strong>Developers and architects</strong> building new sites who
 want to measure machine readiness before launch, not after.</li>
 <li><strong>Investors and acquirers</strong> running due diligence on a
@@ -350,7 +352,8 @@ surfaces that previously returned "I don't have that information".</li>
 <li>Structured data coverage rises from partial to complete, lifting the
 site's eligibility for rich-result and answer-surface inclusion.</li>
 <li>Accessibility findings are quantified and triaged, moving the site
-from "we hope it's compliant" to "we can demonstrate compliance".</li>
+from "we hope it's accessible" to "we know what is broken and what to
+fix first".</li>
 </ul>
 <p>The MX framework documented in this book provides the conceptual
 basis. Web Audit Suite is the measurement layer that turns the framework
@@ -360,14 +363,13 @@ improving</h2>
 <p>Each audit teaches the suite. We record what we find as anonymised,
 platform-level patterns: the type of finding, the platform it appeared
 on, and how often it recurs. We never store your domain in that shared
-record, and we never store your content, your URLs, or the specific text
-we corrected. When a class of problem keeps appearing on a platform,
-that signal prompts us to sharpen the deterministic check that catches
-it, so every future audit of that platform is more thorough. The audits
-run on local models by default, so your content stays inside your
-infrastructure. The result is a measurement layer that gets sharper for
-every site on your platform, without any site's data being exposed to
-another.</p>
+record, nor your content, your URLs, or the specific text we corrected.
+When a class of problem keeps appearing on a platform, that signal
+prompts us to sharpen the deterministic check that catches it, so every
+future audit of that platform is more thorough. The audits run on local
+models by default, so your content stays inside your infrastructure. The
+result is a measurement layer that gets sharper for every site on your
+platform, without any site's data being exposed to another.</p>
 <h2 id="how-to-engage">How to engage</h2>
 <p>CogNovaMX takes Web Audit Suite enquiries through one of two
 routes:</p>
@@ -387,7 +389,7 @@ on site size and the supplements requested.</p>
 <p>The Implementation Cookbook in Appendix A names the patterns that fix
 what Web Audit Suite measures. Together, the two appendices are the
 practitioner's path: measure, fix, re-measure.</p>
-<!-- audit-suite-sync: 2026-09-03-a -->
+<!-- audit-suite-sync: 2026-10-09-c -->
 </div>
 <hr>
 <nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">
