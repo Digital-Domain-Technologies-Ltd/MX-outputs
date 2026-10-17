@@ -1077,4 +1077,112 @@
   .tool-badge-table td:first-child code {
     overflow-wrap: anywhere;
   }
+
+  /* A tier card sets its label beside the body on one unwrapping line, and the
+     longest label ("Tagged only (no MX metadata)") pushed the card to 426px at
+     390px. On a phone the label sits above the body and may wrap. */
+  .tool-tier-card {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .tool-tier-card-label {
+    min-width: 0;
+    white-space: normal;
+  }
+
+  .tool-tier-card-body {
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+}
+
+/* ── Approval (PDF auditor, and the Inspector's approval panel) ── */
+
+.tool-approval {
+  margin: 1.5rem 0;
+}
+
+.tool-approval-status {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: var(--mx-tool-surface-strong);
+  border-left: 4px solid var(--mx-border);
+  color: var(--mx-text);
+}
+
+.tool-approval-status.is-pass {
+  border-left-color: var(--mx-tool-pass);
+}
+
+.tool-approval-status.is-warn {
+  border-left-color: var(--mx-tool-warn);
+}
+
+.tool-approval-status.is-fail {
+  border-left-color: var(--mx-tool-fail);
+}
+
+.tool-approval-meta {
+  font-family: var(--mx-font-mono);
+  font-size: 0.85rem;
+  color: var(--mx-text-muted);
+  overflow-wrap: anywhere;
+}
+
+.tool-approval .tool-evidence td {
+  overflow-wrap: anywhere;
+}
+
+.tool-approval-preview {
+  width: 100%;
+  height: 70vh;
+  min-height: 420px;
+  margin: 1rem 0;
+  border: 1px solid var(--mx-border);
+  border-radius: 8px;
+  background-color: var(--mx-white);
+}
+
+.tool-approval-form {
+  display: grid;
+  gap: 1rem;
+  max-width: 40rem;
+  margin: 1rem 0 1.5rem;
+}
+
+.tool-approval-form label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+  color: var(--mx-text);
+}
+
+.tool-approval-form input,
+.tool-approval-form select,
+.tool-approval-form textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--mx-border);
+  border-radius: 6px;
+  background-color: var(--mx-tool-surface);
+  color: var(--mx-text);
+  font: inherit;
+  font-weight: 400;
+}
+
+.tool-approval-form button {
+  justify-self: start;
+  border: 0;
+  cursor: pointer;
+}
+
+.tool-approval-form button[disabled] {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.tool-approval-form[hidden] {
+  display: none;
 }

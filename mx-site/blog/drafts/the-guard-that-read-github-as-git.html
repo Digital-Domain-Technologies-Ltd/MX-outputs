@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "The Guard That Read GitHub as Git"
+description: "A safety guard in an AI coding tool matches the word git anywhere in a command, so GitHub in a folder path and Digital in a company name set it off. A guard that matches words instead of meaning fails in a way nobody can see, and the fix we could ship was a warning before the trip."
+author: Tom Cranstoun
+created: 2026-10-15
+modified: 2026-10-15
+version: "1.0"
+category: mx-content
+type: blog-post
+tags: [agents, guardrails, tooling, machine-experience, developer-experience]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/the-guard-that-read-github-as-git.md
+  contextProvides:
+    - "An observed false positive in an AI coding agent's worktree-isolation guard: the guard treats any occurrence of the letters git as naming the git command, so a path under a GitHub folder or an organisation name containing Digital makes harmless read-only commands look unverifiable and refused. Draws the general lesson that a guard matching surface text rather than meaning fails silently, trains users to route around it, and gives a message the reader cannot act on. Describes the remedy available to a user who cannot change the guard: an advisory hook that predicts the refusal from the observed patterns, names the words read as git and the rewrite that passes, and briefs the agent when it enters a worktree. Notes that the prediction is empirical because the guard's rule is closed."
+  stability: stable
+  purpose: "Show a technical reader why a safety guard that matches words instead of meaning costs more than it appears to, using a concrete case from day-to-day agent work, and what a user can do when the guard is someone else's."
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  servedAt: https://mx.allabout.network/blog/drafts/the-guard-that-read-github-as-git.html
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A safety guard in an AI coding tool matches the word git anywhere in a command, so GitHub in a folder path and Digital in a company name set it off. A guard that matches words instead of meaning fails in a way nobody can see, and the fix we could ship was a warning before the trip.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/the-guard-that-read-github-as-git.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/the-guard-that-read-github-as-git.html">
+  <meta property="og:title" content="The Guard That Read GitHub as Git | CogNovaMX">
+  <meta property="og:description" content="A safety guard in an AI coding tool matches the word git anywhere in a command, so GitHub in a folder path and Digital in a company name set it off. A guard that matches words instead of meaning fails in a way nobody can see, and the fix we could ship was a warning before the trip.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-10-15">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Guard That Read GitHub as Git | CogNovaMX">
+  <meta name="twitter:description" content="A safety guard in an AI coding tool matches the word git anywhere in a command, so GitHub in a folder path and Digital in a company name set it off. A guard that matches words instead of meaning fails in a way nobody can see, and the fix we could ship was a warning before the trip.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="The Guard That Read GitHub as Git">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/the-guard-that-read-github-as-git.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-generated">
+
+  <title>The Guard That Read GitHub as Git | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "The Guard That Read GitHub as Git",
+        "headline": "The Guard That Read GitHub as Git",
+        "description": "A safety guard in an AI coding tool matches the word git anywhere in a command, so GitHub in a folder path and Digital in a company name set it off. A guard that matches words instead of meaning fails in a way nobody can see, and the fix we could ship was a warning before the trip.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+        "datePublished": "2026-10-15",
+        "dateModified": "2026-10-15",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/the-guard-that-read-github-as-git.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 956,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/the-guard-that-read-github-as-git.html",
+        "name": "The Guard That Read GitHub as Git",
+        "url": "https://mx.allabout.network/blog/drafts/the-guard-that-read-github-as-git.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-it-actually-matched">What It Actually Matched</a></li>
+        <li><a href="#why-a-word-matching-guard-costs-more-than-it-looks">Why a Word-Matching Guard Costs More Than It Looks</a></li>
+        <li><a href="#what-we-could-do-about-it">What We Could Do About It</a></li>
+        <li><a href="#the-part-worth-keeping">The Part Worth Keeping</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="956">
+        <header class="article-header">
+          <h1>The Guard That Read GitHub as Git</h1>
+          <div class="article-meta"
+               data-published="2026-10-15"
+               data-modified="2026-10-15"
+               data-reading-time="5 min">
+            <time datetime="2026-10-15">15 October 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>5 min read</span>
+          </div>
+        </header>
+
+
+<p>I spent part of an afternoon being told no by a safety check that had misread the word GitHub.</p>
+<p>The setup is ordinary. I work with an AI coding agent, and it makes each change in a separate copy of the repository, a git worktree, so it can't trample anything else in flight. That isolation comes with a guard. Before running anything in the shell, the tool checks it can't reach outside that copy. If it can't prove that, it refuses.</p>
+<p>That's a good idea. An agent running git in the wrong folder can commit to another branch or wipe someone's uncommitted work. I want that guard.</p>
+<h2 id="what-it-actually-matched" tabindex="-1">What It Actually Matched</h2>
+<p>The refusals kept arriving on commands that had nothing to do with git. Reading a log file. Listing a folder. Fetching a CI result. Each came back with the same message: the session is isolated in the worktree, and this command names git in a form too complex to verify.</p>
+<p>It took a while to see the pattern, because nothing in the message pointed at it. The guard looks for the letters g, i, t, anywhere in the text, whether or not they spell a command.</p>
+<p>We keep every clone of our repository in a folder called GitHub, so every absolute path I type contains &quot;git&quot;. Our organisation's name starts with Digital, which contains it too. Put either one in a command that also does something the guard can't evaluate up front, such as using a variable or running a small script, and it's refused as if it were a git operation. The same thing happened when a sentence in a note I was saving happened to contain the word.</p>
+<p>None of those commands ran git. The guard couldn't tell, because it read the words and ignored what they did.</p>
+<h2 id="why-a-word-matching-guard-costs-more-than-it-looks" tabindex="-1">Why a Word-Matching Guard Costs More Than It Looks</h2>
+<p>A false positive in a safety check sounds harmless. Better safe than sorry. But each one costs something, and the refused command is the least of it.</p>
+<p>First, the message tells you nothing you can use. &quot;Too complex to verify&quot; is true from the guard's side and useless from mine. I can't fix a command when I don't know which part of it was the problem, so I rewrite it more or less at random until it passes.</p>
+<p>Second, it teaches the wrong lesson. When a guard fires on things that are plainly safe, people and agents learn to route around it instead of listening to it. The workarounds get folded into habit. Then, on the day the guard is right, the reflex is to rephrase and move on.</p>
+<p>Third, it blurs the evidence. An agent that hits an unexplained refusal starts guessing. It tries variations, burns time, and sometimes lands on a version that passes for reasons nobody understands. That defeats the purpose of a guard.</p>
+<p>The general point isn't about this one tool. A check that matches surface text instead of meaning will always misfire on whatever happens to look like the danger. Keyword filters on email did it. Content filters that block a town because its name contains a rude word do it. A safety guard that reads &quot;GitHub&quot; as &quot;git&quot; is the same mistake in a new place.</p>
+<h2 id="what-we-could-do-about-it" tabindex="-1">What We Could Do About It</h2>
+<p>The guard belongs to the tool, not to us, so I can't change how it matches. What I could change is when we find out.</p>
+<p>So we built a hook that runs before every shell command the agent sends from a worktree. It checks the command against the patterns the guard has refused. The main ones are the letters git together with a value worked out at run time, and git inside free text handed to a script runner. When a command looks likely to trip, the hook tells the agent before the call goes out. It names the words being read as git, such as GitHub and Digital. Then it gives the rewrite that passes: a plain relative path, separate calls instead of a chain, or long text moved into a file.</p>
+<p>A second hook does the same job earlier. The moment the agent enters a worktree, it gets a short briefing: this guard reads git as a substring, your own path contains it, and here are the forms that get refused. The first command can then be written the right way, rather than learned by refusal.</p>
+<p>The hooks only advise. They never block anything. The guard's real rule isn't published, so our prediction comes from the refusals we actually saw, and it can be wrong in either direction. A warning that turns out to be unnecessary costs a sentence. A block that turns out to be unnecessary would be one more false positive, which is exactly the problem.</p>
+<p>Every case the predictor knows about is a command from an actual session, path and all. A test built on tidy invented commands would have missed the point, because the trap is in the folder name everyone already has.</p>
+<h2 id="the-part-worth-keeping" tabindex="-1">The Part Worth Keeping</h2>
+<p>Two habits came out of this that I'd apply to any guard, ours or anyone else's.</p>
+<p>When you write a guard, match the thing you're afraid of, not something that looks like it. If you can't work out whether a command runs git, say so in the message, and point at the part you couldn't read.</p>
+<p>When you depend on a guard you can't change, write down what it refuses as soon as you see a pattern, and make that knowledge run before the call. A refusal that arrives with an explanation is a speed bump. One that arrives without an explanation is a guessing game, and an agent will happily play it all afternoon.</p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-15.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

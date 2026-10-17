@@ -120,24 +120,33 @@ export function readResponsiblePersonFromXmp(metadata) {
 }
 
 export async function readPdfMetadata(pdfDoc) {
+  let markInfo = null;
+  try {
+    // /MarkInfo /Marked true is the file's own statement that it is tagged.
+    if (typeof pdfDoc.getMarkInfo === 'function') markInfo = await pdfDoc.getMarkInfo();
+  } catch (_) { /* unreadable: left null, reported as not read */ }
   try {
     const meta = await pdfDoc.getMetadata();
-    return { info: meta.info || null, metadata: meta.metadata || null };
+    return { info: meta.info || null, metadata: meta.metadata || null, markInfo };
   } catch (e) {
-    return { info: null, metadata: null, error: e.message };
+    return { info: null, metadata: null, markInfo, error: e.message };
   }
 }
 
 export function detectTaggedTree(metadata) {
-  // pdf.js does NOT expose /MarkInfo directly in getMetadata, so we read
-  // the XMP claim of pdfuaid:Part=1 (PDF/UA-1 conformance declaration) as a
-  // strong proxy. Absence of pdfuaid:Part is not a definitive "no tagged
-  // tree" answer, but presence is a definitive yes.
-  const pdfuaPart = readXmpField(metadata.metadata, 'pdfuaid:Part') ||
-    readXmpField(metadata.metadata, 'Part');
+  // The tagged structure is read from the catalog's /MarkInfo, never inferred
+  // from the PDF/UA identification: that identification is written only when
+  // veraPDF passed the file, so a tagged file without it is the normal case,
+  // and an identification is not evidence of a structure tree. The
+  // identification (pdfuaid:part) is reported alongside, as declared, and is
+  // not validated here.
+  const pdfuaPart = readXmpField(metadata.metadata, 'pdfuaid:part') ||
+    readXmpField(metadata.metadata, 'pdfuaid:Part');
+  const marked = metadata.markInfo ? metadata.markInfo.Marked === true : null;
   return {
+    marked,
     pdfuaPart: pdfuaPart || null,
-    hasTaggedClaim: Boolean(pdfuaPart),
+    hasTaggedClaim: marked === true,
   };
 }
 
@@ -259,15 +268,24 @@ function provenanceDetail(findings) {
   return `${steps.length} step(s) recorded${decided}; operator: ${findings.provenance.parsed.operator || 'unknown'}`;
 }
 
+function taggedTreeDetail(tagged) {
+  const marked = {
+    true: 'MarkInfo /Marked true (tagged structure tree).',
+    false: 'MarkInfo does not mark the file as tagged.',
+  }[String(tagged.marked)] || 'MarkInfo could not be read.';
+  const identification = tagged.pdfuaPart
+    ? ` PDF/UA-${tagged.pdfuaPart} identification declared (pdfuaid:part); not validated here.`
+    : ' No PDF/UA identification (an MX render writes one only when veraPDF passes the file).';
+  return marked + identification;
+}
+
 export function classify(findings) {
   const evidence = [
     {
       key: 'tagged-tree',
       label: 'Tagged structure (ISO 14289-1)',
       status: findings.tagged.hasTaggedClaim ? 'pass' : 'fail',
-      detail: findings.tagged.pdfuaPart
-        ? `pdfuaid:Part = ${findings.tagged.pdfuaPart}`
-        : 'pdfuaid:Part not declared in XMP packet.',
+      detail: taggedTreeDetail(findings.tagged),
     },
     {
       key: 'mx-namespace',
@@ -329,7 +347,7 @@ export function classify(findings) {
   if (findings.tagged.hasTaggedClaim && findings.mxMeta.present) {
     tier = 'mx';
   } else if (findings.tagged.hasTaggedClaim) {
-    // Tagged only: PDF/UA declared, no MX metadata. (Before 2026-10-09 this
+    // Tagged only: tagged structure, no MX metadata. (Before 2026-10-09 this
     // tier was called 'eaa-tagged'; readers of old reports should map it here.)
     tier = 'tagged';
   } else {

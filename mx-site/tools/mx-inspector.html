@@ -9,8 +9,8 @@ title: "MX Inspector"
 description: "Drop any file on this page and inspect the MX metadata it carries. The browser reads it locally and bytes never leave your machine. PDFs are classified for tagged structure, MX metadata, and AI-governance provenance; images, SVG, HTML, and other carriers report the MX fields they embed."
 author: "Tom Cranstoun"
 created: 2026-05-31
-modified: 2026-10-09
-version: "1.6"
+modified: 2026-10-17
+version: "1.7"
 
 type: component:objectInspector
 
@@ -187,7 +187,7 @@ mx:
 
           <h3 id="check-tagged-tree">Tagged structure (ISO 14289-1)</h3>
 
-          <p>An MX Compatible PDF declares <code>pdfuaid:part=1</code> in its XMP metadata packet, declaring PDF/UA-1 (ISO 14289-1). The inspector reads the XMP packet and reports the declared Part; it does not validate the file against PDF/UA. The tagged structure tree itself is the <code>/StructTreeRoot</code> entry in the PDF's <code>/Catalog</code> dictionary. It lets a screen reader walk the document the way a sighted person does.</p>
+          <p>An MX Compatible PDF has a tagged structure tree: the <code>/StructTreeRoot</code> entry in the PDF's <code>/Catalog</code> dictionary, marked with <code>/MarkInfo /Marked true</code>. Assistive technology walks the document through it the way a sighted person does, and the inspector reads <code>/MarkInfo</code> to report it. The PDF/UA-1 identification (<code>pdfuaid:part=1</code> in the XMP metadata packet) is a separate claim. An MX render writes it only when veraPDF passes the document against PDF/UA-1, so many tagged PDFs have none. The inspector reports the identification when it is present; it does not validate the file against PDF/UA.</p>
           <p><small><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</small></p>
 
           <h3 id="check-mx-namespace">MX XMP namespace</h3>
@@ -203,6 +203,10 @@ mx:
           <p>A provenance chain can also record decisions. A decider is a model that answers a typed question about a supplied state with a probability. The software around it then acts, asks a person, asks for clarification, or falls back, depending on a bar set by how reversible the action is. A router choosing which model a task goes to is the same thing at volume. When a chain carries decision steps, the evidence-chain view adds a Decisions table: what was asked, the answer and how sure the decider was, the bar and the kind of action it was set for, what happened next, where the task was routed, who confirmed, and the recorded verdict. A line above the table gives the volume: how many decisions, how many escalated, how many were acted on below the bar, how many still await confirmation, and the routed spend by model.</p>
 
           <p>The state the decider judged and the prompt it was given travel as hashes, never raw, because the record travels with the file. The label set is hashed too: adding one permitted answer changes every probability, so a changed hash tells you that thresholds tuned on the old set no longer mean what they did. The table shows the verdict the record states. The publisher's own check recomputes each verdict from the facts in the row before the record is pushed, so a claim of a clean act over a below-bar call does not reach you.</p>
+
+          <h3 id="check-approval">Recorded decision</h3>
+
+          <p>A PDF approved with the <a href="/tools/pdf-auditor.html">PDF Auditor</a> records who decided, what they decided, when, their notes, and the SHA-256 and length of the bytes they reviewed. The inspector shows the decision and checks it: it hashes the first <code>ApprovedLength</code> bytes of the file you dropped and compares them with <code>ApprovedSha256</code>, and it says when more was added to the file after the decision. A recorded decision is a statement tied to the bytes by their hash, not a cryptographic signature.</p>
 
           <h3 id="check-responsible-person">Responsible Person Identifier</h3>
 
@@ -235,7 +239,7 @@ mx:
 
           <p>Under the wordmark, the badge prints one line:</p>
 
-          <p><code>Tagged PDF &middot; PDF/UA-1 declared (pdfuaid:Part=1) &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF</code></p>
+          <p><code>Tagged PDF &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF</code></p>
 
           <p>That line is built to be read by four audiences at once. A European reader, a British reader, and an American reader each find an instrument they know. The fourth reader is a machine. An AI agent, a screen reader, or a regulator's validator does not read the visible badge; it reads the tagged structure, the XMP packet, and the provenance record behind it. The badge is for eyes, the artefacts are for machines, and both say the same thing. All four share one international standards baseline that belongs to none of them.</p>
 
@@ -252,11 +256,6 @@ mx:
               <tr>
                 <td><code>Tagged PDF</code></td>
                 <td>The document carries a logical structure tree, so a screen reader can walk it in reading order.</td>
-                <td>International</td>
-              </tr>
-              <tr>
-                <td><code>PDF/UA-1 declared (pdfuaid:Part=1)</code></td>
-                <td>The XMP metadata packet declares PDF/UA Part 1 (ISO 14289-1), so a validator knows which standard to check the file against. The declaration is not a validation result and not a conformance verdict under any law.</td>
                 <td>International</td>
               </tr>
               <tr>

@@ -7,7 +7,7 @@
     "description": "Evidence chain of the rule-driven steps (gate verdicts, renders, probes) behind cognovamx-mx-manifesto.pdf.",
     "author": "Tom Cranstoun",
     "created": "2026-09-25",
-    "modified": "2026-09-25",
+    "modified": "2026-10-13",
     "version": "1",
     "type": "provenance-record",
     "tags": [
@@ -29,10 +29,39 @@
       "mx-site/cognovamx-mx-manifesto.pdf"
     ]
   },
+  "artefactMx": {
+    "carrier": "pdf-xmp",
+    "source": "cognovamx-mx-manifesto.md",
+    "sourceName": "cognovamx-mx-manifesto.md",
+    "fields": {
+      "Author": "Tom Cranstoun",
+      "Version": "1.14",
+      "Created": "2026-06-09",
+      "Modified": "2026-10-10",
+      "MxSpecVersion": "0.9",
+      "Status": "active",
+      "Audience": [
+        "humans",
+        "machines",
+        "business"
+      ],
+      "CanonicalUrl": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/cognovamx-mx-manifesto.md",
+      "RelatedDocs": [
+        "scripts/cogs/manual-repository-architecture.cog.md",
+        "mx-canon/ssot/human-in-command.cog.md",
+        "datalake/manuscripts/mx-books/shared/machine-experience-manifesto.md",
+        "datalake/draft-site/blog/foundations/mx-manifesto.md",
+        "mx-canon/mx-the-gathering/draft-manifesto.md",
+        "datalake/pipeline/drafts/ideas/manifesto.md"
+      ],
+      "Summary": "The publishing contract was written for humans. Machines now read everything. MX is the metadata that lets that contract hold for them."
+    },
+    "note": "The XMP-mx fields the artefact carries, from one definition (scripts/lib/pdf/xmp-fields.cjs). SourceSha is stamped into the XMP after the source frontmatter is updated, so it is recorded in each pdf-render step as inputs.sourceSha rather than here; ProvenanceAiPayload embeds this record itself and is never repeated inside it."
+  },
   "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). Designed as evidence for the deterministic-conformance regime (EAA Directive 2019/882); the Level 2 tagged PDF and per-page accessibility verdicts come from these steps. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
   "auditId": null,
   "runRevision": 1,
-  "lastWriteAt": "2026-09-25T08:22:01.623Z",
+  "lastWriteAt": "2026-10-13T15:06:49.127Z",
   "operator": "Tom Cranstoun",
   "parties": [
     {
@@ -99,7 +128,8 @@
       "available": true,
       "root": "~/ai-log",
       "days": [
-        "2026-09-25"
+        "2026-09-25",
+        "2026-10-13"
       ],
       "header": "provenance.ai.json",
       "steps": "provenance.steps.jsonl",
@@ -127,6 +157,18 @@
       "inputs": [
         "cognovamx-mx-manifesto.md"
       ],
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-10-13T15:06:49.127Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "cognovamx-mx-manifesto.md",
+        "doctype": "letter",
+        "sourceSha": "c2d0b7911c602e37fbbcec4435239d9653857b56",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/cognovamx-mx-manifesto.md"
+      },
       "outcome": "pass"
     }
   ]

@@ -10,15 +10,16 @@ title: "Skills Don't Travel"
 description: "Runtime-specific instruction files lock your AI workflow to one tool. One afternoon spent on this problem is why MX standards exist."
 author: "Tom Cranstoun"
 created: 2026-06-18
-modified: 2026-06-18
+modified: 2026-10-14
 version: "1.1"
 
 type: blog-post
 tags: [cogs, skills, portability, runtime, action-docs, mx-standards, mx-os]
 mx:
   mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans, agents]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/cogs-and-metadata/skills-dont-travel.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/cogs-and-metadata/skills-dont-travel.md
   servedAt: https://mx.allabout.network/blog/drafts/cogs-and-metadata/skills-dont-travel.html
   stability: draft
   runbook: "Draft blog post. When ready to publish run npm run promote -- --slug skills-dont-travel."
@@ -119,7 +120,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1283,
+        "wordCount": 1309,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -159,6 +160,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -201,7 +203,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1283">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1309">
         <header class="article-header">
           <h1>Skills Don't Travel</h1>
           <div class="article-meta"
@@ -238,7 +240,7 @@ mx:
 </tr>
 <tr>
 <td>Cursor</td>
-<td><code>.cursor/rules</code></td>
+<td><code>.cursor/rules/</code> (a folder of <code>.mdc</code> rules)</td>
 </tr>
 <tr>
 <td>GitHub Copilot</td>
@@ -250,7 +252,7 @@ mx:
 </tr>
 <tr>
 <td>Continue</td>
-<td><code>.continue/config.md</code></td>
+<td><code>.continue/rules/</code></td>
 </tr>
 <tr>
 <td>Gemini CLI</td>
@@ -262,7 +264,7 @@ mx:
 </tr>
 </tbody>
 </table>
-<p>Seven formats. None compatible. A rule written for Claude Code does nothing in Cursor. A <code>.windsurfrules</code> file is invisible to Gemini CLI. If I want the same link-depth rule enforced across all seven tools, the naive approach is: write it seven times. Then remember to update it in seven places every time it changes.</p>
+<p>Seven locations, and only partial overlap. Several tools now read <code>AGENTS.md</code> as well as their own file, but no single file reaches them all. A rule written for Claude Code does nothing in Gemini CLI. A <code>.windsurfrules</code> file is invisible to Gemini CLI. If I want the same link-depth rule enforced across all seven tools, the naive approach is: write it seven times. Then remember to update it in seven places every time it changes.</p>
 <p>That is not a workflow. That is a maintenance burden that will quietly become seven drifting versions of the same rule, and the agent that happens to be running the day a rule has drifted will do the wrong thing -- precisely, faithfully, as instructed.</p>
 <h2 id="what-you-are-actually-trying-to-do" tabindex="-1">What you are actually trying to do</h2>
 <p>When you write a rule for an AI agent in a repository, you are doing one of two things.</p>
@@ -275,9 +277,9 @@ mx:
 GEMINI.md  ──────────────────────────────┤
 AGENTS.md  ──────────────────────────────┤
 .windsurfrules  ─────────────────────────├──► scripts/cogs/mx-agent-rules.cog.md
-.cursor/rules  ──────────────────────────┤        (the only place rules live)
+.cursor/rules/  ─────────────────────────┤        (the only place rules live)
 .github/copilot-instructions.md  ────────┤
-.continue/config.md  ────────────────────┘
+.continue/rules/  ───────────────────────┘
 </code></pre>
 <p>Each adapter is ten to fifteen lines: what the repository is, where the rules live, which document wins on conflict. No rules are duplicated. When the link-depth formula changes, I update the COG once. Every tool that boots into the MX-hub repository next picks up the change.</p>
 <h2 id="the-document-does-not-need-to-know-which-tool-will-read-it" tabindex="-1">The document does not need to know which tool will read it</h2>
@@ -329,6 +331,14 @@ AGENTS.md  ───────────────────────
 <p><em>MX COGs are documented at <a href="https://tg.community">tg.community</a>. The action-doc specification is part of the MX Cogs draft note. The <code>mx-agent-rules.cog.md</code> and adapter files described in this post are in the MX-hub repository.</em></p>
 
 
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-14.</li>
+          </ul>
+        </footer>
+
       </article>
 
 
@@ -369,7 +379,10 @@ AGENTS.md  ───────────────────────
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

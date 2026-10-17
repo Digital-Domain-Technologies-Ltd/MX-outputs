@@ -8529,6 +8529,15 @@ Blog
         Blockchain
         Announcements
 
+            Proving What You Published: MX as a Compliance Defence, RAG as the Reader
+
+            How regulated publishers can use MX to create durable, attested records of their own compliance posture, and where Retrieval-Augmented Generation fits as the reading layer.
+
+            21 May 2026
+            - Provenance
+
+- Accessibility
+
             Most AI Assistants Do Not Actually Check robots.txt. Here Is the Proof.
 
             A canary-based test of 12 AI assistants found only ChatGPT, Claude and Perplexity respected a disallowed URL. The other nine fetched it anyway, and most read the page back to the user.
@@ -18094,135 +18103,141 @@ What Blockchain and Crypto Have to Do with MX sets out what MX is and is not. Is
 
 **Description:** How regulated publishers can use MX to create durable, attested records of their own compliance posture, and where Retrieval-Augmented Generation fits as the reading layer.
 
-RAG reads. MX proves. Under the European Accessibility Act, regulated publishers are being asked to show what they published and when. Screenshots will not do the job.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - The shape of the problem
+        - The shape of the problem
 
-            - What MX-compliant publishing produces
+        - What MX-compliant publishing produces
 
-            - Where RAG sits in this picture
+        - Where RAG sits in this picture
 
-            - What this changes for the publisher
+        - What this changes for the publisher
 
-            - What this looks like in operational terms
+        - What this looks like in operational terms
 
-            - Where this leaves the buyer
+        - Where this leaves the buyer
 
           Proving What You Published: MX as a Compliance Defence, RAG as the Reader
 
             21 May 2026
-            &middot;
+            ·
             Tom Cranstoun
-            &middot;
+            ·
             11 min read
 
-        The court date is set. A European retailer has been served with an emergency injunction over the accessibility of its online storefront. The advocacy group bringing the action has snapshots, taken on specific dates by specific tools, of what the retailer's product detail pages looked like, what the accessibility statement said, and what the conformance claims were. The retailer's general counsel needs to answer a question that sounds straightforward but turns out not to be: what did we actually publish, and when?
+The court date is set. A European retailer has been served with an emergency injunction over the accessibility of its online storefront. The advocacy group bringing the action has snapshots, taken on specific dates by specific tools, of what the retailer's product detail pages looked like, what the accessibility statement said, and what the conformance claims were. The retailer's general counsel needs to answer a question that sounds straightforward but turns out not to be: what did we actually publish, and when?
 
-        Internal systems can show the current state. Git history can show what was in the repository at some point. Web archives can show snapshots, but not under the retailer's own control. None of these sources, on their own, produces a record that a court will treat as the retailer's own attested statement of what it was publishing at the moment in question.
+Internal systems can show the current state. Git history can show what was in the repository at some point. Web archives can show snapshots, but not under the retailer's own control. None of these sources, on their own, produces a record that a court will treat as the retailer's own attested statement of what it was publishing at the moment in question.
 
-        This is the use case where the Machine Experience standard does something a Retrieval-Augmented Generation pipeline cannot do. RAG is excellent at helping someone read across many sources. It is not designed to produce a durable, attested record of the retailer's own publishing posture. MX is. The two are not in competition, they sit on different sides of the publisher and consumer boundary, but the boundary itself is where the value lands.
+This is the use case where the Machine Experience standard does something a Retrieval-Augmented Generation pipeline cannot do. RAG is excellent at helping someone read across many sources. It is not designed to produce a durable, attested record of the retailer's own publishing posture. MX is. The two are not in competition, they sit on different sides of the publisher and consumer boundary, but the boundary itself is where the value lands.
 
-        The shape of the problem
+The shape of the problem
 
-        Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
-        European Accessibility Act enforcement is now operationally live. Directive (EU) 2019/882 began enforcement on 28 June 2025, with EN 301 549 and WCAG 2.1 AA as the technical reference points. The pressure is no longer theoretical. ApiDV and Droit Pluriel have filed emergency injunctions, the French référé procedure, at the Tribunal judiciaire de Paris against Auchan, Carrefour, E.Leclerc, and Picard Surgelés. The E.Leclerc detail is the one that should focus minds: the retailer had improved from 32% to 50% compliance and was sued anyway. Half-measures did not protect them.
+European Accessibility Act enforcement is now operationally live. Directive (EU) 2019/882 began enforcement on 28 June 2025, with EN 301 549 and WCAG 2.1 AA as the technical reference points. The pressure is no longer theoretical. ApiDV and Droit Pluriel have brought emergency proceedings, the French référé procedure, against Auchan, Carrefour, E.Leclerc, and Picard Surgelés, each in the court of the company's seat. On 4 June 2026 the Tribunal judiciaire de Caen ordered Carrefour to make its site and app fully accessible within six months, rejecting its defence that it already met 71% of the French accessibility standard. The E.Leclerc detail should focus minds too: the retailer had improved from 32% to 50% compliance and was sued anyway. Half-measures did not protect either of them.
 
-        What gets contested in these cases is not only the current state of the site, but the trajectory: what the retailer claimed to be doing, what it published about its compliance, and how those claims held up over time. The compliance posture is a moving target, and the question of what was true at a specific date matters as much as what is true today.
+What gets contested in these cases is not only the current state of the site, but the trajectory: what the retailer claimed to be doing, what it published about its compliance, and how those claims held up over time. The compliance posture is a moving target, and the question of what was true at a specific date matters as much as what is true today.
 
-        Most regulated publishers do not have a defensible answer to that question. They have a live website that reflects today. A Git history that reflects the codebase, but not necessarily what was rendered. A content management system whose internal records may or may not survive a discovery process intact. PDFs of accessibility statements stored on a shared drive. Internal compliance memos that were never published. Screenshots from monitoring tools, taken by the publisher itself, with all the chain-of-custody questions that implies.
+Most regulated publishers do not have a defensible answer to that question. They have a live website that reflects today. A Git history that reflects the codebase, but not necessarily what was rendered. A content management system whose internal records may or may not survive a discovery process intact. PDFs of accessibility statements stored on a shared drive. Internal compliance memos that were never published. Screenshots from monitoring tools, taken by the publisher itself, with all the chain-of-custody questions that implies.
 
-        None of these is the record a court wants. The court wants the retailer's own attested statement of what it published, signed in a way that cannot be quietly altered after the fact, anchored to a date that cannot be backdated.
+None of these is the record a court wants. The court wants the retailer's own attested statement of what it published, signed in a way that cannot be quietly altered after the fact, anchored to a date that cannot be backdated.
 
-        What MX-compliant publishing produces
+What MX-compliant publishing produces
 
-        The Machine Experience standard was not designed primarily as a litigation tool. It was designed to let publishers declare structured, attested information that machines can consume reliably. But the same properties that make MX content trustworthy for an AI system make it useful as a publishing record.
+The Machine Experience standard was not designed primarily as a litigation tool. It was designed to let publishers declare structured, attested information that machines can consume reliably. But the same properties that make MX content trustworthy for an AI system make it useful as a publishing record.
 
-        A COG, the data-file format that carries MX-compliant content, is Markdown with structured YAML frontmatter. The body is the actual content the publisher is putting forward: an accessibility statement, a conformance claim, a product specification, a returns policy, a price. The frontmatter declares purpose, audience, stability, version, and update instructions. The file is then reduced to a stable byte form.
+A COG, the data-file format that carries MX-compliant content, is Markdown with structured YAML frontmatter. The body is the actual content the publisher is putting forward: an accessibility statement, a conformance claim, a product specification, a returns policy, a price. The frontmatter declares purpose, audience, stability, version, and update instructions. The file is then reduced to a stable byte form.
 
-        That byte form can be signed. Using Ed25519, the publisher produces a signature over the canonical bytes. The signature does not need to be held by the publisher; it can be registered with REGINALD, the registry indexing where COGs live and what their attestations are. The registry holds the attestation; the publisher hosts the COG itself.
+That byte form can be signed. Using Ed25519, the publisher produces a signature over the canonical bytes. The signature does not need to be held by the publisher; it can be registered with REGINALD, the registry indexing where COGs live and what their attestations are. The registry holds the attestation; the publisher hosts the COG itself.
 
-        What this gives the retailer, operationally, is a record with three properties that the existing materials lack.
+What this gives the retailer, operationally, is a record with three properties that the existing materials lack.
 
-        Bytes-exact integrity. If the published accessibility statement is altered after the fact, the signature will not verify. Anyone, the retailer, opposing counsel, the court, an advocacy group, can check whether the file they have is the file that was attested. This is not the same as preventing the retailer from updating their statement. Updates happen, and updates produce new attestations. What it prevents is the silent rewrite of history.
+Bytes-exact integrity. If the published accessibility statement is altered after the fact, the signature will not verify. Anyone, the retailer, opposing counsel, the court, an advocacy group, can check whether the file they have is the file that was attested. This is not the same as preventing the retailer from updating their statement. Updates happen, and updates produce new attestations. What it prevents is the silent rewrite of history.
 
-        Publisher-attributed signing. The signature is the retailer's. It is not a third party making claims about the retailer's content. It is the retailer making a cryptographic statement that yes, this is what we published. The narrowness matters: attestation covers provenance and integrity, not editorial truth. The retailer is not claiming the statement is true in some absolute sense. They are claiming this is the statement they put their name to.
+Publisher-attributed signing. The signature is the retailer's. It is not a third party making claims about the retailer's content. It is the retailer making a cryptographic statement that yes, this is what we published. The narrowness matters: attestation covers provenance and integrity, not editorial truth. The retailer is not claiming the statement is true in some absolute sense. They are claiming this is the statement they put their name to.
 
-        Currency in the registry. The REGINALD registry entry carries currency information that the retailer updates when the content changes. The registry can be queried for the state of the entry at a given time. The combination of the attestation, the registry entry, and the publisher's own audit trail produces a defensible record of what was current when.
+Currency in the registry. The REGINALD registry entry carries currency information that the retailer updates when the content changes. The registry can be queried for the state of the entry at a given time. The combination of the attestation, the registry entry, and the publisher's own audit trail produces a defensible record of what was current when.
 
-        For a general counsel preparing for an EAA case, this is a different position than the one most retailers are in today.
+For a general counsel preparing for an EAA case, this is a different position than the one most retailers are in today.
 
-        Where RAG sits in this picture
+Where RAG sits in this picture
 
-        RAG is not displaced by any of this. It sits one layer up.
+RAG is not displaced by any of this. It sits one layer up.
 
-        When the compliance team, or the auditor, or the court-appointed assessor, or the advocacy group, needs to read across the retailer's published material, supplier documents, internal memos, regulatory guidance, court filings, and trade press, RAG is the right tool. The question "how does our accessibility posture compare to the conformance levels claimed by Carrefour in their public statement of 14 March 2026?" is exactly the kind of cross-source synthesis question that hybrid retrieval, reranking, and constrained generation handle well.
+When the compliance team, or the auditor, or the court-appointed assessor, or the advocacy group, needs to read across the retailer's published material, supplier documents, internal memos, regulatory guidance, court filings, and trade press, RAG is the right tool. The question "how does our accessibility posture compare to the conformance levels claimed by Carrefour in their public statement of 14 March 2026?" is exactly the kind of cross-source synthesis question that hybrid retrieval, reranking, and constrained generation handle well.
 
-        The interesting case is when the RAG pipeline is reading content that includes the retailer's own MX-compliant material. The pipeline can branch.
+The interesting case is when the RAG pipeline is reading content that includes the retailer's own MX-compliant material. The pipeline can branch.
 
-        For content that arrives as an attested COG with a current REGINALD entry, the pipeline does not need to chunk, score, and guess. It fetches the data file, checks the attestation, confirms currency, and passes structured content to the language model with the attestation status preserved. The compute cost is lower. The reliability is higher. The citation is durable, because it can reference the registry entry and the attestation rather than a brittle URL.
+For content that arrives as an attested COG with a current REGINALD entry, the pipeline does not need to chunk, score, and guess. It fetches the data file, checks the attestation, confirms currency, and passes structured content to the language model with the attestation status preserved. The compute cost is lower. The reliability is higher. The citation is durable, because it can reference the registry entry and the attestation rather than a brittle URL.
 
-        For everything else, the law firm briefing, the regulator's HTML guidance, the trade press article, the internal memo on a shared drive, the RAG pipeline does what it has always done. Normalisation, hybrid retrieval, reranking, confidence scoring, constrained generation, citation. None of this changes.
+For everything else, the law firm briefing, the regulator's HTML guidance, the trade press article, the internal memo on a shared drive, the RAG pipeline does what it has always done. Normalisation, hybrid retrieval, reranking, confidence scoring, constrained generation, citation. None of this changes.
 
-        The output to the compliance officer is a single answer that cites mixed sources. The retailer's own published material is cited with attestation status and registry reference. Third-party sources are cited as retrieved content with confidence scores. The officer can see which is which, and so can a court if it comes to that.
+The output to the compliance officer is a single answer that cites mixed sources. The retailer's own published material is cited with attestation status and registry reference. Third-party sources are cited as retrieved content with confidence scores. The officer can see which is which, and so can a court if it comes to that.
 
-        What this changes for the publisher
+What this changes for the publisher
 
-        The shift in posture is the point. Today, a regulated publisher's relationship to its own published content is uncomfortably loose. The website reflects whatever the CMS rendered last. The Git log reflects code, not output. Screenshots are evidence the retailer produced, not evidence the retailer attested. When a question arises about what the retailer was publishing on a specific date, the answer assembles itself from partial sources and depends on the goodwill of the system reading it.
+The shift in posture is the point. Today, a regulated publisher's relationship to its own published content is uncomfortably loose. The website reflects whatever the CMS rendered last. The Git log reflects code, not output. Screenshots are evidence the retailer produced, not evidence the retailer attested. When a question arises about what the retailer was publishing on a specific date, the answer assembles itself from partial sources and depends on the goodwill of the system reading it.
 
-        MX-compliant publishing tightens this. The retailer's accessibility statement is a COG with an attestation. The retailer's conformance claim is a COG with an attestation. The retailer's product detail pages, where they make claims about accessibility features, are COGs with attestations. The retailer's quarterly update note saying "we have improved from 32% to 50% compliance and are continuing remediation" is a COG with an attestation, registered with REGINALD on the date it was published.
+MX-compliant publishing tightens this. The retailer's accessibility statement is a COG with an attestation. The retailer's conformance claim is a COG with an attestation. The retailer's product detail pages, where they make claims about accessibility features, are COGs with attestations. The retailer's quarterly update note saying "we have improved from 32% to 50% compliance and are continuing remediation" is a COG with an attestation, registered with REGINALD on the date it was published.
 
-        If a referee at the Tribunal judiciaire de Paris asks what the retailer was publishing on a specific date, the answer is not "let me check our archives". It is a registry query and a signature verification. The answer is a yes-or-no with cryptographic backing.
+If a référé judge in Caen, Lille, or Créteil asks what the retailer was publishing on a specific date, the answer is not "let me check our archives". It is a registry query and a signature verification. The answer is a yes-or-no with cryptographic backing.
 
-        This does not win the case on its own. The underlying compliance work, meeting WCAG 2.1 AA, conforming to EN 301 549, fixing the actual product pages, still has to happen. What MX gives the retailer is a defensible record of the work they did and the claims they made, attested at the time they made them. That is a different evidentiary position than reconstruction after the fact.
+This does not win the case on its own. The underlying compliance work, meeting WCAG 2.1 AA, conforming to EN 301 549, fixing the actual product pages, still has to happen. What MX gives the retailer is a defensible record of the work they did and the claims they made, attested at the time they made them. That is a different evidentiary position than reconstruction after the fact.
 
-        What this looks like in operational terms
+What this looks like in operational terms
 
-        The MX Readiness Model and REGINALD Compliance Levels map the path.
+The MX Readiness Model and REGINALD Compliance Levels map the path.
 
-        A retailer at L0 has no MX-compliant publishing. Their content is HTML rendered from a CMS, with no structured metadata declaration, no attestation, no registry presence. Their compliance posture is reconstructed from snapshots and screenshots.
+A retailer at L0 has no MX-compliant publishing. Their content is HTML rendered from a CMS, with no structured metadata declaration, no attestation, no registry presence. Their compliance posture is reconstructed from snapshots and screenshots.
 
-        At L1 Discovery, the retailer has semantic HTML, a sitemap, server-side rendering. Machines can find the content. The publishing record is no more defensible than it was, but the technical foundation for machine consumption is in place.
+At L1 Discovery, the retailer has semantic HTML, a sitemap, server-side rendering. Machines can find the content. The publishing record is no more defensible than it was, but the technical foundation for machine consumption is in place.
 
-        At L2 Citation, the retailer has Schema.org JSON-LD on product pages and fact-level clarity in their accessibility statements. AI systems can cite the retailer's content with structural grounding. Still no attestation.
+At L2 Citation, the retailer has Schema.org JSON-LD on product pages and fact-level clarity in their accessibility statements. AI systems can cite the retailer's content with structural grounding. Still no attestation.
 
-        At L3 Attested, the retailer publishes COGs with Ed25519 signatures and registers them with REGINALD. This is the point at which the compliance-defence use case becomes operational. The retailer can prove what they published. REGINALD Compliance Level 3 is the minimum for registration where attestation is claimed.
+At L3 Attested, the retailer publishes COGs with Ed25519 signatures and registers them with REGINALD. This is the point at which the compliance-defence use case becomes operational. The retailer can prove what they published. REGINALD Compliance Level 3 is the minimum for registration where attestation is claimed.
 
-        At L4 Certified, the retailer has all MX fields populated, with Schema.org Product and Offer markup, ISO 4217 currency codes where relevant, and registry presence across their public claims. The publishing record is fully structured and attested.
+At L4 Certified, the retailer has all MX fields populated, with Schema.org Product and Offer markup, ISO 4217 currency codes where relevant, and registry presence across their public claims. The publishing record is fully structured and attested.
 
-        L5 Audited, which would add third-party verification of the publisher's posture, is planned but not yet operational. When it lands, it adds another layer to the defensive record. Until it does, L3 Attested and L4 Certified are the practical targets.
+L5 Audited, which would add third-party verification of the publisher's posture, is planned but not yet operational. When it lands, it adds another layer to the defensive record. Until it does, L3 Attested and L4 Certified are the practical targets.
 
-        The implementation is not a heavy lift for a team that publishes carefully. The COG format is Markdown with YAML frontmatter, nothing the content team cannot read or edit. The signing is a build-step operation. The registry interaction is a publish-step operation. The cost is in the discipline of treating compliance-relevant publications as durable records from the moment they are published, rather than as transient pages that happen to be live today.
+The implementation is not a heavy lift for a team that publishes carefully. The COG format is Markdown with YAML frontmatter, nothing the content team cannot read or edit. The signing is a build-step operation. The registry interaction is a publish-step operation. The cost is in the discipline of treating compliance-relevant publications as durable records from the moment they are published, rather than as transient pages that happen to be live today.
 
-        Where this leaves the buyer
+Where this leaves the buyer
 
-        The honest position for a regulated publisher looking at MX is this. RAG is the reading layer: necessary, well-engineered, and not displaced by anything MX offers. The retailer will continue to use RAG-style systems to read across their own content, supplier documentation, regulatory guidance, and external commentary. That is fine.
+The honest position for a regulated publisher looking at MX is this. RAG is the reading layer: necessary, well-engineered, and not displaced by anything MX offers. The retailer will continue to use RAG-style systems to read across their own content, supplier documentation, regulatory guidance, and external commentary. That is fine.
 
-        MX is the publishing layer for content where the retailer needs a defensible record of what they said and when. Accessibility statements, conformance claims, terms of service, returns policies, pricing pages, product specifications, compliance updates, anywhere the retailer's own claims are operationally consequential. The investment in MX-compliant publishing is small relative to the cost of being unable to prove what was published at a specific moment in time.
+MX is the publishing layer for content where the retailer needs a defensible record of what they said and when. Accessibility statements, conformance claims, terms of service, returns policies, pricing pages, product specifications, compliance updates, anywhere the retailer's own claims are operationally consequential. The investment in MX-compliant publishing is small relative to the cost of being unable to prove what was published at a specific moment in time.
 
-        The EAA enforcement context makes the argument concrete because the consequences are immediate. The injunctions filed against Auchan, Carrefour, E.Leclerc, and Picard Surgelés are not hypothetical. The E.Leclerc detail, 32% to 50%, sued anyway, is not hypothetical. The next round of cases, in France or elsewhere in the European Union, is not hypothetical either. Retailers operating in the regulated environment are going to be asked, repeatedly and adversarially, what they published and when. The ones who can answer with cryptographic backing are in a different position from the ones who answer with screenshots.
+The EAA enforcement context makes the argument concrete because the consequences are immediate. The injunctions filed against Auchan, Carrefour, E.Leclerc, and Picard Surgelés are not hypothetical. The E.Leclerc detail, 32% to 50%, sued anyway, is not hypothetical. The next round of cases, in France or elsewhere in the European Union, is not hypothetical either. Retailers operating in the regulated environment are going to be asked, repeatedly and adversarially, what they published and when. The ones who can answer with cryptographic backing are in a different position from the ones who answer with screenshots.
 
-        That is the use case for MX. Not as a replacement for the reading layer, but as the publishing-side discipline that makes the reading layer's job easier and the publisher's defensive position stronger. RAG reads. MX proves. Both have a place, and the place is determined by which side of the boundary the work is being done from.
+That is the use case for MX. Not as a replacement for the reading layer, but as the publishing-side discipline that makes the reading layer's job easier and the publisher's defensive position stronger. RAG reads. MX proves. Both have a place, and the place is determined by which side of the boundary the work is being done from.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-16.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the MX book series. Building content systems since 1977. Working with clients on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
-          Read next
+          Continue the conversation
 
-            - MX: The Handbook
-
-            - Learn MX
-
-            - Services
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
 
 ---
 
@@ -22981,6 +22996,14 @@ MX
 
             The dated record of agent commerce launches, platform moves, standards work, and regulatory shifts, newest first.
 
+            MX Manifesto
+
+            Open the MX Manifesto PDF in the MX Inspector and see the metadata it carries.
+
+            MX Explained
+
+            Why MX matters, with the MX Explained PDF to download or open in the MX Inspector.
+
         AI Usage Declaration: read on the web or download the tagged PDF (ISO 14289-1 Level 2).
 
         Compliance and trust
@@ -26043,6 +26066,12 @@ Industry News
 
         Recent Developments
 
+          YouTube Music Labels AI-Generated Songs
+
+          14 October 2026 | Platforms
+
+          YouTube Music now shows a label on the player page for tracks where AI played a significant role, and the labels are coming to the main YouTube app. Labels and distributors declare one of three DDEX-defined values when they deliver music: Fully Gen AI, Partly Gen AI, or No Gen AI. Where a supplier declares nothing, YouTube's own detection decides. Apple Music, Spotify, TIDAL, and Deezer have reached the same small vocabulary, which maps onto the MX provenanceOrigin values; the gap is that YouTube's declaration stays in the delivery feed instead of travelling with the track.
+
           Anthropic Launches Fable 5 and Mythos 5, Then Suspends Foreign Access Within 72 Hours
 
           12 June 2026 | Governance
@@ -28176,7 +28205,7 @@ MX
 
           Tagged structure (ISO 14289-1)
 
-          An MX Compatible PDF declares pdfuaid:part=1 in its XMP metadata packet, declaring PDF/UA-1 (ISO 14289-1). The inspector reads the XMP packet and reports the declared Part; it does not validate the file against PDF/UA. The tagged structure tree itself is the /StructTreeRoot entry in the PDF's /Catalog dictionary. It lets a screen reader walk the document the way a sighted person does.
+          An MX Compatible PDF has a tagged structure tree: the /StructTreeRoot entry in the PDF's /Catalog dictionary, marked with /MarkInfo /Marked true. Assistive technology walks the document through it the way a sighted person does, and the inspector reads /MarkInfo to report it. The PDF/UA-1 identification (pdfuaid:part=1 in the XMP metadata packet) is a separate claim. An MX render writes it only when veraPDF passes the document against PDF/UA-1, so many tagged PDFs have none. The inspector reports the identification when it is present; it does not validate the file against PDF/UA.
 
           Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
@@ -28193,6 +28222,10 @@ MX
           A provenance chain can also record decisions. A decider is a model that answers a typed question about a supplied state with a probability. The software around it then acts, asks a person, asks for clarification, or falls back, depending on a bar set by how reversible the action is. A router choosing which model a task goes to is the same thing at volume. When a chain carries decision steps, the evidence-chain view adds a Decisions table: what was asked, the answer and how sure the decider was, the bar and the kind of action it was set for, what happened next, where the task was routed, who confirmed, and the recorded verdict. A line above the table gives the volume: how many decisions, how many escalated, how many were acted on below the bar, how many still await confirmation, and the routed spend by model.
 
           The state the decider judged and the prompt it was given travel as hashes, never raw, because the record travels with the file. The label set is hashed too: adding one permitted answer changes every probability, so a changed hash tells you that thresholds tuned on the old set no longer mean what they did. The table shows the verdict the record states. The publisher's own check recomputes each verdict from the facts in the row before the record is pushed, so a claim of a clean act over a below-bar call does not reach you.
+
+          Recorded decision
+
+          A PDF approved with the PDF Auditor records who decided, what they decided, when, their notes, and the SHA-256 and length of the bytes they reviewed. The inspector shows the decision and checks it: it hashes the first ApprovedLength bytes of the file you dropped and compares them with ApprovedSha256, and it says when more was added to the file after the decision. A recorded decision is a statement tied to the bytes by their hash, not a cryptographic signature.
 
           Responsible Person Identifier
 
@@ -28217,7 +28250,7 @@ MX
 
           Under the wordmark, the badge prints one line:
 
-          Tagged PDF &middot; PDF/UA-1 declared (pdfuaid:Part=1) &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF
+          Tagged PDF &middot; Provenance: EU AI Act &middot; UK ICO &middot; NIST AI RMF
 
           That line is built to be read by four audiences at once. A European reader, a British reader, and an American reader each find an instrument they know. The fourth reader is a machine. An AI agent, a screen reader, or a regulator's validator does not read the visible badge; it reads the tagged structure, the XMP packet, and the provenance record behind it. The badge is for eyes, the artefacts are for machines, and both say the same thing. All four share one international standards baseline that belongs to none of them.
 
@@ -28229,10 +28262,6 @@ MX
 
                 Tagged PDF
                 The document carries a logical structure tree, so a screen reader can walk it in reading order.
-                International
-
-                PDF/UA-1 declared (pdfuaid:Part=1)
-                The XMP metadata packet declares PDF/UA Part 1 (ISO 14289-1), so a validator knows which standard to check the file against. The declaration is not a validation result and not a conformance verdict under any law.
                 International
 
                 EU AI Act
@@ -28281,4 +28310,60 @@ MX
 
         For commissioning AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
 
-<!-- x-mx-sourceHash: a8b370d2e012799701dd554ddae709d91ed82e1109dbe0684de70a44928a0a1d -->
+---
+
+## PDF Auditor | CogNovaMX
+
+**URL:** https://mx.allabout.network/tools/pdf-auditor.html
+
+**Description:** Drop a PDF on this page, read it, and record a decision inside it: who approved it, when, with what notes, and the SHA-256 of the exact bytes reviewed. The browser does the work locally and the file never leaves your machine.
+
+MX
+
+          Audit
+
+          Approve a
+          PDF.
+
+        Drop a PDF, read it, and record your decision inside it before it is published. Your browser does the work and the file never leaves your machine.
+
+          Drop a PDF here or click to choose one
+
+          The decision is written into the PDF. Your file stays in your browser.
+
+          This auditor works on your PDF in your browser. There is no upload, and we keep no record of which files you approve.
+
+          What it records
+
+          The auditor writes six properties into the PDF's XMP packet, in the MX namespace the file already uses:
+
+            The approval properties
+
+                Property
+                What it holds
+
+              mx:ApprovalDecisionapproved, changes-requested or rejected.
+
+              mx:ApprovedByThe name of the person who made the decision.
+
+              mx:ApprovedAtThe date and time of the decision, in UTC.
+
+              mx:ApprovalNotesWhat was checked, and anything the publisher must change or know.
+
+              mx:ApprovedSha256The SHA-256 of the exact bytes that were reviewed.
+
+              mx:ApprovedLengthHow many bytes were reviewed.
+
+          The reviewed bytes stay unchanged
+
+          A PDF can be extended without rewriting it: new versions of its objects are added at the end, and a reader uses the latest. The auditor adds a new version of the metadata stream, and nothing else is touched. What you reviewed is still there, byte for byte, as the start of the approved file. Anyone can check it: take the first ApprovedLength bytes, hash them, and compare the result with ApprovedSha256. The MX Inspector does that check when you drop an approved PDF on it, and says so when more was added after the decision.
+
+          Because the original bytes stay as they were, a document that passed PDF/A or PDF/UA validation keeps those identifications. The new properties are declared in the file's PDF/A extension schema, so a validator reading the approved file finds them described.
+
+          What an approval is, and is not
+
+          An approval here is a recorded statement: a named person, a decision and a time, tied to the exact bytes they saw. The hash proves which bytes the statement covers. It does not prove who wrote the statement, because nothing in it is cryptographically signed. Treat it as the review record that travels with the file, the evidence a publisher shows when asked who checked a document before it went out.
+
+          To change your mind, drop the approved file again and record a new decision. The new decision replaces the old one and covers everything up to that point, the earlier one included.
+
+<!-- x-mx-sourceHash: af1497aa0473bc2a9c08eb6c911e9a1861c79406e2c0061a31911557d0ab3145 -->

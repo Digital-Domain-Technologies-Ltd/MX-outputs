@@ -32,7 +32,7 @@ The recommended order is the order of sections below.
 
 ## Provenance of this bundle
 
-**Generated:** 2026-09-17
+**Generated:** 2026-10-13
 **Source repository:** https://github.com/ddttom/mx-shared-gathering
 **Canonical home for each draft:** https://github.com/ddttom/mx-shared-gathering/blob/main/<filename>
 **Licence:** MIT. The MX vocabulary is free, open, and vendor-neutral.
@@ -1677,7 +1677,7 @@ The following fields classify a cog within its registry. They live in vendor-ext
 | Field | Type | Zone | Purpose |
 |-------|------|:----:|---------|
 | `cogId` | string | 2 | Unique cog identifier within the registry. Typically derived from the filename without `.cog.md`. MUST be unique within its `partOf` namespace. |
-| `cogType` | string | 2 | Cog classification. Common values: `info` (reference / documentation), `action.scripted` / `action.sop` / `action.hybrid` (carries an execute contract; the discriminator after the dot names the cognitive class — see §6.5.2; `action` paired with a separate `actionType` field is an equivalent alias), `routing` (agent navigation), `certificate-of-genuineness` (publisher-provenanced credential), `cogs` (community-owned governance standard; see §6.5.1). |
+| `cogType` | string | 2 | Cog classification. Common values: `info` (reference / documentation), `action.scripted` / `action.sop` / `action.hybrid` (carries an execute contract; the discriminator after the dot names the cognitive class — see §6.5.2; `action` paired with a separate `actionType` field is an equivalent alias), `routing` (agent navigation), `cogs` (community-owned governance standard; see §6.5.1). |
 | `category` | string | 2 | Registry grouping (e.g. `mx-core`, `mx-tool`, `mx-content`). Coarser than `cogType`. |
 
 #### 6.5.1 The `cogs` classification (community-owned governance standard)
@@ -2005,7 +2005,7 @@ The order a consuming tool SHOULD process a cog file:
 5. **Walk `buildsOn`.** Load the named context cogs into the graph. Missing `buildsOn` entries are warnings, not failures.
 6. **Walk `dependencies`.** Hard-resolve each entry per its declared `kind`. A missing `dependencies` entry is a hard failure (§6.3).
 7. **Branch on `cogType`.**
-    - `info` / `routing` / `cogs` / `certificate-of-genuineness` — process as a documentation or governance artefact; do not look for `execute`.
+    - `info` / `routing` / `cogs` — process as a documentation or governance artefact; do not look for `execute`.
     - `action.<kind>` (or `action` with a separate `actionType`) — process as an executable cog; resolve the runtime requirement before extracting any artefact.
 8. **For action cogs, validate `execute`.** Confirm the runtime is permitted in the consumer's environment. For `scripted` and `hybrid` cogs, locate the `@embedded:<id>` artefact named in `execute.actions[].name`.
 9. **For action cogs that declare `produces`,** prepare to validate the output against the declared shape after execution. A shape mismatch is an unmodelled failure and triggers `defaultRemedy` (§6.7.2).
@@ -2549,9 +2549,9 @@ Before declaring an `x-mx-` extension, check the standard vocabulary in MX Core 
 
 # MX Provenance note
 
-**Version:** 1.1
+**Version:** 1.3
 **Status:** Draft by Tom Cranstoun, offered to The Gathering for review
-**Date:** 16 September 2026
+**Date:** 17 September 2026
 **Author:** Tom Cranstoun
 **License:** MIT
 
@@ -2815,6 +2815,8 @@ The record is JSON. Its body is the provenance chain: a `schemaVersion`, the acc
 
 The record describes itself. It meets readers with no context, so it SHOULD carry its own MX metadata in a root `mx` object, the place a JSON carrier holds such metadata (a package manifest or an API response carries it the same way). Because a JSON payload has no second zone, the identity fields (`title`, `description`, `author`, `created`, `modified`, `version`), the OKF fields (`type`, `tags`) and the governance fields (`status`, `purpose`, `canonicalUri`, `refersTo` naming the document the record is evidence for) sit together in that object. The RECOMMENDED `type` is `provenance-record`; a consumer keys on it to recognise the record without inferring from the shape of its fields.
 
+The record also names the boundary it ran under. `workflowId` and `workflowRecord` (§5.9, §5.10) sit at the top level of the record beside the chain, so a consumer asking whether the agent stayed inside its declared scope walks from the trail to the declaration in one step. A record with no declared boundary carries the pair as `null`, which is an honest absence rather than a default.
+
 ```json
 {
   "schemaVersion": "2.0",
@@ -2828,6 +2830,8 @@ The record describes itself. It meets readers with no context, so it SHOULD carr
     "canonicalUri": "https://example.org/reports/q3.mxprov.json",
     "refersTo": ["https://example.org/reports/q3.html"]
   },
+  "workflowId": "quarterly-report-drafting",
+  "workflowRecord": "https://example.org/workflows/quarterly-report-drafting.md",
   "parties": [],
   "frameworks": [],
   "steps": []
@@ -2840,6 +2844,42 @@ example.org/reports/q3.mxprov.json   its provenance record, named by q3.html's p
 ```
 
 A consumer that trusts the origin MAY fetch the `.mxprov.json` record named by `provenanceUri` to obtain the current chain. Fetching the record is a read of a public URL the document itself names; it discloses nothing about the consumer's copy of the document.
+
+---
+
+### 5.9 `workflowId`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Stable identifier of the workflow record that declares the boundary a document, or its provenance chain, was produced under: the tasks and authority given to the agent, the points where a human decides, and the residual risk the operator accepted. A provenance chain proves what happened; the workflow record says what was permitted; this identifier joins them.
+
+Conventionally a slug naming the team and the process. One record per workflow: a redesign of the workflow updates the same record, and a different workflow gets a different identifier. The workflow record carries the value as its own handle, and every document or provenance record produced under that workflow carries the same value as a pointer back to it.
+
+```yaml
+mx:
+  provenanceOrigin: ai-assisted
+  provenanceUri: "https://example.org/reports/q3.mxprov.json"
+  workflowId: quarterly-report-drafting
+  workflowRecord: "https://example.org/workflows/quarterly-report-drafting.md"
+```
+
+---
+
+### 5.10 `workflowRecord`
+
+| Property | Value |
+|----------|-------|
+| **Type** | string (path or URL) |
+| **Zone** | 2 (mx:) |
+| **Conformance** | MAY (Level 3) |
+
+Where the workflow record named by `workflowId` lives, so a consumer walks from the document or the chain to the declared boundary in one step. It is the pointer, not the record. A path follows the `refersTo` convention and a URL follows the `refersToExternal` convention of MX Core Metadata.
+
+An absent or `null` value is an honest "no declared boundary", never a default, and a consumer SHOULD weigh a chain with no workflow record as one whose scope was never declared. The pair complements `provenanceUri`, which points from a document to its chain: these two point from the chain to the boundary the chain was meant to stay inside.
 
 ---
 
@@ -3104,6 +3144,9 @@ mx:
 | `source` | attribution | — | — | MAY |
 | `publisher` | attribution | — | — | MAY |
 | `generate` | attribution | — | — | MAY |
+| `provenanceUri` | attribution | — | — | MAY |
+| `workflowId` | attribution | — | — | MAY |
+| `workflowRecord` | attribution | — | — | MAY |
 | `reviewCycle` | quality | — | SHOULD | — |
 | `accuracyCommitment` | quality | — | — | MAY |
 | `correctionSla` | quality | — | — | MAY |
@@ -3566,9 +3609,9 @@ contractFields:
 
 # MX Carrier Formats note
 
-**Version:** 1.1
+**Version:** 1.2
 **Status:** Draft by Tom Cranstoun, offered to The Gathering for review
-**Date:** 16 September 2026
+**Date:** 2 October 2026
 **Author:** Tom Cranstoun
 **License:** MIT
 
@@ -3579,7 +3622,7 @@ contractFields:
 This note specifies how MX metadata is carried across file formats. It covers two layers:
 
 1. **Carrier mechanisms** — the syntactic envelope each file format uses to host MX metadata: YAML frontmatter for markdown, `<meta>` tags for HTML, JSDoc comments for JavaScript, CSS comments, shell comment blocks, XMP for media, sidecar files, and SQL comment blocks.
-2. **Code-specific provenance vocabulary** — a minimum viable set of fields specific to source code as a document and not covered by the universal identity vocabulary.
+2. **Code-specific provenance vocabulary** — a minimum viable set of fields specific to source code as a document and not covered by the universal identity vocabulary, and a mod vocabulary for code a host application loads into its own event loop.
 
 The note also defines the `mx:*` identity fields used by carriers that do not have YAML frontmatter (HTML, JavaScript, CSS).
 
@@ -4166,7 +4209,7 @@ What context this file provides to agents. Declares the knowledge or capability 
 
 ## 5. Code-specific provenance vocabulary
 
-This section adds two fields specific to source code as a document. They are not covered by the universal identity vocabulary or by the language's own documentation convention.
+This section adds two fields specific to source code as a document, and four for mods (§5.4). They are not covered by the universal identity vocabulary or by the language's own documentation convention.
 
 ### 5.1 Fields
 
@@ -4194,6 +4237,54 @@ A JavaScript file declaring `@mx:sourceRepo` and a markdown file with `sourceRep
 ### 5.3 Profile
 
 This note declares a single profile for code: `code`. An implementation handling code artefacts applies the `code` profile's fields in addition to the universal identity fields. There are no per-language sub-profiles — the vocabulary is language-agnostic.
+
+### 5.4 Mod vocabulary
+
+A mod is code that a host application loads into its own event loop, where it can observe what happens, rewrite an action before the host takes it, or answer in the host's place. A plugin for an AI coding agent that hooks the agent's tool calls is the common case. Such code sits between what an agent decides and what the machine does, so it declares what it hooks, what it may touch, and what it promises. This note declares a second profile, `code-mod`, with four fields.
+
+| Field | Type | Required | Purpose |
+|-------|------|----------|---------|
+| `modHooks` | array | REQUIRED | Each host event the mod hooks, as a hook string in the canonical form defined below, with the matcher list omitted when the hook takes every event. The move is `observe` (passes the event on unchanged), `rewrite` (passes on a changed event) or `answer` (returns without passing it on). |
+| `modCapabilities` | array | REQUIRED | The host API surfaces the mod's code uses, in the host's own names. |
+| `modGuarantee` | string | OPTIONAL | One sentence stating what the mod promises and what it explicitly does not. A machine reads it as a declared limit. |
+| `testedWith` | string | OPTIONAL | The host and version the mod was last tested against, written `host@version`. |
+
+**Hook string (Normative).** Each `modHooks` entry MUST match this grammar, written in ABNF ([RFC 5234](https://www.rfc-editor.org/rfc/rfc5234)), with `unreserved` and `pct-encoded` as defined in [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) section 2:
+
+```abnf
+mod-hook = event [ "{" matcher *( "," matcher ) "}" ] ":" move
+event    = name *( "." name )
+name     = ALPHA *( ALPHA / DIGIT / "_" / "-" )
+matcher  = key "=" value
+key      = ALPHA *( ALPHA / DIGIT / "_" )
+value    = 1*( unreserved / pct-encoded )
+move     = "observe" / "rewrite" / "answer"
+```
+
+The grammar admits no whitespace. Event names, keys and values are case-sensitive and are compared as the host writes them. A declaration is in canonical form when:
+
+1. its matchers are sorted by key in ascending code-point order, and no key appears twice;
+2. every octet of a value outside `unreserved` is percent-encoded from its UTF-8 bytes, and nothing else is;
+3. percent-encodings use uppercase hexadecimal digits.
+
+An implementation that checks a mod MUST bring both the declared hooks and the host-derived hooks to canonical form before comparing them, and then compare the strings byte for byte. A declaration that does not match the grammar MUST fail the check. For example, a hook on `tool.call` matching the Bash tool and the working directory `/srv/app` is written `tool.call{cwd=%2Fsrv%2Fapp,tool=Bash}:answer`.
+
+A mod carries these fields in the carriers its files already use: a root `mx` object in a JSON plugin manifest, and `@mx:` tags in the module's leading JSDoc block (§3.3).
+
+```json
+{
+  "name": "blast-radius",
+  "version": "0.1.0",
+  "mx": {
+    "modHooks": ["tool.call{tool=Bash}:answer", "ui.render{component=Pane}:observe"],
+    "modCapabilities": ["process", "ui", "session"],
+    "modGuarantee": "A safety net that reads the command text; not a permission system.",
+    "testedWith": "claude-code@2.1.287"
+  }
+}
+```
+
+**Declared against derived (Normative).** Where the host can derive a mod's hooks and API calls from its source, an implementation that checks a mod MUST compare the derivation with `modHooks` and `modCapabilities`. A hook or capability found in the code but missing from the declaration MUST fail the check. A declared hook or capability the source no longer uses SHOULD be reported as stale. A mod whose hooks include a `rewrite` or `answer` move SHOULD contribute a step to the provenance record of any decision it shaped; a mod that only observes need not.
 
 ---
 
@@ -4254,6 +4345,8 @@ MX is explicit about deferring to established vocabularies:
 ### 9.1 Normative references
 
 - [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) — Key words for use in RFCs to indicate requirement levels
+- [RFC 3986](https://www.rfc-editor.org/rfc/rfc3986) - Uniform Resource Identifier generic syntax (`unreserved` and `pct-encoded`, used by the §5.4 hook string)
+- [RFC 5234](https://www.rfc-editor.org/rfc/rfc5234) - Augmented BNF for syntax specifications (the §5.4 hook-string grammar)
 
 ### 9.2 Informative references — external standards MX defers to
 

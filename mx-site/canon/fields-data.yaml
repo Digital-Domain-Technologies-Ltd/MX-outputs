@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.7'
+version: '6.52'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-10-13'
+modified: '2026-10-17'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -366,7 +366,6 @@ mx:
     action-doc: action
     cog: cog
     eds-block: cog
-    certificate-of-genuineness: cog
     book-chapter: book
     book-appendix: book
     blog-post: blog
@@ -1686,7 +1685,7 @@ mx:
       overlap: false
       reason: >-
         Different scopes. contentType classifies the document format (guide, specification, script). cogType classifies
-        the cog behaviour (info, action, routing, certificate-of-genuineness).
+        the cog behaviour (info, action, routing).
     - fields:
         - description
         - purpose
@@ -2668,6 +2667,54 @@ mx:
         being repeated, retrieved or agreed with is not evidence and never revises a basis.
       status: canonical
       profile: core
+    - name: claims[].checkedOn
+      type: string
+      inPlainWords: 'This claim was last checked against its source on {value}.'
+      authoring: authored
+      definition: The ISO 8601 date on which the claim was last verified against the source its basis names.
+      example: '2026-10-16'
+      notes: >-
+        Distinct from recordedAt, which dates when the claim was written down. A claim can be recorded once and
+        checked many times; each check that finds the claim still true moves checkedOn and leaves recordedAt alone.
+        A check that finds it false changes the statement or the basis, and revisedBecause names why.
+      status: canonical
+      profile: core
+    - name: claims[].recheckBy
+      type: string
+      inPlainWords: 'This claim must be checked again by {value}.'
+      authoring: authored
+      definition: >-
+        The ISO 8601 date by which the claim must be verified again, because the fact it states can change.
+      example: '2026-12-04'
+      notes: >-
+        Declared on a claim whose truth depends on time: a pending court ruling, a compliance deadline, a figure
+        that is revised, a date a legislator can move. Past this date a reader treats the claim as unverified,
+        whatever its basis, until checkedOn moves past it. The document is due for review on the earliest
+        recheckBy among its claims. A claim that does not change carries no recheckBy.
+      status: canonical
+      profile: core
+    - name: legalInstruments
+      type: array
+      inPlainWords: 'It makes claims under these laws and regulations: {value}.'
+      authoring: authored
+      definition: >-
+        The laws, regulations, standards and court proceedings this document makes claims under, so that a change
+        to any of them obliges the document to be checked again.
+      example:
+        - eu-accessibility-act
+        - eu-ai-act-article-50
+        - us-ada-title-ii-web-rule
+        - EN 301 549
+      notes: >-
+        Operational governance, not subject matter: the field names the instruments whose change puts the
+        document's claims at risk, and a document carrying it is one a reader treats as legal or regulatory
+        content (general information, never legal advice, unless it says otherwise). Each entry is a stable
+        instrument identifier where the publisher keeps a register of instrument dates, otherwise the
+        instrument's own citation as text. Distinct from applicability.jurisdiction, which says where the document
+        is in force, and from entities, which names what the document is about.
+      status: canonical
+      profile: core
+      context: 'Declared on any document that states what a law, regulation or ruling requires, allows or decided.'
     - name: quotes
       type: array
       authoring: authored
@@ -3262,7 +3309,7 @@ mx:
       authoring: authored
       definition: >-
         How long an agent or resolver may cache this document's content before it must be re-fetched. Named tiers map to
-        durations. A custom duration string (e.g., '4h', '30d') is also accepted.
+        durations; the five tiers are the only accepted values.
       example: long-lived
       validValues:
         - ephemeral
@@ -3282,8 +3329,6 @@ mx:
         - long-lived: cache for up to 1 week (e.g., documentation, guides)
 
         - permanent: cache indefinitely until the document changes (e.g., specifications, standards)
-
-        Custom durations use the format: number + unit (s, m, h, d, w). Examples: '30m', '4h', '30d'.
 
         Distinct from stability (content reliability) and lifecycle (development phase). Cacheability is about temporal
         validity — how quickly the content goes stale.
@@ -3682,6 +3727,26 @@ mx:
       notes: ROUTING.cog.md only. Route hint for agents. Distinct from tags.
       status: canonical
       profile: routing
+    - name: routing
+      type: object
+      inPlainWords: 'It routes queries by {value}.'
+      authoring: authored
+      optionalIn: [routing]
+      definition: >-
+        The routing table of a routing cog: the intents a machine may arrive with, each mapped to the folder or file
+        that answers it, so an agent reads a route instead of inferring one.
+      example:
+        by-intent:
+          - intent: why-architecture
+            question: Why was this built this way?
+            route: registers/ADR/
+      notes: >-
+        ROUTING.cog.md only. Each entry names an intent, the question it answers and its route, and may add a file
+        pattern, the key fields to read there, and a note. Sibling sections such as the lifecycle flows and the
+        not-here redirects sit inside the same object. Distinct from keyFields, which directs attention within a
+        folder the route has already reached.
+      status: canonical
+      profile: routing
     - name: book
       type: string
       inPlainWords: 'It belongs to the book {value}.'
@@ -3872,16 +3937,14 @@ mx:
       type: string
       authoring: authored
       optionalIn: [cog, action]
-      definition: 'Cog type classification. Values: info, action, routing, certificate-of-genuineness.'
+      definition: 'Cog type classification. Values: info, action, routing.'
       example: info
       validValues:
         - info
         - action
         - routing
-        - certificate-of-genuineness
       notes: >-
-        Info = reference, action = has execute block, routing = agent navigation, certificate-of-genuineness =
-        publisher-provenanced credential with publisher block.
+        Info = reference, action = has execute block, routing = agent navigation.
       status: canonical
       profile: cog
     - name: maintainedDate
@@ -3917,7 +3980,11 @@ mx:
       notes: >-
         Declares creation method. Part of the provenance group. ai-generated and ai-manipulated carry the
         EU AI Act Article 50 distinction between machine-created content and human-origin content a machine
-        materially altered; MXS-03 defines all five values normatively.
+        materially altered; MXS-03 defines all five values normatively. Recognised outside vocabularies map
+        onto it approximately, and each keeps its own definition: DDEX Gen AI designations Fully Gen AI to
+        ai-generated, Partly Gen AI to ai-assisted, No Gen AI to human-directed; IPTC DigitalSourceType
+        trainedAlgorithmicMedia to ai-generated. An absent value means not declared. Appendix M 22.O carries
+        the crosswalk and where each threshold differs.
       status: canonical
       profile: core
     - name: provenanceUri
@@ -4889,6 +4956,25 @@ mx:
         - schema:translator
       status: canonical
       profile: any
+    - name: termGlossary
+      type: object
+      authoring: authored
+      definition: >-
+        The load-bearing terms a document binds, each mapped to the sense it carries in this document, so a reader, a
+        translator or an agent applies that sense instead of inferring one.
+      example:
+        notario: >-
+          State-appointed mandatory signatory for property transactions under Spanish civil law; not a party's legal
+          representative.
+      notes: >-
+        Each key is a term as the document writes it. A value is either the sense as one sentence, or an object with
+        sense, render (keyed by BCP 47 language tag: the term a translation must use) and avoid (keyed by language
+        tag: renderings known to be wrong, and loanwords to avoid where the language has its own word). An entry
+        corresponds to a concept entry in TBX (TermBase eXchange): the render term carries the administrative status
+        preferredTerm and each avoid term deprecatedTerm. Declare only the terms a wrong reading would change; a
+        glossary of every word is the over-annotation the field exists to avoid.
+      status: canonical
+      profile: any
     - name: displayName
       type: string
       inPlainWords: 'It is shown as {value}.'
@@ -5162,13 +5248,35 @@ mx:
       profile: cog
     - name: reviewCycle
       type: string
+      inPlainWords: 'It is reviewed for accuracy {value}.'
       authoring: authored
       optionalIn: [cog, action]
-      definition: How often this cog's content is reviewed for accuracy.
+      definition: >-
+        How often this document's content is reviewed for accuracy: daily, weekly, monthly, quarterly or annually,
+        or an ISO 8601 duration.
       example: quarterly
-      notes: Part of the trust metadata group. Helps agents assess content freshness expectations.
+      notes: >-
+        Part of the trust metadata group. Declared on content that changes and needs regular review. With
+        lastReviewed it gives the date the next review is due: lastReviewed plus one cycle. A named cycle maps to
+        a duration (daily P1D, weekly P7D, monthly P1M, quarterly P3M, annually P1Y); any other value is an ISO
+        8601 duration such as P90D.
       status: canonical
-      profile: cog
+      profile: core
+      context: 'Declared on any document whose content goes out of date on a known rhythm.'
+    - name: lastReviewed
+      type: string
+      inPlainWords: 'Its content was last reviewed for accuracy on {value}.'
+      authoring: authored
+      optionalIn: [cog, action]
+      definition: The ISO 8601 date on which the document's content was last reviewed for accuracy as a whole.
+      example: '2026-10-16'
+      notes: >-
+        Distinct from modified, which moves on any edit, including a typo fix, and does not say the content was
+        checked. A review that finds nothing to change still moves lastReviewed. With reviewCycle it gives the
+        date the next review is due; a document whose due date has passed reads as unreviewed.
+      status: canonical
+      profile: core
+      context: 'Declared alongside reviewCycle on any document that is reviewed on a rhythm.'
     - name: semantic
       type: boolean-string-or-object
       authoring: authored
@@ -5609,6 +5717,51 @@ mx:
       notes: Read by chain and evidence-pack checkers, which refuse a card that left Backlog with nobody named here.
       status: canonical
       profile: core
+    - name: completeness
+      type: object
+      inPlainWords: 'Whether its list is complete: {value}.'
+      authoring: authored
+      optionalIn: [core]
+      definition: >-
+        Whether the enumeration a document carries is exhaustive, what it covers, and the date that holds, so a reader
+        can tell an entry that is absent from one the document never set out to list.
+      example:
+        exhaustive: true
+        asOf: 2026-10-16
+        scope: UK stockists with a physical shop
+      notes: >-
+        A declaration, never defaulted: an absent block keeps the open-world reading, in which a missing entry is
+        unknown rather than absent. Only exhaustive: true licenses a negative conclusion about a missing entry, and
+        only within the scope and as of the date given. A completeness claim is still a claim; a decision that depends
+        on it looks for corroboration like any other. Distinct from Dublin Core coverage, which names the spatial or
+        temporal topic of a resource. Pairs with actions[].withheldFrom, which declares one deliberate omission
+        rather than leaving it silent.
+      status: canonical
+      profile: core
+    - name: completeness.exhaustive
+      type: boolean
+      authoring: authored
+      definition: Whether the enumeration lists every item within its scope, so that an entry missing from it is absent rather than unknown.
+      example: true
+      notes: Required inside completeness; a block without it is not a statement and a reader treats it as absent. false declares a selection, the open-world reading made explicit.
+      status: canonical
+      profile: core
+    - name: completeness.asOf
+      type: string
+      authoring: authored
+      definition: The ISO 8601 date on which the completeness statement held.
+      example: 2026-10-16
+      notes: A negative is a claim about a moment. Without a date a reader treats the statement as unconfirmed, never as permanent.
+      status: canonical
+      profile: core
+    - name: completeness.scope
+      type: string
+      authoring: authored
+      definition: One sentence naming what the enumeration covers, and so what it does not.
+      example: UK stockists with a physical shop
+      notes: An exhaustive claim with no scope is read as covering only what the document visibly lists.
+      status: canonical
+      profile: core
   profiles:
     - name: core
       description: Fields that apply to all MX documents.
@@ -5661,6 +5814,7 @@ mx:
         - ld
         - readingLevel
         - conformsTo
+        - completeness
         - x-mx-pim
     - name: cog
       description: >-
@@ -5723,6 +5877,7 @@ mx:
         - generate
         - mxCompliance
         - reviewCycle
+        - lastReviewed
         - semantic
         - source
         - updateTriggers
@@ -5852,6 +6007,7 @@ mx:
         - generate
         - mxCompliance
         - reviewCycle
+        - lastReviewed
         - semantic
         - source
         - updateTriggers
@@ -5979,6 +6135,7 @@ mx:
         - tags
         - type
         - resource
+        - routing
     - name: skill
       description: Fields for .claude/skills/*/skill.md files. Three-layer contract (Anthropic runtime, OKF discoverability, MX estate integration).
       header: |

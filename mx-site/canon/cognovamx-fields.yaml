@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '2.0'
+version: '2.2'
 created: '2026-04-15'
-modified: '2026-10-12'
+modified: '2026-10-13'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -427,6 +427,69 @@ mx:
       notes: Gate 54 (scripts/check-needed-for.cjs) refuses a value that is not a task in the registry.
       status: canonical
       profile: any
+    - name: x-mx-scope
+      type: string
+      authoring: authored
+      inPlainWords: 'It covers {value}.'
+      definition: The subject a cog or its sidecar covers, as a short slug the registry lists it under.
+      example: who-maxine-is
+      notes: >-
+        Distinct from the action-cog runtime scope object, which constrains what an executing cog may touch; this is a
+        subject label for a registry listing.
+      status: canonical
+      profile: any
+    - name: x-mx-voice
+      type: string
+      authoring: authored
+      inPlainWords: 'It is written in {value}.'
+      definition: Who speaks in a document and where, when it has more than one narrative voice.
+      example: dual - the author introduces, the partner speaks in designated sections
+      status: canonical
+      profile: any
+    - name: x-mx-disclosureLevel
+      type: string
+      authoring: authored
+      inPlainWords: 'It discloses {value}.'
+      definition: How much of the underlying system a document reveals, in the author's words.
+      example: philosophy and outcomes only, no implementation details
+      notes: >-
+        An editorial boundary for a published document, not a personal-cog disclosureTier: it constrains what the
+        author writes, not what a reader app may share.
+      status: canonical
+      profile: any
+    - name: x-mx-regeneration
+      type: object
+      authoring: authored
+      inPlainWords: 'It is regenerated from {value}.'
+      definition: The prompt and source documents that regenerate a document, so the next writer can rebuild it.
+      example:
+        prompt: Regenerate the identity cog from the source documents.
+        sources:
+          - SOUL.md
+      notes: The prompt is an instruction to the next machine; the sources are paths it must read first.
+      status: canonical
+      profile: any
+    - name: x-mx-clientId
+      type: string
+      authoring: authored
+      inPlainWords: 'It belongs to the client {value}.'
+      definition: The lowercase, hyphenated identifier of the publisher a registry directory holds cogs for.
+      example: mx-reginald
+      status: canonical
+      profile: folder
+    - name: x-mx-block
+      type: object
+      authoring: authored
+      inPlainWords: 'It describes the block {value}.'
+      definition: >-
+        The content model of an Edge Delivery Services block: its version and the rows and columns an author fills in.
+      example:
+        version: '1.0'
+        contentModel:
+          rows:
+            - purpose: Site logo and home link
+      status: canonical
+      profile: cog
     - name: x-mx-contactKind
       type: string
       authoring: authored
@@ -1319,13 +1382,17 @@ mx:
       definition: >-
         Content workflow position. Distinct from status - x-mx-contentState tracks where content is in the editorial
         pipeline and drives publish routing (draft routes to the noindex draft tree, published to the live tree).
-        Values: draft, in-review, published, archived.
+        Values: draft, in-review, published, archived, shared, expired. shared and expired are the private states of a
+        page sent to named recipients: it is never routed under mx-site/, never listed on a lander and never put in a
+        public corpus.
       example: draft
       validValues:
         - draft
         - in-review
         - published
         - archived
+        - shared
+        - expired
       notes: >-
         CogNovaMX editorial-pipeline concept, not a Gathering open-standard field. The enum matches the routing
         generator, its single consumer. The bare `contentState` name is a deprecated synonym; see fields-data.yaml's
@@ -1336,6 +1403,48 @@ mx:
       status: canonical
       profile: x-mx-public
       context: 'Declared on blog posts and other Intent-CMS-managed content to drive draft-vs-published routing.'
+    - name: x-mx-shareRecipients
+      type: array
+      authoring: authored
+      inPlainWords: 'It is shared with {value}.'
+      definition: >-
+        Who may sign in to read a shared page: email addresses, or @domain entries that admit every address at that
+        domain. Required when x-mx-contentState is shared.
+      example: ['client@example.com', '@example.org']
+      notes: >-
+        Read by the share tool, which creates the sign-in gate for these recipients before anything is uploaded, and
+        adds the operator's own address at share time without writing it into the source. Never published: a shared
+        page has no public URL.
+      status: canonical
+      profile: x-mx-private
+      context: 'Declared on an Intent CMS page sent to named recipients (design: mx-canon/mx-os/intent-cms-shared-expired-states.cog.md).'
+    - name: x-mx-shareExpires
+      type: string
+      authoring: authored
+      inPlainWords: 'The share ends at {value}.'
+      definition: >-
+        The ISO 8601 date-time after which a shared page answers 410 Gone. Required when x-mx-contentState is shared or
+        expired; every share expires, and there is no permanent private link.
+      example: '2026-11-01T00:00:00Z'
+      notes: >-
+        Expiry is decided at serve time from this date, so the served answer never waits for the stored state to catch
+        up. Expiry stops serving; it does not delete the stored copy (revoke does).
+      status: canonical
+      profile: x-mx-private
+      context: 'Declared on an Intent CMS page sent to named recipients.'
+    - name: x-mx-shareId
+      type: string
+      authoring: defaulted
+      inPlainWords: 'Its share link is named {value}.'
+      definition: >-
+        The random 24-character lower-case hex name a shared page's link uses. Required when x-mx-contentState is shared
+        or expired. Written by the share tool, never chosen by hand.
+      example: 0123456789abcdef01234567
+      notes: >-
+        Republishing keeps the same id, so a recipient's link always opens the newest version.
+      status: canonical
+      profile: x-mx-private
+      context: 'Written by the share tool on an Intent CMS page sent to named recipients.'
     - name: x-mx-sessionState
       type: string
       authoring: authored
@@ -1622,7 +1731,7 @@ mx:
       inPlainWords: 'Its governance class is {value}.'
       definition: The governance classification of a specification document; cogs marks a Community Owned Governance Standard, governed at The Gathering.
       example: cogs
-      notes: A different item from the standard cogType (info, action, routing, certificate-of-genuineness).
+      notes: A different item from the standard cogType (info, action, routing).
       status: canonical
       profile: x-mx-public
       context: 'Declared on a specification cog.'

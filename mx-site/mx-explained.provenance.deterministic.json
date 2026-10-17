@@ -7,7 +7,7 @@
     "description": "Evidence chain of the rule-driven steps (gate verdicts, renders, probes) behind mx-explained.pdf.",
     "author": "Tom Cranstoun",
     "created": "2026-09-24",
-    "modified": "2026-09-30",
+    "modified": "2026-10-13",
     "version": "1",
     "type": "provenance-record",
     "tags": [
@@ -53,7 +53,7 @@
   "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). Designed as evidence for the deterministic-conformance regime (EAA Directive 2019/882); the Level 2 tagged PDF and per-page accessibility verdicts come from these steps. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
   "auditId": null,
   "runRevision": 1,
-  "lastWriteAt": "2026-09-30T20:22:33.982Z",
+  "lastWriteAt": "2026-10-13T15:06:59.869Z",
   "operator": "Tom Cranstoun",
   "parties": [
     {
@@ -122,7 +122,8 @@
       "days": [
         "2026-09-24",
         "2026-09-25",
-        "2026-09-30"
+        "2026-09-30",
+        "2026-10-13"
       ],
       "header": "provenance.ai.json",
       "steps": "provenance.steps.jsonl",
@@ -235,6 +236,18 @@
     },
     {
       "timestamp": "2026-09-30T20:22:33.982Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "mx-explained.md",
+        "doctype": "info-doc",
+        "sourceSha": "22206775c9794ef86235f519a470fc6498d1f007",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/mx-explained.md"
+      },
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-10-13T15:06:59.869Z",
       "stepId": "pdf-render",
       "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
       "inputs": {

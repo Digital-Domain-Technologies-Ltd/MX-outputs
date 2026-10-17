@@ -1,0 +1,130 @@
+{
+  "$schema": "https://mx.allabout.network/schemas/provenance-deterministic/v2",
+  "schemaVersion": "2.0",
+  "mx": {
+    "@context": "https://mx.allabout.network/canon/context.json",
+    "title": "Deterministic provenance record for AI-USAGE.pdf",
+    "description": "Evidence chain of the rule-driven steps (gate verdicts, renders, probes) behind AI-USAGE.pdf.",
+    "author": "Tom Cranstoun",
+    "created": "2026-10-13",
+    "modified": "2026-10-13",
+    "version": "1",
+    "type": "provenance-record",
+    "tags": [
+      "provenance",
+      "deterministic-evidence-chain",
+      "reginald"
+    ],
+    "status": "active",
+    "purpose": "Let a reader (human, agent, or regulator) walk every rule-driven step behind AI-USAGE.pdf and reproduce its verdicts. An evidence vehicle, not a compliance grant.",
+    "audience": [
+      "machines",
+      "humans"
+    ],
+    "inLanguage": "en",
+    "isGenerated": true,
+    "generatedBy": "mx-reginald/lib/provenance.js",
+    "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/AI-USAGE.provenance.deterministic.json",
+    "refersTo": [
+      "mx-site/AI-USAGE.pdf"
+    ]
+  },
+  "artefactMx": {
+    "carrier": "pdf-xmp",
+    "source": "mx-site/AI-USAGE.md",
+    "sourceName": "AI-USAGE.md",
+    "fields": {
+      "Author": "Tom Cranstoun",
+      "Version": "1.0",
+      "Created": "2026-05-17",
+      "Modified": "2026-09-29",
+      "MxSpecVersion": "0.9",
+      "Status": "active",
+      "Audience": [
+        "humans",
+        "machines"
+      ],
+      "CanonicalUrl": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/AI-USAGE.md",
+      "Summary": "How AI was used in the writing of the MX book series. Author's declaration on authorship, machine assistance, and the relationship between the two."
+    },
+    "note": "The XMP-mx fields the artefact carries, from one definition (scripts/lib/pdf/xmp-fields.cjs). SourceSha is stamped into the XMP after the source frontmatter is updated, so it is recorded in each pdf-render step as inputs.sourceSha rather than here; ProvenanceAiPayload embeds this record itself and is never repeated inside it."
+  },
+  "_description": "Deterministic evidence chain. One entry per rule-driven pipeline step (gate verdict, CSV check, regex match, render step, probe result). It records how the deterministic checks ran (among them the PDF structure check and the per-page automated accessibility results) so they can be reproduced; it cites no regime by default and is not evidence of conformance with any law. Adjacent on disk only; the artefact frontmatter does NOT embed a pointer to this file (the .ai.json companion is the regulator-facing one).",
+  "auditId": null,
+  "runRevision": 1,
+  "lastWriteAt": "2026-10-13T15:06:36.820Z",
+  "operator": "Tom Cranstoun",
+  "parties": [
+    {
+      "role": "auditOperator",
+      "name": "Tom Cranstoun",
+      "email": "info@cognovamx.com",
+      "identifier": "https://allabout.network",
+      "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+      "country": "GB"
+    }
+  ],
+  "responsiblePerson": {
+    "name": "Tom Cranstoun",
+    "email": "info@cognovamx.com",
+    "identifier": "https://allabout.network",
+    "role": "auditOperator",
+    "organisation": "Digital Domain Technologies Ltd (trading as CogNovaMX)",
+    "country": "GB"
+  },
+  "target": null,
+  "workflowId": null,
+  "workflowRecord": null,
+  "residualRisk": null,
+  "startedAt": "2026-10-13T15:06:35.068Z",
+  "frameworks": [],
+  "frameworksCited": [],
+  "companion": "AI-USAGE.provenance.ai.json",
+  "provenance": {
+    "repo": "Digital-Domain-Technologies-Ltd/MX-hub",
+    "commit": {
+      "sha": "627c0846a41b8b5d66b3cf44ebd9d6f402f02033",
+      "shortSha": "627c084"
+    },
+    "branch": "worktree-correct-public-pdf-ua",
+    "dirty": null,
+    "nodeVersion": "v26.10.0",
+    "host": "toms-MacBook-Pro-3.local",
+    "platform": "darwin",
+    "arch": "arm64",
+    "osRelease": "27.0.0",
+    "defaults": {
+      "agent": "deterministic",
+      "humanIntervention": "none",
+      "frameworks": []
+    }
+  },
+  "monitoring": {
+    "aiLog": {
+      "enabled": true,
+      "available": true,
+      "root": "~/ai-log",
+      "days": [
+        "2026-10-13"
+      ],
+      "header": "provenance.ai.json",
+      "steps": "provenance.steps.jsonl",
+      "index": "hash.index.csv",
+      "summary": {}
+    }
+  },
+  "steps": [
+    {
+      "timestamp": "2026-10-13T15:06:36.820Z",
+      "stepId": "pdf-render",
+      "intent": "Tagged PDF produced from the named source via mx.pdf.sh. Deterministic facts: source content hash, doctype, output path.",
+      "inputs": {
+        "source": "AI-USAGE.md",
+        "doctype": "info-doc",
+        "sourceSha": "4452e25188261babf6765cf6fe4ae9110465fb4d",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/AI-USAGE.md"
+      },
+      "outcome": "pass"
+    }
+  ]
+}

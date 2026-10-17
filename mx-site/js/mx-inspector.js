@@ -33,6 +33,7 @@ import {
   RELATIONSHIP_FIELDS,
 } from './component-mx.js';
 import { el } from './mx-dom.js';
+import { readApproval } from './pdf-auditor-core.js';
 
 // The dictionary's profile table (generated from fields-data.yaml by
 // scripts/gen-mx-profiles.cjs). Loaded once; null when it cannot be fetched, and
@@ -122,6 +123,34 @@ async function loadPdfJs() {
     return mod;
   });
   return pdfjsLoadPromise;
+}
+
+const DECISION_LABELS = { approved: 'Approved', 'changes-requested': 'Changes requested', rejected: 'Rejected' };
+
+// The decision a PDF records (written by the PDF auditor, /tools/pdf-auditor.html),
+// checked against the bytes it names: the first ApprovedLength bytes must hash to
+// ApprovedSha256, and anything appended after the decision is called out.
+function approvalSection(approval) {
+  const f = approval.fields;
+  const status = !approval.bytesMatch
+    ? { cls: 'is-fail', text: 'The approved bytes do not match the recorded hash: the file was changed inside the part that was approved.' }
+    : approval.changedAfter
+      ? { cls: 'is-warn', text: 'The approved bytes match, but more was added to the file after the decision.' }
+      : { cls: 'is-pass', text: 'The approved bytes match the recorded hash, and nothing was added after the decision.' };
+  const rows = [
+    ['Decision', DECISION_LABELS[f.ApprovalDecision] || f.ApprovalDecision],
+    ['Approved by', f.ApprovedBy],
+    ['Date', f.ApprovedAt],
+    ['Notes', f.ApprovalNotes],
+    ['Approved bytes', f.ApprovedLength ? `${f.ApprovedLength} bytes` : null],
+    ['SHA-256', f.ApprovedSha256],
+  ].filter(([, v]) => v);
+  return el('section', { class: 'tool-approval', 'data-mx-approval': f.ApprovalDecision },
+    el('h3', { text: 'Recorded decision' }),
+    el('p', { class: `tool-approval-status ${status.cls}`, text: status.text }),
+    el('table', { class: 'tool-evidence' },
+      el('tbody', {}, ...rows.map(([k, v]) => el('tr', {}, el('th', { scope: 'row', text: k }), el('td', { text: v }))))),
+    el('p', {}, 'Recorded with the ', el('a', { href: '/tools/pdf-auditor.html', text: 'PDF Auditor' }), '. A recorded decision is a statement tied to the bytes by their hash; it is not a cryptographic signature.'));
 }
 
 function escapeHtml(s) {
@@ -345,13 +374,18 @@ async function inspectFile(file, resultsEl, busyEl) {
   try {
     let findings;
     let classification;
+    let approval = null;
     if (carrier === 'pdf') {
       busyEl.textContent = 'Loading inspector…';
       const pdfjs = await loadPdfJs();
       busyEl.textContent = 'Reading PDF…';
       const arrayBuffer = await file.arrayBuffer();
+      // pdf.js transfers (detaches) the buffer it is given, so the approval check
+      // reads its own copy first.
+      const approvalPromise = readApproval(new Uint8Array(arrayBuffer.slice(0))).catch(() => null);
       const pdfDoc = await pdfjs.getDocument({ data: arrayBuffer }).promise;
       ({ findings, classification } = await inspectPdfDoc(pdfDoc));
+      approval = await approvalPromise;
     } else if (carrier === 'raster') {
       const bytes = new Uint8Array(await file.arrayBuffer());
       ({ findings, classification } = inspectCarrier({ carrier, filename: file.name, bytes, profileData: await loadProfiles() }));
@@ -362,6 +396,7 @@ async function inspectFile(file, resultsEl, busyEl) {
 
     busyEl.hidden = true;
     renderResults(file, carrier, classification, findings, resultsEl);
+    if (approval) resultsEl.appendChild(approvalSection(approval));
 
     // Any carrier that embeds a parseable provenance chain (PDF XMP, decorated
     // raster/SVG, or an HTML page) opens the evidence-chain view.

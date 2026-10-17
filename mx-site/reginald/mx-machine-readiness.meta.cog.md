@@ -29,7 +29,7 @@ originator: "Tom Cranstoun"
 author: "Tom Cranstoun"
 
 created: 2026-05-07
-modified: 2026-09-29
+modified: 2026-10-13
 version: "2.2"
 
 schema: ./schemas/mx-meta-cog.v1.yaml
@@ -411,7 +411,7 @@ These three fields live under `x-mx-` per Note 3 §6.5: the bare names are reser
 
 `[Public extension · mx.x-mx-cog-id]` - string. Unique cog identifier within the registry, typically derived from the filename without `.cog.md`. MUST be unique within its `mx.partOf` namespace.
 
-`[Public extension · mx.x-mx-cog-type]` - string. Cog classification. Common values: `info`, `action`, `routing`, `certificate-of-genuineness`, `cogs`. The position-paper cog uses `info`.
+`[Public extension · mx.x-mx-cog-type]` - string. Cog classification. Common values: `info`, `action`, `routing`, `cogs`. The position-paper cog uses `info`.
 
 `[Public extension · mx.x-mx-cog-category]` - string. Registry grouping; coarser than `cog-type`.
 

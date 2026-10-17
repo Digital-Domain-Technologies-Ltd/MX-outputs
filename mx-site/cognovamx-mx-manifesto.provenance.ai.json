@@ -7,7 +7,7 @@
     "description": "Evidence chain of the non-deterministic steps (model calls, agent work, human-committed actions) behind cognovamx-mx-manifesto.pdf.",
     "author": "Tom Cranstoun",
     "created": "2026-09-25",
-    "modified": "2026-09-25",
+    "modified": "2026-10-13",
     "version": "1",
     "type": "provenance-record",
     "tags": [
@@ -29,10 +29,39 @@
       "mx-site/cognovamx-mx-manifesto.pdf"
     ]
   },
+  "artefactMx": {
+    "carrier": "pdf-xmp",
+    "source": "cognovamx-mx-manifesto.md",
+    "sourceName": "cognovamx-mx-manifesto.md",
+    "fields": {
+      "Author": "Tom Cranstoun",
+      "Version": "1.14",
+      "Created": "2026-06-09",
+      "Modified": "2026-10-10",
+      "MxSpecVersion": "0.9",
+      "Status": "active",
+      "Audience": [
+        "humans",
+        "machines",
+        "business"
+      ],
+      "CanonicalUrl": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/cognovamx-mx-manifesto.md",
+      "RelatedDocs": [
+        "scripts/cogs/manual-repository-architecture.cog.md",
+        "mx-canon/ssot/human-in-command.cog.md",
+        "datalake/manuscripts/mx-books/shared/machine-experience-manifesto.md",
+        "datalake/draft-site/blog/foundations/mx-manifesto.md",
+        "mx-canon/mx-the-gathering/draft-manifesto.md",
+        "datalake/pipeline/drafts/ideas/manifesto.md"
+      ],
+      "Summary": "The publishing contract was written for humans. Machines now read everything. MX is the metadata that lets that contract hold for them."
+    },
+    "note": "The XMP-mx fields the artefact carries, from one definition (scripts/lib/pdf/xmp-fields.cjs). SourceSha is stamped into the XMP after the source frontmatter is updated, so it is recorded in each pdf-render step as inputs.sourceSha rather than here; ProvenanceAiPayload embeds this record itself and is never repeated inside it."
+  },
   "_description": "AI evidence chain. One entry per non-deterministic pipeline step (LLM call, multi-agent collector, human-committed action). Designed as evidence for AI-governance regimes (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act, and adjacent regimes enumerated in frameworks[]). The companion .provenance.deterministic.json carries rule-driven steps separately. The artefact frontmatter carries a pointer to THIS file; the AI stream is the regulator-relevant one.",
   "auditId": null,
   "runRevision": 1,
-  "lastWriteAt": "2026-09-25T08:22:06.452Z",
+  "lastWriteAt": "2026-10-13T15:06:48.856Z",
   "operator": "Tom Cranstoun",
   "parties": [
     {
@@ -383,7 +412,8 @@
       "available": true,
       "root": "~/ai-log",
       "days": [
-        "2026-09-25"
+        "2026-09-25",
+        "2026-10-13"
       ],
       "header": "provenance.ai.json",
       "steps": "provenance.steps.jsonl",
@@ -431,6 +461,19 @@
       "agent": "human-committed",
       "intent": "Operator (Tom Cranstoun) reviewed the humanized manifesto and the rendered PDF and approved publication at https://mx.allabout.network/cognovamx-mx-manifesto.pdf with the /manifesto short URL and last-page QR.",
       "humanIntervention": "review-after",
+      "outcome": "pass"
+    },
+    {
+      "timestamp": "2026-10-13T15:06:48.856Z",
+      "stepId": "pdf-render",
+      "agent": "mx.pdf.sh",
+      "intent": "Render cognovamx-mx-manifesto.md to tagged PDF via mx.pdf.sh (doctype: letter)",
+      "inputs": {
+        "source": "cognovamx-mx-manifesto.md",
+        "doctype": "letter",
+        "sourceSha": "c2d0b7911c602e37fbbcec4435239d9653857b56",
+        "canonicalUri": "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/cognovamx-mx-manifesto.md"
+      },
       "outcome": "pass"
     }
   ]
