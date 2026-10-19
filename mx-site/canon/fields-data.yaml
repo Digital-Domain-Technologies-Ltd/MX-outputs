@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.52'
+version: '6.53'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-10-17'
+modified: '2026-10-18'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -327,6 +327,9 @@ mx:
       - field: personalIdentity
         default: base
         absent-means: The personal cog belongs to every identity
+      - field: personalRole
+        default: [any]
+        absent-means: The personal cog takes part in every role
       - field: declaredBy
         default: self
         absent-means: The owner made the declaration
@@ -418,6 +421,14 @@ mx:
           Clean up cogs, then remove this lenient entry.
     excludeFromTopLevel:
       rule: 'Auto: any field whose name contains ''.'''
+    fieldStatus:
+      values: [canonical, experimental, deprecated]
+      canonical: Part of the standard. Readers honour it and its definition changes only through a recorded version bump.
+      experimental: >-
+        Defined so that early implementations share one spelling, while the proposal behind it is in Gathering review.
+        Readers MAY honour it; it may change shape or be withdrawn without a deprecations entry, and no conformance
+        level requires it. It graduates to canonical on Gathering adoption.
+      deprecated: Retained so old documents still validate; the deprecations table names its replacement.
   deprecations:
     - old: email
       replacement: x-mx-email
@@ -1368,6 +1379,116 @@ mx:
           description: >-
             Roles permitted to execute this cog. Bridges the guardrail pattern — declares which roles the gate should
             verify.
+    - name: mcpServer
+      implicit: false
+      status: experimental
+      description: >-
+        Experimental. The record an agent checks before it connects to a Model Context Protocol server. It pins the
+        server's identity and the exact lists it serves as SHA-256 digests of their RFC 8785 (JCS) canonical form, and
+        carries a registry status and an expiry. A conforming agent refuses the connection when the cog is revoked,
+        suspended, stale, unsigned, or when a live digest differs, and repeats the check on every list_changed
+        notification. An organisation's own overlay may narrow the block and never widen it. A publisher cog is
+        canonical in the ARD trustManifest, with a copy at the provisional path /.well-known/mx/mcp/<name>.cog.md;
+        shadow cogs live in registries.
+      fields:
+        - name: serverId
+          type: string
+          required: true
+          description: URN identifying the server; the ARD identifier (urn:ai:<publisher-fqdn>:<namespace>:<name>) where the server is in an ARD catalogue.
+        - name: transport
+          type: object
+          required: true
+          description: The transport type (stdio, streamable-http, or a later MCP transport) with its url for a network transport, or the command that starts it for stdio.
+        - name: claimBasis
+          type: string
+          required: true
+          validValues: [asserted, observed, corroborated]
+          description: >-
+            How the record is known, from the claimBasis vocabulary. A publisher cog is asserted until an observation
+            corroborates it; a shadow cog is observed or corroborated, never asserted.
+        - name: toolsetHash
+          type: string
+          required: true
+          description: Lowercase hex SHA-256 of the JCS form of the complete tools/list result, tools sorted by name.
+        - name: resourcesHash
+          type: string
+          required: false
+          description: The same digest over resources/templates/list, templates sorted by uriTemplate. Only when the server offers resources.
+        - name: promptsHash
+          type: string
+          required: false
+          description: The same digest over prompts/list, prompts sorted by name. Only when the server offers prompts.
+        - name: tools
+          type: array
+          required: true
+          description: One entry per tool.
+        - name: tools[].name
+          type: string
+          required: true
+          description: The tool's name as served.
+        - name: tools[].descriptionHash
+          type: string
+          required: true
+          description: SHA-256 of the tool's description string.
+        - name: tools[].effect
+          type: array
+          required: true
+          validValues: [read, write, destructive, external]
+          description: >-
+            Exactly one of read, write or destructive, plus external where it applies; mapped to MCP's readOnlyHint,
+            destructiveHint and openWorldHint.
+        - name: tools[].effectBasis
+          type: string
+          required: false
+          validValues: [documented, tested, both]
+          description: How an observer established the effect. A shadow cog cannot be corroborated while any effect is documented alone.
+        - name: tools[].annotationsServed
+          type: object
+          required: false
+          description: The annotations the server serves, recorded on a shadow cog where the observed effect differs from them.
+        - name: publisher
+          type: object
+          required: false
+          description: The publishing organisation's name and the domain that anchors its identity.
+        - name: returns.classification
+          type: object
+          required: false
+          description: >-
+            The ceiling on what the server may return, using the MX classification properties: sensitivity (public,
+            internal, confidential, restricted), pii, and piiType where pii is true.
+        - name: egress
+          type: array
+          required: false
+          description: Hosts the server declares it may send received data to. An empty list declares none beyond the agent.
+        - name: observedBy
+          type: string
+          required: false
+          description: On a shadow cog, who made the observation.
+        - name: observedAt
+          type: string
+          required: false
+          description: On a shadow cog, when the observation was made (RFC 3339).
+        - name: status
+          type: string
+          required: true
+          validValues: [active, suspended, revoked, unknown]
+          description: The registry status the cog was issued with; the live value is read from statusUrl.
+        - name: statusUrl
+          type: string
+          required: true
+          description: The registry address an agent queries for the current status.
+        - name: issuedAt
+          type: string
+          required: true
+          description: When the cog was signed (RFC 3339). On a shadow cog, not earlier than observedAt.
+        - name: validUntil
+          type: string
+          required: true
+          description: When the cog goes stale (RFC 3339). Defaults to 30 days after issuedAt and never more than 90.
+        - name: signature
+          type: string
+          required: true
+          description: Detached JWS (RFC 7515) over the JCS form of the block, by the publisher or the observer.
     - name: sop
       implicit: false
       virtual: true
@@ -5333,11 +5454,15 @@ mx:
         - interests
         - preferences
         - reception
+        - role
         - skills
       notes: >-
         reception is the push-reception policy: which broadcast categories the person accepts, and how often.
         preferences covers locale, marketplace, language, currency and display choices such as always opening the
-        reader view. A record that needs two kinds is two cogs, so each carries its own disclosureTier.
+        reader view. role is a setting rather than a record about the person: it selects the role named in its
+        personalRole on the sites its appliesToSites names (everywhere when absent), is never matched, and never
+        travels whatever its disclosureTier. A record that needs two kinds is two cogs, so each carries its own
+        disclosureTier.
       status: canonical
       profile: personal
     - name: personalIdentity
@@ -5354,6 +5479,29 @@ mx:
         Identities keep a person's facets apart: only the active identity's cogs take part in a match, so one identity
         never profiles another. base holds the human fundamentals (an access need, an allergy) that apply whichever
         identity is active. Identity names are the person's own; the field does not fix a list.
+      status: canonical
+      profile: personal
+    - name: personalRole
+      type: array
+      inPlainWords: 'It applies when the person acts as {value}.'
+      authoring: defaulted
+      requiredIn: [personal]
+      definition: >-
+        The roles in which a personal cog takes part, such as consumer, trade-buyer or carer; any places it in every
+        role. On a cog of personalKind role, the one role that cog selects.
+      example:
+        - consumer
+      default:
+        - any
+      notes: >-
+        A role is the capacity a person acts in towards a site, and is separate from personalIdentity, which groups the
+        person's own cogs. Only cogs whose personalRole names the active role, or any, take part in a match. The active
+        role is the one the person chose for the current session; failing that, the one the role cogs that apply on the
+        site select, the most specific first by the appliesToSites rules, with an unscoped role cog setting the default;
+        failing that, none, and only cogs for any take part. When the most specific role cogs on a site name different
+        roles, none is active. A reader that finds no personalRole reads any. A role name is lower case letters, digits
+        and hyphens; a cog whose every name is malformed takes part in no role. Role names are the person's own; the
+        field does not fix a list.
       status: canonical
       profile: personal
     - name: disclosureTier
@@ -5564,6 +5712,34 @@ mx:
         profile, and Gate 116 refuses an unknown name or a loosening member. See Appendix M for the security block
         fields and the named profiles.
       status: canonical
+      profile: cog
+    - name: mcpServer
+      type: object
+      authoring: authored
+      inPlainWords: 'Before connecting, an agent checks this MCP server against the record it carries: {value}.'
+      optionalIn: [cog]
+      definition: >-
+        Describes one Model Context Protocol server at one transport endpoint: who runs it, the exact tool, resource
+        and prompt lists it serves (as digests), what it may return, where it may send data, and its registry status,
+        so an agent can check the live server against the record before every session and refuse it on any mismatch.
+        The block is defined in the open standard (fields-data.yaml, blockTypes: mcpServer).
+      example:
+        serverId: 'urn:ai:tools.example.com:mcp:ticket-search'
+        transport:
+          type: streamable-http
+          url: 'https://tools.example.com/mcp'
+        claimBasis: observed
+        toolsetHash: 'sha256 of the JCS form of tools/list'
+        status: active
+        statusUrl: 'https://registry.example.org/status/urn:ai:tools.example.com:mcp:ticket-search'
+        issuedAt: '2026-10-15T09:30:00Z'
+        validUntil: '2026-11-14T09:30:00Z'
+      notes: >-
+        Experimental: the field and its block follow the MCP server cogs proposal, which is in Gathering review, and
+        may change or be withdrawn without a deprecation entry. A publisher cog is the server operator's own account
+        (claimBasis asserted); a shadow cog is a third party's dated observation (observed or corroborated). The
+        claimBasis member takes a subset of the claimBasis vocabulary (22.AH). See Appendix M 22.AN.
+      status: experimental
       profile: cog
     - name: includes
       type: array
@@ -5881,6 +6057,7 @@ mx:
         - semantic
         - source
         - updateTriggers
+        - mcpServer
         - includes
         - deliverable
         - dependencies
@@ -7008,6 +7185,7 @@ mx:
           status: active
           personalKind: dietary
           personalIdentity: base
+          personalRole: [any]
           disclosureTier: guarded
           discloseFor: [dining, groceries]
           declaredBy: self
@@ -7020,6 +7198,7 @@ mx:
         - created
         - modified
         - personalKind
+        - personalRole
         - disclosureTier
       recommended:
         - version
