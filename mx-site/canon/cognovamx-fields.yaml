@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '2.2'
+version: '2.3'
 created: '2026-04-15'
-modified: '2026-10-13'
+modified: '2026-10-19'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -1573,18 +1573,25 @@ mx:
       profile: x-mx-public
       context: 'Declared on a session memory cog so the reconciliation pass can tell whose memory an entry came from.'
     - name: x-mx-adr
-      type: string-or-object
+      type: object
       authoring: authored
       optionalIn: [cog, action]
-      definition: Architecture Decision Record reference. Links to the ADR that governs this cog's architectural choices.
-      example: mx-canon/mx-maxine-lives/registers/ADR/2026-02-13-mx-web-architecture.cog.md
+      definition: >-
+        The Architecture Decision Record's own block, carried by every record in the ADR register: its number, title,
+        status, date, context, decision and consequences, and its relations to the records that came after it.
+      example: '{number: 71, title: "A record is countable, or its absence is invisible", status: accepted, date: 2026-09-20, amendedBy: [96]}'
       notes: >-
-        CogNovaMX registry pointer, not a Gathering open-standard field. Path to the ADR file; a string (path) or an
-        object with path, date, and status. The bare `adr` name is a deprecated synonym; see fields-data.yaml's
-        deprecations table.
+        CogNovaMX registry block, not a Gathering open-standard field. Members number (a positive integer, unique in
+        the register), title, status (proposed, accepted, superseded, deprecated, rejected; mx.status mirrors it), date
+        (the filename's date), context, decision, consequences, and the relations supersedes, supersededBy, amends and
+        amendedBy. A relation names its target as a number in the same register or as "ADR n" or "BDR n" across
+        registers, a list for several, and is declared on both records; a record something supersedes carries status
+        superseded. scripts/lib/decision-register.cjs is the one reading of the block, and scripts/check-adr-numbers.cjs
+        (Gate 33, and Gate 0.56 at commit) holds the rules and writes a missing back-pointer. The bare `adr` name is a
+        deprecated synonym; see fields-data.yaml's deprecations table.
       status: canonical
       profile: x-mx-public
-      context: 'Declared on cog files whose architecture is governed by a recorded ADR.'
+      context: 'Declared on every record in mx-canon/mx-maxine-lives/registers/ADR/.'
     - name: x-mx-ndr
       type: string-or-object
       authoring: authored
@@ -1598,17 +1605,40 @@ mx:
       profile: x-mx-public
       context: 'Declared on cog files whose naming conventions are governed by a recorded NDR.'
     - name: x-mx-bdr
-      type: string-or-object
+      type: object
       authoring: authored
       optionalIn: [cog, action]
-      definition: Business Decision Record reference. Links to the BDR that governs business decisions.
-      example: mx-canon/mx-maxine-lives/registers/BDR/2026-02-28-company-rename.cog.md
+      definition: >-
+        The Business Decision Record's own block, carried by every record in the BDR register: its number, title,
+        status, date, context, decision and consequences, and its relations to the records that came after it.
+      example: '{number: 34, title: "...", status: accepted, date: 2026-08-20, amendedBy: ["ADR 87"]}'
       notes: >-
-        CogNovaMX registry pointer, not a Gathering open-standard field. Path to the BDR file. The bare `bdr` name is
-        a deprecated synonym; see fields-data.yaml's deprecations table.
+        CogNovaMX registry block, not a Gathering open-standard field. The same members and relation rules as
+        x-mx-adr, read by the same scripts/lib/decision-register.cjs and held by the same register check
+        (scripts/check-adr-numbers.cjs). A relation crosses registers by label, so a BDR amended by an ADR declares
+        amendedBy: ["ADR n"] and the ADR declares amends: ["BDR n"]. The bare `bdr` name is a deprecated synonym; see
+        fields-data.yaml's deprecations table.
       status: canonical
       profile: x-mx-public
-      context: 'Declared on cog files whose scope is governed by a recorded Business Decision Record.'
+      context: 'Declared on every record in mx-canon/mx-maxine-lives/registers/BDR/.'
+    - name: x-mx-reviewedOn
+      type: date
+      authoring: authored
+      inPlainWords: 'It was last re-read against a change to what it cites on {value}.'
+      optionalIn: [cog]
+      definition: >-
+        The date a memory or a decision record was last re-read against a change to a file it cites, and found still
+        to stand.
+      example: '2026-10-19'
+      notes: >-
+        Written by npm run records:reviewed, never by hand. The records gate's drift check
+        (scripts/check-record-claims.cjs, Gate 169) requires every record citing a file a push substantively changes to
+        be in that push, edited or stamped; this is the stamp. On a decision record it says the change neither reverses
+        nor amends the decision. It sits under mx: on an ADR or BDR, and at the top level of a memory beside
+        x-mx-originMachine.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a memory, ADR or BDR a push re-read against a change to a file it cites.'
     - name: x-mx-cogRole
       type: string
       authoring: authored
@@ -2392,6 +2422,7 @@ mx:
         - x-mx-adr
         - x-mx-ndr
         - x-mx-bdr
+        - x-mx-reviewedOn
         - x-mx-managedBy
         - x-mx-productionCanonical
         - x-mx-domainTerms
