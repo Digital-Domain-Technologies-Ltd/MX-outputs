@@ -37,6 +37,7 @@
     "created",
     "modified",
     "personalKind",
+    "personalRole",
     "disclosureTier"
   ],
   "type": "object",
@@ -232,6 +233,38 @@
                   ],
                   "properties": {
                     "personalKind": {
+                      "$ref": "#/$defs/hasValue"
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        },
+        {
+          "anyOf": [
+            {
+              "required": [
+                "personalRole"
+              ],
+              "properties": {
+                "personalRole": {
+                  "$ref": "#/$defs/hasValue"
+                }
+              }
+            },
+            {
+              "required": [
+                "mx"
+              ],
+              "properties": {
+                "mx": {
+                  "type": "object",
+                  "required": [
+                    "personalRole"
+                  ],
+                  "properties": {
+                    "personalRole": {
                       "$ref": "#/$defs/hasValue"
                     }
                   }
