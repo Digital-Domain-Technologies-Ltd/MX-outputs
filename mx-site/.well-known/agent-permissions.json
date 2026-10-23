@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "schema_version": "1.0.0",
+    "last_updated": "2026-10-19T08:42:07Z",
+    "author": "CogNovaMX"
+  },
+  "strict": false,
+  "resource_rules": [
+    {
+      "verb": "read_content",
+      "selector": "*",
+      "allowed": true
+    },
+    {
+      "verb": "read_metadata",
+      "selector": "*",
+      "allowed": true
+    },
+    {
+      "verb": "follow_link",
+      "selector": "*",
+      "allowed": true
+    },
+    {
+      "verb": "download_file",
+      "selector": "*",
+      "allowed": true
+    },
+    {
+      "verb": "set_input_value",
+      "selector": "form",
+      "allowed": true,
+      "modifiers": {
+        "human_in_the_loop": true
+      }
+    },
+    {
+      "verb": "submit_form",
+      "selector": "form",
+      "allowed": true,
+      "modifiers": {
+        "human_in_the_loop": true,
+        "rate_limit": {
+          "max_requests": 5,
+          "window_seconds": 3600
+        }
+      }
+    },
+    {
+      "verb": "upload_file",
+      "selector": "*",
+      "allowed": false
+    }
+  ],
+  "action_guidelines": [
+    {
+      "directive": "SHOULD",
+      "description": "Identify yourself as an AI agent, and name the person or organisation you act for, in your requests and in anything you submit."
+    },
+    {
+      "directive": "SHOULD",
+      "description": "Read each page's MX metadata before reusing its content, and follow the content policy and attribution it declares."
+    },
+    {
+      "directive": "SHOULD",
+      "description": "Prefer the machine-readable sources this site publishes (llms.txt, cog files, the field dictionary under /canon/) to scraping rendered pages."
+    },
+    {
+      "directive": "MUST NOT",
+      "description": "Submit a contact, enquiry or sign-up form without the explicit confirmation of the person you act for."
+    },
+    {
+      "directive": "MUST NOT",
+      "description": "Present content from this site as attested by CogNovaMX or REGINALD unless you have verified the attestation yourself."
+    }
+  ]
+}

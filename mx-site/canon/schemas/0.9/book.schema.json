@@ -132,12 +132,55 @@
         "accuracyCommitment": {
           "type": "string"
         },
+        "actingFor": {
+          "type": "object"
+        },
+        "actionLog": {
+          "type": "string"
+        },
         "actionType": {},
         "actions": {
           "type": "array"
         },
+        "admittedAgents": {
+          "type": "array"
+        },
         "affectedGroups": {
           "type": "array"
+        },
+        "agentAccess": {
+          "type": "string",
+          "enum": [
+            "open",
+            "declared",
+            "listed",
+            "closed"
+          ]
+        },
+        "agentActions": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "read",
+              "draft",
+              "write",
+              "submit",
+              "publish",
+              "unpublish",
+              "delete",
+              "message",
+              "pay"
+            ]
+          }
+        },
+        "agentId": {
+          "type": "string"
+        },
+        "agentInterface": {
+          "type": "string"
+        },
+        "agentPermissions": {
+          "type": "string"
         },
         "agentType": {
           "type": "string",
@@ -147,6 +190,9 @@
             "organisation",
             "system"
           ]
+        },
+        "agentVersion": {
+          "type": "string"
         },
         "ai": {
           "type": "object"
@@ -174,6 +220,9 @@
         },
         "aiGenerationReviewRequired": {
           "type": "boolean"
+        },
+        "aiInvolvement": {
+          "type": "string"
         },
         "aiPermittedAreas": {
           "type": "array"
@@ -317,6 +366,9 @@
             "permanent"
           ]
         },
+        "cancellationTerms": {
+          "type": "object"
+        },
         "canonicalUri": {
           "type": "string"
         },
@@ -341,6 +393,22 @@
           "type": "array"
         },
         "classification": {
+          "type": "string"
+        },
+        "cmsArchitecture": {
+          "type": "string",
+          "enum": [
+            "coupled",
+            "headless",
+            "decoupled",
+            "static-generator",
+            "hybrid"
+          ]
+        },
+        "cmsProduct": {
+          "type": "string"
+        },
+        "cmsVersion": {
           "type": "string"
         },
         "cogId": {
@@ -452,6 +520,12 @@
             "ymd"
           ]
         },
+        "decisionRightRef": {
+          "type": "string"
+        },
+        "decisionScope": {
+          "type": "string"
+        },
         "declaredBy": {
           "type": "string",
           "enum": [
@@ -510,6 +584,31 @@
         },
         "entities": {
           "type": "array"
+        },
+        "escalation": {
+          "type": "object"
+        },
+        "evalGrading": {
+          "type": "string",
+          "enum": [
+            "script",
+            "human",
+            "model",
+            "mixed"
+          ]
+        },
+        "evalKey": {
+          "type": "object"
+        },
+        "evalResults": {
+          "type": "array"
+        },
+        "evalRuns": {},
+        "evalSubjects": {
+          "type": "array"
+        },
+        "evalTask": {
+          "type": "string"
         },
         "excludeSites": {
           "type": "array"
@@ -575,6 +674,9 @@
         },
         "hasSubfolders": {
           "type": "boolean"
+        },
+        "humanApprovalFor": {
+          "type": "array"
         },
         "icon": {
           "type": "string"
@@ -647,8 +749,27 @@
             "deprecated"
           ]
         },
+        "loyaltyPointTerms": {
+          "type": "object"
+        },
         "machineOnly": {
           "type": "boolean"
+        },
+        "machineOutputs": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "json-ld",
+              "mx-frontmatter",
+              "llms-txt",
+              "sitemap",
+              "feed",
+              "robots-txt",
+              "agent-card",
+              "mcp-server",
+              "markdown-mirror"
+            ]
+          }
         },
         "maintainedBy": {
           "type": "string"
@@ -659,6 +780,22 @@
         },
         "maintainer": {
           "type": "string"
+        },
+        "mandate": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "read",
+              "draft",
+              "write",
+              "submit",
+              "publish",
+              "unpublish",
+              "delete",
+              "message",
+              "pay"
+            ]
+          }
         },
         "mcpServer": {
           "type": "object"
@@ -766,6 +903,9 @@
         "narrativeContext": {
           "type": "string"
         },
+        "operatesAt": {
+          "type": "array"
+        },
         "originator": {
           "type": "string"
         },
@@ -863,6 +1003,22 @@
             }
           ]
         },
+        "publishingPointKind": {
+          "type": "string",
+          "enum": [
+            "cms",
+            "website",
+            "feed",
+            "api",
+            "newsletter",
+            "social-channel",
+            "marketplace",
+            "document-store"
+          ]
+        },
+        "publishingPoints": {
+          "type": "array"
+        },
         "pulse": {
           "type": "boolean"
         },
@@ -954,6 +1110,9 @@
             "scraped"
           ]
         },
+        "revocationUri": {
+          "type": "string"
+        },
         "rights": {
           "type": "string"
         },
@@ -1031,6 +1190,9 @@
         },
         "speakable": {
           "type": "string"
+        },
+        "spendLimit": {
+          "type": "object"
         },
         "stability": {
           "anyOf": [

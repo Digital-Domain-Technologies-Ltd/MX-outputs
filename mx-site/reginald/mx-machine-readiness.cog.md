@@ -54,7 +54,7 @@ author: "Tom Cranstoun"
 
 created: 2026-05-07
 modified: 2026-10-11
-version: "2.4"
+version: "2.5"
 
 # Mandatory when signed (Note 8 §4.3). Names the schema this cog
 # claims contract conformance against, and the validators it
@@ -421,7 +421,7 @@ Actions:
 
 ### Phase 02 - Publish a cog
 
-Inward frameworks pilot use cases. MX pilots a cog - a Community Owned Governance System: a small set of declarations a document makes about itself, carried inside whatever file format the document already uses. Markdown, HTML, PDF, YAML.
+Inward frameworks pilot use cases. MX pilots a cog - a Community Owned Governance Standard: a small set of declarations a document makes about itself, carried inside whatever file format the document already uses. Markdown, HTML, PDF, YAML.
 
 One cog is enough to begin. Pick a high-stakes document - a price page, a product specification, a regulatory disclosure - and republish it as a cog.
 

@@ -27,6 +27,7 @@ mx:
   partOf: UBERCOG
   maintainer: info@cognovamx.com
   license: proprietary
+  agentPermissions: https://mx.allabout.network/.well-known/agent-permissions.json
   purpose: "The domain anchor every mx-site cog chains to through partOf. Owns the cogs, canon exports, and drafts shipped with the served site; chains up to the master UBERCOG; holds the pointer to the cog factory."
   stability: stable
   contextProvides:

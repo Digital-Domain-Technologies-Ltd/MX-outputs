@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.53'
+version: '6.59'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-10-18'
+modified: '2026-10-19'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -397,7 +397,11 @@ mx:
     aims:riskRegisterEntry: aims-risk-register
     aims:impactAssessment: aims-impact-assessment
     aims:policy: aims-policy
+    aims:decisionRight: aims-decision-right
     personal-cog: personal
+    agent-cog: agent
+    publishing-point-cog: publishing-point
+    cms-cog: cms
   validationPolicy:
     keywords:
       - '@context'
@@ -851,7 +855,12 @@ mx:
         aiAssistance is an open-standard field declared in this dictionary; the x-mx- form was a
         vendor prefix on a standard name, which the extensions standard forbids. ADR 63. Only a
         permission value (welcome, restricted, prohibited) moves here; an AI-involvement value
-        (unknown, none, used, ai-generated) or a sentence about how AI took part is x-mx-aiInvolvement.
+        (unknown, none, used, ai-generated) or a sentence about how AI took part is aiInvolvement.
+    - old: x-mx-aiInvolvement
+      replacement: aiInvolvement
+      notes: >-
+        Promoted into the open standard: how AI took part in making a file describes the file itself and serves the
+        trust lens, so it is not vendor-specific. Distinct from aiAssistance, the permission policy.
     - old: x-mx-aiEditable
       replacement: aiEditable
       notes: >-
@@ -1848,7 +1857,7 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'This document is called {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
       definition: Human-readable document title. The canonical identity field for all documents including cog files.
       example: MX Field Dictionary
       alignsWith:
@@ -1860,7 +1869,7 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'In short: {value}'
-      requiredIn: [core, skill, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
+      requiredIn: [core, skill, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
       definition: One-line summary. Max 160 characters. Used by search engines, AI agents, and registry listings.
       example: Single source of truth for every YAML frontmatter field.
       alignsWith:
@@ -1873,7 +1882,7 @@ mx:
       type: string
       authoring: defaulted
       inPlainWords: 'Written by {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
       definition: Creator of the document. Person name or collaborative attribution.
       example: Tom Cranstoun and Maxine
       alignsWith:
@@ -1900,7 +1909,7 @@ mx:
       type: string
       authoring: defaulted
       inPlainWords: 'First written on {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
       definition: Creation date. ISO 8601 format (YYYY-MM-DD).
       example: '2026-03-01'
       alignsWith:
@@ -1913,7 +1922,7 @@ mx:
       type: string
       authoring: defaulted
       inPlainWords: 'Last changed on {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
       definition: Last modification date. ISO 8601 format (YYYY-MM-DD).
       example: '2026-03-02'
       alignsWith:
@@ -1946,7 +1955,7 @@ mx:
       authoring: authored
       inPlainWords: 'This is version {value} of the document.'
       requiredIn: [portable, aims-policy]
-      recommendedIn: [core, skill, book, blog, contact, report, audit, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, personal]
+      recommendedIn: [core, skill, book, blog, contact, report, audit, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, personal, agent, publishing-point, cms, aims-decision-right, eval]
       optionalIn: [folder]
       definition: Semantic version string. Lives in frontmatter, never in filenames.
       example: '2.0'
@@ -2055,8 +2064,8 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'Its status is {value}.'
-      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
-      recommendedIn: [core, book, contact, report, audit, component, personal]
+      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
+      recommendedIn: [core, book, contact, report, audit, component, personal, agent, publishing-point, cms, eval]
       definition: >-
         Lifecycle state. Standard values: draft, active, published, deprecated, archived, unknown. Decision records:
         proposed, accepted, rejected, superseded. Workflow: pending, review, approved, planning, open, closed, sent.
@@ -2099,7 +2108,7 @@ mx:
       authoring: authored
       inPlainWords: 'It is about {value}.'
       recommendedIn: [cog, book, blog, action]
-      optionalIn: [core, folder, migration, routing, skill, html, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal]
+      optionalIn: [core, folder, migration, routing, skill, html, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, agent, publishing-point, cms, aims-decision-right, eval]
       definition: Discovery keywords. Array of strings for search, filtering, and agent matching.
       example:
         - metadata
@@ -2116,7 +2125,7 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'It is a {value}.'
-      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action]
+      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action, agent, publishing-point, cms, aims-decision-right, eval]
       definition: >-
         Document kind. OKF reserved top-level field naming what the file is, so a machine selects the right handling
         before reading the body. Common values include info-doc, action, blog-post, report, guide, skill, hook,
@@ -2133,7 +2142,7 @@ mx:
       type: string
       inPlainWords: 'It describes the asset at {value}.'
       authoring: authored
-      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action]
+      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action, agent, publishing-point, cms, aims-decision-right, eval]
       definition: >-
         The URI of the one external asset this document describes. OKF reserved top-level field; absent on an
         abstract document (a playbook, a runbook, an info-doc) that describes no single asset.
@@ -2149,9 +2158,9 @@ mx:
       authoring: derived
       derivation: path
       inPlainWords: 'The authoritative copy lives at {value}.'
-      requiredIn: [portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      requiredIn: [portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
       recommendedIn: [book, blog, contact, report, audit]
-      optionalIn: [skill]
+      optionalIn: [skill, publishing-point, cms]
       definition: >-
         The permanent, globally unique URI where the authoritative copy of this document lives. A reader that meets a
         copy anywhere can walk back to the source.
@@ -2533,7 +2542,7 @@ mx:
         - dcterms:references
       authoring: authored
       inPlainWords: 'It refers to {value}.'
-      optionalIn: [cog, contact, report, audit, personal, action]
+      optionalIn: [cog, contact, report, audit, personal, action, eval]
       definition: Related cogs or external resources. Informational links, not dependencies.
       example:
         - field-dictionary
@@ -2566,7 +2575,7 @@ mx:
     - name: corroboratedBy
       type: array
       authoring: authored
-      optionalIn: [personal]
+      optionalIn: [personal, agent, eval]
       inPlainWords: 'Outside sources that make the same claims: {value}.'
       definition: >-
         The external authoritative sources that independently state this document's load-bearing claims: a flat list
@@ -2615,7 +2624,7 @@ mx:
     - name: claimBasis
       type: string
       authoring: authored
-      optionalIn: [personal]
+      optionalIn: [personal, agent, eval]
       inPlainWords: 'Its load-bearing claims are {value}.'
       definition: >-
         How this document's load-bearing claims are known, taken as a whole: asserted, inferred, observed,
@@ -3656,6 +3665,22 @@ mx:
       profile:
         - core
         - folder
+    - name: aiInvolvement
+      type: string
+      authoring: authored
+      inPlainWords: 'AI took part in making it as follows: {value}.'
+      optionalIn: [core]
+      definition: >-
+        How AI took part in making the file: unknown, none, used, ai-generated, or one sentence naming the model and
+        the human who directed it.
+      example: 'Drafted by Claude (Anthropic), directed and approved by Tom Cranstoun'
+      notes: >-
+        A record of what happened, not a permission: aiAssistance states whether AI help is welcome, aiInvolvement
+        states whether it was used. Never inherited, because each file is made separately. The sentence form names the
+        accountable human, which the four short values do not.
+      status: experimental
+      profile:
+        - core
     - name: aiEditable
       type: boolean
       authoring: defaulted
@@ -4157,6 +4182,7 @@ mx:
     - name: workflowRecord
       type: string
       authoring: authored
+      optionalIn: [agent]
       definition: >-
         Where the workflow record named by workflowId lives: a repo-root-relative path or a URL, so a reader walks
         from a document or a provenance chain to the declared boundary in one step.
@@ -4172,7 +4198,7 @@ mx:
       inPlainWords: 'The risk that remains after its controls: {value}.'
       authoring: authored
       recommendedIn: [aims-risk-register]
-      optionalIn: [aims-system-inventory]
+      optionalIn: [aims-system-inventory, agent]
       definition: >-
         The risk the operator judges to remain after the controls a document or a provenance chain records: a level
         drawn from the security.riskLevel vocabulary, the reason that level remains, the role that accepted it, and
@@ -4234,7 +4260,8 @@ mx:
       type: array
       inPlainWords: 'The people and bodies accountable for it: {value}.'
       authoring: authored
-      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      recommendedIn: [agent, publishing-point, cms]
+      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
       definition: >-
         The role-attributed people and organisations accountable for a document, each entry carrying a role, a name,
         and optionally an email, an identifier URL, an organisation and an ISO 3166-1 country code.
@@ -4271,9 +4298,14 @@ mx:
         - riskOwner
         - assessor
         - approver
+        - decisionOwner
+        - consulted
       notes: >-
         One vocabulary with the provenance record's parties[].role, so a role named on a COG means the same thing in
         its chain. systemOwner, riskOwner, assessor and approver name the roles an AI management system assigns.
+        decisionOwner is the one role accountable for a class of AI decision, and consulted a role whose view is taken
+        before that decision without sharing ownership of it; both enter with the experimental aims-decision-right
+        profile.
         tests/test-party-roles-lockstep.js holds this list, the provenance schema and the REGINALD primitive equal.
       status: canonical
       profile: core
@@ -4281,7 +4313,7 @@ mx:
       type: object
       inPlainWords: 'It is evidence for these regulatory provisions: {value}.'
       authoring: authored
-      recommendedIn: [aims-system-inventory, aims-risk-register, aims-impact-assessment, aims-policy]
+      recommendedIn: [aims-system-inventory, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
       optionalIn: [aims-statement-of-applicability]
       definition: >-
         The clauses, articles, controls or functions of each regulatory regime a document provides evidence for, keyed
@@ -4304,7 +4336,7 @@ mx:
     - name: statusNotice
       type: object
       authoring: authored
-      optionalIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      optionalIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
       definition: >-
         Why a document carries the status disputed or withdrawn, the date that standing began, and whom a reader
         contacts about it.
@@ -4376,22 +4408,23 @@ mx:
       type: string
       inPlainWords: 'Its record identifier is {value}.'
       authoring: authored
-      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
       definition: The organisation's own identifier for an AIMS record, stable across versions of the record.
       example: R-014
       status: canonical
-      profile: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      profile: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
     - name: systemRef
       type: string
       inPlainWords: 'It concerns the AI system recorded at {value}.'
       authoring: authored
       requiredIn: [aims-risk-register, aims-impact-assessment]
+      optionalIn: [aims-decision-right]
       definition: >-
         A reference to the AI system inventory entry an AIMS record concerns, as a repository path, an https URI or a
         REGINALD cogUrn.
       example: https://example.org/aims/systems/leaflet-summariser.md
       status: canonical
-      profile: [aims-risk-register, aims-impact-assessment]
+      profile: [aims-risk-register, aims-impact-assessment, aims-decision-right]
     - name: intendedUse
       type: object
       inPlainWords: 'What the system may and may not be used for: {value}.'
@@ -4456,11 +4489,13 @@ mx:
       type: string
       inPlainWords: 'It was approved on {value}.'
       authoring: authored
-      requiredIn: [aims-statement-of-applicability, aims-policy]
-      definition: The date an AIMS record was approved, ISO 8601 (YYYY-MM-DD); the approver is a parties entry with role approver.
+      requiredIn: [aims-statement-of-applicability, aims-policy, aims-decision-right]
+      definition: >-
+        The date an AIMS record was approved, ISO 8601 (YYYY-MM-DD); the approver is a parties entry with role
+        approver.
       example: 2026-09-27
       status: canonical
-      profile: [aims-statement-of-applicability, aims-policy]
+      profile: [aims-statement-of-applicability, aims-policy, aims-decision-right]
     - name: inherentRisk
       type: object
       inPlainWords: 'The risk before treatment: {value}.'
@@ -4557,6 +4592,70 @@ mx:
       example: 2026-09-27
       status: canonical
       profile: aims-impact-assessment
+    # --- The decision-right record (experimental): one class of AI decision and the single role accountable for it.
+    # Proposed for The Gathering beside the AIMS profile set; the schema is
+    # mx-reginald/packages/schemas/src/aims-decision-right.schema.json. A decision two executives share is the
+    # decision nobody owns, so the record names exactly one decisionOwner and lists the rest as consulted.
+    - name: decisionScope
+      type: string
+      inPlainWords: 'It allocates this class of decision: {value}.'
+      authoring: authored
+      requiredIn: [aims-decision-right]
+      definition: >-
+        The class of AI decision a decision-right record allocates, stated so that a person or an agent can tell
+        whether a given decision falls inside it.
+      example: Whether an AI tool requested by one team is built once as a shared service or left to that team.
+      notes: >-
+        One class per record. The single accountable role is the parties entry with role decisionOwner; a decision
+        that fits no recorded scope has no owner yet, which is the finding.
+      status: experimental
+      profile: aims-decision-right
+    - name: escalation
+      type: object
+      inPlainWords: 'When it goes up a level, and to whom: {value}.'
+      authoring: authored
+      recommendedIn: [aims-decision-right]
+      definition: The condition under which a decision leaves its owner and the role or record it goes to.
+      example:
+        trigger: The tool would process personal data, or the owner and the consulted role still disagree.
+        to: approver
+      notes: >-
+        A stated trigger lets an agent acting inside the decision know when to stop and hand back to a person, rather
+        than inferring the boundary from an organisation chart.
+      status: experimental
+      profile: aims-decision-right
+    - name: escalation.trigger
+      type: string
+      authoring: authored
+      definition: The condition, in one sentence, under which the decision goes up a level.
+      example: The tool would process personal data.
+      status: experimental
+      profile: aims-decision-right
+    - name: escalation.to
+      type: string
+      authoring: authored
+      definition: >-
+        Where the decision goes when the trigger holds: a parties.role on the same record, or a reference to the
+        decision-right record of the forum above, as a repository path, an https URI or a REGINALD cogUrn.
+      example: approver
+      status: experimental
+      profile: aims-decision-right
+    - name: decisionRightRef
+      type: string
+      inPlainWords: 'The decision it records is owned under {value}.'
+      authoring: authored
+      optionalIn: [aims-risk-register, aims-statement-of-applicability, aims-impact-assessment]
+      definition: >-
+        A reference to the decision-right record that names who owns the decision this record signs off, as a
+        repository path, an https URI or a REGINALD cogUrn.
+      example: https://example.org/aims/decisions/dr-003.md
+      notes: >-
+        Lets a registry compare the person who signed (residualRisk.acceptedBy on a risk entry, the approver on a
+        statement of applicability, the assessor on an impact assessment) with the decisionOwner the right names,
+        and report a sign-off by anyone else. The comparison judges agreement between two records, never whether
+        either is right.
+      status: experimental
+      profile: [aims-risk-register, aims-statement-of-applicability, aims-impact-assessment]
     - name: aiUsageDeclarationUri
       type: string
       authoring: authored
@@ -4927,7 +5026,7 @@ mx:
     - name: supersededBy
       type: string
       authoring: authored
-      optionalIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal]
+      optionalIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
       definition: 'Canonical field: supersededBy.'
       status: canonical
       profile: cog
@@ -5008,7 +5107,7 @@ mx:
       type: string
       inPlainWords: 'It is written in {value}.'
       authoring: authored
-      recommendedIn: [portable, personal]
+      recommendedIn: [portable, personal, eval]
       definition: >-
         Primary language of the document content, as a BCP 47 language tag (en, es, en-GB). Aligns with Schema.org
         inLanguage and Dublin Core dc:language.
@@ -5256,6 +5355,25 @@ mx:
         ai.attribution, which records the attribution of AI involvement in producing the content.
       status: canonical
       profile: core
+    - name: agentPermissions
+      type: string
+      authoring: authored
+      inPlainWords: 'The terms an AI agent must follow for this are published at {value}.'
+      definition: >-
+        The URL of the agent permission manifest that governs how an AI agent may act on this resource: an
+        agent-permissions.json file (Lightweight Agent Standards Working Group) or an A2WF site manifest. A pointer,
+        not a vocabulary; the manifest format owns the terms.
+      example: 'https://example.com/.well-known/agent-permissions.json'
+      notes: >-
+        Experimental: may change or be withdrawn without a deprecation entry while its proposal is in Gathering review,
+        and no conformance level requires it. A web page needs it only to override the site default, because both
+        manifest formats have their own discovery (the well-known path, or a link rel="agent-permissions" tag). Its use
+        is on content that leaves the site, such as a PDF or a dataset, which otherwise loses its terms. Pairs with
+        contentPolicy, which governs what a machine may do with content it reads; agentPermissions points to what an
+        agent may do on the publisher's estate. Says nothing about which agent is acting; that belongs to the identity
+        protocols.
+      status: experimental
+      profile: core
     - name: contentRating
       type: string
       authoring: authored
@@ -5276,7 +5394,7 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'It is due for review by {value}.'
-      recommendedIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy]
+      recommendedIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
       definition: >-
         The date by which this document's content must next be reviewed for accuracy. Distinct from reviewCycle
         (the review cadence) - reviewBy is the specific next deadline.
@@ -5328,9 +5446,10 @@ mx:
       profile: cog
     - name: expires
       type: string
+      inPlainWords: 'It expires on {value}.'
       authoring: authored
-      recommendedIn: [portable]
-      optionalIn: [cog, personal, action]
+      recommendedIn: [portable, agent]
+      optionalIn: [cog, personal, action, publishing-point, eval]
       definition: Expiry date for time-sensitive cogs. ISO 8601 format (YYYY-MM-DD).
       example: 2026-12-31T00:00:00.000Z
       notes: ISO 8601. For time-sensitive content. Review or archive after this date.
@@ -5632,6 +5751,458 @@ mx:
         history.
       status: canonical
       profile: personal
+    # --- Agent cogs: the agent profile. An agent cog is the record an AI agent carries and presents when it acts:
+    # which agent it is, whom it acts for, what it may do, what stops for a human, and where its actions are logged and
+    # its authority withdrawn. Authentication answers who logged in; the agent cog answers who is acting, for whom, and
+    # under what mandate. It is a declaration, never a grant: the publishing point decides what it admits, and a
+    # corroborated agent cog (claimBasis, corroboratedBy) carries more weight than an asserted one. Proposed to The
+    # Gathering; the fields stay experimental until it rules.
+    - name: agentId
+      type: string
+      inPlainWords: 'It describes the agent {value}.'
+      authoring: authored
+      requiredIn: [agent]
+      definition: >-
+        The stable identifier of the agent an agent cog describes, as a URI its developer controls, so a publishing
+        point can recognise the same agent across sessions and check it against an admission list.
+      example: https://agents.example.com/travel-assistant
+      notes: >-
+        One identifier per agent, kept across releases; agentVersion names the release. The identifier is the
+        developer's claim until it is corroborated, so a publishing point that admits by identifier weighs it by
+        claimBasis. admittedAgents on a publishing-point cog lists values of this field.
+      status: experimental
+      profile: agent
+    - name: agentVersion
+      type: string
+      inPlainWords: 'It describes release {value} of the agent.'
+      authoring: authored
+      recommendedIn: [agent]
+      definition: >-
+        The release of the agent an agent cog describes, so a mandate given to one release is not read as given to
+        the next.
+      example: 2.1.0
+      notes: >-
+        Distinct from version, which versions the cog itself. A release that changes what the agent can do carries a
+        reviewed agent cog before it acts under the earlier mandate. Absent, the cog makes no distinction between
+        releases and its mandate covers whichever release presents it; a publishing point records the release the
+        agent reports.
+      status: experimental
+      profile: agent
+    - name: actingFor
+      type: object
+      inPlainWords: 'It acts for {value}.'
+      authoring: authored
+      requiredIn: [agent]
+      definition: >-
+        The principal an agent acts for: the person or organisation whose authority the mandate carries, as a name and
+        an optional identifier URI.
+      example:
+        name: Example Travel Ltd
+        id: https://example.com/
+      notes: >-
+        The principal, never the developer: the developer is a parties entry with role provider, and the organisation
+        that runs the agent is a parties entry with role deployer. An agent acting for a private individual names that
+        person only as far as the venue needs; a personal cog carries the rest under its own disclosureTier.
+      status: experimental
+      profile: agent
+    - name: mandate
+      type: array
+      inPlainWords: 'It may {value}.'
+      authoring: authored
+      requiredIn: [agent]
+      definition: >-
+        The kinds of action an agent holds its principal's authority for, from a fixed vocabulary that a
+        publishing-point cog's agentActions and humanApprovalFor use too.
+      example:
+        - read
+        - draft
+      validValues:
+        - read
+        - draft
+        - write
+        - submit
+        - publish
+        - unpublish
+        - delete
+        - message
+        - pay
+      notes: >-
+        read retrieves content or data; draft creates or changes content its audience cannot yet see; write changes
+        stored content or records; submit sends a form, an order or a request to another party; publish makes content
+        visible to its audience; unpublish withdraws it; delete removes content or records; message sends a
+        communication to a person; pay commits money. An operation counts as every action whose effect it has: a write that makes content visible is also publish, deleting published content is also unpublish, and a submit that commits money is also pay. An action not listed is outside the mandate. The mandate is what
+        the principal gave, not what a venue allows: at a publishing point the agent may do only what both its mandate
+        and the point's agentActions name. What the agent may touch while it acts is declared in security.scope and
+        security.capabilities.
+      status: experimental
+      profile: agent
+    - name: operatesAt
+      type: array
+      inPlainWords: 'Its mandate covers {value}.'
+      authoring: authored
+      optionalIn: [agent]
+      definition: >-
+        The publishing points and systems an agent's mandate covers, as host patterns in the form appliesToSites uses
+        or as URIs.
+      example:
+        - cms.example.com
+        - '*.example.com'
+      notes: >-
+        Absent, the mandate names no venue, and a publishing point that admits only agents mandated for it reads the
+        absence as not covering itself. A malformed pattern covers nothing.
+      status: experimental
+      profile: agent
+    - name: spendLimit
+      type: object
+      inPlainWords: 'It may spend at most {value}.'
+      authoring: authored
+      optionalIn: [agent]
+      definition: >-
+        The most an agent may commit under a pay mandate: an amount, an ISO 4217 currency code, and the period the
+        amount covers (transaction, day, week or month).
+      example:
+        amount: 500
+        currency: GBP
+        period: month
+      notes: >-
+        Expected whenever mandate includes pay. A pay mandate with no spendLimit declares no ceiling, and a publishing
+        point that takes payment refuses it rather than assume one. The limit is the principal's ceiling; a venue may
+        set a lower one of its own.
+      status: experimental
+      profile: agent
+    - name: humanApprovalFor
+      type: array
+      inPlainWords: 'A named person approves each {value} before it takes effect.'
+      authoring: authored
+      recommendedIn: [agent, publishing-point]
+      definition: >-
+        The kinds of action, from the mandate vocabulary, that stop for a named person's approval before they take
+        effect.
+      example:
+        - publish
+        - pay
+      notes: >-
+        On an agent cog, the stops the principal set; on a publishing-point cog, the stops the point sets for every
+        agent it admits. Where both apply, an action stops if either lists it. Absent declares no stop, which a reader
+        never takes to mean an action is safe to run unattended: security.riskLevel and security.reversibility on the
+        action still apply. The approval is recorded in the actionLog with the approver's role.
+      status: experimental
+      profile:
+        - agent
+        - publishing-point
+    - name: actionLog
+      type: string
+      inPlainWords: 'Its actions are recorded at {value}.'
+      authoring: authored
+      recommendedIn: [agent, publishing-point]
+      definition: >-
+        Where actions are recorded, each attributed to the agentId and agentVersion that took it, the principal it was
+        taken for, and any approval it waited on, as a repo-root-relative path or a URI.
+      example: https://agents.example.com/travel-assistant/log
+      notes: >-
+        On an agent cog, the agent's own record, readable by its principal; on a publishing-point cog, the point's
+        record of agent actions taken through it. The two together let either side reconcile what happened. The
+        pointer, not the log; a log entry follows the provenance step shape (timestamp, agent, method, outcome).
+      status: experimental
+      profile:
+        - agent
+        - publishing-point
+    - name: revocationUri
+      type: string
+      inPlainWords: 'Its mandate can be withdrawn at {value}.'
+      authoring: authored
+      recommendedIn: [agent]
+      definition: >-
+        Where the current status of an agent's mandate is published, so the principal can withdraw it at once and a
+        publishing point can check it before it accepts an action, as a URI or a repo-root-relative path.
+      example: https://agents.example.com/travel-assistant/status
+      notes: >-
+        A conforming publishing point checks it before any action at security.riskLevel high or critical, or any
+        irreversible action, and refuses when it reports the mandate withdrawn or cannot be reached. expires sets the
+        date the mandate lapses with no withdrawal; this field covers withdrawal before that date.
+      status: experimental
+      profile: agent
+    # --- Publishing-point cogs: the publishing-point profile. A publishing point (a CMS, a site, a feed, an API, a
+    # newsletter, a marketplace) states in a cog whether it admits agents, which ones, what an admitted agent may do
+    # there, what stops for a person, and the interface agents use. It is the publishing-point contract made explicit
+    # for its machine audience, and the counterpart of the agent cog: the agent declares its mandate, the point
+    # declares its terms, and an agent acts only where the two overlap. Proposed to The Gathering with the agent
+    # profile; the fields stay experimental until it rules.
+    - name: publishingPointKind
+      type: string
+      inPlainWords: 'It is a {value} publishing point.'
+      authoring: authored
+      requiredIn: [publishing-point]
+      definition: The kind of publishing point a publishing-point cog describes.
+      example: cms
+      validValues:
+        - cms
+        - website
+        - feed
+        - api
+        - newsletter
+        - social-channel
+        - marketplace
+        - document-store
+      notes: >-
+        A CMS that serves several sites carries one cog for the CMS and one per site where the terms differ.
+      status: experimental
+      profile: publishing-point
+    - name: agentAccess
+      type: string
+      inPlainWords: 'It admits {value} agents.'
+      authoring: authored
+      requiredIn: [publishing-point]
+      definition: >-
+        Which agents a publishing point admits: open admits any agent, declared admits an agent that presents an agent
+        cog, listed admits only the agents named in admittedAgents, and closed admits none.
+      example: declared
+      validValues:
+        - open
+        - declared
+        - listed
+        - closed
+      notes: >-
+        Under declared and listed, an admitted agent still acts only within what agentActions allows. closed states
+        that the point offers agents no route, so an agent that reaches it through the human interface is acting
+        outside the point's terms. A point that has not decided carries no cog, which a reader takes as no statement.
+      status: experimental
+      profile: publishing-point
+    - name: admittedAgents
+      type: array
+      inPlainWords: 'It admits the agents {value}.'
+      authoring: authored
+      optionalIn: [publishing-point]
+      definition: The agentId values of the agents a publishing point admits when its agentAccess is listed.
+      example:
+        - https://agents.example.com/editorial-assistant
+      notes: >-
+        Read only when agentAccess is listed, and then an empty or absent list admits no agent. An entry admits the
+        agent, not every action: agentActions and humanApprovalFor still apply.
+      status: experimental
+      profile: publishing-point
+    - name: agentActions
+      type: array
+      inPlainWords: 'An admitted agent may {value} here.'
+      authoring: authored
+      requiredIn: [publishing-point]
+      definition: >-
+        The most an admitted agent may do at a publishing point, from the mandate vocabulary; an agent's effective
+        authority there is what both this list and its own mandate name.
+      example:
+        - read
+        - draft
+      validValues:
+        - read
+        - draft
+        - write
+        - submit
+        - publish
+        - unpublish
+        - delete
+        - message
+        - pay
+      notes: >-
+        A ceiling, never a grant: listing publish does not give an agent without a publish mandate the right to
+        publish. An empty list admits agents to nothing, the same as agentAccess closed.
+      status: experimental
+      profile: publishing-point
+    - name: agentInterface
+      type: string
+      inPlainWords: 'Agents use it through {value}.'
+      authoring: authored
+      recommendedIn: [publishing-point]
+      definition: >-
+        The interface a publishing point offers agents in place of its human interface (an API, a Model Context
+        Protocol server, a feed, a submission folder), as a URI or a repo-root-relative path.
+      example: https://cms.example.com/api/agents
+      notes: >-
+        Where a point names one, an admitted agent uses it and identifies itself there, rather than driving the human
+        interface as if it were a person. Absent, the point offers no agent route beyond what its pages carry.
+      status: experimental
+      profile: publishing-point
+    # --- CMS cogs: the cms profile. A CMS cog describes the content management system itself, as the controller of
+    # one or more publishing points: what product and release it is, how it is built, which publishing points it
+    # controls, and which machine-readable outputs it emits. It is the inventory a reader checks the publishing-point
+    # contract against: the vendor promised visibility, and the cog says what the instance emits. The terms for agents
+    # sit in each publishing point's own cog. Proposed to The Gathering with the agent and publishing-point profiles;
+    # the fields stay experimental until it rules.
+    - name: cmsProduct
+      type: string
+      inPlainWords: 'It runs on {value}.'
+      authoring: authored
+      requiredIn: [cms]
+      definition: The name of the content management system a CMS cog describes, as its vendor names it.
+      example: Example CMS
+      notes: >-
+        The product, not the deployment: the organisation that runs the instance is a parties entry with role
+        systemOwner, and the vendor a parties entry with role provider.
+      status: experimental
+      profile: cms
+    - name: cmsVersion
+      type: string
+      inPlainWords: 'It runs release {value} of the CMS.'
+      authoring: authored
+      recommendedIn: [cms]
+      definition: The release of the CMS the instance runs, as its vendor numbers it.
+      example: '10.4'
+      notes: >-
+        Distinct from version, which versions the cog. A reader compares machineOutputs against what that release can
+        emit, so an upgrade that changes the outputs carries a reviewed cog.
+      status: experimental
+      profile: cms
+    - name: cmsArchitecture
+      type: string
+      inPlainWords: 'It is a {value} CMS.'
+      authoring: authored
+      recommendedIn: [cms]
+      definition: >-
+        How the CMS delivers content: coupled (it renders the pages it serves), headless (it serves content through an
+        API for other systems to render), decoupled (it renders through a separate front end it also manages),
+        static-generator (it builds static files ahead of serving), or hybrid.
+      example: static-generator
+      validValues:
+        - coupled
+        - headless
+        - decoupled
+        - static-generator
+        - hybrid
+      notes: >-
+        Tells an agent where the authoritative content lives: a headless CMS's API holds it, a static generator's
+        source files hold it, and the served pages are a rendering of either.
+      status: experimental
+      profile: cms
+    - name: publishingPoints
+      type: array
+      inPlainWords: 'It controls the publishing points {value}.'
+      authoring: authored
+      requiredIn: [cms]
+      definition: >-
+        The publishing points the CMS controls, as URIs or repo-root-relative paths of their publishing-point cogs, or
+        as the URLs they serve where no cog exists yet.
+      example:
+        - https://news.example.com/.well-known/publishing-point.md
+        - https://news.example.com/feed.xml
+      notes: >-
+        The list holds at least one entry. One CMS often controls several points (a site, its feeds, an API, a
+        newsletter), and their agent terms can differ, so each carries its own publishing-point cog. A point listed by URL with no cog has made no statement
+        to agents.
+      status: experimental
+      profile: cms
+    - name: machineOutputs
+      type: array
+      inPlainWords: 'It emits {value} for machines.'
+      authoring: authored
+      recommendedIn: [cms]
+      definition: >-
+        The machine-readable outputs the CMS instance emits for its publishing points, as configured, not as the
+        product could be configured.
+      example:
+        - json-ld
+        - sitemap
+        - llms-txt
+      validValues:
+        - json-ld
+        - mx-frontmatter
+        - llms-txt
+        - sitemap
+        - feed
+        - robots-txt
+        - agent-card
+        - mcp-server
+        - markdown-mirror
+      notes: >-
+        mx-frontmatter is the published MX metadata embedded in each page; markdown-mirror is a markdown copy served
+        beside each page; agent-card is an A2A agent card at /.well-known/agent-card.json. A statement about the running
+        instance, which an outside-in audit can check against what is served. The list applies to every point in
+        publishingPoints; a CMS whose points emit different outputs carries one cog per group of points that share them: a claimed output the audit cannot find
+        is the latent breach the publishing-point contract describes, surfaced.
+      status: experimental
+      profile: cms
+    - name: evalTask
+      type: string
+      inPlainWords: 'It tests this: {value}.'
+      authoring: authored
+      requiredIn: [eval]
+      definition: The work an eval puts to each model and the capability it measures, in one sentence.
+      example: Review a 3,500-line Python library with planted logic bugs and decoys, then fix what it finds.
+      notes: >-
+        Names the task, not the vendor's category for it. A reader matches the task against their own work before
+        reading any score, because a result transfers only to work of the same shape.
+      status: experimental
+      profile: eval
+    - name: evalSubjects
+      type: array
+      inPlainWords: 'It tested {value}.'
+      authoring: authored
+      requiredIn: [eval]
+      definition: >-
+        The models an eval put its task to, each named with its exact version, the route it was reached by, and the
+        settings it ran at.
+      example: '[{model: example-model-4, provider: example-lab, route: openrouter, settings: default reasoning}]'
+      notes: >-
+        Members model (required), provider, route and settings. A model name without a version, or a result without
+        its settings, cannot be repeated: the same name can serve a different model later, and reasoning settings move
+        scores.
+      status: experimental
+      profile: eval
+    - name: evalGrading
+      type: string
+      inPlainWords: 'Its answers were scored by {value}.'
+      authoring: authored
+      requiredIn: [eval]
+      definition: >-
+        How each answer was scored: by a script against a fixed key, by a person, by a model acting as judge, or by a
+        mix of these.
+      example: script
+      validValues:
+        - script
+        - human
+        - model
+        - mixed
+      notes: A score from a model acting as judge carries the judge's own errors, and a reader weighs it accordingly.
+      status: experimental
+      profile: eval
+    - name: evalRuns
+      type: integer
+      inPlainWords: 'It ran {value} times per model.'
+      authoring: authored
+      requiredIn: [eval]
+      definition: How many times the eval put its task to each model.
+      example: 5
+      notes: >-
+        A single run is one sample of a model's output. It cannot separate a model's usual behaviour from one bad or
+        lucky draw, so a reader treats a one-run result as an observation, not a rate.
+      status: experimental
+      profile: eval
+    - name: evalKey
+      type: object
+      inPlainWords: 'Its answer key is {value}.'
+      authoring: authored
+      recommendedIn: [eval]
+      definition: The date an eval's answer key was fixed, and where the key lives.
+      example: '{fixedAt: 2026-10-12, location: https://example.com/evals/billing/key.json}'
+      notes: >-
+        Members fixedAt (a date, required) and location (a URI, absent when the key is withheld to keep it out of
+        training data). A key fixed before the first run cannot have been fitted to the answers.
+      status: experimental
+      profile: eval
+    - name: evalResults
+      type: array
+      inPlainWords: 'It scored {value}.'
+      authoring: authored
+      recommendedIn: [eval]
+      definition: >-
+        The outcome for each model: its score against the key, and what the run cost in money, tokens and time.
+      example: '[{model: example-model-4, score: 80, outOf: 80, costUsd: 0.18, tokensIn: 5236, tokensOut: 7763, seconds: 63.0}]'
+      notes: >-
+        Members model, score and outOf (required); wrong, costUsd, tokensIn, tokensOut, seconds and runAt (optional).
+        wrong counts answers the key marks incorrect, for a task where a model can give more answers than the key
+        holds: a score with no wrong count hides an invented answer. Token counts are each vendor's own and do not
+        compare across tokenizers. A cost that rests on a time-limited price is
+        declared in volatileValues beside it.
+      status: experimental
+      profile: eval
     - name: publishedTo
       type: string
       inPlainWords: 'It is published to {value}.'
@@ -5698,6 +6269,7 @@ mx:
     - name: security
       type: object-or-string
       authoring: authored
+      optionalIn: [agent]
       inPlainWords: 'Before running it, a reader weighs this security declaration: {value}.'
       definition: >-
         Security declaration for an action document: the security block defined in the open standard
@@ -5938,6 +6510,129 @@ mx:
       notes: An exhaustive claim with no scope is read as covering only what the document visibly lists.
       status: canonical
       profile: core
+    - name: cancellationTerms
+      type: object
+      inPlainWords: 'Its cancellation terms: {value}.'
+      authoring: authored
+      optionalIn: [core]
+      definition: >-
+        What cancelling a booking or order the document offers costs, and until when cancelling is free, so an agent
+        can read the terms before it commits on its owner's behalf.
+      example:
+        freeUntil: P2D
+        fee: 100%
+        termsUrl: https://example.com/booking-terms
+      notes: >-
+        Fills a gap in Schema.org, whose MerchantReturnPolicy covers returning goods and whose Reservation carries only
+        a ReservationCancelled status: no Schema.org property states what cancelling costs. Where Schema.org later
+        defines one, defer to it. A summary of the binding terms at termsUrl, never a replacement for them. An absent
+        block says nothing about the terms, never that cancelling is free. A fee that moves on its own cadence is also
+        declared in volatileValues, so an agent knows where to fetch the current figure.
+      status: experimental
+      profile: core
+    - name: cancellationTerms.freeUntil
+      type: string
+      authoring: authored
+      definition: >-
+        How long before the booked start a cancellation stays free, as an ISO 8601 duration, or the fixed RFC 3339 time
+        after which a fee applies.
+      example: P2D
+      notes: P0D means a fee applies from the moment of booking. Omit it when fee is 0.
+      status: experimental
+      profile: core
+    - name: cancellationTerms.fee
+      type: string
+      authoring: authored
+      definition: >-
+        The charge for cancelling after freeUntil, as an amount with its ISO 4217 code or as a percentage of the
+        booking price.
+      example: 25.00 GBP
+      notes: 0 means cancelling is free at any time. A percentage is of the total price including fees and taxes.
+      status: experimental
+      profile: core
+    - name: cancellationTerms.termsUrl
+      type: string
+      authoring: authored
+      definition: The address of the full cancellation terms the block summarises.
+      example: https://example.com/booking-terms
+      status: experimental
+      profile: core
+    - name: loyaltyPointTerms
+      type: object
+      inPlainWords: 'Its loyalty points work like this: {value}.'
+      authoring: authored
+      optionalIn: [core]
+      definition: >-
+        What a loyalty point earned on the document's offers is worth, how points are earned, and when they lapse or
+        cannot be spent, so an agent can calculate a programme's value instead of guessing it.
+      example:
+        program: https://example.com/#rewards
+        earnRate: 1
+        pointValue: 0.05
+        expiresAfter: P12M
+        expiryBasis: last-activity
+        blackoutDates:
+          - 2026-12-24/2026-12-26
+      notes: >-
+        Complements Schema.org MemberProgram, MemberProgramTier, hasTierBenefit and validForMemberTier, which describe a
+        programme, its tiers and the offers each tier gets; none of them states what a point is worth, how fast points
+        are earned, when they expire, or when they cannot be redeemed. Amounts are in the document's currency field.
+        Declares the published terms of the programme, never one member's balance, which belongs in that member's own
+        personal cog. A point value that moves on its own cadence is also declared in volatileValues, so an agent knows
+        where to fetch the current figure.
+      status: experimental
+      profile: core
+    - name: loyaltyPointTerms.program
+      type: string
+      authoring: authored
+      definition: The Schema.org MemberProgram the points belong to, as its URL or @id.
+      example: https://example.com/#rewards
+      alignsWith:
+        - schema:MemberProgram
+      status: experimental
+      profile: core
+    - name: loyaltyPointTerms.earnRate
+      type: number
+      authoring: authored
+      definition: The number of points earned for each one unit of the document's currency spent.
+      example: 1
+      status: experimental
+      profile: core
+    - name: loyaltyPointTerms.pointValue
+      type: number
+      authoring: authored
+      definition: The redemption value of one point, in the document's currency.
+      example: 0.05
+      notes: Where redemption value varies, the lowest value a member can rely on, with the detail in the programme terms.
+      status: experimental
+      profile: core
+    - name: loyaltyPointTerms.expiresAfter
+      type: string
+      authoring: authored
+      definition: How long a point stays valid, as an ISO 8601 duration counted from the date expiryBasis names.
+      example: P12M
+      notes: Omit it when points do not expire.
+      status: experimental
+      profile: core
+    - name: loyaltyPointTerms.expiryBasis
+      type: string
+      authoring: authored
+      definition: >-
+        Whether expiresAfter counts from the date a point was earned or from the member's last earning or redemption.
+      example: last-activity
+      validValues:
+        - earned
+        - last-activity
+      status: experimental
+      profile: core
+    - name: loyaltyPointTerms.blackoutDates
+      type: array
+      authoring: authored
+      definition: The periods when points cannot be redeemed, as ISO 8601 intervals.
+      example:
+        - 2026-12-24/2026-12-26
+      status: experimental
+      profile: core
   profiles:
     - name: core
       description: Fields that apply to all MX documents.
@@ -5983,6 +6678,7 @@ mx:
         - ai
         - contextProvides
         - aiAssistance
+        - aiInvolvement
         - aiEditable
         - runbook
         - contentType
@@ -5991,6 +6687,8 @@ mx:
         - readingLevel
         - conformsTo
         - completeness
+        - cancellationTerms
+        - loyaltyPointTerms
         - x-mx-pim
     - name: cog
       description: >-
@@ -6972,6 +7670,7 @@ mx:
         - resource
         - jurisdictionalEvidence
         - statusNotice
+        - decisionRightRef
         - supersededBy
     - name: aims-risk-register
       description: >-
@@ -7040,6 +7739,7 @@ mx:
         - type
         - resource
         - statusNotice
+        - decisionRightRef
         - supersededBy
     - name: aims-impact-assessment
       description: >-
@@ -7104,6 +7804,7 @@ mx:
         - type
         - resource
         - statusNotice
+        - decisionRightRef
         - supersededBy
     - name: aims-policy
       description: >-
@@ -7159,6 +7860,71 @@ mx:
         - type
         - resource
         - statusNotice
+        - supersededBy
+    - name: aims-decision-right
+      description: >-
+        One class of AI decision and the single role accountable for it: who owns the decision, who is consulted,
+        when it goes up a level and to whom, and when the allocation was agreed. The record kind is
+        aims:decisionRight. Experimental: proposed for The Gathering beside the AIMS profile set.
+      header: |
+        ---
+        # Carrier: an AIMS decision right, one COG per class of decision
+        # --- Zone 1a: Identity ---
+        title: "Decision right: shared AI tools across teams"
+        description: "Who decides whether an AI tool one team builds is built once for every team."
+        author: Tom Cranstoun
+        created: 2026-10-19
+        modified: 2026-10-19
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface ---
+        type: aims:decisionRight
+        tags: [example, aims, decision-right]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          canonicalUri: https://example.com/aims/decisions/dr-003.md
+          status: active
+          recordId: DR-003
+          decisionScope: Whether an AI tool requested by one team is built once as a shared service.
+          parties:
+            - role: decisionOwner
+              name: Chief Information Officer
+            - role: consulted
+              name: Chief Technology Officer
+            - role: approver
+              name: AI Governance Council
+          escalation:
+            trigger: The tool would process personal data.
+            to: approver
+          approvedAt: 2026-10-19
+          reviewBy: 2027-04-19
+          jurisdictionalEvidence:
+            ISO-42001:
+              controls: [A.3.2]
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - status
+        - canonicalUri
+        - parties
+        - recordId
+        - approvedAt
+        - decisionScope
+      recommended:
+        - version
+        - jurisdictionalEvidence
+        - escalation
+        - reviewBy
+      optional:
+        - tags
+        - type
+        - resource
+        - statusNotice
+        - systemRef
         - supersededBy
     - name: personal
       description: >-
@@ -7221,3 +7987,260 @@ mx:
         - appliesToSites
         - excludeSites
         - declaredBy
+    - name: agent
+      description: >-
+        An agent cog: the record an AI agent carries and presents when it acts. It names the agent and its release, the
+        principal it acts for, the kinds of action its mandate covers, where the mandate applies, what it may spend,
+        which actions stop for a named person, where its actions are logged, and where its mandate can be withdrawn.
+        The record kind is agent-cog. Who built and who runs the agent are parties entries (provider, deployer); what it
+        may touch while acting is its security block. A declaration, never a grant: the publishing point it meets
+        decides what to admit. Proposed to The Gathering; not ratified.
+      header: |
+        ---
+        # Carrier: an agent cog, presented by the agent when it acts
+        # --- Zone 1a: Identity ---
+        title: "Editorial assistant"
+        description: "Drafts and corrects articles in the newsroom CMS for Example News."
+        author: Jane Doe
+        created: 2026-10-19
+        modified: 2026-10-19
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: agent-cog
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          agentId: https://agents.example.com/editorial-assistant
+          agentVersion: 2.1.0
+          actingFor:
+            name: Example News Ltd
+            id: https://news.example.com/
+          parties:
+            - role: provider
+              name: Example Agents Ltd
+            - role: deployer
+              name: Example News Ltd
+          mandate: [read, draft, write]
+          operatesAt: [cms.news.example.com]
+          humanApprovalFor: [publish]
+          actionLog: https://agents.example.com/editorial-assistant/log
+          revocationUri: https://agents.example.com/editorial-assistant/status
+          expires: 2027-10-19
+          security:
+            riskLevel: medium
+            automationConsent: advisory-only
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - agentId
+        - actingFor
+        - mandate
+      recommended:
+        - version
+        - status
+        - parties
+        - expires
+        - agentVersion
+        - humanApprovalFor
+        - actionLog
+        - revocationUri
+      optional:
+        - tags
+        - type
+        - resource
+        - corroboratedBy
+        - claimBasis
+        - workflowRecord
+        - residualRisk
+        - supersededBy
+        - operatesAt
+        - spendLimit
+        - security
+    - name: publishing-point
+      description: >-
+        A publishing-point cog: the terms a CMS, site, feed, API, newsletter or marketplace sets for the agents that act
+        there. It names the kind of point, which agents it admits, the most an admitted agent may do, which actions
+        stop for a named person, the interface agents use in place of the human one, and where agent actions are
+        logged. The record kind is publishing-point-cog. It is the publishing-point contract stated for the machine
+        audience and the counterpart of the agent cog: an agent acts only where its mandate and the point's terms
+        overlap. The owner and the controller are parties entries. Proposed to The Gathering; not ratified.
+      header: |
+        ---
+        # Carrier: a publishing-point cog, served beside the point it governs
+        # --- Zone 1a: Identity ---
+        title: "Newsroom CMS: agent terms"
+        description: "Which agents may work in the Example News CMS, and what they may do there."
+        author: Jane Doe
+        created: 2026-10-19
+        modified: 2026-10-19
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: publishing-point-cog
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          publishingPointKind: cms
+          agentAccess: listed
+          admittedAgents:
+            - https://agents.example.com/editorial-assistant
+          agentActions: [read, draft, write]
+          humanApprovalFor: [publish, unpublish, delete]
+          agentInterface: https://cms.news.example.com/api/agents
+          actionLog: https://cms.news.example.com/agent-log
+          parties:
+            - role: systemOwner
+              name: Example News Ltd
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - publishingPointKind
+        - agentAccess
+        - agentActions
+      recommended:
+        - version
+        - status
+        - parties
+        - humanApprovalFor
+        - actionLog
+        - agentInterface
+      optional:
+        - tags
+        - type
+        - resource
+        - canonicalUri
+        - supersededBy
+        - expires
+        - admittedAgents
+    - name: cms
+      description: >-
+        A CMS cog: the record of a content management system as the controller of one or more publishing points. It
+        names the product and release, how the system delivers content, the publishing points it controls, and the
+        machine-readable outputs the instance emits. The record kind is cms-cog. The vendor and the organisation that
+        runs the instance are parties entries (provider, systemOwner); the terms for agents sit in each point's
+        publishing-point cog. Proposed to The Gathering; not ratified.
+      header: |
+        ---
+        # Carrier: a CMS cog, kept beside the instance it describes
+        # --- Zone 1a: Identity ---
+        title: "Newsroom CMS"
+        description: "The CMS behind Example News: what it runs, what it controls, and what it emits for machines."
+        author: Jane Doe
+        created: 2026-10-19
+        modified: 2026-10-19
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: cms-cog
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          cmsProduct: Example CMS
+          cmsVersion: "10.4"
+          cmsArchitecture: headless
+          publishingPoints:
+            - https://news.example.com/.well-known/publishing-point.md
+            - https://news.example.com/feed.xml
+          machineOutputs: [json-ld, sitemap, feed, llms-txt]
+          parties:
+            - role: provider
+              name: Example CMS Inc
+            - role: systemOwner
+              name: Example News Ltd
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - cmsProduct
+        - publishingPoints
+      recommended:
+        - version
+        - status
+        - parties
+        - cmsVersion
+        - cmsArchitecture
+        - machineOutputs
+      optional:
+        - tags
+        - type
+        - resource
+        - canonicalUri
+        - supersededBy
+    - name: eval
+      description: >-
+        An eval record: a fixed task put to one or more models, the key the answers were scored against, how they were
+        scored, how many times the task ran, and what each model scored. The record kind is eval-record. A benchmark
+        table states results; an eval record states enough for a reader to repeat the test or weigh the result.
+        Proposed to The Gathering; not ratified.
+      header: |
+        ---
+        # Carrier: an eval record, published beside the write-up it supports
+        # --- Zone 1a: Identity ---
+        title: "Billing spec eval"
+        description: "A subscription billing spec scored by 80 hidden tests on dates and rounding."
+        author: Jane Doe
+        created: 2026-10-15
+        modified: 2026-10-15
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: eval-record
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          evalTask: "Build a billing engine from a written spec."
+          evalSubjects:
+            - model: example-model-4
+              provider: example-lab
+              route: openrouter
+              settings: default reasoning
+          evalGrading: script
+          evalRuns: 5
+          evalKey:
+            fixedAt: 2026-10-12
+          evalResults:
+            - model: example-model-4
+              score: 80
+              outOf: 80
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - evalTask
+        - evalSubjects
+        - evalGrading
+        - evalRuns
+      recommended:
+        - version
+        - status
+        - inLanguage
+        - evalKey
+        - evalResults
+      optional:
+        - tags
+        - type
+        - resource
+        - refersTo
+        - corroboratedBy
+        - claimBasis
+        - supersededBy
+        - expires
