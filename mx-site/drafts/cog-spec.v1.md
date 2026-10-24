@@ -1,7 +1,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: Tom Cranstoun
-modified: 2026-09-29
+modified: 2026-10-23
 created: 2026-04-27
 title: "Cog Specification"
 description: "The cog file format, artefact model, and verification algorithm."
@@ -872,6 +872,8 @@ A consumer receives a cog from an untrusted party. The cog declares benign-sound
 
 **Mitigation:** A witness attests to contract satisfaction; it does NOT attest that the cog's content is safe to execute. Consumers MUST review cogs from untrusted sources before invoking any embedded artefact, regardless of whether the cog has a valid witness. The witness reduces the surface area of review (the contract is what was signed) but does not eliminate the need for human judgement on what is being executed.
 
+A cog received from another system is declarative. The consuming party reads it and MUST NOT act on it: it MUST NOT invoke an embedded artefact or perform `execute` instructions from it until a human on the consuming side has reviewed it and promoted it for execution. The promotion MUST be bound to the cog's declared `version` and the SHA-256 of the bytes as received, and any change to either MUST revoke it. The consuming party SHOULD keep the received bytes unaltered as evidence. It SHOULD re-investigate the cog only on first sight, on a change, or on a notice of deletion, and record one of four decisions each time: accept as is, refer for human review, modify (by writing its own derived cog that references the received original by hash, never by editing the original), or reject. A notice of deletion SHOULD mark the accepted cog withdrawn while keeping the received bytes and the decision record.
+
 ### 10.9 Threat: registry compromise
 
 A witness registry - local or hosted - is modified by an adversary. Witnesses are added, removed, or altered.
@@ -913,4 +915,4 @@ YAML 1.2 Specification, <https://yaml.org/spec/1.2.2/>.
 
 CommonMark Specification (for fenced code block syntax), <https://commonmark.org/>.
 
-<!-- cog-spec-sync: 2026-09-14-b -->
+<!-- cog-spec-sync: 2026-10-23-a -->
