@@ -721,7 +721,7 @@ The audit measures. It is not a certificate, and it does not make your site comp
 
 Prefer to talk first?
 
-Tell us about your site and we will scope the run with you, or check five pages free right now to see what kind of findings to expect.
+Tell us about your site and we will scope the run with you.
 
           About this page
 
@@ -3245,7 +3245,7 @@ Get MX: The Handbook today, join or sponsor the community at The Gathering, and 
 
 **URL:** https://mx.allabout.network/blog/audit-for-auditors.html
 
-**Description:** What an auditor reading one of our deliverables can verify without trusting our word for it: the evidence chain inside the PDF, the sidecar pair on disk, and the regression test that proves all of it holds on a fresh render.
+**Description:** What an auditor reading one of our deliverables can verify without trusting our word for it: the evidence chain inside the PDF, the paired provenance files, the consistency check every report passes, and the public tools that read all of it.
 
 Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
@@ -3255,11 +3255,11 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
 
         - Evidence rides inside the PDF
 
-        - Reviewer signals stay separate from the client surface
+        - Every report is checked before it ships
 
-        - One scoring vocabulary, machine-verifiable
+        - One scale, stated scope
 
-        - A regression test that proves the claim on every render
+        - A regression test holds the PDF contract
 
         - What an auditor can do with this
 
@@ -3269,71 +3269,71 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             Tom Cranstoun
             ·
-            6 min read
+            4 min read
 
-Audit reports usually carry their own credibility problem. The reader has the document. They don't have the evidence that produced it. They can ask the writer; they can show their working; the working may or may not match what shipped. An MX audit closes that gap from the other side. An auditor reading an MX deliverable can walk from the document to every signal it depends on, without needing our word for anything.
+Audit reports usually carry their own credibility problem. The reader has the document. They don't have the evidence that produced it. They can ask the author, who can show their working, and that working may or may not match what shipped. An MX audit closes that gap from the other side. An auditor reading an MX deliverable can walk from the document to every signal it depends on, without needing our word for anything.
 
 Evidence rides inside the PDF
 
-Every PDF an MX audit produces embeds a structured XMP packet inside its metadata stream. The packet declares the artefact's conformance claim: pdfuaid:part=1, the ISO 14289-1 (PDF/UA-1) declaration that EAA Directive 2019/882 requires. It also holds a set of MX-namespaced identity fields populated from the source frontmatter: who authored it, when, what content type it's, which audiences it's for, and its conformance targets. The same packet embeds the full AI provenance evidence chain inline under XMP-mx:ProvenanceAiPayload: every action that touched the artefact, who or what executed each one, what inputs went in, what verdict came out, and which AI-governance frameworks each is recorded against (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act).
+Every audit PDF holds a structured XMP packet in its metadata stream. The packet records the title in dc:title, and it gains the PDF/UA-1 identification (pdfuaid:part=1, ISO 14289-1) only when the finished document passes validation. One that fails goes without, rather than claiming what it hasn't earned.
 
-The same evidence chain also goes into a sidecar JSON file adjacent to the PDF on disk (<basename>.provenance.ai.json) along with its deterministic companion (<basename>.provenance.deterministic.json) for the rule-driven steps. The on-disk copies serve EAA accessibility-conformance evidence and any reviewer who prefers file-system access. The inline XMP copy serves anyone who only has the PDF.
+On a contract, or with the evidence add-on, the same packet embeds the full provenance chain under XMP-mx:ProvenanceAiPayload: every step that touched the report, who or what carried it out, what went in, what verdict came out, and the AI-governance frameworks that apply to each (EU AI Act, UK ICO AI guidance, NIST AI RMF, Colorado AI Act). The chain also travels as a pair of files, the AI record (<basename>.provenance.ai.json) and its deterministic companion for the rule-driven steps, carried inside the PDF as associated files. An inspector who has only the PDF has everything.
 
-To extract the embedded chain on any MX PDF: exiftool -b -XMP-mx:ProvenanceAiPayload <file>.pdf. The -b flag matters; without it exiftool prepends a label and the JSON doesn't parse.
+To extract the embedded chain: exiftool -b -XMP-mx:ProvenanceAiPayload <file>.pdf. The -b flag matters; without it exiftool prepends a label and the JSON doesn't parse.
 
-Reviewer signals stay separate from the client surface
+Every report is checked before it ships
 
-Every audit goes through a battery of deterministic gates before delivery. They catch scope drift, hyperbole in prose, claims a numeric verifier couldn't corroborate against the source data, voice inconsistencies. Each gate that flags something records the finding to a structured store (audit_errors.json) and the pipeline continues to a deliverable PDF. This is the always-produce-PDF contract: a failing gate raises a warning, not an exit code, so the client receives a document that names its own gaps rather than a silent failure.
+Before release, every fact a report states is checked against the results the audit recorded. A disagreement stops the PDF, so every part of a delivered report agrees with the rest and with the results behind it. Nothing is papered over with a warning.
 
-Those reviewer-facing findings go into a sibling sidecar, not inside the client-facing report. Each delivery ships with a companion markdown file (<basename>-report-findings.md) carrying every finding the gates raised, by severity, with the gate name, the category, the timestamp, and the supporting evidence. The reviewer reads this before signing off; the client reads the report; the auditor reads either or both.
+One scale, stated scope
 
-The separation is structural, not cosmetic. The findings sidecar carries its own MX frontmatter declaring contentType: audit-findings and a companion pointer to the report. The report's provenance chain records the reviewer's sign-off statement (if any) as an audit step, so the record still names the human who released the document. The chain integrity is intact; what the client sees is clean.
+The report uses one scale throughout: Good, Fair or Poor, with a grade alongside, from each row up to the overall figure. Beside each one, the report states what it covers, and its Scope and Limits section says what the audit looked at and what it didn't. A machine-readable JSON export of the results ships with every audit, so an auditor can set its figures against the report's tables without retyping anything.
 
-One scoring vocabulary, machine-verifiable
+A regression test holds the PDF contract
 
-The Balanced Scorecard speaks one scoring vocabulary across every cell. The audited row reports a band (Excellent, Good, Could Be Better, Needs Improvement) with a letter grade alongside (A through D). The peer-comparison cell uses the same band, never a raw median. Each cell reads as A (median), B (median), C (median), or D (median). An auditor scanning the scorecard sees site versus cohort in a single eye-pass.
+"MX Compatible" is a regression-tested contract, not a marketing line. A test renders a small fixture through the same PDF pipeline that produces client deliveries and asserts every signal an inspector relies on:
 
-The change is also useful when the scorecard is consumed by a machine. The bands map cleanly to a four-value enum; a tooling pipeline can compare site to peer without parsing or normalising. The methodology that maps a numeric score to a rating is in mx-reginald/audit/lib/scoring-methodology.json, the single source of truth for every score's inputs, weights, and band boundaries. The auditor can verify any reported band by re-running the methodology against the raw figures in audit_averages.json; the figures are committed alongside the delivery in the .infill/ archive.
+- The AI provenance file exists beside the PDF.
 
-A regression test that proves the claim on every render
+- The deterministic provenance file exists beside the PDF.
 
-"MX Compatible" is a regression-tested contract, not a marketing line. tests/test-pdf-mx-compatible.js renders a small fixture markdown through the same PDF pipeline that produces client deliveries, then asserts every signal an inspector relies on:
-
-- The AI provenance sidecar exists adjacent to the PDF.
-
-- The deterministic provenance sidecar exists adjacent to the PDF.
-
-- The PDF XMP packet declares pdfuaid:Part=1.
+- The XMP packet carries dc:title, and a PDF/UA-1 identification only when the file passed validation, never an unchecked one.
 
 - The MX identity fields in XMP mirror the source frontmatter byte-for-byte.
 
-- The provenance pointer fields name the adjacent sidecars by basename.
+- The provenance pointer fields name both files by basename.
 
 - The full AI evidence chain is embedded inline under XMP-mx:ProvenanceAiPayload.
 
-- The inline copy matches the adjacent .ai.json after JSON normalisation.
+- The inline copy matches the AI provenance file after JSON normalisation.
 
-The test is wired into npm test. Any change that would silently break the MX Compatible contract breaks the test instead. The pipeline doesn't ship a PDF that fails it, and the operator who runs a build gets a clear, named failure pointing at the missing signal.
+It runs whenever the pipeline is modified, so an edit that would break the MX Compatible contract fails the test instead of reaching a client.
 
 What an auditor can do with this
 
-An MX audit report can be verified without leaving the document. exiftool -b -XMP-mx:ProvenanceAiPayload <file>.pdf | jq . returns the full AI chain on the command line. The deterministic companion is named in the same packet under XMP-mx:ProvenanceCompanion; a reviewer with file-system access can resolve and read it. The gate findings are in the findings sidecar. The methodology that produced every score is at scoring-methodology.json in the audit toolkit, public and re-runnable. The frameworks each provenance step is recorded against are named in the chain itself, so an auditor working a regulatory clause can walk from it to the steps the report cites.
+An MX audit report can be verified without leaving the document. exiftool -b -XMP-mx:ProvenanceAiPayload <file>.pdf | jq . returns the full chain on the command line, and the deterministic companion is named in the same packet under XMP-mx:ProvenanceCompanion. The frameworks each step is recorded against are named in the chain itself, so an auditor working through a regulatory clause can find the steps the report cites for it.
 
-An auditor who prefers a browser to a terminal can use the interactive inspector at /tools/pdf-inspector.html. It accepts any MX PDF (the QR code on the cover badge resolves to the same URL) and walks the full evidence chain end-to-end in the browser. A reader who wants the short version of what each signal means and which standard it cites can read the explainer at /learn/mx-for-pdfs.html.
+An auditor who prefers a browser to a terminal can use the interactive inspector at /tools/pdf-inspector.html. It accepts any MX PDF and walks the full evidence chain in the browser. A reader who wants the short version of what each signal means, and which standard it cites, can read the explainer at /learn/mx-for-pdfs.html.
 
-Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, entity type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
-None of this constitutes a compliance claim against any specific regulation. EAA conformance, EU AI Act compliance, ICO accountability: all of those remain legal duties of the publishing entity. What MX provides is the evidence vehicle: the structured, tamper-evident, machine-readable trail that any regulated body needs to produce when asked. An auditor walking that trail has the cover, the inspector, the explainer, the sidecars, the methodology, and the framework citations as reference points. That is the contract.
+None of this constitutes a compliance claim against any specific regulation. Conformance with the EAA or the EU AI Act, and accountability to the ICO, remain legal duties of the publishing organisation. What MX provides is the evidence vehicle: the structured, tamper-evident, machine-readable trail that the organisation needs to produce when asked. An auditor walking that trail can lean on the PDF, the inspector, the explainer, the provenance files, the scope statement and the framework citations. That's the contract.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-27.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience community and author of the forthcoming MX book series. Building content systems since 1977. Focus areas: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your team stands on the agent-readiness curve?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -3417,7 +3417,7 @@ The format doesn't change what the audit measures. Your scores, the schema you c
 
 **URL:** https://mx.allabout.network/blog/audit-for-engineers.html
 
-**Description:** A walk through an MX audit deliverable from an engineer's perspective: scorecard vocabulary, page composition, findings sidecar, regression tests, and the contract that makes the PDF MX Compatible.
+**Description:** What an MX audit delivers, read from an engineer's side: the files that arrive, one scoring scale, findings that say how to verify the fix, and a PDF that declares what it is in ways you can check with your own tools.
 
 Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
@@ -3425,15 +3425,15 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
 
         Index
 
-        - One vocabulary in the Balanced Scorecard
+        - What arrives
 
-        - Contents lands on its own page
+        - One scale, and findings you can verify
 
-        - Findings ride in a sibling sidecar
+        - The report is checked before it ships
 
-        - Tests that hold the contract
+        - The PDF declares what it is
 
-        - An MX Compatible regression test
+        - Checking it yourself
 
         - How the pieces fit
 
@@ -3443,63 +3443,49 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             Tom Cranstoun
             ·
-            5 min read
+            3 min read
 
-An MX audit is rendered through a pipeline that places every fact into a skeleton, rewrites the skeleton into prose, gates the prose against a battery of deterministic checks, and ships a tagged PDF along with a provenance sidecar pair. We walk through the artefact from an engineer's perspective: the scorecard, the page composition, the sidecar layout, the regression tests, and the contract that makes the PDF MX Compatible.
+An MX audit arrives as a small set of files, and each one is built to be checked by the person who receives it. Here is that set from an engineer's side: what each file is for, what the PDF says about itself, and how to confirm it with tools you already have.
 
-One vocabulary in the Balanced Scorecard
+What arrives
 
-The Balanced Scorecard at the top of every audit report grades each dimension on a four-band scale (Excellent, Good, Could Be Better, Needs Improvement) with a letter grade alongside (A through D). The vs Peers column speaks the same vocabulary, never raw numbers. Each cell reads as A (median), B (median), C (median), or D (median).
+A free audit delivers two documents, each as a tagged PDF with an HTML edition beside it. The Main report holds the verdict, the top findings, the action plan, the scope and its limits, the findings in detail and the change since the last audit. The Appendices hold the supporting evidence. A machine-readable JSON export of the results comes with both. A contract, or the evidence add-on, adds the findings export and the provenance pair.
 
-The helper that maps a raw score to a band lives in scoreBandFromValue() at mx-reginald/audit/bin/infill-report.js. The peer-comparison formatter (formatPeerComparison()) routes the peer median through the same helper before emitting the cell, so the row's own grade and its peer comparison can never speak different languages. The boundaries (76, 51, 26) and band names also live as a single source of truth in mx-reginald/audit/lib/scoring-methodology.json for any tooling that wants to read the same enum.
+One scale, and findings you can verify
 
-Contents lands on its own page
+The report uses one scale throughout: Good, Fair or Poor, with a grade alongside, from each row up to the overall figure. A row and its comparison can't speak different languages, and a machine reading the export gets one enum.
 
-A cover doctype's PDF flow is: title plus MX Compatible badge on page one, contents on page two, body from page three onward. The cover-to-contents break comes from break-after: page on section.mx-compatible-zone. The contents-to-body break comes from a dedicated rule in scripts/templates/pdf/_base.css:
+Each finding has five parts: what was observed, the evidence, why it matters, what to change, and how to verify it. You'll use the last part most. It names a check you can run yourself, so a fix is confirmed the day you ship it rather than at the next audit.
 
-nav#TOC {
-  break-before: page;
-  page-break-before: always;
-  break-after: page;
-  page-break-after: always;
-}
+The report is checked before it ships
 
-Both the modern (break-*) and legacy (page-break-*) properties are set because the rendering engine pairs CSS Paged Media with Chrome's print path. Doctypes that hide the TOC entirely (letter, blog-post, briefing-2col) set display: none on nav#TOC, so the break rule is a no-op there.
+Before release, every fact the report states is checked against the results the audit recorded, and a disagreement stops the PDF. So the figure quoted in a paragraph matches the one in the table beside it.
 
-Findings ride in a sibling sidecar
+The PDF declares what it is
 
-Every audit goes through deterministic gates that catch scope mis-statements, exaggeration in prose, unverified numeric claims, voice drift, and internal score contradictions. One gate catches the specific failure mode where a rewrite step substitutes n/a/100 for a dimension that the Balanced Scorecard table shows as a real number: the gate parses the scorecard, extracts each dimension's numeric score, and blocks the PDF if n/a/100 appears in prose for a dimension where the scorecard has digits. The gates record every finding to a sidecar JSON file and the pipeline continues; nothing fails the run. This is the always-produce-PDF contract: a failing gate becomes a recorded warning, not an exit code.
+The PDF conforms to PDF/A-3a for archiving and PDF/UA-1 (ISO 14289-1) for accessibility. It carries each identification only after the finished file has passed validation. Its XMP packet records the title in dc:title, and its Producer field names who issued the report. On a contract or with the add-on, the same packet embeds the full evidence chain under XMP-mx:ProvenanceAiPayload, and the two provenance files ride inside the PDF as associated files.
 
-The findings travel with the report as a sibling sidecar named after it:
+Checking it yourself
 
-mx-outputs/audit/<date>/<host>/
-├── <basename>-report.md
-├── <basename>-report.pdf
-├── <basename>-report-findings.md
-├── <basename>-report-fierce-critic.json
-└── <basename>-report.provenance.ai.json
+- Any PDF/UA validator, or a screen reader, tells you whether the tagging holds.
 
-The findings sidecar is a complete markdown document with its own MX frontmatter (contentType: audit-findings, companion: <report>.md). It carries the gate name, the category, the timestamp, and the supporting evidence for every finding, by severity. The reviewer reads the sidecar before sign-off; the client reads the report.
+- exiftool -XMP:all <file>.pdf lists the packet. On a delivery with provenance, exiftool -b -XMP-mx:ProvenanceAiPayload <file>.pdf | jq . returns the chain. The -b flag matters: without it exiftool prepends a label and the JSON doesn't parse.
 
-The renderer at mx-reginald/audit/lib/render-error-section.js exposes renderFindingsMarkdownDoc() for the sidecar; a legacy renderErrorReportSection() survives as an empty no-op so older skeletons that still carry [ERROR_REPORT_SECTION] resolve to invisible sentinels. The post-gates regenerator script writes the sidecar and strips any residual block out of the report markdown. Templates and contracts no longer reference the placeholder.
+- The interactive inspector at /tools/pdf-inspector.html accepts any MX PDF and walks the chain in the browser. The explainer at /learn/mx-for-pdfs.html maps each signal to the standard it cites.
 
-Tests that hold the contract
-
-Two regression tests live under mx-reginald/audit/test/ and exercise the path from canned fixtures to a rendered skeleton. infill-golden.test.js renders the canonical web-audit-suite template against a synthetic example.com fixture and asserts byte-identical output against golden-skeleton.md; the fixture writes through a stable host-slug subfolder so the rendered mx.generate.output line is deterministic. audit-gates.test.js covers every gate's exit-code contract, including the deterministic verifier's always-continue behaviour: on the unsupported-numeric fixture the verifier exits zero and stdout names unverified claim(s) - logged as warnings, so the test asserts both the exit code and the message.
-
-An MX Compatible regression test
-
-The phrase "MX Compatible" names a specific set of signals an inspector can verify on the rendered PDF: provenance sidecar pair on disk, the pdfuaid:Part=1 Level 2 declaration, MX-namespaced XMP fields populated from frontmatter, pointer fields naming the sidecars, and the full AI evidence chain embedded inline under XMP-mx:ProvenanceAiPayload.
-
-tests/test-pdf-mx-compatible.js at the hub root writes a fixture markdown to a tmp dir with the full mx frontmatter and a declared x-mx-provenance block, renders it through scripts/bin/mx.pdf.sh, then makes eleven assertions: the two sidecars on disk, the PDF/UA declaration, five identity fields, two pointer fields, and one byte-for-byte match between the embedded XMP payload and the adjacent .ai.json after JSON normalisation. The test is wired into npm test and exposed as npm run test:pdf-mx-compatible.
-
-An engineer who wants to sanity-check the contract from outside the repository can run the same probes by hand. The interactive inspector at /tools/pdf-inspector.html accepts any MX PDF and walks the chain in the browser; the explainer at /learn/mx-for-pdfs.html maps each signal to the standard it cites.
+- The JSON export parses with any JSON tool, so you can compare its figures with the report's tables line for line.
 
 How the pieces fit
 
-One scoring vocabulary across every row of the scorecard. One contents page on its own page. One sibling sidecar carrying every reviewer signal so the report markdown stays client-facing. A regression-tested PDF contract that an inspector can verify in a browser or from the command line.
+The report makes the argument. The export gives a machine the figures. The PDF's metadata says what the document is, and with a contract or the add-on it also holds the evidence chain behind it.
 
-The shared property across all of those is the same: each part of the deliverable does one job, and the part that does it is the part the reader expects to look at. The report carries the argument. The sidecar carries the reviewer's working. The XMP packet carries the evidence chain. The tests catch when any of them stops doing its job.
+Each part does one job, and you can check every one of them without asking us.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-27.
 
             About the author
 
@@ -8644,6 +8630,24 @@ Blog
         Blockchain
         Announcements
 
+            An MX Audit, Read by an Engineer
+
+            What an MX audit delivers, read from an engineer's side: the files that arrive, one scoring scale, findings that say how to verify the fix, and a PDF that declares what it is in ways you can check with your own tools.
+
+            28 May 2026
+            - Provenance
+
+- Practitioner
+
+            How an MX Audit Proves Itself
+
+            What an auditor reading one of our deliverables can verify without trusting our word for it: the evidence chain inside the PDF, the paired provenance files, the consistency check every report passes, and the public tools that read all of it.
+
+            28 May 2026
+            - Practitioner
+
+- Provenance
+
             2 August 2026. €15 Million. Does Your CMS Know What It Published?
 
             On 2 August 2026 the EU AI Act's Article 50 transparency obligations become enforceable law. For most enterprise CMS platforms, the requirement for machine-readable proof of content origin lands somewhere between difficult and architecturally impossible. REGINALD was built for exactly this.
@@ -9020,15 +9024,6 @@ Blog
 
 - Business case
 
-            An MX Audit, Read by an Engineer
-
-            A walk through an MX audit deliverable from an engineer's perspective: scorecard vocabulary, page composition, findings sidecar, regression tests, and the contract that makes the PDF MX Compatible.
-
-            28 May 2026
-            - Provenance
-
-- Practitioner
-
             The Letter the Law Says You Have to Send
 
             Employment agencies in New York must notify candidates when an automated tool influenced a hiring decision. Most of those letters are inaccessible PDFs with no provenance record. MX closes both gaps in one artefact.
@@ -9128,15 +9123,6 @@ Blog
             - Practitioner
 
 - Business case
-
-            How an MX Audit Proves Itself
-
-            What an auditor reading one of our deliverables can verify without trusting our word for it: the evidence chain inside the PDF, the sidecar pair on disk, and the regression test that proves all of it holds on a fresh render.
-
-            28 May 2026
-            - Practitioner
-
-- Provenance
 
             AI, MX, and the Future of Business
 
@@ -28502,4 +28488,4 @@ MX
 
           To change your mind, drop the approved file again and record a new decision. The new decision replaces the old one and covers everything up to that point, the earlier one included.
 
-<!-- x-mx-sourceHash: 6eeeb154ab3a13be7b7f6851deab97947334594842c7672f0f6fcb2c3f3962b1 -->
+<!-- x-mx-sourceHash: ff5f73f2c92c4abc6d0feb35c2d30f25d13cb2f26c43dca6c7e05897bdf1408f -->
