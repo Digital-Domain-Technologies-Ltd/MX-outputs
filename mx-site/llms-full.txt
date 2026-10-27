@@ -765,7 +765,7 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             Tom Cranstoun
             ·
-            4 min read
+            5 min read
 
 On 2 August 2026, the EU AI Act's Article 50 transparency obligations become enforceable law. The fines are real: up to €15 million, or 3% of your global annual turnover, whichever hurts more.
 
@@ -773,23 +773,23 @@ Note: This page describes regulatory frameworks in general terms only. Nothing h
 
 Here is what the regulation actually requires: if your system generates, assists, or significantly shapes content intended for the public, it must carry machine-readable proof of its origin. Not a disclaimer in small print. Not a policy page. Machine-readable. Detectable by other systems. Verifiable.
 
-For most enterprise CMS platforms, that requirement lands somewhere between "difficult" and "architecturally impossible." Not because the content teams are careless. Because the systems underneath them were never designed to track where a sentence came from.
+For most enterprise CMS platforms, that requirement lands somewhere between "difficult" and "architecturally impossible." Not because the content teams are careless. Because the systems underneath them were never designed to track the origin of a sentence.
 
 The provenance problem is a structural one.
 
-Modern content pipelines are multi-handed. A product description might start as a brief drafted by a human, refined by an LLM, reviewed by an editor, localised by an AI translation service, and published through a headless CMS into five markets simultaneously. Ask that system which parts are "AI-generated" and it will look at you blankly.
+Modern content pipelines are multi-handed. A product description might start as a brief drafted by a human, refined by an LLM, reviewed by an editor, localised by an AI translation service, and published through a headless CMS into five markets simultaneously. Ask that system which parts are "AI-generated" and it'll look at you blankly.
 
 Article 50 doesn't care about the complexity of your pipeline. It cares about the output. If an AI was materially involved, the content must be marked. Machine-readably. At publication. Not retrospectively.
 
 What machine-readable provenance actually looks like.
 
-The European Commission's Code of Practice on Transparency of AI-Generated Content, published just last week, points toward technical standards like C2PA (Coalition for Content Provenance and Authenticity) as the implementation mechanism. C2PA works by attaching signed, verifiable metadata to content at the point of creation or modification: a chain of custody that survives republication, aggregation, and AI scraping.
+The European Commission's Code of Practice on Transparency of AI-Generated Content, published in June 2026, points toward technical standards like C2PA (Coalition for Content Provenance and Authenticity) as the implementation mechanism. C2PA works by attaching signed, verifiable metadata to content at the point of creation or modification: a chain of custody that survives republication, aggregation, and AI scraping.
 
 This is precisely the problem REGINALD was designed to solve.
 
-REGINALD (the Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation) uses Ed25519 cryptographic signatures to attach verifiable provenance to every document it registers at the moment of authorship. When a document is written, revised, or AI-assisted, that event is recorded and signed. The chain of custody is immutable and machine-readable by any conforming agent or auditing system.
+REGINALD (the Registry for Genuine Information, Notarised Authentication, and Legitimate Documentation) issues an Ed25519-signed attestation for each COG submitted to it. The attestation binds a digest of the submitted content to the registry's signing key, published as a DID document any verifier can resolve, and records when the registry received it. A verifier re-hashes the content, resolves the key, and checks the signature without asking the registry to vouch for the answer. What the attestation dates is the submission. When a document was written, revised, or AI-assisted is the publisher's own claim, carried inside the content and covered by the digest rather than observed by the registry.
 
-For a CMS publisher, this means: every piece of content carries a verifiable record of its origin, its revision history, who reviewed it, and what AI systems touched it. Not in a database that might be subpoenaed. In the document itself.
+For a CMS publisher, this means each submitted document has a dated, signed record a third party can check against the bytes. Origin, revision history, reviewers, and any AI involvement travel in the document's own metadata, which the publisher hosts and the attestation covers by digest, so the evidence stays with the file rather than in a database somebody else controls. Submitting is the publisher's act, and that's the honest limit: the registry holds what it was sent, and a document nobody submits leaves no record of its own absence.
 
 The compliance question is really a content infrastructure question.
 
@@ -799,13 +799,19 @@ If your documents carry their own provenance, Article 50 compliance is a byprodu
 
 The companies that will navigate this cleanly are the ones that treated document provenance as infrastructure from the start: not a legal feature bolted on before a deadline, but a structural property of every file they publish.
 
-That is what MX is built for. The deadline just made it urgent for everyone else.
+MX was built for exactly that job. The deadline just made it urgent for everyone else.
 
-A note on scope. The 2 August deadline applies in full to any system placed on the market from that date. For generative systems already on the market before it, the AI Omnibus gives providers a transitional period, to 2 December 2026, to implement the Article 50(2) machine-readable marking. That extension is narrower than it sounds: it covers the provider's marking duty and nothing else. The deployer duties are not extended - labelling deepfakes, labelling AI-generated text on matters of public interest, and disclosing a chatbot's nature all apply from 2 August 2026, however long the underlying model has been deployed. If your CMS is publishing AI-generated text on matters of public interest from August 3 onwards, the labelling duty applies regardless of when you deployed the model.
+A note on scope. The 2 August deadline applies in full to any system placed on the market from that date. For generative systems already on the market before it, the AI Omnibus gives providers a transitional period, to 2 December 2026, to implement the Article 50(2) machine-readable marking. That extension is narrower than it sounds: it covers the provider's marking duty and nothing else. The deployer duties aren't extended - labelling deepfakes, labelling AI-generated text on matters of public interest, and disclosing a chatbot's nature all apply from 2 August 2026, however long the underlying model has been deployed. If your CMS is publishing AI-generated text on matters of public interest from August 3 onwards, the labelling duty applies regardless of when you deployed the model.
 
 If you're a CMS vendor, a digital agency, or a publisher with AI-generated content in your stack and no provenance layer beneath it, I'm happy to talk.
 
 Tom Cranstoun leads Digital Domain Technologies Ltd, trading as CogNovaMX, and founded the Machine Experience (MX) practice. MX: The Handbook is available now. MX: The Protocols follows in 2026.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-27.
 
             About the author
 
@@ -8638,6 +8644,19 @@ Blog
         Blockchain
         Announcements
 
+            2 August 2026. €15 Million. Does Your CMS Know What It Published?
+
+            On 2 August 2026 the EU AI Act's Article 50 transparency obligations become enforceable law. For most enterprise CMS platforms, the requirement for machine-readable proof of content origin lands somewhere between difficult and architecturally impossible. REGINALD was built for exactly this.
+
+            15 June 2026
+            - Provenance
+
+- CMS
+
+- Standards
+
+- Business case
+
             Proving What You Published: MX as a Compliance Defence, RAG as the Reader
 
             How regulated publishers can use MX to create durable, attested records of their own compliance posture, and where Retrieval-Augmented Generation fits as the reading layer.
@@ -8839,19 +8858,6 @@ Blog
 - Business case
 
 - AI agents
-
-            2 August 2026. €15 Million. Does Your CMS Know What It Published?
-
-            On 2 August 2026 the EU AI Act's Article 50 transparency obligations become enforceable law. For most enterprise CMS platforms, the requirement for machine-readable proof of content origin lands somewhere between difficult and architecturally impossible. REGINALD was built for exactly this.
-
-            15 June 2026
-            - Provenance
-
-- CMS
-
-- Standards
-
-- Business case
 
             The Tier Question Has a Simpler Answer
 
@@ -25264,7 +25270,7 @@ MX
 
           The standard the badge points to is open. ISO 14289-1 tagged structure, the MX metadata schema, and the provenance pair are all published by The Gathering at tg.community, community-governed, and free to implement. Any publisher can adopt the pattern; any tool can produce a file that meets the same technical bar; other tools and registries can exist on the same standard.
 
-          The badge itself is reserved. The right to award and display the MX Compatible badge on a deliverable belongs to accredited MX practitioners, formally Certified Operators of the CogNovaMX Accreditation Programme. The programme runs in three tiers. Approved Operators self-attest on their own published work. Certified Operators issue third-party claims after methodology review and a sample-claim audit. Audit-Grade Operators sign regulated-scope claims, backed by professional indemnity insurance, independent peer review, and named-individual signing authorities. Admission is by application and audit, not by course or exam.
+          The badge itself is reserved. The right to award and display the MX Compatible badge on a deliverable belongs to accredited MX practitioners, formally Accredited Operators of the CogNovaMX Accreditation Programme. The programme runs in three tiers. Approved Operators self-attest on their own published work. Accredited Operators issue third-party claims after methodology review and a sample-claim audit. Audit-Grade Operators sign regulated-scope claims, backed by professional indemnity insurance, independent peer review, and named-individual signing authorities. Admission is by application and audit, not by course or exam.
 
           Separating the open standard from the restricted badge keeps two things true at once. The conformance pattern stays free for anyone to implement. The visible mark on a file stays accountable to a named human, a working address, and a registry entry a regulator can resolve. A reader who scans the QR code and walks the evidence chain back to the responsible-person block does not need to trust the publisher's word about who signed for the artefact; the accreditation record says so.
 
@@ -25301,7 +25307,7 @@ MX
 
         To commission AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
 
-        If you want to award the badge yourself rather than commission us, the Certified Operator programme is the route. Three tiers, application-and-audit admission, indicative pricing on the page. Stage 1 admissions open shortly; the waitlist is live now.
+        If you want to award the badge yourself rather than commission us, the Accredited Operator programme is the route. Three tiers, application-and-audit admission, indicative pricing on the page. Stage 1 admissions open shortly; the waitlist is live now.
 
 ---
 
@@ -28496,4 +28502,4 @@ MX
 
           To change your mind, drop the approved file again and record a new decision. The new decision replaces the old one and covers everything up to that point, the earlier one included.
 
-<!-- x-mx-sourceHash: de45c7709e8abb135935d6fbc91bff7734586e64596539d81caeb8ae855add47 -->
+<!-- x-mx-sourceHash: 11bc5560acda981e2bf06039c1851896ca8afd0cb6c00fe4699687afff6408d3 -->

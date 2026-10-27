@@ -10,21 +10,22 @@ title: "The Machine That Reviewed Itself"
 description: "We fed three days of Claude Code session transcripts back into Claude and asked it to find inefficiencies. It found them in two places: in how I work, and in the system itself. Here is what happened and what we fixed."
 author: "Tom Cranstoun"
 created: "2026-06-22"
-modified: "2026-06-22"
+modified: 2026-10-26
 version: "1.0"
 type: "blog-post"
 tags: [mx, machine-experience, self-improving-systems, ai-agents, claude-code, working-practice, automation]
 mx:
   mxSpecVersion: "0.9"
   audience: [humans, machines]
+  x-mx-contentState: draft
   purpose: "Blog post showing MX OS self-auditing in practice: session JSONL data used to find both human and system inefficiencies. Chatty register, Tom voice, concrete details."
   stability: draft
   contextProvides: ["MX OS self-auditing practice: session data used to improve both human working habits and system gate behaviour"]
   refersTo:
-    - CLAUDE.md
-    - datalake/draft-site/blog/what-is-machine-experience.md
+    - datalake/draft-site/blog/foundations/what-is-machine-experience.md
   runbook: "Blog post. Chatty register. Tom voice. Meta-story leads, then widens to architectural principle. No em-dashes. No numbered lists in prose."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/the-machine-that-reviewed-itself.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/the-machine-that-reviewed-itself.md
+  servedAt: https://mx.allabout.network/blog/drafts/the-machine-that-reviewed-itself.html
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -110,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1057,
+        "wordCount": 923,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -150,6 +151,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -190,18 +192,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1057">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="923">
         <header class="article-header">
           <h1>The Machine That Reviewed Itself</h1>
           <div class="article-meta"
                data-published="2026-06-22"
                data-modified="2026-06-22"
-               data-reading-time="6 min">
+               data-reading-time="5 min">
             <time datetime="2026-06-22">22 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>6 min read</span>
+            <span>5 min read</span>
           </div>
         </header>
 
@@ -212,31 +214,38 @@ mx:
 <p>Over three days (19-22 June) the MX-hub sessions generated 83 JSONL files totalling about 137MB. Five of those sessions were large enough to matter: 2-7MB each, covering a range of work from OKF field migrations to gate debugging to building new skills.</p>
 <p>I pointed Claude at them with a single question: what could be better?</p>
 <h2 id="two-classes-of-inefficiency" tabindex="-1">Two classes of inefficiency</h2>
-<p>Most AI-productivity writing assumes the human is the variable. Calibrate the prompts, add memory entries, adjust the workflow. The system is the system.</p>
+<p>Most AI-productivity writing assumes the human is the variable. Calibrate the prompts, add memory entries, adjust the workflow. The tooling stays as it is.</p>
 <p>What came back from the analysis was different. There were two distinct classes of problem.</p>
-<p>The first class was mine. I was re-teaching Claude the same rules across sessions. &quot;OKF is primary, MX is secondary&quot; -- Tom's verbatim correction from a 1,932-file codemod -- is not in <a href="http://CLAUDE.md">CLAUDE.md</a>. It should be. &quot;After every commit, state the SHA and file count&quot; -- said twice in the same session because the IDE shows stale state -- is not in <a href="http://CLAUDE.md">CLAUDE.md</a> either. Neither is &quot;Node.js, not shell, for new scripts.&quot; These are rules that belong in the permanent record, not in the conversation history.</p>
+<p>The first class was mine. I was re-teaching Claude the same rules across sessions. &quot;OKF is primary, MX is secondary&quot; -- Tom's verbatim correction from a 1,932-file codemod -- wasn't in the instructions every session reads. It should be. &quot;After every commit, report the SHA and file count&quot; -- said twice in the same session because the IDE shows stale state -- wasn't there either. Neither is &quot;Node.js, not shell, for new scripts.&quot; These are rules that belong in the permanent record, not in the conversation history.</p>
 <p>The second class was the system's. This one was more interesting.</p>
 <h2 id="where-the-system-was-getting-in-its-own-way" tabindex="-1">Where the system was getting in its own way</h2>
-<p>Gate 22 (<code>check-draft-site-fresh.cjs</code>) fires when a blog post source is edited without regenerating its served HTML. That is correct behaviour. But it was also firing when I updated only the frontmatter -- a <code>createdHash</code> field, a <code>modified</code> date -- without touching the body. The rendered HTML is unchanged. The gate was checking file modification time, not content. So it blocked a push that did not need to be blocked, and the escape hatch (<code>MX_SKIP_DRAFT_SITE_FRESH=1</code>) was used twice in one session.</p>
-<p>Gate 25 proves index generators are idempotent by running them and checking for drift. That is correct behaviour too. But when a new <code>.cog.md</code> file is committed, the generators legitimately produce new index output -- new registry entries -- that was never committed. Gate 25 then sees the tree as dirty. Not because a generator is non-deterministic, but because the regen step was missed. The fix required manual <code>npm run index:regen</code>, a new commit, and another push attempt. This happened across multiple sessions.</p>
-<p>And then there were the API keys sitting in <code>~/.claude/settings.json</code>. Two Anthropic API keys embedded verbatim in allowlist curl entries from an openclaw debugging session months ago. Not in git, not public, but in a file that should not carry live secrets regardless.</p>
-<p>Each of these is the same pattern underneath: something that could be caught or prevented by a script was instead being caught by a person, after the fact.</p>
+<p>One check fires when a blog post source is edited without regenerating its served page. That's correct behaviour. But it was also firing when I updated only the metadata, without touching the body. The rendered page is unchanged. The check was reading when the file changed, not what changed. So it stopped work that didn't need stopping, and I had to step round it twice in one session.</p>
+<p>Another check proves that the repository's generated indexes are reproducible by regenerating them and looking for differences. That's correct behaviour too. But when a new cog is committed, the generators legitimately produce new index entries that were never committed, and the check sees the tree as dirty. Not because a generator is unreliable, but because the regeneration step was missed. Each time, the fix was a manual regeneration, a new commit and another attempt. This happened across multiple sessions.</p>
+<p>Each of these is the same pattern underneath: a problem a script could catch or prevent was instead left for a person to notice, after the fact.</p>
 <h2 id="what-we-fixed" tabindex="-1">What we fixed</h2>
 <p>Three tracks of work came out of the analysis.</p>
-<p>The first track was the human rules. Four additions to <a href="http://CLAUDE.md">CLAUDE.md</a> -- the file that every Claude session in the MX-hub repository reads at start. OKF priority. SHA reporting after commits. Search before writing new scripts. Node.js preference. Six new memory files covering Gate 22 bypass, Gate 25 regen, Appendix M editing, gathering sweep requirements, and the push-before-switching-sessions discipline. These are rules that should have been permanent. Now they are.</p>
-<p>The second track was the deterministic fixes. Gate 22 now reads the git diff for a source file and compares body content (everything after the closing frontmatter delimiter) between the base ref and HEAD. If the bodies are identical, the gate skips that file and logs &quot;frontmatter-only change, republish not required.&quot; Gate 25 now has a pre-check: if <code>.cog.md</code> files are in the push, it runs <code>npm run index:regen</code> before the idempotency check, and if the regen produces changes, it tells you exactly what to commit rather than failing with a drift error. The dream skill now auto-reruns after a fix rather than stopping and waiting for &quot;run again.&quot; And there is a new <code>/pre-push-sweep</code> skill that drains field-migration debt proactively before step-commit gates surface it one-by-one.</p>
+<p>The first track was the human rules. Four additions to the instructions every session reads at start: OKF priority, SHA reporting after commits, search before writing new scripts, and a preference for Node.js. Six new memory records took the rest forward. These are rules that should have been permanent. Now they are.</p>
+<p>The second track was the deterministic fixes. The freshness check now compares what a change did to the body, so a metadata-only edit no longer asks for a republish. The index check now regenerates first when new cogs arrive, and tells you exactly what to commit rather than failing. The analysis skill reruns itself after a fix rather than waiting to be asked. And a new sweep drains migration debt before the checks surface it one item at a time.</p>
 <p>The third track is this post.</p>
 <h2 id="why-this-is-the-point" tabindex="-1">Why this is the point</h2>
-<p>MX OS describes a repository that is self-describing, self-checking, and self-healing. The cog registry is its self-description. The pre-push gates are its self-checking. <code>mx:heal</code> is its self-healing.</p>
+<p>MX OS describes a repository that explains itself, checks itself and repairs itself. Its cog registry does the explaining; its checks and its repair step do the rest.</p>
 <p>What happened in June 2026 is that the repository became self-auditing.</p>
 <p>The session JSONL files are machine-readable data. They carry timestamps, tool names, user messages, and correction signals. We ran them through the same kind of analysis we run on any other data source. The output was a structured finding set: corrections that should be permanent rules, gates that were firing on false positives, a missing pre-check that every cog-adding session was hitting.</p>
-<p>The improvements are now deterministic. Gate 22 does not rely on anyone remembering that metadata-only changes do not require republishing. Gate 25 does not rely on anyone remembering to run index:regen after adding a cog. The skill instructions tell Claude to re-run after a fix without being asked. Memory files carry the corrections forward into future sessions.</p>
-<p>This is what &quot;a check a script can do, a script does&quot; means in practice. The rule that lives in memory rots. The rule that lives in a gate holds.</p>
-<p>And the session data that revealed it -- the JSONL transcripts, the tool call sequences, the correction signals -- that is MX in the places you do not normally look. Provenance. Machine-readable context. The metadata that travels with the work.</p>
-<p>The machine did not just help with the work. It helped improve the conditions under which the work happens.</p>
+<p>The improvements are now deterministic. The freshness check knows that a metadata-only change needs no republish, and the index step regenerates after a new cog arrives, so nobody has to remember either. The skill instructions tell Claude to re-run after a fix without being asked. Memory files carry the corrections forward into future sessions.</p>
+<p>That's the working rule here: anything a script can check is checked automatically. Guidance kept in memory rots; a rule enforced by a check holds.</p>
+<p>And the session data that revealed it -- the JSONL transcripts, the tool call sequences, the correction signals -- that's MX in the places you don't normally look. Provenance. Machine-readable context. The metadata that travels with the work.</p>
+<p>The machine didn't just help with the work. It helped improve the conditions under which the work happens.</p>
 <hr>
-<p><em>If you are building with Claude Code and want to structure your sessions so the data stays readable and improvable, the MX OS model is a reasonable starting point. The session JSONL format is documented and stable. The analysis in this post took one session and five parallel fork agents to run. The improvements ship in the same session.</em></p>
+<p><em>If you're building with Claude Code and want to structure your sessions so the data stays readable and improvable, the MX OS model is a reasonable starting point. The session JSONL format is documented and stable. The analysis in this post took one session and five parallel fork agents to run. The improvements ship in the same session.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-26.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -278,7 +287,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

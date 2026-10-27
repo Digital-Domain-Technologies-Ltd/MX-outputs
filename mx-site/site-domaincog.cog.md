@@ -22,6 +22,10 @@ mx:
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/site-domaincog.cog.md
   status: active
   x-mx-cogRole: domaincog
+  x-mx-aliases:
+    - served site
+    - mx-site estate
+    - site drafts and exports
   x-mx-domainScope: ["mx-site"]
   x-mx-createdHash: b0125b66
   partOf: UBERCOG
