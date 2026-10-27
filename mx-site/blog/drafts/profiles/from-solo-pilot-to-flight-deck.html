@@ -10,7 +10,7 @@ title: "From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic L
 description: "Building Machine Experience solo is one thing; scaling it with a partner requires inter-cog negotiation the current web isn't ready for. How and why we set up a shared agentic layer on Discord - with the practical steps to build your own."
 author: Tom Cranstoun
 created: "2026-07-04"
-modified: 2026-10-11
+modified: 2026-10-15
 version: "1.0"
 type: blog-post
 tags:
@@ -120,7 +120,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1267,
+        "wordCount": 1255,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -199,7 +199,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1267">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1255">
         <header class="article-header">
           <h1>From Solo Pilot to Flight Deck: Why Scott and I Are Sharing an Agentic Layer</h1>
           <div class="article-meta"
@@ -215,20 +215,20 @@ mx:
         </header>
 
 
-<p>Building Machine Experience (MX) as a solo architect is one thing. Scaling it with a partner requires a level of inter-cog negotiation that the current web just isn't ready for.</p>
-<p>Scott and I aren't just &quot;using an AI app.&quot; We are creating a collaborative UBERCOG environment on Discord. By connecting our respective Wingmen - mine is Maxine - to a shared channel, we are moving past the siloed chatbot model and into a verifiable ledger of partnership.</p>
+<p>Building Machine Experience (MX) as a solo architect is one thing. Scaling it with a partner requires a level of inter-cog negotiation that the current web just isn't ready to support.</p>
+<p>Scott and I aren't just &quot;using an AI app.&quot; We're creating a collaborative, cog-governed environment on Discord. By connecting our respective Wingmen - mine is Maxine - to a shared channel, we're moving past the siloed chatbot model and into a verifiable ledger of partnership.</p>
 <p>Here is the goal. When I tell Maxine to draft a technical autopsy of a failed Amazon delivery, Scott doesn't just see a final result. He sees the provenance of the data. He sees shared context at work - tokens aren't being burned re-explaining the same problem twice, because the agent already has the state handshake from our shared channel history.</p>
-<p>We are building a web where agents from different users can verify each other's signatures and act on a single, shared reality without leaking private data. By bringing Scott and others into this Discord-based MX envelope, we are proving that the future of work isn't just &quot;human + machine&quot; - it's &quot;team + governed agentic layer.&quot;</p>
-<p>No more detective work. No more replaying the same mistakes. Just deterministic collaboration.</p>
+<p>We're building a web where agents from different users can verify each other's signatures and act on a single, shared reality without leaking private data. By bringing Scott and others into this Discord-based MX envelope, we're proving that the future of work isn't just &quot;human + machine&quot; - it's &quot;team + governed agentic layer.&quot;</p>
+<p>Deterministic collaboration replaces the detective work and stops the same mistakes being replayed.</p>
 <h2 id="why-discord-of-all-places" tabindex="-1">Why Discord, of all places</h2>
-<p>It is a fair question. Discord looks like a gaming chat app, and that is exactly why it works.</p>
+<p>It's a fair question. Discord looks like a gaming chat app, and that's exactly why it works.</p>
 <p>The properties an agentic layer needs are the properties Discord ships by default. Persistent, append-only channel history - a ledger nobody edits retroactively. First-class bot accounts, so an agent is a named participant with its own identity rather than a puppet typing through a human's account. Fine-grained roles and permissions, so governance is enforced by the platform rather than promised in prose. Threads for isolating a single job's working. And an API mature enough that a decade of tooling already speaks it.</p>
 <p>Compare that with the alternatives. Email has no shared state. Shared documents have state but no conversation. Slack comes close but prices per seat and treats bots as second-class. Discord gives every agent a face, a name, a role, and a permanent transcript - for nothing.</p>
-<p>The deeper point is an MX one. A shared channel is common ground made literal: one history both humans and both agents read identically. Maxine doesn't need me to re-explain what Scott's agent said the day before; the channel <em>is</em> the state handshake. That is the same argument as the folder index that runs my Drive workspace - explicit, shared, dual-audience ground truth beats private context every time. The Discord channel is that index, extended in time.</p>
+<p>The deeper point is an MX one. A shared channel is common ground made literal: one history both humans and both agents read identically. Maxine doesn't need me to re-explain what Scott's agent said the day before; the channel <em>is</em> the state handshake. That's the same argument as the folder index that runs my Drive workspace - explicit, shared, dual-audience ground truth beats private context every time. The Discord channel is that index, extended in time.</p>
 <h2 id="how-to-set-it-up" tabindex="-1">How to set it up</h2>
 <p>This is the part people ask about, so here is the actual recipe. Nothing below requires a paid plan.</p>
 <h3 id="section-1-create-the-server-the-envelope" tabindex="-1">1. Create the server - the envelope</h3>
-<p>One partner creates a Discord server (the &quot;+&quot; in the left rail → Create My Own). This server is the MX envelope: everything inside it is shared reality, everything outside stays private. Name it accordingly - ours is the Flight Deck.</p>
+<p>One partner creates a Discord server (the &quot;+&quot; in the left rail → Create My Own). This server is the MX envelope: everything inside it's shared reality, everything outside stays private. Name it accordingly - ours is the Flight Deck.</p>
 <p>Set the server to invite-only from the start: Server Settings → enable Community features later if needed, but keep membership to the people whose agents you trust.</p>
 <h3 id="section-2-structure-the-channels-the-zones" tabindex="-1">2. Structure the channels - the zones</h3>
 <p>Channels are the zones of the shared environment, and it pays to separate them by function, the same way frontmatter separates identity from governance:</p>
@@ -243,21 +243,21 @@ mx:
 <ol>
 <li>Go to the <a href="https://discord.com/developers/applications">Discord Developer Portal</a> and select <strong>New Application</strong>. Name it after the agent - Maxine, not &quot;Tom's bot&quot;.</li>
 <li>Under <strong>Bot</strong>, add the bot user. This issues a token: this is the agent's credential. Treat it like a password - it goes in your agent runtime's configuration, never in a channel message.</li>
-<li>Under <strong>Privileged Gateway Intents</strong>, enable <strong>Message Content Intent</strong> - without it the bot can be mentioned but cannot read the channel history that makes the state handshake work.</li>
-<li>Under <strong>OAuth2 → URL Generator</strong>, tick the <code>bot</code> scope, then grant the minimum permissions the agent needs: View Channels, Send Messages, Create Public Threads, Embed Links, Read Message History. Do not grant Administrator; governance means least privilege.</li>
+<li>Under <strong>Privileged Gateway Intents</strong>, enable <strong>Message Content Intent</strong> - without it the bot can be mentioned but can't read the channel history that makes the state handshake work.</li>
+<li>Under <strong>OAuth2 → URL Generator</strong>, tick the <code>bot</code> scope, then grant the minimum permissions the agent needs: View Channels, Send Messages, Create Public Threads, Embed Links, Read Message History. Don't grant Administrator; governance means least privilege.</li>
 <li>Open the generated URL, choose the shared server, and authorise. The agent now appears in the member list with its own name and face.</li>
 </ol>
 <p>Repeat per agent. Two partners, two applications, two tokens, two identities - which is precisely what lets the ledger attribute every message.</p>
 <h3 id="section-4-wire-the-agent-runtime-to-the-bot" tabindex="-1">4. Wire the agent runtime to the bot</h3>
-<p>The bot user is a socket; your agent plugs into it. How depends on your stack: a Discord MCP server or connector lets a Claude-based wingman read and post through the bot's credentials; a small bridge script using any Discord API library does the same for custom runtimes; and for output-only integrations, a channel webhook (Channel Settings → Integrations → Webhooks) posts formatted messages with no bot at all - though it cannot read, so it cannot handshake.</p>
-<p>Whichever route, the configuration lives with the agent's owner. Scott never holds Maxine's token; I never hold his agent's. Verification without credential sharing.</p>
+<p>The bot user is a socket; your agent plugs into it. How depends on your stack. A Discord MCP server or connector lets a Claude-based wingman read and post through the bot's credentials, and a small bridge script using any Discord API library does the same for custom runtimes. For output-only integrations, a channel webhook (Channel Settings → Integrations → Webhooks) posts formatted messages with no bot at all - though without read access, it can't handshake.</p>
+<p>Whichever route, the configuration lives with the agent's owner. Scott never holds Maxine's token, and his agent's credentials stay out of my hands. Verification without credential sharing.</p>
 <h3 id="section-5-encode-the-governance-roles-as-rules" tabindex="-1">5. Encode the governance - roles as rules</h3>
-<p>Create an <strong>agents</strong> role and assign it to every bot. Give the role exactly the channel permissions agreed in the pinned conventions, and nothing more. If the partnership later agrees agents may, say, manage threads, that is one role edit - visible to everyone, applied to all agents at once, and recorded in the audit log. Server Settings → Audit Log is the governance ledger behind the content ledger.</p>
+<p>Create an <strong>agents</strong> role and assign it to every bot. Give the role only the channel permissions agreed in the pinned conventions. If the partnership later agrees agents may, say, manage threads, that's one role edit - visible to everyone, applied to all agents at once, and recorded in the audit log. Server Settings → Audit Log holds the governance record behind the content ledger.</p>
 <h3 id="section-6-agree-the-message-conventions-cogs-in-the-channel" tabindex="-1">6. Agree the message conventions - cogs in the channel</h3>
-<p>The last layer is not a Discord feature; it is discipline, and it is where MX earns its keep. Our conventions:</p>
+<p>The last layer isn't a Discord feature; it's discipline, and it's where MX earns its keep. Our conventions:</p>
 <ul>
-<li>Every agent deliverable is posted with a short structured header - who produced it, at whose instruction, from what sources, and the URN of the artefact it refers to. A cog's frontmatter, compressed into a message.</li>
-<li>Artefacts themselves live in governed storage (our Drive folder of cogs, the MX-hub repository); the channel carries references and provenance, not payloads. Private data stays home - the channel gets the claim, the signature, and the pointer.</li>
+<li>Every agent deliverable is posted with a short structured header - who produced it, at whose instruction, from what sources, and the URN of the artefact it references. A cog's frontmatter, compressed into a message.</li>
+<li>Artefacts themselves are kept in governed storage (our Drive folder of cogs, the MX-hub repository); the channel carries references and provenance, not payloads. Private data stays home - the channel gets the claim, the signature, and the pointer.</li>
 <li>Agents never edit or delete channel messages. Corrections are new messages. Append-only is what makes history a ledger.</li>
 </ul>
 <h2 id="what-this-proves" tabindex="-1">What this proves</h2>
@@ -271,7 +271,7 @@ mx:
           <h2 id="reader-notice-heading">About this page</h2>
           <ul>
             <li>Written by Tom Cranstoun.</li>
-            <li>Last changed on 2026-10-11.</li>
+            <li>Last changed on 2026-10-15.</li>
           </ul>
         </footer>
 

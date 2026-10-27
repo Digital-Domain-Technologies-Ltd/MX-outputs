@@ -32,7 +32,7 @@ mx:
   maintainer: info@cognovamx.com
   license: proprietary
   agentPermissions: https://mx.allabout.network/.well-known/agent-permissions.json
-  purpose: "The domain anchor every mx-site cog chains to through partOf. Owns the cogs, canon exports, and drafts shipped with the served site; chains up to the master UBERCOG; holds the pointer to the cog factory."
+  purpose: "The domain anchor every mx-site cog chains to through partOf. Owns the cogs, canon exports, and drafts shipped with the served site; chains up to the master cog; points to the cog specification."
   stability: stable
   contextProvides:
     - "Ownership anchor for cogs under mx-site/"
@@ -40,11 +40,11 @@ mx:
   refersTo: [UBERCOG, how-to-write-a-cog]
   audience: [humans, machines]
   readingLevel: beginner
-  runbook: "A cog in the served site estate declares partOf: site-domaincog (or a cog that chains to it). Follow refersTo to the master UBERCOG or to how-to-write-a-cog for the cog factory."
+  runbook: "A cog in the served site estate declares partOf: site-domaincog (or a cog that chains to it). The cog specification at https://mx.allabout.network/cog.html describes the format."
   dependencies: []
 
 ---
 
 # site-domaincog
 
-The domain anchor for the served site estate: the cogs, canon exports, and drafts that ship with `mx-site/` (mx.allabout.network). A cog in this domain declares `partOf: site-domaincog`, or names an intermediate cog that chains here; the chain continues to the master [`UBERCOG.cog.md`](../UBERCOG.cog.md). The cog factory is [`how-to-write-a-cog`](../scripts/cogs/how-to-write-a-cog.cog.md).
+The domain anchor for the served site estate: the cogs, canon exports, and drafts that ship with `mx-site/` (mx.allabout.network). A cog in this domain declares `partOf: site-domaincog`, or names an intermediate cog that chains here; the chain continues to the master cog. The format is described in the [cog specification](https://mx.allabout.network/cog.html).

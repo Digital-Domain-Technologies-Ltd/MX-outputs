@@ -5,24 +5,27 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "It's Not the IDE - It's the Project Directory"
 description: "Two developers, one repo, the same model: one gets files scaffolded automatically and the other doesn't. The cause is not terminal vs IDE - it's which directory the Claude Code session was launched in, and what /add-dir does not carry over."
 author: "Salva"
 created: 2026-06-22
-modified: 2026-06-22
+modified: 2026-09-29
 version: "0.1"
 
 type: blog-post
 mx:
-  status: draft
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/dev/its-not-the-ide-its-the-project-directory.md
+  aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/dev/its-not-the-ide-its-the-project-directory.md
+  contextProvides:
+    - "A Claude Code behaviour difference between two developers on the same repo is caused by the launch directory ($CLAUDE_PROJECT_DIR), not by terminal vs IDE; /add-dir grants file access but does not load the attached directory's hooks, settings, or project config."
   stability: draft
   purpose: "Explain why Claude Code hooks and scaffolding fire for a project-rooted session but not for one that merely /add-dir's the repo, and how to diagnose the difference."
   servedAt: https://mx.allabout.network/blog/drafts/dev/its-not-the-ide-its-the-project-directory.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/drafts/dev/its-not-the-ide-its-the-project-directory.html
-  blogFilename: its-not-the-ide-its-the-project-directory
 
 ---
 -->
@@ -64,11 +67,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="It's Not the IDE - It's the Project Directory">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="0.1">
@@ -151,6 +152,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -234,7 +236,7 @@ deterministic project machinery that fires automatically. And every one of those
 hooks is declared like this:</p>
 <pre><code class="language-json">{
   &quot;type&quot;: &quot;command&quot;,
-  &quot;command&quot;: &quot;bash \&quot;$CLAUDE_PROJECT_DIR/.claude/hooks/session-...sh\&quot;&quot;
+  &quot;command&quot;: &quot;bash \&quot;$CLAUDE_PROJECT_DIR/.claude/hooks/&lt;hook&gt;.sh\&quot;&quot;
 }
 </code></pre>
 <p>Notice <code>$CLAUDE_PROJECT_DIR</code>. That variable points at the directory you
@@ -294,6 +296,14 @@ guard rails that come with them all hang off the directory you started in - and
 when a hook doesn't run, check whose project directory you're actually in.</p>
 
 
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Salva.</li>
+            <li>Last changed on 2026-09-29.</li>
+          </ul>
+        </footer>
+
       </article>
 
 
@@ -332,7 +342,10 @@ when a hook doesn't run, check whose project directory you're actually in.</p>
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

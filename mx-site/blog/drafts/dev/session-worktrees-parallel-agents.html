@@ -5,30 +5,30 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Repo Now Knows Who Is In The Room"
 description: "How per-session git worktrees solve the silent collision problem when multiple Claude Code sessions run against the same repository at the same time."
 author: Tom Cranstoun
-created: "2026-06-15"
-modified: "2026-06-15"
+created: 2026-06-15
+modified: 2026-06-15
 version: "1.0"
+type: blog-post
+tags: [worktree, session-isolation, multi-agent, git, claude-code]
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience:
     - humans
     - machines
-  tags:
-    - worktree
-    - session-isolation
-    - multi-agent
-    - git
-    - claude-code
-  canonicalUri: https://mx.allabout.network/blog/drafts/dev/session-worktrees-parallel-agents.html
+  aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/dev/session-worktrees-parallel-agents.md
   servedAt: https://mx.allabout.network/blog/drafts/dev/session-worktrees-parallel-agents.html
-  blogFilename: session-worktrees-parallel-agents
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides:
+    - "How per-session git worktrees prevent silent file collisions when multiple Claude Code sessions run concurrently against the same repo."
   purpose: "Explain the session worktree pattern for concurrent Claude Code sessions."
   stability: stable
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -69,11 +69,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Repo Now Knows Who Is In The Room">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -102,7 +100,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -116,7 +114,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 630,
+        "wordCount": 631,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -156,6 +154,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -170,7 +169,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -195,7 +194,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="630">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="631">
         <header class="article-header">
           <h1>The Repo Now Knows Who Is In The Room</h1>
           <div class="article-meta"
@@ -223,12 +222,20 @@ mx:
 <p><code>npm run session:close -- session-20260615-A</code> does the reverse. It checks for uncommitted changes (blocks if there are any - commit first), merges the session branch back to <code>main</code> with <code>--no-ff</code> so the session history stays readable, then removes the worktree and the branch. It also offers to regenerate the estate indexes if the environment qualifies for that.</p>
 <p><code>npm run session:list</code> tells you what is currently open.</p>
 <h2 id="two-things-to-know-before-you-close" tabindex="-1">Two things to know before you close</h2>
-<p><strong>Gate 22.</strong> The repo has a gate that checks whether any published blog post source in <code>datalake/draft-site/blog/</code> was edited since the corresponding HTML was last generated. If you edit a published post in your session, you need to republish it (<code>npm run promote</code>) and commit the result before closing. Otherwise the gate fires when you push.</p>
-<p><strong>Index regeneration stays on main.</strong> The generated indexes - the routing registry, the documentation map, the cog registry - can only be regenerated on a fat clone of <code>main</code> with all submodules present. A session branch refuses to run the regenerators, which is correct: a partial or off-branch index is worse than a stale one. After session:close merges your work to <code>main</code>, run <code>npm run index:regen</code> there if you edited sources the indexes read from.</p>
+<p><strong>Republish what you edit.</strong> The repo has a check that looks at whether any published blog post source in <code>datalake/draft-site/blog/</code> was edited since the corresponding HTML was last generated. If you edit a published post in your session, you need to republish it (<code>npm run promote</code>) and commit the result before closing. Otherwise the check fires when you push.</p>
+<p><strong>Index regeneration stays on main.</strong> The generated indexes - the routing registry, the documentation map, the cog registry - can only be regenerated on a fat clone of <code>main</code> with all submodules present. A session branch refuses to run the regenerators, which is correct: a partial or off-branch index is worse than a stale one. After session:close merges your work to <code>main</code>, regenerate them there if you edited sources the indexes read from.</p>
 <h2 id="why-this-matters-beyond-just-not-losing-work" tabindex="-1">Why this matters beyond just not losing work</h2>
 <p>The worktree pattern makes the repo's concurrency explicit. Before this, the repo had no model of &quot;more than one operator at a time&quot; - it assumed a single writer and the Gates were designed accordingly. Now there is an actual mechanism: each session declares itself at start, commits to an isolated branch, and declares itself done at close. Merge conflicts become visible at the merge step, where git can describe them, rather than silent at the write step, where the last file save wins.</p>
 <p>The repo knows who is in the room. That is how it should work.</p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-06-15.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -236,7 +243,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -270,7 +277,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -287,5 +297,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

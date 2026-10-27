@@ -5,22 +5,29 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Watching with the machines"
 description: "A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has."
 author: Tom Cranstoun
 created: 2026-05-31
-modified: 2026-05-31
+modified: 2026-09-29
 version: "1.0"
 
+category: mx-content
 type: blog-post
 tags: [mx-readiness, chrome-extension, on-device-inference, gemini-nano, phi-silica, ollama, watching-the-machines]
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   servedAt: https://mx.allabout.network/blog/drafts/watching-with-the-machines.html
   runbook: "Promote from drafts/ to blog/ when ready; update canonical, OG, robots, and add a card to blog/index.html."
   audience:
     - humans
     - machines
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/watching-with-the-machines.md
+  aiAssistance: welcome
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/watching-with-the-machines.md
+  contextProvides:
+    - "A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has."
   stability: stable
   purpose: "A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has."
 
@@ -64,11 +71,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Watching with the machines">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -111,7 +116,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1266,
+        "wordCount": 1268,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -151,6 +156,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -192,7 +198,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1266">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1268">
         <header class="article-header">
           <h1>Watching with the machines</h1>
           <div class="article-meta"
@@ -231,7 +237,7 @@ mx:
 <p>The summary panel writes the verdict. Where that prose comes from depends on what the browser exposes:</p>
 <p><strong>Chrome with the Prompt API flag.</strong> The on-device Gemini Nano model answers. Chrome installed the weights through its component-update system, which is also the subject of the series. On a machine where Nano has been installed, this is the lightest and fastest path because the model is already in memory.</p>
 <p><strong>Edge on a Copilot+ PC.</strong> Microsoft's Phi-Silica answers, also locally. The Edge surface (<code>self.ai.assistant</code>) has the same shape as Chrome's, so the panel does not care which one fires.</p>
-<p><strong>Local Ollama, anywhere.</strong> When neither browser exposes an in-built model, the panel reaches <code>http://localhost:11434</code> and asks whichever model the operator has pulled to write the summary. This is the same default the full MX audit pipeline uses in regulated-industry mode, where the policy is &quot;no client data crosses the browser sandbox into a vendor's cloud&quot; and the operator wants a model under their own administrative control answering the prompt instead of one shipped by the browser vendor.</p>
+<p><strong>Local Ollama, anywhere.</strong> When neither browser exposes an in-built model, the panel reaches a local Ollama server and asks whichever model the operator has pulled to write the summary. This is the same default the full MX audit pipeline uses in regulated-industry mode, where the policy is &quot;no client data crosses the browser sandbox into a vendor's cloud&quot; and the operator wants a model under their own administrative control answering the prompt instead of one shipped by the browser vendor.</p>
 <p>A single button in the panel forces the Ollama path even when the browser has its own model. Useful for comparing a small Nano against a larger Ollama model on the same page, or for committing to the regulated-industry path when an organisation's policy requires it.</p>
 <p>A second button copies the score, the summary, and every finding to the clipboard. Useful for pasting into a bug report, an outreach note, or a row in a CSV when sweeping across a sample of pages.</p>
 <h2 id="local-by-design-not-by-marketing" tabindex="-1">Local by design, not by marketing</h2>
@@ -240,7 +246,7 @@ mx:
 <p>Correctness: the signals the panel reports are facts about the bytes the browser already loaded. They do not need a remote model to confirm. The model writes prose, not findings.</p>
 <p>Regulation: the MX audit pipeline already runs in a local-LLM-first configuration because regulated industries (financial, healthcare, public sector) cannot ship client data across vendor sandboxes for inference. The extension follows the same rule. The Ollama fallback is the same lever the audit pipeline pulls.</p>
 <h2 id="where-this-fits" tabindex="-1">Where this fits</h2>
-<p>The MX audit pipeline is the full system: dozens of inputs, weighted scoring, written reports, accessibility conformance, provenance sidecars, gates against drift. The panel is its lightweight cousin. The audit is for client engagements where you want the report. The panel is for ten seconds on the page in front of you when someone asks &quot;is this MX-ready?&quot;</p>
+<p>The MX audit is the full service: a written report, accessibility conformance and a record of how each finding was reached. The panel is its lightweight cousin. The audit is for client engagements where you want the report. The panel is for ten seconds on the page in front of you when someone asks &quot;is this MX-ready?&quot;</p>
 <p>The signals the panel grades are the signals the series argued for. The magic-header meta tag and the governance triplet are the page's way of telling a machine what it is. The AI disclosure is the page's account of how it was authored. The discovery files at the origin are the publisher's offer to be machine-legible at the site level. The provenance markers are the chain a regulator or an inspector can walk back to the source. None of these are theoretical. They are the things a machine reading the web on someone's behalf either finds or has to guess about. Guessing, in MX terms, is the part the standard exists to remove.</p>
 <p>The Silent Install series pointed at a browser writing a model to a user's disk without asking. The lesson was not that on-device inference is wrong. The lesson was that the relationship between the person and the software acting on their behalf has to run in both directions. This extension is one small step at the page level: a local read of how legible a single page is, run on the same kind of on-device model that started the conversation. Installed carefully, with a button that names the boundary it runs inside, used to make a thing more legible rather than less.</p>
 <h2 id="where-to-find-it" tabindex="-1">Where to find it</h2>
@@ -249,6 +255,14 @@ mx:
 <hr>
 <p><em>Version 1.0 · 31 May 2026 · <a href="https://mx.allabout.network/blog/drafts/watching-the-machines/google-nano-model/">Part of the Watching the Machines column</a></em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-09-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -290,7 +304,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

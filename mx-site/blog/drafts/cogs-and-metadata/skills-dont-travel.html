@@ -32,8 +32,6 @@ mx:
   relatedTo:
     - datalake/draft-site/blog/cogs-and-metadata/the-layer-beneath-the-system-prompt.md
     - datalake/draft-site/blog/cogs-and-metadata/fable5-system-prompt-is-a-cog.md
-    - scripts/cogs/mx-agent-rules.cog.md
-    - scripts/cogs/generate-agent-rules.cog.md
 
 ---
 -->
@@ -272,11 +270,11 @@ mx:
 <p><strong>Constraining behaviour</strong> -- &quot;do not write files outside <code>datalake/</code>. Do not run this on a partial checkout. Always confirm before committing.&quot; That is policy. It should be enforceable by any capable agent, because policy that only applies to one tool is not really policy -- it is a suggestion to your current vendor.</p>
 <p>Both are documentation problems, not tool problems. The information and the constraints belong in version control, in a format any capable reader can understand.</p>
 <h2 id="the-solution-is-not-to-write-seven-files" tabindex="-1">The solution is not to write seven files</h2>
-<p>The solution I built is a single COG -- <code>scripts/cogs/mx-agent-rules.cog.md</code> -- that contains every invariant operating rule for any agent working in the MX-hub repository. The seven tool-specific files each contain exactly one instruction: read the COG first, and apply what it says.</p>
+<p>The solution I built is a single COG -- <code>mx-agent-rules.cog.md</code> -- that contains every invariant operating rule for any agent working in the MX-hub repository. The seven tool-specific files each contain exactly one instruction: read the COG first, and apply what it says.</p>
 <pre><code>CLAUDE.md  ──────────────────────────────┐
 GEMINI.md  ──────────────────────────────┤
 AGENTS.md  ──────────────────────────────┤
-.windsurfrules  ─────────────────────────├──► scripts/cogs/mx-agent-rules.cog.md
+.windsurfrules  ─────────────────────────├──► mx-agent-rules.cog.md
 .cursor/rules/  ─────────────────────────┤        (the only place rules live)
 .github/copilot-instructions.md  ────────┤
 .continue/rules/  ───────────────────────┘

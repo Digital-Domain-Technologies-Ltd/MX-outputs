@@ -5,32 +5,30 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "A File That Knows Where It Lives"
 description: "Relative links work for humans previewing markdown. They fail completely when a machine reads the file outside its origin repo. Two new metadata fields give every file a repo address it carries wherever it goes."
 author: Tom Cranstoun
 created: "2026-06-14"
 modified: "2026-06-14"
 version: "1.0"
+type: blog-post
+tags: [mx, machine-readability, metadata, paths, grounding, agents]
 mx:
-  status: draft
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience:
     - humans
     - machines
-  tags:
-    - mx
-    - machine-readability
-    - metadata
-    - paths
-    - grounding
-    - agents
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/cogs-and-metadata/a-file-that-knows-where-it-lives.md
+  aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/cogs-and-metadata/a-file-that-knows-where-it-lives.md
+  contextProvides:
+    - "Why relative markdown links work for humans but break for machines reading files outside their origin repo, and how two x-mx- fields (x-mx-hostRepo, x-mx-repoPath) solve it."
   stability: stable
   purpose: "Why relative markdown links work for humans but break for machines, and how two new MX fields ground a file to its repo without touching the links."
   servedAt: https://mx.allabout.network/blog/drafts/cogs-and-metadata/a-file-that-knows-where-it-lives.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/drafts/cogs-and-metadata/a-file-that-knows-where-it-lives.html
-  blogFilename: a-file-that-knows-where-it-lives
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -71,11 +69,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="A File That Knows Where It Lives">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -104,7 +100,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -158,6 +154,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -172,7 +169,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -221,7 +218,7 @@ mx:
 <p>This is not a hypothetical failure. It is the normal state when metadata travels.</p>
 <p>MX is designed for exactly this: metadata that travels with the file. A cog pushed to a per-domain Gitea audit repo, an attestation record stored in REGINALD, a PDF embedding its provenance XMP - in every case the file has left its origin context. The relative links in the body remain, pointing at paths that no longer resolve from where the machine is standing.</p>
 <p>The usual answer is the <code>canonicalUri</code> field: a full raw-content URL for this specific file.</p>
-<pre><code class="language-yaml">canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/how-to-write-a-cog.cog.md
+<pre><code class="language-yaml">canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/cogs-and-metadata/a-file-that-knows-where-it-lives.md
 </code></pre>
 <p>That solves location for this file. It does not tell a machine which repo this file belongs to, or where to look for sibling files. A machine that wants to follow a relative link <code>../../../../../../datalake/knowledge/system/gitea.cog.md</code> still has no anchor.</p>
 <h2 id="two-fields-one-address" tabindex="-1">Two fields, one address</h2>
@@ -230,9 +227,9 @@ mx:
 <pre><code class="language-yaml">x-mx-hostRepo: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main
 </code></pre>
 <p><code>x-mx-repoPath</code> declares the file's path from the repo root, no leading slash:</p>
-<pre><code class="language-yaml">x-mx-repoPath: scripts/cogs/how-to-write-a-cog.cog.md
+<pre><code class="language-yaml">x-mx-repoPath: datalake/draft-site/blog/cogs-and-metadata/a-file-that-knows-where-it-lives.md
 </code></pre>
-<p>Together they let a machine construct a direct fetch URL for any file in the same repo: <code>x-mx-hostRepo + &quot;/&quot; + x-mx-repoPath</code>. For this file: <code>https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/scripts/cogs/how-to-write-a-cog.cog.md</code> - which is exactly what <code>canonicalUri</code> already declares.</p>
+<p>Together they let a machine construct a direct fetch URL for any file in the same repo: <code>x-mx-hostRepo + &quot;/&quot; + x-mx-repoPath</code>. For this file: <code>https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/cogs-and-metadata/a-file-that-knows-where-it-lives.md</code> - which is exactly what <code>canonicalUri</code> already declares.</p>
 <p>That is the point. <code>x-mx-hostRepo</code> and <code>x-mx-repoPath</code> are not a replacement for <code>canonicalUri</code>; they are its components, separated so a machine can use them independently. The three fields together give three complementary anchors:</p>
 <table>
 <thead>
@@ -271,13 +268,21 @@ npm run repo-path:backfill:apply    # write
 <p>MX exists so that a file remains useful when it travels outside the environment that produced it. Repo grounding is what keeps a file useful when it travels outside the repo.</p>
 
 
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-06-14.</li>
+          </ul>
+        </footer>
+
       </article>
 
 
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -311,7 +316,10 @@ npm run repo-path:backfill:apply    # write
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -328,5 +336,6 @@ npm run repo-path:backfill:apply    # write
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

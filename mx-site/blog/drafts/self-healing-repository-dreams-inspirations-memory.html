@@ -11,16 +11,18 @@ type: blog-post
 description: "MX-Hub's self-improving infrastructure uses three mechanisms - Dreams (silent LLM miners), Inspirations (deterministic repair actors), and Memory Sync (portable practice) - to make repositories that heal their own drift and learn from use patterns."
 author: Tom Cranstoun
 created: 2026-06-27
-modified: 2026-06-27
+modified: 2026-09-29
 tags: [architecture, repository, machine-learning, infrastructure, developer-experience, maxine]
 mx:
   mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans, machines]
   purpose: "Explain how MX-Hub's self-improving infrastructure (Dreams, Inspirations, Memory Sync) keeps repositories self-healing and helps operators inherit accumulated practice on first clone."
   stability: draft
   runbook: "Blog draft in the Intent CMS source layer. Edit here, then promote with npm run promote -- <source.md> --apply; never edit the generated HTML."
   contextProvides: ["How Dreams, Inspirations, and Memory Sync make a repository self-healing"]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/self-healing-repository-dreams-inspirations-memory.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/self-healing-repository-dreams-inspirations-memory.md
+  servedAt: https://mx.allabout.network/blog/drafts/self-healing-repository-dreams-inspirations-memory.html
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -106,7 +108,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1661,
+        "wordCount": 1644,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -146,6 +148,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -189,7 +192,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1661">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1644">
         <header class="article-header">
           <h1>Self-Healing Code: How Dreams, Inspirations, and Memory Turn a Repository Into a Learning System</h1>
           <div class="article-meta"
@@ -241,7 +244,7 @@ mx:
 <li><strong>Scope-enforced</strong> - it refuses to touch anything outside its declared write boundary</li>
 <li><strong>Operator-controlled</strong> - it never pushes. The operator reviews, then decides to push</li>
 </ol>
-<p>The runner harness (<a href="../../../../../../scripts/lib/inspire-runner.cjs"><code>scripts/lib/inspire-runner.cjs</code></a>) enforces this at two layers. First, it limits what the inspiration can write (a filesystem boundary). Second, after the inspiration runs, it snapshots the tree - if the inspiration tried to write outside its scope, the snapshots fail to match, and the commit is refused.</p>
+<p>The runner harness enforces this at two layers. First, it limits what the inspiration can write (a filesystem boundary). Second, after the inspiration runs, it snapshots the tree - if the inspiration tried to write outside its scope, the snapshots fail to match, and the commit is refused.</p>
 <p>This is Human-in-Command: the machine fixes the problem, the human signs off.</p>
 <h3 id="from-temporary-to-permanent-promotion" tabindex="-1">From Temporary to Permanent: Promotion</h3>
 <p>Here's where it gets smart. Inspirations can be <strong>temporary</strong> or <strong>permanent</strong>.</p>
@@ -259,7 +262,7 @@ mx:
 <li><strong>User</strong> - individual operator profiles and preferences. &quot;Claude prefers terse responses. Claude uses the Sonnet model for reviews.&quot;</li>
 <li><strong>Reference</strong> - pointers to external resources. &quot;The Gathering standard spec lives here. The MX Manifesto lives there.&quot;</li>
 </ol>
-<p>When you first clone the repository, a deterministic merge happens (the contract is <a href="../../../../../../scripts/lib/memory-sync.cjs"><code>scripts/lib/memory-sync.cjs</code></a>). Your local device memory (the working copy on your machine) converges with the repo-tracked memory (what everyone has committed). The rule is: union by file, newest <code>modified:</code> timestamp wins.</p>
+<p>When you first clone the repository, a deterministic merge happens (a small, tested sync contract). Your local device memory (the working copy on your machine) converges with the repo-tracked memory (what everyone has committed). The rule is: union by file, newest <code>modified:</code> timestamp wins.</p>
 <p>Deletions are handled deliberately, not silently. You don't delete a memory file; you add an entry to <code>RETIRED.md</code> saying why it's gone. That way, if someone clones an old branch, they see what was retired and why - not a mysterious absence.</p>
 <p>This is what onboarding should be. You don't read a fifty-page operations manual. You clone the repo. The memory syncs. The next time you run a command, hooks remind you of the patterns you need to know. By session three, you've internalized the practice.</p>
 <h2 id="how-they-work-together" tabindex="-1">How They Work Together</h2>
@@ -314,14 +317,15 @@ mx:
 <p>What this produces is unusual: a repository that gets better with use. Not by accident or cleanup sprints, but by design. Every time someone encounters a problem, they can fix it once and promote it to permanent. Every time they learn something, they can record it in memory so the next person doesn't re-learn it.</p>
 <p>You clone MX-Hub. The memory syncs. You read the Reminders (key decisions that need to be in your head). You run a command. Hooks remind you of the patterns. By session three, you're operating at the level of operators who've been here for months.</p>
 <p>That's what Dreams, Inspirations, and Memory do. They make repositories that heal themselves and teach.</p>
-<hr>
-<p><strong>Further reading:</strong></p>
-<ul>
-<li><a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/mx-canon/mx-os/inspirations-prd.cog.md">Inspirations PRD</a> - Full specification</li>
-<li><a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/scripts/lib/memory-sync.cjs">Memory Sync Contract</a> - Implementation</li>
-<li><a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/blob/main/scripts/cogs/manual-repository-architecture.cog.md">Repository Architecture</a> - System design</li>
-</ul>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-09-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -363,7 +367,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

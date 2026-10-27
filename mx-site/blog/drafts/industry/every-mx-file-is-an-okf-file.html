@@ -10,7 +10,7 @@ title: "Every MX File Is Now an OKF File"
 description: "Google's Open Knowledge Format and MX describe the same carrier. We have migrated the entire MX estate so every file is simultaneously valid OKF and full MX - one frontmatter block, two standard readers, zero duplicates."
 author: Tom Cranstoun
 created: 2026-06-21
-modified: 2026-06-21
+modified: 2026-09-29
 version: "0.1"
 
 type: blog-post
@@ -20,12 +20,14 @@ mx:
   mxSpecVersion: "0.9"
   audience: [humans, machines]
   purpose: "Announce that the MX estate is now OKF-conformant and explain what that means for readers building on either standard."
-  runbook: "Draft blog post. Review for tone and accuracy before promoting: npm run promote -- datalake/draft-site/blog/drafts/industry/every-mx-file-is-an-okf-file.md --apply"
+  runbook: "Draft blog post. Review for tone and accuracy before promoting: npm run promote -- datalake/draft-site/blog/industry/every-mx-file-is-an-okf-file.md --apply"
   contextProvides: ["MX is now OKF-conformant; every MX file satisfies OKF; the three-zone model; what OKF omits that MX adds"]
   stability: stable
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/industry/every-mx-file-is-an-okf-file.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/industry/every-mx-file-is-an-okf-file.md
+  x-mx-contentState: draft
   refersTo:
     - datalake/draft-site/blog/industry/okf-untyped-edges.md
+  servedAt: https://mx.allabout.network/blog/drafts/industry/every-mx-file-is-an-okf-file.html
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -111,7 +113,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 626,
+        "wordCount": 614,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -151,6 +153,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -190,7 +193,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="626">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="614">
         <header class="article-header">
           <h1>Every MX File Is Now an OKF File</h1>
           <div class="article-meta"
@@ -213,7 +216,7 @@ mx:
 <h2 id="what-we-did" tabindex="-1">What We Did</h2>
 <p>MX already owned <code>title</code>, <code>description</code>, and the concept behind <code>tags</code>. We adopted the OKF field names directly - no synonyms, no wrappers. <code>type</code> now sits at the top level of every MX file, carrying the same content-type vocabulary that used to live under <code>mx.contentType</code>. <code>tags</code> moved up from under <code>mx:</code> to the top level where OKF expects it. <code>resource</code> is new: an optional field for files that describe a specific external asset, distinct from the citation list under <code>mx.refersToExternal</code>.</p>
 <p>The <code>mx:</code> block - with the typed relation graph, the trust layer, the governance fields - stays exactly where it is. An OKF consumer reads the top-level fields and treats <code>mx:</code> as one preserved unknown key. An MX consumer reads everything. No fact is written twice.</p>
-<p>The migration ran in one pass across the estate. 1,912 files. Gate 32 now runs strict at push time: any file that puts <code>type</code> or <code>tags</code> under <code>mx:</code>, or that stores a <code>timestamp</code> in source, is rejected before it reaches the remote.</p>
+<p>The migration ran in one pass across the estate. 1,912 files. A strict check now runs at push time: any file that puts <code>type</code> or <code>tags</code> under <code>mx:</code>, or that stores a <code>timestamp</code> in source, is rejected before it reaches the remote.</p>
 <h2 id="what-it-means" tabindex="-1">What It Means</h2>
 <p><strong>For anyone building on OKF:</strong> MX files are valid OKF concept documents. You do not need an adapter, a transformer, or a second file format. Drop the markdown into any OKF-compatible tool and it reads cleanly.</p>
 <p><strong>For anyone building on MX:</strong> nothing changed in the way you author files. <code>type</code> replaces <code>mx.contentType</code>. <code>tags</code> stays at the top. The <code>mx:</code> block is the same. The validator guides you if you put a field in the wrong place.</p>
@@ -225,8 +228,16 @@ mx:
 <p>That distinction is the commercial proposition. We wrote about the untyped-edge problem in June 2026 - the fact that OKF has no typed relation graph. This is the same argument from a different angle. OKF solves discovery. MX solves trust. The two standards compose because MX adopts OKF's surface and extends it.</p>
 <p>The field mapping in detail is in the next post.</p>
 <hr>
-<p><em>Gate 32 passes at 1,912 from 1,912. The mapping SSOT is at <code>mx-canon/ssot/registries/mx-okf-field-map.yaml</code>. The operator manual is at <code>scripts/cogs/okf-frontmatter.cog.md</code>.</em></p>
+<p><em>The check passes at 1,912 from 1,912.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-09-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -268,7 +279,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
