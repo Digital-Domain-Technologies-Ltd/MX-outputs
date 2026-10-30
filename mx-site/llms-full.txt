@@ -4299,54 +4299,67 @@ MX Learn · Lesson 6 of 6
 
 **Description:** What an MX Compatible PDF carries that an ordinary PDF does not: tagged structure, AI-governance provenance, and the metadata that lets a regulator, an AI agent, or a screen reader walk the document with the same confidence a sighted reader does.
 
-MX
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
-          Compatible
+            Author: Tom Cranstoun
 
-          MX for
-          PDFs.
+        Index
 
-        If you scanned a QR code on the cover of a PDF, this page is what it pointed you to. Here is what the badge means.
+        - What this PDF carries
 
-          An MX Compatible PDF is an ordinary PDF that also carries three things most PDFs do not: a tagged structure tree, an AI-governance provenance record, and the metadata that ties both to a published canon. The badge on the cover is the visible index entry for that evidence chain. You can verify every part of it from the file alone.
+        - Why it matters
 
-          See it for yourself in under a minute. Drop the PDF you are holding into the MX Inspector: your browser reads the file locally (it never leaves your machine), classifies it, lists every MX metadata field it carries, and walks the embedded provenance chain step by step. Everything this page explains, the inspector shows you live from your own file.
+        - How to verify the claims
 
-          Open the MX Inspector &rarr;
+        - If you publish PDFs
 
-          This page tells you what is in the file you have, why any regulator, AI agent, or screen reader can walk it the same way wherever it lands, and how to verify any of the claims yourself. The structure travels with the file: ship it from London, Frankfurt, New York, Sydney, S&atilde;o Paulo, or Bangalore and it carries the same evidence on arrival.
+        - Get a free MX-readiness check on your own PDF
 
-          Which laws bite depends on where the file is read, not where it was written. The sharpest enforcement risk today is European, because the European Accessibility Act and the EU AI Act both carry fines large enough to fund the lawyers who chase them; treat those as the floor any publisher serving European readers has to clear. The same evidence answers the United States NIST AI Risk Management Framework, the UK ICO AI guidance, the Colorado AI Act, and the analogous instruments now appearing in other jurisdictions, so a publisher who builds for the European floor inherits the rest for free.
+        - Or have us do it for you
 
-          Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+          MX for PDFs
 
-          The QR code you scanned ends with a fragment of the form #mx:<hash>. That hash is the first eight characters of the source-content SHA recorded inside the document. It identifies which version of the source the PDF was rendered from. Anyone can match it back to the canonical source on disk or in the repository.
+            31 May 2026
+            ·
+            Tom Cranstoun
+            ·
+            12 min read
 
-          What this PDF carries
+An MX Compatible PDF is an ordinary PDF that also carries three things most PDFs do not: a tagged structure tree, an AI-governance provenance record, and the metadata that ties both to a published canon. The badge on the cover is the visible index entry for that evidence chain. You can verify every part of it from the file alone.
 
-          Three things, all machine-readable, all open by design.
+This page tells you what is in the file you have, why any regulator, AI agent, or screen reader can walk it the same way wherever it lands, and how to verify any of the claims yourself. The structure travels with the file: ship it from London, Frankfurt, New York, Sydney, São Paulo, or Bangalore and it carries the same evidence on arrival.
 
-          A tagged structure tree
+Which laws bite depends on where the file is read, not where it was written. The sharpest enforcement risk is European, because the European Accessibility Act and the EU AI Act both carry fines large enough to fund the lawyers who chase them; treat those as the floor any publisher serving European readers has to clear. The same evidence answers the United States NIST AI Risk Management Framework, the UK ICO AI guidance, the Colorado AI Act, and the analogous instruments now appearing in other jurisdictions, so a publisher who builds for the European floor inherits the rest for free.
 
-          Inside the PDF, every heading, paragraph, list item, table cell, figure, and caption is recorded as a node in a logical tree. The tree follows ISO 14289-1, the international standard for accessible tagged PDF (PDF/UA-1), declared in the document's XMP packet under pdfuaid:part=1. A screen reader can walk that tree the same way a sighted reader walks the visible page: heading by heading, paragraph by paragraph, alt text on every figure. An AI agent reads exactly the same tree. The structure is the file; it is not reconstructed from pixels.
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
-          For comparison, an ordinary PDF carries only the visual rendering. The order of text in the file is the order the typesetter wrote it, not the order a reader would follow. A screen reader has to guess. An AI agent has to do vision-based reconstruction. Both are slower, less accurate, and more expensive than reading a tree that is already there.
+The QR code you scanned ends with a fragment of the form #mx:<hash>. That hash is the first eight characters of the source-content SHA recorded inside the document. It identifies which version of the source the PDF was rendered from. Anyone can match it back to the canonical source the PDF declares.
 
-          AI-governance provenance
+What this PDF carries
 
-          Adjacent to the PDF on disk, and embedded as a single XMP payload inside the PDF itself, is a pair of provenance records. The AI sidecar (file extension .provenance.ai.json) records every non-deterministic step that touched the document: large-language-model calls, multi-agent collectors, human-committed actions. It serves the AI-governance regimes that ask "what model produced this, on what input, under what prompt, with what audit trail": the EU AI Act, the UK ICO AI guidance, the United States NIST AI Risk Management Framework, the Colorado AI Act, and the analogous instruments now appearing in other jurisdictions.
+Three things, all machine-readable, all open by design.
 
-          The deterministic sidecar (.provenance.deterministic.json) lives next to it and records the rule-driven steps: gate verdicts, CSV checks, render steps, probe results. It serves the European Accessibility Act, Directive 2019/882, which entered into force on 28 June 2025 and asks "is this document conformant to the relevant accessibility standard, and what evidence supports that conformance".
+A tagged structure tree
 
-          Both sidecars cross-reference each other through a companion field. Together they form an evidence vehicle, not a compliance grant. Compliance with any law stays a legal duty of the organisation that publishes the file. What the records do is make the evidence the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request.
+Inside the PDF, every heading, paragraph, list item, table cell, figure, and caption is recorded as a node in a logical tree. The tree follows ISO 14289-1 (PDF/UA-1), the international standard for accessible tagged PDF. The document's XMP packet gains the PDF/UA-1 identification, pdfuaid:part=1, only when veraPDF passes the file against that standard. A screen reader can walk that tree the same way a sighted person walks the visible page: heading by heading, paragraph by paragraph, alt text on every figure. An AI agent reads exactly the same tree. The structure is the file; it is not reconstructed from pixels.
 
-          Responsible Person Identifier
+For comparison, an ordinary PDF carries only the visual rendering. The order of text in the file is the order the typesetter wrote it, not the order a reader would follow. A screen reader has to guess. An AI agent has to do vision-based reconstruction. Both are slower, less accurate, and more expensive than reading a tree that is already there.
 
-          At the top of every sidecar (both the AI stream and the deterministic stream) sits a structured responsiblePerson block. It carries the name, email, identifier URL, role, organisation, and country of the human accountable for the audit chain. Any reader walking from a finding to the person responsible finds the full identifier in one step, without having to cross-reference an external directory or guess from a commit author. The block is the structured identity regulators look for under EU AI Act Article 4 (AI literacy obligations for providers and deployers), the UK ICO AI guidance accountability principle, the United States NIST AI Risk Management Framework GOVERN function (roles, responsibilities, and lines of communication), and EAA Directive 2019/882's responsible economic operator requirement.
+AI-governance provenance
 
-          The shape:
+Adjacent to the PDF on disk, and embedded as a single XMP payload inside the PDF itself, is a pair of provenance records. The AI sidecar (file extension .provenance.ai.json) records every non-deterministic step that touched the document: large-language-model calls, multi-agent collectors, human-committed actions. It serves the AI-governance regimes that ask "what model produced this, on what input, under what prompt, with what audit trail": the EU AI Act, the UK ICO AI guidance, the United States NIST AI Risk Management Framework, the Colorado AI Act, and the analogous instruments now appearing in other jurisdictions.
 
-          {
+The deterministic sidecar (.provenance.deterministic.json) lives next to it and records the rule-driven steps: gate verdicts, CSV checks, render steps, probe results. It serves the European Accessibility Act, Directive 2019/882, which entered into force on 28 June 2025 and asks "is this document conformant to the relevant accessibility standard, and what evidence supports that conformance".
+
+Both sidecars cross-reference each other through a companion field. Together they form an evidence vehicle, not a compliance grant. Compliance with any law stays a legal duty of the organisation that publishes the file. What the records do is make the evidence the organisation must produce structured, machine-readable, tamper-evident, and verifiable on request.
+
+Responsible Person Identifier
+
+At the top of every sidecar (both the AI stream and the deterministic stream) sits a structured responsiblePerson block. It carries the name, email, identifier URL, role, organisation, and country of the human accountable for the audit chain. Any reader walking from a finding to the person responsible finds the full identifier in one step, without having to cross-reference an external directory or guess from a commit author. The block gives structured evidence of accountability under the UK ICO AI guidance accountability principle, the United States NIST AI Risk Management Framework GOVERN function (roles, responsibilities, and lines of communication), and EAA Directive 2019/882's responsible economic operator requirement. EU AI Act Article 4 asks providers and deployers to support the AI literacy of the staff who operate their AI systems; it does not require a named person, but a named owner is one way to show who answers for that duty.
+
+The shape:
+
+{
   "name": "Tom Cranstoun",
   "email": "tom.cranstoun@gmail.com",
   "identifier": "https://allabout.network",
@@ -4355,96 +4368,113 @@ MX
   "country": "GB"
 }
 
-          Each field serves a regulator-facing question. name is the legal individual answerable for the audit; email is the direct contact channel. identifier is a stable URL that an auditor can resolve to verify the identity claim against an independent record (in this case the operator's own public-facing biography). role says in plain language what this person did in the audit chain. organisation names the legal entity behind the work, distinguishing the public brand from the registered company where the two differ. country is the two-letter ISO 3166-1 alpha-2 code that determines which jurisdiction's accountability rules apply.
+Each field serves a regulator-facing question. name is the legal individual answerable for the audit; email is the direct contact channel. identifier is a stable URL that an auditor can resolve to verify the identity claim against an independent record (in this case the operator's own public-facing biography). role says in plain language what this person did in the audit chain. organisation names the legal entity behind the work, distinguishing the public brand from the registered company where the two differ. country is the two-letter ISO 3166-1 alpha-2 code that determines which jurisdiction's accountability rules apply.
 
-          The identifier travels with the file. A regulator who downloads the PDF, extracts the AI sidecar from the XMP payload, and reads the first six fields knows immediately who is accountable, where to reach them, and which jurisdiction governs the chain. There is no separate identity directory to consult and no email-address-from-commit-history reconstruction to attempt. The audit identifies its own author and stands behind the chain by name.
+The identifier travels with the file. A regulator who downloads the PDF, extracts the AI sidecar from the XMP payload, and reads the first six fields knows immediately who is accountable, where to reach them, and which jurisdiction governs the chain. There is no separate identity directory to consult and no email-address-from-commit-history reconstruction to attempt. The audit identifies its own author and stands behind the chain by name.
 
-          One single identifier is enough for the simplest audits. Real-world audits routinely involve more than one accountable party: a provider distinct from a deployer, an authorised representative for non-EU placements, a bias auditor for an employment system. The provenance JSON's v2 shape (from 2026-05-28 onwards) carries these as a parties[] array with a controlled role enum drawn from what regimes actually ask for: auditOperator, provider (EU AI Act Art. 16; Colorado developer), deployer (EU AI Act Art. 26; Colorado deployer), authorisedRepresentative (EU AI Act Art. 22 / Art. 54 for non-EU providers), importer, distributor, auditor (NYC Local Law 144 bias auditor; ISO 42001 internal audit), dataController, dataProcessor, dpo, modelDeveloper, modelEvaluator. The full canonical position on regime compatibility, what compatibility means, what it does not mean, which 30 regulatory regimes the chain currently serves as evidence for, and how an operator extends it for a new regime, is documented at provenance-regime-compatibility.md.
+One single identifier is enough for the simplest audits. Real-world audits routinely involve more than one accountable party: a provider distinct from a deployer, an authorised representative for non-EU placements, a bias auditor for an employment system. The provenance JSON's v2 shape (from 2026-05-28 onwards) carries these as a parties[] array with a controlled role enum drawn from what regimes actually ask for: auditOperator, provider (EU AI Act Art. 16; Colorado developer), deployer (EU AI Act Art. 26; Colorado deployer), authorisedRepresentative (EU AI Act Art. 22 / Art. 54 for non-EU providers), importer, distributor, auditor (NYC Local Law 144 bias auditor; ISO 42001 internal audit), dataController, dataProcessor, dpo, modelDeveloper, modelEvaluator. The full canonical position on regime compatibility, what compatibility means, what it does not mean, which 30 regulatory regimes the chain currently serves as evidence for, and how an operator extends it for a new regime, is documented at provenance-regime-compatibility.md.
 
-          The MX metadata packet
+The MX metadata packet
 
-          The document's XMP metadata carries an MX namespace with twenty-plus fields that record what the file is, who wrote it, when, against what canonical source, with what intended audience, under what status. The fields draw from MX, an open, community-governed standard administered by The Gathering. The wire schema travels with the file: a tool that opens the PDF without ever visiting a network can still read provenance, intent, audience, and canonical pointers directly from the metadata. The structure survives mirroring, archiving, and re-distribution.
+The document's XMP metadata carries an MX namespace with twenty-plus fields that record what the file is, who wrote it, when, against what canonical source, with what intended audience, under what status. The fields draw from MX, a protocol published under the MIT licence, so anyone may implement it. The wire schema travels with the file: a tool that opens the PDF without ever visiting a network can still read provenance, intent, audience, and canonical pointers directly from the metadata. The structure survives mirroring, archiving, and re-distribution.
 
-          Why it matters
+Why it matters
 
-          Two halves do the work. MX makes the content machine-readable: any system reading the file gets a complete, structured account of what it contains and how to use it. REGINALD, the registry for which CogNovaMX is the reference operator, makes the content machine-trustworthy: a signed attestation binds the file to a known publisher and a specific source hash, so a verifier can check that the document has not been altered since it was published.
+Two halves do the work. MX makes the content machine-readable: any system reading the file gets a complete, structured account of what it contains and how to use it. REGINALD, the registry for which CogNovaMX is the reference operator, makes the content machine-trustworthy: a signed attestation binds the file to a known publisher and a specific source hash, so a verifier can check that the document has not been altered since it was published.
 
-          The combined effect is that AI agents working from MX Compatible content cite attested facts rather than inferences. Hallucination rates drop. Inference cost drops by orders of magnitude, because the agent walks a tree it does not have to reconstruct. The documentation regulators require (under the EAA for accessibility, under the EU AI Act for high-risk AI systems, under the NIST AI RMF for risk management) becomes a structured by-product of how the file was built rather than a separate compliance artefact that has to be assembled by hand.
+The combined effect is that AI agents working from MX Compatible content cite attested facts rather than inferences. Hallucination rates drop. Inference cost drops by orders of magnitude, because the agent walks a tree it does not have to reconstruct. The documentation regulators require (under the EAA for accessibility, under the EU AI Act for high-risk AI systems, under the NIST AI RMF for risk management) becomes a structured by-product of how the file was built rather than a separate compliance artefact that has to be assembled by hand.
 
-          For a publisher, the upside is that the same metadata serves three audiences against the same fabric. Auditors walk from a regulatory clause to every decision that cited it via the policy-reference fields. Operational teams get a tamper-evident log of every action the file went through, sequence-numbered and signature-bound. Regulators verify each link with their own standard libraries: DID resolution, JCS, Ed25519, RFC 6962.
+For a publisher, the upside is that the same metadata serves three audiences against the same fabric. Auditors walk from a regulatory clause to every decision that cited it via the policy-reference fields. Operational teams get a tamper-evident log of every action the file went through, sequence-numbered and signature-bound. Regulators verify each link with their own standard libraries: DID resolution, JCS, Ed25519, RFC 6962.
 
-          How to verify the claims
+How to verify the claims
 
-          Everything in the file is open to inspection. The fastest path is the MX Inspector: drop the PDF into the browser tool and it classifies the file, lists every MX metadata field in the packet (status, audience, canonical URL, the source file and its content hash, licence, and the rest), reads the provenance chain and operator identity, and gives you the whole inspection as downloadable JSON and markdown - no command-line tools, no login, no installation. Some MX Compatible PDFs carry a "Walk this document's evidence chain" hyperlink beside the badge: where the document's provenance record is publicly served, that one click opens the walk directly, with nothing to drop. Or run three commands directly against the file.
+Everything in the file is open to inspection. Three commands cover most of the verification surface. Or drop the PDF on the interactive inspector and read every claim without the commands.
 
-          Open the MX Inspector &rarr;
+Check the structure tree
 
-          Check the structure tree
+Confirm the PDF carries ISO 14289-1 tags:
 
-          Confirm the PDF carries ISO 14289-1 tags:
+qpdf --json file.pdf | jq '.objects[] | select(.["/Type"] == "/StructTreeRoot")'
 
-          qpdf --json file.pdf | jq '.objects[] | select(.["/Type"] == "/StructTreeRoot")'
+If the result is non-empty, the document has a structure tree. Walk further into the tree to confirm tags map to logical content. The structure-tree presence and the /MarkInfo /Marked true declaration are the Level 1 conformance signal under the MX Document Accessibility note.
 
-          If the result is non-empty, the document has a structure tree. Walk further into the tree to confirm tags map to logical content. The structure-tree presence and the /MarkInfo /Marked true declaration are the Level 1 conformance signal under the MX Document Accessibility note.
+Read the conformance claim
 
-          Read the conformance claim
+Check whether the document holds the PDF/UA-1 identification (ISO 14289-1):
 
-          Confirm the document declares PDF/UA-1 (ISO 14289-1):
+exiftool -XMP-pdfuaid:part file.pdf
 
-          exiftool -XMP-pdfuaid:Part file.pdf
+A value of 1 means the file identifies itself as PDF/UA-1. An MX render writes it only when veraPDF passes the file, so an MX PDF without it has not yet passed. The identification is a claim, not proof: run a PDF/UA validator such as veraPDF to test it.
 
-          A value of 1 indicates ISO 14289-1 (PDF/UA-1) conformance is asserted. The declaration is open to verification by any tool that walks the XMP packet.
+Read the provenance chain
 
-          Read the provenance chain
+The AI provenance payload is embedded in the XMP packet under xmp:ProvenanceAiPayload:
 
-          The AI provenance payload is embedded in the XMP packet under xmp:ProvenanceAiPayload:
+exiftool -b -XMP-mx:ProvenanceAiPayload file.pdf | jq .
 
-          exiftool -b -XMP-mx:ProvenanceAiPayload file.pdf | jq .
+The -b flag is mandatory; without it exiftool prepends a label that breaks JSON parsing. The output is the full AI provenance chain: every step the document went through, the agent that took it, the input hashes, the outcome. The deterministic chain lives in the adjacent .provenance.deterministic.json file on disk, pointed to from the XMP under xmp:ProvenanceCompanion.
 
-          The -b flag is mandatory; without it exiftool prepends a label that breaks JSON parsing. The output is the full AI provenance chain: every step the document went through, the agent that took it, the input hashes, the outcome. The deterministic chain lives in the adjacent .provenance.deterministic.json file on disk, pointed to from the XMP under xmp:ProvenanceCompanion.
+If you publish PDFs
 
-          If you publish PDFs
+The standard the badge points to is open. ISO 14289-1 tagged structure, the MX metadata schema, and the provenance pair are all published by The Gathering at tg.community, community-governed, and free to implement. Any publisher can adopt the pattern; any tool can produce a file that meets the same technical bar; other tools and registries can exist on the same standard.
 
-          The standard the badge points to is open. ISO 14289-1 tagged structure, the MX metadata schema, and the provenance pair are all published by The Gathering at tg.community, community-governed, and free to implement. Any publisher can adopt the pattern; any tool can produce a file that meets the same technical bar; other tools and registries can exist on the same standard.
+The badge itself is reserved. The right to award and display the MX Compatible badge on a deliverable belongs to accredited MX practitioners, formally Accredited Operators of the CogNovaMX Accreditation Programme. The programme runs in three tiers. Approved Operators self-attest on their own published work. Accredited Operators issue third-party claims after methodology review and a sample-claim audit. Audit-Grade Operators sign regulated-scope claims, backed by professional indemnity insurance, independent peer review, and named-individual signing authorities. Admission is by application and audit, not by course or exam.
 
-          The badge itself is reserved. The right to award and display the MX Compatible badge on a deliverable belongs to accredited MX practitioners, formally Accredited Operators of the CogNovaMX Accreditation Programme. The programme runs in three tiers. Approved Operators self-attest on their own published work. Accredited Operators issue third-party claims after methodology review and a sample-claim audit. Audit-Grade Operators sign regulated-scope claims, backed by professional indemnity insurance, independent peer review, and named-individual signing authorities. Admission is by application and audit, not by course or exam.
+Separating the open standard from the restricted badge keeps two things true at once. The conformance pattern stays free for anyone to implement. The visible mark on a file stays accountable to a named human, a working address, and a registry entry a regulator can resolve. A reader who scans the QR code and walks the evidence chain back to the responsible-person block does not need to trust the publisher's word about who signed for the artefact; the accreditation record says so.
 
-          Separating the open standard from the restricted badge keeps two things true at once. The conformance pattern stays free for anyone to implement. The visible mark on a file stays accountable to a named human, a working address, and a registry entry a regulator can resolve. A reader who scans the QR code and walks the evidence chain back to the responsible-person block does not need to trust the publisher's word about who signed for the artefact; the accreditation record says so.
+CogNovaMX operates the accreditation programme, the reference tooling at cognovamx.com, and the registry at reginald.allabout.network. The programme is built on MX, which CogNovaMX stewards and dogfoods on the repository and site behind MX: The Protocols, and whose future governance is proposed through The Gathering.
 
-          CogNovaMX operates the accreditation programme, the reference tooling at cognovamx.com, and the registry at reginald.allabout.network. The Gathering governs the open standard the programme is built on.
+The point of the badge is that the file declares its claim and lets you check it.
 
-          The point of the badge is that the file declares its claim and lets you check it.
+Get a free MX-readiness check on your own PDF
 
-          Get a free MX-readiness check on your own PDF
+Paste a public PDF URL and we will run the AX (Agent Experience) Audit pipeline against it. You will receive a written report covering ISO 14289-1 tagged structure, MX metadata presence, AI-governance provenance, and explicit eligibility for the MX Compatible badge. No payment, no obligation. Reports go out within two working days.
 
-          Paste a public PDF URL and we will run the MX audit pipeline against it. You will receive a written report covering ISO 14289-1 tagged structure, MX metadata presence, AI-governance provenance, and explicit eligibility for the MX Compatible badge. No payment, no obligation. Reports go out within two working days.
+PDF URL
 
-              PDF URL
+Your email
 
-              Your email
+Your name (optional)
 
-              Your name (optional)
+I am the owner of the document or authorised to submit it. CogNovaMX may contact me at this email about the report and related services.
 
-              I am the owner of the document or authorised to submit it. CogNovaMX may contact me at this email about the report and related services.
+Request the free check
 
-            Request the free check
+Related reading
 
-            Related reading
+Tagged PDFs are MX (blog) Accessibility and AI Convergence What is MX Why MX Matters
 
-              Tagged PDFs are MX (blog)
-              Accessibility and AI Convergence
-              What is MX
-              Why MX Matters
+Or have us do it for you
 
-        Or have us do it for you
+We produce machine-readable publications for print, web, and anywhere else a file has to land. The same evidence chain you read about above ships on every artefact we deliver: tagged structure, signed provenance, and the metadata that travels with the file.
 
-        We produce machine-readable publications for print, web, and anywhere else a file has to land. The same evidence chain you read about above ships on every artefact we deliver: tagged structure, signed provenance, and the metadata that travels with the file.
+Start with the free introduction: MX: The Introduction. A plain-language primer on what MX is, why machines misread the web, and the five-step framework for fixing it.
 
-        Start with the free introduction: MX: The Introduction. A plain-language primer on what MX is, why machines misread the web today, and the five-step framework for fixing it.
+To commission AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
 
-        To commission AI-compatible PDFs, websites, or print materials with QR codes that lead back to the machine-readable record, contact MX PrintWorks at mx-printworks@cognovamx.com. For everything else, the general inbox is info@cognovamx.com. Cogs for your files.
+If you want to award the badge yourself rather than commission us, the Accredited Operator programme is the route. Three tiers, application-and-audit admission, indicative pricing on the page. Stage 1 admissions open shortly; the waitlist is live now.
 
-        If you want to award the badge yourself rather than commission us, the Accredited Operator programme is the route. Three tiers, application-and-audit admission, indicative pricing on the page. Stage 1 admissions open shortly; the waitlist is live now.
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-29.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
 
 ---
 
@@ -4702,16 +4732,53 @@ Machine Experience (MX) is the practice of making anything you publish, a video,
 
 **Description:** Machine Experience (MX) is the governance envelope above the discovery layer of the web. It defers to Schema.org, JSON-LD, microdata, and WCAG 2.1 AA, and adds the layer they leave open: provenance, lifecycle, locale, and the signed record an agent verifies before acting on a file.
 
-MX
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
-        Machine Experience
+            Author: Tom Cranstoun
 
-        What is
-        MX?
+        Index
 
-      Machine Experience is the practice of making digital content readable by every machine that consumes it, from websites to documents, PDFs to data feeds.
+        - The Core Insight
 
-          Content Ops is the discipline of creating, managing, improving, publishing, distributing, archiving, and retiring content across every digital channel. Machine Experience (MX) is the layer that keeps Content Ops work usable when an AI agent, or any other system, encounters the file outside the environment that produced it.
+        - How MX Differs from Traditional Web Design
+
+        - What MX Is Not (Before We Go On)
+
+        - How MX Works
+
+        - The Two Pillars Working Together
+
+        - MX in Action: A Simple Example
+
+        - What MX Is Not
+
+        - Frequently Asked Questions
+
+        - The Business Case
+
+        - Who Needs MX?
+
+        - Beyond the Website
+
+        - The Convergence Thesis
+
+        - Why the Plumbing Beats the Tactics
+
+        - Getting Started with MX
+
+        - What's Next?
+
+        - Related
+
+          What is Machine Experience (MX)?
+
+            31 May 2026
+            ·
+            Tom Cranstoun
+            ·
+            12 min read
+
+Content Ops is the discipline of creating, managing, improving, publishing, distributing, archiving, and retiring content across every digital channel. Machine Experience (MX) is the layer that keeps Content Ops work usable when an AI agent, or any other system, encounters the file outside the environment that produced it.
 
 MX is the practice of making digital content readable by every machine that consumes it, so no machine has to guess.
 
@@ -4753,7 +4820,7 @@ The shift. The brief moves past "make it look good" and onto "make it unambiguou
 
 What MX Is Not (Before We Go On)
 
-MX is not SEO, GEO, AEO, Schema.org, JSON-LD, or microdata. Those are tactics and formats that operate at the discovery layer. MX is the layer above them, where an agent that has already found and parsed the page works out whether to act on what it just read. SEO got you found. GEO got you understood. MX gets you used.
+MX is not SEO, GEO, AEO, Schema.org, JSON-LD, or microdata. Those are tactics and formats that operate at the discovery layer. MX is the layer above them, where an agent that has already found and parsed the page works out whether to act on what it just read. SEO got you found. GEO chases the citation. MX gets you used.
 
 How MX Works
 
@@ -4799,7 +4866,7 @@ The system has two operational pillars, both required for a record an agent can 
 
 - REGINALD makes content machine-trustworthy. The public registry that attests who wrote the record, when it was published, whether it has been modified, and whether the version the agent is reading is the version the publisher issued
 
-A record can be readable without being trustworthy. It can be attested without being readable. Machine-ready content needs both. The framework is open and standards-governed by The Gathering; any organisation can operate a registry on the same specification.
+A record can be readable without being trustworthy. It can be attested without being readable. Machine-ready content needs both. MX is a private protocol, created for the book MX: The Protocols and stewarded by CogNovaMX, which dogfoods it on the book's own repository and site. It is published under the MIT licence, so anyone may implement it, and its future governance is proposed through The Gathering. Any organisation can operate a registry on the same specification.
 
 MX in Action: A Simple Example
 
@@ -4810,8 +4877,7 @@ Before MX (Human-Only Design)
   <div class="email">info@company.com</div>
 </div>
 
-Human sees: Contact information clearly displayed.
-AI agent sees: Two generic containers with text. Are these contact methods? Which is preferred? What are the hours?
+Human sees: Contact information clearly displayed. AI agent sees: Two generic containers with text. Are these contact methods? Which is preferred? What are the hours?
 
 After MX (Human + Agent Design)
 
@@ -4822,8 +4888,7 @@ After MX (Human + Agent Design)
   <meta itemprop="hoursAvailable" content="Mo-Fr 09:00-17:00">
 </div>
 
-Human sees: Exactly the same contact information.
-AI agent sees: Structured contact data with explicit types, availability, and purpose.
+Human sees: Exactly the same contact information. AI agent sees: Structured contact data with explicit types, availability, and purpose.
 
 What MX Is Not
 
@@ -4853,20 +4918,25 @@ MX is:
 
 Frequently Asked Questions
 
-  What is Machine Experience (MX)?
-  Machine Experience (MX) is the governance envelope above the discovery layer of the web. SEO got you found, GEO got you understood, MX gets you used. MX defers to Schema.org, JSON-LD, microdata, WCAG 2.1 AA, and other established standards for what they already cover, and adds the layer they leave open: provenance, lifecycle, locale, agent affordances, and the signed record an agent verifies before acting. MX is not SEO, not Generative Engine Optimisation, not Answer Engine Optimisation, and not a structured-data format.
+What is Machine Experience (MX)?
 
-  How does MX differ from traditional web design?
-  Traditional web design puts visual design first and relies on human inference. MX puts the page's structure, semantics, and governance signals on a par with the visible layout. Schema.org and WCAG cover the discovery layer; MX adds a signed, dated, lifecycle-aware record above them so an agent knows whether to act on what it just read.
+Machine Experience (MX) is the governance envelope above the discovery layer of the web. SEO got you found, GEO got you understood, MX gets you used. MX defers to Schema.org, JSON-LD, microdata, WCAG 2.1 AA, and other established standards for what they already cover, and adds the layer they leave open: provenance, lifecycle, locale, agent affordances, and the signed record an agent verifies before acting. MX is not SEO, not Generative Engine Optimisation, not Answer Engine Optimisation, and not a structured-data format.
 
-  How does MX relate to Schema.org, JSON-LD, and WCAG?
-  MX defers to them and builds on top of them. Schema.org and JSON-LD describe what an entity is (a Product, an Offer, a Person); WCAG 2.1 AA defines the semantic and accessibility structure that machines and assistive technologies both depend on. MX adds the governance envelope above this discovery layer: provenance (who issued the record and when), lifecycle (when it expires, what supersedes it), locale conventions, agent affordances, and a cryptographic signature so the version on the page can be verified against the version the publisher actually issued. A page with good Schema.org is a stronger MX surface, not a competing one.
+How does MX differ from traditional web design?
 
-  Who needs MX?
-  Any organisation that wants its content found, understood, and acted upon by machines, including the machines that act inside the organisation. This includes e-commerce sites, service businesses, content publishers, SaaS products, and any organisation whose contracts, policy documents, specifications, or reports are read by agents inside enterprise tools.
+Traditional web design puts visual design first and relies on human inference. MX puts the page's structure, semantics, and governance signals on a par with the visible layout. Schema.org and WCAG cover the discovery layer; MX adds a signed, dated, lifecycle-aware record above them so an agent knows whether to act on what it just read.
 
-  How do I get started with MX?
-  Start at the discovery layer and work up. (1) Add Schema.org markup to your most important pages so machines can find and understand what the entities are. (2) Bring the page to WCAG 2.1 AA so the semantic structure is sound. (3) Then layer on the MX governance envelope: declare provenance, lifecycle, locale conventions, and canonical URI on each record so an agent knows whether the version it parsed is current and trustworthy. (4) Where it matters (commerce, regulated content, contracts), publish the signed record to a registry so the agent verifies what the page claims. The discovery work without the governance envelope is the £203,000 cruise misread waiting to happen.
+How does MX relate to Schema.org, JSON-LD, and WCAG?
+
+MX defers to them and builds on top of them. Schema.org and JSON-LD describe what an entity is (a Product, an Offer, a Person); WCAG 2.1 AA defines the semantic and accessibility structure that machines and assistive technologies both depend on. MX adds the governance envelope above this discovery layer: provenance (who issued the record and when), lifecycle (when it expires, what supersedes it), locale conventions, agent affordances, and a cryptographic signature so the version on the page can be verified against the version the publisher actually issued. A page with good Schema.org is a stronger MX surface, not a competing one.
+
+Who needs MX?
+
+Any organisation that wants its content found, understood, and acted upon by machines, including the machines that act inside the organisation. This includes e-commerce sites, service businesses, content publishers, SaaS products, and any organisation whose contracts, policy documents, specifications, or reports are read by agents inside enterprise tools.
+
+How do I get started with MX?
+
+Start at the discovery layer and work up. (1) Add Schema.org markup to your most important pages so machines can find and understand what the entities are. (2) Bring the page to WCAG 2.1 AA so the semantic structure is sound. (3) Then layer on the MX governance envelope: declare provenance, lifecycle, locale conventions, and canonical URI on each record so an agent knows whether the version it parsed is current and trustworthy. (4) Where it matters (commerce, regulated content, contracts), publish the signed record to a registry so the agent verifies what the page claims. The discovery work without the governance envelope is the £203,000 cruise misread waiting to happen.
 
 The Business Case
 
@@ -4920,13 +4990,13 @@ Most advice on getting cited by AI assistants still talks about the LLM as if it
 
 The way through that churn is plumbing, not tactics. Output what the simplest machine can read:
 
-  - Right MIME types, so each file is delivered as the type it actually is.
+- Right MIME types, so each file is delivered as the type it actually is.
 
-  - A discoverable sitemap, listing the pages you want machines to find.
+- A discoverable sitemap, listing the pages you want machines to find.
 
-  - An llms.txt that is actually wired up, served, listed in the sitemap, and referenced from page heads.
+- An llms.txt that is actually wired up, served, listed in the sitemap, and referenced from page heads.
 
-  - Structured data that matches the rendered page, with no drift between the markup and what a visitor sees.
+- Structured data that matches the rendered page, with no drift between the markup and what a visitor sees.
 
 If the dumbest reader can parse the result, every smarter one can too. Tactics will reshuffle every few months. Plumbing does not.
 
@@ -4954,23 +5024,37 @@ What's Next?
 
 Now that you understand what Machine Experience is, explore:
 
-→ Why MX Matters - The business urgency
-→ Key MX Principles - Deeper dive on the standards MX defers to and the governance envelope MX adds
-→ Implementation Examples - See MX in practice
+→ Why MX Matters - The business urgency → Key MX Principles - Deeper dive on the standards MX defers to and the governance envelope MX adds → Implementation Examples - See MX in practice
 
 Ready to implement MX at your organization?
 
 Get MX Consultation →
 
-            Related
+Related
 
-          What is MX?
-          Why MX Matters
-          Key Principles
-          Benefits of MX
-          Explicit Over Implicit
-          Common Mistakes
-          Accessibility & AI
+What is MX? Why MX Matters Key Principles Benefits of MX Explicit Over Implicit Common Mistakes Accessibility & AI
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-19.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
 
 ---
 
@@ -7914,4 +7998,4 @@ That is the work MX was built to make possible.
 
             - Join The Gathering
 
-<!-- x-mx-sourceHash: cf776bb16e00c2c5c2f3a9d0fe595c07705c8141b4201faa8798fd78478a6cab -->
+<!-- x-mx-sourceHash: 86fa2e807bd7908af1eae900a85a2c9fbda0f1938dce5a5167cb4e9b76fb18e2 -->
