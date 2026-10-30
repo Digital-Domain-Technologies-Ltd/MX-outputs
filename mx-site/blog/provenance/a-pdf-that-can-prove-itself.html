@@ -5,29 +5,28 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
-"@context": https://mx.allabout.network/canon/context.json
 title: "A PDF That Can Prove Itself"
 description: "Every PDF this site produces now carries its own evidence chain inside its XMP packet. Open the file with no network and no source repo and an inspector can still read who made it, when, what it was rendered from, and what the chain is silent about. The honest absence matters as much as the present steps."
 author: Tom Cranstoun
 created: 2026-05-26
-modified: 2026-10-13
+modified: 2026-05-26
 version: "1.0"
-category: mx-content
-type: blog-post
+type: blog
 tags: [practitioner, provenance, mx-foundations]
 mx:
-  mxSpecVersion: "0.9"
-  x-mx-contentState: published
   servedAt: https://mx.allabout.network/blog/provenance/a-pdf-that-can-prove-itself.html
+  generate:
+    script: scripts/generate-content-html.cjs
+  status: published
   audience:
   - humans
   - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/provenance/a-pdf-that-can-prove-itself.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  contextProvides:
-    - "Every PDF this site produces now carries its own evidence chain inside its XMP packet. Open the file with no network and no source repo and an inspector can still read who made it, when, what it was rendered from, and what the chain is silent about. The honest absence matters as much as the present steps."
   stability: stable
   purpose: "Every PDF this site produces now carries its own evidence chain inside its XMP packet. Open the file with no network and no source repo and an inspector can still read who made it, when, what it was rendered from, and what the chain is silent about. The honest absence matters as much as the present steps."
+  blogUrl: https://mx.allabout.network/blog/a-pdf-that-can-prove-itself.html
+  blogFilename: a-pdf-that-can-prove-itself
 refersTo:
 - the-padlock-and-the-page.md
 - provenance-you-can-see.md
@@ -75,9 +74,11 @@ refersToExternal:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
-       never emitted here; a served page says what the document is, not how this
-       estate is organised. Stewardship lives in the markdown source. -->
+  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
+       carrier, so the next revision (human or agent) reads the responsible
+       handler instead of inferring it. mx:type and x-mx-managedBy are constant
+       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
+       single source of truth and check-managed-by.cjs asserts they agree. -->
   <meta name="mx:name" content="A PDF That Can Prove Itself">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -120,7 +121,7 @@ refersToExternal:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1973,
+        "wordCount": 1979,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -161,7 +162,6 @@ refersToExternal:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
-        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -204,7 +204,7 @@ refersToExternal:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1973">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1979">
         <header class="article-header">
           <h1>A PDF That Can Prove Itself</h1>
           <div class="article-meta"
@@ -221,7 +221,7 @@ refersToExternal:
 
 
 <p>A PDF is a thing that travels. It leaves the system that produced it, gets emailed, attached to a deal room, dropped in a shared drive, printed and rescanned, forwarded to a regulator. Wherever it lands, the question waiting for it is the one this blog has been writing about for two months: who made this, when, on what authority, and has it been changed.</p>
-<p>The honest answer, before this work, was: open the source repo on your own machine, look up the provenance sidecar next to the original, and trust that the PDF in your hand matches that sidecar. Which is not really verification. The chain depends on the inspector having the right filesystem access at the right moment, and on the file in their hand being the file the sidecar describes. Two assumptions, both broken on the email path most PDFs actually take.</p>
+<p>The honest answer until recently has been: open the source repo on your own machine, look up the provenance sidecar next to the original, and trust that the PDF in your hand matches that sidecar. Which is not really verification. The chain depends on the inspector having the right filesystem access at the right moment, and on the file in their hand being the file the sidecar describes. Two assumptions, both broken on the email path most PDFs actually take.</p>
 <p>The cleaner answer is the one the file should give for itself. The PDF should carry its own evidence chain inside, in a structured form a machine can extract without network access, source-tree access, or any of the operator's cooperation. That is what shipped this morning.</p>
 <h2 id="what-the-file-now-says" tabindex="-1">What the file now says</h2>
 <p>Every PDF produced through this site's render pipeline now carries its full AI provenance chain in the XMP metadata packet at the front of the file. XMP is the same place ISO 14289 puts its accessibility conformance declaration; reading it is one exiftool call:</p>
@@ -249,7 +249,7 @@ refersToExternal:
   }
 ]
 </code></pre>
-<p>Those two steps are the machine's own account of the render, written as the file is made. The chain does not end there. Before the file ships, a human-check step joins it: the record of a person who reviewed the output and stands behind it. The AI attaches the trail; a human checks it. A chain that carried only the machine's work, with no human in it, is treated as incomplete, and a deterministic gate in our build refuses it. A shipped file names both the machine that produced it and the human accountable for it.</p>
+<p>Those two steps are the machine's own account of the render, written as the file is made. The chain does not end there. Before the file ships, a human-check step joins it: the record of a person who reviewed the output and stands behind it. The AI attaches the trail; a human checks it. A chain that carried only the machine's work, with no human in it, is treated as incomplete, and a deterministic gate in this repository refuses it. A shipped file names both the machine that produced it and the human accountable for it.</p>
 <p>Two things in that chain worth dwelling on, because they sit at the centre of the design.</p>
 <h2 id="the-honest-absence" tabindex="-1">The honest absence</h2>
 <p>The first step says, explicitly, that the chain begins at this render. The PDF is not claiming to know who wrote the source markdown, when it was last reviewed, whether anybody signed it, or which version of which review process passed it. The chain in the PDF only claims what the chain in the PDF can actually back up.</p>
@@ -265,8 +265,8 @@ refersToExternal:
 <p><code>doctype</code> records the render mode (report, blog-post, letter, book, etc.) so the chain captures not just what was rendered but how. Two PDFs of the same source produced under different doctypes are different artefacts, and their chains say so.</p>
 <h2 id="why-the-deterministic-side-gets-the-same-step" tabindex="-1">Why the deterministic side gets the same step</h2>
 <p>The chain runs on two streams. The AI stream carries every step that involved non-deterministic processing (LLM calls, multi-agent collectors, human-committed edits). The deterministic stream carries every step that is rule-driven (a gate verdict, a CSV check, a probe result, a render with declared parameters).</p>
-<p>A render is on the deterministic side of that line. Same source, same doctype, same toolchain produce the same bytes; if the source changes, the SHA changes and the chain says so. So the render's facts go in BOTH streams: the AI stream because the render is the step the inspector cares about reading inside the PDF, and the deterministic stream because the render IS a deterministic step.</p>
-<p>The two streams are not redundant. The AI sidecar travels in metadata, embedded inside the artefact, surfaced for AI-governance regimes (EU AI Act, UK ICO, NIST AI RMF, Colorado AI Act). The deterministic sidecar lives adjacent on disk, larger and more detailed, a record of how the rule-driven checks ran that cites no regime. One reader, one frame; one file, one frame. The cross-reference is by mutual <code>companion</code> pointer at the top of each.</p>
+<p>A render is on the deterministic side of that line. Same source, same doctype, same toolchain produce the same bytes; if the source changes, the SHA changes and the chain says so. So the render's facts go in BOTH streams: the AI stream because the render is the step the inspector cares about reading inside the PDF, and the deterministic stream because the render IS a deterministic step that the EAA Directive's documentation expectations land on.</p>
+<p>The two streams are not redundant. The AI sidecar travels in metadata, embedded inside the artefact, surfaced for AI-governance regimes (EU AI Act, UK ICO, NIST AI RMF, Colorado AI Act). The deterministic sidecar lives adjacent on disk, larger and more detailed, surfaced for accessibility-conformance regimes (EAA Directive 2019/882). One reader, one frame; one file, one frame. The cross-reference is by mutual <code>companion</code> pointer at the top of each.</p>
 <h2 id="what-an-inspector-does-with-this" tabindex="-1">What an inspector does with this</h2>
 <p>The simplest path: open the PDF in any tool that exposes XMP and read the <code>mx:ProvenanceAiPayload</code> field. Acrobat, Apple Preview's metadata inspector, every command-line PDF tool. The JSON pasted above is what they get back.</p>
 <p>The verifying path: clone the source repo (if the chain's <code>canonicalUri</code> is one they can reach), run <code>git hash-object</code> on the source, compare to the chain's <code>sourceSha</code>. If they match, the PDF was produced from exactly that source, and the chain is honest about what happened to the source on its way to PDF. If they do not match, the PDF still verifies as having been rendered from SOME version of the source; the inspector then has to decide whether the divergence matters.</p>
@@ -276,7 +276,7 @@ refersToExternal:
 <p>It is not a guarantee that the source is true. The render captures who rendered what, when, against which canonical address. It does not capture whether the source's claims are factually correct. A signed, verified chain on a PDF that says the moon is made of cheese verifies that someone published the claim, not that the claim is true.</p>
 <p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
 <p>It is not a substitute for a regulator. The chain is queryable, verifiable evidence about the file. Whether the file complies with the EU AI Act, the European Accessibility Act, or any other regulatory regime remains a legal duty of the publisher. The chain gives a regulator the records they expect to find; it does not interpret those records on the publisher's behalf.</p>
-<p>It's not the end of the work. The chain is one layer. The signing chain on the publisher's identity (DIDs, key rotation, transparency logs) is another. The accessibility declarations elsewhere in the PDF (<code>StructTreeRoot</code>, and the PDF/UA-1 identification <code>pdfuaid:part=1</code> where veraPDF passes the file) are another. Together they answer the four medieval questions; alone, none of them does. Provenance is a system, and this is its metadata layer.</p>
+<p>It is not the end of the work. The chain is one layer. The signing chain on the publisher's identity (DIDs, key rotation, transparency logs) is another. The conformance declarations elsewhere in the PDF (<code>pdfuaid:Part=1</code>, <code>StructTreeRoot</code>, the rest of the EAA conformance declarations) are another. Together they answer the four medieval questions; alone, none of them does. Provenance is a system; this is the metadata layer of that system.</p>
 <h2 id="how-to-use-it" tabindex="-1">How to use it</h2>
 <p>If you publish PDFs through this site, you already use it. The pipeline does the work. There is nothing to configure, nothing to opt into, and the existing audit-pipeline PDFs (which carried full provenance chains before this morning's change) still produce the same chains they always did. The change closes the gap for hub-direct PDFs of arbitrary markdown sources, which previously shipped with the XMP metadata block but without the AI payload inside it.</p>
 <p>If you receive a PDF this site produced, extract the chain with one command:</p>
@@ -284,18 +284,9 @@ refersToExternal:
 </code></pre>
 <p>Pipe through <code>jq '.steps'</code> to see just the chain. Pipe through <code>jq '.steps[].stepId'</code> to get the step names. Pipe through <code>jq '.steps[] | select(.stepId == &quot;pdf-render&quot;) | .inputs'</code> to get the source's identifying inputs in one line.</p>
 <p>If you publish PDFs through a different pipeline, the file format of the chain is open and the primitives sit at <code>mx-reginald/lib/provenance.js</code>. The convention is the convention any provenance regime ought to land on: a chain that is honest about where it begins, that ties to specific bytes by content hash, and that the file carries with it wherever it goes.</p>
-<p>The PDF should be able to prove itself. The ones we produce can.</p>
+<p>The PDF should be able to prove itself. After today, the ones we produce can.</p>
 <p>Tom Cranstoun is the Machine Experience Authority and founder of the MX community. He consults on MX strategy through CogNovaMX Ltd.</p>
 
-
-        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
-          <h2 id="reader-notice-heading">About this page</h2>
-          <ul>
-            <li>Written by Tom Cranstoun.</li>
-            <li>Last changed on 2026-10-13.</li>
-            <li>It cites <a href="https://www.iso.org/standard/64599.html" rel="noopener">www.iso.org/standard/64599.html</a> and <a href="https://www.w3.org/TR/did-core/" rel="noopener">www.w3.org/TR/did-core</a>.</li>
-          </ul>
-        </footer>
 
       </article>
 
@@ -337,10 +328,7 @@ refersToExternal:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
-          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
-          <li><a href="/reginald/">REGINALD</a></li>
-          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
