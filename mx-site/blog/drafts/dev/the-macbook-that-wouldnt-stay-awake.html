@@ -5,20 +5,26 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The MacBook That Wouldn't Stay Awake"
 description: "How to keep a MacBook running with the lid closed, even a locked-down corporate one, using Apple's own clamshell mode and a few dollars of dummy hardware - no software to install and nothing for IT to block."
 author: Tom Cranstoun
 created: "2026-06-19"
-modified: "2026-06-19"
+modified: 2026-10-15
 version: "1.0"
 type: blog-post
 tags: [macbook, clamshell, macos, hardware, productivity, remote-work, long-running-tasks, dev]
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans, machines]
   purpose: "Show how to keep a MacBook awake with the lid closed using clamshell mode (an HDMI dummy plug to fake a display, a wireless nano dongle to fake a keyboard and mouse, and power), which works even on a locked-down corporate machine because it relies on an Apple-supported feature no MDM profile blocks."
   stability: stable
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/dev/the-macbook-that-wouldnt-stay-awake.md
+  contextProvides:
+    - "MacBooks sleep when the lid closes; software fixes (Amphetamine, caffeinate) are often blocked on corporate machines by MDM. The reliable answer is Apple's own clamshell mode, which keeps the machine awake with the lid closed when power, an external display, and an external keyboard/mouse are connected. All three can be faked cheaply: an HDMI/USB-C dummy plug emulates a display via EDID, a wireless nano dongle emulates a keyboard/mouse, and the charger supplies power. Under $25, nothing to install, supported by Apple. Keep airflow; never bag a lid-closed running MacBook."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/dev/the-macbook-that-wouldnt-stay-awake.md
   runbook: "Blog post. Practical hardware how-to, no project specifics. Read straight through."
+  servedAt: https://mx.allabout.network/blog/drafts/dev/the-macbook-that-wouldnt-stay-awake.html
 
 ---
 -->
@@ -60,11 +66,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The MacBook That Wouldn't Stay Awake">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -107,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1093,
+        "wordCount": 1091,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -148,6 +152,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -191,7 +196,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1093">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1091">
         <header class="article-header">
           <h1>The MacBook That Wouldn't Stay Awake</h1>
           <div class="article-meta"
@@ -207,46 +212,46 @@ mx:
         </header>
 
 
-<p>Picture this. You're in a hotel room in Chicago. It's 11pm. You have a 200MB software package downloading, a Time Machine backup grinding away, and an AI coding session you kicked off before dinner that needs another three hours to finish. You close your MacBook lid, set it on the desk, and go to sleep.</p>
+<p>You're in a hotel room in Chicago. It's 11pm. You have a 200MB software package downloading, a Time Machine backup grinding away, and an AI coding session you kicked off before dinner that needs another three hours to finish. You close your MacBook lid, set it on the desk, and go to sleep.</p>
 <p>At 3am your phone buzzes. The download failed. The backup stalled. The coding session timed out.</p>
 <p>Your MacBook went to sleep the moment you closed the lid.</p>
 <p>Sound familiar?</p>
 <hr>
 <h2 id="why-this-happens" tabindex="-1">Why This Happens</h2>
 <p>Apple designs MacBooks to sleep when the lid closes. It makes sense most of the time - it saves battery, prevents overheating in a bag, and stops the fan spinning at 3am in a quiet hotel room. macOS is genuinely trying to be helpful.</p>
-<p>But &quot;most of the time&quot; isn't &quot;all of the time.&quot; Sometimes you need the machine to keep running. And when you're on a corporate laptop, the usual solutions quickly run into walls.</p>
+<p>But &quot;usually&quot; isn't &quot;always.&quot; Sometimes you need the machine to keep running. And when you're on a corporate laptop, the usual solutions quickly run into walls.</p>
 <hr>
 <h2 id="the-software-wall" tabindex="-1">The Software Wall</h2>
-<p>The first instinct is to reach for a utility. <a href="https://apps.apple.com/us/app/amphetamine/id937984704">Amphetamine</a> is the community's go-to - free, clever, and genuinely excellent. It lives in your menu bar, lets you tie a session to a running app or a file download, and overrides macOS sleep entirely. For a personal machine it's the answer.</p>
+<p>The first instinct is to reach for a utility. <a href="https://apps.apple.com/us/app/amphetamine/id937984704">Amphetamine</a> is the community's go-to - free, clever, and genuinely excellent. It runs from your menu bar, lets you tie a session to a running app or a file download, and overrides macOS sleep entirely. For a personal machine it's the answer.</p>
 <p>But on a corporate MacBook? Your IT department has probably already thought of this. MDM profiles can block third-party installs, restrict the App Store, and lock down energy settings at the OS level.</p>
 <p>What about the built-in <code>caffeinate</code> command? Type <code>caffeinate -s</code> into Terminal and macOS will stay awake with the lid closed as long as it's on power - no install needed, no admin rights required. Elegant.</p>
 <p>Except that corporate machines often lock Terminal access too. Or the MDM profile overrides <code>pmset</code> settings silently in the background. If you've worked on a locked-down corporate machine, you already know the feeling: every clever workaround hits another wall.</p>
 <hr>
 <h2 id="the-caveman-solution" tabindex="-1">The Caveman Solution</h2>
 <p>At this point, desperation sets in. And desperation leads to the oldest trick in the book: just... don't fully close the lid. Leave it cracked open an inch. macOS sees the hinge sensor as &quot;open&quot; and stays awake. Problem solved.</p>
-<p>Except it isn't. Because now your MacBook is sitting on the hotel nightstand at midnight with its screen blazing at full brightness, lighting up the room like a Vegas billboard. You'll either lie there wide awake staring at the ceiling, or you'll bury the laptop under a pillow - which is a great way to cook it.</p>
+<p>Except it isn't. Because now your MacBook is sitting on the hotel nightstand at midnight with its screen blazing at full brightness, lighting up everything around it like a Vegas billboard. You'll either lie there wide awake staring at the ceiling, or you'll bury the laptop under a pillow - which is a great way to cook it.</p>
 <p>So no. The caveman solution stays in the cave.</p>
 <hr>
 <h2 id="the-hardware-revelation" tabindex="-1">The Hardware Revelation</h2>
-<p>Here's the thing that changes everything: macOS has its own built-in mechanism for running with the lid closed. Apple calls it clamshell mode, and it's designed for exactly the scenario of using a MacBook as a desktop - lid shut, plugged into an external display.</p>
+<p>The fix is already in the operating system: macOS has its own built-in mechanism for running with the lid closed. Apple calls it clamshell mode, and it's designed for exactly the scenario of using a MacBook as a desktop - lid shut, plugged into an external display.</p>
 <p>The trick is that clamshell mode has three requirements:</p>
 <ol>
 <li>Power connected</li>
 <li>An external display connected</li>
 <li>An external keyboard or mouse connected</li>
 </ol>
-<p>Meet all three, and macOS stays fully awake with the lid closed. No software. No Terminal. No IT conversation. It's Apple's own supported feature, and no MDM profile is going to block it without also breaking every legitimate docked-MacBook setup in the company.</p>
+<p>Meet all three, and macOS stays fully awake with the lid closed, without extra software, Terminal commands, or a conversation with IT. It's Apple's own supported feature, and no MDM profile is going to block it without also breaking every legitimate docked-MacBook setup in the company.</p>
 <p>So the question becomes: can you fake all three?</p>
 <p>Yes. Easily. Cheaply.</p>
 <hr>
 <h2 id="the-kit" tabindex="-1">The Kit</h2>
 <p><strong>The HDMI Dummy Plug</strong></p>
-<p>This is the key piece. An <a href="https://www.amazon.com/dp/B0G43C71HS">HDMI dummy plug</a> - also called a headless ghost adapter or display emulator - is a small metal dongle that plugs into your HDMI or USB-C port and contains a tiny chip that broadcasts EDID display data. Your Mac thinks a monitor is connected. That's it. That's the whole trick. You can find them for a few dollars, and they come in packs.</p>
+<p>This is the key piece. An <a href="https://www.amazon.com/dp/B0G43C71HS">HDMI dummy plug</a> - also called a headless ghost adapter or display emulator - is a small metal dongle that plugs into your HDMI or USB-C port and contains a tiny chip that broadcasts EDID data. Your Mac thinks a monitor is connected. That's it. That's the whole trick. You can find them for a few dollars, and they come in packs.</p>
 <p>If your MacBook only has USB-C ports, look for a USB-C EDID dummy plug - same idea, different connector.</p>
 <p><strong>The Nano Dongle</strong></p>
 <p>macOS clamshell mode also wants a keyboard or mouse. You don't need to carry an actual keyboard. The USB nano receiver from any cheap wireless combo - a <a href="https://www.amazon.com/Logitech-MK270-Wireless-Keyboard-Mouse/dp/B079JLY5M5">Logitech MK270</a> runs around $20 - is about the size of a thumbnail. Plug it into a USB port and your Mac sees a connected keyboard and mouse, even if the actual devices are switched off in a drawer somewhere. Leave the dongle plugged in permanently. You'll forget it's there.</p>
 <p><strong>Power</strong></p>
-<p>You were carrying the charger anyway. When you're on the road, a wall outlet in a hotel room, airport lounge, or conference venue is never far away. Plug in your MacBook's standard power adapter and that's the third box ticked.</p>
+<p>You had the charger with you anyway. When you're on the road, a wall outlet in a hotel room, airport lounge, or conference venue is never far away. Plug in your MacBook's standard power adapter and that's the third box ticked.</p>
 <hr>
 <h2 id="how-to-do-it" tabindex="-1">How To Do It</h2>
 <p>The setup takes about thirty seconds:</p>
@@ -286,16 +291,24 @@ mx:
 </tr>
 </tbody>
 </table>
-<p>The dummy plug and dongle together fit in a small pocket. The total cost is under $25, there is nothing to install, and your IT department has nothing to object to. The whole thing uses a feature Apple built and supports.</p>
+<p>The dummy plug and dongle together fit in a small pocket. The total cost is under $25, there's nothing to install, and your IT department has no grounds for objection. The whole thing uses a feature Apple built and supports.</p>
 <hr>
 <h2 id="one-thing-to-remember" tabindex="-1">One Thing To Remember</h2>
-<p>A MacBook running in clamshell mode is still generating heat. The lid acts as part of the thermal design, so the machine will run slightly warmer than usual. That's fine on a desk or nightstand. What you should never do is close the lid and put the MacBook into a bag - without airflow, heat builds up fast and you risk thermal throttling or worse.</p>
-<p>Leave it flat on a surface, or better yet, in a vertical stand with airflow on both sides. Your machine will thank you.</p>
+<p>A MacBook running in clamshell mode is still generating heat. The lid forms part of the thermal design, so the machine will run slightly warmer than usual. That's fine on a desk or nightstand. What you should never do is close the lid and put the MacBook into a bag - without airflow, heat builds up fast and you risk thermal throttling or worse.</p>
+<p>Leave it flat on a desk or table, or better yet, in a vertical stand with airflow on both sides. Your machine will thank you.</p>
 <hr>
 <p>The next time you're in a Chicago hotel room at 11pm, your kit is ready. Dummy plug in. Dongle in. Charger in. Lid closed. Sleep well.</p>
 <hr>
 <p><em>Tom Cranstoun founded the MX community and wrote the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-15.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -337,7 +350,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

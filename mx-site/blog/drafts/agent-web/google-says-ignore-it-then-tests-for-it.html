@@ -10,23 +10,22 @@ title: "Google Says Ignore llms.txt, Then Tests for It"
 description: "Google's guidance says llms.txt is too new to bother with. Google's own tools test for it. The contradiction points to what llms.txt actually is: an index for LLMs to read your site faster, not a training-data file."
 author: "Tom Cranstoun"
 created: 2026-06-30
-modified: 2026-06-30
+modified: 2026-10-15
 version: "1.0"
 
 type: blog-post
 tags: [llms-txt, agent-web, machine-experience, agent-readiness, information-architecture]
 mx:
   mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans, machines]
   purpose: "Resolve the contradiction between Google's guidance (llms.txt is too new) and Google's tools (they test for it). Explain what llms.txt actually is: an index for LLMs, not an SEO artifact. Show how to use it in real-time LLM retrieval workflows."
   contextProvides:
     - "Why Google's contradiction is correct, what llms.txt is actually for, and how to use it in real-time LLM retrieval."
   stability: draft
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/google-says-ignore-it-then-tests-for-it.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/google-says-ignore-it-then-tests-for-it.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   servedAt: https://mx.allabout.network/blog/drafts/agent-web/google-says-ignore-it-then-tests-for-it.html
-  blogUrl: https://mx.allabout.network/blog/drafts/agent-web/google-says-ignore-it-then-tests-for-it.html
-  blogFilename: google-says-ignore-it-then-tests-for-it
 
 ---
 -->
@@ -113,7 +112,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1857,
+        "wordCount": 1800,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -154,6 +153,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -198,25 +198,25 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1857">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1800">
         <header class="article-header">
           <h1>Google Says Ignore llms.txt, Then Tests for It</h1>
           <div class="article-meta"
                data-published="2026-06-30"
                data-modified="2026-06-30"
-               data-reading-time="10 min">
+               data-reading-time="9 min">
             <time datetime="2026-06-30">30 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>10 min read</span>
+            <span>9 min read</span>
           </div>
         </header>
 
 
-<p>Google's official guidance on <code>llms.txt</code> is clear: it is too new, too unsettled, not yet established enough to warrant your time. Treat it as optional. Most teams do. They add it to the checklist, mark it draft, and move on to something that drives engagement.</p>
+<p>Google's official guidance on <code>llms.txt</code> is clear: it's too new, too unsettled, not yet established enough to warrant your time. Treat it as optional. Most teams do. They add it to the checklist, mark it draft, and move on to something that drives engagement.</p>
 <p>But then Google PageSpeed Insights checks for it. Google's core web vitals testing suite audits whether your <code>llms.txt</code> is reachable. Google says ignore it, then quietly tests for it.</p>
-<p>That contradiction is not a mistake. It points to something the guidance misses: what <code>llms.txt</code> is actually for.</p>
+<p>That contradiction isn't a mistake. It points to something the guidance misses: the actual purpose of <code>llms.txt</code>.</p>
 <h2 id="why-you-should-actually-implement-it-ranked-by-impact" tabindex="-1">Why You Should Actually Implement It (Ranked by Impact)</h2>
 <ol>
 <li>
@@ -228,29 +228,29 @@ When your team asks an AI about your own site, providing <code>llms.txt</code> f
 When someone uses ChatGPT Search, Claude, or Perplexity to research you, they get a directed answer instead of a crawl through your entire site. Live, regardless of training-data outcomes.</p>
 </li>
 <li>
-<p><strong>Operational data that stays current (unlike training data)</strong>
-You control the update cycle. When services change, you update <code>llms.txt</code>. When you publish new content, you update it. This is not a fire-and-forget artifact waiting to reach a training pipeline.</p>
+<p><strong>Operational data that stays current (unlike a training corpus)</strong>
+You control the update cycle. When services change, you update <code>llms.txt</code>. When you publish new content, you update it. This isn't a fire-and-forget artifact waiting to reach a training pipeline.</p>
 </li>
 <li>
 <p><strong>Concrete efficiency at scale (energy impact across the web)</strong>
-If every site did this, LLM query cost and energy consumption would drop measurably. You are also contributing to that systemic reduction.</p>
+If every site did this, LLM query cost and energy consumption would drop measurably. You're also contributing to that systemic reduction.</p>
 </li>
 </ol>
 <h2 id="what-the-guidance-thinks-llmstxt-is" tabindex="-1">What the Guidance Thinks llms.txt Is</h2>
-<p>Most writing about <code>llms.txt</code> frames it as a training-data play. The argument: publish a structured description of your site, AI training pipelines will find it and incorporate it into the models they build, models will know who you are and what you do, you win. This is the SEO comparison, and it is natural because Jeremy Howard proposed <code>llms.txt</code> while discussing broader questions of AI training data access.</p>
-<p>That story is plausible. But it requires two things to happen: first, a training pipeline has to find your <code>llms.txt</code> (it has to be in Common Crawl, indexed, served as HTML, and prioritised during data collection). See the previous post for why most implementations fail. Second, the training pipeline has to actually be running right now, pulling new data, and your <code>llms.txt</code> has to arrive before the model reaches its knowledge cutoff. By the time this reaches a training run, you are betting on timing and visibility and infrastructure that is not yours.</p>
-<p>That is not a reliable win. And it is not what Google is testing for.</p>
+<p>Most writing about <code>llms.txt</code> frames it as a training-data play. The argument: publish a structured description of your site, AI training pipelines will find it and incorporate it into the models they build, models will know who you're and what you do, you win. This is the SEO comparison, and it's natural because Jeremy Howard proposed <code>llms.txt</code> while discussing broader questions of AI training data access.</p>
+<p>That story is plausible, but it has preconditions. First, a training pipeline has to find your <code>llms.txt</code> (it has to be in Common Crawl, indexed, served as HTML, and prioritised during data collection). See the previous post for why most implementations fail. Second, the training pipeline has to actually be running right now, pulling new data, and your <code>llms.txt</code> has to arrive before the model reaches its knowledge cutoff. By the time this reaches a training run, you're betting on timing and visibility and infrastructure that isn't yours.</p>
+<p>That isn't a reliable win. Nor is it the thing Google's audit checks.</p>
 <h2 id="what-google-is-actually-testing" tabindex="-1">What Google Is Actually Testing</h2>
-<p>PageSpeed Insights, Core Web Vitals, and the other auditing suites Google runs are real-time tools. A team wants to know right now whether their site is performing well. The audit loads the page, measures it, and returns a report within seconds. No training pipeline. No multi-month lag. No betting on whether the page will reach the right dataset at the right moment.</p>
-<p>When Google audits whether your site has an <code>llms.txt</code>, it is asking a different question: <em>right now, could an LLM-powered tool or agent find a structured description of your site without having to crawl and infer?</em> Not &quot;will this eventually reach a training run.&quot; But &quot;does a live LLM query have anywhere to look other than your entire website?&quot;</p>
-<p>That is a real, immediate problem. And <code>llms.txt</code> is the answer.</p>
+<p>PageSpeed Insights, Core Web Vitals, and the other auditing suites Google runs are real-time tools. A team wants to know right now whether their site is performing well. The audit loads the page, measures it, and returns a report within seconds, with no training pipeline or months of lag before the result.</p>
+<p>When Google audits for an <code>llms.txt</code>, it's asking a different question. <em>Right now, could an LLM-powered tool or agent find a structured description of your site without having to crawl and infer</em>? Not &quot;will this eventually reach a training run.&quot; But &quot;does a live LLM query have anywhere to look other than your entire website?&quot;</p>
+<p>That's a real, immediate problem. And <code>llms.txt</code> is the answer.</p>
 <h2 id="the-real-use-an-index-for-queries-not-a-training-artifact" tabindex="-1">The Real Use: An Index for Queries, Not a Training Artifact</h2>
 <p>A person tells an AI: &quot;Research this company and tell me what they do.&quot; The AI has two options. It can crawl the entire site: homepage, about page, blog, services, case studies, pricing. Or it can read a single structured file that says: &quot;We are a machine-experience consultancy. We offer assessments, implementation, training, and advisory. Here is the homepage, blog, contact information.&quot;</p>
-<p>The second is faster, cheaper, and more reliable. The AI does not have to infer. It does not have to parse design patterns to find the services. It does not have to read through years of blog posts to discover what this team specialises in. The <code>llms.txt</code> file is a curated summary. The AI reads it first and knows exactly where to look.</p>
-<p>This is not training data. This is immediate operational value. Every time an agent, a researcher, or a person asking an AI questions encounters your site, they benefit from having a structured index available. Not eventually, not after a training run, but in that moment.</p>
+<p>The second is faster, cheaper, and more reliable. With the file, the AI has no need to infer, to parse design patterns to find the services, or to read through years of blog posts to discover what this team specialises in. The <code>llms.txt</code> file is a curated summary. The AI reads it first and knows exactly where to look.</p>
+<p>This is immediate operational value rather than training data. Every time an agent, a researcher, or a person asking an AI questions encounters your site, they benefit from having a structured index available. Not eventually, not after a training run, but in that moment.</p>
 <p>And Google tests for it because Google knows that real-time LLM usage is already here. ChatGPT Search, Claude's live search, Perplexity, and hundreds of smaller AI tools run queries against web content every second. Those queries benefit from structured guidance. Google knows this is already happening. So the audit checks whether your site is set up for it.</p>
 <h2 id="the-cost-of-not-having-it-wasted-compute" tabindex="-1">The Cost of Not Having It: Wasted Compute</h2>
-<p>Here is the efficiency angle nobody mentions. Every time an LLM asks about your site without reading <code>llms.txt</code> first, it burns tokens and energy crawling pages it does not need.</p>
+<p>Here is the efficiency angle nobody mentions. Every time an LLM asks about your site without reading <code>llms.txt</code> first, it burns tokens and energy crawling pages it doesn't need.</p>
 <p>Say your team asks Claude: &quot;What does our company do and how do we charge?&quot; Without <code>llms.txt</code>, the model might:</p>
 <ul>
 <li>Load and parse your homepage (2,000 tokens).</li>
@@ -261,49 +261,57 @@ If every site did this, LLM query cost and energy consumption would drop measura
 <li>Total: approximately 10,000 tokens.</li>
 </ul>
 <p>With <code>llms.txt</code>, it loads and reads a 300-token summary that already tells it exactly what to know. Your services, your pricing model, where the details live. Same answer, 300 tokens.</p>
-<p>That is not just faster. That is a 97% reduction in tokens for that query. Multiply that by how many times your team, your customers, or external researchers ask about your company, and the energy and cost savings are real. Every query. Every time.</p>
-<p>This applies even when you control both sides of the conversation. Internal research. Due diligence. Team onboarding. A new hire asks Claude to read your documentation. Give it the index first. It will use a fraction of the tokens.</p>
+<p>Beyond the speed, that's a 97% reduction in tokens for that query. Multiply that by how many times your team, your customers, or external researchers ask about your company, and the energy and cost savings are real. Every query. Every time.</p>
+<p>This applies even when you control both sides of the conversation. Internal research. Due diligence. Team onboarding. A new hire asks Claude to read your documentation. Give it the index first. It'll use a fraction of the tokens.</p>
 <p>The sum of many small efficiencies across many queries is substantial. And it compounds when the practice spreads: if every company on the web provided <code>llms.txt</code>, the energy cost of LLM operations would drop measurably.</p>
 <h2 id="shifting-from-bet-on-training-to-answer-live-queries" tabindex="-1">Shifting From &quot;Bet on Training&quot; to &quot;Answer Live Queries&quot;</h2>
 <p>This reframing changes what <code>llms.txt</code> is worth doing.</p>
-<p>If you frame it as a training-data play, then most <code>llms.txt</code> implementations fail, and you never know it. You published the file. Nobody tells you it did not reach Common Crawl. Nobody tells you it did not influence the model. You move on. The investment disappears.</p>
+<p>If you frame it as a training-data play, then most <code>llms.txt</code> implementations fail, and you never know it. You published the file. You get no signal that it missed Common Crawl or failed to influence the model. You move on. The investment disappears.</p>
 <p>If you frame it as a query-time index, then you have a concrete, testable measure. Every time a person or an AI agent asks about your site, they have a faster, more accurate path to the answer. You can see that working. You can measure the impact of keeping the file current and useful.</p>
-<p>The shift is from a long-term, probabilistic bet to an immediate, verifiable utility. That is a bet most teams will actually win.</p>
+<p>The shift is from a long-term, probabilistic bet to an immediate, verifiable utility. That's a bet most teams will actually win.</p>
 <h2 id="how-to-think-about-it" tabindex="-1">How to Think About It</h2>
-<p><code>robots.txt</code> controls access. It tells crawlers what they are allowed to read.</p>
-<p><code>llms.txt</code> is different. It is not an access-control file. It is an index. It says: &quot;If you are trying to understand this site, here is where to start. Here is what we do. Here is where to find the details. Here is how to contact us.&quot;</p>
+<p><code>robots.txt</code> controls access. It tells crawlers what they're allowed to read.</p>
+<p><code>llms.txt</code> is different. Rather than an access-control file, it's an index. It says: &quot;If you are trying to understand this site, here is where to start. Here is what we do. Here is where to find the details. Here is how to contact us.&quot;</p>
 <p>The key insight: you should want every LLM-powered system to read your <code>llms.txt</code> first. Before they crawl. Before they guess. Before they infer from design patterns or scattered content. You want them to have a guided, curated description in hand.</p>
 <p>That means:</p>
 <ol>
-<li><strong>Keep it current.</strong> When your services change, your <code>llms.txt</code> changes. It is operational data, not a set-it-once artifact.</li>
+<li><strong>Keep it current.</strong> When your services change, your <code>llms.txt</code> changes. It's operational data, not a set-it-once artifact.</li>
 <li><strong>Make it useful.</strong> The description should actually help an AI agent understand your site in a few seconds. Not buzzwords. Not padding. Clarity.</li>
 <li><strong>Link to it visibly.</strong> Include a <code>&lt;link rel=&quot;llms-txt&quot; href=&quot;/llms.txt&quot;&gt;</code> in the <code>&lt;head&gt;</code> of every page, so any system that reaches you knows to read the index before crawling.</li>
 <li><strong>Include it in your sitemap.</strong> Same reason as before, but different signalling. It tells live indexers that this is important and current, not a one-time artifact.</li>
 </ol>
-<p>And use it in practice yourself. When you ask an AI to research your own site, give it the <code>llms.txt</code> first. You will see the difference. The answer is faster, more focused, less likely to drift into the blog archive looking for clues.</p>
+<p>And use it in practice yourself. When you ask an AI to research your own site, give it the <code>llms.txt</code> first. You'll see the difference. The answer is faster, more focused, less likely to drift into the blog archive looking for clues.</p>
 <h2 id="why-google-tests-for-it-even-though-it-says-dont-worry" tabindex="-1">Why Google Tests for It Even Though It Says &quot;Don't Worry&quot;</h2>
-<p>The guidance that says &quot;llms.txt is too new, ignore it&quot; is correct if you are betting on training data. Training pipelines have not yet converged on it. The standard is still settling. It does not yet drive enough value in that channel to warrant priority.</p>
-<p>But Google also knows that right now an LLM asking about your site benefits from having an index. Google is testing for it because Google knows that use is already live and already valuable. The guidance reflects the long-term training-data question. The test reflects the immediate query-time reality. Both are true. They are just answering different questions.</p>
-<p>The mistake is treating them as contradictory when they are answering different time horizons. Google is right that training data is uncertain. Google is also right that query-time indices are immediately useful. You can do the immediate useful thing right now. The training data bet will sort itself out.</p>
+<p>The guidance that says &quot;llms.txt is too new, ignore it&quot; is correct if you're betting on training data. Training pipelines haven't yet converged on it. The standard is still settling. It doesn't yet drive enough value in that channel to warrant priority.</p>
+<p>But Google also knows that right now an LLM asking about your site benefits from having an index. Google is testing for it because it knows that use is live and already valuable. The guidance reflects the long-term training-data question. The test reflects the immediate query-time reality. Both are true. They're just answering different questions.</p>
+<p>The mistake is treating them as contradictory when they're answering different time horizons. Google is right that training data is uncertain. Google is also right that query-time indices are immediately useful. You can do the immediate useful thing right now. The training data bet will sort itself out.</p>
 <h2 id="the-checklist" tabindex="-1">The Checklist</h2>
 <p>If you own an <code>llms.txt</code> or are deciding whether to create one:</p>
 <ol>
 <li><strong>Focus on query-time value, not training.</strong> The file should answer: what does this site do, right now?</li>
-<li><strong>Keep it brief and current.</strong> It is an index, not a brochure. If your services or team changes, update it.</li>
+<li><strong>Keep it brief and current.</strong> It's an index, not a brochure. If your services or team changes, update it.</li>
 <li><strong>Link it from every page.</strong> <code>&lt;link rel=&quot;llms-txt&quot; href=&quot;/llms.txt&quot;&gt;</code> in the <code>&lt;head&gt;</code> makes it discoverable without crawling.</li>
 <li><strong>Test it yourself.</strong> When you ask an AI about your site, provide the <code>llms.txt</code> first. See if it helps. It will.</li>
 <li><strong>Serve it as HTML</strong> (wrap it in a minimal HTML document, as the previous post showed) so crawlers can index it if they want to, and so Common Crawl can pick it up without extra work.</li>
 </ol>
-<p>You will not know if your <code>llms.txt</code> influenced a training run. But you will know if it helps an LLM answer a query about your site better. One is a bet. The other is a measurable improvement. Pick the one you can see working.</p>
+<p>You won't know if your <code>llms.txt</code> influenced a training run. But you'll know if it helps an LLM answer a query about your site better. One is a bet. The other is a measurable improvement. Pick the one you can see working.</p>
 <hr>
 <h3 id="related-reading" tabindex="-1">Related Reading</h3>
 <ul>
-<li><a href="https://mx.allabout.network/blog/your-site-generator-should-emit-llms-txt.html">Your Site Generator Should Emit llms.txt Automatically</a> - if this convinced you that llms.txt is essential, this explains why hand-authoring it fails and how to automate it</li>
-<li><a href="https://mx.allabout.network/blog/llms-txt-guide.html">Why llms.txt Probably Isn't Working, And What to Do About It</a> - the technical implementation details and the three conformance levels</li>
-<li><a href="https://mx.allabout.network/blog/server-side-rendering-for-ai.html">What AI Crawlers See When They Can't Run Your JavaScript</a> - why the page an LLM reads is not the page you designed</li>
-<li><a href="https://mx.allabout.network/blog/agent-discoverability-checklist.html">Agent Discoverability: What Your Site Is Missing</a> - the signals AI agents look for when reading your site</li>
+<li><a href="https://mx.allabout.network/blog/your-site-generator-should-emit-llms-txt.html">Your Site Generator Should Emit llms.txt Automatically</a> - if this convinced you that llms.txt is essential, this explains why hand-authoring it fails and how to automate it.</li>
+<li><a href="https://mx.allabout.network/blog/llms-txt-guide.html">Why llms.txt Probably Isn't Working, And What to Do About It</a> - the technical implementation details and the three conformance levels.</li>
+<li><a href="https://mx.allabout.network/blog/server-side-rendering-for-ai.html">What AI Crawlers See When They Can't Run Your JavaScript</a> - why what an LLM reads isn't the page you designed.</li>
+<li><a href="https://mx.allabout.network/blog/agent-discoverability-checklist.html">Agent Discoverability: What Your Site Is Missing</a> - the signals AI agents look for when reading your site.</li>
 </ul>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-15.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -345,7 +353,10 @@ If every site did this, LLM query cost and energy consumption would drop measura
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

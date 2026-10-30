@@ -10,7 +10,7 @@ title: "Humans Take Journeys, Agents Take One Fetch"
 description: "Google's September 2026 spam update prompted a common reading in the SEO community: the update rewards the usefulness of a page and stops chasing links. Whether or not that is Google's intent, it describes how an AI agent reads. A person follows a journey because a journey limits what they must hold in mind at once. Most agents read one file in isolation and decide, without following a link: humans want a drip feed, machines want it all at once. MX supplies the layers that let one page serve both readers."
 author: Tom Cranstoun
 created: "2026-09-28"
-modified: 2026-09-30
+modified: 2026-10-29
 version: "1.1"
 type: blog-post
 tags:
@@ -24,6 +24,7 @@ tags:
   - mx
 mx:
   mxSpecVersion: "0.9"
+  x-mx-contentState: published
   audience:
     - humans
     - machines
@@ -40,8 +41,6 @@ mx:
   purpose: "Use the September 2026 spam update, and the community reading of it, to explain the difference between a human journey and an agent's single fetch, and to show how MX lets one page serve both without choosing between them."
   servedAt: https://mx.allabout.network/blog/industry/humans-take-journeys-agents-take-one-fetch.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator. The rollout facts come from the Google Search Status Dashboard entry in corroboratedBy; the reading of the update is attributed to the community, never to Google."
-  blogUrl: https://mx.allabout.network/blog/industry/humans-take-journeys-agents-take-one-fetch.html
-  blogFilename: humans-take-journeys-agents-take-one-fetch
   quotes:
     - "Released the September 2026 spam update, which applies globally and to all languages. The rollout may take up to two weeks to complete."
     - "It doesn't chase links; it evaluates real usefulness"
@@ -144,7 +143,7 @@ refersToExternal:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1326,
+        "wordCount": 1358,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -185,6 +184,7 @@ refersToExternal:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -227,7 +227,7 @@ refersToExternal:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1326">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1358">
         <header class="article-header">
           <h1>Humans Take Journeys, Agents Take One Fetch</h1>
           <div class="article-meta"
@@ -258,7 +258,7 @@ refersToExternal:
 <p>A machine has no such limit. It can hold the whole page, every specification, every review and every term, as easily as it holds one line. What it lacks is the context a person picks up along the way. Being led is no help to it. It wants everything, in the fetch it made.</p>
 <p>Humans want a drip feed. Machines want it all at once. That's the conflict: the same page is asked to hold back for one reader and to say everything for the other.</p>
 <h2 id="where-jevons-comes-in" tabindex="-1">Where Jevons Comes In</h2>
-<p>I expect the number of single fetches to rise. I've written about <a href="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">Jev</a>, TypeSafe's decision model, named after William Stanley Jevons. His paradox says that making a resource cheaper tends to increase total use rather than reduce it. I've <a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">measured</a> a small decider making a decision in about a tenth of a second at no marginal cost, and argued that <a href="https://mx.allabout.network/blog/industry/nobody-got-fired-for-using-geo.html">cheap decisions multiply</a>.</p>
+<p>I expect the number of single fetches to rise. I've written about <a href="https://mx.allabout.network/blog/agent-web/a-decider-is-only-as-good-as-its-state.html">Jev</a>, TypeSafe's decision model, named after William Stanley Jevons. His paradox says that making a resource cheaper tends to increase total use rather than reduce it. I've <a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">measured</a> my own Jev-style rebuild, running on a small local model, making a decision in about a tenth of a second at no marginal cost. Hosted Jev, called through TypeSafe's API, took a median 264 ms a decision and cost $0.0070 for 354 decisions. Neither costs much, and I've argued that <a href="https://mx.allabout.network/blog/industry/nobody-got-fired-for-using-geo.html">cheap decisions multiply</a>.</p>
 <p>Follow that to a single page. A router fetches it to decide which model should handle it. A decider fetches it to check whether it's current. Another asks who owns it, and another whether it may be quoted. Each of those is one fetch, made by a machine with no interest in the journey. The more of them there are, the more of your content's life is spent being read one page at a time. Every one of those reads that has to guess also costs <a href="https://mx.allabout.network/blog/reduce-inference-save-energy.html">energy that a declared answer would save</a>.</p>
 <h2 id="what-mx-adds" tabindex="-1">What MX Adds</h2>
 <p>MX leaves the journey in place and adds the layers a single fetch needs, inside the page, where a person doesn't have to look at them and a machine can't miss them.</p>
@@ -283,11 +283,21 @@ refersToExternal:
 <li><a href="https://mx.allabout.network/blog/why-use-mx.html">Why Use MX</a>: why a file needs metadata that travels with it, so the machine that meets it next doesn't have to guess.</li>
 </ul>
 <h2 id="where-your-own-content-stands" tabindex="-1">Where Your Own Content Stands</h2>
-<p>A single fetch shows what an agent can know about your page. Whether your pages declare enough to be read that way is what an MX audit measures.</p>
+<p>A single fetch shows what an agent can know about your page. Whether your pages declare enough to be read that way is what an AX (agent experience) audit measures.</p>
 <ul>
-<li><a href="https://mx.allabout.network/about/contact.html">Get in touch about an MX audit</a></li>
+<li><a href="https://tityra.com">Get in touch about an AX audit</a></li>
 </ul>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+            <li>Outside sources that make the same claims: <a href="https://status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu" rel="noopener">status.search.google.com/incidents/XhUDXP7A67iHCD2kmbVu</a>.</li>
+            <li>It cites <a href="https://xmlpress.net/publications/eppo/" rel="noopener">xmlpress.net/publications/eppo</a>.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -329,7 +339,10 @@ refersToExternal:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

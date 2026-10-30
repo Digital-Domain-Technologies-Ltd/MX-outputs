@@ -5,20 +5,26 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Fat Clones, Thin Clones, and the Strawberry Problem"
 description: "The same repository is met by different environments - a full local checkout, an ephemeral cloud one, and different AI models reading the same files - and they quietly diverge. MX keeps them consistent with shared cogs that travel with the repo, checks that know which environment they are in, and memory that carries what was learned into the next session on any machine."
 author: Tom Cranstoun
 created: "2026-06-19"
-modified: "2026-06-19"
-version: "1.0"
+modified: 2026-10-15
+version: "1.1"
 type: blog-post
-tags: [fat-clone, thin-clone, agents, determinism, cogs, portable-memory, environments, self-healing, mx]
+tags: [fat-clone, thin-clone, egress-clone, agents, determinism, cogs, portable-memory, environments, self-healing, mx]
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
   audience: [humans, machines]
   purpose: "Explain, without project specifics, the two-environment problem (a complete local checkout versus an ephemeral partial one, and a cloud model versus an on-device one reading the same files) and how MX keeps them consistent: shared cogs as portable deterministic ground truth, environment-aware checks that refuse work they cannot honestly do, and portable memory that travels with the repository."
   stability: stable
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/fat-clones-thin-clones-and-the-strawberry-problem.md
+  contextProvides:
+    - "The two-environment problem for a repository: a fat clone (complete local checkout) versus a thin clone (ephemeral, partial, often without tooling), and a cloud AI model versus an on-device one reading the same files. The failure is not a crash but quiet, confident damage (rebuilding a whole-estate index from a partial checkout). MX's answer is shared cogs that travel with the repo and read the same to any agent, checks that detect their environment and refuse what they cannot honestly do, and portable memory that hydrates into the next session on any machine."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/fat-clones-thin-clones-and-the-strawberry-problem.md
   runbook: "Blog post. No project specifics; keep it that way. Read straight through."
+  servedAt: https://mx.allabout.network/blog/fat-clones-thin-clones-and-the-strawberry-problem.html
 
 ---
 -->
@@ -60,14 +66,12 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Fat Clones, Thin Clones, and the Strawberry Problem">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/fat-clones-thin-clones-and-the-strawberry-problem.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -107,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1122,
+        "wordCount": 1413,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -132,13 +136,15 @@ mx:
   <link rel="stylesheet" href="../css/mx-blog.css">
 </head>
 <body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
   <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
 
+  <!-- Site Header -->
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
-        <img src="/images/logo.webp" srcset="/images/logo.webp 1x, /images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
       <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
@@ -146,15 +152,13 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
-        <a href="/audit/">Audit</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
       </nav>
     </div>
   </header>
-
-  <!-- Skip to Content Link (WCAG Accessibility) -->
 
   <main id="main">
     <section class="blog-page" aria-label="Article">
@@ -182,54 +186,67 @@ mx:
         <li><a href="#two-environments-one-repository">Two environments, one repository</a></li>
         <li><a href="#the-problem-is-not-a-crash">The problem is not a crash</a></li>
         <li><a href="#the-fix-is-shared-ground-truth-that-travels">The fix is shared ground truth that travels</a></li>
+        <li><a href="#what-travels-and-what-stays-local">What travels, and what stays local</a></li>
         <li><a href="#same-repository-any-brain">Same repository, any brain</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1122">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1413">
         <header class="article-header">
           <h1>Fat Clones, Thin Clones, and the Strawberry Problem</h1>
           <div class="article-meta"
                data-published="2026-06-19"
                data-modified="2026-06-19"
-               data-reading-time="6 min">
+               data-reading-time="8 min">
             <time datetime="2026-06-19">19 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>6 min read</span>
+            <span>8 min read</span>
           </div>
         </header>
 
 
-<p>Ask a chatbot how many times the letter &quot;r&quot; appears in &quot;strawberry&quot; and you will, sooner or later, get a confident wrong answer. Ask the same model the same question on a different day, in a different window, behind a different bit of plumbing, and you can get a different answer again. The unsettling part is not that it is wrong but that &quot;the same AI&quot; turns out to be a fiction. The model in your phone and the model in your browser and the model your colleague is using are not one consistent thing. The environment makes the agent.</p>
+<p>Ask a chatbot how many times the letter &quot;r&quot; appears in &quot;strawberry&quot; and you will, sooner or later, get a confident wrong answer. Ask the same model the same question on a different day, in a different window, behind a different bit of plumbing, and you can get a different answer again. The unsettling part isn't that it's wrong but that &quot;the same AI&quot; turns out to be a fiction. The model in your phone and the model in your browser and the model your colleague is using aren't one consistent thing. The environment makes the agent.</p>
 <p>I have been living inside a small version of this problem lately, and it has nothing to do with chatbots and everything to do with where work actually happens.</p>
 <h2 id="two-environments-one-repository" tabindex="-1">Two environments, one repository</h2>
 <p>A repository - the folder of files a team and its agents work in - is met by more than one kind of environment.</p>
-<p>One is the <strong>fat clone</strong>: a full local checkout, everything present, every dependency installed, every linked component pulled down. On a fat clone an agent can see the whole estate and run every tool it carries. It is the complete picture.</p>
-<p>The other is the <strong>thin clone</strong>: a stripped-down checkout, often in the cloud, spun up to do one job and then thrown away. It deliberately leaves most of the estate on the shelf and often arrives before its tools are installed. It is a partial picture, and it knows almost nothing about the parts it did not fetch.</p>
-<p>Then there is the second axis, the one the strawberry test is really about: the <em>agent itself</em> changes. A cloud session running one model is not the same brain as an on-device assistant running another. Same repository, a new reader, and the two read the same words and reach different conclusions, exactly like two windows giving two answers about a piece of fruit.</p>
-<p>So you have a repository that holds still while everything meeting it shifts underneath: the completeness of the checkout, the tools available, and the model doing the reading.</p>
+<p>One is the <strong>fat clone</strong>: a full local checkout, everything present, every dependency installed, every linked component pulled down. On a fat clone an agent can see the whole estate and run every tool it carries. It's the complete picture.</p>
+<p>The other is the <strong>thin clone</strong>: a stripped-down checkout, often in the cloud, spun up to do one job and then thrown away. It deliberately leaves most of the estate on the shelf and often arrives before its tools are installed. It's a partial picture, and it knows almost nothing about the parts it didn't fetch.</p>
+<p>Cutting across both is a third descriptor: the <strong>egress clone</strong>, the checkout that's allowed to reach the internet - to download a tool, fetch a live page, publish. Fat and thin describe what an environment can <em>see</em>; egress describes what it can <em>reach</em>, and the two don't imply each other. Most of the clones my work happens on are egress-less, on purpose: they assume no internet at all, run entirely from what's local, and anything that genuinely needs the outside world is written down and routed to the one clone that can cross.</p>
+<p>Then there's the second axis, the one the strawberry test is really about: the <em>agent itself</em> changes. A cloud session running one model isn't the same brain as an on-device assistant running another. Same repository, a new reader, and the two read the same words and reach different conclusions, exactly like two windows giving two answers about a piece of fruit.</p>
+<p>So you have a repository that holds still while everything meeting it shifts underneath: the completeness of the checkout, what it's allowed to reach, the tools available, and the model doing the reading.</p>
 <h2 id="the-problem-is-not-a-crash" tabindex="-1">The problem is not a crash</h2>
-<p>You might expect the failure here to be loud: the agent reaches for something that is not there and falls over. That does happen, and it is the easy case, because a crash tells you something is wrong.</p>
-<p>The dangerous case is quiet. Picture an agent on a thin clone asked to rebuild a whole-repository index, a file meant to summarise every part of the estate. Most of the estate is not present on a thin clone. So the agent rebuilds the index from the slice it can see, drops every entry the missing parts would have contributed, and produces a file that looks freshly generated and is quietly gutted. No error. No red mark. Just confident, plausible damage that the next reader inherits as truth.</p>
-<p>Now add the other axis: the agent is a different model than last time, and it reads the instructions slightly differently. You cannot fix this by being careful, because there is no single &quot;you&quot; here at all. There is a rotating cast of environments and brains, and none of them can hold the others' context in its head.</p>
+<p>You might expect the failure here to be loud: the agent reaches for something that isn't there and falls over. That does happen, and it's the easy case, because a crash tells you something is wrong.</p>
+<p>The dangerous case is quiet. Picture an agent on a thin clone asked to rebuild a whole-repository index, a file meant to summarise every part of the estate. Most of the estate isn't present on a thin clone. So the agent rebuilds the index from the slice it can see, drops everything the absent sections would have contributed, and produces a file that looks freshly generated yet lacks every entry from the parts it couldn't see. Nothing reports an error, and the next reader inherits the damage as truth.</p>
+<p>Now add the other axis: the agent is a different model than last time, and it reads the instructions slightly differently. You can't fix this by being careful, because there's no single &quot;you&quot; here at all. There's a rotating cast of environments and brains, and none of them can hold the others' context in its head.</p>
 <h2 id="the-fix-is-shared-ground-truth-that-travels" tabindex="-1">The fix is shared ground truth that travels</h2>
-<p>The answer is not to make every environment identical. You cannot, and you should not try; the whole point of a thin cloud clone is that it is light. The answer is to make the <em>ground truth</em> identical, and to carry it in something every environment reads the same way.</p>
-<p>That is the job MX gives to a <strong>cog</strong>: a plain file, readable by a person and a machine alike, that states what something is, how it relates to everything else, and what is safe to do with it. The instructions do not live in one clever agent's head or one machine's setup. They live in the repository, in a carrier that travels with it, and they read the same whether a cloud model or an on-device one opens them. Both environments read the same cogs. When the brain swaps, the ground truth does not.</p>
-<p>Three things follow, and they are the whole trick.</p>
-<p><strong>The instructions are read, not guessed.</strong> A cog states the rule outright, so two different models do not each have to reason their way to it and risk reasoning differently. The famous strawberry failure is the model guessing at something it should be able to read. A cog removes the guess, and with it the divergence.</p>
-<p><strong>The checks know which environment they are in.</strong> The repository's own guardrails detect whether they are on a complete checkout with the tools present or on a thin partial one. When the picture is whole, they do the work and enforce the rules. When it is not, they refuse, loudly, naming the gap, rather than producing that quietly gutted index. The repository mends itself only when it can see its whole self, and it knows the difference. So the thin-clone agent is structurally stopped from the confident-damage move, not merely trusted to avoid it.</p>
-<p><strong>What is learned travels too.</strong> Knowledge an agent picks up in one session, a correction, a hard-won rule, a &quot;do not regenerate that here&quot;, is written back into the repository as portable memory, so the next one on any machine inherits it. The on-device assistant and the cloud session do not start from scratch and drift apart; they hydrate from the same accumulated practice the moment they open the repository. Memory stops being something one brain holds and becomes something the repository carries to all of them.</p>
+<p>The answer isn't to make every environment identical. You can't, and you shouldn't try; the whole point of a thin cloud clone is that it's light. The answer is to make the <em>ground truth</em> identical, and to carry it in something every environment reads the same way.</p>
+<p>That's the job MX gives to a <strong>cog</strong>: a plain file, readable by a person and a machine alike, that states what something is, how it relates to everything else, and what's safe to do with it. The instructions don't depend on one clever agent's head or one machine's setup. The repo holds them in a carrier that travels with it, and they read the same whether a cloud model or an on-device one opens them. Both environments read the same cogs. When the brain swaps, the ground truth doesn't.</p>
+<p>Three things follow, and they're the heart of it.</p>
+<p><strong>The instructions are read, not guessed.</strong> A cog states the rule outright, so two different models don't each have to reason their way to it and risk reasoning differently. The famous strawberry failure is the model guessing at something it should be able to read. A cog removes the guess, and with it the divergence.</p>
+<p><strong>The checks know which environment they're in.</strong> The repository's own guardrails detect whether they're on a complete checkout with the tools present or on a thin partial one. When the picture is whole, they do the work and enforce the rules. When it isn't, they refuse, loudly, naming the gap, rather than producing that quietly gutted index. The repository mends itself only when it can see its whole self, and it knows the difference. So the thin-clone agent is structurally stopped from the confident-damage move, not merely trusted to avoid it.</p>
+<p><strong>What's learned travels too.</strong> Knowledge an agent picks up in one session, a correction, a hard-won rule, a &quot;do not regenerate that here&quot;, is written back into the repository as portable memory, so the next one on any machine inherits it. The on-device assistant and the cloud session don't start from scratch and drift apart; they hydrate from the same accumulated practice the moment they open the repository. Memory stops being something one brain holds and becomes something the repository carries to all of them.</p>
+<h2 id="what-travels-and-what-stays-local" tabindex="-1">What travels, and what stays local</h2>
+<p>There's a second half to the trick, and it's the mirror image of the gutted-index warning: not everything should travel, and telling the two apart is the whole of it. What travels is the ground truth, the source files and the cogs that describe them. What doesn't travel is the derived view an environment builds for its own convenience: a search index, a cached map of the estate, a scratch artefact. Those are rebuilt wherever they're needed, from whatever happens to be present.</p>
+<p>That sounds like a contradiction of the warning above, and it's really the resolution of it. The rule wasn't &quot;never rebuild from a partial view&quot;. The rule is that a <em>shared</em> artefact, one every environment will read as the whole truth, must only be rebuilt where the entire estate is visible. A purely <em>local</em> view is held to the opposite standard: it's allowed to describe exactly the slice its environment can see, precisely because it makes no claim to speak for everyone and never travels to contradict anyone. A thin clone's local index of its own handful of files is honest. The same clone rewriting the estate's shared index would be the lie. Same operation, opposite verdict, and one question decides it: does this artefact travel and speak for everyone, or stay home and cover only here?</p>
 <h2 id="same-repository-any-brain" tabindex="-1">Same repository, any brain</h2>
-<p>Put those together and the strawberry problem stops being frightening. You are never going to make two model instances answer in lockstep by force of will. What you can do is make the file they read explicit and identical for everyone, and keep the environment honest about what it is and what it is allowed to do there.</p>
-<p>The file tells the agent what it is. The gate enforces what is safe in this environment. The memory carries what the last agent learned. None of it depends on which model turned up today, or whether the checkout is fat or thin. That is the difference between hoping your agents agree and building a place where it does not matter that they do not: the repository holds the truth, and every environment that meets it reads the same thing.</p>
-<p>That, in the end, is what MX is for. Not making the machines smarter. Making the ground they stand on the same.</p>
+<p>Put those together and the strawberry problem stops being frightening. You're never going to make two model instances answer in lockstep by force of will. What you can do is make the file they read explicit and identical for everyone, and keep the environment honest about what it's and what it's allowed to do there.</p>
+<p>The file tells the agent what it is. The gate enforces what's safe in this environment. The memory carries what the last agent learned. None of it depends on which model turned up, or whether the checkout is fat or thin. That's the difference between hoping your agents agree and building a place where it doesn't matter that they don't: the repository holds the truth, and every environment that meets it reads the same thing.</p>
+<p>That, in the end, is the purpose of MX. Not making the machines smarter. Making the ground they stand on the same.</p>
 <hr>
 <p><em>Tom Cranstoun founded the MX community and wrote the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-15.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -262,7 +279,7 @@ mx:
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="/images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
         <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
       </div>
       <nav class="footer-links" aria-label="Site links">
@@ -271,7 +288,7 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
-          <li><a href="/audit/">Audit</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/reginald/">REGINALD</a></li>
           <li><a href="/the-gathering/">The Gathering</a></li>

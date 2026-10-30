@@ -5,23 +5,29 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Designing Workflows for Humans and Machines"
 description: "How we used Claude to understand a complex multi-step workflow, then automated it so humans could repeat it without AI assistance"
 author: "Tom Cranstoun"
 created: 2026-04-02
-modified: 2026-04-02
-version: "1.0"
+modified: 2026-07-04
+version: "1.1"
 
 type: blog-post
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
+  quotes:
+    - "\"Create an npm script called add-new-repo that takes a parameter, the name of the repo, and it asks the questions and does the work we just performed.\""
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/designing-workflows-for-humans-and-machines.md
+  aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/foundations/designing-workflows-for-humans-and-machines.md
+  contextProvides:
+    - "How we used Claude to understand a complex multi-step workflow, then automated it so humans could repeat it without AI assistance"
   stability: stable
   purpose: "How we used Claude to understand a complex multi-step workflow, then automated it so humans could repeat it without AI assistance"
   servedAt: https://mx.allabout.network/blog/designing-workflows-for-humans-and-machines.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/designing-workflows-for-humans-and-machines.html
-  blogFilename: designing-workflows-for-humans-and-machines
 
 ---
 -->
@@ -63,14 +69,12 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Designing Workflows for Humans and Machines">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/designing-workflows-for-humans-and-machines.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -110,7 +114,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 3731,
+        "wordCount": 3736,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -151,6 +155,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -201,7 +206,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="3731">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="3736">
         <header class="article-header">
           <h1>Designing Workflows for Humans and Machines</h1>
           <div class="article-meta"
@@ -246,7 +251,7 @@ https://github.com/digital-domain-technologies/MX-Audit
 <ul>
 <li>Repository mode: hub (multi-repository with 11 active submodules)</li>
 <li>Existing submodules in packages/ with various naming patterns</li>
-<li>MX onboarding system at <code>scripts/mx/onboard-repo.sh</code></li>
+<li>MX onboarding system at <code>scripts/git-hooks/mx/onboard-repo.sh</code> (run via <code>npm run mx:onboard</code>)</li>
 <li>Documentation at <code>docs/guides/for-humans/mx-onboarding-guide.md</code></li>
 </ul>
 <p>Maxine discovered we had a 7-step onboarding process that:</p>
@@ -326,7 +331,7 @@ npm run mx:onboard packages/mx-audit
 <p>This is where human-machine design comes in.</p>
 <h2 id="phase-4-automation-without-ai" tabindex="-1">Phase 4: Automation Without AI</h2>
 <p>Claude created three things:</p>
-<h3 id="section-1-an-automated-script-scriptsmxadd-new-reposh" tabindex="-1">1. An Automated Script (<code>scripts/mx/add-new-repo.sh</code>)</h3>
+<h3 id="section-1-an-automated-script-scriptsgit-hooksmxadd-new-reposh" tabindex="-1">1. An Automated Script (<code>scripts/git-hooks/mx/add-new-repo.sh</code>)</h3>
 <p>A 450-line bash script that:</p>
 <ul>
 <li>Takes a repository URL as input</li>
@@ -338,7 +343,7 @@ npm run mx:onboard packages/mx-audit
 </ul>
 <h3 id="section-2-an-npm-command-npm-run-repoadd" tabindex="-1">2. An NPM Command (<code>npm run repo:add</code>)</h3>
 <pre><code class="language-json">&quot;scripts&quot;: {
-  &quot;repo:add&quot;: &quot;bash scripts/mx/add-new-repo.sh&quot;
+  &quot;repo:add&quot;: &quot;bash scripts/git-hooks/mx/add-new-repo.sh&quot;
 }
 </code></pre>
 <p>Simple, memorable, one-line execution.</p>
@@ -676,7 +681,7 @@ npm run mx:onboard packages/name
 <li>Success criteria</li>
 <li>Verification checklist</li>
 </ul>
-<p>Script source (<code>scripts/mx/add-new-repo.sh</code>):</p>
+<p>Script source (<code>scripts/git-hooks/mx/add-new-repo.sh</code>):</p>
 <ul>
 <li>Clear function names</li>
 <li>Inline documentation</li>
@@ -889,7 +894,7 @@ Training → Learning → Task → [Learning disappears]
 </code></pre>
 <h3 id="the-script" tabindex="-1">The Script</h3>
 <pre><code class="language-bash">#!/bin/bash
-# scripts/mx/add-new-repo.sh
+# scripts/git-hooks/mx/add-new-repo.sh
 # 450 lines of automated workflow
 # - Interactive prompts
 # - Complete validation
@@ -916,6 +921,14 @@ Training → Learning → Task → [Learning disappears]
 <li><a href="https://mx.allabout.network/learn/what-is-mx.html">Add New Repository Guide</a></li>
 </ul>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-07-04.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -957,7 +970,10 @@ Training → Learning → Task → [Learning disappears]
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

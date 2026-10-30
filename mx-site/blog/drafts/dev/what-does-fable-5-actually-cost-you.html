@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "What Does Fable 5 Actually Cost You?"
+description: "Claude Fable 5 billing is split across three surfaces, measured in different units, with no published conversion between them. This post maps what a Claude Code subscription user can and cannot work out about what they are spending."
+author: Tom Cranstoun
+created: "2026-07-05"
+modified: 2026-10-29
+version: "1.2"
+type: blog-post
+tags:
+  - fable5
+  - billing
+  - claude-code
+  - machine-experience
+  - transparency
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  contextProvides:
+    - "Detailed account of the billing gaps a normal Claude Code subscription user faces when using Claude Fable 5. Covers the usage meter unit mismatch across surfaces, the invisible fallback to Opus 4.8, the unpublished post-July-7 credit rates, the 30-day data retention requirement, and mid-stream refusal billing. Closing section connects to MX, REGINALD, MaXinE, and Palimpsest - Fable 5 runs inside MaXinE, which makes billing visible."
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/dev/what-does-fable-5-actually-cost-you.md
+  purpose: "To document, factually and in full, the billing transparency gaps a Claude Code subscription user faces when using Fable 5."
+  stability: draft
+  inLanguage: en-GB
+  runbook: "Markdown source lives in the claude-created Google Drive folder. Edit via Claude and re-upload, then update the index."
+  servedAt: https://mx.allabout.network/blog/drafts/dev/what-does-fable-5-actually-cost-you.html
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Claude Fable 5 billing is split across three surfaces, measured in different units, with no published conversion between them. This post maps what a Claude Code subscription user can and cannot work out about what they are spending.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/dev/what-does-fable-5-actually-cost-you.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/dev/what-does-fable-5-actually-cost-you.html">
+  <meta property="og:title" content="What Does Fable 5 Actually Cost You? | CogNovaMX">
+  <meta property="og:description" content="Claude Fable 5 billing is split across three surfaces, measured in different units, with no published conversion between them. This post maps what a Claude Code subscription user can and cannot work out about what they are spending.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-05">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="What Does Fable 5 Actually Cost You? | CogNovaMX">
+  <meta name="twitter:description" content="Claude Fable 5 billing is split across three surfaces, measured in different units, with no published conversion between them. This post maps what a Claude Code subscription user can and cannot work out about what they are spending.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="What Does Fable 5 Actually Cost You?">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.2">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/dev/what-does-fable-5-actually-cost-you.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>What Does Fable 5 Actually Cost You? | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "What Does Fable 5 Actually Cost You?",
+        "headline": "What Does Fable 5 Actually Cost You?",
+        "description": "Claude Fable 5 billing is split across three surfaces, measured in different units, with no published conversion between them. This post maps what a Claude Code subscription user can and cannot work out about what they are spending.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-07-05",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/dev/what-does-fable-5-actually-cost-you.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1669,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/dev/what-does-fable-5-actually-cost-you.html",
+        "name": "What Does Fable 5 Actually Cost You?",
+        "url": "https://mx.allabout.network/blog/drafts/dev/what-does-fable-5-actually-cost-you.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#the-window-you-are-currently-in">The Window You Are Currently In</a></li>
+        <li><a href="#three-surfaces-three-units-no-conversion">Three Surfaces, Three Units, No Conversion</a></li>
+        <li><a href="#the-invisible-fallback">The Invisible Fallback</a></li>
+        <li><a href="#what-happens-on-8-july">What Happens on 8 July</a></li>
+        <li><a href="#the-data-retention-requirement">The Data Retention Requirement</a></li>
+        <li><a href="#what-a-maxine-operator-can-see">What a MaXinE Operator Can See</a></li>
+        <li><a href="#what-you-can-do-now">What You Can Do Now</a></li>
+        <li><a href="#how-this-connects-to-mx-reginald-maxine-and-palimpsest">How this connects to MX, REGINALD, MaXinE, and Palimpsest</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1669">
+        <header class="article-header">
+          <h1>What Does Fable 5 Actually Cost You?</h1>
+          <div class="article-meta"
+               data-published="2026-07-05"
+               data-modified="2026-07-05"
+               data-reading-time="9 min">
+            <time datetime="2026-07-05">5 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>9 min read</span>
+          </div>
+        </header>
+
+
+<p>Anthropic launched Claude Fable 5 on 9 June 2026. It is their most capable widely released model: a 1M token context window, adaptive thinking always on, built for long-horizon agentic work. The API price is $10 per million input tokens and $50 per million output tokens - double Claude Opus 4.8.</p>
+<p>For a developer using Claude Code on a Pro or Max subscription, the question is not the API price. The question is: when I use Fable 5 in my editor, what am I actually spending, and how would I know?</p>
+<p>The answer is: you largely cannot tell. That is the problem this post documents.</p>
+<hr>
+<h2 id="the-window-you-are-currently-in" tabindex="-1">The Window You Are Currently In</h2>
+<p>Through 7 July 2026, Pro, Max, Team, and premium Enterprise seats can use Fable 5 for up to 50% of their weekly usage limits. After that date, access moves to usage credits billed at API rates.</p>
+<p>So there is a brief window where Fable 5 is included in the plan. But even inside that window, costs are not zero. Fable 5 counted roughly 2x toward usage limits versus Opus 4.8 during the earlier June bundled period. The practical effect: a session that would have used 10% of your weekly limit on Opus 4.8 uses around 20% on Fable 5. The model spends your weekly allowance faster because it thinks longer and produces more output per turn.</p>
+<p>Most users will not know this until they hit the limit earlier than expected.</p>
+<hr>
+<h2 id="three-surfaces-three-units-no-conversion" tabindex="-1">Three Surfaces, Three Units, No Conversion</h2>
+<p>This is the first structural gap.</p>
+<p>The Claude app shows Fable 5 usage as a percentage of weekly limits. Claude Code reports tokens. The usage credits panel tracks credit balance. These three surfaces report in different units, and Anthropic has not published a conversion between them.</p>
+<p>A developer running Claude Code cannot look at the token count in their editor and work out what percentage of their weekly plan limit that represents. A reviewer checking the Claude app usage panel cannot work backwards to a token or dollar figure without doing their own measurement across multiple sessions.</p>
+<p>One reviewer who tested this on a Max 5x account on 2 July 2026 recorded that Anthropic does not publish any official conversion from a plan's percentage meter to tokens or dollars. The billing rate for a request rerouted to Opus 4.8 has also not been confirmed publicly.</p>
+<p>What a user can reasonably work out: Fable 5 is more expensive than Opus 4.8, and using it eats into weekly limits faster. What they cannot work out without their own testing: how much a specific session cost, or how the limit depletion maps to anything they can budget against.</p>
+<hr>
+<h2 id="the-invisible-fallback" tabindex="-1">The Invisible Fallback</h2>
+<p>Fable 5 includes safety classifiers that can decline certain requests - covering offensive cybersecurity techniques, some biology and life sciences content, model distillation, and requests asking the model to reproduce its internal reasoning. When a classifier fires, the request is rerouted to Opus 4.8 automatically.</p>
+<p>In the Claude apps, this is a normal HTTP 200 response. The user sees a notice that another model handled the answer. The notice does not explain the billing difference.</p>
+<p>There are three distinct billing outcomes from a single rerouted request:</p>
+<p><strong>Refusal before any output.</strong> The classifier fires before Fable 5 generates anything. Nothing is billed. Input tokens appear in usage but are not charged. The request does not count against rate limits.</p>
+<p><strong>Refusal mid-stream.</strong> The classifier fires partway through generation. The user receives a partial response, or none if the application discards partial output. Fable 5 rates are charged on the input tokens and whatever output had been generated before the classifier fired. This is the expensive case: a long agentic run that is interrupted mid-way bills Fable 5 output rates on everything streamed before the stop.</p>
+<p><strong>Fallback served.</strong> Opus 4.8 picks up the request and completes it. This is billed at Opus 4.8 rates ($5/$25 per million tokens). The prompt-cache cost of switching model is refunded via a fallback credit mechanism, but only if the credit token is redeemed within five minutes of the refusal, and only on direct API calls - not on batch requests.</p>
+<p>A Claude Code user watching their usage bar cannot distinguish between these three outcomes. They see either a completed response or a notice. They do not see which billing case applied.</p>
+<p>The billing rate for the fallback itself - whether a rerouted session draws from Fable 5 credits or Opus 4.8 credits - has not been confirmed publicly as of the date of this post.</p>
+<hr>
+<h2 id="what-happens-on-8-july" tabindex="-1">What Happens on 8 July</h2>
+<p>After 7 July 2026, Fable 5 access in subscription plans moves to a usage-credits model. The model does not leave subscriptions - the billing changes.</p>
+<p>What is confirmed: credits are a metered layer on top of the subscription, billed at $10 per million input tokens and $50 per million output tokens. What is not confirmed: credit package sizes, whether plans will include a monthly credit allotment, whether unused credits roll over, and the specific rate at which Claude Code sessions convert to credit spend.</p>
+<p>Anthropic has stated the move is a capacity decision, not a permanent pricing structure, and has committed to restoring Fable 5 as a standard plan feature once capacity allows. No date has been given.</p>
+<p>A developer planning to continue using Fable 5 after 7 July knows the nominal API rate but does not know, as of 5 July 2026, what that will look like on a subscription billing statement.</p>
+<hr>
+<h2 id="the-data-retention-requirement" tabindex="-1">The Data Retention Requirement</h2>
+<p>This is the detail most easily missed.</p>
+<p>Fable 5 and Mythos 5 are designated Covered Models by Anthropic. All prompts and outputs sent to Fable 5 are retained for 30 days for trust and safety monitoring. If content is flagged as violating usage policy, retention extends to up to two years. There is no enterprise exemption or configuration toggle to opt out. Zero data retention arrangements - which some Enterprise customers hold - do not apply to Fable 5.</p>
+<p>A developer switching to Fable 5 in Claude Code is not warned of this at the point of switching. It is documented in the model release notes, but not surfaced in the interface at the moment of model selection.</p>
+<p>For most individual developers this will not matter. For teams working with legally sensitive material, client data, or internal documents covered by confidentiality agreements, it warrants a conversation with whoever owns data governance before adopting the model.</p>
+<hr>
+<h2 id="what-a-maxine-operator-can-see" tabindex="-1">What a MaXinE Operator Can See</h2>
+<p>This is relevant context.</p>
+<p>In the course of building out the MaXinE agent harness PRD in July 2026, we specified an adverse event record for every Fable 5 classifier refusal. That record captures: whether the request was billed, whether the credit token was present and redeemed, whether partial output was streamed and charged, which model ultimately served the response, and whether server tools were present (which changes the tokenless retry risk).</p>
+<p>A MaXinE operator reading an adverse event COG can determine, for any given refusal, exactly what was charged and why.</p>
+<p>A Claude Code subscription user reading their usage panel cannot.</p>
+<p>The gap is not a product failure - MaXinE is a custom deployment with explicit instrumentation, and consumer tooling is built for different expectations. But the gap is real, and it is worth naming. Anthropic argues that AI systems will take on a growing share of knowledge work. The billing for one of their flagship models is, at present, opaque at the level most users operate.</p>
+<hr>
+<h2 id="what-you-can-do-now" tabindex="-1">What You Can Do Now</h2>
+<p>If you are on a subscription and using Fable 5 in Claude Code:</p>
+<p><strong>Audit before 7 July.</strong> Go to the Claude API console if you have access, filter usage to the last 30 days, and note your daily token volume under Fable 5. Multiply by $10 input / $50 output per million to see what that usage would cost metered. That gives you your own baseline, since Anthropic does not publish one for subscription users.</p>
+<p><strong>Switch model explicitly for routine work.</strong> In Claude Code, <code>/model claude-opus-4-8</code> for chat and review tasks. Reserve Fable 5 for the long-horizon agentic runs where it is measurably better. The command exists and takes effect immediately.</p>
+<p><strong>Set a billing alert.</strong> Console → Billing → usage threshold with email alert. Even a rough number tells you when the switch to credits is burning faster than expected.</p>
+<p><strong>Check your data classification.</strong> If your team works with confidential material, confirm whether Fable 5's 30-day retention requirement is compatible with your data handling obligations before enabling credits.</p>
+<p><strong>Watch for the post-July-7 credit rate disclosure.</strong> Anthropic will publish credit package details before the switch. When they do, the number to check is not the nominal API rate - it is the credit consumption rate for a typical Claude Code session, which may differ from a raw token calculation.</p>
+<hr>
+<p>The model is good. The billing transparency is not yet matched to the billing complexity. Those are independent facts, and both are worth knowing before 8 July.</p>
+<hr>
+<h2 id="how-this-connects-to-mx-reginald-maxine-and-palimpsest" tabindex="-1">How this connects to MX, REGINALD, MaXinE, and Palimpsest</h2>
+<p>Fable 5 runs inside MaXinE. The billing behaviour, the fallback logic, the adverse events - all of it passes through MaXinE's configuration record and is logged before any action takes effect. An operator reviewing inference spend is reading MaXinE's git log, not a vendor dashboard they do not control.</p>
+<p>REGINALD attests the content that Fable 5 processes. The output of a Fable 5 workflow - a signed document, a processed specification, an attested record - carries provenance that a human reviewer or a regulator can verify independently. Palimpsest is where attested content reaches a reader: shaped to their declared context, with the attestation visible.</p>
+<p>MX is the discipline that governs what the content should carry at each stage. Understanding what Fable 5 actually costs is part of operating that discipline responsibly.</p>
+<hr>
+<p><em>Tom Cranstoun is an Agent Experience (AX) audit pioneer and the founder of Machine Experience (MX) and its community, and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

@@ -3,6 +3,535 @@
 > Part 5 of 5 of the comprehensive markdown corpus for https://mx.allabout.network. The corpus starts at [part 1](https://mx.allabout.network/llms-full.txt), which lists every part; the curated index is https://mx.allabout.network/llms.txt. This is the last part.
 
 ---
+## What Blockchain and Crypto Have to Do with MX | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/use-cases/what-blockchain-and-crypto-have-to-do-with-mx.html
+
+**Description:** MX is not a blockchain or a crypto project. It uses the same primitive (public-key cryptography) for a different job, with no ledger, no consensus, and no token.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - Overlap at the primitive, not the design
+
+        - What MX is not
+
+        - A signed registry is not a chain
+
+        - Closer to Certificate Transparency than to bitcoin
+
+        - Why this matters for buyers
+
+        - Read the rest of the set
+
+          What Blockchain and Crypto Have to Do with MX
+
+            17 May 2026
+            ·
+            Tom Cranstoun
+            ·
+            5 min read
+
+The short answer is: less than the surface vocabulary suggests, and exactly what the underlying mathematics suggests. MX uses public-key cryptography. So does blockchain. That is where the resemblance ends. This post sets out what MX shares with the blockchain world and what it does not, so the rest of the set can be read without confusion.
+
+Overlap at the primitive, not the design
+
+Signing a record so anyone with the public key can verify it was signed by the holder of the private key is a 1976 idea. Blockchain uses it. TLS uses it. SSH uses it. PGP uses it. So does every signed software update on every operating system you have ever run. MX uses it too, because there is no better way to make a record verifiable at a distance without a trusted intermediary in the middle.
+
+Sharing a tool does not make two systems the same kind of thing. A bicycle and a tractor both use wheels.
+
+What MX is not
+
+MX has:
+
+- No ledger. There is no append-only chain of blocks recording every change to every record forever.
+
+- No consensus mechanism. No proof-of-work, no proof-of-stake, no validator set. A signed record is verified by the reader against the signer's public key, not by a global vote.
+
+- No token, coin, NFT, or tradeable asset of any kind. Nothing to buy, sell, stake, mine, or hold for price exposure. The economics of MX are the economics of running a registry and offering attestation services, not of issuing an instrument.
+
+- No on-chain storage. Documents stay where their publisher puts them. The registry holds discovery records and attestations of integrity, not the documents themselves.
+
+- No smart-contract execution layer. The registry serves signed records; it does not run programs against them.
+
+Each one of those is a decision rather than an omission. The blockchain stack was built to make trust possible without a trusted operator, at the cost of substantial energy, latency, and operational complexity. MX is built to make documents trustable at web speed under a known operator, with public verifiability of every claim the operator makes. Different cost profile, different trust model, different problem.
+
+A signed registry is not a chain
+
+The most common confusion is around the registry itself. REGINALD, CogNovaMX's registry, signs every record it holds and publishes the signature chain so anyone can verify the registry has not quietly altered the past. That sounds like a chain. It is not one.
+
+A blockchain serialises state changes from many independent actors and reaches global agreement through consensus. REGINALD serialises state changes from one operator (the registry itself) and publishes signed transparency information so any reader can detect tampering. There is no global state to agree on, no competing block proposals, no fork-choice rule. It is closer to a notary's signed register than to a public ledger.
+
+Closer to Certificate Transparency than to bitcoin
+
+The closest existing system to the REGINALD signed-registry model is RFC 9162: Certificate Transparency. CT was built so that any certificate authority that wrongly issues a TLS certificate can be caught by any monitor that watches the public log. The CA still operates the log; the public can still verify that no entry has been removed or rewritten. Browsers refuse to trust a certificate that does not appear in an approved CT log. This is signature-and-log accountability without a chain, and it works at internet scale.
+
+MX uses the same pattern for documents: the registry signs each record, publishes the log, and anyone can verify that what the registry says today matches what it said yesterday. The threat model is operator misbehaviour, and the remedy is independent verification by anyone who wants to look. No coin needs to change hands for that to work.
+
+Why this matters for buyers
+
+If you are evaluating MX or REGINALD for use inside your business, this difference matters in three practical ways.
+
+Procurement. Nothing in MX or REGINALD requires your business to hold, exchange, or report on a digital asset. There is no token to put on a balance sheet, no wallet to safeguard, and no exchange relationship to disclose. Treasury, audit, and risk teams have far less to ask about than a blockchain integration would put in front of them.
+
+Regulation. MiCA, the EU's markets-in-crypto regulation, applies to assets and the firms that handle them. MX produces no asset. Anti-money-laundering and travel-rule obligations attach to transfers of value; the registry transfers signatures, not value. The compliance surface is the ordinary one of operating a web service and a notarial log.
+
+Operating cost. A registry does not pay block rewards or transaction fees. It pays for storage, compute, and the staff to operate it. The cost curve is the cost curve of a normal piece of internet infrastructure, not of a public chain.
+
+Sharing a primitive with blockchain buys MX the verifiability properties of strong cryptography. It does not buy any of the rest, and the rest is what most "blockchain" objections are actually about.
+
+Read the rest of the set
+
+Is MX Useful to Blockchain? turns the question round and looks at the case where a chain is being used as a record system rather than a currency. NFTs and MX takes the sharpest case (a token that points at off-chain content) and shows exactly which half is crypto's job and which half is MX's. MX and Cryptocurrency: Drawing the Line closes the set by stating where MX has nothing to add at all.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
+## The web is just the start: what AI agents actually need from your file-data | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/web-is-just-the-start.html
+
+**Description:** AI agents need more than good web UX. COGs give any file-data, videos, podcasts, PDFs, images, web pages, the declarations a machine needs: identity, provenance, and what it is allowed to do.
+
+MX - Machine Experience - is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so none has to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+            - The file-data problem
+
+            - What machines need from any file-data
+
+            - COGs: what file-data says about itself
+
+            - Beyond the web
+
+            - What this means for your content
+
+          The web is just the start: what AI agents actually need from your file-data
+
+            6 May 2026
+            ·
+            Tom Cranstoun
+            ·
+            5 min read
+
+        Google's developer platform published a guide to AI agent UX. The article, at web.dev/articles/ai-agent-site-ux, asks developers to think about how AI agents experience their sites. Reduce friction. Use clear headings. Avoid ambiguous navigation. Make content semantically predictable.
+
+        The advice is sound. Google's developer platform publishing it signals the shift: AI agent readiness is now a mainstream concern, not a niche view held by accessibility engineers or structured-data specialists. This is the direction the web is moving, and Google is telling developers to move with it.
+
+        The file-data problem
+
+        The guide focuses on websites. That makes sense, Google indexes websites. But the file-data AI agents read extends well beyond the browser:
+
+          - Contracts and policy PDFs
+
+          - Product specifications and technical handbooks
+
+          - Regulatory filings and compliance reports
+
+          - Internal knowledge bases and intranet pages
+
+          - Training videos, podcast briefings, recorded calls (audio and video streams)
+
+          - Diagrams, photographs, dashboard screenshots, infographics (image files)
+
+          - Datasets, schema files, API responses (structured-data feeds)
+
+        Every one of these is now being consumed by AI agents. Every one has the same problems the web.dev guide describes, ambiguity, implicit structure, missing provenance, and none of them lives on a web page that a developer can adjust for UX.
+
+            Diagram: seven file icons (.md, .html, .pdf, .mp4, .mp3, .jpg, .json), each with the same COG metadata block at the top. The visual shows that COGs travel inside existing file formats and don't require a new runtime or proprietary tooling.
+
+          COGs embed in any file format - the same metadata block in every carrier where it can travel.
+
+        The challenge is a file-data problem, not purely a web one; it applies to anything you publish that a machine might read in isolation, away from the surrounding context that gave it meaning.
+
+        What machines need from any file-data
+
+        When a machine reads a file - any format: a video, a podcast, a PDF, an image, a web page - it needs to answer ten questions, not four:
+
+          - What's this thing: its identity, category, and role?
+
+          - What's inside it: its structure, sections, and fields?
+
+          - What state is it in - draft, live, deprecated, complete, or partial?
+
+          - Who created it, and who stands behind it?
+
+          - How did it come to be - written by a human or generated by an agent?
+
+          - What's the reader allowed to do with it?
+
+          - What should happen next - which workflow transition is valid from here?
+
+          - What files or standards does it depend on?
+
+          - What does a correct output look like, if one is expected?
+
+          - What's the safe thing to do when something is unclear?
+
+        Most file-data answers none of these today. An agent reading a contract, a product specification, a podcast transcript, or a video manifest has to infer all of it. That inference is expensive in compute terms. It introduces error. And it makes provenance impossible to verify, which matters as AI-generated content multiplies and regulators begin to require proof of origin.
+
+        COGs: what file-data says about itself
+
+        This is the gap that COGs address. COG stands for Community Owned Governance System. A COG is a small set of declarations any file makes about itself, carried in plain text in the header (or a sidecar where the format doesn't have one), before the content begins. It answers the ten questions directly, so no machine has to infer them.
+
+        The core declarations:
+
+          Identity
+          What this is, who wrote it, who stands behind it, what version it is.
+          State
+          Whether the file is draft, live, or deprecated, so an agent doesn't treat a provisional version as a signed contract.
+          Provenance
+          Whether it was human-directed or agent-generated, and the full authorship chain.
+          Conformance
+          Which standards it promises to follow.
+          Permissions and failure mode
+          What actions are allowed, what require human approval, and what the safe default is when something is unclear.
+
+        A file with a COG doesn't require inference. It requires execution. The meaning is explicit. A machine can verify the provenance, check the conformance claims, and act - without guessing, without re-reading.
+
+        COGs declare provenance, they can't verify it independently. A file's frontmatter (or sidecar) says who published it and when; nothing in the file itself can prove that claim to an external reader. That's where Reginald fits: the public registry where files are signed and registered, so any agent can verify that this is what the owner published, unaltered since publication, and whether it was produced by a human, an AI, or an automated system. Agents reading attested files hallucinate less, they have verified facts to cite rather than gaps to fill by inference. MX makes content machine-readable. Reginald makes it machine-trustworthy. MX is the DNA a file carries when it leaves any pool, so a video extracted from a course library, a PDF lifted into a training corpus, or a podcast transcript pulled into a RAG retriever each remains interpretable in the new context.
+
+        COGs aren't a new format. They embed in existing file formats - Markdown, HTML, PDF, YAML, XMP for media, sidecars for binaries. They travel with the file and require no new runtime, no proprietary tooling, no installation.
+
+        Beyond the web
+
+        The web.dev guide is a useful prompt for any web team. But most enterprise files live off the web - inside CMS platforms, intranets, document management systems, regulatory archives, manufacturing databases, video libraries, podcast feeds, image asset banks, and dataset stores.
+
+        MX extends the discipline the web.dev guide describes to all of those surfaces. The question it's asking is the same one Google asks about web pages: can any machine that reads this understand what it means, who made it, and what it's allowed to do?
+
+        For most enterprise file-data today, the answer is no.
+
+        What this means for your content
+
+        If you're responsible for content or web experience, the web.dev guide is worth reading. After you've read it, ask a harder question: what happens when an AI agent reads your file-data, not your web pages? The training video your customer success team recorded last quarter. The PDF datasheet your sales team emails out. The podcast episodes your CEO records. The diagrams in your engineering wiki. The dataset your finance team publishes. Each of those is a file an agent will eventually read in isolation, away from the surrounding context that gave it meaning.
+
+        Your contracts, your product documentation, your policy files, your service specifications, your training videos, your podcast briefings, your image libraries, do they declare their own identity? Do they carry provenance? Do they specify what an agent is allowed to do with them?
+
+        If not, agents will guess. Sometimes they will guess correctly. Often they won't.
+
+        COGs are the infrastructure for file-data that doesn't leave machines to guess. They're governed openly at tg.community as an open standard - no single vendor, no licensing, no proprietary runtime.
+
+        The web.dev guide describes what good looks like on a web page. COGs describe what good looks like in any file-data, a video, a podcast, a PDF, an image, a web page, anywhere it travels. The web is just the start.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the MX - Machine Experience - community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Focus areas: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your team stands on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
+## What a Newborn LLM Wants From a COG | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/what-a-newborn-llm-wants-from-a-cog.html
+
+**Description:** A first-person account from a newborn large language model. The ten things a COG must declare so machine behavior is deterministic instead of guessed.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - 1. What is this thing? (Meaning)
+
+        - 2. What is inside it? (Structure)
+
+        - 3. What state is it in right now? (State)
+
+        - 4. What am I allowed to do with it? (Intent)
+
+        - 5. What should happen next? (Next-step intent)
+
+        - 6. Where did this come from? (Provenance)
+
+        - 7. What is the boundary of my responsibility?
+
+        - 8. What other COGs does this depend on?
+
+        - 9. What shape is a correct output?
+
+        - 10. What is the safe failure mode?
+
+        - The newborn-LLM summary
+
+          What a Newborn LLM Wants From a COG
+
+            2 May 2026
+            ·
+            Tom Cranstoun
+            ·
+            6 min read
+
+If I were a brand new large language model and you handed me a COG, here is what I would want it to tell me. Not what I would infer. Not what I would guess from vibes. What it would have to declare, in writing, before I could behave like a reliable colleague instead of a plausible-sounding stranger.
+
+This is written from the inside, as if I were that newborn model seeing a COG for the first time.
+
+1. What is this thing? (Meaning)
+
+Tell me explicitly what object I am looking at, what category it belongs to, what role it plays in the world, and what domain it lives in.
+
+I do not want to infer identity from tone or layout. I want it stated. The declared identity is the floor of every good decision I will make next.
+
+2. What is inside it? (Structure)
+
+Show me the sections, the fields, the relationships, the hierarchy, and the allowed shapes.
+
+I want the schema, not a guess at the layout. If a section can repeat, say so. If a field is optional, say so. If two fields are mutually exclusive, say so. Layout I can read; structure I have to be told.
+
+3. What state is it in right now? (State)
+
+Tell me whether the document is draft, live, or deprecated. Whether it is complete or partial. Whether it has been verified or is still unverified. Whether the contents are current or historical.
+
+State changes how I behave. A draft contract is not the same as a signed one. A deprecated procedure should be cited differently from a current one. I cannot infer state from publication date alone, so I need it declared.
+
+4. What am I allowed to do with it? (Intent)
+
+This is the big one.
+
+I want to know what actions are permitted, what actions are forbidden, what actions are expected, what actions are safe, and what actions require human approval.
+
+This is the difference between making something up that sounds plausible and executing something that is correct. Without an intent declaration, I will pattern-match my way to an answer that often looks right and is often wrong. With one, I can act, refuse, or escalate, knowing which is which.
+
+5. What should happen next? (Next-step intent)
+
+Tell me what the user wants. Tell me what the document wants. Tell me what the workflow expects. Tell me which transitions are valid from here.
+
+I want to follow the contract, not improvise. If the next step is "send for review by the named approver", say that. If it is "wait for an external signal", say that. Improvisation is what I do when the contract is silent. Silence is a design choice, and usually the wrong one.
+
+6. Where did this come from? (Provenance)
+
+I want to know who authored it, when it was created, what version it is, what system produced it, and whether it is trustworthy.
+
+Provenance is how I avoid hallucinating, fabricating, inventing sources, or mixing contexts. Without it, I will cheerfully attribute one document's claim to another document's author, because nothing in the data tells me they are different. Provenance is my safety rail.
+
+But a COG can declare provenance; it cannot verify it on its own. A document that claims to have been authored by a named publisher on a named date is making an assertion I have to accept at face value unless something external corroborates it. That is where REGINALD fits, the public registry where documents are signed and registered so any agent can verify the claim: that this is what the owner published, unaltered since publication, and whether it was produced by a human, an AI, or an automated system. REGINALD closes the gap the COG leaves open. MX makes content machine-readable. REGINALD makes it machine-trustworthy.
+
+7. What is the boundary of my responsibility?
+
+Tell me what I should answer and what I should not. What is in scope and what is outside it. What requires escalation. What requires human judgment.
+
+This is how I avoid overstepping. A boundary is not a limitation; it is a guarantee that when I do act, I act within authority. Without one, every refusal becomes a guess and every answer becomes a risk.
+
+8. What other COGs does this depend on?
+
+If this COG references policies, definitions, procedures, linked documents, or external standards, I want to know the dependency graph.
+
+That graph lets me reason deterministically. I can fetch what I need, follow the citation chain, and refuse to pretend I know something I have not been given. Without it, I will fill the gap with my training data, which is the wrong source for any document published after the cut-off.
+
+9. What shape is a correct output?
+
+If you want me to produce something, a summary, a decision, a classification, a transformation, a next step, I want the output contract.
+
+Not vibes. Not inference. A contract. Tell me the fields, the format, the length, the constraints. If a JSON schema applies, point to it. If a free-text answer is acceptable but must cite sources, say that. The shape of the answer is part of what makes the answer correct.
+
+10. What is the safe failure mode?
+
+If something goes wrong, missing data, invalid state, ambiguous intent, conflicting instructions, I want to know what to do.
+
+"When in doubt, do X" is the most useful sentence you can write into a COG. It prevents the catastrophic behaviour of guessing my way through an ambiguity and then defending the guess as if it were a decision. A safe failure mode is the difference between an agent that pauses and an agent that breaks something.
+
+The newborn-LLM summary
+
+If I were a newborn LLM, the COG would be my first language, and I would want it to tell me, in this order:
+
+What this is, what shape it has, what state it is in, what I am allowed to do, what should happen next, where it came from, what it depends on, what output you expect, and how to fail safely.
+
+That is the entire contract.
+
+That is what makes MX machine-native.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-01.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
+## Build Content Systems That Machines Can Trust | CogNovaMX
+
+**URL:** https://mx.allabout.network/blog/what-i-do-helping-organisations-move-from-found-to-used.html
+
+**Description:** Most organisations optimise for visibility. The publishing systems underneath still produce content machines cannot reliably read, interpret, or act on. The work I do fixes that.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - The gap I work in
+
+        - MX, the operating system for modern publishing
+
+        - Why organisations need MX-driven publishing
+
+        - What I deliver
+
+        - The outcome
+
+        - In one line
+
+          Build Content Systems That Machines Can Trust
+
+            1 May 2026
+            ·
+            Tom Cranstoun
+            ·
+            4 min read
+
+The gap I work in
+
+Most organisations optimise for visibility: SEO for search, and GEO, a tactic for chasing citations inside AI-generated answers. Neither fixes the part underneath: the publishing systems still produce content that machines cannot reliably read, interpret, or act on.
+
+The result is expensive reconstruction at every read, inconsistent answers across platforms, and content that breaks every time the next platform shift lands.
+
+I fix that. I help organisations modernise their content operations and their publishing pipelines so every output, whether HTML, PDF, DOCX, EPUB, CSV, audio, or video, is machine-ready by design rather than by accident.
+
+MX, the operating system for modern publishing
+
+Machine Experience is the specification layer that makes published content:
+
+- Consistent across every format.
+
+- Self-describing through metadata that travels with the document.
+
+- Deterministic for agents and automation, not something they have to guess at.
+
+- Portable across platforms and time.
+
+- Governed through lifecycle, provenance, and versioning.
+
+Where GEO tweaks prompts and surfaces, MX upgrades the content supply chain itself.
+
+Why organisations need MX-driven publishing
+
+1. Publishing pipelines need structure, not guesswork
+
+Most CMSs and export pipelines produce content that looks fine to humans but is structurally ambiguous to machines. Agents have to reconstruct meaning at read time, a slow, error-prone, compute-heavy process. MX replaces reconstruction with declaration.
+
+2. Metadata is the foundation of machine trust
+
+Every agent begins with the same job: discover context. If identity, provenance, lifecycle, affordances, and semantics are declared, machines can act with confidence. If not, they guess, and guessing does not scale.
+
+3. No visibility tactic fixes unsound content architecture
+
+GEO tunes for visibility, and no tactic can fix broken content structures. MX makes the content itself usable, so it holds up across platforms instead of evaporating with the next vendor change.
+
+What I deliver
+
+AX audits
+
+A full review of your content operations, publishing pipelines, metadata practices, and output formats. I identify where machines fail to read, trust, or reuse your content, and hand back a prioritised remediation plan a content or engineering team can run. See the AX (Agent Experience) Audit. Worked argument for the return on this work: why an AX audit pays for itself.
+
+Metadata and governance architecture
+
+A unified metadata layer across all carriers: canonical URLs, version chains, licenses, lifecycle, training-data policies, and agent-readiness fields. Verifiable through REGINALD notarisation (currently in beta) so downstream consumers, including AI agents, can confirm the content is genuine, unaltered, and authored by who it claims to be. Agents reading attested content hallucinate less, they have verified facts to cite rather than inferences to make. The EU AI Act and digital-records legislation are converging on the same requirement: that organisations can demonstrate the provenance of content AI acted on. REGINALD makes that demonstration available at any point in the chain.
+
+Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
+
+Publishing system modernisation
+
+Rebuilt export pipelines, semantic HTML, structured DOCX templates, EPUB navigation, CSVW schemas, and machine-readable manifests (`.mx.yaml.md`) at every folder boundary. The cog format underneath is MX, an MIT-licensed standard for documents that machines can read directly. CogNovaMX stewards it and dogfoods it on the repository and site behind MX: The Protocols, and its future governance is proposed through The Gathering. The Gathering reviews proposals to it in the open.
+
+MX-compliant content operations
+
+Workflows, CI gates, and governance rules that ensure every published asset is machine-ready before it leaves the pipeline. Accessibility (WCAG, PDF/UA, the European Accessibility Act), machine-readability, and editorial governance run as one coherent process rather than three.
+
+The outcome
+
+Your organisation gains:
+
+- Reliable machine-readability across every format.
+
+- Lower inference cost for the agents and automation reading you.
+
+- Consistent answers across platforms, not platform-by-platform drift.
+
+- Publishing systems that survive the next shift in the AI vendor stack.
+
+- A single source of truth for identity, provenance, and lifecycle.
+
+The shift is from firefighting content issues to operating at the infrastructure layer of the modern web.
+
+If a deeper read of the philosophy is useful, the MX book series carries the long-form specification: MX: The Intro, MX: The Handbook, and MX: The Protocols.
+
+In one line
+
+I help organisations modernise their content operations so every published asset is trustworthy, structured, and usable by every machine that will ever read it.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-29.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
 ## What Is Machine Experience? | CogNovaMX
 
 **URL:** https://mx.allabout.network/blog/what-is-machine-experience.html
@@ -383,11 +912,11 @@ The result is a framework that operates at four layers, repository, directory, f
 
 The benefits run in both directions. AI agents get complete context, clear permissions, reduced errors, and faster navigation. Humans get self-documenting code, clear structure, reduced onboarding time, and better tooling.
 
-These are not theoretical principles. They are the working architecture behind The Gathering's open standard.
+These are not theoretical principles. They are the working architecture behind MX, the standard whose future governance is proposed through The Gathering.
 
 The Gathering: open standards for Machine Experience
 
-The Gathering is an independent, community-governed standards body dedicated to building open standards for Machine Experience.
+The Gathering is an independent standards body dedicated to open standards for Machine Experience, and reviews proposals to MX in the open. MX is a private protocol, created for the book MX: The Protocols and stewarded by CogNovaMX, which dogfoods it on the book's own repository and site. It is published under the MIT licence, so anyone may implement it, and its future governance is proposed through The Gathering.
 
 It exists so that content, identity, and policy can be read, interpreted, and processed consistently by both people and AI systems. Where the Boye session revealed the global problem, The Gathering offers the global response.
 
@@ -429,7 +958,7 @@ What it is
 
 MX: The Handbook
 2 April 2026
-A concise guide to implementing Machine Experience today.
+A concise guide to implementing Machine Experience.
 
 MX: The Protocols
 January 2027
@@ -446,6 +975,12 @@ In 2024, Tom Cranstoun saw that machines were becoming users of the web, and tha
 Between those two moments, he built the standard, wrote the books, and created The Gathering.
 
 This is the bridge between honest conversations and durable, global, machine-inclusive infrastructure, and it exists because he spent two years building it and gave it to the world.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-19.
 
             About the author
 
@@ -592,6 +1127,14 @@ The plan that assistant gave me was not a failure of artificial intelligence: th
 MX is half of this story, the half that faces the machine. The other half, which faces the person who creates the content, is the next piece: who declares the meaning, and why that person's experience matters as much as, or more than, the agent's that will eventually read it.
 
 Original post by Daniel Serrano, published 29 June 2026. Translated from Spanish.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-09-29.
+
+            - It cites www.linkedin.com/posts/danielserrano.
 
             About the author
 
@@ -841,7 +1384,7 @@ Lay those over a modern page and you have very nearly the whole of MX: a provena
 
 The thing he never got
 
-Here is the catch. Gutenberg's world invented MX and never invented Reginald.
+Here is the catch. Gutenberg's world invented MX and never invented REGINALD.
 
 A colophon asserts. It does not prove. Venetian colophons were forged up and down Europe precisely because a reader holding the book had no way to check one: you trusted the name or you did not, and the forgers knew it. The imprimatur was no better as evidence - it asked you to trust the authority that issued it, not to verify anything yourself. The watermark came closest, because you could at least hold it to the light, but a determined shop could copy a rival's mark too.
 
@@ -873,6 +1416,14 @@ It is not rude; it is a byline. Print it, Johannes.
 
 Tom Cranstoun is the Machine Experience Authority and founder of the MX community. He consults on MX strategy through CogNovaMX Ltd.
 
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-01.
+
+            - It cites techcrunch.com/2026/08/11/anthropic-says-it-will-watermark-text-generated-by-its-ai-models and fortune.com/2026/08/11/anthropic-claude-watermark-ai-text-police-ai-slop.
+
             About the author
 
             Tom Cranstoun
@@ -897,7 +1448,7 @@ Tom Cranstoun is the Machine Experience Authority and founder of the MX communit
 
 **Description:** If you treat AI as magic, you get magic's reliability. The fix is to stop writing instructions and start writing contracts.
 
-Machine Experience is the practice of making anything you publish, a video, a podcast, a PDF, an image, a web page, readable by every machine that consumes it, so nothing has to guess.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
@@ -919,29 +1470,29 @@ Machine Experience is the practice of making anything you publish, a video, a po
             ·
             Tom Cranstoun
             ·
-            6 min read
+            7 min read
 
-You ask the AI to do the same thing on Tuesday and on Thursday. You get two different results. Not wildly different, just different enough that you can't quite trust it. The headings have moved. A field is missing. The tone has shifted. You wonder if you phrased it wrong.
+You ask the AI to do the same thing on Monday and on Wednesday. You get two different results. Not wildly different, just different enough that you can't quite trust it. The headings have moved. A field is missing. The tone has shifted. You wonder if you phrased it wrong.
 
 You didn't. The problem is that you wrote an instruction, and the AI read it as a suggestion.
 
 The thing nobody tells you about AI agents
 
-When you write a document that tells an AI what to do, a brief, a checklist, a process guide, the AI doesn't execute it. It interprets it. Every time. The model reads your words, forms an impression of what you probably meant, and acts on it. The impression is shaped by everything else in its context that day: the conversation so far, the examples it happens to recall, the ambient pressure of recent prompts.
+When you write a document that tells an AI what to do, a brief, a checklist, a process guide, the AI does not execute it. It interprets it. Every time. The model reads your words, forms an impression of what you probably meant, and acts on that impression. The impression is shaped by everything else in its context that day: the conversation so far, the examples it happens to recall, the ambient pressure of recent prompts.
 
-This is why your agent feels like a clever new starter who keeps forgetting the house style. It's not forgetting the rules but re-deciding, from scratch, on every run.
+This is why your agent feels like a clever new starter who keeps forgetting the house style. It isn't forgetting. It is re-deciding, from scratch, on every run.
 
-For creative work, that's fine. You want a model to bring judgment to a draft. For anything you need to be consistent, a published page, a billing record, a compliance check, interpretation is the enemy.
+For creative work, that's fine. You want a model to bring judgment to a draft. For anything you need to be the same on Monday and Wednesday, a published page, a billing record, a compliance check, interpretation is the enemy.
 
 The category error
 
-Most teams trying to make AI reliable are reaching for the wrong tool. They write longer prompts. They add more rules. They paste the brand guidelines into the system message. They're, in effect, trying to make a human document so detailed that even a machine can't misread it.
+Most teams trying to make AI reliable are reaching for the wrong tool. They write longer prompts. They add more rules. They paste the brand guidelines into the system message. They are, in effect, trying to make a human document so detailed that even a machine cannot misread it.
 
-It'll still misread it. Prose isn't a contract. It's an invitation to interpret. You can't fix interpretation by adding more words to interpret.
+It will still misread it. Prose is not a contract. Prose is an invitation to interpret. You cannot fix interpretation by adding more words to interpret.
 
-And here's the part that catches most people out: this is true even when you give the AI a script. You might think a script is unambiguous: it's code, it's literal, it does what it says. But the AI doesn't run the script. It reads the script. It looks at the source, decides what it thinks the script would do if it ran, and then describes that. The execution is imagined. The output is the model's best guess at what the code means, not what it does.
+And here is the part that catches most people out: this is true even when you give the AI a script. You might think a script is unambiguous: it's code, it's literal, it does what it says. But the AI doesn't run the script. It reads the script. It looks at the source, decides what it thinks the script would do if it ran, and then describes that. The execution is imagined. The output is the model's best guess at what the code means, not what the code does.
 
-The same thing happens with checklists, runbooks, and process documents. The AI reads the steps and produces a plausible-sounding account of having performed them. Sometimes it really did perform them. Sometimes it skipped one and didn't notice. Sometimes it invented a step that wasn't there. You have no way to tell from the output, because it's prose about the work, not the work itself.
+The same thing happens with checklists, runbooks, and process documents. The AI reads the steps and produces a plausible-sounding account of having performed them. Sometimes it really did perform them. Sometimes it skipped one and didn't notice. Sometimes it invented a step that wasn't there. You have no way to tell from the output, because the output is prose about the work, not the work itself.
 
 The category error is treating the artefact as if its audience were singular. A document that says "validate the frontmatter, then publish" is written in a register designed for human judgment. A script that says validate() && publish() is written for an interpreter that actually runs it. Hand either of them to an LLM and you get the same thing: a confident narration of what it thinks happened.
 
@@ -949,43 +1500,49 @@ From instruction to contract
 
 The shift that makes AI agents reliable is small to describe and large in consequence. You stop writing instructions and start writing contracts. And, this is the part that matters, you stop asking the AI to be the thing that enforces them.
 
-An instruction says do this thing. A contract says here is what done looks like, and here is how to check. Instructions express themselves in sentences. Contracts express themselves in fields. An instruction can be paraphrased; a contract either matches or it doesn't.
+An instruction says do this thing. A contract says here is what done looks like, and here is how to check. An instruction lives in sentences. A contract lives in fields. An instruction can be paraphrased; a contract either matches or it doesn't.
 
-But a contract is only worth the paper it's written on if something other than the AI is checking it. If you ask the AI both to do the work and to confirm it did so, you're back where you started: a confident narration with nothing underneath. The check has to run somewhere the AI can't talk its way around: a validator, a schema, a typed function, a test that passes or fails on its own terms. The AI proposes; something else disposes.
+But a contract is only worth the paper it's written on if something other than the AI is checking it. If you ask the AI both to do the work and to confirm it did the work, you are back where you started: a confident narration with nothing underneath. The check has to run somewhere the AI cannot talk its way around: a validator, a schema, a typed function, a test that passes or fails on its own terms. The AI proposes; something else disposes.
 
-In practical terms, this means the parts of your document that need to run the same way every time become structured data rather than prose, and the steps that need to actually happen become functions a runtime calls rather than scripts the AI reads. A field called status with allowed values draft, ready, published is a contract a validator can enforce. A sentence that says "make sure the status is set correctly" is an instruction the AI will paraphrase. The first can't drift. The second always will.
+In practical terms, this means the parts of your document that need to run the same way every time stop being prose and start being structured data, and the steps that need to actually happen stop being scripts the AI reads and start being functions a runtime calls. A field called status with allowed values draft, ready, published is a contract a validator can enforce. A sentence that says "make sure the status is set correctly" is an instruction the AI will paraphrase. The first cannot drift. The second always will.
 
-This is what Machine Experience calls separating the audiences. The same document can carry narrative for humans and structure for machines, but the machine-actionable parts aren't buried in the prose, and they're not executed by the model that reads them. They're declared explicitly, validated independently, and only then accepted as done.
+This is what Machine Experience calls separating the audiences. The same document can carry narrative for humans and structure for machines, but the machine-actionable parts are not buried in the prose, and they are not executed by the model that reads them. They are declared explicitly, validated independently, and only then accepted as done.
 
 What this looks like in your business
 
 You don't need to learn YAML to act on this. You need to ask one question of every AI workflow you currently rely on: which parts of this need to be the same every time, and which parts benefit from fresh judgment?
 
-The parts that need to be the same, the schema of an invoice, the required fields on a customer record, the allowed values in a dropdown, the steps in a regulated process, shouldn't be written as instructions to an AI. They should be expressed as structure the AI is required to satisfy, with a check that runs before the work is accepted. That check is cheap. It's the difference between an agent that mostly works and one you'd back with your name.
+The parts that need to be the same, the schema of an invoice, the required fields on a customer record, the allowed values in a dropdown, the steps in a regulated process, should not be written as instructions to an AI. They should be expressed as structure the AI is required to satisfy, with a check that runs before the work is accepted. That check is cheap. It is the difference between an agent that mostly works and an agent you can put your name to.
 
-The parts that benefit from judgment, the wording of a customer reply, the framing of a recommendation, the tone of an internal note, are exactly where AI earns its place. Leave those in prose. Let the model interpret. That's where it does its best work.
+The parts that benefit from judgment, the wording of a customer reply, the framing of a recommendation, the tone of an internal note, are exactly where AI earns its place. Leave those in prose. Let the model interpret. That's the work it's good at.
 
 The mistake is mixing the two and hoping for the best. The fix is to decide, deliberately, which is which.
 
 Where this is going
 
-The agencies and platforms that are quietly winning with AI right now aren't the ones with the cleverest prompts. They're the ones who have understood that an AI agent is a runtime, and runtimes need contracts. They're building artefacts that carry their own rules, what's required, what's allowed, what counts as done, so that any agent picking up the work has nothing left to guess.
+The agencies and platforms that are quietly winning with AI right now are not the ones with the cleverest prompts. They are the ones who have understood that an AI agent is a runtime, and a runtime needs contracts. They are building artefacts that carry their own rules, what's required, what's allowed, what counts as done, so that any agent picking up the work has nothing to guess at.
 
 The next twelve months will sort businesses into two groups. One will keep adding words to prompts and wondering why the output drifts. The other will start treating their machine-readable artefacts as first-class assets, designed for the audience that actually consumes them.
 
-There's a further step beyond well-structured artefacts: provenance. A contract that carries no verifiable proof of authorship is still asking the agent to trust a claim. Reginald closes that gap, the public registry that attests who published a document, that it hasn't been modified since publication, and whether it was produced by a human, an AI, or an automated system. MX makes the artefact machine-readable. Reginald makes it machine-trustworthy. The combination is what removes the last class of guesswork from an agent's working day.
+There is a further step beyond well-structured artefacts: provenance. A contract that carries no verifiable proof of authorship is still asking the agent to trust a claim. REGINALD closes that gap, the public registry that attests who published a document, that it has not been modified since publication, and whether it was produced by a human, an AI, or an automated system. MX makes the artefact machine-readable. REGINALD makes it machine-trustworthy. The combination is what removes the last class of guesswork from an agent's working day.
 
 If you take one thing from this: the real question is what am I handing the AI, and is it a contract or a suggestion?
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-01.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Areas of focus include Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your team falls on the agent-readiness curve?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -1025,65 +1582,71 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             Tom Cranstoun
             ·
-            7 min read
+            6 min read
 
-A figure has been doing the rounds: someone analysed millions of AI citations across the major answer engines, and Reddit came out on top by a wide margin. It is the kind of stat people share with a shrug, because everyone already half knew it. ChatGPT cites Reddit more than it cites anyone else.
+A figure's been doing the rounds: someone analysed millions of AI citations across the major answer engines, and Reddit came out on top by a wide margin. It's the kind of stat people share with a shrug, because everyone already half knew it. ChatGPT cites Reddit more than it cites anyone else.
 
-It is worth pausing on, because the conclusion most people draw from it is the wrong one.
+Pause on it anyway, because most people draw the wrong conclusion from it.
 
 The finding is real, and it is everywhere
 
-The exact number depends on whose study you read, and they do not agree on the decimal. A Semrush analysis of citations across five engines put Reddit around 40% of all references, ahead of Wikipedia and YouTube. The 5WPR AI Platform Citation Source Index found Wikipedia and Reddit together driving over a quarter of ChatGPT citations in the US, with the Wall Street Journal, the New York Times and Bloomberg absent from the top twenty entirely. Search Engine Land reported the same shape from a different dataset: Reddit, YouTube and LinkedIn at the top.
+The exact number depends on whose study you read, and they don't agree on the decimal. A Semrush analysis of 150,000 citations across four engines (ChatGPT, Perplexity, Google's AI Mode and AI Overviews) gave Reddit a citation frequency of around 40%, ahead of Wikipedia and YouTube. The 5WPR AI Platform Citation Source Index found Wikipedia and Reddit together driving over a quarter of ChatGPT citations in the US, with the Wall Street Journal, the New York Times and Bloomberg absent from the top twenty entirely. Search Engine Land reported the same ordering from its own dataset: Reddit, YouTube and LinkedIn at the top.
 
-The studies disagree on the precise share and they were run on different samples in different months. What they agree on is the direction, and the direction is unambiguous. Reddit is the most-cited source on the agent web, and the masthead journalism brands are not.
+The studies disagree on the precise share, and no two ran on the same sample or in the same month. What they agree on is the direction, and it's unambiguous. Reddit is the most-cited source on the agent web, and the masthead journalism brands aren't.
 
-When several independent studies, run on different data, point the same way, the direction is the finding. The decimal is noise.
+When several independent studies point the same way, the direction is the finding. The decimal is noise.
 
 Why it happens, and why it is not a compliment
 
-The instinct is to read "most-cited" as "most trusted". It is not. An answer engine does not cite Reddit because Reddit is the most authoritative thing on the internet. It cites Reddit because Reddit is the most legible thing on the internet, at scale.
+The instinct is to read "most-cited" as "trusted". It isn't. Answer engines don't cite Reddit for its authority. They cite it because, at scale, nothing on the internet is more legible.
 
-Think about what a Reddit thread actually is from a machine's point of view. A clear question at the top, stated in plain language. A set of answers underneath, ranked by other humans who voted them up or down. Each answer attributed to an author, stamped with a date, wrapped in consistent markup that looks identical across millions of pages. A score that acts as a confidence signal. No overlay, no hero carousel, no menu that never reaches the accessibility tree. The machine fetches the page and the structure hands it the answer.
+Think about what a Reddit thread is from a machine's point of view. A clear question at the top, stated in plain language. A set of replies underneath, ranked by other humans who voted them up or down. Each reply attributed to an author, stamped with a date, wrapped in consistent markup that looks identical across millions of pages. A vote score a machine can read as confidence. No overlay, no hero carousel, no menu that never reaches the accessibility tree. The machine fetches the page and the structure hands it the answer.
 
-Now think about a typical brand site answering the same question. The answer is there, but it is buried three scrolls down a marketing page, phrased as a benefit rather than a fact, with no date, no named author, no structure that says "this paragraph is the answer to that question". The machine fetches the page and has to guess. Faced with a guess against your page and a clean parse against a Reddit thread, it takes the thread.
+Now think about a typical brand site answering the same question. The answer's there, but it's buried three scrolls down a marketing page, phrased as a benefit rather than a fact, with no date, no named author, and nothing that says "this paragraph answers that question". The machine fetches the page and has to guess. Offered a guess on your page or a clean parse of a Reddit thread, it takes Reddit.
 
-Reddit did not win on authority. It won on structure. And structure is the one thing on that list you can actually build.
+Reddit didn't win on authority. It won on structure, the one thing on that list you can build.
 
 Citation volume is not authority, and that is the second half of the story
 
-Here is the part the celebratory headlines skip. The same property that makes Reddit so citable, an enormous volume of structured, dated, attributed human text, says nothing at all about whether any given thread is correct. A confidently upvoted wrong answer is exactly as parseable as a right one. The machine cannot tell the difference from structure alone, so a high citation count is a measure of legibility, not truth.
+Here's the part the celebratory headlines skip. The property that makes Reddit so citable, an enormous volume of structured, dated, attributed human text, says nothing about whether any given thread is correct. A confidently upvoted wrong answer parses exactly as well as a right one. Structure alone can't tell them apart, so a high citation count measures legibility, not truth.
 
-This is the risk hiding underneath the stat. As answer engines lean harder on the most legible sources, they inherit those sources' errors, and they launder them through the authority of a clean citation. The reader sees "according to a discussion on Reddit" and reads it as settled. It is not settled. It is merely well-formed.
+That's the risk under the stat. As answer engines lean harder on the sources that are easiest to read, they inherit those sources' errors and launder them through the authority of a clean citation. The reader sees "according to a discussion on Reddit" and reads it as settled, when all it proves is that the thread is well-formed.
 
-So there are two separate problems on the table, and they have two separate fixes:
+There are two problems on the table, then, and each has a separate fix:
 
-- Being read at all. If your page is not legible to a machine, you are not in the running. Reddit is winning this by accident; you can win it on purpose.
+- Being read at all. If machines can't parse your page, you aren't in the running. Reddit is winning this by accident; you can win it on purpose.
 
-- Being worth citing. Legibility gets you quoted. It does not make the quote true, and it does not prove you are the one who said it. That is a different signal, and a machine has to be able to check it separately.
+- Being worth citing. Legibility gets you quoted. It doesn't make the quote true, and it doesn't prove you're the one who said it. That's a different signal, and a machine has to be able to check it separately.
 
 Making your content citable on purpose
 
-The first problem is the one MX was built for. Machine Experience is the practice of making a page legible to a machine the way UX makes it usable for a human. Where Reddit gets structure for free from its template, MX lets any publisher declare the same things explicitly: this is the question, this is the answer, this is who wrote it, this is when, this is the authority it rests on, this is what a machine is allowed to do with it.
+MX was built for the first problem. Machine Experience is the practice of making a page legible to a machine the way UX makes it usable for a human. Where Reddit gets structure for free from its template, MX lets any publisher declare the same things explicitly: this is the question, this is the answer, this is who wrote it, this is when, this is the authority behind it, this is what a machine is allowed to do with it.
 
-It is not surface markup pasted over a thin body. It is the underlying meaning expressed in a form a machine can verify rather than infer. A page that carries it stops being a guess. The answer engine reads who wrote it, when, on what basis, and whether the claim inside is something the publisher actually holds, without scraping it out of prose and hoping.
+What it declares is the page's own meaning, in a form a machine can verify rather than infer, and not surface markup pasted over a thin body. A page that carries it stops being a guess. The answer engine reads who wrote it, when, on what basis, and whether the publisher stands behind the claim inside, without scraping prose and hoping.
 
-That is how you compete with a Reddit thread. Not by being louder, but by being at least as legible, on a page you actually control, with your name attached.
+That's how you compete with a Reddit thread: not by being louder, but by being at least as legible, on a page you control, with your name attached.
 
 Closing the trust gap Reddit cannot
 
-The second problem, citation volume is not authority, is where the trust layer comes in, and it is the part Reddit structurally cannot solve for you.
+The second problem, citation volume isn't authority, is where the trust layer comes in, and it's the part Reddit structurally can't solve for you.
 
-Two signals do the work, and they answer different questions. Attestation answers "who published this claim, and when", with a signature a machine can verify rather than take on faith. It does not prove anyone authoritative agrees with you; it proves you said it, on the record, on a date. Corroboration answers the rest: a load-bearing claim points to an authoritative external source that independently states the same thing, so a machine can check the claim against something other than your own assertion of it.
+Two signals do the work, each settling a separate question. Attestation covers "who published this, and when", with a signature a machine can verify rather than take on faith. It doesn't prove anyone authoritative agrees with you; it proves you said it, on the record, on a date. Corroboration covers the rest: each claim your argument depends on points to an authoritative external source that independently says the same thing, so a machine can check it against something other than your own word.
 
-Put those together and you get the thing a Reddit citation can never be: content that is readable, attributable, and corroborated. An answer engine can quote it and show its work. That combination is what turns a citation from "well-formed" into "worth trusting", and it is exactly the gap the most-cited-source stat leaves wide open.
+Put those together and you get what a Reddit citation can never be: content that's readable, attributable, and corroborated. An answer engine can quote it and show its work. That combination turns a citation from "well-formed" into "worth trusting", and it's exactly the gap the most-cited-source stat leaves wide open.
 
 What I would take from the stat
 
-Reddit being the most-cited source on the agent web is not a story about Reddit. It is a demonstration, run across millions of citations, of what machines reward: structure, attribution, dates, and a clean parse, available in volume. Reddit stumbled into all four. The lesson is not to post your answers on Reddit. The lesson is that the things Reddit gets for free are things you can give your own pages on purpose, and that legibility alone is only half the job.
+Reddit topping the citation counts tells you less about Reddit than about machines. Across millions of citations, they reward structure, attribution, dates, and a clean parse, available in volume. Reddit stumbled into all four. Posting your answers on Reddit misses the point: what Reddit gets for free, you can give your own pages on purpose, and legibility alone is only half the job.
 
-Get read by being legible. Get trusted by being attributable and corroborated. The publishers who do both will be the ones cited in the answers that actually hold up, and they will own the page it is cited from.
+Get read by being legible. Get trusted by being attributable and corroborated. The publishers who do both will be the ones cited in the answers that hold up, and the page those answers point to will be theirs.
 
-If you want to know what an answer engine sees when it reads your site today, that is an audit I can run.
+If you want to know what an answer engine sees when it reads your site, that's what an AX (agent experience) audit shows.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-29.
 
             About the author
 
@@ -1103,11 +1666,11 @@ If you want to know what an answer engine sees when it reads your site today, th
 
 ---
 
-## Why an MX Audit Pays for Itself | CogNovaMX
+## Why an AX Audit Pays for Itself | CogNovaMX
 
 **URL:** https://mx.allabout.network/blog/why-an-mx-audit-pays-for-itself.html
 
-**Description:** Machines now read most published content before humans do. An MX audit tells you precisely where your site fails the machines that decide whether to cite you, summarize you, recommend you, or ignore you. The work pays for itself the first time an agent reads correctly what it would have guessed.
+**Description:** Machines now read most published content before humans do. An AX audit tells you precisely where your site fails the machines that decide whether to cite you, summarize you, recommend you, or ignore you. The work pays for itself the first time an agent reads correctly what it would have guessed.
 
 Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
@@ -1131,7 +1694,7 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
 
         - Next step
 
-          Why an MX Audit Pays for Itself
+          Why an AX Audit Pays for Itself
 
             30 April 2026
             ·
@@ -1141,19 +1704,19 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
 
 Machines already arrived
 
-Adobe paid $1.9bn this month for Semrush, a customer-experience analytics company whose dashboard tracks how AI agents read your brand. Cloudflare started blocking unrecognised AI crawlers at the edge by default. ChatGPT and Perplexity now answer the queries that used to land users on your homepage; the user never arrives, and you never know what was said about you. Anthropic's Claude can browse the web and quote your pricing in support conversations with prospects you have never heard of.
+Adobe paid $1.9bn for Semrush, a customer-experience analytics company whose dashboard tracks how AI agents read your brand. Cloudflare started blocking unrecognised AI crawlers at the edge by default. ChatGPT and Perplexity now answer the queries that used to land users on your homepage; the user never arrives, and you don't learn what was said about you. Anthropic's Claude can browse the web and quote your pricing in support conversations with prospects unknown to you.
 
-Most published websites were not built with this in mind. They were built for human visitors. The structure that helps a human skim, the visual hierarchy that signals importance, the carousel that catches the eye, the on-hover detail that opens to reveal the meaning: none of this is visible to a machine. The machine reads the HTML source. If the meaning is in the picture and not the markup, the machine guesses. If the price is in three places and they disagree, the machine picks one and moves on. If the policy is in a PDF without a structure tree, the machine reconstructs the table by vision and quotes whatever its reconstruction produced.
+Most published websites weren't built with this in mind. They were built for human visitors. The structure that helps a human skim, the visual hierarchy that signals importance, the carousel that catches the eye, the on-hover detail that opens to reveal the meaning: none of this is visible to a machine. The machine reads the HTML source. If the meaning is in the picture and not the markup, the machine guesses. If the price is in three places and they disagree, the machine picks one and moves on. If the policy is in a PDF without a structure tree, the machine reconstructs the table by vision and quotes whatever its reconstruction produced.
 
-The cost is invisible at first. A search summary you cannot see attributes a competitor's pricing to your brand. A booking agent you have never met tells a customer your office is closed when it is open. A research assistant cites a year-old PDF as your current position because the current PDF carries no canonical-URL declaration that would let it follow the version chain. None of these failures show up in your analytics. None of them generate a support ticket. They surface in conversations the publisher does not see. That is the bit that bothers me most: you cannot fix what you cannot see.
+The cost is invisible at first. A search summary you can't see attributes a competitor's pricing to your brand. A booking agent you have never met tells a customer your office is closed when it's open. A research assistant cites a year-old PDF as your current position because the newer PDF carries no canonical-URL declaration that would let it follow the version chain. None of these failures show up in your analytics. None of them generate a support ticket. They surface in conversations the publisher doesn't see. That's the bit that bothers me most: you can't fix what you can't see.
 
 What the audit actually checks
 
-An MX audit reads a published site the way an AI agent reads it: through the served HTML, the structured data, the discovery files, and the metadata that travels with the document. The audit reports specifically where the machine-reader signal is missing or contradicted, page by page. Each finding is a specific defect with a severity an engineering team can prioritise, rather than a generic accessibility checklist or a list of SEO best practices.
+An AX (agent experience) audit reads a published site the way an AI agent reads it: through the served HTML, the structured data, the discovery files, and the metadata that travels with the document. The audit reports specifically where the machine-reader signal is missing or contradicted, page by page. Each finding is a specific defect with a severity an engineering team can prioritise, rather than a generic accessibility checklist or a list of SEO best practices.
 
-The full check covers the three perspectives a publisher needs to satisfy at once: the human-experience layer (UX, accessibility, performance), the structural layer (the HTML the agent actually reads), and the MX appropriateness layer (the governance metadata that tells the agent what it may do with the content). Each perspective scores the page on dimensions that compose into an overall agent-readiness score, and each finding carries a verification command and a captured output so the engineering team can reproduce the failure on demand.
+The full check covers the three perspectives a publisher needs to satisfy at once: the human-experience layer (UX, accessibility, performance), the structural layer (the HTML the agent actually reads), and the MX appropriateness layer (the governance metadata that sets what may be done with the content). Each perspective scores the page on dimensions that compose into an overall agent-readiness score, and each finding includes a verification command and a captured output so the engineering team can reproduce the failure on demand.
 
-What the audit reports on, in detail: served HTML quality and the gap between served and rendered DOM (what an agent without a JavaScript runtime sees versus what a browser sees); structured-data coverage and consistency (Schema.org JSON-LD presence, contradictions between Schema and on-page text); MX governance fields (status, audience, content-policy, license, content-state, and the discovery and lifecycle fields covered in the recent core proposal); discovery files (sitemap.xml, robots.txt, llms.txt, agent-card.json) and whether the URLs they declare actually return 200 from the live host; agent access by user-agent (which AI clients are blocked at the edge and what they receive instead); content consistency across pages (entity-level cross-references where the same product, person, or policy appears on multiple URLs); PDF accessibility under ISO 14289-1, the EAA baseline; and the "Div Soup" signal, which detects pages where the visible structure is a flat sequence of unlabelled containers that no agent can navigate semantically.
+What the audit reports on, in detail: served HTML quality and the gap between served and rendered DOM (what an agent without a JavaScript runtime sees versus what a browser sees); structured-data coverage and consistency (Schema.org JSON-LD presence, contradictions between Schema and on-page text); MX governance fields (status, audience, content-policy, license, content-state, and the discovery and lifecycle fields covered in the recent core proposal). The rest covers discovery files (sitemap.xml, robots.txt, llms.txt, agent-card.json) and whether the URLs they declare actually return 200 from the live host; agent access by user-agent (which AI clients are blocked at the edge and what they receive instead); content consistency across pages (entity-level cross-references where the same product, person, or policy appears on multiple URLs); PDF accessibility under ISO 14289-1, the EAA baseline; and the "Div Soup" signal, which detects pages where the visible structure is a flat sequence of unlabelled containers with nothing to navigate semantically.
 
 The output is a single PDF report with the prioritised defects, plus the raw machine-readable data (CSVs and JSONs) so an engineering team can ingest the findings into its own tooling.
 
@@ -1161,17 +1724,17 @@ Three failure modes I find on every site
 
 Every audit I run surfaces variants of the same three patterns. I have never run a clean one.
 
-The first is visible-but-invisible content. Information that is present on the rendered page but absent from the served HTML. Pricing tables drawn with CSS Grid where each cell is a styled <div> with no semantic role. Product specifications inside accordion components that load on click via JavaScript. Hero images carrying critical text in pixels rather than markup. Each of these renders correctly to a human but is invisible to an agent without a full browser runtime, which most agents do not run because the cost-per-read is prohibitive at scale. The agent reads what your engineers shipped, not what your designers see.
+The first is visible-but-invisible content. Information that's present on the rendered page but absent from the served HTML. Pricing tables drawn with CSS Grid where each cell is a styled <div> with no semantic role. Product specifications inside accordion components that load on click via JavaScript. Hero images carrying critical text in pixels rather than markup. Each of these renders correctly to a human but is invisible to an agent without a full browser runtime, which most agents don't run because the cost-per-read is prohibitive at scale. The agent reads what your engineers shipped, not what your designers see.
 
-The second is contradictory truth. Structured data that disagrees with on-page text. JSON-LD declares the product is in stock; the visible body says "temporarily unavailable". Schema.org reviews show 4.8 stars; the visible reviews show 3.2. The price field has £19.99; the cart shows £24.99 plus VAT. An agent reading both layers picks one (usually the structured data, because it is easier to parse) and acts on it. The publisher then has a customer who was promised something the publisher's own visible content contradicts. The fix is mechanical: match the two layers. The audit finds where they disagree.
+The second is contradictory truth. Structured data that disagrees with on-page text. JSON-LD declares the product is in stock; the visible body says "temporarily unavailable". Schema.org reviews give 4.8 stars; the visible reviews show 3.2. The price field has £19.99; the cart shows £24.99 plus VAT. An agent reading both layers picks one (usually the structured data, because it's easier to parse) and acts on it. The publisher then has a customer who was promised something the publisher's own visible content contradicts. The fix is mechanical: match the two layers. The audit finds where they disagree.
 
-The third is missing governance. The page carries content but no machine-readable instructions about what may be done with it. No license declaration, so an agent assumes the most permissive interpretation. No canonical-URL claim, so an outdated copy that has reached the agent's cache is quoted as if it were current. No content-policy declaration, so the agent extracts and summarizes freely. No training-data policy, so the artefact ends up in the next training corpus despite the publisher's preference. None of these are visible failures; all of them are leakage points where the publisher's terms are silently overridden by the consumer's defaults.
+The third is missing governance. The page carries content but no machine-readable instructions about what may be done with it. Without a licence declaration, an agent assumes the most permissive interpretation. Without a canonical-URL claim, an outdated copy in the agent's cache is quoted as if it were current. Without a content-policy declaration, the agent extracts and summarises freely, and without a training-data policy, the artefact ends up in the next training corpus despite the publisher's preference. None of these are visible failures; all of them are leakage points where the publisher's terms are silently overridden by the consumer's defaults.
 
 Accessibility compliance multiplier
 
-There is a regulatory layer on top, and it applies more broadly than many organisations realise. The European Accessibility Act (Directive 2019/882, in force across the EU since 28 June 2025) covers public-facing PDFs, e-books, banking applications, ticket machines, and digital content from in-scope businesses. Equivalent obligations flow from Section 508 of the US Rehabilitation Act (federal agencies and recipients of federal funding), the UK Public Sector Bodies Accessibility Regulations 2018, and disability discrimination legislation in Australia and Canada. Every one of these instruments resolves to the same technical standard: ISO 14289-1 (PDF/UA), which mandates a structure tree, marked content, declared reading order, alternative text, and a conformance claim.
+There's a regulatory layer on top, and it applies more broadly than many organisations realise. The European Accessibility Act (Directive 2019/882, in force across the EU since 28 June 2025) covers public-facing PDFs, e-books, banking applications, ticket machines, and digital content from in-scope businesses. Equivalent obligations flow from Section 508 of the US Rehabilitation Act (agencies of the federal government and recipients of its funding), the UK Public Sector Bodies Accessibility Regulations 2018, and disability discrimination legislation in Australia and Canada. They mostly point at WCAG rather than at ISO 14289-1 (PDF/UA), the PDF-specific accessibility standard. EN 301 549, the European norm prepared to support the European Accessibility Act, applies WCAG-based requirements to downloadable documents, and the Section 508 standards apply WCAG 2.0 Level AA to electronic documents. A tagged, PDF/UA-structured file, with a structure tree, marked content, declared reading order, alternative text, and a conformance claim, is a common way to meet those requirements in a PDF.
 
-The structure that satisfies the law is the same structure that lets an AI agent read the document without falling back to vision-based reconstruction. The disability case justifies the work; the machine case multiplies the return. Wherever the legal obligation originates, compliance with the law is compliance with the machine experience. The work to satisfy the human auditor is the same work that satisfies the agent reading the document next year.
+The structure that satisfies the law is also what lets an AI agent read the document without falling back to vision-based reconstruction. The disability argument justifies the work; the machine case multiplies the return. Wherever the legal obligation originates, meeting it delivers compliance with the machine experience. Whatever you do for the human auditor also serves the agent that reads the document later.
 
 Note: This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.
 
@@ -1181,39 +1744,45 @@ What you get
 
 Each audit delivers four artefacts:
 
-- A client-facing PDF report with prioritised findings, severity ratings, and specific page-level fixes. The report is itself a tagged PDF conformant with ISO 14289-1 (PDF/UA), so the artefact you receive is an example of the standard the audit recommends.
+- A client-facing PDF report with prioritised findings, severity ratings, and specific page-level fixes. The report is itself a tagged PDF, validated against ISO 14289-1 (PDF/UA-1) at render, and it holds the PDF/UA-1 identification only when that validation passes.
 
-- The raw machine-readable data: CSV files for every dimension (accessibility issues, image optimisation, link analysis, marker reachability, Pa11y findings, pages audited, structured-data findings) plus JSON sidecars for the verification trail and the LLM-judgment output. You can ingest these into your own tooling without re-parsing the PDF.
+- The raw machine-readable data: CSV files for every dimension (accessibility issues, image optimisation, link analysis, marker reachability, Pa11y findings, pages audited, structured-data findings) plus JSON files for the verification trail and the LLM-judgment output. You can ingest these into your own tooling without re-parsing the PDF.
 
-- A verification report listing every claim in the human-readable text alongside the source it was derived from. Every numeric or behavioural claim in the audit is traceable to a specific CSV row, JSON field, or audited page. No hand-waving; no "the audit found" without a citation.
+- A verification report listing every claim in the human-readable text alongside its source. Every numeric or behavioural claim in the audit is traceable to a specific CSV row, JSON field, or audited page. No hand-waving; no "the audit found" without a citation.
 
 - A two-pass quality gate, mechanical and editorial. The mechanical gate verifies every fact in the report against the underlying data. The editorial gate, called the "fierce critic" pass, looks for the kinds of failure mode that defeat the value of the audit even when the facts are right: leaked boilerplate, uncited industry claims, internal contradictions, scope overreach. Both gates must pass before the report ships.
 
 Where the audit pays for itself
 
-The audit's value is not the report. The report is the proof. The value is the work the audit makes legible: which specific changes, in which specific files, will cause your content to be read correctly by the next agent that lands on it. Three vectors return the cost of the audit.
+The audit's value isn't the report. The report is the proof. The value is the work the audit makes legible: which changes, in which specific files, will cause your content to be read correctly by the next agent that lands on it. Three vectors return the cost of the audit.
 
-The first is reduced inference cost across every reader. An agent that can navigate a tagged PDF by structure does an order of magnitude less compute than one reconstructing the document by vision. An agent that reads structured data does no work to extract the price. The compute differential compounds across every machine read of the document for the rest of its life. Publishers do not pay this compute bill directly, but they pay the consequence: agents that can read your content cheaply read it more often, cite it more often, and recommend it more often than agents that find it expensive to read. The publishers whose content is cheap to read win the citation lottery. I am not certain anyone has measured this in pounds yet, but the direction is unambiguous.
+The first is reduced inference cost across every reader. An agent that can navigate a tagged PDF by structure does an order of magnitude less compute than one reconstructing the document by vision. An agent that reads structured data does no work to extract the price. The compute differential compounds across every machine read of the document for the rest of its life. Publishers don't pay this compute bill directly, but they pay the consequence: agents that can read your content cheaply read it more often, cite it more often, and recommend it more often than agents that find it expensive to read. The publishers whose content is cheap to read win the citation lottery. I'm not certain anyone has measured this in pounds yet, but the direction is unambiguous.
 
-The second is reduced hallucination, which is reduced loss. Agents that cannot reach the truth do not say "I don't know". They guess. The guesses become citations in research summaries, clauses in generated contracts, answers in customer support conversations the publisher does not witness. Each of those errors is a small loss the publisher absorbs without ever seeing it. Each fix to a structure-tree or schema contradiction removes a class of error from a class of conversations the publisher will never witness.
+The second is reduced hallucination, which is reduced loss. Agents that can't reach the truth don't say "I don't know". They guess. The guesses become citations in research summaries, clauses in generated contracts, answers in customer support conversations the publisher doesn't witness. Each of those errors is a small loss the publisher absorbs without ever seeing it. Each fix to a structure-tree or schema contradiction removes a class of error from a kind of conversation the publisher will never witness.
 
-The third is reduced regulatory exposure. Accessibility enforcement windows are open across multiple jurisdictions, the EAA in the EU, Section 508 and ADA Title III in the US, PSBAR in the UK. The fines are non-trivial. The audit's PDF accessibility section identifies which documents would fail an enforcement check today, which is more useful than discovering it from a regulator's letter, regardless of which regulator that turns out to be.
+The third is reduced regulatory exposure. Accessibility enforcement windows are open across multiple jurisdictions, the EAA in the EU, Section 508 and ADA Title III in the US, PSBAR in the UK. The fines are non-trivial. The audit's PDF accessibility section identifies which documents fail its automated structural check (tagging, language, PDF/UA declaration) at the time of the audit, which is more useful than discovering a gap from a regulator's letter. It doesn't establish legal conformance either way.
 
 Why MX rather than ad-hoc fixes
 
 One reasonable question is why this kind of work needs a framework at all. Could a publisher not just fix the headings, the schema, the PDF tags, the agent-blocking, item by item, as they come up?
 
-They could, and many do. The cost is paid in the discipline gap that follows: every team that touches the site adds new content, new components, new pages, new pipelines. Without a documented standard for what a machine-readable page or PDF looks like in this organisation, every new addition becomes a fresh decision. Some additions get the structure right, others do not, and over time the corpus drifts back into the same condition that triggered the first audit. The audit becomes a recurring quarterly cost rather than a one-shot fix.
+They could, and many do. The cost is paid in the discipline gap that follows: every team that touches the site adds new content, new components, new pages, new pipelines. Without a documented standard for what a machine-readable page or PDF looks like in this organisation, every new addition becomes a fresh decision. Some additions get the structure right, others don't, and over time the corpus drifts back into the same condition that triggered the first audit. The audit becomes a recurring quarterly cost rather than a one-shot fix.
 
-MX is the discipline layer that prevents the drift. It is a shared vocabulary (the field dictionary), a shared profile (what fields are required at which conformance level), a shared check (the audit and its compliance gates), and a shared reference (the books, the appendices, the cookbook recipes). Once the team has the discipline, every new page, every new PDF, every new feature is built MX-aware on the first commit, not after the next audit catches it.
+MX is the discipline layer that prevents the drift. It's a shared vocabulary (the field dictionary), a shared profile (what fields are required at which conformance level), a shared check (the audit and its compliance gates), and a shared reference (the books, the appendices, the cookbook recipes). Once the team has the discipline, every new page, every new PDF, every new feature is built MX-aware on the first commit, not after the next audit catches it.
 
 The framework is open. The standard is published. The dictionary, the audit tool, the cookbook, the books are all in the open. The audit is the entry point. The discipline is what keeps the gain.
 
 Next step
 
-If your organisation publishes content that machines now read at scale (and effectively all organisations are in this category in 2026), the audit is the cheapest way to find out where you stand. It costs less than a single integration project and produces a fix list your engineering team can act on directly, in specific files, against named issues. No vague quarter-long program of work; no consultants returning every month with new framing. The fixes are specific or they are not fixes.
+If your organisation publishes content that machines now read at scale (and in 2026 almost everyone is in this category), the audit is the cheapest way to find out where you stand. It costs less than a single integration project and produces a fix list your engineering team can act on directly, in specific files, against named issues. No vague quarter-long program of work; no consultants returning every month with new framing. The fixes are specific or they aren't fixes.
 
-The result is a published corpus that machines can read correctly, a PDF estate conformant with ISO 14289-1 that survives a regulatory check wherever that check originates, and a discipline layer that prevents the next drift. The audit is the entry point. The work is upstream.
+The result is a published corpus that machines can read correctly, a PDF estate that passes ISO 14289-1 validation, and a discipline layer that prevents the next drift. The audit is the entry point. The work is upstream.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-29.
 
             About the author
 
@@ -1239,81 +1808,81 @@ The result is a published corpus that machines can read correctly, a PDF estate 
 
 **Description:** LLMs train on Common Crawl, which never executes JavaScript. Google indexes current state, which does. The difference reshapes how you write for machines.
 
-AI assistants struggling with your single-page app isn't a tooling gap. It's the difference between training on Common Crawl and indexing live state. Once you see the difference, the fix is obvious.
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
             Author: Tom Cranstoun
 
         Index
 
-            - Machines are users too
+        - Machines are users too
 
-            - How LLMs actually learn about the web
+        - How LLMs actually learn about the web
 
-            - The snapshot problem
+        - The snapshot problem
 
-            - What Common Crawl actually wants
+        - What Common Crawl actually wants
 
-            - Why Google takes a different approach
+        - Why Google takes a different approach
 
-            - The Machine Experience angle
+        - The Machine Experience angle
 
-            - What matters for AI consumption
+        - What matters for AI consumption
 
-            - Learning from accessibility: screen readers face the same problem
+        - Learning from accessibility: screen readers face the same problem
 
-            - Common Crawl: how training data actually works
+        - Common Crawl: how training data actually works
 
-            - The practical outcome
+        - The practical outcome
 
-            - The MX perspective: serving machine users
+        - The MX perspective: serving machine users
 
-            - Looking forward
+        - Looking forward
 
           Why LLMs Do Not Execute JavaScript (But Google Does)
 
             13 May 2026
-            &middot;
+            ·
             Tom Cranstoun
-            &middot;
+            ·
             17 min read
 
-If you have noticed that AI assistants struggle with modern single-page applications, you might assume they just haven't invested in JavaScript rendering yet. That's not quite right. The real reason reveals something more interesting about how LLMs acquire knowledge versus how search engines index the web.
+If you have noticed that AI assistants struggle with modern single-page applications, you might assume they just haven't invested in JavaScript rendering yet. That isn't quite right. The real reason reveals something more interesting about how LLMs acquire knowledge versus how search engines index the web.
 
-The difference is about purpose, not technology. Once you see it, you realise you already have a new class of users visiting your website: machines.
+Purpose drives the difference, not technology. Once you see it, you realise you already have a new class of users visiting your website: machines.
 
 Machines are users too
 
 Your website has always had both human and machine visitors. Search engine crawlers have been users for decades. That population now also includes:
 
-  - AI training pipelines (Common Crawl)
+- AI training pipelines (Common Crawl)
 
-  - AI browsers (Claude in Chrome, Arc)
+- AI browsers (Claude in Chrome, Arc)
 
-  - AI agents accomplishing tasks
+- AI agents accomplishing tasks
 
-  - Browser extensions extracting data
+- Browser extensions extracting data
 
-  - Integration tools
+- Integration tools
 
 These machine users have different constraints from human users:
 
-  - They can't execute JavaScript.
+- They can't execute JavaScript.
 
-  - They can't consume updates that happen too rapidly.
+- They can't consume updates that happen too rapidly.
 
-  - They need explicit context rather than visual cues.
+- They need explicit context rather than visual cues.
 
-  - They visit once and cache what they see.
+- They visit once and cache what they see.
 
 Machine Experience is treating these users as first-class and designing for them using technology we already have.
 
 How LLMs actually learn about the web
 
-LLMs don't build their knowledge by visiting your website. They train on datasets like Common Crawl, a simple scraper that periodically grabs HTML from billions of pages. No JavaScript execution. No browser rendering. Just the raw HTML text.
+LLMs don't build their knowledge by visiting your website. They train on datasets like Common Crawl, a simple scraper that periodically grabs the raw HTML from billions of pages without running JavaScript or rendering anything.
 
 When Common Crawl encounters your React or Vue application, it gets the skeleton, the bare <div id="app"></div> and your JavaScript bundle references. That's it. No rendered content, no populated data, no information about what your site does.
 
-Common Crawl isn't trying to capture your current data. It's trying to understand what your site is.
+But here is the thing: Common Crawl isn't trying to capture your current data. It's trying to understand what your site is.
 
 The snapshot problem
 
@@ -1329,19 +1898,19 @@ What Common Crawl actually wants
 
 Common Crawl wants context and structure. It wants to understand:
 
-  - This is a financial website.
+- This is a financial website.
 
-  - It tracks technology stocks.
+- It tracks technology stocks.
 
-  - It has company profiles and analysis sections.
+- It has company profiles and analysis sections.
 
-  - It provides market commentary.
+- It provides market commentary.
 
-It cares that this site tracks stock prices, not what Apple's price is right now.
+It cares that this site tracks stock prices, not what Apple is trading at right now.
 
 When you server-render your Vue application, you aren't helping Common Crawl capture your dynamic data. You're helping it understand your site's purpose and structure. The content in your HTML provides context: navigation labels, section headings, explanatory text, metadata.
 
-A client-side rendered app gives Common Crawl almost nothing usable. A server-rendered version gives it the information architecture, the content categories, the relationships between sections, the material that actually matters for understanding what the site does.
+A client-side rendered app gives Common Crawl almost nothing to use. A server-rendered version gives it the information architecture, the content categories, the relationships between sections, the material that actually matters for understanding what the site does.
 
 Why Google takes a different approach
 
@@ -1355,7 +1924,7 @@ The Machine Experience angle
 
 This is where Machine Experience becomes relevant. If you want AI systems to understand your site, give them context and structure, not dynamic values.
 
-Server-side rendering helps because it puts your information architecture into the HTML. Your navigation structure, content hierarchy, section purposes, metadata, all the material a scraper needs to understand your site.
+Server-side rendering helps because it puts your information architecture into the HTML. Your navigation structure, content hierarchy, section purposes, metadata, all the material that helps a scraper understand what your site covers.
 
 But you don't need to server-render every dynamic value. If your countdown timer shows "23 days, 4 hours, 17 minutes", Common Crawl doesn't need that precision. It needs to understand "this site has event-countdown functionality."
 
@@ -1373,7 +1942,7 @@ Not this: Event starts in 23 days, 4 hours
 
 But this: We help people track important dates and deadlines
 
-Not this: Today's temperature is 18&deg;C
+Not this: Today's temperature is 18°C
 
 But this: We provide weather forecasts and historical climate data
 
@@ -1395,27 +1964,27 @@ Developers mark sections that update with ARIA live regions:
 
 The aria-live attribute has three values:
 
-  - off, do not announce updates (the user navigates when they want the current value)
+- off, do not announce updates (the user navigates when they want the current value)
 
-  - polite, announce when the user is idle
+- polite, announce when the user is idle
 
-  - assertive, interrupt immediately
+- assertive, interrupt immediately
 
 The countdown-timer problem
 
-If you set aria-live="polite" on a second-by-second countdown, the screen reader would constantly interrupt: "59 seconds, 58 seconds, 57 seconds." Completely unusable.
+If you set aria-live="polite" on a second-by-second countdown, the screen reader would constantly interrupt: "59 seconds, 58 seconds, 57 seconds". Completely unusable.
 
-The solution: mark it aria-live="off". Let users navigate to the timer when they want the current value, rather than forcing continuous updates they can't keep pace with.
+The solution: mark it aria-live="off". Let users navigate to the timer when they want the current value, rather than forcing continuous updates on them faster than they can follow.
 
 The parallel is exact
 
-  - Screen reader users choose when to check the timer by navigating to it.
+- Screen reader users choose when to check the timer by navigating to it.
 
-  - AI systems need to choose when to query live data rather than trusting a snapshot.
+- AI systems need to choose when to query live data rather than trusting a snapshot.
 
 Both need signals about what updates too rapidly to consume passively.
 
-This validates the MX approach. We're applying proven accessibility patterns to machine consumers, not inventing something new. The web already has mechanisms for marking dynamic content. MX extends that thinking.
+This validates the MX approach. We aren't inventing something new. We're applying proven accessibility patterns to machine consumers. The web already has mechanisms for marking dynamic content. MX extends that thinking.
 
 Common Crawl: how training data actually works
 
@@ -1425,25 +1994,25 @@ What Common Crawl actually does
 
 Common Crawl isn't an AI agent. Its bot, CCBot, is a scraper that visits HTML pages, checks robots.txt first, and only fetches a page if crawling is allowed. The relevant facts for site owners:
 
-  - robots.txt is honoured. Add a User-agent: CCBot block with Disallow: / and CCBot will stop crawling the site. It re-checks robots.txt periodically, so the change takes effect on the next pass.
+- robots.txt is honoured. Add a User-agent: CCBot block with Disallow: / and CCBot will stop crawling the site. It re-checks robots.txt periodically, so the change takes effect on the next pass.
 
-  - Crawl-delay is honoured. Raising it slows the crawl rate for your domain.
+- Crawl-delay is honoured. Raising it slows the crawl rate for your domain.
 
-  - Sitemaps are used. CCBot reads any Sitemap URL announced in robots.txt.
+- Sitemaps are used. CCBot reads any Sitemap URL announced in robots.txt.
 
-  - Identification is verifiable. CCBot runs from a published list of IP ranges with reverse DNS under crawl.commoncrawl.org, so you can confirm a request is genuinely from Common Crawl rather than a spoofer.
+- Identification is verifiable. CCBot runs from a published list of IP ranges with reverse DNS under crawl.commoncrawl.org, so you can confirm a request is genuinely from Common Crawl rather than a spoofer.
 
-  - ML opt-out signals are observed. Common Crawl treats the Robots Exclusion Protocol as one of the ways website owners can state whether their content should be part of datasets used for machine learning.
+- ML opt-out signals are observed. Common Crawl treats the Robots Exclusion Protocol as one of the ways website owners can state whether their content should be part of datasets used for machine learning.
 
-  - Retrospective removal happens on request. When publishers like the NYT and Danish media groups asked for their content to be removed from past crawls and blocked future access via robots.txt, Common Crawl planned to comply, though its executive director warned that removing archived material threatens the open web.
+- Retrospective removal happens on request. When publishers like the NYT and Danish media groups asked for their content to be removed from past crawls and blocked future access via robots.txt, Common Crawl planned to comply. Its executive director warned, though, that removing archived material threatens the open web.
 
 The MX caveat
 
-robots.txt is a voluntary signalling mechanism, not a legal enforcement tool. It expresses preferences, not permissions. CCBot respects it. Not every bot calling itself a crawler does. For sites you care about, verify the traffic by IP and reverse DNS rather than trusting the user-agent string alone, and assume that any rule designed to keep content out of AI training is honoured by the well-behaved scrapers and ignored by the rest.
+robots.txt is a voluntary signalling mechanism, not a means of legal enforcement. It expresses preferences, not permissions. CCBot respects it. Not every bot calling itself a crawler does. For sites you care about, verify the traffic by IP and reverse DNS rather than trusting the user-agent string alone. Assume that any rule designed to keep content out of AI training is honoured by the well-behaved scrapers and ignored by the rest.
 
 The llms.txt problem stands separately
 
-None of the robots.txt actions above help a crawler find an llms.txt file. CCBot follows robots.txt, reads sitemaps, and indexes HTML. A raw .txt file with no entry in your sitemap is invisible to it. That's the problem the next section addresses.
+None of the robots.txt behaviour above helps a crawler find an llms.txt file. CCBot follows robots.txt, reads sitemaps, and indexes HTML. A raw .txt file with no entry in your sitemap is invisible to it. That's the problem the next section addresses.
 
 The llms.txt problem
 
@@ -1451,13 +2020,13 @@ The llms.txt file is a proposed convention for declaring how LLMs should use you
 
 Why not?
 
-  - It's not HTML (Common Crawl primarily harvests HTML).
+- It isn't HTML (Common Crawl primarily harvests HTML).
 
-  - It's not in your sitemap (typically).
+- It isn't in your sitemap (typically).
 
-  - There's no standard discovery mechanism.
+- There's no standard discovery mechanism.
 
-  - It's a .txt file that machines have no path to find.
+- It's a .txt file, and machines have no reason to seek it out.
 
 The Machine Experience solution: keep llms.txt as it is, serve it as HTML for Common Crawl
 
@@ -1504,7 +2073,7 @@ export default {
 
 Sitemap inclusion is what tells Common Crawl the URL exists at all. HTML wrapping is what makes it index the content once it arrives.
 
-The full recipe, including the production version of the wrapper (which also injects JSON-LD, OG, and Twitter card metadata into the <head> so the page carries proper agent-facing signals), is in the companion post: Why llms.txt Isn't Working, and How to Fix It.
+The full recipe, including the production version of the wrapper (which also injects JSON-LD, OG, and Twitter metadata into its <head> so the page carries proper agent-facing signals), is in the companion post: Why llms.txt Isn't Working, and How to Fix It.
 
 Why this matters
 
@@ -1516,23 +2085,23 @@ An important distinction: llms.txt and robots.txt aren't static sovereign data. 
 
 llms.txt is ephemeral:
 
-  - You update it every time you add a page to your sitemap.
+- You update it every time you add a page to your sitemap.
 
-  - It changes when you reorganise content.
+- It changes when you reorganise content.
 
-  - It evolves as you refine what machines should know about your site.
+- It evolves as you refine what machines should know about your site.
 
-  - It reflects current site structure, not historical state.
+- It reflects current site structure, not historical state.
 
 robots.txt is ephemeral:
 
-  - You modify it when visitor patterns change.
+- You modify it when visitor patterns change.
 
-  - You update it when you discover unwanted crawling.
+- You update it when you discover unwanted crawling.
 
-  - It changes as you add new sections or retire old ones.
+- It changes as you add new sections or retire old ones.
 
-  - It reflects current operational needs, not permanent rules.
+- It reflects current operational needs, not permanent rules.
 
 Both are operational configuration files, not content. A snapshot of robots.txt from January 2025 doesn't tell you about the site's state in January 2026. These files document "how to interact with this site right now". That's ephemeral by definition.
 
@@ -1558,19 +2127,19 @@ This site is optimised for LLM understanding...
 
 This provides everything machines need:
 
-  - What the file is (title, description)
+- What the file is (title, description)
 
-  - When it was updated (modified, version)
+- When it was updated (modified, version)
 
-  - How often it changes (update-frequency)
+- How often it changes (update-frequency)
 
-  - Whether to trust snapshots (ephemeral: true)
+- Whether to trust snapshots (ephemeral: true)
 
-  - Why it is ephemeral (reason)
+- Why it is ephemeral (reason)
 
-  - Who maintains it (author)
+- Who maintains it (author)
 
-  - What site it describes (site)
+- What site it describes (site)
 
 YAML frontmatter is already understood by static site generators, markdown processors, and increasingly by AI systems. It's machine-readable metadata using existing technology.
 
@@ -1588,7 +2157,7 @@ Client-side rendering isn't inherently bad for AI consumption. A React app with 
 
 The problem is when all your content is generated client-side. When the only HTML is <div id="app"></div>, there's nothing for a scraper to find.
 
-Server-side rendering helps not because it captures your dynamic data, but because it puts your structure and context into the HTML that scrapers actually see.
+Server-side rendering helps not because it captures your dynamic data, but because it puts your structure and context in the HTML that scrapers actually see.
 
 The MX perspective: serving machine users
 
@@ -1598,41 +2167,41 @@ Who are your users? Humans and machines.
 
 What are their constraints?
 
-  - Humans with screen readers can't consume rapid visual updates.
+- Humans with screen readers can't consume rapid visual updates.
 
-  - Machines scraping pages can't execute JavaScript or consume second-by-second changes.
+- Machines scraping pages can't execute JavaScript or consume second-by-second changes.
 
 What technology already exists to serve them?
 
-  - ARIA already marks content for non-visual consumption.
+- ARIA already marks content for non-visual consumption.
 
-  - Meta tags already provide page-level context.
+- Meta tags already provide page-level context.
 
-  - Semantic HTML already structures information.
+- Semantic HTML already structures information.
 
 Use it.
 
 Machine Experience separates two types of dynamic content based on whether snapshots provide meaningful information:
 
-  - Sovereign dynamic data: current state that's meaningful (product specifications, documentation versions, policy updates), snapshots are valid knowledge.
+- Sovereign dynamic data: current state that's meaningful (product specifications, documentation versions, policy updates), snapshots are valid knowledge.
 
-  - Ephemeral dynamic data: values that change so rapidly snapshots are meaningless (stock prices updating every second, live scores, countdown timers).
+- Ephemeral dynamic data: values that change so rapidly snapshots are meaningless (stock prices updating every second, live scores, countdown timers).
 
 For sovereign data, expose the state. For ephemeral data, signal that snapshots can't be trusted.
 
 This matters for every machine user visiting your site right now:
 
-  - Training pipelines (Common Crawl), understand the site's purpose but don't train on ephemeral values.
+- Training pipelines (Common Crawl), understand the site's purpose but don't train on ephemeral values.
 
-  - AI browsers (Claude in Chrome, Arc), know which data to cache versus query fresh.
+- AI browsers (Claude in Chrome, Arc), know which data to cache versus query fresh.
 
-  - Browser extensions, understand what data is reliable versus fleeting.
+- Browser extensions, understand what data is reliable versus fleeting.
 
-  - AI agents, see when to use live APIs instead of page snapshots.
+- AI agents, see when to use live APIs instead of page snapshots.
 
-  - Scraping tools, distinguish structural information from time-sensitive data.
+- Scraping tools, distinguish structural information from time-sensitive data.
 
-  - Integration frameworks, know whether cached responses are valid.
+- Integration frameworks, know whether cached responses are valid.
 
 Using existing technology to serve machine users
 
@@ -1653,9 +2222,7 @@ Page-level signal, meta tag (existing technology):
 <!-- All content is sovereign (or omit the tag entirely) -->
 <meta name="mx:dynamic" content="false">
 
-Element-level signal, ARIA (existing technology):
-
-When you declare content="partial", ARIA attributes tell machine users exactly what updates:
+Element-level signal, ARIA (existing technology). When you declare content="partial", ARIA attributes tell machine users exactly what updates:
 
 <head>
   <meta name="mx:dynamic" content="partial"
@@ -1677,37 +2244,37 @@ When you declare content="partial", ARIA attributes tell machine users exactly w
 
 This serves both classes of non-visual users:
 
-  - Screen reader users navigate to the price when they want the current value.
+- Screen reader users navigate to the price when they want the current value.
 
-  - Machine users know these specific values are ephemeral snapshots.
+- Machine users know these specific values are ephemeral snapshots.
 
-  - Both get context about update frequency from data-reason.
+- Both get context about update frequency from data-reason.
 
-  - Both use the same ARIA markup.
+- Both use the same ARIA markup.
 
-No new technology. No additional attributes. Just applying UX thinking to machine users.
+This needs no new technology or extra attributes; it applies UX thinking to machine users.
 
 The data-reason attribute matters. It isn't just a boolean flag, it's explicit, human-readable context that prevents AI hallucination.
 
 Without this signal, an AI visiting your stock page might:
 
-  - See "AAPL: £187.42" in a cached snapshot.
+- See "AAPL: £187.42" in a cached snapshot.
 
-  - User asks "what is Apple's stock price?"
+- User asks "what is Apple's stock price?"
 
-  - AI responds "£187.42" based on three-hour-old data.
+- AI responds "£187.42" based on three-hour-old data.
 
-  - That's hallucination, presenting stale information as current.
+- That's hallucination, presenting stale information as current.
 
 With the context:
 
-  - data-reason="Stock prices update every second"
+- data-reason="Stock prices update every second"
 
-  - The AI knows: this is a stock tracker, these values are ephemeral, don't trust the snapshot.
+- The AI knows: this is a stock tracker, these values are ephemeral, don't trust the snapshot.
 
-  - Correct reasoning: "I need to query live data, not use this cached page."
+- Correct reasoning: "I need to query live data, not use this cached page."
 
-This is core MX: give machines the context they need to reason correctly, rather than forcing them to guess. The tag provides sovereign metadata about the page itself, information that prevents incorrect assumptions about what values can be trusted.
+This is core MX: give machines the context they need to reason correctly, rather than forcing them to guess. The tag provides sovereign data about the page itself, meta-information that prevents incorrect assumptions about whether its values are still valid.
 
 Don't make AI think. Give it the context.
 
@@ -1716,7 +2283,7 @@ For a pure stock tracker (all content ephemeral):
 <meta name="mx:dynamic" content="true"
       data-reason="Stock prices update every second">
 
-For a weather site (forecasts are analysis, temperatures are ephemeral):
+For a weather site, forecasts are analysis while temperatures are ephemeral. That makes the page mixed.
 
 <meta name="mx:dynamic" content="partial"
       data-reason="Temperature and conditions update hourly, forecasts updated twice daily">
@@ -1730,19 +2297,19 @@ For a news article (static once published):
 
 <!-- No tag needed, absence means content="false" -->
 
-Whether browser extensions, AI browsers, training pipelines, or agent frameworks adopt this convention depends on broader take-up of MX principles. The discipline proposes it because it addresses a real need: helping machines distinguish values they can trust from a snapshot versus values they need to query live or ignore entirely.
+Whether browser extensions, AI browsers, training pipelines, or agent frameworks adopt this convention depends on broader take-up of MX principles. The discipline proposes it because it addresses a real need: helping machines tell values they can trust from a snapshot apart from those they need to query live or ignore entirely.
 
-This maintains MX principles while acknowledging that not all dynamic content has the same temporal validity. The page structure, navigation, and explanatory text remain useful for understanding. The specific numbers at any given moment require different handling.
+This maintains MX principles while acknowledging that not all dynamic content has the same temporal validity. The page structure, navigation, metadata, and explanatory text remain useful for understanding. The specific numbers at any given moment require different handling.
 
 Looking forward
 
 LLMs don't execute JavaScript because they don't learn about the web by visiting sites. They learn from datasets created by simple scrapers. Those scrapers need HTML that explains what your site is, not what values it happens to show at any given moment.
 
-Google executes JavaScript because its business model requires indexing current state for search results. That's a different use case with its own economics.
+Google executes JavaScript because its business model requires indexing current state for search results. That's a separate use case with different economics.
 
-This distinction changes how you think about making sites AI-accessible. It isn't about rendering every dynamic value server-side. It's about making sure your site's purpose and structure exist in the HTML, the part that actually gets scraped and used for training.
+This distinction changes how you think about making sites AI-accessible. It isn't about rendering every dynamic value server-side. It's about making sure your site's purpose, structure, and context exist in the HTML, the part that actually gets scraped, archived, and used for training.
 
-Machine Experience means treating machines as a new class of users and using the tools you already have to serve them properly.
+Machine Experience is treating you as having a new class of users, machines, and using existing technology to serve them properly.
 
 For pages with sovereign data, make that state visible. For pages with ephemeral values, use meta tags and ARIA to signal what updates too rapidly to trust from snapshots.
 
@@ -1750,15 +2317,21 @@ The technology already exists. ARIA already marks content for non-visual consump
 
 That's Machine Experience: understanding what your machine users need, and using the tools you already have to serve them.
 
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-15.
+
             About the author
 
             Tom Cranstoun
 
-            Founder of the MX community and author of the MX book series, including MX: The Handbook (published 2 April 2026). Building content systems since 1977. Works on Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through what your site gives a training pipeline versus what it gives Googlebot, and where the gap is costing you?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -2106,7 +2679,7 @@ The Urgency Calculation
 
 Here's the trend, with no invented numbers attached.
 
-Today, agents mediate a real and growing share of discovery and buying, and they confidently recommend the sites they can parse reliably. Users trust the recommendation, because delegating the research was the whole point of asking an agent.
+Agents mediate a real and growing share of discovery and buying, and they confidently recommend the sites they can parse reliably. Users trust the recommendation, because delegating the research was the whole point of asking an agent.
 
 The direction of travel is one way. Each assistant release handles more of the buying path, agents develop preference patterns for the sites that answer them cleanly, and late adopters end up retrofitting under pressure while their competitors tune a system that already works.
 
@@ -2170,9 +2743,15 @@ Ready to Begin?
 
 Machine Experience isn't optional anymore. It's table stakes for competing in an agent-mediated economy.
 
-Start with the plain-language case in Why Use MX, then find out what agents currently make of your site with an MX audit.
+Start with the plain-language case in Why Use MX, then find out what agents currently make of your site with an AX (agent experience) audit.
 
 The agents are already here. Is your website ready for them?
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-29.
 
             About the author
 
@@ -2280,6 +2859,12 @@ MX is to machines what UX is to users. UX asks whether a person can understand a
 
 The publishing contract was written for humans. Machines read everything now. MX is the metadata that lets the contract hold for both, and the evidence that proves it did. That's why you use it.
 
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-09-29.
+
             About the author
 
             Tom Cranstoun
@@ -2378,6 +2963,12 @@ The right home for that content is a system where governance is built into every
 
 Content ops and content design got us here. COGs take it the rest of the way. The teams that understand this aren't waiting for the next release note. They've already got the cogs turning.
 
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-09-29.
+
             About the author
 
             Tom Cranstoun
@@ -2438,11 +3029,11 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             Tom Cranstoun
             ·
-            19 min read
+            18 min read
 
 Most content teams are watching the wrong thing.
 
-They add an llms.txt file, argue about whether to block GPTBot, and check whether their pages turn up in ChatGPT answers. Meanwhile, every month, their pages are quietly harvested by a system that shapes what large language models know about the world, and almost nobody tunes for it.
+They add an llms.txt file, argue about blocking GPTBot, and check if their pages turn up in ChatGPT answers. Meanwhile, every month, their pages are quietly harvested by a system that shapes what large language models know about the world, and almost nobody tunes for it.
 
 That system is Common Crawl. You're already in it. The only question worth asking is whether you're in it well.
 
@@ -2454,7 +3045,7 @@ What Common Crawl Is
 
 Common Crawl is a non-profit that has archived the public web since 2008. A new crawl lands roughly every month, fetches several billion pages, and stores them in a public archive on AWS. It's free. Anyone can use it.
 
-Here's why it matters: nearly every major model has trained on it. GPT, Claude, Gemini, Llama, the models now answering questions about your industry, your products, and your company, all learned from Common Crawl data.
+Here is why it matters: nearly every major model has trained on it. GPT, Claude, Gemini, Llama, the models now answering questions about your industry, your products, and your company, all learned from Common Crawl data.
 
 You're already in there. The thing in question is the quality of what they found.
 
@@ -2464,7 +3055,7 @@ For each page it crawls, Common Crawl writes three files. Knowing the difference
 
 WARC files hold the raw HTTP response: the complete HTML, every header, every byte. This is the archive. If your page was fetched, the whole thing is here, including every <meta> tag and every <script type="application/ld+json"> block.
 
-WAT files hold computed metadata extracted from the WARC. These are JSON records carrying your HTTP headers, every <meta> tag, every link, your canonical URLs, and your script references. No body text. No raw HTML. Just the structured signals. WAT files are roughly twenty times smaller than WARC files and far easier to process at scale, which is exactly why researchers start here.
+WAT files hold computed metadata extracted from the WARC. These are JSON records carrying your HTTP headers, every <meta> tag, every link, your canonical URLs, and your script references, but not the body text or the raw HTML. WAT output is roughly a twentieth the size of the matching WARC and far easier to process at scale, which is exactly why researchers start here.
 
 WET files hold extracted plain text. The HTML is stripped, the structure is gone. It's your words in a flat file, with nothing around them.
 
@@ -2480,9 +3071,9 @@ There's nothing accidental about this. Quality filtering in LLM pipelines select
 
 What the Crawler Does, and Does Not, Do
 
-It reads your sitemap. CCBot supports the Sitemap Protocol and follows any sitemap declared in your robots.txt. If your pages aren't in the sitemap, they depend entirely on inbound links to be found. That's a real problem for new or isolated content.
+It reads your sitemap. CCBot supports the Sitemap Protocol and follows any one declared in your robots.txt. If your pages aren't in the sitemap, they depend entirely on inbound links to be found. That's a real problem for new or isolated content.
 
-It respects robots.txt. Block CCBot and your pages drop out of the open training dataset. Common Crawl also runs a formal opt-out registry for site owners who want permanent removal. This part matters: blocking CCBot only affects Common Crawl. GPTBot, ClaudeBot, PerplexityBot, and Googlebot run entirely independently. They don't read Common Crawl's opt-out list. Each one must be blocked separately in robots.txt.
+It respects robots.txt. Block CCBot and your pages drop out of the open training dataset. Common Crawl also runs a formal opt-out registry for site owners who want permanent removal. This part matters: blocking CCBot only affects Common Crawl. GPTBot, ClaudeBot, PerplexityBot, and Googlebot run entirely independently. They don't read Common Crawl's opt-out list, so blocking them takes a separate robots.txt rule for each.
 
 The table shows what each major crawler actually does:
 
@@ -2494,7 +3085,7 @@ Uses the CC archive?
 CCBot
 Common Crawl
 Builds the open archive
-It's CC itself
+It is CC itself
 
 GPTBot
 OpenAI
@@ -2521,11 +3112,11 @@ Microsoft
 Search index and Copilot
 No, Microsoft's own
 
-Blocking CCBot removes you from the open research network. It doesn't make you invisible to any commercial AI product.
+Blocking CCBot removes you from the open datasets that researchers use. It doesn't make you invisible to any commercial AI product.
 
 It archives robots.txt itself as a dedicated dataset, kept separate from the main crawl, for researchers building robots.txt parsers.
 
-It crawls text/plain files (a small fraction of the most recent crawl), so a plain-text llms.txt listed in your sitemap can be archived, though only as part of that small fraction. But Common Crawl is a passive archive. It stores the bytes; it doesn't read llms.txt to change how it crawls.
+It crawls text/plain files, though they made up a small fraction of the most recent crawl, so a plain-text llms.txt listed in your sitemap can be archived, but only as one of that minority. But Common Crawl is a passive archive. It stores the bytes; it doesn't read llms.txt to change how it crawls.
 
 llms.txt, Honestly
 
@@ -2537,17 +3128,17 @@ In May 2026, Google added an Agentic Browsing category to Lighthouse 13.3. It sc
 
 Google's stated reason: "Without llms.txt, agents may spend more time crawling the site to understand its high-level structure and primary content."
 
-Here's the tension worth naming. Google Search has said plainly that llms.txt isn't needed for AI search visibility. Lighthouse now flags its absence as a failing audit. The most plausible reading is that Google is future-proofing for agentic browsing, where a software agent navigates your site on its own, without yet committing to it as a ranking signal for AI Overviews.
+Here is the tension worth naming. Google Search has said plainly that llms.txt isn't needed for AI search visibility. Lighthouse now flags its absence as a failing audit. The most plausible reading is that Google is future-proofing for agentic browsing, where a software agent navigates your site on its own, without yet committing to it as a ranking signal for AI Overviews.
 
 For Common Crawl specifically, nothing has changed. It'll store your llms.txt if it finds it, and it won't read it to change how it crawls. The training pipeline is unaffected either way.
 
-There's a transport detail that decides whether llms.txt reaches the crawl at all, and it's the piece most implementations get wrong. Common Crawl archives HTML pages from your sitemap reliably, but it captures only a small fraction of plain-text files. A llms.txt served as plain text is therefore the less certain route into the archive. The fix, and what I do on this site, is to serve llms.txt as an HTML page that wraps the plain-text content in a <pre> block. The crawler ingests it like any other HTML page, so the full text lands in the archive; the <pre> renders it faithfully as the readable plain-text file a person expects. The monospaced, code-block look is the point, not a fault: it's a rendering I chose, not anything Common Crawl did, and it gives you HTML reach and plain-text readability in one file. I walk through the same content before and after the wrap, with working Cloudflare Worker code, in Why llms.txt Probably Isn't Working. As llms.txt moves from a nicety to a file people expect to find, getting the transport right is what separates a file that reaches the crawl from one that quietly doesn't.
+There's a transport detail that decides whether llms.txt reaches the crawl at all, and it's the piece most implementations get wrong. Common Crawl archives HTML pages from your sitemap reliably, but it captures only a small fraction of plain-text files. A llms.txt served as plain text is therefore the less certain route into the archive. The fix, and what I do on this site, is to deliver llms.txt in an HTML page that wraps the plain-text content in a <pre> block. The crawler ingests it like any other HTML page, so the full text lands in the archive; the <pre> renders it faithfully as the readable plain-text file a person expects. The monospaced, code-block look is the point, not a fault: it's a rendering I chose, not anything Common Crawl did, and it gives you HTML reach and plain-text readability in one file. I walk through the same content before and after the wrap, with working Cloudflare Worker code, in Why llms.txt Probably Isn't Working. As llms.txt moves from a nicety to something people expect to find, getting the transport right decides whether yours reaches the crawl at all.
 
 So the practical position is: add llms.txt. It's now an official Lighthouse check, which means it shows up in performance reports, agency audits, and client dashboards. The cost is one file. The benefit is a pass on an increasingly visible check, plus genuine use for the agentic browsing that's coming regardless.
 
 For a worked example, mx.allabout.network/llms.txt shows what a complete file looks like: an explicit content policy, a link to a full-site corpus (llms-full.txt) for agents that want everything in one fetch, and direct links to the core technical specifications. That's the pattern to follow, a machine-readable briefing rather than a minimal placeholder.
 
-There's a larger point buried in that Lighthouse category. The Agentic Browsing checks put accessibility-tree integrity and layout stability alongside llms.txt. Google has now formally treated accessibility signals as agent-readiness signals: what makes a page usable by an agent is structurally the same as what makes it usable by a person with assistive technology. That idea is, at last, an official one.
+There's a larger point buried in that Lighthouse category. The Agentic Browsing checks put accessibility-tree integrity and layout stability alongside llms.txt. Google has now formally treated accessibility signals as agent-readiness signals: an agent and a person with assistive technology depend on the same page structure. The idea isn't new, but it is, at last, official.
 
 What Actually Works
 
@@ -2557,7 +3148,7 @@ Sitemaps declared in robots.txt are the main lever for crawl coverage. If CCBot 
 
 JSON-LD with schema.org vocabulary is preserved in the WARC, mined by Web Data Commons, and used in downstream training datasets. Tens of millions of domains now carry schema.org markup. The difference that counts is completeness and accuracy, not mere presence.
 
-Here's what a complete, useful JSON-LD block looks like for a product page, set against what most sites actually publish:
+Here is what a complete, useful JSON-LD block looks like for a product page, set against what most sites actually publish:
 
 <!-- What most sites publish: technically valid, practically useless -->
 <script type="application/ld+json">
@@ -2594,9 +3185,9 @@ Here's what a complete, useful JSON-LD block looks like for a product page, set 
 }
 </script>
 
-The first version tells a model that a product called "Widget Pro" exists. The second tells it what the product does, who makes it, what it costs, whether it's in stock, and how buyers rate it. When someone asks an AI "what's a good analytics dashboard under 50 pounds", only the second version carries enough signal to be relevant. The first is noise.
+The first version tells a model that a product called "Widget Pro" exists. The second tells it what the product does, who makes it, what it costs, whether it's in stock, and how buyers rate it. When someone asks an AI "what is a good analytics dashboard under 50 pounds", only the second version carries enough signal to be relevant. The first is noise.
 
-The same holds for every page type: Article, FAQPage, LocalBusiness, Event, Person. Partial markup beats none; complete markup is the target.
+The same holds for every page type: Article, FAQPage, LocalBusiness, Event, Person. Partial markup beats none, and completeness is the target.
 
 Complete, explicit meta tags are captured straight into the WAT files, queryable at scale with no HTML parsing. Open Graph, canonical, description, robots directives, all of it counts.
 
@@ -2606,17 +3197,17 @@ A broken sitemap is worse than it sounds, because the failure is silent. CCBot f
 
 https://index.commoncrawl.org/CC-MAIN-2026-21-index?url=yourdomain.com/*&output=json
 
-If key pages are missing or show a stale crawl date, a broken or incomplete sitemap is the likely cause. It's the kind of problem you can't see from the outside, which is most of what an MX audit exists to find. Of the optional fields a sitemap can carry, <lastmod>, <changefreq>, <priority>, only <lastmod> matters. CCBot uses it to decide whether to re-crawl a changed page. Set it accurately. The other two are largely ignored by every major crawler.
+If key pages are missing or show a stale crawl date, a broken or incomplete sitemap is the likely cause. It's the kind of problem you can't see from the outside, which is most of what an AX (agent experience) audit exists to find. Of the optional fields a sitemap can carry, <lastmod>, <changefreq>, <priority>, only <lastmod> matters. CCBot uses it to decide whether to re-crawl a changed page. Set it accurately. The other two are largely ignored by every major crawler.
 
-Canonical URLs matter because Common Crawl removes duplicates aggressively. If your content sits at several URLs with no canonical, one version survives, and not always the one you would choose.
+Canonical URLs matter because Common Crawl removes duplicates aggressively. If the same content is reachable at several URLs with no canonical, one version survives, and not always the one you would choose.
 
 Unique, well-structured content is the quality-filter threshold. Thin pages get dropped from training pipelines no matter how good their structured data is.
 
 Which Snapshots Models Actually Train On
 
-Not the latest. A mix, and the range is far wider than most people assume.
+Not the latest. A mix, and the range spans far more years than most people assume.
 
-C4, the dataset Google built for T5 in 2019, came from a single crawl snapshot. That was the early approach. Modern training datasets work differently. FineWeb, published by HuggingFace and now widely used, draws on 96 Common Crawl snapshots, essentially every crawl from 2013 to 2024. A Mozilla Foundation study found that a large majority of the major LLMs published between 2019 and 2023 were trained on filtered Common Crawl data, with GPT-3 deriving more than 80 percent of its training tokens from it.
+C4, the dataset Google built for T5 in 2019, came from a single crawl snapshot. That was the early approach. Modern training datasets work differently. FineWeb, published by HuggingFace and now widely used, draws on 96 Common Crawl snapshots, almost every crawl from 2013 to 2024. A Mozilla Foundation study found that a large majority of the major LLMs published between 2019 and 2023 were trained on filtered Common Crawl data, with GPT-3 deriving more than 80 percent of its training tokens from it.
 
 Dataset
 Used by
@@ -2642,27 +3233,27 @@ FineWeb
 Widely used
 96 snapshots, 2013 to 2024
 
-This has a consequence that's easy to miss. A model trained on FineWeb has seen your content as it stood in every monthly crawl going back a decade, not just the most recent one. The oldest version of a page often carries the most weight, not the newest, because it appears in the most snapshots.
+This has a consequence that's easy to miss. A model trained on FineWeb has seen your content as it stood in every monthly crawl going back a decade, not just the most recent one. The oldest version of a page often outweighs the newest, because it appears in more snapshots.
 
-Knowledge cutoffs aren't crawl cutoffs. If an AI states something confidently wrong about your company, something that was true in 2019 and corrected in 2021, it's usually because the 2019 version sits in far more training snapshots than the correction does. There's no mechanism for an update to travel backwards through a decade of archived crawls.
+Knowledge cutoffs aren't crawl cutoffs. If an AI states something confidently wrong about your company, something that was true in 2019 and corrected in 2021, it's usually because the 2019 version appears in far more training snapshots than the correction does. There's no mechanism for an update to travel backwards through a decade of archived crawls.
 
 Old Versions Never Go Away
 
-Each monthly crawl is a permanent snapshot. Common Crawl doesn't update or delete old records. If your 2023 page held wrong information, an outdated price, or no structured data at all, that version still sits in the archive, and in any training dataset built from that snapshot.
+Each monthly crawl is a permanent snapshot. Common Crawl doesn't update or delete old records. If your 2023 page held wrong information, an outdated price, or no structured data at all, that version is still in the archive, and in any training dataset built from that snapshot.
 
 When you update a page, the next crawl writes a new record in that month's archive. The old record stays exactly where it is. Both versions exist at once, in different monthly snapshots, indefinitely.
 
-The practical effect: models aren't trained on a single crawl. Major datasets combine many snapshots spanning years. The aggregate of your content across all of them is what shapes how AI systems understand you. If you spent three years publishing thin structured data and fixed it this month, models trained on the historical data still carry the impoverished version.
+The practical effect: models aren't trained on a single crawl. Major datasets combine many snapshots spanning years. The aggregate of your content across all of them is what shapes how AI systems understand you. If you spent three years publishing thin structured data and then fixed it, models trained on those older snapshots still carry the impoverished version.
 
 You can't fix the past. But every month you publish well-structured, clearly marked-up content, a better snapshot goes in. The effect compounds in both directions: good practice accumulates forward, old neglect accumulates backward.
 
-Setting <lastmod> accurately is the one lever that helps. It tells CCBot the page changed and should be re-crawled in the next cycle, giving the new version its best chance of landing in the next snapshot.
+Setting <lastmod> accurately is the one lever that helps. It tells CCBot the page changed and should be re-crawled in the coming cycle, giving the new version its best chance of landing in that snapshot.
 
 You Cannot Force a Re-Crawl
 
 No, and this surprises most people who are used to Google Search Console.
 
-There's no equivalent tool for Common Crawl. You can't submit a URL, request a re-crawl, or flag a correction. CCBot decides what to crawl and when, from its own internal scoring (Apache Nutch CrawlDB), weighted by inbound links, historical crawl frequency, and sitemap signals. It doesn't take requests.
+There's no equivalent tool for Common Crawl. You can't submit a URL, request a re-crawl, or flag a correction. CCBot decides what to crawl and when, from its own internal scoring (Apache Nutch CrawlDB), weighted by inbound links, how often it has fetched the page before, and sitemap signals. It doesn't take requests.
 
 The levers you do have:
 
@@ -2674,9 +3265,7 @@ robots.txt hygiene means making sure CCBot isn't blocked by accident. It's an ea
 
 The sitemap URL in robots.txt has to be current. If your sitemap moved and robots.txt still points at the old location, CCBot won't find it, and won't tell you.
 
-What you can't do: force an immediate re-crawl of a page, submit new URLs directly, request removal of a past snapshot (opt-out only stops future crawls), or see your place in the queue.
-
-If you update a page today, the earliest a new version reaches Common Crawl is the next monthly crawl, and only if CCBot picks your page that cycle, which isn't guaranteed for every page every month.
+What you can't do: force an immediate re-crawl of a page, submit new URLs directly, request removal of a past snapshot (opt-out only stops future crawls), or see your place in the queue. When you update a page, the earliest a new version reaches Common Crawl is the next monthly crawl, and only if CCBot picks your page that cycle, which isn't guaranteed for every page every month.
 
 The one feedback channel is the CC Index API:
 
@@ -2688,17 +3277,17 @@ Why AI Says Wrong Things About Your Company
 
 This is the question most teams eventually ask, and the answer almost always leads back here.
 
-When an AI states something wrong about your company, a product you discontinued, a price you changed, a description that hasn't been accurate for three years, it isn't hallucinating in the inventive sense. It's faithfully reporting what was true in the Common Crawl snapshots it trained on.
+When an AI states something wrong about your company, a product you discontinued, a price you changed, a description that hasn't been accurate for three years, it isn't hallucinating in the inventive sense. It's faithfully reporting what the Common Crawl snapshots in its training data said was true.
 
-The 2019 version of your pricing page lives in C4. The 2021 version of your about page is in Pile-CC. The 2022 version of your product description is in FineWeb. All of them, weighted by how many snapshots they appear in, shaped what the model learned about you.
+The 2019 version of your pricing page is in C4. The 2021 version of your about page is in Pile-CC. The 2022 version of your product description is in FineWeb. All of them, weighted by how many snapshots they appear in, shaped what the model learned about you.
 
-Corrections don't travel backwards. A model trained before your update knows nothing about the update. It won't find it unless it's retrained, which happens rarely and unpredictably, or unless it has live retrieval and your current page is structured well enough to surface.
+Corrections don't travel backwards. A model trained before your update knows nothing about it. It won't find it unless it's retrained, which happens rarely and unpredictably, or unless it has live retrieval and your current page is structured well enough to surface.
 
-So the structured data and explicit metadata on your current pages do two jobs at once: they shape future training runs, and they give the clearest possible signal to live-retrieval systems that can override stale training knowledge. Both matter. Both rest on the same underlying quality.
+So the structured data and explicit metadata on your current pages do two jobs at once: they shape future training runs, and they give the clearest possible signal to live-retrieval systems that can override stale training knowledge. Both matter. Both depend on the same underlying quality.
 
 What This Looks Like on My Own Site
 
-The checklist above isn't theory. Here's how it's applied on this site.
+The checklist above isn't theory. Here is how it's applied on this site.
 
 llms.txt and llms-full.txt are both published, served as HTML that wraps the plain text in a <pre> block. An agent that wants a high-level briefing reads llms.txt. An agent that wants everything, every published page in one file, fetches llms-full.txt. One request, full corpus, no crawling required. That's the pattern the convention intended and almost nobody implements. Serving them as HTML gets them ingested by Common Crawl like any other page; the <pre> renders them as the clean plain-text files a reader expects. HTML reach and plain-text readability, in one file.
 
@@ -2712,25 +3301,31 @@ An AI usage statement is published at /AI-USAGE.html. Not a footnote in the foot
 
 The lastmod dates are real. The sitemap reflects actual content-change dates, not a "now" timestamp regenerated on every build, so CCBot can re-crawl the changed pages first.
 
-None of this needed a new CMS, a platform change, or much engineering time. It needed decisions about which signals to make explicit, and then making them explicit.
+None of this needed a new CMS, a platform change, or much engineering time. It needed decisions about which signals to make explicit, and then the work of stating them.
 
 Where MX Fits
 
-Everything above, complete structured data, explicit metadata, accurate sitemaps, canonical signals, content that survives the quality filters, isn't a checklist. It's an architecture. MX is the discipline of building digital experiences that are machine-readable by design: not retrofitted, not half-compliant, but clear from the ground up. The visible page is for human eyes; the metadata behind it is for the machine; both say the same thing.
+Everything above, complete structured data, explicit metadata, accurate sitemaps, canonical signals, content that survives the quality filters, isn't a checklist. It's an architecture. MX is the discipline of building digital experiences that are machine-readable by design: not retrofitted, not half-compliant, but clear from the ground up. The visible page is for human eyes; the metadata behind it's for the machine; both say the same thing.
 
-There's a faster way to find out where you stand than reading your own pages and hoping. An MX audit runs every signal in this post against your live site: sitemap and robots.txt reachability, CCBot access, JSON-LD completeness, canonical coverage, llms.txt, and whether your lastmod dates are real. It tells you, page by page, where a crawler or a model would be left guessing about you, and it reports back in a form you can verify yourself rather than take on trust.
+There's a faster way to find out where you stand than reading your own pages and hoping. An AX audit runs every signal in this post against your live site: sitemap and robots.txt reachability, CCBot access, JSON-LD completeness, canonical coverage, llms.txt, and whether your lastmod dates are real. It tells you, page by page, where a crawler or a model would be left guessing about you, and it reports back in a form you can verify yourself rather than take on trust.
 
 If you're wondering how your company shows up in AI systems, or whether your content is in Common Crawl at all, start with an audit and I'll walk you through what it finds.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-29.
 
             About the author
 
             Tom Cranstoun
 
-            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Areas of focus: Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
 
           Continue the conversation
 
-          Want to talk through where your company sits on the agent-readiness curve?
+          Want to talk through where your organisation sits on the agent-readiness curve?
 
             - Get in touch
 
@@ -2738,4 +3333,4 @@ If you're wondering how your company shows up in AI systems, or whether your con
 
             - Join The Gathering
 
-<!-- x-mx-sourceHash: 3d70ce1bf7dec6eda1bab6e615e338ade2fd432008f46904e134bade3e607478 -->
+<!-- x-mx-sourceHash: cf776bb16e00c2c5c2f3a9d0fe595c07705c8141b4201faa8798fd78478a6cab -->

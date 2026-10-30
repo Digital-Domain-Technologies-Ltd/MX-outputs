@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Seven Steps to an Agentic Organisation, and Where Context Lives"
+description: "Seven steps take an organisation from AI tools run by hand to work that runs on agent output. Two of them differ from the usual pattern: context belongs on the file, not behind a department gateway, and a handoff between agents is checked by a script before a model judges it."
+author: Tom Cranstoun
+created: 2026-10-25
+modified: 2026-10-29
+type: blog-post
+tags: [agents, agentic-ai, maxine, harness, governance, provenance, determinism]
+mx:
+  mxSpecVersion: "0.9"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/seven-steps-to-an-agentic-organisation.md
+  purpose: "Set out a seven-step ladder from AI tool adoption to an organisation that runs on agent output: tool adoption, context on the file, harness first, headless, governance, agent to agent, orchestrated work. Two steps depart from the usual pattern. Step two puts context on the file itself rather than in department knowledge graphs behind API gateways, so it survives the file leaving the organisation. Step six puts a deterministic check before any model judgement at a handoff, and carries provenance with every handoff. Map each step to what MaXinE does as of October 2026 and name what is not built."
+  contextProvides:
+    - "The seven steps: tool adoption, context on the file, harness first, headless, governance, agent to agent, orchestrated work. Most organisations sit on step one."
+    - "Context held in department knowledge graphs behind gateways is lost when a file leaves the organisation. MX puts the context on the file, where any agent can read it."
+    - "A model judging every handoff between agents brings inference back at the point the harness removed it. A script checks what can be checked; a model judges the remainder."
+    - "MaXinE as of October 2026: a provider-agnostic AI router with a model registry and per-task routing and fallback, a deterministic internals guard decided before any model runs, an egress guard on outbound fetches, and a hosted instance that runs without a desktop."
+    - "Agent expiry dates and handoff checking are not MaXinE product features as of October 2026; our working repository applies them as working practice."
+  audience: [humans, machines]
+  stability: "stable"
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator. Before publishing, re-check the MaXinE claims at each step against the Maxine uber plan."
+  servedAt: https://mx.allabout.network/blog/drafts/seven-steps-to-an-agentic-organisation.html
+  x-mx-contentState: draft
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Seven steps take an organisation from AI tools run by hand to work that runs on agent output. Two of them differ from the usual pattern: context belongs on the file, not behind a department gateway, and a handoff between agents is checked by a script before a model judges it.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/seven-steps-to-an-agentic-organisation.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/seven-steps-to-an-agentic-organisation.html">
+  <meta property="og:title" content="Seven Steps to an Agentic Organisation, and Where Context Lives | CogNovaMX">
+  <meta property="og:description" content="Seven steps take an organisation from AI tools run by hand to work that runs on agent output. Two of them differ from the usual pattern: context belongs on the file, not behind a department gateway, and a handoff between agents is checked by a script before a model judges it.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-10-25">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Seven Steps to an Agentic Organisation, and Where Context Lives | CogNovaMX">
+  <meta name="twitter:description" content="Seven steps take an organisation from AI tools run by hand to work that runs on agent output. Two of them differ from the usual pattern: context belongs on the file, not behind a department gateway, and a handoff between agents is checked by a script before a model judges it.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Seven Steps to an Agentic Organisation, and Where Context Lives">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/seven-steps-to-an-agentic-organisation.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Seven Steps to an Agentic Organisation, and Where Context Lives | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Seven Steps to an Agentic Organisation, and Where Context Lives",
+        "headline": "Seven Steps to an Agentic Organisation, and Where Context Lives",
+        "description": "Seven steps take an organisation from AI tools run by hand to work that runs on agent output. Two of them differ from the usual pattern: context belongs on the file, not behind a department gateway, and a handoff between agents is checked by a script before a model judges it.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-10-25",
+        "dateModified": "2026-10-25",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/seven-steps-to-an-agentic-organisation.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1007,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/seven-steps-to-an-agentic-organisation.html",
+        "name": "Seven Steps to an Agentic Organisation, and Where Context Lives",
+        "url": "https://mx.allabout.network/blog/drafts/seven-steps-to-an-agentic-organisation.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#step-one-tool-adoption">Step One: Tool Adoption</a></li>
+        <li><a href="#step-two-context-on-the-file">Step Two: Context on the File</a></li>
+        <li><a href="#step-three-harness-first">Step Three: Harness First</a></li>
+        <li><a href="#step-four-headless">Step Four: Headless</a></li>
+        <li><a href="#step-five-governance">Step Five: Governance</a></li>
+        <li><a href="#step-six-agent-to-agent-checked-before-it-is-judged">Step Six: Agent to Agent, Checked Before It Is Judged</a></li>
+        <li><a href="#step-seven-orchestrated-work">Step Seven: Orchestrated Work</a></li>
+        <li><a href="#where-to-start">Where to Start</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1007">
+        <header class="article-header">
+          <h1>Seven Steps to an Agentic Organisation, and Where Context Lives</h1>
+          <div class="article-meta"
+               data-published="2026-10-25"
+               data-modified="2026-10-25"
+               data-reading-time="6 min">
+            <time datetime="2026-10-25">25 October 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>6 min read</span>
+          </div>
+        </header>
+
+
+<p>Most organisations are still at the first rung of the move to agents while they shop for technology built for the last. What they need first is the discipline of the middle steps.</p>
+<p>The seven steps are tool adoption, context on the file, harness first, going headless, governance, agent to agent, and orchestrated work. Two of them differ from the way this ladder is usually drawn, and both differences have one cause. A machine has no stake in its own errors, so whatever it relies on has to be checkable by whoever reads its work next.</p>
+<p>At each step I set out what MaXinE, our engine, does as of October 2026, and what it doesn't do yet.</p>
+<h2 id="step-one-tool-adoption" tabindex="-1">Step One: Tool Adoption</h2>
+<p>AI tools exist across the organisation and people run each one by hand. When someone closes their laptop, the automation stops. When they go on holiday, the workflow goes with them.</p>
+<p>There's a second loss at this step that's easy to miss. When a file leaves the tool that made it, its context stays behind. The next reader, person or machine, gets the content without knowing what it is, where it came from, or what its purpose is.</p>
+<h2 id="step-two-context-on-the-file" tabindex="-1">Step Two: Context on the File</h2>
+<p>The usual answer is a knowledge graph in each department, each behind its own API gateway, so that sales queries engineering through an interface and agents don't cross departmental boundaries.</p>
+<p>That works while the file stays inside the building. It fails the moment a file is emailed, published, attached to a contract or picked up by a supplier's agent. The context lived behind the gateway, and it stayed there when the file left.</p>
+<p>MX puts the context on the file itself: what it is, who made it, when, from what, and how it may be used. An agent reads that from the file, inside the organisation or outside it, with no API call. Departments can still keep their boundaries; the boundary is declared on the file, so an agent can see it rather than guess it.</p>
+<p>MaXinE already reads context this way. Asked about a web page, it answers from what the site declares: its MX head, the cog it links with <code>&lt;link rel=&quot;cog&quot;&gt;</code>, and the metadata on its images. That content is fetched through an egress guard and treated as untrusted data.</p>
+<h2 id="step-three-harness-first" tabindex="-1">Step Three: Harness First</h2>
+<p>Build the evaluation criteria, routing rules and quality gates before choosing a model. The harness is the asset; the model underneath is replaceable. If swapping the model breaks the system, what was built is a dependency, not a platform.</p>
+<p>Our own repository works to that rule: a check a script can do, a script does. The model gets only the decisions software can't make.</p>
+<p>MaXinE is built the same way. Its AI router puts every provider behind one interface, a model registry holds more than one model, and a routing policy picks a model per task with a fallback order. Some decisions never reach a model at all: when someone asks how the product works internally, a deterministic rule answers before the decider runs.</p>
+<h2 id="step-four-headless" tabindex="-1">Step Four: Headless</h2>
+<p>Every automation runs as a service, on a schedule or on a condition, without anyone logging in at nine in the morning. Organisations stall here, because nobody forces the move from a script on someone's desktop to a service that runs on its own.</p>
+<p>MaXinE works as a hosted instance without the desktop app, and answers questions through one endpoint. It's designed to go where the organisation already operates: on one machine, on an internal network, or with external inference switched on deliberately. Not every deployment mode in that design is built yet.</p>
+<h2 id="step-five-governance" tabindex="-1">Step Five: Governance</h2>
+<p>Every knowledge structure has access control from the start. Every agent has an owner, a declared boundary and an expiry date. An agent nobody has run for months, or whose evaluation scores have fallen below the line, is retired. A dead agent with live API keys is a liability.</p>
+<p>Governance describes how you run, not a certificate that you comply. Machine-readable records make an audit possible; they don't pass it for you.</p>
+<p>Agent expiry dates aren't a MaXinE product feature yet. We apply the practice in our own working repository: a person stays in command of each system, every AI call is logged centrally, and items that sit undecided are surfaced until someone decides them.</p>
+<h2 id="step-six-agent-to-agent-checked-before-it-is-judged" tabindex="-1">Step Six: Agent to Agent, Checked Before It Is Judged</h2>
+<p>Agent A finishes and hands off to agent B. The usual design puts a language model between them as a quality gate, judging every handoff.</p>
+<p>That brings inference back at exactly the point step three removed it. A model judging a model's output is a second opinion with the same blind spots. Instead, a script checks everything that can be checked, such as the schema and the required fields. A model judges only what remains. And every handoff carries its provenance, so B, or a person reviewing later, can see what A read and what it produced.</p>
+<p>Handoff checking between MaXinE agents isn't built yet. It's the next step on our ladder.</p>
+<h2 id="step-seven-orchestrated-work" tabindex="-1">Step Seven: Orchestrated Work</h2>
+<p>Workflows run semi or fully automated. Agents take the volume and people deal with the exceptions. The organisation runs on agent output.</p>
+<p>Authority stays with people. Agents act within a boundary a person has declared, and that same human decides when each system is used. Exceptions reach a human because the records at each step show where something didn't check out.</p>
+<h2 id="where-to-start" tabindex="-1">Where to Start</h2>
+<p>Most organisations reading this are at the first rung. Going headless is where the discipline shows, and I would put context on the file alongside it: an automation that runs on its own still needs to know what it's reading. Do that first, and everything that follows has something to check.</p>
+<p><em>Tom Cranstoun is an Agent Experience (AX) audit pioneer and the founder of Machine Experience (MX) and its community, and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

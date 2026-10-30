@@ -5,21 +5,26 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "The Letter the Law Says You Have to Send"
 description: "Employment agencies in New York must notify candidates when an automated tool influenced a hiring decision. Most of those letters are inaccessible PDFs with no provenance record. MX closes both gaps in one artefact."
 author: "Tom Cranstoun"
 created: "2026-06-17"
-modified: "2026-06-17"
+modified: 2026-10-09
 version: "1.0"
 type: "blog-post"
 tags: [employment, nyc-ll144, ada, hic, ai-decisions, pdf-accessibility, provenance, regulated-industries]
 mx:
+  mxSpecVersion: "0.9"
   audience: [business, humans]
+  x-mx-contentState: published
   refersTo:
-    - datalake/draft-site/blog/tagged-pdfs-are-mx.md
-    - datalake/draft-site/blog/who-answers-when-the-machine-decides.md
+    - datalake/draft-site/blog/cogs-and-metadata/tagged-pdfs-are-mx.md
+    - datalake/draft-site/blog/provenance/who-answers-when-the-machine-decides.md
   purpose: "Blog post making the employment agency AI letter use case concrete: NYC LL144 compliance, ADA-tagged PDFs, and Human-in-Command provenance in one artefact."
   stability: "stable"
+  contextProvides:
+    - "Employment agency AI letter use case: NYC Local Law 144, ADA-accessible PDFs, HIC provenance in one artefact"
   runbook: "Blog post targeting HR technology, employment agency, and regulated-industry readers. US-first framing (NYC LL144). Chatty register, Tom voice. Concrete use case: acceptance/rejection letter that is simultaneously ADA-tagged, AI-provenance-bearing, and HIC-declared."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/employment-agency-ai-letters.md
   generate:
@@ -27,6 +32,7 @@ mx:
     format: "pdf"
     output: "mx-outputs/pdf/blog-employment-agency-ai-letters.pdf"
     description: "Blog post PDF"
+  servedAt: https://mx.allabout.network/blog/employment-agency-ai-letters.html
 
 ---
 -->
@@ -68,11 +74,9 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Letter the Law Says You Have to Send">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -115,7 +119,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 914,
+        "wordCount": 899,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -140,13 +144,15 @@ mx:
   <link rel="stylesheet" href="../css/mx-blog.css">
 </head>
 <body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
   <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
 
+  <!-- Site Header -->
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
-        <img src="/images/logo.webp" srcset="/images/logo.webp 1x, /images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
       <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
@@ -154,15 +160,13 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
-        <a href="/audit/">Audit</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
       </nav>
     </div>
   </header>
-
-  <!-- Skip to Content Link (WCAG Accessibility) -->
 
   <main id="main">
     <section class="blog-page" aria-label="Article">
@@ -196,7 +200,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="914">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="899">
         <header class="article-header">
           <h1>The Letter the Law Says You Have to Send</h1>
           <div class="article-meta"
@@ -217,7 +221,7 @@ mx:
 </blockquote>
 <p>Most employers are not doing any of this correctly. And the ones trying are producing a letter that is, in almost every case, three different problems at once.</p>
 <h2 id="what-the-letter-has-to-do" tabindex="-1">What the letter has to do</h2>
-<p>It has to tell the candidate an automated tool was involved. It has to name the person or team accountable for that decision. It has to be accessible - the Americans with Disabilities Act applies to electronic documents as well as physical premises, and an untagged PDF is not accessible to a screen reader user. And it has to be something the employer can show to a regulator if asked: a record with a date, a policy reference, and a verifiable provenance chain.</p>
+<p>It has to tell the candidate an automated tool was involved. It has to name the person or team accountable for that decision. It has to be accessible - an untagged PDF is not accessible to a screen reader user. And it has to be something the employer can show to a regulator if asked: a record with a date, a policy reference, and a verifiable provenance chain.</p>
 <p>That is a lot to ask of a letter that most HR teams are still producing as a Word document converted to PDF and emailed as an attachment.</p>
 <h2 id="three-problems-in-one-document" tabindex="-1">Three problems in one document</h2>
 <p><strong>The accessibility problem.</strong> Most PDFs produced by HR teams are not tagged. An untagged PDF is a flat image to a screen reader - it reads as a series of characters with no structure, no reading order, and no logical navigation. A screen reader user cannot tell the subject line from the body. They cannot jump to the action the letter requires. They cannot determine which paragraph they are in. The ADA requires electronic communications to be accessible; an untagged PDF fails that test before anyone opens it.</p>
@@ -233,6 +237,14 @@ mx:
 <p>The two posts that cover the technical underpinnings: <a href="https://mx.allabout.network/blog/tagged-pdfs-are-mx.html">Tagged PDFs Are MX</a> on why the accessibility and machine-readability requirements converge on the same structure tree, and <a href="https://mx.allabout.network/blog/who-answers-when-the-machine-decides.html">Who Answers When the Machine Decides?</a> on the accountability gap the letter has to close.</p>
 <p>If you want to see what this looks like in practice - a real employment letter produced by the same pipeline - get in touch: <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>.</p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-09.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -265,7 +277,7 @@ mx:
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="/images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
         <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
       </div>
       <nav class="footer-links" aria-label="Site links">
@@ -274,7 +286,7 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
-          <li><a href="/audit/">Audit</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/reginald/">REGINALD</a></li>
           <li><a href="/the-gathering/">The Gathering</a></li>

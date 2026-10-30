@@ -5,11 +5,12 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Document OS vs Content OS: Why the Distinction Matters More Than You Think"
 description: "Sanity made a smart move when they stopped calling themselves a headless CMS and started calling themselves a Content Operating System. They're right that the language needed to change. They're wrong about what the operating system actually is."
 author: Tom Cranstoun
 created: "2026-06-15"
-modified: "2026-06-15"
+modified: 2026-10-19
 version: "1.1"
 type: blog-post
 tags:
@@ -20,16 +21,18 @@ tags:
   - agent-runtime
   - competitive-positioning
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
   audience:
     - humans
     - machines
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/document-os-vs-content-os.md
+  contextProvides:
+    - "Sanity launched a 'Content Operating System for the AI era' in March 2026. Key MX differentiator: Sanity documents are queryable by agents; MX COGs are executable by agents. Sanity Context (MCP endpoint) stores agent system prompts as editable Sanity documents, closest competitor move to MX doc-as-runtime, but the execution gap remains: documents never escape Sanity. COGs carry their own action block and can boot without any platform present."
   stability: stable
   purpose: "Counter Sanity's 'Content Operating System' positioning. Establish the distinction between queryable content (Sanity) and executable documents (MX COG). Claim 'Document OS' as MX's positioning language."
   servedAt: https://mx.allabout.network/blog/document-os-vs-content-os.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/document-os-vs-content-os.html
-  blogFilename: document-os-vs-content-os
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -70,11 +73,9 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Document OS vs Content OS: Why the Distinction Matters More Than You Think">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.1">
@@ -117,7 +118,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 717,
+        "wordCount": 727,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -158,6 +159,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -194,7 +196,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="717">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="727">
         <header class="article-header">
           <h1>Document OS vs Content OS: Why the Distinction Matters More Than You Think</h1>
           <div class="article-meta"
@@ -234,13 +236,21 @@ mx:
 <p><strong>The governance question they can't answer.</strong></p>
 <p>There's a second difference that matters more in the long run.</p>
 <p>Sanity Context stores your agent system prompts as editable documents inside Sanity Studio. Your agents, your system prompts, your content governance: all running through infrastructure one vendor controls. Every agent that reads your content needs a Sanity MCP URL. Every governance rule belongs to Sanity's schema. Documents never escape Sanity.</p>
-<p>MX COGs are an open standard governed by The Gathering, a community body independent of any single vendor. A COG carries its own executable logic, provenance, and routing in the document itself. It can boot without Sanity, without Google, without any platform being present. The document is the unit. The document is sovereign.</p>
+<p>MX COGs are published under the MIT licence, so anyone may implement them, and MX's future governance is proposed through The Gathering, so no single vendor owns it. A COG carries its own executable logic, provenance, and routing in the document itself. It can boot without Sanity, without Google, without any platform being present. The document is the unit. The document is sovereign.</p>
 <p>We're not building a better CMS. We're building the layer beneath the CMS that every agent needs to operate with confidence.</p>
 <p>The Content OS is a compelling product. The Document OS is an infrastructure standard.</p>
 <p>Those are different things. In ten years, the infrastructure wins.</p>
 <hr>
 <p><em>Tom Cranstoun leads Digital Domain Technologies Ltd, trading as CogNovaMX, and founded the Machine Experience (MX) practice. MX: The Handbook is available now. MX: The Protocols follows in 2026.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-19.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -282,7 +292,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

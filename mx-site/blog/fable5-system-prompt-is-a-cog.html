@@ -5,20 +5,26 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Anthropic's System Prompt Is a COG That Doesn't Know It's a COG"
 description: "The leaked Fable 5 system prompt is 1,585 lines of flat markdown. I asked an AI to rewrite it in MX format. It produced 13 COGs and a boot manifest. The fit was near-perfect, and that isn't a coincidence."
 author: Tom Cranstoun
 created: "2026-06-14"
-modified: "2026-06-14"
+modified: 2026-10-29
 version: "0.1"
 type: blog-post
 tags: [mx-os, cog, anthropic, claude, fable5, system-prompt, reginald, agent-architecture, provenance]
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
   audience: [humans, machines]
   purpose: "Use the Fable 5 system prompt leak as evidence that MX is the right structure for machine-executable documents. The decomposition was natural, not forced."
   stability: draft
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/fable5-system-prompt-is-a-cog.md
+  contextProvides:
+    - "The Fable 5 system prompt decomposes naturally into 13 MX COGs. The fit validates the MX architecture: the mental model Anthropic built into their monolith is the same one MX formalises."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/cogs-and-metadata/fable5-system-prompt-is-a-cog.md
   runbook: "Blog post. No special context required. Read straight through."
+  servedAt: https://mx.allabout.network/blog/fable5-system-prompt-is-a-cog.html
 
 ---
 -->
@@ -60,11 +66,9 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Anthropic's System Prompt Is a COG That Doesn't Know It's a COG">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="0.1">
@@ -107,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 895,
+        "wordCount": 898,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -132,13 +136,15 @@ mx:
   <link rel="stylesheet" href="../css/mx-blog.css">
 </head>
 <body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
   <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
 
+  <!-- Site Header -->
   <header class="site-header">
     <div class="header-inner">
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
-        <img src="/images/logo.webp" srcset="/images/logo.webp 1x, /images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
       <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
@@ -146,15 +152,13 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
-        <a href="/audit/">Audit</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
       </nav>
     </div>
   </header>
-
-  <!-- Skip to Content Link (WCAG Accessibility) -->
 
   <main id="main">
     <section class="blog-page" aria-label="Article">
@@ -189,7 +193,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="895">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="898">
         <header class="article-header">
           <h1>Anthropic's System Prompt Is a COG That Doesn't Know It's a COG</h1>
           <div class="article-meta"
@@ -249,8 +253,16 @@ mx:
 <p>MX doesn't need to compete with Claude or any other model. It just needs to be the layer where the contract lives, in public, in a format machines can read and humans can verify.</p>
 <p>The Fable 5 decomposition shows the layer is real. They built it without naming it. Someone needs to name it, standardise it, and govern it independently. The Gathering exists to do that work.</p>
 <hr>
-<p><em>The full 13-COG rewrite of the Fable 5 system prompt is available <a href="https://github.com/Digital-Domain-Technologies-Ltd/MX-hub/tree/main/mx-canon/mx-the-gathering/reference-implementations/fable5">in the MX-hub repository</a>.</em></p>
+<p><em>The full 13-COG rewrite of the Fable 5 system prompt is held as a reference implementation for The Gathering.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -283,7 +295,7 @@ mx:
   <footer class="site-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <img src="/images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
         <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
       </div>
       <nav class="footer-links" aria-label="Site links">
@@ -292,7 +304,7 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
-          <li><a href="/audit/">Audit</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
           <li><a href="/reginald/">REGINALD</a></li>
           <li><a href="/the-gathering/">The Gathering</a></li>

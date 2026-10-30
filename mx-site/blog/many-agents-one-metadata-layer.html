@@ -5,23 +5,27 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Many Agents, One Metadata Layer"
 description: "AWS Quick, Cowork, OpenClaw, ChatGPT, Claude, Perplexity, Cursor, Microsoft Copilot. Every new agent platform rebuilds the same context-discovery layer from scratch. The fix is MX metadata in every carrier and at every folder boundary, so the next agent that arrives does not have to start over."
 author: "Tom Cranstoun"
 created: 2026-04-30
-modified: 2026-04-30
+modified: 2026-10-01
 version: "1.0"
 
 type: blog-post
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/many-agents-one-metadata-layer.md
+  aiAssistance: "welcome"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/many-agents-one-metadata-layer.md
+  contextProvides:
+    - "AWS Quick, Cowork, OpenClaw, ChatGPT, Claude, Perplexity, Cursor, Microsoft Copilot. Every new agent platform rebuilds the same context-discovery layer from scratch. The fix is MX metadata in every carrier and at every folder boundary, so the next agent that arrives does not have to start over."
   stability: stable
   purpose: "AWS Quick, Cowork, OpenClaw, ChatGPT, Claude, Perplexity, Cursor, Microsoft Copilot. Every new agent platform rebuilds the same context-discovery layer from scratch. The fix is MX metadata in every carrier and at every folder boundary, so the next agent that arrives does not have to start over."
   servedAt: https://mx.allabout.network/blog/many-agents-one-metadata-layer.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/many-agents-one-metadata-layer.html
-  blogFilename: many-agents-one-metadata-layer
 
 ---
 -->
@@ -63,11 +67,9 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Many Agents, One Metadata Layer">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -151,6 +153,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -217,7 +220,7 @@ mx:
 <h2 id="what-each-agent-is-actually-doing" tabindex="-1">What each agent is actually doing</h2>
 <p>Strip away the marketing copy and every agent platform is, at the layer that matters, a context-discovery engine attached to an action engine. The action engines differ. The context-discovery engines do not, in any meaningful way. They all need the same five things from any document or URL they are asked to act on.</p>
 <p>Identity: what is this thing, and is it the current version. Provenance: where did it come from, who made it, when. Lifecycle: is the content still authoritative or has it been superseded. Affordances: what may an agent do with the content, and what should it do next. Semantics: what is this about, in machine-resolvable terms, so the agent can decide whether the document is relevant before reading the body.</p>
-<p>Provenance is the one primitive where declaration and verification diverge. An agent can read a provenance claim from MX metadata; it cannot confirm whether that claim is genuine without an external reference. That is <a href="https://reginald.allabout.network/" rel="noopener">Reginald</a>'s function, the public registry where documents are signed and registered so provenance is verifiable, not just declared. MX provides the substrate. Reginald provides the trust layer. Together they address all five discovery questions an agent asks, including the one that metadata alone cannot answer.</p>
+<p>Provenance is the one primitive where declaration and verification diverge. An agent can read a provenance claim from MX metadata; it cannot confirm whether that claim is genuine without an external reference. That is <a href="https://reginald.allabout.network/" rel="noopener">REGINALD</a>'s function, the public registry where documents are signed and registered so provenance is verifiable, not just declared. MX provides the substrate. REGINALD provides the trust layer. Together they address all five discovery questions an agent asks, including the one that metadata alone cannot answer.</p>
 <p>An agent that finds those five answers in metadata does its job in a tree walk. An agent that has to derive them from prose does its job in a vision-and-language reconstruction. The compute differential is one to two orders of magnitude per document. The error rate diverges similarly: the metadata path produces a deterministic answer, the reconstruction path produces an estimate that may or may not be correct, with errors that propagate downstream into citations, generated contracts, and customer support conversations the publisher never sees.</p>
 <p>Every new agent platform that ships in 2026 will pay these costs again. The publishers who reach the agents will pay them. The end users who read the agent's output will pay them. The grid that runs the inference will pay them in megawatts.</p>
 <h2 id="the-substrate-not-the-application" tabindex="-1">The substrate, not the application</h2>
@@ -248,6 +251,14 @@ mx:
 <p>None of these is a multi-quarter program. Each is a finite, scoped pass that an engineering team can complete and verify against a specific gate. The audit work I described in the previous post is the entry point: it tells you which fields are missing, which PDFs are untagged, which folders are bare. The discipline is what keeps the substrate consistent as the corpus grows.</p>
 <p>The agent platforms will keep launching. Another one will land while you are reading this. The substrate they all build on is the same substrate, and it is yours to ship.</p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-01.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -289,7 +300,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

@@ -5,22 +5,27 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Whose Standard Is It Anyway?"
 description: "Records provenance is too important to belong to vendors whose products generate the records. Why independent governance of standards matters, and the test buyers should apply."
 author: "Tom Cranstoun"
 created: 2026-05-20
-modified: 2026-05-21
+modified: 2026-10-23
 version: "1.0"
 
+type: blog-post
 mx:
-  status: published
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/governance/whose-standard-is-it-anyway.md
+  contextProvides:
+    - "Records provenance is too important to belong to vendors whose products generate the records. Why independent governance of standards matters, and the test buyers should apply."
   stability: stable
   purpose: "Records provenance is too important to belong to vendors whose products generate the records. Why independent governance of standards matters, and the test buyers should apply."
   servedAt: https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -61,11 +66,9 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Whose Standard Is It Anyway?">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -94,7 +97,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -108,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1179,
+        "wordCount": 1209,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -149,6 +152,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -163,7 +167,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -189,57 +193,68 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1179">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1209">
         <header class="article-header">
           <h1>Whose Standard Is It Anyway?</h1>
           <div class="article-meta"
                data-published="2026-05-20"
                data-modified="2026-05-20"
-               data-reading-time="6 min">
+               data-reading-time="7 min">
             <time datetime="2026-05-20">20 May 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>6 min read</span>
+            <span>7 min read</span>
           </div>
         </header>
 
 
 <p>Most conversations about standards focus on the technical specification. Which fields. Which signatures. Which file format. Almost nobody asks the question that determines whether a standard will still mean what it says in five years.</p>
 <p>Who owns it?</p>
-<p>A specification is a static document. Governance is the live process that decides what the specification means tomorrow, who is allowed to implement it, what happens when the sponsor's commercial interests diverge from the community's, and who can be cut off from the registry on a Monday morning. The technical detail can be excellent and the governance can still be broken. When that happens, the people who built on the standard discover, often too late, that they were building on someone else's business model.</p>
+<p>A specification is a static document. Governance is the live process that decides what the specification means tomorrow and who's allowed to implement it. It also decides what happens when the sponsor's commercial interests diverge from the community's, and who can be cut off from the registry on a Monday morning. The technical detail can be excellent and the governance can still be broken. When that happens, the people who built on the standard discover, often too late, that they were building on someone else's business model.</p>
 <p>Records provenance, the layer MX addresses, is too important to belong to vendors whose products generate the records. This post is the argument for why.</p>
 <h2 id="the-principle" tabindex="-1">The principle</h2>
-<p>A standard that determines whose content is trusted should not be controlled by anyone who profits from generating that content. The conflict of interest is structural, not personal. Decent sponsors do not change the equation, and an open specification does not change the equation. If the body that ratifies the standard is also a market participant in the layer above or below the standard, the standard will eventually bend toward the sponsor's interests. Sometimes slowly. Sometimes in a single keynote.</p>
-<p>A case from the last eighteen months shows the shape of the problem.</p>
+<p>A standard that determines whose content is trusted shouldn't be controlled by anyone who profits from generating it. The conflict of interest is structural, not personal. Decent sponsors don't change the equation, and neither does an open specification. If the body that ratifies the standard is also a market participant in the layer above or below the standard, the standard will eventually bend toward the sponsor's interests. Sometimes slowly. Sometimes in a single keynote.</p>
+<p>A case from the last eighteen months shows the problem plainly.</p>
 <h2 id="the-case-wordpress-and-the-kill-switch" tabindex="-1">The case: WordPress and the kill switch</h2>
 <p>WordPress powers somewhere around 43% of the web. The plugin directory at <a href="http://WordPress.org">WordPress.org</a> is the supply chain that keeps those sites secure and functional. WordPress is open source. The WordPress trademark is owned by the WordPress Foundation. The <a href="http://WordPress.org">WordPress.org</a> domain, the actual distribution infrastructure, is owned personally by Matt Mullenweg, co-founder of WordPress and CEO of Automattic.</p>
-<p>In September 2024 Mullenweg used a keynote at WordCamp US to complain that competitor WP Engine was not contributing enough to the WordPress ecosystem. Within weeks, WP Engine's access to <a href="http://WordPress.org">WordPress.org</a> was blocked. The Advanced Custom Fields plugin, owned by WP Engine and used by hundreds of thousands of sites, had its slug taken over by an Automattic-controlled fork. A US court granted WP Engine a preliminary injunction in December 2024 forcing the restoration of access and ownership.</p>
+<p>In September 2024 Mullenweg used a keynote at WordCamp US to complain that competitor WP Engine wasn't contributing enough to WordPress. Within weeks, WP Engine's access to <a href="http://WordPress.org">WordPress.org</a> was blocked. The Advanced Custom Fields plugin, owned by WP Engine and used by hundreds of thousands of sites, had its slug taken over by an Automattic-controlled fork. A US court granted WP Engine a preliminary injunction in December 2024 forcing the restoration of access and ownership.</p>
 <p>A group of WordPress contributors then asked Mullenweg to propose community-minded governance reforms. Mullenweg responded by deactivating their <a href="http://WordPress.org">WordPress.org</a> accounts.</p>
-<p>The technical specification of WordPress did not change during any of this. The governance did, in public, in real time. Enterprise legal teams started phoning agency CEOs to ask whether WordPress was still a defensible platform choice. Karim Marucchi, CEO of Crowd Favorite, later said the question they put to him was direct: why should we trust WordPress if one person can unilaterally make changes that put our supply chain at risk, with no apparent checks and balances?</p>
+<p>The technical specification of WordPress didn't change during any of this. The governance did, in public, in real time. Enterprise legal teams started phoning agency CEOs to ask whether WordPress was still a defensible platform choice. Karim Marucchi, CEO of Crowd Favorite, later said the question they put to him was direct. Why should we trust WordPress if one person can unilaterally make changes that put our supply chain at risk, with no apparent checks and balances?</p>
 <p>There was no answer.</p>
 <h2 id="the-structural-failure-modes" tabindex="-1">The structural failure modes</h2>
-<p>The WordPress story is one shape of governance failure, but it is not the only shape. Patterns recur across the standards bodies in this space, and they are worth naming directly so buyers know what to look for.</p>
+<p>The WordPress story is one form of governance failure, but not the only one. Patterns recur across the standards bodies in this space, and they're worth naming directly so buyers can spot them.</p>
 <p><strong>Capture by infrastructure ownership.</strong> The specification is open, but the domain, the registry, the certificate authority, or the directory service is owned by a single party. The <a href="http://WordPress.org">WordPress.org</a> pattern. It looks fine until the owner decides it isn't.</p>
-<p><strong>Capture by sponsor concentration.</strong> The specification is governed by a coalition, but the coalition is dominated by vendors with commercial interests in adjacent products. It works while the sponsors agree, and produces stalemates or unilateral extensions when they don't.</p>
-<p><strong>Capture by founder dependency.</strong> The specification is excellent, but the project depends on a small group of founders who can be politically exhausted, commercially co-opted, or simply move on. Independent foundation governance helps, but it is not a guarantee.</p>
-<p>A buyer evaluating a standard should ask, in order: who owns the infrastructure the standard runs on, who funds the governance body, and what happens to the standard if the founders leave. If the answers are uncomfortable, the standard is not as independent as the marketing claims.</p>
+<p><strong>Capture by sponsor concentration.</strong> The specification is governed by a coalition dominated by vendors with commercial interests in adjacent products. It works while the sponsors agree, and produces stalemates or unilateral extensions when they don't.</p>
+<p><strong>Capture by founder dependency.</strong> The specification is excellent, but the project depends on a small group of founders who can be politically exhausted, commercially co-opted, or simply move on. Independent foundation governance helps, but it isn't a guarantee.</p>
+<p>A buyer evaluating a standard should ask, in order: who owns the infrastructure the standard runs on, who funds the governance body, and what happens to the standard if the founders leave. If the answers are uncomfortable, the standard isn't as independent as the marketing claims.</p>
 <h2 id="how-mx-is-governed" tabindex="-1">How MX is governed</h2>
 <p>MX is structured to fail differently.</p>
 <p>The standard, COG (the Community Owned Governance Standard), is open. The format is Markdown, YAML, and HTML. No proprietary container. No required toolchain. A publisher with a text editor and a static host can produce a compliant record.</p>
-<p>The registry protocol, REGINALD, is open. Anyone can run a REGINALD instance. The Gathering operates a public registry. Enterprises run private registries behind their own firewalls. Closed-network and air-gapped REGINALD deployments are explicitly supported at Level 5 of the MX market chain, because regulated industries cannot send signed records to a public service.</p>
-<p>The standards body, The Gathering Administration Ltd, is an independent UK company whose sole purpose is to govern the MX standard. The Gathering does not sell consultancy, does not sell tooling, does not sell hosting, and does not certify implementations it has commercial stakes in. Implementation work happens elsewhere, including in my own firm; the boundary between standards body and market participant is structural, not aspirational.</p>
+<p>The registry protocol is published, and anyone can run their own implementation of it. REGINALD is CogNovaMX's own implementation and stays proprietary; its service is the public registry for hosted COGs. Enterprises run private registries behind their own firewalls. Closed-network and air-gapped deployments are explicitly supported at Level 5 of the MX market chain, because regulated industries can't send signed records to a public service.</p>
+<p>The standards body, The Gathering Administration Ltd, is an independent UK company through which MX's future governance is proposed. The Gathering doesn't sell consultancy, doesn't sell tooling, doesn't sell hosting, and doesn't certify implementations it has commercial stakes in. Implementation work happens elsewhere, including in my own firm; the boundary between standards body and market participant is structural, not aspirational.</p>
 <p>The signing primitive, Ed25519 over canonical bytes, is the same cryptography modern signing standards use generally. Standards differ from each other in their governance, not in their mathematics.</p>
-<p>The identity layer, did:web by default, distributes trust rather than concentrating it. Each publisher hosts their own DID document on their own domain; resolution uses DNS and HTTPS that already run everywhere. A publisher with sloppy ops is genuinely less trustworthy than they would be under a shared directory, and that cost has to be named honestly. Failure modes are local rather than global, and the dependencies are public, checkable with any standard library, and documented by IETF and the CA/Browser Forum. When a deployment needs a stronger binding from DID to legal entity, W3C Verifiable Credentials sit on top of the base protocol.</p>
+<p>The identity layer, did:web by default, distributes trust rather than concentrating it. Each publisher hosts their own DID document on their own domain; resolution uses DNS and HTTPS that already run everywhere. A publisher with sloppy ops is genuinely less trustworthy than they would be under a shared directory, and that cost has to be named. Failure modes are local rather than global, and the dependencies are public, checkable with any standard library, and documented by IETF and the CA/Browser Forum. When a deployment needs a stronger binding between a DID and a legal entity, W3C Verifiable Credentials add it on top of the base protocol.</p>
 <p>None of this makes MX immune to the failure modes above. A standards body can still be captured. Infrastructure can still concentrate. Founders can still leave. What it does mean is that the design choices have been made with the failure modes in mind, rather than discovered after the dispute starts.</p>
 <h2 id="the-test" tabindex="-1">The test</h2>
-<p>The useful question for anyone evaluating an open standard is not &quot;is the specification good?&quot; The specification is almost always good. The useful questions are these.</p>
-<p>If the sponsor went bankrupt tomorrow, would the standard survive?</p>
-<p>If the sponsor's commercial interests shifted, would the standard bend?</p>
-<p>If the registry operator decided to block a participant, would the participant have recourse?</p>
-<p>If the answers are not clearly yes, yes, and yes, the standard is something other than what its marketing says it is. Use it anyway if it earns its keep, but understand what you are buying and price the governance risk into the decision.</p>
+<p>The useful question for anyone evaluating an open standard isn't &quot;is the specification good?&quot; The specification is almost always good. The useful questions are these.</p>
+<ul>
+<li>If the sponsor went bankrupt tomorrow, would the standard survive?</li>
+<li>If the sponsor's commercial interests shifted, would the standard bend?</li>
+<li>If the registry operator decided to block a participant, would they have recourse?</li>
+</ul>
+<p>If the answers aren't clearly yes, yes, and yes, the standard is something other than what its marketing says it is. Use it anyway if it earns its keep, but understand what you're buying and price the governance risk into the decision.</p>
 <p>The CMS industry is currently learning this lesson the expensive way. The institutions that learn it first will be the ones whose content infrastructure is still working when the next dispute starts.</p>
+<p>The commitments that answer these questions for MX are public rather than promised: <a href="https://mx.allabout.network/blog/governance/not-the-main-sponsor.html">Not the Main Sponsor</a> sets out the funding cap, the founder's lack of a veto, and the conditions for the donation, and the standard itself is written in the open at <a href="https://tg.community">The Gathering</a>.</p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-23.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -247,7 +262,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -281,7 +296,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -298,5 +316,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

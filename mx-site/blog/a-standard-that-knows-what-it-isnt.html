@@ -10,12 +10,13 @@ title: "A Standard That Knows What It Isn't"
 description: "A preview of Chapter 21 of MX: The Protocols, why the MX standard stays small, defers to DCAT, Schema.org, EXIF, and IETF, and why that restraint is the architecture, not a limitation."
 author: "Tom Cranstoun"
 created: 2026-04-19
-modified: 2026-04-19
+modified: 2026-10-01
 version: "1.0"
 
 type: blog-post
 mx:
   mxSpecVersion: "0.9"
+  x-mx-contentState: published
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/foundations/a-standard-that-knows-what-it-isnt.md
   contextProvides:
@@ -24,8 +25,6 @@ mx:
   purpose: "A preview of Chapter 21 of MX: The Protocols, why the MX standard stays small, defers to DCAT, Schema.org, EXIF, and IETF, and why that restraint is the architecture, not a limitation."
   servedAt: https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html
-  blogFilename: a-standard-that-knows-what-it-isnt
 
 ---
 -->
@@ -153,6 +152,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -221,7 +221,7 @@ mx:
 <p>The Gathering, the independent, community-governed body behind MX, currently has four proposed standards awaiting community ratification via Stream. None is final. All are stable enough to build against, and all will evolve through public review.</p>
 <p>MXS-01 Core Metadata (proposed): the identity vocabulary every MX-aware document carries. Title, author, created, modified, version, description, tags, audience, status, license, maintainer. Plus the two-zone frontmatter model that keeps Zone 1 for document identity and Zone 2 (the <code>mx:</code> block) for operational metadata. Three conformance levels: Level 1 is the baseline every MX document must satisfy; Level 2 adds complete metadata; Level 3 adds AI-specific optimisation.</p>
 <p>MXS-02 Extensions (proposed): the namespace policy. Standard fields carry no prefix and belong to The Gathering. Vendor public extensions use <code>x-vendor-</code> (for CogNovaMX, <code>x-mx-</code>). Vendor private extensions add a <code>-p-</code> marker (for CogNovaMX, <code>x-mx-p-</code>). The prefix is the policy: every reader of a cog can tell at a glance whether a field belongs to the standard, to a named vendor, or to a vendor's operational private layer. The convention follows HTTP custom-header practice.</p>
-<p>MXS-03 Provenance (proposed): attribution, trust, maintenance, and decision-record references. The fields that establish who created content, how it was derived, who maintains it, and what governance decisions shaped it. This is the layer that turns a cog from &quot;some text claiming to be a guide&quot; into &quot;a guide with a traceable origin and a nominated maintainer.&quot; The declared fields in MXS-03 are verified at registry scale by <a href="https://reginald.allabout.network/" rel="noopener">Reginald</a>, the public registry where cogs are signed and registered so any agent can confirm provenance is genuine, not just claimed. MX makes content machine-readable. Reginald makes it machine-trustworthy.</p>
+<p>MXS-03 Provenance (proposed): attribution, trust, maintenance, and decision-record references. The fields that establish who created content, how it was derived, who maintains it, and what governance decisions shaped it. This is the layer that turns a cog from &quot;some text claiming to be a guide&quot; into &quot;a guide with a traceable origin and a nominated maintainer.&quot; The declared fields in MXS-03 are verified at registry scale by <a href="https://reginald.allabout.network/" rel="noopener">REGINALD</a>, the public registry where cogs are signed and registered so any agent can confirm provenance is genuine, not just claimed. MX makes content machine-readable. REGINALD makes it machine-trustworthy.</p>
 <p>MXS-04 Carrier Formats (proposed): code. Source files, JavaScript, TypeScript, Python, Go, shell, CSS, carry metadata through their native mechanisms (JSDoc, CSS comments, shell comment blocks, SQL comment blocks). MXS-04 specifies the field vocabulary for those carriers: function-level annotations, API surface metadata, test metadata, inline code annotations. Databases and media are explicitly not in scope.</p>
 <p>That is the entire active family. Two earlier drafts were deferred. An AI/Agent Policy draft was shelved because adjacent efforts at W3C, NIST, and IEEE are still converging, and standardizing an MX-specific AI vocabulary now would risk forking. A Profile-Specific Metadata draft was withdrawn after the canon split because the profiles it was going to cover had either moved to MXS-04 or to external standards.</p>
 <h2 id="the-three-file-canon" tabindex="-1">The three-file canon</h2>
@@ -302,6 +302,14 @@ mx:
 <p><em>MX: The Protocols publishes in January 2027. Chapter 21 is &quot;The Fields and the Standards.&quot; Source drafts: <a href="https://github.com/ddttom/mx-shared-gathering">github.com/ddttom/mx-shared-gathering</a>. Machine-readable canon: <code>/canon/</code>. Stream RFC drafts: <a href="https://github.com/TG-Community">github.com/TG-Community</a> (the four <code>draft-cranstoun-mx-*</code> repos). Community review: <a href="https://tg.community">tg.community</a> · <a href="https://stream.tg.community">stream.tg.community</a>. Book reference: Appendix M and Appendix U of <em>The Protocols</em>.</em></p>
 
 
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-01.</li>
+          </ul>
+        </footer>
+
       </article>
 
 
@@ -342,7 +350,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

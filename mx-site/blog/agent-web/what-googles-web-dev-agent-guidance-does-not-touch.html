@@ -5,31 +5,30 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "What Google's web.dev agent guidance does not touch"
 description: "Google's 1 May 2026 web.dev guide tells developers to make their pages agent-friendly. The advice is sound. It also stops at the rendered HTML page. Provenance, authentication, rights, lifecycle, and off-web carriers are not in scope. MX is."
 author: "Tom Cranstoun"
 created: 2026-05-08
-modified: 2026-06-13
+modified: 2026-10-15
 version: "1.1"
 
+type: blog-post
+tags: [agent-web, mx, provenance, google, mx-foundations, the-gathering]
 mx:
-  status: published
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  quotes:
+    - "Everything we suggest to make a site \"agent-ready\" also makes sites better for humans."
+  x-mx-contentState: published
   audience: [humans, machines]
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/what-googles-web-dev-agent-guidance-does-not-touch.md
+  contextProvides:
+    - "Google's 1 May 2026 web.dev guide tells developers to make their pages agent-friendly. The advice is sound. It also stops at the rendered HTML page. Provenance, authentication, rights, lifecycle, and off-web carriers are not in scope. MX is."
   stability: stable
   purpose: "Google's 1 May 2026 web.dev guide tells developers to make their pages agent-friendly. The advice is sound. It also stops at the rendered HTML page. Provenance, authentication, rights, lifecycle, and off-web carriers are not in scope. MX is."
   servedAt: https://mx.allabout.network/blog/agent-web/what-googles-web-dev-agent-guidance-does-not-touch.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/what-googles-web-dev-agent-guidance-does-not-touch.html
-  blogFilename: what-googles-web-dev-agent-guidance-does-not-touch
-  tags:
-    - agent-web
-    - mx
-    - provenance
-    - google
-    - mx-foundations
-    - the-gathering
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -70,11 +69,9 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="What Google's web.dev agent guidance does not touch">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.1">
@@ -103,7 +100,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -117,7 +114,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1042,
+        "wordCount": 1022,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -158,6 +155,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -172,7 +170,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -198,7 +196,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1042">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1022">
         <header class="article-header">
           <h1>What Google's web.dev agent guidance does not touch</h1>
           <div class="article-meta"
@@ -214,48 +212,56 @@ mx:
         </header>
 
 
-<p>On 1 May 2026 Google's developer platform published a guide titled <em>Build agent-friendly websites</em>, at <a href="https://web.dev/articles/ai-agent-site-ux" rel="noopener">web.dev/articles/ai-agent-site-ux</a>. The article asks developers to think about how AI agents experience their pages, and gives eight specific things to do. The advice is sound. It is also a useful signal about where the conversation is moving: agent-readiness is now a mainstream developer concern, not a niche held by accessibility specialists or structured-data engineers.</p>
-<p>What the guide is, and what it is not, are both worth being precise about. It tells developers how to make a rendered HTML page legible to an agent that arrives at the URL. It does not tell publishers how to make the underlying file, the contract, the policy, the recorded talk, the dataset, the manuscript, legible to any agent that reads it without ever touching the page. That is a different problem, with a different scope, and Google's guide does not pretend otherwise.</p>
-<p>This post is a careful read of what the guide includes, what it deliberately leaves out, and where Machine Experience (MX) picks up the work the guide does not address.</p>
+<p>On 1 May 2026 Google's developer platform published a guide titled <em>Build agent-friendly websites</em>, at <a href="https://web.dev/articles/ai-agent-site-ux" rel="noopener">web.dev/articles/ai-agent-site-ux</a>. The article asks developers to think about how AI agents experience their pages, and gives eight specific things to do. The advice is sound. It's also a useful signal about where the conversation is moving: agent-readiness is now a mainstream developer concern, not a niche held by accessibility specialists or structured-data engineers.</p>
+<p>What the guide is, and what it isn't, both deserve precision. It tells developers how to make a rendered HTML page legible to an agent that arrives at the URL. It doesn't tell publishers how to make the underlying file, the contract, the policy, the recorded talk, the dataset, the manuscript, legible to any agent that reads it without ever touching the page. That's a separate problem with its own scope, and Google's guide doesn't pretend otherwise.</p>
+<p>This post is a careful read of what the guide includes, what it deliberately leaves out, and where Machine Experience (MX) picks up the work Google leaves unaddressed.</p>
 <h2 id="what-the-guide-covers" tabindex="-1">What the guide covers</h2>
 <p>The guide is organised under three section headings: <em>How agents view your site</em>, <em>Build agent-friendly websites</em>, and <em>Next steps</em>. The concrete recommendations are eight specific properties of the rendered HTML page:</p>
 <ol>
 <li>Every necessary action, human or agent, is reflected in the interface.</li>
-<li>Page layout is stable, so an agent that takes screenshots is not confused by buttons that move between product categories.</li>
+<li>Page layout is stable, so an agent that takes screenshots isn't confused by buttons that move between product categories.</li>
 <li>No ghost elements or transparent overlays that hide interactive elements.</li>
 <li>Actionable elements use semantic HTML, prefer <code>&lt;button&gt;</code> and <code>&lt;a&gt;</code> over modified <code>&lt;div&gt;</code> and <code>&lt;span&gt;</code>.</li>
-<li>Where semantic HTML is not possible, supply <code>role</code> and <code>tabindex</code>.</li>
+<li>Where semantic HTML isn't possible, supply <code>role</code> and <code>tabindex</code>.</li>
 <li>Set <code>cursor: pointer</code> in CSS as an actionability signal.</li>
 <li>Add <code>for</code> on <code>&lt;label&gt;</code> tags to bind them to inputs.</li>
-<li>Interactive elements have a visible area larger than 8 square pixels, so they are not filtered out by visual analysis.</li>
+<li>Interactive elements have a visible area of more than 8 square pixels, so they aren't filtered out by visual analysis.</li>
 </ol>
-<p>Every item is a property of the rendered page: the DOM, the accessibility tree, the CSS, the choice of semantic element, the visual stability of the layout. The guide assumes the agent is looking at a page through a browser-like interface, either via the DOM or via screenshots, and tells the developer how to make that page legible.</p>
+<p>Every item is a property of the rendered page: the DOM, the accessibility tree, the CSS, the choice of semantic element, the visual stability of the layout. The guide assumes the agent is looking at a page through a browser-like interface, either via the DOM or via screenshots, and tells the developer how to make it legible.</p>
 <h2 id="googles-own-equivalence" tabindex="-1">Google's own equivalence</h2>
 <p>The strongest single line in the guide is Google's own equivalence statement:</p>
 <blockquote>
 <p>Everything we suggest to make a site &quot;agent-ready&quot; also makes sites better for humans.</p>
 </blockquote>
-<p>That is exactly right, and it is the answer to the question some readers will be asking: <em>why isn't Google addressing the rest of it?</em> Because the rest of it is not page UX. Provenance, authentication, rights, lifecycle, and off-web carriers are different surface areas, with different conventions, owned by different working groups. Google's web.dev team is publishing what is in scope for web.dev. They are not promising more; they are also not arguing the rest doesn't matter.</p>
+<p>That's exactly right, and it's the answer to the question some readers will be asking: <em>why isn't Google addressing the rest of it?</em> Because everything else isn't page UX. Provenance, authentication, rights, lifecycle, and off-web carriers are separate surface areas, each with its own conventions and owned by other working groups. Google's web.dev team is publishing what's in scope for web.dev. They aren't promising more; they're also not arguing the rest doesn't matter.</p>
 <h2 id="what-the-guide-does-not-touch" tabindex="-1">What the guide does not touch</h2>
 <p>Five things, by name or by substance, are absent from the article:</p>
 <ul>
-<li><strong>Provenance.</strong> Where the content came from, who authored it, when it was first published, and the unbroken chain back to source. No mention of C2PA. No mention of content credentials. No mention of signed manifests.</li>
+<li><strong>Provenance.</strong> Where the content came from, who authored it, when it was first published, and the unbroken chain back to source. The article doesn't mention C2PA, content credentials, or signed manifests.</li>
 <li><strong>Authentication and attestation.</strong> No mention of cryptographic signing of content, of integrity signatures, of publisher identity attached to the asset itself.</li>
-<li><strong>Rights and licensing.</strong> No license metadata. No usage permissions for AI training or inference. No SPDX, no Creative Commons vocabulary, no rights expression.</li>
+<li><strong>Rights and licensing.</strong> The article mentions no licence metadata, no usage permissions for AI training or inference, and no rights vocabulary such as SPDX or Creative Commons.</li>
 <li><strong>Lifecycle.</strong> No versioning, no supersession, no retraction, no deprecation. An agent has no way to know that a previously authoritative document has been replaced.</li>
 <li><strong>Off-web carriers.</strong> The guidance is HTML-only. It says nothing about PDF, DOCX, EPUB, MP4, audio files, CSV, ICS feeds, RSS, or Markdown, the formats in which most enterprise, government, and scholarly content actually lives.</li>
 </ul>
 <p>This is the MX scope. MX picks up exactly where the guide stops.</p>
 <h2 id="google-covered-the-page-mx-covers-the-file" tabindex="-1">Google covered the page. MX covers the file</h2>
-<p>That is the framing in one line. Google's 1 May 2026 web.dev guidance is accessibility hygiene for the rendered HTML page, semantic elements, the accessibility tree, stable layouts. MX adds what the page cannot carry on its own: <strong>provenance</strong>, <strong>authentication</strong>, <strong>rights</strong>, <strong>lifecycle</strong>, and the <strong>off-web carriers</strong> (PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, Markdown) where most of the world's content actually lives.</p>
-<p>MX is not a competitor to Google's guidance, and the guidance is not a competitor to MX. They share an audience, they share a goal, and they sit at different layers of the same stack. A site that follows the web.dev guide and carries MX declarations is doing both jobs. A site that does only one is doing half.</p>
-<p>A month later, Google drew the same boundary itself. On 5 June 2026 its Search Central docs published an official guide to <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">optimizing for generative AI features</a>, which named GEO as a category and then debunked most of what is sold under it: no llms.txt, no special AI schema, no &quot;AI chunking&quot;, no machine-flavoured rewrite of the page. What it left standing was the page done well, which is exactly the scope of this web.dev guide. Neither document reaches the file once it leaves the page, and neither claims to. That absence is the same one this post is about.</p>
+<p>That's the framing in one line. Google's 1 May 2026 web.dev guidance is accessibility hygiene for the rendered HTML page: semantic elements, the tree that assistive technology reads, stable layouts. MX adds what the page can't carry on its own: <strong>provenance</strong>, <strong>authentication</strong>, <strong>rights</strong>, <strong>lifecycle</strong>, and the <strong>off-web carriers</strong> (PDF, DOCX, EPUB, MP4, audio, CSV, ICS, RSS, Markdown) where most of the world's content actually lives.</p>
+<p>MX isn't a competitor to Google's guidance, and Google isn't competing with MX. They serve one audience toward one goal, and they sit at different layers of the same stack. A site that follows the web.dev guide and carries MX declarations is doing both jobs. A site that does only one is doing half.</p>
+<p>A month later, Google drew the same boundary itself. On 5 June 2026 its Search Central docs published an official guide to <a href="https://developers.google.com/search/docs/fundamentals/ai-optimization-guide" rel="noopener">optimising for generative AI features</a>, which named GEO as a category and then debunked most of what is sold under it: no llms.txt, no special AI schema, no &quot;AI chunking&quot;, no machine-flavoured rewrite of the page. What it left standing was the page done well, which is exactly the scope of this web.dev guide. Neither document reaches the file once it leaves the page, and neither claims that reach. That absence is the subject of this post.</p>
 <h2 id="what-this-means-for-your-content" tabindex="-1">What this means for your content</h2>
-<p>If your job is web, design, development, performance, the web.dev guide is essential reading. Implement what it says. The eight recommendations are real work and real wins.</p>
-<p>After that, ask the harder question: what happens when an agent reads your content where the page is not present? The contract attached to a procurement portal email. The policy file lifted into a regulatory submission. The training video extracted from your course library. The dataset published once and indexed forever. Each of those is a file an agent will read in isolation, away from the page that gave it context.</p>
-<p>For those files, MX is the discipline. <a href="https://reginald.allabout.network/" rel="noopener">REGINALD</a> is the public registry that makes the declarations verifiable - <strong>MX makes content machine-readable; REGINALD makes it machine-trustworthy</strong>. The standard is governed openly at <a href="https://tg.community" rel="noopener">tg.community</a>. No single vendor. No proprietary runtime. No licensing.</p>
+<p>If your job is web, design, development, performance, the web.dev guide is essential reading. Implement what it says. The eight recommendations are real work, and they pay off.</p>
+<p>After that, ask the harder question: what happens when an agent reads your content where the page isn't present? The contract attached to a procurement portal email. The policy file lifted into a regulatory submission. The training video extracted from your course library. The dataset published once and indexed forever. Each of those is a file an agent will read in isolation, away from the page that gave it context.</p>
+<p>For those files, MX is the discipline. <a href="https://reginald.allabout.network/" rel="noopener">REGINALD</a> is the public registry that makes the declarations verifiable - <strong>MX makes content machine-readable; REGINALD makes it machine-trustworthy</strong>. The standard is governed openly at <a href="https://tg.community" rel="noopener">tg.community</a>, with no single vendor, no proprietary runtime and no licensing.</p>
 <p>Google covered the page. We cover the file. Both jobs need doing.</p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-15.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -263,7 +269,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -297,7 +303,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -314,5 +323,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

@@ -5,52 +5,62 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
-title: "An MX Audit, On Your Desk"
-description: "The audit report we deliver to clients has one job: tell them what we found and what to do about it. We have shaped the deliverable around that job."
-author: "Tom Cranstoun"
-created: 2026-05-28
-modified: 2026-05-28
-version: "1.0"
-
+"@context": https://mx.allabout.network/canon/context.json
+title: "Agent Harness: Parsing"
+description: "How the MX conformance harness tests cog parsing - checking that well-formed input succeeds and malformed input fails with the right error."
+author: Tom Cranstoun
+created: "2026-07-05"
+modified: 2026-10-29
+version: "1.1"
+type: blog-post
+tags:
+  - mx
+  - agent
+  - javascript
+  - conformance
+  - parsing
 mx:
-  status: draft
-  contentType: blog-post
-  audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/provenance/audit-for-clients.md
-  stability: stable
-  purpose: "The audit report we deliver to clients has one job: tell them what we found and what to do about it. We have shaped the deliverable around that job."
-  servedAt: https://mx.allabout.network/blog/drafts/provenance/audit-for-clients.html
-  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/drafts/provenance/audit-for-clients.html
-  blogFilename: audit-for-clients
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  contextProvides:
+    - "Explains the parsing handler in the MX conformance harness. Shows how a case describes a cog input and an expected outcome (success or failure), and how the handler calls parseCog, catches errors, and compares the result. Includes the case format and full handler code."
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/dev/harness-parsing.md
+  purpose: "To show how the parsing category of conformance cases works, and how to write and test similar cases for your own agent."
+  stability: draft
+  inLanguage: en-GB
+  runbook: "Markdown source lives in the claude-created Google Drive folder. Edit via Claude and re-upload, then update the index."
+  servedAt: https://mx.allabout.network/blog/drafts/dev/harness-parsing.html
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
-  <meta name="description" content="The audit report we deliver to clients has one job: tell them what we found and what to do about it. We have shaped the deliverable around that job.">
+  <meta name="description" content="How the MX conformance harness tests cog parsing - checking that well-formed input succeeds and malformed input fails with the right error.">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/provenance/audit-for-clients.html">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/dev/harness-parsing.html">
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/provenance/audit-for-clients.html">
-  <meta property="og:title" content="An MX Audit, On Your Desk | CogNovaMX">
-  <meta property="og:description" content="The audit report we deliver to clients has one job: tell them what we found and what to do about it. We have shaped the deliverable around that job.">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/dev/harness-parsing.html">
+  <meta property="og:title" content="Agent Harness: Parsing | CogNovaMX">
+  <meta property="og:description" content="How the MX conformance harness tests cog parsing - checking that well-formed input succeeds and malformed input fails with the right error.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:site_name" content="CogNovaMX">
   <meta property="og:locale" content="en_GB">
-  <meta property="article:published_time" content="2026-05-28">
+  <meta property="article:published_time" content="2026-07-05">
   <meta property="article:author" content="Tom Cranstoun">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="An MX Audit, On Your Desk | CogNovaMX">
-  <meta name="twitter:description" content="The audit report we deliver to clients has one job: tell them what we found and what to do about it. We have shaped the deliverable around that job.">
+  <meta name="twitter:title" content="Agent Harness: Parsing | CogNovaMX">
+  <meta name="twitter:description" content="How the MX conformance harness tests cog parsing - checking that well-formed input succeeds and malformed input fails with the right error.">
   <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta name="twitter:site" content="@ddttomtom">
@@ -63,20 +73,18 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
-  <meta name="mx:name" content="An MX Audit, On Your Desk">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Agent Harness: Parsing">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
-  <link rel="mx" href="https://mx.allabout.network/blog/drafts/provenance/audit-for-clients.html">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/dev/harness-parsing.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
   <meta name="ai-disclosure" content="ai-assisted">
 
-  <title>An MX Audit, On Your Desk | CogNovaMX</title>
+  <title>Agent Harness: Parsing | CogNovaMX</title>
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
@@ -85,18 +93,18 @@ mx:
     "@graph": [
       {
         "@type": "BlogPosting",
-        "name": "An MX Audit, On Your Desk",
-        "headline": "An MX Audit, On Your Desk",
-        "description": "The audit report we deliver to clients has one job: tell them what we found and what to do about it. We have shaped the deliverable around that job.",
+        "name": "Agent Harness: Parsing",
+        "headline": "Agent Harness: Parsing",
+        "description": "How the MX conformance harness tests cog parsing - checking that well-formed input succeeds and malformed input fails with the right error.",
         "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
-        "datePublished": "2026-05-28",
-        "dateModified": "2026-05-28",
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-07-05",
         "author": {
           "@type": "Person",
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -106,11 +114,11 @@ mx:
           "url": "https://mx.allabout.network/"
         },
         "mainEntityOfPage": {
-          "@id": "https://mx.allabout.network/blog/drafts/provenance/audit-for-clients.html"
+          "@id": "https://mx.allabout.network/blog/drafts/dev/harness-parsing.html"
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 557,
+        "wordCount": 558,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -118,9 +126,9 @@ mx:
       },
       {
         "@type": "WebPage",
-        "@id": "https://mx.allabout.network/blog/drafts/provenance/audit-for-clients.html",
-        "name": "An MX Audit, On Your Desk",
-        "url": "https://mx.allabout.network/blog/drafts/provenance/audit-for-clients.html",
+        "@id": "https://mx.allabout.network/blog/drafts/dev/harness-parsing.html",
+        "name": "Agent Harness: Parsing",
+        "url": "https://mx.allabout.network/blog/drafts/dev/harness-parsing.html",
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -151,6 +159,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -165,7 +174,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -181,23 +190,22 @@ mx:
         <summary>Index</summary>
         <nav aria-label="Table of contents">
           <ul>
-        <li><a href="#one-scoring-language">One scoring language</a></li>
-        <li><a href="#cover-contents-report-each-on-its-own-page">Cover, contents, report, each on its own page</a></li>
-        <li><a href="#reviewer-notes-belong-to-the-reviewer">Reviewer notes belong to the reviewer</a></li>
-        <li><a href="#why-this-shape-matters">Why this shape matters</a></li>
+        <li><a href="#what-parsing-cases-test">What parsing cases test</a></li>
+        <li><a href="#the-handler">The handler</a></li>
+        <li><a href="#adapting-this-for-your-own-parser">Adapting this for your own parser</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="557">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="558">
         <header class="article-header">
-          <h1>An MX Audit, On Your Desk</h1>
+          <h1>Agent Harness: Parsing</h1>
           <div class="article-meta"
-               data-published="2026-05-28"
-               data-modified="2026-05-28"
+               data-published="2026-07-05"
+               data-modified="2026-07-05"
                data-reading-time="3 min">
-            <time datetime="2026-05-28">28 May 2026</time>
+            <time datetime="2026-07-05">5 July 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
@@ -206,19 +214,92 @@ mx:
         </header>
 
 
-<p>When we deliver an audit, the document in your hand reads as one piece of work. Cover, contents, findings, recommendations. Nothing else competing for attention. The shape is deliberate and consistent: same evidence behind every report, same scoring vocabulary, same clean delivery surface.</p>
-<h2 id="one-scoring-language" tabindex="-1">One scoring language</h2>
-<p>The Balanced Scorecard at the top of the report grades each dimension on a four-band scale: Excellent, Good, Could Be Better, Needs Improvement. Each band carries a letter grade alongside it (A through D) so the scan is fast. The column comparing your scores to the curated benchmark dataset speaks the same language. The peer comparison reads &quot;A (median)&quot; or &quot;D (median)&quot;, never a raw number. One vocabulary across the row, one scan to find where your site stands against the cohort.</p>
-<h2 id="cover-contents-report-each-on-its-own-page" tabindex="-1">Cover, contents, report, each on its own page</h2>
-<p>An audit report opens with a cover page carrying your title, the MX Compatible badge, and the conformance line that names the standards the file lives up to. The contents page follows on its own page. The body follows on its own page after that. Each in its own space, each easy to print or to share as a tear-off.</p>
-<p>The MX Compatible badge on the cover is more than a logo. It carries a QR code that resolves to an interactive PDF inspector at <a href="https://mx.allabout.network/tools/pdf-inspector.html">/tools/pdf-inspector.html</a>; a regulator or buyer who scans the cover can verify the file's evidence chain end-to-end without leaving the browser. A reader who wants the short version of what each badge signal means can read the explainer at <a href="https://mx.allabout.network/learn/mx-for-pdfs.html">/learn/mx-for-pdfs.html</a>.</p>
-<h2 id="reviewer-notes-belong-to-the-reviewer" tabindex="-1">Reviewer notes belong to the reviewer</h2>
-<p>Every audit goes through automated checks before a human reviewer signs it off for delivery. The checks catch the kind of thing a tired writer might miss. A claim that the site has &quot;no schema markup&quot; when actually it carries a small set. A sentence written in the present tense that should be past. A scope phrase that mixes per-page numbers with site-wide language.</p>
-<p>Those checks generate working notes for the reviewer. The notes do not belong inside the report you receive. They live in a companion file that travels alongside it, named after the report itself (for example, <code>sealed-4e3eda239a.invalid-de-report-findings.md</code> next to <code>sealed-4e3eda239a.invalid-de-report.pdf</code>). Same prose, same evidence. The reviewer reads the companion before sign-off; you read the report. If you ever want to see the reviewer's working, the file is right there alongside the deliverable, and we are happy to walk you through it.</p>
-<h2 id="why-this-shape-matters" tabindex="-1">Why this shape matters</h2>
-<p>The audit is a written argument for what is working on your site and what is not. The argument lands harder when the writing is clean. One scoring language is easier to read than two. A contents page on its own page is easier to navigate than one bleeding under the cover. A report that is yours, with reviewer working set aside, is easier to share with the colleague who needs to act on it.</p>
-<p>The shape does not change what the audit measures. Your scores, the schema you carry, the discovery files we found, the accessibility instances we counted: those are what they are. What the shape does is keep the deliverable focused on the conversation it is meant to have with you, and keep everything else, including the reviewer's working and the regulator-facing evidence chain, in clearly named companion files alongside.</p>
+<p>This is the first in a series of posts working through the MX conformance harness category by category. Each post covers one handler: what it tests, what the case format looks like, and how the handler code works.</p>
+<p>The parsing handler tests one thing: given a block of text, does the cog parser accept or reject it?</p>
+<h2 id="what-parsing-cases-test" tabindex="-1">What parsing cases test</h2>
+<p>A cog is a markdown file with a YAML frontmatter block. The parser's job is to read that block and either return a structured object or throw an error. Parsing cases exercise both sides of that behaviour - inputs that should succeed and inputs that should fail.</p>
+<p>Each case in the <code>parsing/</code> directory is a YAML file describing one input and one expected outcome.</p>
+<p>A passing case:</p>
+<pre><code class="language-yaml">case-id: parsing-001
+case-name: A well-formed cog parses without error
+spec-references:
+  - &quot;section 2&quot;
+input:
+  type: cog
+  content: |
+    ---
+    title: Test cog
+    description: A minimal valid cog.
+    ---
+    Body text.
+expect:
+  outcome: success
+</code></pre>
+<p>A failing case:</p>
+<pre><code class="language-yaml">case-id: parsing-003
+case-name: Missing description field produces a parse error
+spec-references:
+  - &quot;section 2.1&quot;
+input:
+  type: cog
+  content: |
+    ---
+    title: No description here
+    ---
+    Body text.
+expect:
+  outcome: failure
+  failure-mentions: description
+</code></pre>
+<p>The <code>failure-mentions</code> field is optional. When present, it asserts that the error message contains a specific word or phrase - in this case, <code>description</code>. That lets the case check not just that the parser rejected the input, but that it identified the right problem.</p>
+<h2 id="the-handler" tabindex="-1">The handler</h2>
+<pre><code class="language-javascript">function runParsingCase(testCase) {
+  const { input, expect } = testCase;
+  if (input.type !== 'cog') return skip(`input type ${input.type} not handled`);
 
+  let parsed;
+  try {
+    parsed = parseCog(input.content);
+  } catch (err) {
+    if (expect.outcome === 'failure') {
+      if (expect['failure-mentions']) {
+        const ok = err.message.toLowerCase()
+          .includes(expect['failure-mentions'].toLowerCase());
+        return ok
+          ? pass()
+          : fail(`error did not mention &quot;${expect['failure-mentions']}&quot;: ${err.message}`);
+      }
+      return pass();
+    }
+    return fail(`unexpected parse error: ${err.message}`);
+  }
+
+  if (expect.outcome === 'success') return pass();
+  return fail(`expected failure but parsing succeeded`);
+}
+</code></pre>
+<p>Walk through the logic:</p>
+<ol>
+<li>If the input type is not <code>cog</code>, return <code>skip</code>. The harness may eventually handle other input types; this makes the gap explicit rather than silent.</li>
+<li>Call <code>parseCog</code>. If it throws, we are in the failure path.</li>
+<li>In the failure path: if the case expected failure, check whether <code>failure-mentions</code> is set. If it is, verify the error message contains the expected string. If not, pass unconditionally.</li>
+<li>If <code>parseCog</code> did not throw: if the case expected success, pass. If the case expected failure, fail.</li>
+</ol>
+<h2 id="adapting-this-for-your-own-parser" tabindex="-1">Adapting this for your own parser</h2>
+<p>Replace <code>parseCog</code> with whatever your parser is called. The case format stays the same - <code>input.content</code>, <code>expect.outcome</code>, and the optional <code>expect['failure-mentions']</code>. The handler shape stays the same.</p>
+<p>If your parser returns structured errors rather than throwing, adjust the try/catch to read the error from the return value. The comparison logic is identical.</p>
+<p>The <code>failure-mentions</code> check is a substring match, case-insensitive. That is intentionally loose - error message text changes; what matters is that the right field or concept appears in the message. If your error model is more structured (error codes, field names as structured data), you can add a <code>failure-code</code> field to the case format and check it directly.</p>
+<hr>
+<p><em>Tom Cranstoun is an Agent Experience (AX) audit pioneer and the founder of Machine Experience (MX) and its community, and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -226,7 +307,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -260,7 +341,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -277,5 +361,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

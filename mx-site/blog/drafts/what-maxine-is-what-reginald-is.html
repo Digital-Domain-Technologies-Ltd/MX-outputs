@@ -10,8 +10,8 @@ title: "What Maxine Is, What REGINALD Is, and How They Work Together"
 description: "Maxine is the engine that acts on your content under a human's authority. REGINALD is the registry that attests it. MX is the practice that makes either one worth having, and you cannot buy a practice."
 author: "Tom Cranstoun"
 created: 2026-07-12
-modified: 2026-10-11
-version: "1.0"
+modified: 2026-10-23
+version: "1.2"
 
 type: blog-post
 tags:
@@ -80,7 +80,7 @@ mx:
        estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="What Maxine Is, What REGINALD Is, and How They Work Together">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.2">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/drafts/what-maxine-is-what-reginald-is.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -120,7 +120,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1394,
+        "wordCount": 1767,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -204,18 +204,18 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1394">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1767">
         <header class="article-header">
           <h1>What Maxine Is, What REGINALD Is, and How They Work Together</h1>
           <div class="article-meta"
                data-published="2026-07-12"
                data-modified="2026-07-12"
-               data-reading-time="7 min">
+               data-reading-time="9 min">
             <time datetime="2026-07-12">12 July 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>7 min read</span>
+            <span>9 min read</span>
           </div>
         </header>
 
@@ -223,37 +223,39 @@ mx:
 <p>Maxine is the engine that acts on your content. REGINALD is the registry that attests it. MX is the practice that makes either one worth having.</p>
 <p>People ask me which one they can buy. The honest answer is that the third one isn't for sale, and it's the one that matters most.</p>
 <h2 id="mx-is-a-practice" tabindex="-1">MX is a practice</h2>
-<p>MX is metadata that records where a file came from, what it's for, and how it may be used, and that travels with the file. That's the whole definition. It isn't a platform, it isn't a licence, and there's no dashboard to log into.</p>
+<p>MX is metadata that travels with a file and records where it came from, what it's for, and how it may be used. That's the whole definition. It isn't a platform, it isn't a licence, and there's no dashboard.</p>
 <p>I keep meeting teams who want to buy their way out of this, and I understand why. Buying is easier than changing how you work. But a practice is a set of habits your team holds, and nobody can sell you a habit. What I can do is teach it, audit whether you're doing it, and build the tooling that makes doing it the path of least resistance.</p>
-<p>So when someone asks me to licence MX, I tell them there's nothing to licence. The standard is published under the MIT licence, so anyone may implement it. We steward it while we run it live as a test, and it will be donated to The Gathering as an open standard. It defers to Dublin Core, <a href="https://schema.org">Schema.org</a>, and everything else that already covers a need. You can adopt all of it tomorrow without paying me a penny. Most teams don't, because knowing what the metadata should say is the hard part, and that's where I come in.</p>
+<p>So when someone asks me to licence MX, I tell them there's nothing to sign. The standard is published under the MIT licence, so anyone may implement it. We steward it and dogfood it on the repository and site behind MX: The Protocols, and its future governance is proposed through The Gathering. It defers to Dublin Core, <a href="https://schema.org">Schema.org</a>, and everything else that already covers a need. You can adopt all of it tomorrow without paying me a penny. Most teams don't, because knowing what the metadata should say is the hard part, and that's where I come in.</p>
 <p>That's the business, then: consultancy, expertise, training, and the books. Everything else here is infrastructure that supports the practice, and it's worthless without one.</p>
 <h2 id="maxine-is-the-engine" tabindex="-1">Maxine is the engine</h2>
 <p>Maxine reads a repository, checks it against its own declared rules, and repairs what has drifted.</p>
-<p>She isn't a chatbot bolted onto a codebase. She's a working surface where an AI agent is allowed to act, bounded by three properties you can check. Authority: a human declares what the agent may do, and the agent cannot act outside it. Conformance: dozens of deterministic gates refuse a non-conforming change before it can land. Provenance: every action leaves a machine-readable record of who did what, when, and with which model.</p>
-<p>Here's what that looks like in practice. In July 2026 I asked Maxine to merge with the remote. Three words. What happened next was a chain I didn't invoke and didn't have to remember. The raw git command was refused at the write boundary, before git ever ran it, because a raw merge skips the checks that exist precisely because a bad merge once silently dropped 76 tracked files here. She was redirected to the sanctioned procedure, which resolved everything mechanical without a model in the loop. The merge aged eleven generated indexes, so a staleness manifest noticed and a completeness guard asked whether this clone was even entitled to regenerate them. It was, so it did. The commit boundary then inspected what came out rather than trusting it. Then she stopped, wrote up what happened, and asked me whether to push.</p>
+<p>She isn't a chatbot bolted onto a codebase. She's a working surface where an AI agent is allowed to act, bounded by three properties you can check. Authority: a human declares what the agent may do, and it can't act outside that. Conformance: dozens of deterministic gates refuse a non-conforming change before it can land. Provenance: every action leaves a machine-readable record of who did what, when, and with which model.</p>
+<p>Here's what that looks like in practice. In July 2026 I asked Maxine to merge with the remote. Three words. What happened next was a chain I didn't invoke and didn't have to remember. The raw git command was refused at the write boundary, before git ever ran it, because a raw merge skips the checks that exist precisely because one once silently dropped 76 tracked files here. She was redirected to the sanctioned procedure, which resolved everything mechanical without a model in the loop. The merge aged eleven generated indexes, so a staleness manifest noticed and a completeness guard asked whether this clone was even entitled to regenerate them. It was, so it did. The commit boundary then inspected what came out rather than trusting it. Then she stopped, wrote up what happened, and asked me whether to push.</p>
 <p>Nine mechanisms fired. I invoked none of them. And the one real decision, the irreversible one, came back to me.</p>
-<p>That last part is the bit people miss when they see a self-healing repository and get nervous. Self-healing doesn't mean self-authorising. The machine repairs what it can prove is broken and stops at the edge of anything a human owns. That boundary is the whole reason the rest of it is safe to run.</p>
+<p>That last part is the bit people miss when they see a self-healing repository and get nervous. Self-healing doesn't mean self-authorising. The machine repairs what it can prove is broken and stops at the edge of anything a human owns. That boundary is the whole reason the rest of it's safe to run.</p>
+<p>None of this is tied to my own repository. Maxine attaches to a private project and manages it the same way, with the same gates and the same human in command, inside that project's own tree. A partner's private repository already runs her, and that's the proof it works. Joining is simple: a partner gives me access to their GitHub repository, they get a Palimpsest, and that codebase becomes a private project of their own, managed the same way as ours. The Palimpsest talks to the project through signed, encrypted cogs: every message is signed by its sender and encrypted for its receiver, so the repository can verify who sent it and nobody in between can read it. Analytics from a partner's project are taken only to improve Maxine, never to work against a partner or to trade on them.</p>
 <h2 id="reginald-is-the-registry" tabindex="-1">REGINALD is the registry</h2>
-<p>REGINALD attests. It answers questions a reader has about a file that the file cannot answer about itself, because anything a file says about itself is just a claim.</p>
-<p>There are four questions worth paying for. Who published this, and when? Is this the current version? Is the publisher still standing behind it, or did they quietly walk away two years ago? And does an authoritative outside source independently agree with the claim being made?</p>
-<p>Attestation, currency, freshness, corroboration. A machine can check all four before it decides whether to believe your page, and a regulator can check all four without asking your permission.</p>
-<p>The verification is the part I'm proudest of, and nobody else seems to offer it. REGINALD signs; it doesn't verify. Verification happens on the reader's machine, with standard libraries they already have. No vendor account, no console, no subscription needed to check somebody else's evidence. Every governance platform I looked at in 2026 keeps its evidence inside its own product, so cancelling the subscription takes the evidence with it. Something you can only see while you keep paying isn't much use in front of a regulator.</p>
+<p>REGINALD attests. It answers questions a reader has about a file that the file can't answer about itself, because anything a file says about itself is just a claim.</p>
+<p>Four questions are worth paying to answer. Who published this, and when? Is this the current version? Is the publisher still standing behind it, or did they quietly walk away two years ago? And does an authoritative outside source independently agree with the claim being made?</p>
+<p>Attestation, currency, freshness, corroboration. A machine can check all four before it decides whether to believe your page, and a regulator can do the same without asking your permission.</p>
+<p>The verification is the part I'm proudest of, and nobody else seems to offer it. REGINALD signs; it doesn't verify. Verification happens on the reader's machine, with standard libraries they already have. No vendor account, no console, no subscription needed to check somebody else's evidence. Every governance platform I looked at in 2026 keeps its evidence inside its own product, so cancelling the subscription takes the record with it. Something you can only see while you keep paying isn't much use in front of a regulator.</p>
 <h2 id="how-they-fit-together" tabindex="-1">How they fit together</h2>
 <p>MX declares. REGINALD attests. Maxine acts.</p>
-<p>Take any one away and the other two get weaker. Content that's beautifully machine-readable but unsigned tells an agent exactly what it is with no reason to believe a word of it. A signed artefact with no MX metadata proves who published an opaque blob. An agent acting on well-described, well-attested content is only safe if the place it acts refuses whatever nobody authorised.</p>
+<p>Take any one away and the other two get weaker. Content that's beautifully machine-readable but unsigned tells an agent exactly what it's with no reason to believe a word of it. A signed artefact with no MX metadata proves who published an opaque blob. An agent acting on well-described, well-attested content is only safe if the place it acts refuses whatever nobody authorised.</p>
 <p>That's the argument for all three, and it's why I audit all three.</p>
+<p>Two more parts sit underneath them, built to the same rule. The first is Intent CMS, content that manages itself. The site source is written once as markdown carrying its own MX: its owner, its authoritative status, its expiry and the checks it must pass. The platform reads those fields to manage what it publishes, and publication strips them, so only what a reader needs travels. The served HTML is a build artefact; the markdown is the system. The Palimpsest reads the cogs Intent CMS publishes, so a site on Intent CMS is one the Palimpsest can use in full. The second is the fleet, the set of machines that runs all of this. They talk over signed messages with no open internet access, and each one declares its own role and what it may do. That's the enterprise REGINALD, air-gapped. A partner can buy any number of dedicated machines of their own, each an Apple Mac that joins the fleet and runs Maxine for their projects. For regulated industries, I lease an air-gapped Maxine fleet controller: the machine that runs the whole estate's Maxines inside the customer's own walls, with no open internet access. There's a charge for each additional Maxine added to that private fleet. I onboard the company's own knowledge to the controller Maxine, so she runs on what that business knows. The partner programme, Maxine on private projects, the Palimpsest and dedicated machines, is in alpha until late January 2027.</p>
 <h2 id="the-three-audits" tabindex="-1">The three audits</h2>
 <p>I audit sites, repositories and the CMS behind them, and the people.</p>
 <p>The site audit asks what an agent actually sees when it reads your pages, as opposed to what your designers see. Those are different things, and the gap is usually a shock.</p>
 <p>The repository and CMS audit asks whether the place your content is produced can be trusted to produce it. Your published page can be immaculate while the system that generates it lets an unsupervised agent rewrite anything it likes, unlogged. I've seen every major CMS ship agent write access in the twelve months to July 2026. I have yet to see one ship agent accountability.</p>
-<p>The operator audit asks about the humans. Whether they know the tools they've been given, whether they're making the same three mistakes with their AI every week, and whether they've quietly switched off the guardrails because a gate annoyed them once.</p>
+<p>The operator audit asks about the humans. Do they know the tools they've been given? Are they making the same three mistakes with their AI every week? Have they quietly switched off the guardrails because a gate annoyed them once?</p>
 <p>You need all three, and the third one is the one people skip. A perfectly governed repository with an untrained team is one where somebody adds a bypass flag on a Friday afternoon, because tooling rarely survives contact with people who don't understand why it's there. So the training carries as much weight as the tooling, which is why I've never treated it as an upsell.</p>
 <h2 id="why-this-is-suddenly-urgent" tabindex="-1">Why this is suddenly urgent</h2>
 <blockquote>
 <p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
 </blockquote>
 <p>Article 50 of the EU AI Act applies from 2 August 2026. It requires that outputs of AI systems generating synthetic audio, image, video or text are &quot;marked in a machine-readable format and detectable as artificially generated or manipulated&quot;. It also requires deployers publishing AI-generated text on matters of public interest to disclose it.</p>
-<p>Read that phrase again. Marked in a machine-readable format. That is a legal obligation to attach machine-readable provenance to a published artefact, and it lands in a few weeks.</p>
+<p>Read that phrase again. Marked in a machine-readable format. That's a legal obligation to attach machine-readable provenance to a published artefact, and it lands in a few weeks.</p>
 <p>I want to be careful here, because the industry's instinct will be to sell fear and a compliance guarantee. Nobody can grant you compliance; that stays your legal duty and the fines land on you. What structured, attested content gives you is the evidence you'll be asked to produce, in a form somebody else can check. Sold as evidence, it's exactly what a regulator wants. Sold as compliance in a box, it collapses the first time anyone looks at it, and the regulators have already fined a company a million dollars for that particular promise.</p>
 <h2 id="where-to-start" tabindex="-1">Where to start</h2>
 <p>Start with the site audit. It's the cheapest way to find out how bad the gap is, it produces the evidence you'll need anyway, and its findings become the syllabus for the training that follows.</p>
@@ -265,7 +267,7 @@ mx:
           <h2 id="reader-notice-heading">About this page</h2>
           <ul>
             <li>Written by Tom Cranstoun.</li>
-            <li>Last changed on 2026-10-11.</li>
+            <li>Last changed on 2026-10-23.</li>
           </ul>
         </footer>
 

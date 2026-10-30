@@ -10,21 +10,22 @@ title: "x401 Proves the Agent. MX Proves the Page."
 description: "A new protocol called x401 lets an agent prove who it acts for. It says nothing about whether the page it just read is genuine. Here is how the two halves of agent trust fit together, and the one small change that makes them verify with the same key."
 author: "Tom Cranstoun"
 created: "2026-06-26"
-modified: "2026-06-26"
+modified: 2026-10-19
 version: "0.1"
 
 type: blog-post
 tags: [agent-web, identity, provenance, x401, x402, verifiable-credentials, reginald, mx, trust]
 mx:
   mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience:
     - humans
     - machines
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/x401-proves-the-agent-mx-proves-the-page.md
   contextProvides:
-    - "How x401 (agent identity) and MX/Reginald (content provenance) compose into one agent-trust stack, the shared Ed25519 crypto under both, and the JCS canonicalisation change that makes them byte-compatible."
+    - "How x401 (agent identity) and MX/REGINALD (content provenance) compose into one agent-trust stack, the shared Ed25519 crypto under both, and the JCS canonicalisation change that makes them byte-compatible."
   stability: draft
-  purpose: "Show why agent identity and content provenance are two different problems, how x401 and MX/Reginald solve one each, and where they snap together."
+  purpose: "Show why agent identity and content provenance are two different problems, how x401 and MX/REGINALD solve one each, and where they snap together."
   corroboratedBy:
     - https://www.prweb.com/releases/proof-launches-x401-the-open-protocol-for-verifying-the-authority-behind-ai-agents-302810968.html
     - https://openid.net/specs/openid-4-verifiable-presentations-1_0.html
@@ -32,8 +33,6 @@ mx:
     - https://www.rfc-editor.org/rfc/rfc8785
   servedAt: https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
-  blogUrl: https://mx.allabout.network/blog/drafts/agent-web/x401-proves-the-agent-mx-proves-the-page.html
-  blogFilename: x401-proves-the-agent-mx-proves-the-page
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -119,7 +118,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1276,
+        "wordCount": 1271,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -160,6 +159,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -202,7 +202,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1276">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1271">
         <header class="article-header">
           <h1>x401 Proves the Agent. MX Proves the Page.</h1>
           <div class="article-meta"
@@ -229,29 +229,29 @@ mx:
 <p>Neither one says a word about your page.</p>
 <h2 id="who-proves-the-page" tabindex="-1">Who Proves the Page?</h2>
 <p>Here is the gap. An agent can now prove it acts for a real, authorised person. It still has no way to know that the page it just read is the genuine thing the publisher stands behind, rather than a stale copy, a spoof, or a fabrication an earlier model hallucinated and a later one is now quoting as fact.</p>
-<p>That's the artefact, not the actor. And it's the half MX and Reginald exist to cover.</p>
-<p>The two-pillar way we say it: MX makes content machine-readable, so an agent can act on a page without guessing what it means. Reginald makes content machine-trustworthy, so the agent can check who published a claim, whether it's the current version, and that the publisher still stands behind it. Readable, then trustworthy. The actor proves itself with x401; the page proves itself with MX and Reginald.</p>
-<p>This is also the documentation regimes like the EU AI Act and the European Accessibility Act expect organisations to be able to produce on request: a structured, verifiable record of what was published and what an agent did with it.</p>
+<p>That's the artefact, not the actor. And it's the half MX and REGINALD exist to cover.</p>
+<p>The two-pillar way we say it: MX makes content machine-readable, so an agent can act on a page without guessing what it means. REGINALD makes content machine-trustworthy, so the agent can check who published a claim, whether it's the current version, and that the publisher still stands behind it. Readable, then trustworthy. The actor proves itself with x401; the page proves itself with MX and REGINALD.</p>
+<p>This is also the documentation regimes like the EU AI Act expect organisations to be able to produce on request: a structured, verifiable record of what was published and what an agent did with it.</p>
 <blockquote>
 <p><strong>Note:</strong> This page describes regulatory frameworks in general terms only. Nothing here is legal advice. Requirements vary by jurisdiction, organisation type, and use case. Consult qualified legal specialists for guidance specific to your situation.</p>
 </blockquote>
-<p>MX and Reginald don't grant compliance with any of those. Compliance stays a legal duty of the organisation. What they do is make the evidence machine-readable and checkable, so producing it later is a lookup, not an archaeology dig.</p>
+<p>MX and REGINALD don't grant compliance with any of those. Compliance stays a legal duty of the organisation. What they do is make the evidence machine-readable and checkable, so producing it later is a lookup, not an archaeology dig.</p>
 <h2 id="they-already-sign-the-same-way" tabindex="-1">They Already Sign the Same Way</h2>
 <p>This is the part that surprised me when I lined them up.</p>
-<p>x401 and Reginald were built by separate teams, each chasing its own problem, and they reached for the same crypto. Reginald signs a cog's identity and body with Ed25519 over a content hash, and a verifier checks the signature on the spot, from a small sidecar that carries the public key, without calling any registry. x401's world verifies a credential client-side too, issuer-neutral, no central gatekeeper.</p>
-<p>Same primitive. Same posture. The only honest difference is what they point at: x401 signs a claim about an agent, Reginald signs one about a file.</p>
+<p>x401 and REGINALD were built by separate teams, each chasing its own problem, and they reached for the same crypto. REGINALD signs a cog's identity and body with Ed25519 over a content hash, and a verifier checks the signature on the spot, from a small sidecar that carries the public key, without calling any registry. x401's world verifies a credential client-side too, issuer-neutral, no central gatekeeper.</p>
+<p>Same primitive. Same posture. The only honest difference is what they point at: x401 signs a claim about an agent, REGINALD signs one about a file.</p>
 <p>Because they verify the same way, a single piece of software walking up to a page could check both at once. Is the agent who it claims to be? Is the page what it claims to be? One mental model, one verification routine, two answers.</p>
 <h2 id="where-they-snap-together" tabindex="-1">Where They Snap Together</h2>
 <p>Once you see the shared crypto underneath, the integration points almost draw themselves.</p>
-<p>The first is an identity socket. Reginald's provenance record already has a slot for the identifier of each party that touched an artefact. As of June 2026 that slot is filled by hand, a name typed into a field. An x401 presentation fills it with a credential the agent actually proved. The record stops saying &quot;the system claims this agent acted&quot; and starts saying &quot;this one proved who it was, and here's the receipt.&quot;</p>
-<p>The second is permission, recorded. x401's real trick is binding identity to authorisation: who the agent is, and what it may do. Reginald's provenance steps can carry that scope as a checked precondition. The trail then proves the whole sentence: this verified agent, allowed to do this, acted on this page, under this regime. That's a far stronger thing to hand a regulator than any of the three pieces alone.</p>
+<p>The first is an identity socket. REGINALD's provenance record already has a slot for the identifier of each party that touched an artefact. As of June 2026 that slot is filled by hand, a name typed into a field. An x401 presentation fills it with a credential the agent actually proved. The record stops saying &quot;the system claims this agent acted&quot; and starts saying &quot;this one proved who it was, and here's the receipt.&quot;</p>
+<p>The second is permission, recorded. x401's real trick is binding identity to authorisation: who the agent is, and what it may do. REGINALD's provenance steps can carry that scope as a checked precondition. The trail then proves the whole sentence: this verified agent, allowed to do this, acted on this page, under this regime. That's a far stronger thing to hand a regulator than any of the three pieces alone.</p>
 <p>The third is the single verifier from a moment ago. One library, checking the actor and the artefact with the same key math.</p>
 <h2 id="the-one-thing-that-has-to-change" tabindex="-1">The One Thing That Has to Change</h2>
 <p>I'll be straight about the catch, because it's small and it's real.</p>
-<p>&quot;Same primitive&quot; isn't yet &quot;same bytes.&quot; The Verifiable Credentials world canonicalises its JSON with a standard called JCS before signing. Reginald currently uses a home-grown scheme for the same step. The signatures are the same kind of signature, but they're computed over differently-shaped input, so a standard Verifiable Credentials library can't verify a Reginald attestation as-is. The shared-verifier promise doesn't hold until that lines up.</p>
+<p>&quot;Same primitive&quot; isn't yet &quot;same bytes.&quot; The Verifiable Credentials world canonicalises its JSON with a standard called JCS before signing. REGINALD currently uses a home-grown scheme for the same step. The signatures are the same kind of signature, but they're computed over differently-shaped input, so a standard Verifiable Credentials library can't verify a REGINALD attestation as-is. The shared-verifier promise doesn't hold until that lines up.</p>
 <p>The fix is to adopt JCS for the signing step, version it so existing signatures keep verifying, and prove a new signature checks out under someone else's library and not only our own. It's a contained change, and it turns a deference we already claimed into one we actually keep. We have written the decision down and put the work on the list.</p>
 <h2 id="the-stack-not-the-pieces" tabindex="-1">The Stack, Not the Pieces</h2>
-<p>Step back, and the whole thing is simple. An agent transaction on the open web wants three things proven: who's acting, that the payment is good, and that the content is real. x401 takes the first. x402 takes the second. MX and Reginald take the third, the only one about the page rather than the visitor.</p>
+<p>Step back, and the whole thing is simple. An agent transaction on the open web wants three things proven: who's acting, that the payment is good, and that the content is real. x401 takes the first. x402 takes the second. MX and REGINALD take the third, the only one about the page rather than the visitor.</p>
 <p>You don't have to pick a side in this. The pieces were built by separate teams who mostly haven't met, and they fit anyway, because they all bet on the same open standards. The win for you is concrete: when an agent acts on your content, you can know who it was, that it was allowed, and that what it read was genuine, and you can show all three later without reconstructing them from memory.</p>
 <p>That's what an agent at your door is really asking for. Now both halves of the answer exist.</p>
 <h2 id="read-the-primary-sources" tabindex="-1">Read the Primary Sources</h2>
@@ -262,6 +262,15 @@ mx:
 <li><a href="https://www.rfc-editor.org/rfc/rfc8785">RFC 8785 (JCS)</a> is the JSON canonicalisation standard the signing-step alignment adopts.</li>
 </ul>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-19.</li>
+            <li>Outside sources that make the same claims: <a href="https://www.prweb.com/releases/proof-launches-x401-the-open-protocol-for-verifying-the-authority-behind-ai-agents-302810968.html" rel="noopener">www.prweb.com/releases/proof-launches-x401-the-open-protocol-for-verifying-the-authority-behind-ai-agents-302810968.html</a>, <a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html" rel="noopener">openid.net/specs/openid-4-verifiable-presentations-1_0.html</a>, <a href="https://www.coinbase.com/developer-platform/discover/launches/x402" rel="noopener">www.coinbase.com/developer-platform/discover/launches/x402</a> and <a href="https://www.rfc-editor.org/rfc/rfc8785" rel="noopener">www.rfc-editor.org/rfc/rfc8785</a>.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -303,7 +312,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

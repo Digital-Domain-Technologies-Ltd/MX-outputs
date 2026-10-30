@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Writing an Agent Harness"
+description: "What an agent harness is, why you need one, and how to build one in plain JavaScript - using the MX conformance harness as a worked example."
+author: Tom Cranstoun
+created: "2026-07-05"
+modified: 2026-10-29
+version: "1.2"
+type: blog-post
+tags:
+  - mx
+  - reginald
+  - agent
+  - javascript
+  - conformance
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  contextProvides:
+    - "A practical guide to writing an agent harness in JavaScript, grounded in the MX cog-review conformance harness. Covers the three responsibilities of a harness (load, dispatch, report), shows the actual pattern used in the MX reference implementation, and explains how to adapt it for a different agent and a different set of cases. Closing section connects to MX, REGINALD, MaXinE, and Palimpsest."
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/dev/writing-an-agent-harness.md
+  purpose: "To explain what an agent harness does and how to build one, using a real example."
+  stability: draft
+  inLanguage: en-GB
+  runbook: "Markdown source lives in the claude-created Google Drive folder. Edit via Claude and re-upload, then update the index."
+  servedAt: https://mx.allabout.network/blog/drafts/dev/writing-an-agent-harness.html
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="What an agent harness is, why you need one, and how to build one in plain JavaScript - using the MX conformance harness as a worked example.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/dev/writing-an-agent-harness.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/dev/writing-an-agent-harness.html">
+  <meta property="og:title" content="Writing an Agent Harness | CogNovaMX">
+  <meta property="og:description" content="What an agent harness is, why you need one, and how to build one in plain JavaScript - using the MX conformance harness as a worked example.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-05">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Writing an Agent Harness | CogNovaMX">
+  <meta name="twitter:description" content="What an agent harness is, why you need one, and how to build one in plain JavaScript - using the MX conformance harness as a worked example.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Writing an Agent Harness">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.2">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/dev/writing-an-agent-harness.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Writing an Agent Harness | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Writing an Agent Harness",
+        "headline": "Writing an Agent Harness",
+        "description": "What an agent harness is, why you need one, and how to build one in plain JavaScript - using the MX conformance harness as a worked example.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-07-05",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/dev/writing-an-agent-harness.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 1446,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/dev/writing-an-agent-harness.html",
+        "name": "Writing an Agent Harness",
+        "url": "https://mx.allabout.network/blog/drafts/dev/writing-an-agent-harness.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-a-harness-does">What a Harness Does</a></li>
+        <li><a href="#why-keep-cases-as-data-files">Why Keep Cases as Data Files</a></li>
+        <li><a href="#the-harness-structure">The Harness Structure</a></li>
+        <li><a href="#the-dispatch-function">The Dispatch Function</a></li>
+        <li><a href="#handling-more-complex-cases">Handling More Complex Cases</a></li>
+        <li><a href="#reporting">Reporting</a></li>
+        <li><a href="#adapting-this-for-your-agent">Adapting This for Your Agent</a></li>
+        <li><a href="#what-this-does-not-cover">What This Does Not Cover</a></li>
+        <li><a href="#how-this-connects-to-mx-reginald-maxine-and-palimpsest">How this connects to MX, REGINALD, MaXinE, and Palimpsest</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1446">
+        <header class="article-header">
+          <h1>Writing an Agent Harness</h1>
+          <div class="article-meta"
+               data-published="2026-07-05"
+               data-modified="2026-07-05"
+               data-reading-time="8 min">
+            <time datetime="2026-07-05">5 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>8 min read</span>
+          </div>
+        </header>
+
+
+<p>An agent harness is a thin piece of code that sits between your test cases and your agent. It loads a case, hands it to the agent, and checks the result. That is all it does.</p>
+<p>The term sounds more involved than it is. If you have written any kind of test runner, you have written something in the same family. The difference is that the thing being tested is an agent - a function, a pipeline, or a model call - rather than a pure function with deterministic output.</p>
+<p>This post works through a real harness: the one built for the MX cog-review conformance suite. The code is plain JavaScript with one dependency (<code>js-yaml</code>). The pattern it follows is the same pattern you would use for any agent you want to test systematically.</p>
+<h2 id="what-a-harness-does" tabindex="-1">What a Harness Does</h2>
+<p>A harness has three responsibilities.</p>
+<p><strong>Load.</strong> Read each test case from a file. The case describes an input and an expected outcome. It does not contain any code - it is data.</p>
+<p><strong>Dispatch.</strong> Work out which part of your agent handles this type of case, and call it with the input.</p>
+<p><strong>Report.</strong> Compare the agent's output against the expected outcome, and record pass, fail, or skip.</p>
+<p>That is the whole shape. Everything else is detail.</p>
+<h2 id="why-keep-cases-as-data-files" tabindex="-1">Why Keep Cases as Data Files</h2>
+<p>The cases in the MX suite are YAML files. Each one describes a single behaviour:</p>
+<pre><code class="language-yaml">case-id: parsing-001
+case-name: A well-formed cog parses without error
+spec-references:
+  - &quot;section 2&quot;
+input:
+  type: cog
+  content: |
+    ---
+    title: Test cog
+    description: A minimal valid cog.
+    ---
+    Body text.
+expect:
+  outcome: success
+</code></pre>
+<p>Keeping cases as data rather than code has two practical benefits. First, anyone can read them - a developer working on the spec, a reviewer checking coverage, an implementer in a different language. Second, a second implementation can use the same case files with its own harness. The cases define what the agent must do; the harness defines how to call it.</p>
+<p>In the MX suite, the case files live under <code>conformance/cases/</code>, organised into sub-directories by category: <code>parsing/</code>, <code>annotations/</code>, <code>fingerprints/</code>, <code>witnesses/</code>, <code>validators/</code>. The harness discovers them by reading the directory.</p>
+<h2 id="the-harness-structure" tabindex="-1">The Harness Structure</h2>
+<p>Here is the top-level shape of <code>run-js.js</code>, the MX reference harness:</p>
+<pre><code class="language-javascript">import { readdirSync, readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import yaml from 'js-yaml';
+
+// Import the agent under test
+import { parseCog } from '../../../../../../src/cog.js';
+import { runReview } from '../../../../../../src/runners/review.js';
+import { signContractSatisfaction, verifyWitness } from '../../../../../../src/runners/reginald.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const CASES_DIR = join(__dirname, '..', 'cases');
+
+const results = { passed: [], failed: [], skipped: [] };
+
+const categories = readdirSync(CASES_DIR)
+  .filter(name =&gt; !name.startsWith('.') &amp;&amp; !name.startsWith('_'));
+
+for (const category of categories.sort()) {
+  const categoryDir = join(CASES_DIR, category);
+  const caseFiles = readdirSync(categoryDir)
+    .filter(f =&gt; f.endsWith('.yaml'))
+    .sort();
+
+  for (const caseFile of caseFiles) {
+    const casePath = join(categoryDir, caseFile);
+    const testCase = yaml.load(readFileSync(casePath, 'utf8'));
+    const result = await runCase(category, testCase);
+    // record result
+  }
+}
+</code></pre>
+<p>Two things to note. The harness imports the agent - the actual functions being tested. The case files know nothing about those imports; they just describe inputs and expected outputs. And the harness iterates by category, which is how it knows which dispatcher to call.</p>
+<h2 id="the-dispatch-function" tabindex="-1">The Dispatch Function</h2>
+<p>Each category of case maps to a handler function. The dispatch looks like this:</p>
+<pre><code class="language-javascript">async function runCase(category, testCase) {
+  switch (category) {
+    case 'parsing':    return runParsingCase(testCase);
+    case 'annotations': return runAnnotationsCase(testCase);
+    case 'fingerprints': return runFingerprintsCase(testCase);
+    case 'witnesses':  return runWitnessesCase(testCase);
+    case 'validators': return runValidatorsCase(testCase);
+    default:
+      return { outcome: 'skip', reason: `no handler for category: ${category}` };
+  }
+}
+</code></pre>
+<p>A new category of case means a new handler and a new line in the switch. Nothing else changes.</p>
+<p>Each handler follows the same shape: extract the input from the case, call the agent, compare the result to <code>testCase.expect</code>, and return <code>{ outcome: 'pass' }</code> or <code>{ outcome: 'fail', reason: '...' }</code>.</p>
+<p>Here is the parsing handler:</p>
+<pre><code class="language-javascript">async function runParsingCase(testCase) {
+  const input = testCase.input.content;
+  const expected = testCase.expect.outcome;
+
+  let actual;
+  try {
+    parseCog(input);
+    actual = 'success';
+  } catch (err) {
+    actual = 'error';
+  }
+
+  if (actual === expected) {
+    return { outcome: 'pass' };
+  }
+  return {
+    outcome: 'fail',
+    reason: `expected ${expected}, got ${actual}`
+  };
+}
+</code></pre>
+<p>The agent here is <code>parseCog</code>. The case says whether it should succeed or throw. The handler calls it, catches any error, and compares.</p>
+<h2 id="handling-more-complex-cases" tabindex="-1">Handling More Complex Cases</h2>
+<p>Not every case is a single function call. The witness cases in the MX suite test a multi-step workflow: sign a document, edit it, then verify the signature should fail. The handler runs each step in sequence:</p>
+<pre><code class="language-javascript">async function runWitnessesCase(testCase) {
+  const { document } = testCase.input;
+
+  // Step 1: sign
+  const signed = await signContractSatisfaction(document);
+
+  // Step 2: tamper if the case asks for it
+  const subject = testCase.input.tamper
+    ? signed.replace('Body text.', 'Altered text.')
+    : signed;
+
+  // Step 3: verify
+  let verifyOutcome;
+  try {
+    await verifyWitness(subject);
+    verifyOutcome = 'valid';
+  } catch (err) {
+    verifyOutcome = 'invalid';
+  }
+
+  const expected = testCase.expect['verify-outcome'];
+  if (verifyOutcome === expected) return { outcome: 'pass' };
+  return { outcome: 'fail', reason: `expected ${expected}, got ${verifyOutcome}` };
+}
+</code></pre>
+<p>The case data drives the behaviour. <code>testCase.input.tamper</code> is a flag set in the YAML; the handler reads it and decides what to do. The handler is still thin - it is translating between the case format and the agent's API.</p>
+<h2 id="reporting" tabindex="-1">Reporting</h2>
+<p>After all cases have run, the harness prints a summary:</p>
+<pre><code class="language-javascript">const total = results.passed.length + results.failed.length + results.skipped.length;
+console.log(`\n${results.passed.length}/${total} passed`);
+
+if (results.failed.length &gt; 0) {
+  console.log('\nFailed:');
+  for (const f of results.failed) {
+    console.log(`  ${f.caseId}: ${f.reason}`);
+  }
+}
+
+process.exit(results.failed.length &gt; 0 ? 1 : 0);
+</code></pre>
+<p>Exit code 1 on any failure means a CI pipeline will catch regressions without extra configuration.</p>
+<h2 id="adapting-this-for-your-agent" tabindex="-1">Adapting This for Your Agent</h2>
+<p>The harness above is coupled to the MX reference implementation - it imports <code>parseCog</code>, <code>runReview</code>, and the other functions by name. That is intentional. The harness is the translation layer between the language-agnostic case files and the language-specific agent. A Python implementation of the same agent would write a Python harness importing its own functions, pointing at the same case files.</p>
+<p>If you are writing a harness for a different agent, the steps are:</p>
+<p><strong>Define your case format.</strong> Decide what fields a case needs: an input, an expected output, and enough metadata to identify it in a report. YAML works well. Keep it flat - nested structures make cases harder to write and harder to read.</p>
+<p><strong>Write one handler per case category.</strong> Start with one category and one case. Get the load-dispatch-report loop working end to end before adding more. The loop is the same regardless of how many categories you have.</p>
+<p><strong>Keep handlers thin.</strong> A handler that calls the agent and compares the result should be short. If a handler is doing significant work itself, that work probably belongs in the agent, not the test.</p>
+<p><strong>Make skips explicit.</strong> If a case cannot run in this environment - because a dependency is missing, or a feature is not yet implemented - return <code>{ outcome: 'skip', reason: '...' }</code> rather than letting it fail silently. Silent skips hide coverage gaps.</p>
+<p><strong>Exit non-zero on failure.</strong> One line. Makes CI integration free.</p>
+<h2 id="what-this-does-not-cover" tabindex="-1">What This Does Not Cover</h2>
+<p>A harness of this kind tests deterministic agent behaviour: given this input, expect this output. It does not handle probabilistic outputs from a language model, where the same input can produce different outputs on different runs.</p>
+<p>Testing model behaviour is a different problem. You need either a scoring function (does the output satisfy these criteria?) or a fixed seed and a snapshot test. Those are valid approaches, but they add complexity. Start with the deterministic cases. They will find most of the bugs.</p>
+<hr>
+<h2 id="how-this-connects-to-mx-reginald-maxine-and-palimpsest" tabindex="-1">How this connects to MX, REGINALD, MaXinE, and Palimpsest</h2>
+<p>The harness described in this post is the structural layer inside MaXinE that wraps every agent workflow. MaXinE is the engine that runs the harness, routes inference, records configuration, and catches adverse events. REGINALD attests the content the harness processes - every document the agent reads or produces passes through a signing step that makes its origin verifiable.</p>
+<p>The signed content that comes out of a harness run reaches a reader through Palimpsest, shaped to their declared context. A regulator asking about a specific agent decision gets the git log, the harness event record, and the REGINALD attestation chain. MX is the discipline that determines what each of those records should contain.</p>
+<hr>
+<p><em>Tom Cranstoun is an Agent Experience (AX) audit pioneer and the founder of Machine Experience (MX) and its community, and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

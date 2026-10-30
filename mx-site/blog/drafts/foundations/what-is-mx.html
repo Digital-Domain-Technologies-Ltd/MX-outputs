@@ -5,22 +5,25 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "What is Machine Experience (MX)?"
 description: "Machine Experience (MX) is the practice of designing web experiences that work for both humans and AI agents through structured data, accessibility, and explicit intent."
 author: Tom Cranstoun
-created: '2026-06-13'
+modified: 2026-10-05
+created: 2026-06-13
 
 type: blog-post
 tags: []
 mx:
-  status: draft
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/foundations/what-is-mx.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/foundations/what-is-mx.md
   purpose: "Draft blog post for the mx-site."
   stability: draft
-  runbook: "Draft source for the mx-site blog. Promote via npm run promote to publish."
-  blogUrl: https://mx.allabout.network/blog/drafts/foundations/what-is-mx.html
-  blogFilename: what-is-mx
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides: ["Blog post draft: What is Machine Experience (MX)?"]
+  servedAt: https://mx.allabout.network/blog/drafts/foundations/what-is-mx.html
 
 ---
 -->
@@ -62,11 +65,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="What is Machine Experience (MX)?">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -95,7 +96,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -109,7 +110,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1010,
+        "wordCount": 1059,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -150,6 +151,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -164,7 +166,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -195,7 +197,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1010">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1059">
         <header class="article-header">
           <h1>What is Machine Experience (MX)?</h1>
           <div class="article-meta"
@@ -216,12 +218,13 @@ mx:
       6 min read
 </code></pre>
 <p>Machine Experience (MX) is the practice of designing web experiences that work equally well for humans and AI agents.</p>
-<p>It's not a framework. It's not a library. It's a methodology—a way of thinking about web design that acknowledges a fundamental truth: your website has two radically different types of users, and both deserve first-class experiences.</p>
+<p>It's not a framework. It's not a library. It's a methodology-a way of thinking about web design that acknowledges a fundamental truth: your website has two radically different types of users, and both deserve first-class experiences.</p>
 <h2 id="the-core-insight" tabindex="-1">The Core Insight</h2>
 <p>For 30 years, web design optimized for one user type: humans with visual browsers, pointing devices, and the ability to infer meaning from context.</p>
 <p>Then AI agents arrived.</p>
 <p>These agents don't have eyes. They can't hover. They don't infer. They parse structured markup, follow semantic hierarchies, and take explicit instructions literally.</p>
 <p>MX recognizes that optimizing for humans alone is no longer sufficient. In an AI-mediated world, websites must work for both human visitors AND the agents acting on their behalf.</p>
+<p>There's a deeper gap than eyes and a mouse. A machine has no stake in its own errors. It doesn't mind being wrong, so it doesn't go looking for its mistakes. MX gives it the means to find them: every file carries what a reader needs to check it.</p>
 <h2 id="how-mx-differs-from-traditional-web-design" tabindex="-1">How MX Differs from Traditional Web Design</h2>
 <h3 id="traditional-approach" tabindex="-1">Traditional Approach</h3>
 <ul>
@@ -252,7 +255,7 @@ mx:
 <p>Why it matters:
 When an AI agent visits your e-commerce site, it shouldn't have to infer that &quot;$49.99&quot; next to &quot;Add to Cart&quot; is the price. It should read &lt;span itemprop=&quot;price&quot;&gt;49.99&lt;/span&gt; and know with certainty.</p>
 <h3 id="section-2-accessibility-wcag-21-aa" tabindex="-1">2. Accessibility (WCAG 2.1 AA)</h3>
-<p>MX recognizes that accessibility compliance isn't just about screen readers—it's the foundation of AI agent compatibility.</p>
+<p>MX recognizes that accessibility compliance isn't just about screen readers-it's the foundation of AI agent compatibility.</p>
 <p>What this means in practice:</p>
 <ul>
 <li>Semantic HTML elements (&lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;aside&gt;)</li>
@@ -264,7 +267,7 @@ When an AI agent visits your e-commerce site, it shouldn't have to infer that &q
 <p>Why it matters:
 Assistive technologies and AI agents face identical challenges: they need explicit structure, not visual inference. When you fix accessibility issues, you simultaneously make your site more agent-compatible.</p>
 <h3 id="section-3-explicit-over-implicit" tabindex="-1">3. Explicit Over Implicit</h3>
-<p>Machines don't do subtle. If something is disabled, unavailable, required, or conditional—say so explicitly in markup, not just visually.</p>
+<p>Machines don't do subtle. If something is disabled, unavailable, required, or conditional-say so explicitly in markup, not just visually.</p>
 <p>What this means in practice:</p>
 <ul>
 <li>Disabled form fields marked with disabled attribute (not just gray CSS)</li>
@@ -345,13 +348,21 @@ AI agent sees: Structured contact data with explicit types, availability, and pu
 <p>Get MX Consultation →</p>
 
 
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-05.</li>
+          </ul>
+        </footer>
+
       </article>
 
 
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -385,7 +396,10 @@ AI agent sees: Structured contact data with explicit types, availability, and pu
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -402,5 +416,6 @@ AI agent sees: Structured contact data with explicit types, availability, and pu
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

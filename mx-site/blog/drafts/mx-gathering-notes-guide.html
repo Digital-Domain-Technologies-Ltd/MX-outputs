@@ -5,17 +5,22 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "MX Gathering Notes: A Guide for the Internal Team (11 drafts)"
 description: "An internal guide to the eleven MX draft notes authored for The Gathering community review. What each note covers, how to read them, and links to the source on GitHub."
 author: "Tom Cranstoun"
 created: 2026-04-29
-modified: 2026-04-29
+modified: 2026-10-02
 version: "1.0"
 
 type: blog-post
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/mx-gathering-notes-guide.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/mx-gathering-notes-guide.md
+  contextProvides:
+    - "An internal guide to the eleven MX draft notes authored for The Gathering community review. What each note covers, how to read them, and links to the source on GitHub."
   stability: stable
   purpose: "An internal guide to the eleven MX draft notes authored for The Gathering community review. What each note covers, how to read them, and links to the source on GitHub."
   servedAt: https://mx.allabout.network/blog/drafts/mx-gathering-notes-guide.html
@@ -61,11 +66,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="MX Gathering Notes: A Guide for the Internal Team (11 drafts)">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -149,6 +152,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -211,7 +215,7 @@ mx:
 <p>The Gathering is an open community formed around the idea that the web needs agreed vocabulary for machine-readable metadata. Think of it as a lightweight RFC process, similar in spirit to how IETF works, but focused on the gap between what established standards (<a href="https://schema.org">Schema.org</a>, Dublin Core, WCAG, OpenAPI) cover and what is left unspecified for AI agents and automated workflows.</p>
 <p>The community review process works like this: a note author publishes a draft, the community reads it, leaves comments or raises issues on GitHub, and the note is revised until it reaches rough consensus. Once ratified, a note becomes part of the shared vocabulary anyone can implement.</p>
 <p>None of my notes are ratified yet. They are drafts. That is the point: I am seeking review, not announcing a finished standard.</p>
-<p>All ten notes are in the public GitHub repository at <a href="https://github.com/ddttom/mx-shared-gathering" rel="noopener">github.com/ddttom/mx-shared-gathering</a> under the MIT license. Anyone can read them, fork them, or comment.</p>
+<p>All the notes are in the public GitHub repository at <a href="https://github.com/ddttom/mx-shared-gathering" rel="noopener">github.com/ddttom/mx-shared-gathering</a> under the MIT license. Anyone can read them, fork them, or comment.</p>
 <h2 id="reading-order" tabindex="-1">Reading order</h2>
 <p>The notes are not independent. They build on each other. Read them in this order:</p>
 <ol>
@@ -253,7 +257,7 @@ mx:
 <p><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-document-accessibility.md" rel="noopener">Read draft-document-accessibility.md on GitHub</a></p>
 <h3 id="section-11-mx-scope-note-mx-vs-geo" tabindex="-1">11. MX Scope Note: MX vs GEO</h3>
 <p>Defines the scope of MX in relation to Generative Engine Optimization (GEO) and AI Engine Optimization (AEO). The central claim: MX asks whether any machine can find any document in a corpus, verify it is genuine, and know whether it is current, regardless of which machine, which format, or which access pathway. GEO asks how to increase the probability that a specific class of LLM-powered system cites a specific web page. These are different questions with different answers.</p>
-<p>The note also covers: why GEO's causal claims about LLM citation do not hold up (transformers process tokens, not structured tags); the standalone machine readability principle (a document must be interpretable in isolation, without access to its originating website); and the role of Reginald as an active queryable registry rather than a passive markup layer.</p>
+<p>The note also covers: why GEO's causal claims about LLM citation do not hold up (transformers process tokens, not structured tags); the standalone machine readability principle (a document must be interpretable in isolation, without access to its originating website); and the role of REGINALD as an active queryable registry rather than a passive markup layer.</p>
 <p>Read this note. It is the sharpest version of the &quot;MX is not GEO&quot; argument we have.</p>
 <p><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-mx-not-geo.md" rel="noopener">Read draft-mx-not-geo.md on GitHub</a></p>
 <h2 id="what-to-do" tabindex="-1">What to do</h2>
@@ -267,6 +271,14 @@ mx:
 <p>Send your feedback directly to Tom before the community submission. You can also raise issues on the <a href="https://github.com/ddttom/mx-shared-gathering/issues" rel="noopener">GitHub issues tab</a> if you prefer to work that way.</p>
 <p>The goal is to submit these as a coherent set, not one at a time. So the sooner you have read them and flagged questions, the sooner I can revise and submit.</p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-02.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -308,7 +320,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Agent Harness: Fingerprints"
+description: "How the MX conformance harness tests content fingerprinting - checking that a cog's contract and body produce stable, reproducible hashes."
+author: Tom Cranstoun
+created: "2026-07-05"
+modified: 2026-10-29
+version: "1.1"
+type: blog-post
+tags:
+  - mx
+  - agent
+  - javascript
+  - conformance
+  - fingerprints
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  contextProvides:
+    - "Explains the fingerprints handler in the MX conformance harness. Covers how cases assert that specific inputs produce specific hashes, and how the handler verifies stability and distinguishes contract fingerprints from body fingerprints."
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/dev/harness-fingerprints.md
+  purpose: "To show how the fingerprints category of conformance cases works, and how to write and test similar cases for your own agent."
+  stability: draft
+  inLanguage: en-GB
+  runbook: "Markdown source lives in the claude-created Google Drive folder. Edit via Claude and re-upload, then update the index."
+  servedAt: https://mx.allabout.network/blog/drafts/dev/harness-fingerprints.html
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="How the MX conformance harness tests content fingerprinting - checking that a cog's contract and body produce stable, reproducible hashes.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/dev/harness-fingerprints.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/dev/harness-fingerprints.html">
+  <meta property="og:title" content="Agent Harness: Fingerprints | CogNovaMX">
+  <meta property="og:description" content="How the MX conformance harness tests content fingerprinting - checking that a cog's contract and body produce stable, reproducible hashes.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-05">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Agent Harness: Fingerprints | CogNovaMX">
+  <meta name="twitter:description" content="How the MX conformance harness tests content fingerprinting - checking that a cog's contract and body produce stable, reproducible hashes.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Agent Harness: Fingerprints">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.1">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/dev/harness-fingerprints.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Agent Harness: Fingerprints | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "BlogPosting",
+        "name": "Agent Harness: Fingerprints",
+        "headline": "Agent Harness: Fingerprints",
+        "description": "How the MX conformance harness tests content fingerprinting - checking that a cog's contract and body produce stable, reproducible hashes.",
+        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+        "datePublished": "2026-07-05",
+        "dateModified": "2026-07-05",
+        "author": {
+          "@type": "Person",
+          "name": "Tom Cranstoun",
+          "email": "tom@digitaldomaintechnologies.com",
+          "url": "https://www.linkedin.com/in/tom-cranstoun/",
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+        },
+        "publisher": {
+          "@type": "Organization",
+          "name": "CogNovaMX",
+          "legalName": "Digital Domain Technologies Ltd",
+          "alternateName": "CogNovaMX Ltd",
+          "url": "https://mx.allabout.network/"
+        },
+        "mainEntityOfPage": {
+          "@id": "https://mx.allabout.network/blog/drafts/dev/harness-fingerprints.html"
+        },
+        "articleSection": "Machine Experience",
+        "keywords": ["machine-experience", "ai-agents"],
+        "wordCount": 757,
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mx.allabout.network/blog/drafts/dev/harness-fingerprints.html",
+        "name": "Agent Harness: Fingerprints",
+        "url": "https://mx.allabout.network/blog/drafts/dev/harness-fingerprints.html",
+        "inLanguage": "en-GB",
+        "isPartOf": {
+          "@id": "https://mx.allabout.network/#website"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-fingerprint-cases-test">What fingerprint cases test</a></li>
+        <li><a href="#the-handler">The handler</a></li>
+        <li><a href="#why-pre-computed-hashes-in-cases">Why pre-computed hashes in cases</a></li>
+        <li><a href="#the-canonical-form-requirement">The canonical form requirement</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="757">
+        <header class="article-header">
+          <h1>Agent Harness: Fingerprints</h1>
+          <div class="article-meta"
+               data-published="2026-07-05"
+               data-modified="2026-07-05"
+               data-reading-time="4 min">
+            <time datetime="2026-07-05">5 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>4 min read</span>
+          </div>
+        </header>
+
+
+<p>This is the third post in the series. The first two covered parsing and annotations. This one covers fingerprints.</p>
+<p>A fingerprint is a hash of part of a cog. The MX system uses two: a contract fingerprint, computed over the cog's structured metadata, and a body fingerprint, computed over its narrative content. They serve different purposes. The contract fingerprint is what gets signed when a witness is created. The body fingerprint records the state of the prose at signing time, without being included in the signed claim.</p>
+<p>The fingerprints handler checks that the hashing functions produce stable, correct output.</p>
+<h2 id="what-fingerprint-cases-test" tabindex="-1">What fingerprint cases test</h2>
+<p>Fingerprint cases are different from parsing or annotation cases in one important respect: they include the expected hash value in the case itself. This means the hash must be computed once - by hand or by a reference run - and recorded. Any implementation that produces a different hash for the same input has a bug.</p>
+<pre><code class="language-yaml">case-id: fingerprints-001
+case-name: Contract fingerprint is stable across runs
+spec-references:
+  - &quot;section 4.1&quot;
+input:
+  type: cog
+  content: |
+    ---
+    title: Stable fingerprint test
+    description: Used to verify hash stability.
+    schema: urn:mx:schema:basic
+    ---
+    Body text that should not affect the contract fingerprint.
+expect:
+  outcome: success
+  contract-fingerprint: &quot;a3f8c2e1d4b7...&quot;
+</code></pre>
+<p>The <code>contract-fingerprint</code> value in <code>expect</code> is the canonical output. The handler computes the fingerprint from the input and compares it character-for-character.</p>
+<p>A body fingerprint case:</p>
+<pre><code class="language-yaml">case-id: fingerprints-003
+case-name: Body fingerprint changes when body content changes
+spec-references:
+  - &quot;section 4.2&quot;
+input:
+  type: cog
+  content: |
+    ---
+    title: Body fingerprint test
+    description: Body fingerprint test.
+    ---
+    Original body content.
+  altered-content: |
+    ---
+    title: Body fingerprint test
+    description: Body fingerprint test.
+    ---
+    Altered body content.
+expect:
+  outcome: success
+  fingerprints-differ: true
+</code></pre>
+<p>This case does not assert a specific hash value. It asserts that two different inputs produce different hashes. That is a weaker assertion but a useful one - it checks that body changes are detected without requiring a pre-computed value.</p>
+<h2 id="the-handler" tabindex="-1">The handler</h2>
+<pre><code class="language-javascript">function runFingerprintsCase(testCase) {
+  const { input, expect } = testCase;
+  if (input.type !== 'cog') return skip(`input type ${input.type} not handled`);
+
+  let parsed;
+  try {
+    parsed = parseCog(input.content);
+  } catch (err) {
+    return fail(`cog did not parse: ${err.message}`);
+  }
+
+  if (expect['contract-fingerprint']) {
+    const actual = computeContractFingerprint(parsed);
+    if (actual !== expect['contract-fingerprint']) {
+      return fail(
+        `contract fingerprint mismatch\n  expected: ${expect['contract-fingerprint']}\n  actual:   ${actual}`
+      );
+    }
+  }
+
+  if (expect['body-fingerprint']) {
+    const actual = computeBodyFingerprint(parsed);
+    if (actual !== expect['body-fingerprint']) {
+      return fail(
+        `body fingerprint mismatch\n  expected: ${expect['body-fingerprint']}\n  actual:   ${actual}`
+      );
+    }
+  }
+
+  if (expect['fingerprints-differ'] &amp;&amp; input['altered-content']) {
+    let altered;
+    try {
+      altered = parseCog(input['altered-content']);
+    } catch (err) {
+      return fail(`altered cog did not parse: ${err.message}`);
+    }
+
+    const original = computeBodyFingerprint(parsed);
+    const alteredFp = computeBodyFingerprint(altered);
+
+    if (original === alteredFp) {
+      return fail(`fingerprints did not differ after body change`);
+    }
+  }
+
+  return pass();
+}
+</code></pre>
+<p>The handler checks whichever fields are present in <code>expect</code>. A case may check a contract fingerprint, a body fingerprint, both, or neither - instead asserting that two fingerprints differ. All three checks are independent.</p>
+<h2 id="why-pre-computed-hashes-in-cases" tabindex="-1">Why pre-computed hashes in cases</h2>
+<p>Recording the expected hash in the case file means the case is a contract. If someone changes the hashing algorithm, the case fails. If the case fails for any reason other than an intentional algorithm change, that is a regression.</p>
+<p>The downside is that adding a new case requires running the reference implementation first to get the hash. This is a small cost for a meaningful guarantee. The alternative - testing only that a hash is produced, without checking its value - does not catch the class of bug where the hash function changes silently.</p>
+<h2 id="the-canonical-form-requirement" tabindex="-1">The canonical form requirement</h2>
+<p>Both fingerprint functions - <code>computeContractFingerprint</code> and <code>computeBodyFingerprint</code> - operate on a canonical form of their input, not the raw text. For the contract fingerprint, this means sorting object keys alphabetically and removing whitespace variation before hashing. This is the RFC 8785 JSON Canonicalisation Scheme (JCS) approach.</p>
+<p>Canonical form matters because two cogs that are semantically identical but differ in whitespace or key order must produce the same fingerprint. A case that passes on one machine and fails on another - because key order varies between JavaScript engines - is not a useful conformance case.</p>
+<p>If you are adapting this for your own agent, make sure your fingerprint function specifies and tests its canonical form. The fingerprint cases are where implementation drift becomes visible.</p>
+<hr>
+<p><em>Tom Cranstoun is an Agent Experience (AX) audit pioneer and the founder of Machine Experience (MX) and its community, and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

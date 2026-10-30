@@ -5,29 +5,32 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Why Use MX"
 description: "The publishing contract was written for humans. Machines read everything now, and they read files, not pages. When a file travels away from the system that produced it, MX is the metadata that lets it still say what it is, where it came from, and how it may be used, so the machine that meets it next does not have to guess."
 author: Tom Cranstoun
 created: 2026-08-07
-modified: 2026-08-27
+modified: 2026-09-29
 version: "1.0"
+category: mx-content
 type: blog-post
 tags: [mx, reginald, machine-readability, provenance, positioning, determinism]
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
   servedAt: https://mx.allabout.network/blog/why-use-mx.html
-  generate:
-    script: scripts/generate-content-html.cjs
   audience:
     - humans
     - machines
+  aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/why-use-mx.md
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   refersTo:
-    - datalake/draft-site/pages/why-use-mx.md
+    - datalake/draft-site/pages/learn/why-use-mx.md
+  contextProvides:
+    - "The plain-language answer to 'why use MX', in the chatty blog register. Frames MX as the second clause of a publishing contract that was written for humans and is now read by machines: content travels away from its source as files, machines fill gaps by inference, and ungoverned inference over unverified inputs is the exposure. Names the practical reasons to adopt MX (determinism over inference, metadata that travels with the file, the whole estate rather than the website, evidence for AI-governance work, adoption that compounds rather than costs) and keeps the MX / REGINALD split clean: MX makes content machine-readable, REGINALD makes it machine-trustworthy. The buyer-facing on-ramp to the MX Manifesto."
   stability: stable
   purpose: "Give a reader who has just heard of MX one short, warm read that answers 'why would I use this' without a spec, and leaves the MX and REGINALD roles clearly separated."
-  blogUrl: https://mx.allabout.network/blog/why-use-mx.html
-  blogFilename: why-use-mx
 
 ---
 -->
@@ -69,11 +72,9 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Why Use MX">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -157,6 +158,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -244,6 +246,14 @@ mx:
 <p>The publishing contract was written for humans. Machines read everything now. MX is the metadata that lets the contract hold for both, and the evidence that proves it did. That's why you use it.</p>
 
 
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-09-29.</li>
+          </ul>
+        </footer>
+
       </article>
 
 
@@ -284,7 +294,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

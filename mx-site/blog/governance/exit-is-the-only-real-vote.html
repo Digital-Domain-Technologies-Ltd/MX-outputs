@@ -5,30 +5,29 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: Exit Is the Only Real Vote
 description: "The ninth post in the standards-governance series. The ultimate check on whoever holds a standard is the community's ability to leave - to fork it and have the fork survive. The recent licence-grab forks, Terraform to OpenTofu and Redis to Valkey, show exit working and show what it costs. MX is forkable by design: open licence, open primitives, no patent layer, no hub, and the standard held by The Gathering rather than a company - so there is no owner positioned to betray."
 author: Tom Cranstoun
 created: "2026-06-03"
-modified: "2026-06-03"
-version: "1.0"
+modified: 2026-10-29
+version: "1.1"
+type: blog-post
+tags: [governance, open-standards, mx, forking, licensing, the-gathering]
 mx:
-  status: published
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
   audience:
     - humans
     - machines
-  tags:
-    - governance
-    - open-standards
-    - mx
-    - forking
-    - licensing
-    - the-gathering
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/governance/exit-is-the-only-real-vote.md
+  contextProvides:
+    - "The ninth post in the standards-governance series. The ultimate check on whoever holds a standard is the community's ability to leave - to fork it and have the fork survive. The recent licence-grab forks, Terraform to OpenTofu and Redis to Valkey, show exit working and show what it costs. MX is forkable by design: open licence, open primitives, no patent layer, no hub, and the standard held by The Gathering rather than a company - so there is no owner positioned to betray."
   stability: stable
   purpose: "The ninth post in the standards-governance series. The ultimate check on whoever holds a standard is the community's ability to leave - to fork it and have the fork survive. The recent licence-grab forks, Terraform to OpenTofu and Redis to Valkey, show exit working and show what it costs. MX is forkable by design: open licence, open primitives, no patent layer, no hub, and the standard held by The Gathering rather than a company - so there is no owner positioned to betray."
   servedAt: https://mx.allabout.network/blog/governance/exit-is-the-only-real-vote.html
   runbook: Blog post on mx-site, standards-governance series. The HTML is the canonical source for this YAML frontmatter.
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -69,14 +68,12 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Exit Is the Only Real Vote">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/governance/exit-is-the-only-real-vote.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -102,7 +99,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -116,7 +113,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 888,
+        "wordCount": 884,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -157,6 +154,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -171,7 +169,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -198,7 +196,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="888">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="884">
         <header class="article-header">
           <h1>Exit Is the Only Real Vote</h1>
           <div class="article-meta"
@@ -211,23 +209,23 @@ mx:
             <span>·</span>
             <span>5 min read</span>
           </div>
-
         </header>
 
 
-<p>This is the ninth post in the standards-governance series. The buyer's test that has run through these posts asks what happens when the body behind a standard turns hostile - when the sponsor's interests shift, when the registry decides to block you. Behind all of those is a single question that decides whether any of the others have teeth. If the holder of a standard abused its position tomorrow, could you leave? Could the community take the standard and continue without them, and would the result survive? That ability to walk is the only vote that a standard's holder cannot ignore.</p>
+<p>This is the ninth post in the standards-governance series. The buyer's test that has run through these posts asks what happens when the body behind a standard turns hostile - when the sponsor's interests shift, when the registry decides to block you. Behind all of those is a single question that decides whether any of the others have teeth. If the holder of a standard abused its position tomorrow, could you leave? Could the community take the standard and continue without them, and would the result survive? That ability to walk is the only vote that a standard's holder can't ignore.</p>
 <h2 id="why-the-exit-keeps-the-holder-honest" tabindex="-1">Why the exit keeps the holder honest</h2>
-<p>A governance promise is only as strong as the cost of breaking it. A holder that can lock you in has no reason to keep faith beyond goodwill, and goodwill is not a structure. A holder that knows the community can fork and thrive without them is disciplined by that knowledge whether or not anyone ever forks. The right to leave does its work mostly by existing. It is the reason an open licence and an implementable specification are not merely convenient but protective: they are what make the threat of departure credible.</p>
+<p>A governance promise is only as strong as the cost of breaking it. A holder that can lock you in has no reason to keep faith beyond goodwill, which isn't a structure. A holder that knows the community can fork and thrive without them is disciplined by that knowledge whether or not anyone ever forks. The right to leave does its work mostly by existing. It's the reason an open licence and an implementable specification aren't merely convenient but protective: they're what make the threat of departure credible.</p>
 <h2 id="when-communities-actually-left" tabindex="-1">When communities actually left</h2>
 <p>The last few years have run the experiment in public, and the pattern barely changes. A project under a single company's control, pressured by cloud rivals reselling its work, switches to a restrictive licence to protect its revenue. The community, finding the ground moved under it, forks the last open version and places it somewhere no one company can move it again.</p>
-<p>HashiCorp moved Terraform from an open licence to a restrictive one in 2023; the community forked the last open release into <a href="https://www.softwareseni.com/the-open-source-license-change-pattern-mongodb-to-redis-timeline-2018-to-2026-and-what-comes-next/">OpenTofu</a> and donated it to the Linux Foundation. Redis made the same move in 2024, and within about a month the Linux Foundation had launched <a href="https://www.linuxfoundation.org/press/linux-foundation-launches-open-source-valkey-community">Valkey</a> from the last open version, backed by a crowd of firms that had depended on the original. Elastic had been through it earlier and, tellingly, eventually returned to an open licence - exit had cost it enough to be worth reversing. The detail that matters most for governance is what the forks looked like afterwards: placed under foundations rather than companies, they drew contributors from more organisations than the projects they replaced. Leaving did not just preserve the work. It widened the ownership.</p>
+<p>HashiCorp moved Terraform from an open licence to a restrictive one in 2023; the community forked the last permissive release into <a href="https://www.softwareseni.com/the-open-source-license-change-pattern-mongodb-to-redis-timeline-2018-to-2026-and-what-comes-next/">OpenTofu</a> and donated it to the Linux Foundation. Redis made the same move in 2024, and within about a month the Linux Foundation had launched <a href="https://www.linuxfoundation.org/press/linux-foundation-launches-open-source-valkey-community">Valkey</a> from the last open version, backed by a crowd of firms that had depended on the original. Elastic had been through it earlier and, tellingly, eventually returned to an open licence - exit had cost it enough to be worth reversing. The detail that matters most for governance is what the forks looked like afterwards: placed under foundations rather than companies, they drew contributors from more organisations than the projects they replaced. Leaving didn't just preserve the work. It widened the ownership.</p>
 <h2 id="the-cost-nobody-should-hide" tabindex="-1">The cost nobody should hide</h2>
-<p>It would be dishonest to present forking as a clean win, because it is a schism, not a divorce by mutual consent. Once Terraform and OpenTofu parted, each began adding features the other could not safely copy, and integrators now keep compatibility matrices to track which is which. A fork splits a community's effort, doubles the maintenance, and confuses everyone downstream for years. The right to fork is a fire exit, not a front door. You want it to exist, marked and unobstructed, precisely so that you rarely have to use it - and the existence of a usable exit is itself what reduces the chance of the fire.</p>
+<p>It would be dishonest to present forking as a clean win, because it's a schism, not a divorce by mutual consent. Once Terraform and OpenTofu parted, each began shipping changes the other couldn't safely copy, and integrators now keep compatibility matrices to track which is which. A fork splits a community's effort, doubles the maintenance, and confuses everyone downstream for years. The right to fork is a fire exit, not a front door. You want it to exist, marked and unobstructed, precisely so that you rarely have to use it - and the existence of a usable exit is itself what reduces the chance of the fire.</p>
 <h2 id="forkable-by-design-with-no-one-to-betray" tabindex="-1">Forkable by design, with no one to betray</h2>
-<p>This is where MX takes a different route to the same safety. The forks above all began the same way: a company held the thing, and one day relicensed it. MX removes the precondition rather than improving the escape. The standard is held by <a href="https://tg.community">The Gathering</a>, an independent body, under an open licence; the primitives are open and unencumbered, with no patent layer to inherit; there is no hub the system must route through; and the conformance definition lives in the open, apart from any vendor. There is nothing for a company to relicense out from under the community, because no company holds it.</p>
-<p>So the exit right is satisfied in advance. The threat that disciplines a holder - leave and survive - is permanent and cheap here, not because betrayal would be survivable but because there is no owner positioned to commit it. This is the structural form of the commitment made earlier in the series, where the founder relinquishes the veto once the body stands on its own funding. A promise not to abuse control is worth less than an arrangement in which the control was never concentrated enough to abuse.</p>
+<p>This is where MX takes a different route to the same safety. The forks above all began the same way: a company held the thing, and one day relicensed it. MX removes the precondition rather than improving the escape. CogNovaMX stewards the common vocabulary now, and ownership passes to <a href="https://tg.community">The Gathering</a> after donation. The specification is already published under an open licence. The primitives are open and unencumbered, with no patent layer to inherit, and the system routes through no hub. The conformance criteria belong to The Gathering, apart from any vendor. A relicence would gain a company nothing, because what's already published stays open.</p>
+<p>So the exit right is satisfied in advance. The threat that disciplines a holder - leave and survive - is permanent and cheap here, because nobody is positioned to take back what's already published. This is the structural form of the commitment made earlier in the series, where the founder holds no veto and the vocabulary passes to the body once it's ready. A promise not to misuse control is worth less than an arrangement in which power was never concentrated enough to abuse.</p>
 <h2 id="the-test" tabindex="-1">The test</h2>
-<p>The closing question for the buyer's test is the one that gives the rest their force. If the holder turned hostile tomorrow, could the community fork the standard and survive - and is the cost of leaving low enough that the threat is real? If exit is impossible, the other safeguards are courtesies. If exit is possible but ruinous, the holder has more room than it should. The strongest position is the one where leaving is cheap because there was never a single hand on the switch.</p>
+<p>The closing question for the buyer's test is the one that gives the rest their force. If the holder turned hostile tomorrow, could the community fork the standard and survive - and is the cost of leaving low enough that the threat is real? If exit is impossible, the other safeguards are courtesies. If exit is possible but ruinous, the holder has more room than it should.</p>
+<p>The strongest position is the one where leaving is cheap because there was never a single hand on the switch.</p>
 <h2 id="related-reading" tabindex="-1">Related reading</h2>
 <ul>
 <li><a href="https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html">Whose Standard Is It Anyway?</a> - the failure modes that exit guards against</li>
@@ -236,8 +234,16 @@ mx:
 <li><a href="https://tg.community">The Gathering</a> - the body that holds MX so no company can relicense it</li>
 </ul>
 <hr>
-<p><em>Tom Cranstoun is the founder of the Machine Experience (MX) community and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+<p><em>Tom Cranstoun is an Agent Experience (AX) audit pioneer and the founder of Machine Experience (MX) and its community, and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -245,7 +251,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -279,7 +285,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -296,5 +305,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

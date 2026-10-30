@@ -5,31 +5,31 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: The Spec Was Never the Fragile Part
 description: The fourth post in the standards-governance series. JPEG has been threatened twice across thirty years while the specification never changed - once by a patent underneath it, once by a browser that switched off its successor. The fragile parts of a standard are the patents below it and the distribution above it, and keeping both out of any one party's hands is the work.
 author: Tom Cranstoun
 created: "2026-06-03"
-modified: "2026-06-03"
-version: "1.0"
+modified: 2026-10-29
+version: "1.1"
+type: blog-post
+tags: [governance, open-standards, mx, jpeg-xl, fair, patents, the-gathering]
 mx:
-  status: published
-  contentType: blog-post
+  mxSpecVersion: "0.9"
+  quotes:
+    - "insufficient ecosystem interest"
+  x-mx-contentState: published
   audience:
     - humans
     - machines
-  tags:
-    - governance
-    - open-standards
-    - mx
-    - jpeg-xl
-    - fair
-    - patents
-    - the-gathering
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/governance/the-spec-was-never-the-fragile-part.md
+  contextProvides:
+    - "The fourth post in the standards-governance series. JPEG has been threatened twice across thirty years while the specification never changed - once by a patent underneath it, once by a browser that switched off its successor. The fragile parts of a standard are the patents below it and the distribution above it, and keeping both out of any one party's hands is the work."
   stability: stable
   purpose: "The fourth post in the standards-governance series. JPEG has been threatened twice across thirty years while the specification never changed - once by a patent underneath it, once by a browser that switched off its successor. The fragile parts of a standard are the patents below it and the distribution above it, and keeping both out of any one party's hands is the work."
   servedAt: https://mx.allabout.network/blog/governance/the-spec-was-never-the-fragile-part.html
   runbook: Blog post on mx-site, standards-governance series. The HTML is the canonical source for this YAML frontmatter.
+
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
@@ -70,14 +70,12 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="The Spec Was Never the Fragile Part">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/governance/the-spec-was-never-the-fragile-part.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -103,7 +101,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -117,7 +115,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1802,
+        "wordCount": 1772,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -158,6 +156,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -172,7 +171,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../images/avatars/tom-avatar.webp"
+            <img src="../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -202,64 +201,71 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1802">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1772">
         <header class="article-header">
           <h1>The Spec Was Never the Fragile Part</h1>
           <div class="article-meta"
                data-published="2026-06-03"
                data-modified="2026-06-03"
-               data-reading-time="10 min">
+               data-reading-time="9 min">
             <time datetime="2026-06-03">3 June 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>10 min read</span>
+            <span>9 min read</span>
           </div>
-
         </header>
 
 
-<p>This is the fourth post in the standards-governance series. The earlier ones placed the danger inside a standard's governance: who owns the infrastructure it runs on, who funds the body that ratifies it, and what happens when the founder leaves. <a href="https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html">Whose Standard Is It Anyway?</a> set that out. JPEG earns a post of its own because it shows the danger is not only inside the governance. It comes from below the specification and from above it - from the patents the technique depends on, and from the distribution that decides who is allowed to use it. Across thirty years, JPEG has been threatened from both directions while the specification itself never changed.</p>
+<p>This is the fourth post in the standards-governance series. The earlier ones placed the danger inside a standard's governance: who owns the infrastructure it runs on, who funds the body that ratifies it, and what happens when the founder leaves. <a href="https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html">Whose Standard Is It Anyway?</a> set that out. JPEG earns a post of its own because it shows the danger isn't only inside the governance. It comes from below the specification and from above it - from the patents the technique depends on, and from the distribution that decides who's allowed to use it. Across thirty years, JPEG has been threatened from both directions while the specification itself never changed.</p>
 <h2 id="the-win-first" tabindex="-1">The win first</h2>
-<p>JPEG, first standardised in 1992 by the Joint Photographic Experts Group, won the web for an unglamorous reason: anyone could implement it without asking. The specification was published, the technique was understood, and a developer with a compiler could produce a working encoder. No licence to sign, no gatekeeper to clear. That is why it is still the safe default three decades later, having outlived a procession of technically better successors. The lesson this series keeps returning to holds here too: a standard wins by being freely implementable and everywhere, not by being the cleverest design available. <a href="https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html">A Standard That Knows What It Isn't</a> makes the same case for MX - build on what already exists, claim as little new ground as you can.</p>
+<p>JPEG, first standardised in 1992 by the Joint Photographic Experts Group, won the web for an unglamorous reason: anyone could implement it without asking. The specification was published, the technique was understood, and a developer with a compiler could produce a working encoder. No licence to sign, no gatekeeper to clear. That's why it's still the safe default three decades later, having outlived a procession of technically better successors. The lesson this series keeps returning to holds here too: a standard wins by being freely implementable and everywhere, not by being the cleverest design available. <a href="https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html">A Standard That Knows What It Isn't</a> makes the same case for MX - build on what already exists, claim as little new ground as you can.</p>
 <p>But &quot;freely implementable&quot; turned out to be a claim about the specification, not about the ground underneath it.</p>
 <h2 id="the-threat-from-below-the-patent-nobody-mentioned" tabindex="-1">The threat from below: the patent nobody mentioned</h2>
-<p>In 2002 a company called Forgent Networks announced that JPEG was not free after all. It held a patent, US 4,698,672, filed in 1986 by engineers at Compression Labs, which Forgent had since acquired, and it read that patent as covering the compression at the heart of the format. Then it started charging. <a href="https://www.nbcnews.com/id/wbna15534260">Forgent took more than $110 million in licensing and settlements and sued dozens of companies</a> before the claim came apart: a court ruled the patent applied only to video, the US Patent Office rejected its broadest claims on a public-interest reexamination, and the patent expired in 2006.</p>
-<p>This was not a freak event. The same shape had already played out with GIF, when Unisys asserted the LZW compression patent against a format the whole web had assumed was free. In both cases the specification was open and the technique underneath it was owned. An open spec resting on an encumbered primitive is a trap with a delay on it. It springs years later, once adoption is too deep to reverse, which is exactly when a licensing demand carries the most leverage.</p>
-<p>The governance lesson is plain. Clearing the patent ground is not a legal nicety to be done after the spec is finished. It is part of writing the standard. A body that defines a format without insisting its techniques are free to implement has built a liability and called it a standard. The defence is to build only on primitives that are open by design and old enough to be clear of ambush. MX takes that literally: its signing, identity, and canonical-bytes machinery is assembled from published IETF and W3C work, Ed25519, did:web, JSON canonicalisation, Merkle structures, chosen partly because the ground under them is already clear.</p>
+<p>In 2002 a company called Forgent Networks announced that JPEG wasn't free after all. It held US patent 4,698,672, filed in 1986 by engineers at Compression Labs, which Forgent had since acquired, and it read the claims as covering the format's central compression technique. Then it started charging. <a href="https://www.nbcnews.com/id/wbna15534260">Forgent took more than $110 million in licensing and settlements and sued dozens of companies</a> before the claim came apart: a court ruled it applied only to video, the USPTO rejected its broadest claims on a public-interest reexamination, and it expired in 2006.</p>
+<p>This wasn't a freak event. The same thing had already happened with GIF, when Unisys asserted the LZW compression patent against a format the whole web had assumed was free. In both cases the specification was open and the technique underneath it was owned. An open spec resting on an encumbered primitive is a trap with a delay on it. It springs years later, once adoption is too deep to reverse, which is exactly when a licensing demand has the most leverage.</p>
+<p>The governance lesson is plain. Clearing the patent ground isn't a legal nicety to be done after the spec is finished. It's part of writing the standard. A body that defines a format without insisting its techniques are free to implement has built a liability and called it a standard. The defence is to build only on primitives that are open by design and old enough to be clear of ambush. MX applies that directly: its signing, identity, and canonical-bytes machinery is assembled from published IETF and W3C work, Ed25519, did:web, JSON canonicalisation, Merkle structures, chosen partly because the ground under them is already clear.</p>
 <h2 id="the-threat-from-above-the-distribution-gate" tabindex="-1">The threat from above: the distribution gate</h2>
-<p>The second threat is newer, and it sits at the other end of the pipe.</p>
-<p>JPEG XL is the modern successor: an ISO standard, royalty-free, markedly smaller than JPEG at the same quality, and able to repack existing JPEGs with no loss. By merit it should have spread quickly. Instead, in 2022 <a href="https://www.phoronix.com/news/JPEG-XL-Possible-Chrome-Back">Google removed it from Chrome</a>, citing &quot;insufficient ecosystem interest&quot;. The format did not change. Its quality did not change. One browser's decision removed the distribution, and a superior royalty-free standard sat stranded for three years.</p>
-<p>This is the <a href="https://mx.allabout.network/blog/governance/a-rule-you-sell-is-not-a-standard.html">AMP</a> pattern at a different layer. The body that wrote JPEG XL did not decide whether the web could use it. The browser vendor did. A standard can be open, royalty-free, and superior, and still be switched off by whoever controls the runtime it has to pass through.</p>
+<p>The second threat is newer, and it comes from the other end of the pipe.</p>
+<p>JPEG XL is the modern successor: an ISO standard, royalty-free, compressing well beyond JPEG at equal quality, and able to repack existing JPEGs with no loss. By merit it should have spread quickly. Instead, in 2022 <a href="https://www.phoronix.com/news/JPEG-XL-Possible-Chrome-Back">Google removed it from Chrome</a>, citing &quot;insufficient ecosystem interest&quot;. The format didn't change. Its quality didn't change. One browser's decision removed the distribution, and a superior royalty-free standard sat stranded for three years.</p>
+<p>This is the <a href="https://mx.allabout.network/blog/governance/a-rule-you-sell-is-not-a-standard.html">AMP</a> pattern at a different layer. The body that wrote JPEG XL didn't decide whether the web could use it. The browser vendor did. A standard can be open, royalty-free, and superior, and still be switched off by whoever controls the runtime it has to pass through.</p>
 <h2 id="what-broke-the-gate" tabindex="-1">What broke the gate</h2>
 <p>The end of the story is the part this series has been waiting for, because it shows the defence working.</p>
-<p>JPEG XL did not survive by appealing to Google. It survived because it was not Google's to kill. Safari shipped it in 2023. Firefox moved its position. In late 2025 the PDF Association named it the preferred format for high-dynamic-range images in PDF, which put pressure on every PDF viewer, Chrome's included. Developer demand kept surfacing in the open. And when <a href="https://devclass.com/2025/11/24/googles-chromium-team-decides-it-will-add-jpeg-xl-support-reverses-obsolete-declaration/">Chrome reversed course</a> in November 2025, the new decoder was written in Rust largely by an outside contributor rather than by Google, and shipped behind a flag in early 2026, with default support expected later in the year.</p>
-<p>Everything that rescued the format came from the fact that no single party owned it: other implementers who could ship it regardless, an adjacent standards body that could endorse it, outside engineers who could do the work. A standard with one owner can be switched off in an afternoon. A standard many parties hold cannot, because there is no single switch to throw.</p>
+<p>JPEG XL survived because it was never Google's to kill. Safari shipped it in 2023. Firefox moved its position. In late 2025 the PDF Association named it the preferred format for high-dynamic-range images in PDF, which put pressure on every PDF viewer, Chrome's included. Developer demand kept surfacing in the open. And when <a href="https://devclass.com/2025/11/24/googles-chromium-team-decides-it-will-add-jpeg-xl-support-reverses-obsolete-declaration/">Chrome reversed course</a> in November 2025, the new decoder was written in Rust largely by an outside contributor rather than by Google, and shipped behind a flag in early 2026, with default support expected later in the year.</p>
+<p>Everything that rescued the format came from nobody owning it outright: other implementers who could ship it regardless, an adjacent standards body that could endorse it, outside engineers who could do the work. A standard with one owner can be switched off in an afternoon. A standard many parties hold can't, because there's no single switch to throw.</p>
 <h2 id="trust-in-the-signature-not-the-registry" tabindex="-1">Trust in the signature, not the registry</h2>
-<p>There is a sharper version of that fix, and it decides whether the single switch can exist at all. When a registry is the single source of truth - holding the canonical copy, the identity, and the permission to be listed - it is also a single point of control, and control is what gets abused. <a href="http://WordPress.org">WordPress.org</a> is the case <a href="https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html">the series opened on</a>: a directory the whole ecosystem depended on, owned by one company, able to reassign a plugin and cut a participant off on a Monday morning.</p>
-<p>The answer reached for is the same one MX makes. In 2025 the Linux Foundation launched <a href="https://www.linuxfoundation.org/press/linux-foundation-announces-the-fair-package-manager-project-for-open-source-content-management-system-stability">FAIR, Federated And Independent Repositories</a>, built so that no single entity controls the supply chain end to end. Packages are cryptographically signed and served through federated repositories that anyone can mirror or self-host. The signature is what a site verifies; the repository is only where it found the package. Once trust lives in the signature, the registry stops being a chokepoint and becomes a convenience that can be replaced.</p>
-<p>That portability is not theoretical. FAIR was conceived for WordPress, but the WordPress effort stalled, and the project has since been <a href="https://hackathon.cloudfest.com/project/fair-package-management-for-typo3/">carried into TYPO3</a>, whose community is building it into an extension ecosystem of some eight thousand packages; the format was platform-agnostic from the start. A registry one company owns cannot relocate. A federated, signed format can, because no one holds the trust to begin with. The reason it had to move is its own lesson: FAIR's founders concluded that neutrality the ecosystem will not fund does not materialise, which is the exact problem <a href="https://mx.allabout.network/blog/governance/not-the-main-sponsor.html">Not the Main Sponsor</a> sets out to solve. A neutral standard needs both an architecture no one owns and a way to keep the lights on.</p>
-<p>That is the line between a registry that grants trust and a registry that merely points to it. The first can revoke what it granted. The second has nothing to revoke.</p>
+<p>There's a sharper version of that fix, and it decides whether the single switch can exist at all. When a registry is the one source of truth - holding the canonical copy, the identity, and the permission to be listed - it's also a point of control, and that power is what gets abused. <a href="http://WordPress.org">WordPress.org</a> is the case <a href="https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html">the series opened on</a>: a directory the whole community depended on, owned by one company, able to reassign a plugin and cut a participant off on a Monday morning.</p>
+<p>The answer reached for is the same one MX makes. In 2025 the Linux Foundation launched <a href="https://www.linuxfoundation.org/press/linux-foundation-announces-the-fair-package-manager-project-for-open-source-content-management-system-stability">FAIR, Federated And Independent Repositories</a>, built so that no single entity controls the supply chain end to end. Packages are cryptographically signed and served through federated repositories that anyone can mirror or self-host. The signature is what a site verifies; the repository is only where it found the package. Once trust moves into the signature, the registry stops being a chokepoint and becomes a convenience that can be replaced.</p>
+<p>That portability isn't theoretical. FAIR was conceived for WordPress, but the WordPress effort stalled, and the project has since been <a href="https://hackathon.cloudfest.com/project/fair-package-management-for-typo3/">carried into TYPO3</a>, whose community is building it into an extension library of some eight thousand packages; the format was platform-agnostic from the start. A registry one company owns can't relocate. A federated, signed format can, because no one ever held the trust. The reason it had to move is its own lesson: FAIR's founders concluded that neutrality nobody funds doesn't materialise, which is the exact problem <a href="https://mx.allabout.network/blog/governance/not-the-main-sponsor.html">Not the Main Sponsor</a> sets out to solve. A neutral standard needs both an architecture no one owns and a way to pay its running costs.</p>
+<p>That's the line between a registry that grants trust and one that merely points to it. The first can revoke what it granted. The second has nothing to revoke.</p>
 <h2 id="what-this-means-for-mx" tabindex="-1">What this means for MX</h2>
 <p>Put the two threats together and the conclusion is the one this series keeps reaching from new directions. The specification is rarely the fragile part. The fragile parts are the patents beneath it and the distribution above it, and a standards body's real work is keeping both out of any single party's hands.</p>
-<p>That is the shape <a href="https://tg.community">The Gathering</a> is built to. The standard is held by an independent body, community-led and never vendor-driven, so no one company can rewrite or retire it. The primitives are open and unencumbered, so there is no patent layer for a Forgent to sit on. And MX sits on the pointing side of that line: a COG carries its own signature, the publisher's identity lives under did:web on their own domain, and a reader verifies both without anyone's permission. REGINALD indexes where a COG is and attests its integrity, but it holds none of the trust, which is why anyone can run an instance and an air-gapped one still works.</p>
+<p><a href="https://tg.community">The Gathering</a> is built for that work. The stewardship position reads: &quot;CogNovaMX stewards the common MX vocabulary today and dogfoods it first; ownership and governance pass to the Gathering after donation.&quot; The specification is published under an open licence, so no one company can retire it. The primitives are open and unencumbered, leaving no patent layer for a Forgent to exploit. And MX belongs on the pointing side of that line: a COG carries its own signature, the publisher's identity is a did:web identifier on their own domain, and a reader verifies both without anyone's permission. REGINALD indexes where a COG is and attests its integrity, but it holds none of the trust, which is why anyone can run an instance and an air-gapped one still works.</p>
 <h2 id="federated-still-has-a-hub" tabindex="-1">Federated still has a hub</h2>
-<p>Even the federated case keeps one. FAIR moved trust into the signature, but to stay usable it rebuilt a central place to find packages and a labelling layer to say which ones to trust. Those hubs are federated and replaceable, which makes them far better than a single-owner directory - but they are still places the system routes through, and a place everything routes through is a place that can be leaned on. MX needs no such hub, because finding a COG is not a separate errand: it rides with content discovered the way any page already is, a publisher's identity resolves to their own domain, and a registry like REGINALD is an optional index rather than the only door in. Verification is point to point, reader to publisher, with nothing in the middle that everyone must query.</p>
-<p>The honest cost is that the burden moves to the publisher - weak key handling leaves you less trustworthy than a shared directory would, and that failure is yours - but it is local, not a single switch in one company's hand. None of this makes MX safe forever. It means the failure modes JPEG suffered have been designed against, rather than discovered after the demand letter arrives.</p>
+<p>Even the federated case keeps one. FAIR moved trust into the signature, but to stay usable it rebuilt a central index for finding packages and a labelling layer that says which ones are sound. Those hubs are federated and replaceable, which makes them far better than a single-owner directory. They're still routes the system depends on, though, and anything everyone depends on can be pressured. MX needs no such hub, because finding a COG isn't a separate errand. It rides with content discovered the way any page already is. A publisher's identity resolves to their own domain, and a registry like REGINALD is an optional index rather than the only door in. Verification is point to point, reader to publisher, with nothing in the middle that everyone must query.</p>
+<p>The honest cost is that the burden moves to the publisher - weak key handling leaves you less trustworthy than a shared directory would, and that failure is yours - but it's local, not a single switch in one company's hand. None of this makes MX safe forever. It means the failure modes JPEG suffered have been designed against, rather than discovered after the demand letter arrives.</p>
 <h2 id="the-test-extended" tabindex="-1">The test, extended</h2>
-<p>The earlier posts asked who profits if the rule says what it says, and who can change it. JPEG adds questions about the layers that test did not reach. Is every technique the standard requires free to implement, with no patent waiting underneath it? And if the one platform that matters most decided tomorrow to stop supporting it, would the standard survive the loss?</p>
+<p>The earlier posts asked who profits if the rule says what it says, and who can change it. JPEG adds questions about the layers that test didn't reach. Is every technique the standard requires free to implement, with no patent waiting underneath it? And if the one platform that matters most decided tomorrow to stop supporting it, would the standard survive the loss?</p>
 <p>JPEG passed both, eventually, the hard way. The point of a standards body is to make survival the design, not the reprieve.</p>
 <h2 id="related-reading" tabindex="-1">Related reading</h2>
 <ul>
 <li><a href="https://mx.allabout.network/blog/governance/whose-standard-is-it-anyway.html">Whose Standard Is It Anyway?</a> - the post that opened the series: the WordPress kill-switch case and the three failure modes</li>
-<li><a href="https://mx.allabout.network/blog/governance/a-rule-you-sell-is-not-a-standard.html">A Rule You Sell Is Not a Standard</a> - AMP and OOXML, and the IETF as the working alternative</li>
-<li><a href="https://mx.allabout.network/blog/governance/not-the-main-sponsor.html">Not the Main Sponsor</a> - the founder's funding cap and the expiring veto</li>
+<li><a href="https://mx.allabout.network/blog/governance/a-rule-you-sell-is-not-a-standard.html">A Rule You Sell Isn't a Standard</a> - AMP and OOXML, and the IETF as the working alternative</li>
+<li><a href="https://mx.allabout.network/blog/governance/not-the-main-sponsor.html">Not the Main Sponsor</a> - the founder's funding cap, no founder veto, and the conditions for the donation</li>
 <li><a href="https://mx.allabout.network/blog/a-standard-that-knows-what-it-isnt.html">A Standard That Knows What It Isn't</a> - why MX stays small and builds on what already exists</li>
 <li><a href="https://tg.community">The Gathering</a> - the open body that holds the MX standard</li>
 </ul>
 <hr>
-<p><em>Tom Cranstoun is the founder of the Machine Experience (MX) community and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+<p><em>Tom Cranstoun is an Agent Experience (AX) audit pioneer and the founder of Machine Experience (MX) and its community, and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -267,7 +273,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -301,7 +307,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -318,5 +327,6 @@ mx:
   </footer>
 
   <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

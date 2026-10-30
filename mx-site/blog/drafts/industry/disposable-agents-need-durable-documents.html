@@ -10,7 +10,7 @@ title: "Disposable Agents Need Durable Documents"
 description: "OpenAI's dots put an always-on agent in every ChatGPT account, and the next step is an agent per errand: one for the boiler, one for the car, one for the weekend away. If agents become disposable, the durable thing is the document they read, and a cold agent guesses unless that document declares who owns it and whether it is still true."
 author: Tom Cranstoun
 created: "2026-09-30"
-modified: "2026-09-30"
+modified: 2026-10-15
 version: "1.0"
 type: blog-post
 tags:
@@ -23,22 +23,21 @@ tags:
   - small-models
 mx:
   mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience:
     - humans
     - machines
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/industry/disposable-agents-need-durable-documents.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/industry/disposable-agents-need-durable-documents.md
   contextProvides:
     - "OpenAI announced dots at DevDay on 29 September 2026: always-on agents running on GPT-6 Astra, each with its own cloud computer, reachable through ChatGPT, Slack and Teams, with custom rules on when they act alone."
     - "The likely trajectory is many narrow agents, one per task or object, cheap enough to create and throw away."
     - "A disposable agent carries no history with the objects it acts on, so every read starts cold and the document is the only memory available."
-    - "Measured: a small decider handed a bare document invented an owner nine times out of ten; handed the same document with declared metadata, it stopped guessing."
+    - "Measured: the author's own local 3B decider, handed a bare document, invented an owner nine times out of ten; handed the same document with declared metadata, it stopped guessing."
     - "The first step for a business is to declare owner, currency and validity as labelled fields on the documents that carry money or liability."
   stability: draft
   purpose: "Answer the disposable-agents conversation that followed OpenAI's dots launch with the MX position: agents will come and go, so the document has to carry its own state."
   servedAt: https://mx.allabout.network/blog/drafts/industry/disposable-agents-need-durable-documents.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by promote. The measured decider figure comes from the decider post; change it there, never here alone."
-  blogUrl: https://mx.allabout.network/blog/drafts/industry/disposable-agents-need-durable-documents.html
-  blogFilename: disposable-agents-need-durable-documents
   quotes:
     - "an agent for your boiler, another for your car, another for the weekend trip"
     - "And Agents will be disposable shortly."
@@ -141,7 +140,7 @@ refersToExternal:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 778,
+        "wordCount": 859,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -182,6 +181,7 @@ refersToExternal:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -222,18 +222,18 @@ refersToExternal:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="778">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="859">
         <header class="article-header">
           <h1>Disposable Agents Need Durable Documents</h1>
           <div class="article-meta"
                data-published="2026-09-30"
                data-modified="2026-09-30"
-               data-reading-time="4 min">
+               data-reading-time="5 min">
             <time datetime="2026-09-30">30 September 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>4 min read</span>
+            <span>5 min read</span>
           </div>
         </header>
 
@@ -247,8 +247,9 @@ refersToExternal:
 <p>So the agent starts cold every time it opens a document. The agent fetches the service record, the warranty document and the manufacturer's page, and the only memory it has is what those documents say about themselves. If they don't say who owns them, whether they're current and when they stop being valid, the agent has to fill the gap. A machine filling a gap is a guess.</p>
 <p>Scale that up. An always-on dot and a hundred single-task agents behind it all read the same documents repeatedly, from a standing start each time. The cheaper agents get, the more cold reads each document receives, and the more guesses are made about it.</p>
 <h2 id="the-guess-is-measurable" tabindex="-1">The Guess Is Measurable</h2>
-<p>I've tested this directly with a small decider, the kind of narrow model that makes one cheap decision and hands hard cases up the chain (<a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">the measured runs are written up here</a>). Handed a bare document, it guessed, and it invented an owner nine times out of ten. Handed the same document with its owner and currency declared as labelled fields, it stopped guessing and read the answer.</p>
+<p>I've tested this directly with a small decider I built and ran locally, a 3B model of the kind that makes one cheap decision and hands hard cases up the chain (<a href="https://mx.allabout.network/blog/agent-web/i-built-a-decider-and-measured-it.html">the measured runs are written up here</a>). Handed a bare document, it guessed, and it invented an owner nine times out of ten. Handed the same document with its owner and currency declared as labelled fields, it stopped guessing and read the answer.</p>
 <p>The model didn't get smarter between the two runs. The document told it more. That's the point for a world of disposable agents: you can't train judgement into an agent that exists for an afternoon, but you can put the facts it needs into the thing it reads.</p>
+<p>A better decider doesn't remove the need. TypeSafe's hosted Jev, a decision model built for this kind of question, does better on bare input. In a separate test, where a decider checks another model's answer, it said &quot;cannot be determined&quot; on all 10 bare cases, which my local rebuilds never did. It gave a verdict only where a scope and documents were declared. A registered repeat on 2026-10-15 gave the same result on every case.</p>
 <h2 id="agents-come-and-go-the-document-stays" tabindex="-1">Agents Come and Go, the Document Stays</h2>
 <p>This changes where the lasting value sits. If agents are disposable, the market for any one of them is fragile; the next launch replaces it. What lasts is the material every agent reads: the service record, the warranty terms, the price list, the hotel's cancellation policy. Those documents outlive every agent that reads them.</p>
 <p>MX is to machines what UX is to users. UX asks whether a person can understand a page and act on it. MX asks the same of a machine, and a cold, disposable agent is the hardest of those readers: no history, no context and no time to work it out. A document that works for that agent works for everyone else too.</p>
@@ -267,6 +268,15 @@ refersToExternal:
 <li>Schoon, B. (2026, September 29). OpenAI launches Dots, new 'always-on agents' you can assign tasks to. <em>9to5Google</em>. <a href="https://9to5google.com/2026/09/29/openai-dots-agent/">https://9to5google.com/2026/09/29/openai-dots-agent/</a></li>
 </ol>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-15.</li>
+            <li>Outside sources that make the same claims: <a href="https://openai.com/index/introducing-dots/" rel="noopener">openai.com/index/introducing-dots</a> and <a href="https://9to5google.com/2026/09/29/openai-dots-agent/" rel="noopener">9to5google.com/2026/09/29/openai-dots-agent</a>.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -308,7 +318,10 @@ refersToExternal:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
