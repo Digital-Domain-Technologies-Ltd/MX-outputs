@@ -5,26 +5,31 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Metadata Is the Right Move. Human-in-Command Is the Right Model."
 description: "We are enthusiastically pro-metadata. Adding structured data to your site improves machine readability - that is exactly what MX is built on. The question is not whether to add it but how to add it with human oversight and provenance that travels with the content."
 author: Tom Cranstoun
 created: "2026-06-24"
-modified: "2026-06-24"
+modified: 2026-10-29
 version: "1.1"
 type: blog-post
 tags: [geo, structured-data, automation, machine-readability, audit, ai-agents, provenance, the-gathering, open-standards]
 mx:
-  status: draft
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans, machines]
-  purpose: "Position MX as pro-metadata, pro-vendor-participation, and pro-open-standards. Frame the GEO automation question around Human-in-Command and provenance that travels with content. Invite vendors to The Gathering. CTA: free 5-page audit."
+  purpose: "Position MX as pro-metadata, pro-vendor-participation, and pro-open-standards. Frame the automated-markup question around Human-in-Command and provenance that travels with content. Invite vendors to The Gathering. CTA: the free AX Audit on Tityra, up to 10 pages."
   stability: stable
+  contextProvides:
+    - "MX position on GEO automation tools: enthusiastically pro-metadata; the gap is provenance and human oversight, not the concept of adding structured data. Human-in-Command is the correct model. Vendors invited to join The Gathering."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/industry/the-geo-automation-trap.md
-  runbook: "Blog post. Chatty register. Warm toward vendors. Pro-metadata, pro-open-standards. CTA at end: free 5-page audit."
+  runbook: "Blog post. Chatty register. Warm toward vendors. Pro-metadata, pro-open-standards. CTA at end: the free AX Audit on Tityra, up to 10 pages."
   generate:
     script: "scripts/bin/mx.pdf.sh"
     format: "pdf"
     output: "mx-outputs/pdf/metadata-is-the-right-move.pdf"
     description: "Letter-format PDF of the GEO automation blog post"
+  servedAt: https://mx.allabout.network/blog/drafts/industry/the-geo-automation-trap.html
 
 ---
 -->
@@ -66,11 +71,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Metadata Is the Right Move. Human-in-Command Is the Right Model.">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.1">
@@ -99,7 +102,7 @@ mx:
           "name": "Tom Cranstoun",
           "email": "tom@digitaldomaintechnologies.com",
           "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.webp"
+          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
         },
         "publisher": {
           "@type": "Organization",
@@ -113,7 +116,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1071,
+        "wordCount": 1079,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -140,6 +143,7 @@ mx:
 <body>
   <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
 
   <!-- Site Header -->
   <header class="site-header">
@@ -153,6 +157,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -167,7 +172,7 @@ mx:
       <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
         <div class="introduction-content" role="presentation">
           <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
-            <img src="../../../images/avatars/tom-avatar.webp"
+            <img src="../../../images/avatars/tom-avatar.png"
                  alt="Tom Cranstoun profile picture"
                  class="author-image" width="80" height="80" loading="lazy">
           </a>
@@ -187,13 +192,13 @@ mx:
         <li><a href="#human-in-command-is-the-correct-model">Human-in-Command is the correct model</a></li>
         <li><a href="#an-invitation-to-vendors">An invitation to vendors</a></li>
         <li><a href="#the-right-questions-to-ask">The right questions to ask</a></li>
-        <li><a href="#we-will-audit-5-pages-of-your-site-for-free">We will audit 5 pages of your site for free</a></li>
+        <li><a href="#we-will-audit-up-to-10-pages-of-your-site-for-free">We will audit up to 10 pages of your site for free</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1071">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1079">
         <header class="article-header">
           <h1>Metadata Is the Right Move. Human-in-Command Is the Right Model.</h1>
           <div class="article-meta"
@@ -221,12 +226,12 @@ mx:
 <h2 id="human-in-command-is-the-correct-model" tabindex="-1">Human-in-Command is the correct model</h2>
 <p>The EU AI HLEG principle we build against is Human-in-Command: every automated system operates within a declared output boundary, and a human holds authority over when and how that system acts. Adobe LLM Optimizer is already close to this model. A person signs off before any change reaches production. That's the right shape.</p>
 <p>The direction of travel is clear: automate within a boundary a human set, with a human reviewing the output, and a record of that review that travels with the content rather than sitting in a vendor dashboard.</p>
-<p>What that looks like in practice is a report that carries its own evidence chain. Every PDF an MX audit produces embeds the full provenance record inside the file's XMP metadata: who ran each step, what inputs it saw, what verdict it reached, which AI-governance frameworks the step is recorded against. An auditor with only the PDF can run <code>exiftool -b -XMP-mx:ProvenanceAiPayload &lt;file&gt;.pdf</code> and read the complete chain offline, without contacting us, without accessing a dashboard, without trusting our word for anything. The chain also lives as a sidecar JSON file next to the PDF on disk. We describe the full mechanic in <a href="/blog/provenance/audit-for-auditors.html">How an MX Audit Proves Itself</a>. The short version: the report proves itself.</p>
+<p>What that looks like in practice is a report that carries its own evidence chain. Every PDF an AX (agent experience) audit produces embeds the full provenance record inside the file's XMP metadata: who ran each step, what inputs it saw, what verdict it reached, which AI-governance frameworks the step is recorded against. An auditor with only the PDF can run <code>exiftool -b -XMP-mx:ProvenanceAiPayload &lt;file&gt;.pdf</code> and read the complete chain offline, without contacting us, without accessing a dashboard, without trusting our word for anything. The chain also ships as a JSON file beside the PDF. We describe the full mechanic in <a href="https://mx.allabout.network/blog/provenance/audit-for-auditors.html">How an AX Audit Proves Itself</a>. The short version: the report proves itself.</p>
 <p>That's the model for metadata provenance generally. Not a record in a vendor dashboard that requires a login. A record that rides with the artefact, open to any inspector, machine-readable by design.</p>
 <p>The over-decoration problem, where adding too much structured data increases the inline data weight of the page to the point where constrained parsers struggle to process it, is a real operational concern, and the protocols book covers it in full. But it's secondary to the provenance question. A page with carefully curated, human-reviewed structured data and a clear record of its origin is in a better position than a page with comprehensive automated schema and no trail.</p>
 <h2 id="an-invitation-to-vendors" tabindex="-1">An invitation to vendors</h2>
 <p><a href="https://tg.community">The Gathering</a> is an open, community-led standards body that governs the MX metadata standard. It exists to fill the gaps that established standards (Dublin Core, <a href="https://schema.org">Schema.org</a>, DCAT, OpenAPI) leave open, in a way that no single vendor controls.</p>
-<p>If you're building a GEO optimisation tool, we invite you to join. The provenance question we're raising here isn't unique to MX. It's the open problem the whole category needs to solve, and solving it together as an open standard is better for everyone than each vendor building a proprietary trail that stays on their own platform.</p>
+<p>If you're building a tool that adds structured data to pages, we invite you to join. The provenance question we're raising here isn't unique to MX. It's the open problem the whole category needs to solve, and solving it together as an open standard is better for everyone than each vendor building a proprietary trail that stays on their own platform.</p>
 <p>The metadata you generate is valuable. We'd like to help it be trustworthy too.</p>
 <h2 id="the-right-questions-to-ask" tabindex="-1">The right questions to ask</h2>
 <p>If your site runs an AI optimisation tool, or you're evaluating one, these are the questions worth asking:</p>
@@ -237,12 +242,20 @@ mx:
 <li>Is the total inline data weight of your pages within thresholds that constrained machine parsers can handle?</li>
 </ul>
 <p>Fuller details on all of these questions, and the architectural reasoning behind them, are in <em>MX: The Protocols</em>, the book we're publishing on building for machine experience.</p>
-<h2 id="we-will-audit-5-pages-of-your-site-for-free" tabindex="-1">We will audit 5 pages of your site for free</h2>
+<h2 id="we-will-audit-up-to-10-pages-of-your-site-for-free" tabindex="-1">We will audit up to 10 pages of your site for free</h2>
 <p>Our audit suite measures these things. For any site we audit, we identify the CMS platform, note which AI optimisation tools are likely active, measure DOM complexity across the audited pages, and report whether the metadata on your pages has a provenance record that travels with it.</p>
 <p>We're not looking to find fault. We're looking to give you a clear picture of where your site stands, what a downstream AI agent sees when it reads your pages, and what the honest gaps are.</p>
-<p>Send us your site and five pages you care about. The audit report is yours to keep, no obligation.</p>
-<p><a href="https://mx.allabout.network/audit">Get your free 5-page audit →</a></p>
+<p>Send us your site and up to 10 pages you care about. The audit report is yours to keep, no obligation.</p>
+<p><a href="https://tityra.com">Get your free AX Audit on Tityra →</a></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -250,7 +263,7 @@ mx:
       <!-- Post Conclusion: author + CTA + onward links -->
       <aside class="post-conclusion" aria-label="About the author and next steps">
         <div class="post-conclusion-author">
-          <img src="../../../images/avatars/tom-avatar.webp" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
             <p class="post-conclusion-eyebrow">About the author</p>
             <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
@@ -284,7 +297,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>
@@ -301,5 +317,6 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

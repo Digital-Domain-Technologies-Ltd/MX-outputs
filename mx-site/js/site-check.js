@@ -74,7 +74,7 @@
       }
       parts.push(box);
     });
-    parts.push(el('p', 'Want the full picture, with every page and a dated record you can show? See the MX Audit at https://mx.allabout.network/audit/.'));
+    parts.push(el('p', 'Want the full picture, with every page and a dated record you can show? See the AX (agent experience) audit at https://mx.allabout.network/audit/.'));
     results.replaceChildren.apply(results, parts);
     results.hidden = false;
   }

@@ -5,17 +5,22 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "Your A/B Test Might Be Lying to Machines"
 description: "A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it."
 author: "Tom Cranstoun"
 created: 2026-06-02
-modified: 2026-06-02
+modified: 2026-10-29
 version: "1.0"
 
 type: blog-post
 mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
   audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/ab-test-lying-to-machines.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/ab-test-lying-to-machines.md
+  contextProvides:
+    - "A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it."
   stability: stable
   purpose: "A/B tests assume stateful human sessions. Machines arrive cold, with no cookies and no cohort assignment. Each fetch returns a different variant. Here is what that means for AI inference, training data, and how to fix it."
   servedAt: https://mx.allabout.network/blog/drafts/ab-test-lying-to-machines.html
@@ -61,11 +66,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Your A/B Test Might Be Lying to Machines">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -108,7 +111,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1563,
+        "wordCount": 1587,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -135,6 +138,7 @@ mx:
 <body>
   <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
 
   <!-- Site Header -->
   <header class="site-header">
@@ -148,6 +152,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -188,7 +193,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1563">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1587">
         <header class="article-header">
           <h1>Your A/B Test Might Be Lying to Machines</h1>
           <div class="article-meta"
@@ -204,7 +209,7 @@ mx:
         </header>
 
 
-<p>During a recent MX audit, we fetched the homepage of a major SaaS platform three times in quick succession. Three different headlines came back. None of them was the production headline that appeared when we loaded the page in a browser. The site's personalisation layer was treating each cold HTTP request as a fresh visitor, randomly assigning it to an A/B test cohort, and serving a test variant as the headline.</p>
+<p>During a recent AX (agent experience) audit, we fetched the homepage of a major SaaS platform three times in quick succession. Three different headlines came back. None of them was the production headline that appeared when we loaded the page in a browser. The site's personalisation layer was treating each cold HTTP request as a fresh visitor, randomly assigning it to an A/B test cohort, and serving a test variant as the headline.</p>
 <p>The vendor responsible was Ninetailed, a content personalisation platform. Our audit tool detected its script patterns in the served HTML and confirmed the variant inconsistency: three fetches, three H1 texts, zero session continuity.</p>
 <p>This is not a bug in the personalisation platform. It is a consequence of the web being built for human browsers, now encountering a growing class of visitors who are not human browsers.</p>
 <h2 id="what-we-found" tabindex="-1">What We Found</h2>
@@ -233,7 +238,7 @@ mx:
 <h2 id="what-publishers-should-do" tabindex="-1">What Publishers Should Do</h2>
 <p>The goal is not to disable personalisation or A/B testing. Those are legitimate tools for improving human experience. The goal is to ensure that machines -- which cannot participate in the session contract -- receive consistent, canonical content.</p>
 <h3 id="user-agent-bypass-rules" tabindex="-1">User-Agent Bypass Rules</h3>
-<p>Most personalisation platforms support configuration rules that bypass experiment assignment for specified User-Agents. ClaudeBot, GPTBot, ChatGPT-User, PerplexityBot, GoogleOther, CCBot, and Google-Extended are the most important to cover. When these agents show up, give them the control variant: the real page, the one you'd call canonical.</p>
+<p>Most personalisation platforms support configuration rules that bypass experiment assignment for specified User-Agents. ClaudeBot, GPTBot, ChatGPT-User, PerplexityBot, Googlebot, GoogleOther, and CCBot are the ones to cover first. Google-Extended isn't on the list: it's a robots.txt token that never appears in a request, so a bypass rule can't match it. When these agents show up, give them the control variant: the real page, the one you'd call canonical.</p>
 <p>This is the most reliable fix and the one we recommend first. It requires no changes to your sitemap, your llms.txt, or your content. It requires a configuration change in your personalisation platform and a verification step (fetch the page with each User-Agent string and confirm you receive the control).</p>
 <h3 id="llmstxt-declaration-for-variable-content-pages" tabindex="-1">llms.txt Declaration for Variable-Content Pages</h3>
 <p>For pages that are intentionally variable -- personalised landing pages, geo-targeted content, logged-in dashboards -- the User-Agent bypass may not be sufficient or appropriate. In those cases, use <a href="https://mx.allabout.network/blog/llms-txt-guide.html">llms.txt</a> to declare that the content varies by session.</p>
@@ -252,6 +257,14 @@ mx:
 <p>The opportunity is to close that gap deliberately: to give machines a consistent, canonical, version of what you intend to say, while continuing to personalise the experience for humans who can benefit from it.</p>
 <p>Our audit now detects A/B test vendors in crawled HTML and confirms variant inconsistency by probing the same URL multiple times. When we find it, we say so, we show the evidence, and we recommend the mitigations. The question of whether to act is yours.</p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -293,7 +306,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

@@ -5,20 +5,25 @@
   <!-- MX-SOURCE-FRONTMATTER:START -->
 <!--
 ---
+"@context": https://mx.allabout.network/canon/context.json
 title: "When the Catch-All Runs First: Six Bugs in a Deterministic Template System"
-description: "A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist."
+description: "A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong file, and an LLM fabricating inconsistencies that didn't exist."
 author: "Tom Cranstoun"
 created: "2026-06-30"
-modified: "2026-06-30"
+modified: 2026-10-29
 version: "1.0"
 type: "blog-post"
 tags: [audit, infill, template, determinism, ordering, bugs, machines, report-generation]
 mx:
+  mxSpecVersion: "0.9"
   audience: ["humans", "machines"]
-  purpose: "Technical post explaining three ordering bugs found in the MX audit infill pipeline, aimed at developers and machines building deterministic template systems."
+  x-mx-contentState: draft
+  purpose: "Technical post explaining three ordering bugs found in the AX audit infill pipeline, aimed at developers and machines building deterministic template systems."
   stability: draft
+  contextProvides: ["Template ordering bug patterns", "STRIP-IF blank line rule", "catch-all IF stripping", "Balanced Scorecard regression"]
   runbook: "Technical blog post. First-person plural (we). Chatty but precise. Show the bug, show the fix, state the lesson. No em-dashes. Neutral English."
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/when-the-catch-all-runs-first.md
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/when-the-catch-all-runs-first.md
+  servedAt: https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html
 
 ---
 -->
@@ -26,7 +31,7 @@ mx:
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
-  <meta name="description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist.">
+  <meta name="description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong file, and an LLM fabricating inconsistencies that didn't exist.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html">
 
@@ -34,7 +39,7 @@ mx:
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://mx.allabout.network/blog/drafts/when-the-catch-all-runs-first.html">
   <meta property="og:title" content="When the Catch-All Runs First: Six Bugs in a Deterministic Template System | CogNovaMX">
-  <meta property="og:description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist.">
+  <meta property="og:description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong file, and an LLM fabricating inconsistencies that didn't exist.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta property="og:image:width" content="1200">
@@ -47,7 +52,7 @@ mx:
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="When the Catch-All Runs First: Six Bugs in a Deterministic Template System | CogNovaMX">
-  <meta name="twitter:description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist.">
+  <meta name="twitter:description" content="A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong file, and an LLM fabricating inconsistencies that didn't exist.">
   <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta name="twitter:site" content="@ddttomtom">
@@ -60,11 +65,9 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX compliance + stewardship. x-mx-managedBy names the cog that owns this
-       carrier, so the next revision (human or agent) reads the responsible
-       handler instead of inferring it. mx:type and x-mx-managedBy are constant
-       for the blog template; the resolver at scripts/lib/managed-by.cjs is the
-       single source of truth and check-managed-by.cjs asserts they agree. -->
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="When the Catch-All Runs First: Six Bugs in a Deterministic Template System">
   <meta name="mx:type" content="blog-post">
   <meta name="mx:version" content="1.0">
@@ -84,7 +87,7 @@ mx:
         "@type": "BlogPosting",
         "name": "When the Catch-All Runs First: Six Bugs in a Deterministic Template System",
         "headline": "When the Catch-All Runs First: Six Bugs in a Deterministic Template System",
-        "description": "A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong sidecar, and an LLM fabricating inconsistencies that didn't exist.",
+        "description": "A deterministic report pipeline found six classes of bug across two sessions: content stripped before its handler, a blank line inside a conditional block, a scorecard with no scores, a services site classified as e-commerce, a data field read from the wrong file, and an LLM fabricating inconsistencies that didn't exist.",
         "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
         "datePublished": "2026-06-30",
         "dateModified": "2026-06-30",
@@ -107,7 +110,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1794,
+        "wordCount": 1770,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -134,6 +137,7 @@ mx:
 <body>
   <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
 
   <!-- Site Header -->
   <header class="site-header">
@@ -147,6 +151,7 @@ mx:
         <a href="/books/">Books</a>
         <a href="/learn/">Learn</a>
         <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
         <a href="/blog/" aria-current="page">Blog</a>
         <a href="/the-gathering/">The Gathering</a>
         <a href="/about/">About</a>
@@ -187,7 +192,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1794">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1770">
         <header class="article-header">
           <h1>When the Catch-All Runs First: Six Bugs in a Deterministic Template System</h1>
           <div class="article-meta"
@@ -202,7 +207,7 @@ mx:
           </div>
         </header>
 
-<p>We build audit reports deterministically. Every number, band label, and scorecard row comes from a JSON sidecar - not from memory, not from inference. The report template carries <code>[PLACEHOLDER_NAME]</code> tokens; the infill script resolves them; the LLM rewrites prose sections but cannot change any data. The design principle is that data placement precedes prose writing, so hallucinated facts can be caught before they reach the PDF.</p>
+<p>We build audit reports deterministically. Every number, band label, and scorecard row comes from recorded data, not from memory or inference. The data is placed before any prose is written, so a hallucinated fact is caught before it reaches the PDF.</p>
 <p>In one session, three bugs surfaced in this system. None were subtle. All were invisible until a rendered PDF made them obvious. Each taught something specific about the failure modes of deterministic template systems.</p>
 <h2 id="bug-1-the-catch-all-that-ate-the-handler" tabindex="-1">Bug 1: The Catch-All That Ate the Handler</h2>
 <p>The Error Page Test section in the audit report carries conditional interpretation blocks:</p>
@@ -256,7 +261,7 @@ mx:
 <p>One sentence each. A section called &quot;Balanced Scorecard&quot; with no scorecard.</p>
 <p>The bug was a design decision from a few weeks earlier. The original tables repeated scores already visible in the Executive Summary scorecard. The rationale: &quot;avoid duplicating the Executive Summary scorecard tables.&quot; The tables were replaced with deterministic prose sentences.</p>
 <p>The prose sentences were correct. They contained real data. But they were not a scorecard. A consultant presenting a &quot;Balanced Scorecard&quot; section to a client expects two structured views of the same data from different lenses - human and machine. Two sentences that could appear anywhere is not that.</p>
-<p><strong>The fix</strong> was to keep the narrative sentences and add deterministic table placeholders after each one. The tables generate from <code>audit_averages.json</code> values already in scope - no new data sources, no inference. The prose introduces the data; the tables show it.</p>
+<p><strong>The fix</strong> was to keep the narrative sentences and add deterministic table placeholders after each one. The tables generate from values already in the run's results - no new data sources, no inference. The prose introduces the data; the tables show it.</p>
 <p><strong>The lesson:</strong> &quot;avoiding duplication&quot; is not a sufficient reason to remove structure. The Executive Summary scorecard shows eight dimensions in one table. The Balanced Scorecard was supposed to show the same data reorganised into two lenses. That is not duplication - that is reframing. When a section is named &quot;Balanced Scorecard&quot;, the contract with the reader is that it contains a scorecard. Removing the scorecard to avoid repeating data dissolves the contract.</p>
 <h2 id="what-connects-them" tabindex="-1">What connects them</h2>
 <p>All three bugs share a common shape: the intent was sound but the execution had a hidden assumption that turned out to be wrong.</p>
@@ -276,6 +281,14 @@ mx:
 <hr>
 <p><em>We document the architecture behind these systems in <code>mx-reginald/audit/audit-infill-architecture.cog.md</code> (handler ordering and catch-all stripping) and <code>mx-reginald/audit/audit-report-pipeline.cog.md</code> (the full gate chain from template to PDF). Both are machine-readable and cross-linked to the existing audit architecture cog family.</em></p>
 
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
 
       </article>
 
@@ -317,7 +330,10 @@ mx:
           <li><a href="https://mx.allabout.network/books/">Books</a></li>
           <li><a href="/learn/">Learn MX</a></li>
           <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
           <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
           <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
         </ul>
       </nav>

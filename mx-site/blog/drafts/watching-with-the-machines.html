@@ -10,7 +10,7 @@ title: "Watching with the machines"
 description: "A browser extension that scores any web page on MX-readiness, using whichever on-device language model the browser already has."
 author: Tom Cranstoun
 created: 2026-05-31
-modified: 2026-09-29
+modified: 2026-10-29
 version: "1.0"
 
 category: mx-content
@@ -116,7 +116,7 @@ mx:
         },
         "articleSection": "Machine Experience",
         "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 1268,
+        "wordCount": 1270,
         "inLanguage": "en-GB",
         "isPartOf": {
           "@id": "https://mx.allabout.network/#website"
@@ -143,6 +143,7 @@ mx:
 <body>
   <!-- Skip to Content Link (WCAG Accessibility) -->
   <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
 
   <!-- Site Header -->
   <header class="site-header">
@@ -198,7 +199,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1268">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1270">
         <header class="article-header">
           <h1>Watching with the machines</h1>
           <div class="article-meta"
@@ -237,16 +238,16 @@ mx:
 <p>The summary panel writes the verdict. Where that prose comes from depends on what the browser exposes:</p>
 <p><strong>Chrome with the Prompt API flag.</strong> The on-device Gemini Nano model answers. Chrome installed the weights through its component-update system, which is also the subject of the series. On a machine where Nano has been installed, this is the lightest and fastest path because the model is already in memory.</p>
 <p><strong>Edge on a Copilot+ PC.</strong> Microsoft's Phi-Silica answers, also locally. The Edge surface (<code>self.ai.assistant</code>) has the same shape as Chrome's, so the panel does not care which one fires.</p>
-<p><strong>Local Ollama, anywhere.</strong> When neither browser exposes an in-built model, the panel reaches a local Ollama server and asks whichever model the operator has pulled to write the summary. This is the same default the full MX audit pipeline uses in regulated-industry mode, where the policy is &quot;no client data crosses the browser sandbox into a vendor's cloud&quot; and the operator wants a model under their own administrative control answering the prompt instead of one shipped by the browser vendor.</p>
+<p><strong>Local Ollama, anywhere.</strong> When neither browser exposes an in-built model, the panel reaches a local Ollama server and asks whichever model the operator has pulled to write the summary. This is the same default the full AX (agent experience) audit pipeline uses in regulated-industry mode, where the policy is &quot;no client data crosses the browser sandbox into a vendor's cloud&quot; and the operator wants a model under their own administrative control answering the prompt instead of one shipped by the browser vendor.</p>
 <p>A single button in the panel forces the Ollama path even when the browser has its own model. Useful for comparing a small Nano against a larger Ollama model on the same page, or for committing to the regulated-industry path when an organisation's policy requires it.</p>
 <p>A second button copies the score, the summary, and every finding to the clipboard. Useful for pasting into a bug report, an outreach note, or a row in a CSV when sweeping across a sample of pages.</p>
 <h2 id="local-by-design-not-by-marketing" tabindex="-1">Local by design, not by marketing</h2>
 <p>The inspection stays on the machine for reasons of consent, correctness, and regulation.</p>
 <p>Consent: the page being inspected may not have given permission for its content to reach a remote endpoint. Sending the page somewhere for the inspection would put the inspector in the position of the very actors MX exists to hold to account.</p>
 <p>Correctness: the signals the panel reports are facts about the bytes the browser already loaded. They do not need a remote model to confirm. The model writes prose, not findings.</p>
-<p>Regulation: the MX audit pipeline already runs in a local-LLM-first configuration because regulated industries (financial, healthcare, public sector) cannot ship client data across vendor sandboxes for inference. The extension follows the same rule. The Ollama fallback is the same lever the audit pipeline pulls.</p>
+<p>Regulation: the AX audit pipeline already runs in a local-LLM-first configuration because regulated industries (financial, healthcare, public sector) cannot ship client data across vendor sandboxes for inference. The extension follows the same rule. The Ollama fallback is the same lever the audit pipeline pulls.</p>
 <h2 id="where-this-fits" tabindex="-1">Where this fits</h2>
-<p>The MX audit is the full service: a written report, accessibility conformance and a record of how each finding was reached. The panel is its lightweight cousin. The audit is for client engagements where you want the report. The panel is for ten seconds on the page in front of you when someone asks &quot;is this MX-ready?&quot;</p>
+<p>The AX audit is the full service: a written report, accessibility conformance and a record of how each finding was reached. The panel is its lightweight cousin. The audit is for client engagements where you want the report. The panel is for ten seconds on the page in front of you when someone asks &quot;is this MX-ready?&quot;</p>
 <p>The signals the panel grades are the signals the series argued for. The magic-header meta tag and the governance triplet are the page's way of telling a machine what it is. The AI disclosure is the page's account of how it was authored. The discovery files at the origin are the publisher's offer to be machine-legible at the site level. The provenance markers are the chain a regulator or an inspector can walk back to the source. None of these are theoretical. They are the things a machine reading the web on someone's behalf either finds or has to guess about. Guessing, in MX terms, is the part the standard exists to remove.</p>
 <p>The Silent Install series pointed at a browser writing a model to a user's disk without asking. The lesson was not that on-device inference is wrong. The lesson was that the relationship between the person and the software acting on their behalf has to run in both directions. This extension is one small step at the page level: a local read of how legible a single page is, run on the same kind of on-device model that started the conversation. Installed carefully, with a button that names the boundary it runs inside, used to make a thing more legible rather than less.</p>
 <h2 id="where-to-find-it" tabindex="-1">Where to find it</h2>
@@ -260,7 +261,7 @@ mx:
           <h2 id="reader-notice-heading">About this page</h2>
           <ul>
             <li>Written by Tom Cranstoun.</li>
-            <li>Last changed on 2026-09-29.</li>
+            <li>Last changed on 2026-10-29.</li>
           </ul>
         </footer>
 
