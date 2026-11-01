@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '2.4'
+version: '2.5'
 created: '2026-04-15'
-modified: '2026-10-19'
+modified: '2026-11-01'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -2107,6 +2107,23 @@ mx:
       status: canonical
       profile: x-mx-public
       context: 'Declared on a draft-site page source whose JSON-LD type is not its type''s default.'
+    - name: x-mx-metaTitle
+      type: string
+      inPlainWords: 'A search result shows it as {value}.'
+      authoring: authored
+      definition: >-
+        The search title: the text a page's HTML <title> carries in place of the source's title, for a title too long
+        for a search result that cannot change, such as a published post's. The generator reads it from the mx block.
+      example: 'Orange With Pump: Lost in Machine Translation'
+      notes: >-
+        Only the <title> reads it. The title stays the H1, the card text, og:title, twitter:title and the structured
+        data headline. The site-name rule applies as it does to a title: " | CogNovaMX" is added last only when the two
+        fit in 60 characters, and a search title over 60 is used whole and never cut (scripts/lib/site-entities.cjs
+        searchTitleOf and pageTitle). Absent or blank, the title is the <title>. Lead with the page's point and keep it
+        under 60 characters with the site name.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a draft-site source whose title, as a search result shows it, runs past 60 characters.'
     - name: x-mx-domainTerms
       type: array
       authoring: authored

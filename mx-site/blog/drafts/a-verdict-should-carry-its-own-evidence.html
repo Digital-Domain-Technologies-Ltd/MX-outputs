@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "A Verdict Should Carry Its Own Evidence"
+description: "A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence."
+author: Tom Cranstoun
+created: "2026-11-01"
+modified: 2026-11-01
+version: "1.0"
+category: mx-content
+type: blog-post
+tags:
+  - testing
+  - evidence
+  - provenance
+  - machine-experience
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  audience:
+    - humans
+    - machines
+  aiInvolvement: ai-generated
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/a-verdict-should-carry-its-own-evidence.md
+  servedAt: https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  contextProvides:
+    - "A worked example of an automated check whose failure message named only the failed stage, a cause found by reproducing the failure elsewhere (a VPN client dropping loopback traffic to a server listening on every interface), and the two fixes: a test that depends only on what it controls, and a red verdict that carries the failing test and its error line wherever it is published."
+  purpose: "Show engineering teams that a test result is an artefact like any other, and that it should carry what its reader needs to check it, which is the MX principle applied to the tools that build the work."
+  stability: stable
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html">
+  <meta property="og:title" content="A Verdict Should Carry Its Own Evidence | CogNovaMX">
+  <meta property="og:description" content="A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-11-01">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A Verdict Should Carry Its Own Evidence | CogNovaMX">
+  <meta name="twitter:description" content="A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="A Verdict Should Carry Its Own Evidence">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-generated">
+
+  <title>A Verdict Should Carry Its Own Evidence | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "A Verdict Should Carry Its Own Evidence",
+      "headline": "A Verdict Should Carry Its Own Evidence",
+      "description": "A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
+      "datePublished": "2026-11-01",
+      "dateModified": "2026-11-01",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 782,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html",
+      "name": "A Verdict Should Carry Its Own Evidence",
+      "url": "https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-a-bare-red-costs">What a Bare Red Costs</a></li>
+        <li><a href="#the-test-was-judging-the-machine">The Test Was Judging the Machine</a></li>
+        <li><a href="#fixing-the-test-then-the-verdict">Fixing the Test, Then the Verdict</a></li>
+        <li><a href="#a-pass-or-a-fail-is-an-artefact">A Pass or a Fail Is an Artefact</a></li>
+        <li><a href="#try-it-on-your-own-checks">Try It on Your Own Checks</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="782">
+        <header class="article-header">
+          <h1>A Verdict Should Carry Its Own Evidence</h1>
+          <div class="article-meta"
+               data-published="2026-11-01"
+               data-modified="2026-11-01"
+               data-reading-time="4 min">
+            <time datetime="2026-11-01">1 November 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>4 min read</span>
+          </div>
+        </header>
+
+
+<p>Every commit that reaches our main line is tested again after it lands. One afternoon that check came back red. The message named the stage that had failed and the place its log was kept. That was all it said. The log was on the computer that ran it, which wasn't answering.</p>
+<p>The next commit went the same way, and the one after that. Three failures in a row look like three bad commits, so each sent someone off to read its code. Each time the code was fine.</p>
+<h2 id="what-a-bare-red-costs" tabindex="-1">What a Bare Red Costs</h2>
+<p>A message that only says &quot;failed&quot; hands its reader a job. To act on it, they need the name of the test and the error it printed. If those are in a log on one computer, every reader has to get there first. When they can't, they guess.</p>
+<p>Guessing goes like this. You open the newest commit, find nothing wrong with it, and move on to the one after. A cause that stays put while the commits come and go never shows up in any one of them.</p>
+<p>We had one piece of luck. The suite that ran on the unreachable computer works anywhere, so I ran it myself on my laptop. Nearly everything passed. One didn't, and it broke the same way every time: a request to a small local web server got no answer within five seconds.</p>
+<h2 id="the-test-was-judging-the-machine" tabindex="-1">The Test Was Judging the Machine</h2>
+<p>That test starts a little web server and fetches a file from it over loopback, the address a computer uses to talk to itself. The server listens on every network interface, because in real use other devices need to reach it. The fetch goes over loopback because that address is meant to answer whatever else is going on.</p>
+<p>On my laptop it didn't. A VPN client was running, and it filters local traffic. With the tunnel up, a request over loopback to anything listening on every interface was dropped without a word. Bind the same server to loopback alone and it answered at once. It wasn't the programming language, either: the web server built into a different runtime did exactly the same.</p>
+<p>The test, in other words, told us nothing about the code. It reported on the network setup of whichever computer ran it. On a build server with no VPN it passed. On a laptop with one, it failed every time, whatever the commit.</p>
+<p>I still can't say whether that was the whole story on the computer nobody could reach, because its message didn't say.</p>
+<h2 id="fixing-the-test-then-the-verdict" tabindex="-1">Fixing the Test, Then the Verdict</h2>
+<p>A test should depend only on what it controls. This one controls the address it fetches from, so it now starts its server there too. A separate check makes sure that, left to its defaults, the server still listens on every interface. It does that without sending a request, so nothing on the network can change its answer.</p>
+<p>The second fix matters more. A red result now carries its own evidence: each failing test by name, and the line it failed with, wherever it's published. Anyone who sees the verdict, anywhere, can see why it's red. The full log is still there for the detail, but nobody needs it to make a start.</p>
+<h2 id="a-pass-or-a-fail-is-an-artefact" tabindex="-1">A Pass or a Fail Is an Artefact</h2>
+<p>This is the MX principle turned on our own tools. <a href="https://mx.allabout.network/learn/what-is-mx.html">MX</a> is metadata that records where a file came from, what it's for, and how it should be used, written so the next reader, human or machine, can check it instead of taking it on trust. A test result is a file too. Somebody reads it and acts on it, so it owes them the same things: what was checked, what was found, and where to look next.</p>
+<p>A machine has no stake in its own errors. It won't go hunting for the cause of a failure it reported; it'll just report the same thing again, as ours did. If you want the cause found, the verdict has to carry what its next reader needs to find it.</p>
+<h2 id="try-it-on-your-own-checks" tabindex="-1">Try It on Your Own Checks</h2>
+<p>Pick one of your own failure messages and read it as if you'd never seen the system before. Does it name what failed and say what it printed? Could you act on it without opening the log? If not, the evidence is somewhere else, and someone pays for that the next time it goes red.</p>
+<p>When a check passes in one place and fails in another, ask what it depends on that it doesn't control. Ours depended on the network. Yours might depend on the clock, the disk, the locale, or a service somebody left running.</p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-11-01.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

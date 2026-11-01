@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.61'
+version: '6.63'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-10-25'
+modified: '2026-10-31'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -1672,6 +1672,47 @@ mx:
       parsingRule: 'Standard YAML parser. Also supports inline SQL comments: -- @mx ... -- @mx:end'
       backwardCompatible: true
       narrativeSection: 'Carrier: Database Sidecar'
+    - format: SKILL.md (Agent Skills)
+      metadataLocation: >-
+        YAML frontmatter `metadata` map (string keys to string values), the place the Agent Skills specification gives
+        for properties it does not define
+      mxIdentity: >-
+        MX fields as `metadata` keys with the `mx.` prefix (`mx.title`, `mx.version`, `mx.canonicalUri`); the full MX
+        record, lists and nested blocks included, in the skill folder's `.mx.yaml.md`
+      nativeBlocks: name and description = identity and prose excerpt, Markdown body = instructions
+      parsingRule: >-
+        Read the frontmatter; the six Agent Skills fields belong to that standard (externalStandards.agent-skills);
+        strip the `mx.` prefix from a `metadata` key to get the camelCase MX field name
+      backwardCompatible: true
+      note: Agent Skills clients read name and description and pass `metadata` through untouched.
+      narrativeSection: 'Carrier: Agent Skills'
+  externalStandards:
+    - id: agent-skills
+      name: Agent Skills
+      specification: https://agentskills.io/specification
+      referenceValidator: https://github.com/agentskills/agentskills/tree/main/skills-ref
+      governs:
+        fileName: SKILL.md
+      closedFields: true
+      fields:
+        - name: name
+          required: true
+          maxLength: 64
+          rules: [lowercase, letters-digits-hyphens, no-edge-hyphen, no-double-hyphen, matches-directory]
+        - name: description
+          required: true
+          maxLength: 1024
+        - name: license
+        - name: compatibility
+          maxLength: 500
+        - name: metadata
+          valueType: string-map
+        - name: allowed-tools
+          status: experimental
+      mxCarrier: SKILL.md (Agent Skills)
+      reason: >-
+        A skill is a directory holding a file named exactly SKILL.md. The specification defines six frontmatter fields,
+        and its reference validator rejects any other top-level field (closedFields), so MX facts travel in `metadata`.
   overlap-resolution:
     - fields:
         - tags
@@ -7023,10 +7064,10 @@ mx:
         - resource
         - routing
     - name: skill
-      description: Fields for .claude/skills/*/skill.md files. Three-layer contract (Anthropic runtime, OKF discoverability, MX estate integration).
+      description: Fields for .claude/skills/*/SKILL.md files. Three-layer contract (Anthropic runtime, OKF discoverability, MX estate integration).
       header: |
         ---
-        # Carrier: .claude/skills/<name>/skill.md
+        # Carrier: .claude/skills/<name>/SKILL.md
         # --- Zone 1a: Identity ---
         title: "MX Add Field"
         description: "One-command flow for adding a new MX field to the canon."

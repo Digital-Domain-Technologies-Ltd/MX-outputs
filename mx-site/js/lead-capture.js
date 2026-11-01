@@ -2,7 +2,7 @@
  * MX Lead Capture
  *
  * Progressive-enhancement form handler for the free-PDF-check form on
- * /learn/mx-for-pdfs.html and the Certified Operator waitlist form on
+ * /learn/mx-for-pdfs.html and the Accredited Operator waitlist form on
  * /services/certified-operator.html. With JavaScript disabled the forms
  * submit normally (the worker handles the redirect server-side). With
  * JavaScript enabled the submission is captured, posted as JSON, and the
