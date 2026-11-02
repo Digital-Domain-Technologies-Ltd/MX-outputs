@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Agent Ready Is Three Verbs, and an Honest Visitor"
+description: "Elementor's definition of agent ready is right: read, query, act, and know who is visiting. An audit should say which of the three a site supports, with a finding a machine can check, and never impersonate a bot to find out. Read what that looks like."
+author: Tom Cranstoun
+created: 2026-11-01
+modified: 2026-11-01
+version: "1.0"
+category: mx-content
+type: blog-post
+tags: [agents, agent-ready, ax-audit, web-bot-auth, machine-experience]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  servedAt: https://mx.allabout.network/blog/drafts/agent-ready-is-three-verbs-and-an-honest-visitor.html
+  stability: stable
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-ready-is-three-verbs-and-an-honest-visitor.md
+  purpose: "Agree with Elementor's three-verb definition of agent ready and its point about honest bot identity, and state what an audit owes a site owner once both are accepted: a verdict per verb, a finding a machine can check, and a visitor that never impersonates a vendor bot."
+  contextProvides:
+    - "Agent ready as read, query, act, and why reading is mostly accessibility work"
+    - "Why an auditor that impersonates a vendor crawler produces a false 'blocks agents' finding, and the honest alternative"
+    - "Why agent files and markdown twins must match the page, and what an audit compares"
+    - "What an AX audit adds: evidence on every finding, declared preferences read not graded, never a certificate"
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  aiInvolvement: ai-assisted
+  aiDisclosure: ai-assisted
+  refersToExternal:
+    - "Schwab, M. (2026a, October 21). How the web is changing for agents, and what agent ready means. Elementor Blog. https://elementor.com/blog/what-agent-ready-means/"
+    - "Schwab, M. (2026b, October 29). The agent-ready approaches that are catching on, and what AI agents actually use. Elementor Blog. https://elementor.com/blog/what-agents-actually-use/"
+  quotes:
+    - "An agent ready site makes three things easy for an agent: reading, querying, and acting."
+    - "agent files and markdown versions of pages need to match what people see"
+  corroboratedBy:
+    - https://elementor.com/blog/what-agent-ready-means/
+    - https://elementor.com/blog/what-agents-actually-use/
+  claimBasis: corroborated
+  claims:
+    - statement: An agent-readiness scanner that presented itself as GPTBot was refused by a site's bot defence and then reported the site as blocking AI agents.
+      basis: corroborated
+      corroboratedBy:
+        - https://elementor.com/blog/what-agent-ready-means/
+      recordedAt: '2026-11-01'
+    - statement: llms.txt version 2 asks a site to point at the file with a Link header or a link rel="describedby" tag.
+      basis: corroborated
+      corroboratedBy:
+        - https://elementor.com/blog/what-agents-actually-use/
+      recordedAt: '2026-11-01'
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Elementor's definition of agent ready is right: read, query, act, and know who is visiting. An audit should say which of the three a site supports, with a finding a machine can check, and never impersonate a bot to find out. Read what that looks like.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/agent-ready-is-three-verbs-and-an-honest-visitor.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/agent-ready-is-three-verbs-and-an-honest-visitor.html">
+  <meta property="og:title" content="Agent Ready Is Three Verbs, and an Honest Visitor | CogNovaMX">
+  <meta property="og:description" content="Elementor's definition of agent ready is right: read, query, act, and know who is visiting. An audit should say which of the three a site supports, with a finding a machine can check, and never impersonate a bot to find out. Read what that looks like.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-11-01">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Agent Ready Is Three Verbs, and an Honest Visitor | CogNovaMX">
+  <meta name="twitter:description" content="Elementor's definition of agent ready is right: read, query, act, and know who is visiting. An audit should say which of the three a site supports, with a finding a machine can check, and never impersonate a bot to find out. Read what that looks like.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Agent Ready Is Three Verbs, and an Honest Visitor">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/agent-ready-is-three-verbs-and-an-honest-visitor.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Agent Ready Is Three Verbs, and an Honest Visitor</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "Agent Ready Is Three Verbs, and an Honest Visitor",
+      "headline": "Agent Ready Is Three Verbs, and an Honest Visitor",
+      "description": "Elementor's definition of agent ready is right: read, query, act, and know who is visiting. An audit should say which of the three a site supports, with a finding a machine can check, and never impersonate a bot to find out. Read what that looks like.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-11-01",
+      "dateModified": "2026-11-01",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/drafts/agent-ready-is-three-verbs-and-an-honest-visitor.html"
+      },
+      "articleSection": "Machine Experience",
+      "citation": [
+        "Schwab, M. (2026a, October 21). How the web is changing for agents, and what agent ready means. Elementor Blog. https://elementor.com/blog/what-agent-ready-means/",
+        "Schwab, M. (2026b, October 29). The agent-ready approaches that are catching on, and what AI agents actually use. Elementor Blog. https://elementor.com/blog/what-agents-actually-use/"
+      ],
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 948,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/drafts/agent-ready-is-three-verbs-and-an-honest-visitor.html",
+      "name": "Agent Ready Is Three Verbs, and an Honest Visitor",
+      "url": "https://mx.allabout.network/blog/drafts/agent-ready-is-three-verbs-and-an-honest-visitor.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../images/logo.webp" srcset="../../images/logo.webp 1x, ../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#read-query-act">Read, Query, Act</a></li>
+        <li><a href="#the-visitor-has-to-be-honest-too">The visitor has to be honest too</a></li>
+        <li><a href="#no-cloaking">No cloaking</a></li>
+        <li><a href="#what-we-add">What we add</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="948">
+        <header class="article-header">
+          <h1>Agent Ready Is Three Verbs, and an Honest Visitor</h1>
+          <div class="article-meta"
+               data-published="2026-11-01"
+               data-modified="2026-11-01"
+               data-reading-time="5 min">
+            <time datetime="2026-11-01">1 November 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>5 min read</span>
+          </div>
+        </header>
+
+
+<p>Miriam Schwab has written two posts on the Elementor blog that get &quot;agent ready&quot; right. The first, <a href="https://elementor.com/blog/what-agent-ready-means/">What agent ready means</a>, puts it in three verbs: &quot;An agent ready site makes three things easy for an agent: reading, querying, and acting.&quot; The second, <a href="https://elementor.com/blog/what-agents-actually-use/">What agents actually use</a>, walks the mechanisms one at a time and is candid about how few are standards yet.</p>
+<p>I agree on the three verbs, I agree harder on her point about identity, and I want to say what an audit owes a site owner once you accept both.</p>
+<h2 id="read-query-act" tabindex="-1">Read, Query, Act</h2>
+<p>Reading is mostly solved, and accessibility solved it. An agent that falls back to browsing reads the same tree a screen reader does, so real headings and buttons that are buttons help a blind visitor and a machine through the same code. A fetcher that discards the layout needs the answer in the HTML it receives, not painted in later by a script.</p>
+<p>Querying is asking a specific question and getting a structured answer: is this in stock in size 9, when is the next event. Structured data does some of this; a site's MCP server does more, once someone has connected it. Schwab notes that most fetchers drop every script block on the way to text, so a fact that lives only in markup is a fact many agents never see. Put it in the visible text as well.</p>
+<p>Acting is where the web is furthest behind. An agent that finds a form field by its position breaks when the design changes. A labelled field helps. A named action with a description and typed inputs keeps working however the page looks, and that's what WebMCP is for.</p>
+<p>An AX audit measures all of this page by page. What the three verbs give me is a cleaner way to report it: the first page should say which of the three an agent can do on this site, and which it can't, with the measurement behind each.</p>
+<h2 id="the-visitor-has-to-be-honest-too" tabindex="-1">The visitor has to be honest too</h2>
+<p>A bot introduces itself with a user-agent string, a line of text it writes about itself. Nothing stops a script calling itself GPTBot. So when a readiness scanner tested Schwab's site while pretending to be GPTBot, her bot defence noticed the request didn't come from OpenAI and refused it. The scanner then reported that her site blocks AI agents. The site did the right thing; the scanner published a false positive.</p>
+<p>I take that as a rule for anyone who audits sites, us included. An auditor that impersonates a vendor's crawler isn't measuring whether a site is open to agents; it's measuring whether the bot defence works, and then mislabelling the answer. There's a fair question underneath, what a site's rules do with a given name, but the verdict has to say what a refusal means. A vendor-named request from the wrong address, refused, is &quot;blocks impersonators&quot;. It becomes &quot;blocks agents&quot; only when an honest request, one that says who it is and links to a page explaining itself, is refused as well. The next step, which Schwab also names, is Web Bot Auth: the agent signs each request and the site checks the signature against a published key. An auditor should sign its own requests as soon as it can, and say so.</p>
+<h2 id="no-cloaking" tabindex="-1">No cloaking</h2>
+<p>Schwab's second rule is the one SEO taught everyone the hard way: showing a bot a different page from the one people see got sites penalised. Her line is that &quot;agent files and markdown versions of pages need to match what people see.&quot;</p>
+<p>Markdown twins of pages are spreading, served at a .md address or by asking the normal address for text/markdown. They're a fraction of the HTML's size, and they open a quiet way to say one thing to people and another to machines, by intent or by a stale copy nobody regenerated. An audit should fetch the twin by every route the site offers and compare the words: headings, prices, dates, claims. A twin that says something the page doesn't is a finding, with both excerpts attached. The same applies to llms.txt, and to a negotiated response that omits the header saying it varies by request, which is how a person ends up downloading markdown.</p>
+<h2 id="what-we-add" tabindex="-1">What we add</h2>
+<p>Agreeing with a definition is cheap. What we add is the evidence.</p>
+<p>Every finding in an AX audit says how it was reached: which request was made, as whom, what came back, and when. A verdict that a site supports querying names the server that answered and the tools it listed. A verdict of &quot;blocks impersonators&quot; shows the honest request that got through beside the spoofed one that didn't. That is Machine Experience applied to our own output: the next reader, human or machine, gets what they need to check the claim, and a site owner who doesn't trust us can run the same checks without us.</p>
+<p>Preferences get the same treatment. Whether a site lets agents read it and whether it lets anyone train on it are separate decisions, and owners should state both. An audit should read what a site declares, in robots and in headers, and show it beside what is served. It shouldn't grade the declaration, and it should never present any of this as a certificate. Agent ready is a property of a site on a day, measured by a named method, and the next deploy can change it.</p>
+<p>If you run a site and want to know which of the three verbs it supports, that is the question an <a href="https://tityra.com">AX audit</a> answers, with a finding you can check and a visitor who told you who it was.</p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-11-01.</li>
+            <li>Outside sources that make the same claims: <a href="https://elementor.com/blog/what-agent-ready-means/" rel="noopener">elementor.com/blog/what-agent-ready-means</a> and <a href="https://elementor.com/blog/what-agents-actually-use/" rel="noopener">elementor.com/blog/what-agents-actually-use</a>.</li>
+            <li>It cites Schwab, M. (2026a, October 21). How the web is changing for agents, and what agent ready means. Elementor Blog. https://elementor.com/blog/what-agent-ready-means/ and Schwab, M. (2026b, October 29). The agent-ready approaches that are catching on, and what AI agents actually use. Elementor Blog. https://elementor.com/blog/what-agents-actually-use/.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 title: CogNovaMX Field Extensions
-version: '2.5'
+version: '2.6'
 created: '2026-04-15'
 modified: '2026-11-01'
 author: Tom Cranstoun
@@ -1577,18 +1577,22 @@ mx:
       authoring: authored
       optionalIn: [cog, action]
       definition: >-
-        The Architecture Decision Record's own block, carried by every record in the ADR register: its number, title,
-        status, date, context, decision and consequences, and its relations to the records that came after it.
-      example: '{number: 71, title: "A record is countable, or its absence is invisible", status: accepted, date: 2026-09-20, amendedBy: [96]}'
+        The Architecture Decision Record's own block, carried by every record in the ADR register: its title, status,
+        date, context, decision and consequences, and its relations to the records that came after it. A record is
+        identified by its slug, the dated filename stem, and cited by its title.
+      example: '{title: "Two contention domains and the land-lock", status: accepted, date: 2026-07-20, legacyNumber: 44, amendedBy: ["2026-10-16-the-land-lock-covers-the-land-alone"]}'
       notes: >-
-        CogNovaMX registry block, not a Gathering open-standard field. Members number (a positive integer, unique in
-        the register), title, status (proposed, accepted, superseded, deprecated, rejected; mx.status mirrors it), date
-        (the filename's date), context, decision, consequences, and the relations supersedes, supersededBy, amends and
-        amendedBy. A relation names its target as a number in the same register or as "ADR n" or "BDR n" across
-        registers, a list for several, and is declared on both records; a record something supersedes carries status
-        superseded. scripts/lib/decision-register.cjs is the one reading of the block, and scripts/check-adr-numbers.cjs
-        (Gate 33, and Gate 0.56 at commit) holds the rules and writes a missing back-pointer. The bare `adr` name is a
-        deprecated synonym; see fields-data.yaml's deprecations table.
+        CogNovaMX registry block, not a Gathering open-standard field. Members title (unique in the register; the
+        frontmatter title and the H1 repeat it word for word), status (proposed, accepted, superseded, deprecated,
+        rejected; mx.status mirrors it), date (the filename's date), context, decision, consequences, the relations
+        supersedes, supersededBy, amends and amendedBy, and legacyNumber. A relation names its target by slug, in
+        either register, a list for several, and is declared on both records; a record something supersedes carries
+        status superseded. Numbers are no longer allocated: legacyNumber is the positive integer a record dated on or
+        before the cutover carried, kept read-only so a citation by number in dated history still resolves (npm run
+        decision:resolve), and a record dated after it carries none. scripts/lib/decision-register.cjs is the one
+        reading of the block, and scripts/check-adr-numbers.cjs (Gate 33, and Gate 0.56 at commit) holds the rules,
+        refuses the old numbered design and repairs it (npm run decisions:repair), and writes a missing back-pointer.
+        The bare `adr` name is a deprecated synonym; see fields-data.yaml's deprecations table.
       status: canonical
       profile: x-mx-public
       context: 'Declared on every record in mx-canon/mx-maxine-lives/registers/ADR/.'
@@ -1609,15 +1613,16 @@ mx:
       authoring: authored
       optionalIn: [cog, action]
       definition: >-
-        The Business Decision Record's own block, carried by every record in the BDR register: its number, title,
-        status, date, context, decision and consequences, and its relations to the records that came after it.
-      example: '{number: 34, title: "...", status: accepted, date: 2026-08-20, amendedBy: ["ADR 87"]}'
+        The Business Decision Record's own block, carried by every record in the BDR register: its title, status,
+        date, context, decision and consequences, and its relations to the records that came after it. A record is
+        identified by its slug, the dated filename stem, and cited by its title.
+      example: '{title: "The Consumer Product Is Publicly Named Palimpsest", status: accepted, date: 2026-07-05, legacyNumber: 22, amendedBy: ["2026-10-22-the-palimpsest-maxine-and-reginald-go-public"]}'
       notes: >-
         CogNovaMX registry block, not a Gathering open-standard field. The same members and relation rules as
         x-mx-adr, read by the same scripts/lib/decision-register.cjs and held by the same register check
-        (scripts/check-adr-numbers.cjs). A relation crosses registers by label, so a BDR amended by an ADR declares
-        amendedBy: ["ADR n"] and the ADR declares amends: ["BDR n"]. The bare `bdr` name is a deprecated synonym; see
-        fields-data.yaml's deprecations table.
+        (scripts/check-adr-numbers.cjs). A relation names its target by slug in either register, so a BDR amended by
+        an ADR declares amendedBy: ["<the ADR's slug>"] and the ADR declares amends: ["<the BDR's slug>"]. The bare
+        `bdr` name is a deprecated synonym; see fields-data.yaml's deprecations table.
       status: canonical
       profile: x-mx-public
       context: 'Declared on every record in mx-canon/mx-maxine-lives/registers/BDR/.'

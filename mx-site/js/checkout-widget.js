@@ -27,11 +27,4 @@
     handleBuy('pdf');
   });
 
-  document.getElementById('buy-physical-uk-btn').addEventListener('click', function () {
-    handleBuy('physical_uk');
-  });
-
-  document.getElementById('buy-physical-world-btn').addEventListener('click', function () {
-    handleBuy('physical_world');
-  });
 })();
