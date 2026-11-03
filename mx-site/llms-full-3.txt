@@ -3,6 +3,174 @@
 > Part 3 of 5 of the comprehensive markdown corpus for https://mx.allabout.network. The corpus starts at [part 1](https://mx.allabout.network/llms-full.txt), which lists every part; the curated index is https://mx.allabout.network/llms.txt. Next: [part 4 of 5](https://mx.allabout.network/llms-full-4.txt).
 
 ---
+## Orange With Pump: A Field Guide to Machine Translation Going Sideways
+
+**URL:** https://mx.allabout.network/blog/foundations/orange-with-pump.html
+
+**Description:** A British juice brand, sold in Germany, photographed through a phone's translate camera, promises Orange with Pump. Nobody ordered a pump. The joke is instructive: a machine is grounded in a culture, and it is not yours. It reads German through an English-trained memory, and where your cultural grounding would have started, its guessing runs out.
+
+Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
+
+            Author: Tom Cranstoun
+
+        Index
+
+        - What the bottle actually says
+
+        - Where the pump came from
+
+        - A machine is grounded in a culture, just not yours
+
+        - From a joke to a cost: the Vietnamese case
+
+        - The fix is to hand the machine the culture, not hope it has it
+
+        - Tastes good, does good
+
+        - Related reading
+
+          Orange With Pump: A Field Guide to Machine Translation Going Sideways
+
+            8 June 2026
+            ·
+            Tom Cranstoun
+            ·
+            8 min read
+
+I was handed a bottle of German orange juice and asked to translate it.
+
+This should be the easiest job in the world. It is a juice bottle. It has perhaps eleven words on it. I have a phone, the phone has a camera, the camera has a little translate button, and the little translate button has the combined linguistic might of roughly the entire internet behind it. We have spent twenty years and an unknowable quantity of electricity teaching machines to do exactly this.
+
+The phone considered the bottle, thought about it for a moment, and confidently informed me that I was holding:
+
+Orange With Pump.
+
+I checked the fridge. No pump was supplied.
+
+The evidence, exactly as my phone presented it. The German underneath says Orange mit Fruchtfleisch - "orange juice with pulp". Google Lens got within one letter and decided otherwise.
+
+What the bottle actually says
+
+Let us do this properly first, because the bottle is, in fairness, perfectly clear if you read it like a human:
+
+On the bottle (German)
+What it means
+
+innocent
+The brand name. It is a British company. The name is already in English. Nobody translated anything here, and that is the first joke.
+
+Schmeckt gut, tut gut
+"Tastes good, does good." Their slogan. Genuinely sweet.
+
+Direktsaft
+"Direct juice", i.e. not-from-concentrate. Pressed, bottled, never reconstituted from a syrup.
+
+Orange mit Fruchtfleisch
+Fruchtfleisch is literally "fruit flesh", and the standard English is "with pulp." A British supermarket says the same thing in its own shelf-speak: "with bits." Pulp, or bits. Not pump.
+
+Niemals Zucker zugesetzt
+"Never any sugar added."
+
+So the correct, boring, human translation of the headline is orange juice with pulp. That is the punchline of the whole exercise. The right English answer is a word so ordinary it is printed on a thousand cartons. The German label said Fruchtfleisch, the standard English is pulp, and the machine, asked to get from one to the other, produced pump.
+
+Where the pump came from
+
+Look at what actually happened, because it is sharper than "the machine doesn't speak German."
+
+Correct
+What the machine produced
+
+p u l p
+p u m p
+
+Pulp and pump are one letter apart. A single l became an m, and the machine shipped the result without a flicker of doubt. This is not a model that had no idea; it is a model that got within one character of the answer and still handed me plumbing, confidently, because nothing in its world told it the result was absurd.
+
+That is the failure worth dwelling on. The machine did not fail because it is stupid. It failed because it was confident and contextless. A human who knows what juice is would auto-correct pump back to pulp without even noticing the slip, because the world forbids a pump in a juice bottle. The machine had no such world to check against. A one-letter error that any grounded reader would catch on sight sailed straight through, because to the machine "pump" and "pulp" are just two nearby strings, and it had no reason to prefer the one that makes sense in a fridge.
+
+A German shopper has never once been confused about this. Neither has a British one standing in front of the same fridge. They have context, but more than context, they have a culture the machine was never given. They know what an innocent bottle is. They know the juice aisle has bits and the hardware aisle has pumps, and that these are different shops. They disambiguate before they have finished reading, because the disambiguation was never really in the words. It was in the world the words came from.
+
+A machine is grounded in a culture, just not yours
+
+This is the real point, and it is bigger than one bottle.
+
+A model is not grounded in nothing. It is grounded in a culture: the one it was trained on. And as I argued in The Crawl Still Speaks English, that culture is overwhelmingly the English-language web. The Common Crawl that sits under nearly every model is still around 41 percent English, with no other single language above 6 percent, and that number has barely moved in two years. The model does not approach German neutrally. It approaches German through English, translates the prompt into an English frame to reason about it, and translates back. Its defaults, its sense of what a word "probably" means, are English defaults.
+
+So when it meets Orange mit Fruchtfleisch, it is not consulting a German juice aisle it has lived in. It is working in a vast, mostly-English statistical memory where pump and pulp sit side by side as plausible strings, with nothing to break the tie. A reader grounded in the world breaks that tie instantly: one of those words belongs in a fridge and one does not. The machine has no fridge. Its grounding runs out exactly where the German-and-British grounding would have started, and so the one-letter slip goes uncaught.
+
+It is the same failure as the model that happily knew Wiener Schnitzel, because the English-language web is full of it, but stalled on Erdäpfelsalat until someone explained it was just potato salad under an Austrian name. The model's knowledge ran out precisely where the English sources did. Pump is Erdäpfelsalat with a sense of humour.
+
+From a joke to a cost: the Vietnamese case
+
+The juice bottle is funny because the stakes are a missing word for pulp. Move the same reflex to a language that carries meaning in marks the plumbing likes to throw away, and the joke becomes a cost.
+
+Vietnamese is the clearest case, and I wrote it up on its own in Strip the Marks, Lose the Word. Take the single syllable ma. The mark on the vowel is not decoration; it is the word:
+
+- ma - ghost
+
+- má - mother
+
+- mà - but
+
+- mả - tomb
+
+- mã - horse, or code
+
+- mạ - rice seedling
+
+Strip the marks somewhere in the plumbing, a URL slug, a filename, an old database that folds everything to ASCII, and a system built around English assumptions does not hand the model a slightly degraded word. It hands it a hole, and lets the model fill the hole with whatever its English-grounded culture finds most probable. Same machine, same reflex as the juice bottle, but now the choice is between a mother and a grave. The model will pick one, confidently, and move on.
+
+That is why this matters past the laugh. A machine grounded in someone else's culture does not announce when its grounding has run out. It produces fluent, assured output either way. Orange With Pump is obviously wrong, so we catch it. The Vietnamese case is just as wrong and reads perfectly, so we do not.
+
+The fix is to hand the machine the culture, not hope it has it
+
+The fix is not "use a better model", though better models help. Better models are still grounded in the same crawl. The fix is to stop shipping context-free text and hoping the machine shares your world. Declare what the thing is. State the language and the locale. Mark up what a word refers to: that Fruchtfleisch here is the thing a British shelf calls "bits", that this is a juice and not a hardware store. Keep the fully-marked form as the record, never the ASCII fallback. You are not decorating the text; you are supplying the grounding the model did not get from its training, in a place it reads first.
+
+That is the whole of Machine Experience in one sentence: the machine is going to read in its own culture whatever you give it, so give it the meaning explicitly rather than leaving it to guess. The brands, and the languages, that do this are the ones whose words still mean something after a phone camera, a crawler, or a translation layer has had its way with them. It is also a rule someone has to own and keep, which is the work The Gathering exists to do: community-led, never vendor-driven, because a rule that decides whose words survive a pipeline cannot belong to whoever profits most from the answer.
+
+Tastes good, does good
+
+Until then, I will be in the kitchen, enjoying my Orange With Pump. It tastes good. It does good. It does not, as far as I can tell, pump anything.
+
+With apologies to innocent, who got it right in two languages before the machine got it wrong in a third.
+
+Related reading
+
+- The Crawl Still Speaks English - why the model guesses in English, and what a non-English publisher can do about it
+
+- Strip the Marks, Lose the Word - diacritics and tone marks as data, where the same reflex deletes whole words
+
+- The Tokenization Trap - how a model breaks a German word into pieces before it can read it
+
+- What Is Machine Experience? - the discipline behind this post
+
+- The Gathering - the open standards body where MX rules like this one are written and owned
+
+Tom Cranstoun is an Agent Experience (AX) audit pioneer and the founder of Machine Experience (MX) and its community, and author of the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.
+
+          About this page
+
+            - Written by Tom Cranstoun.
+
+            - Last changed on 2026-10-29.
+
+            About the author
+
+            Tom Cranstoun
+
+            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
+
+          Continue the conversation
+
+          Want to talk through where your organisation sits on the agent-readiness curve?
+
+            - Get in touch
+
+            - Explore the books
+
+            - Join The Gathering
+
+---
+
 ## Strip the Marks, Lose the Word
 
 **URL:** https://mx.allabout.network/blog/foundations/strip-the-marks-lose-the-word.html
@@ -1945,6 +2113,49 @@ Blog
         Commentary
         Blockchain
         Announcements
+
+            The Repair That Got Retold as a Breakthrough
+
+            An AI edited 0.016% of a small model's parameters and its maths score went from 7.9% to 48.1%. The numbers are real. The edit stopped the model looping; it didn't teach it maths, and the researchers said so.
+
+            3 November 2026
+            - Commentary
+
+            The Security Scare I Checked Before I Repeated It
+
+            A viral post landed in my feed: a massive Adobe extension hole, three hundred million people at risk right now. Before I passed it on I did the boring thing and read the primary record. Most of it was true. The urgency was not. The gap between those two is the whole reason I do this work.
+
+            26 July 2026
+            - Provenance
+
+- Commentary
+
+            The Structured Index Buys Precision, Not Reach
+
+            A Google team ran the same agent against the open web and against a schema.org-gated corpus. Precision on machine-actionable results rose 65.7%. Relevance did not move at all, and coverage fell from 56 answered queries to 40. That trade is the part the GEO summaries leave out, and it makes structured markup a positioning decision rather than a technical fix.
+
+            3 September 2026
+            - SEO / GEO / AEO
+
+- Commentary
+
+- Provenance
+
+            A Watermark Answers the Wrong Question
+
+            Anthropic explained how Claude marks its content: an imperceptible text watermark, and signed C2PA provenance metadata on files. The headlines said AI content can now be detected. The marks prove far less than that. A watermark you can strip with one rewrite, and a file manifest that certifies who touched the pixels rather than whether the claim inside is true, both answer what tool made this. The question a machine actually needs answered is what this is, who stands behind it, whether it is current, and whether anyone authoritative agrees. That is a different axis, and a more useful one.
+
+            11 August 2026
+            - Provenance
+
+- Commentary
+
+            A Benchmark Table Is Not an Eval
+
+            Google launched Gemini 4 Argon with a table that put it ahead of Claude Opus 5.5 on 14 of 18 benchmarks, at half the price. A journalist ran three tests of her own and got a tie, a near-total failure and a run of invented answers. The gap between the two is the case for running your own evals, and for writing down how you ran them.
+
+            19 October 2026
+            - Commentary
 
             Google Named GEO, Then Debunked Most of It
 
@@ -5570,622 +5781,4 @@ The agent platforms will keep launching. Another one will land while you are rea
 
             - Join The Gathering
 
----
-
-## MX: A New Role for Content in the Age of AI
-
-**URL:** https://mx.allabout.network/blog/mx-a-new-role.html
-
-**Description:** Machine Experience (MX) is the missing discipline in web development-ensuring AI agents get complete context from HTML structure, not just visual interfaces.
-
-Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
-
-            Author: Tom Cranstoun
-
-        Index
-
-        - The Missing Discipline in Web Development
-
-        - What Machine Experience Actually Means
-
-        - MX: The Handbook
-
-        - What Real Audit Data Reveals
-
-        - How AI Agents Actually Navigate Websites
-
-        - Served HTML vs Rendered HTML
-
-        - What the Web Audit Suite Actually Measures
-
-        - The Convergence Principle
-
-        - Why This Matters Right Now
-
-        - Getting Started with MX
-
-        - What's Next
-
-          MX: A New Role for Content in the Age of AI
-
-            2 April 2026
-            ·
-            Tom Cranstoun
-            ·
-            21 min read
-
-The Missing Discipline in Web Development
-
-We've spent decades building disciplines for the web. User Experience (UX) optimises for humans. Search Engine Optimisation (SEO) optimises for crawlers. Accessibility (a11y) optimises for users with disabilities. These three disciplines have shaped modern web development, created professional roles, and established best practices.
-
-But there's a fourth visitor type we haven't optimised for: AI agents acting on behalf of humans.
-
-These agents are visiting your site right now. People ask ChatGPT about your products, use Copilot to compare your services, and run Perplexity to check your availability. They're not science fiction or distant future speculation, they're active traffic, making decisions about whether to recommend you or skip you entirely.
-
-The problem? These visitors are invisible.
-
-The Invisible Visitor Problem
-
-Unlike human users who show up in analytics, persist through poor UX, and give feedback, AI agents arrive once, assess your site's structure, and either succeed or fail silently. When they succeed, they build computational trust in your site and return for future queries. When they fail, they disappear from recommendations permanently, without an analytics warning or an email explaining what went wrong.
-
-The business impact is immediate. Adobe's Holiday 2025 data shows AI referrals surged dramatically, up 700% in retail, 500% in travel. Conversion rates from AI-referred users now lead human traffic by 30%. In a single quarter, agent-mediated commerce stopped being an experiment and became a revenue driver. If agents can't extract your pricing, understand your offering, or complete your checkout flow, they recommend competitors who've implemented the explicit structure they require.
-
-This gap in web development practice has a name: Machine Experience (MX).
-
-What Machine Experience Actually Means
-
-Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to think. When AI has to "think" (infer meaning from incomplete information), it must generate confident answers even when context is missing, leading to hallucination. MX makes all context explicitly present in your website's structure.
-
-Let me be clear what MX isn't:
-
-- Not SEO: search engine optimisation focuses on ranking signals, keyword targeting, and organic traffic. MX focuses on structural clarity for agent comprehension.
-
-- Not GEO: Generative Engine Optimisation tunes content to win citations in AI-generated answers. GEO is a tactic; MX is the specification underneath it.
-
-- Not accessibility: WCAG optimises for users with disabilities. MX optimises for machines that can't infer visual cues.
-
-- Not performance: Core Web Vitals measure page speed. MX measures semantic structure.
-
-- Not a memory-pool design: an LLM-wiki, a vector store, or an Obsidian-style knowledge base organises what it holds inside one system. MX is what a file carries when it leaves any system.
-
-So what's MX? It's the master discipline that improves all of those as side effects. MX is the DNA a file carries when it leaves any pool, so the next reader can interpret it without inference, in a training corpus, a RAG retrieval, an agent's context window, an archive twenty years from now.
-
-HTML informed by MX is the publication step that carries context built in Content Operations through to agents at the moment of delivery. When you implement MX patterns, semantic HTML, structured data, explicit state, you automatically improve SEO (crawlability), accessibility (screen reader compatibility), and performance (simpler DOM structures).
-
-Diagram not available
-
-Mx Relationship Diagram
-
-MX improves all disciplines as side effects
-
-One implementation serves multiple audiences. When you add semantic HTML for AI agents, screen readers benefit automatically. When you add Schema.org for agent comparison, search engines surface rich results automatically. When you make state explicit for agent confidence, keyboard users gain clearer navigation automatically.
-
-This isn't about creating separate experiences. It's about fixing the underlying structure so it works for everyone, machines and humans alike.
-
-MX: The Handbook
-
-These AI agents are "invisible" for two distinct reasons:
-
-First, agents are invisible to site owners. They blend into analytics logs, visit once, assess structure, and either succeed or disappear, no persistent patterns to track, no cookies, no user sessions to follow. If they fail, you never know why.
-
-Second, the interface is invisible to them. They can't see animations, colour coding, toast notifications, or loading spinners. Visual hierarchy built with CSS? Invisible. Brand messaging conveyed through imagery? Invisible. Implicit state indicated by colour changes? Invisible.
-
-Modern AI browsers (ChatGPT, BrowserOps, Comet, Strawberry, Neo, DIA) do identify themselves as bots in their User-Agent strings, but these strings can't be trusted, they're trivially spoofed by any developer. Some agents are browser extensions running alongside human users. Others are Playwright-driven automation frameworks controlled by AI scripts. Some are AI browsers accessing sites directly. Site owners can no longer reliably distinguish between human visitors and AI agents.
-
-The traffic looks identical in analytics, but the visitor's capabilities and limitations differ in kind.
-
-Consider the tolerance difference:
-
-- Human users persist through poor UX. They click around, ask for help, come back later, and give feedback.
-
-- AI agents fail silently. They move to competitors, never return, and generate no analytics signal.
-
-This zero-tolerance characteristic makes MX more demanding than accessibility. Whilst accessibility users often persist through poor implementations (finding workarounds, asking for assistance), agents simply disappear. One failure, one missing semantic element, one ambiguous state indicator, and they're gone.
-
-The agents visiting your site represent billions in potential revenue. Adobe's data shows they're primary traffic, well past the experimental stage. Conversion rates now favour AI-referred users by 30%. The question isn't whether to optimise for agents. The question is whether you can afford not to whilst competitors build agent-compatible structure.
-
-What Real Audit Data Reveals
-
-I've audited dozens of professional websites over recent months using automated tools that check for agent compatibility patterns. The findings reveal consistent gaps across organisations that pride themselves on digital excellence.
-
-Common patterns across professional sites:
-
-Diagram not available
-
-The Gap Visualization
-
-Widespread MX gaps consistently found in audits
-
-Semantic HTML is missing on most sites. Instead of <main>, <nav>, and <article> elements, sites use generic <div> containers with CSS classes. Agents parsing served HTML before JavaScript executes can't distinguish navigation from content from sidebars.
-
-The llms.txt file, an emerging standard that provides AI agents with structured guidance about site organisation, hasn't been implemented on most professional sites. This forces agents to crawl entire site structures to understand organisation, though many of those same sites block agent crawlers entirely.
-
-robots.txt blocking is widespread. Sites routinely block GPTBot, ClaudeBot, Amazonbot, and other AI crawlers. The result is stark: organisations want AI-mediated recommendations but actively prevent agents from accessing the content needed to make them.
-
-Schema.org gaps are inconsistent. Structured data exists on some pages but not others, product pages have pricing markup, but comparison tables lack it. Event pages have dates but not registration URLs. Inconsistent implementation forces agents to guess which pages contain authoritative data.
-
-Explicit state is missing throughout. Form validation errors display as visual colour changes. Checkout progress shows via CSS-animated steppers. Button states indicate loading with spinners. None of this state appears in HTML attributes where agents can read it. State exists visually but not semantically.
-
-These aren't edge cases or budget-constrained sites. These patterns appear across organisations with sophisticated digital teams, substantial web budgets, and publicly stated ambitions to excel online. The gap comes from awareness rather than resources.
-
-The patterns that confuse agents also harm accessibility users. A missing <main> element forces screen reader users to navigate the entire page to find primary content. Missing alt text blocks both agents and blind users. Visual-only state indicators exclude both agents and keyboard users. The convergence between MX needs and accessibility needs isn't coincidental, both groups lack access to visual design cues.
-
-How AI Agents Actually Navigate Websites
-
-When AI agents interact with your website, they attempt five tasks. Each task has specific technical requirements. Fail any task, and the agent cannot finish the job.
-
-Diagram not available
-
-Five agent tasks
-
-Fail any task and the agent cannot finish the job
-
-Task 1, Discovery: can agents find you? This requires crawlable structure (robots.txt compliance, sitemap.xml), semantic HTML markup, and server-side rendering for JavaScript-heavy content. Block GPTBot, ClaudeBot, or Amazonbot and agents never discover you exist.
-
-Task 2, Extraction: can agents accurately extract your content? This requires fact-level clarity (each statistic, definition, concept needs to stand alone and make sense), structured data (Schema.org JSON-LD), and explicit content architecture. If agents can't extract clear facts, they generate incorrect details or route to competitors with clearer structure.
-
-Task 3, Compare: can agents understand your offering? This requires JSON-LD microdata at the pricing level, explicit comparison attributes (product features, specifications), and semantic HTML that agents can parse for feature extraction. When comparison data is visual-only, agents leave you off the lists they build.
-
-Task 4, Pricing: can agents understand your costs? This requires Schema.org types (Product, Offer, PriceSpecification), unambiguous pricing structure with currency specification (ISO 4217 codes), and validation to prevent decimal formatting errors. Without proper metadata, agents misunderstand costs by orders of magnitude, the Danube cruise error where £2,030 became £203,000 because European decimal formatting (€2.030,00) was misinterpreted.
-
-Task 5, Confidence: can agents complete checkout? This requires no hidden state buried in JavaScript (it must be reflected in the DOM), explicit form semantics (<button> not <div class="btn">), persistent feedback (role="alert" for important messages), and data-state attributes for checkout progress tracking. Visual-only state means agents can't see what buttons do, can't track progress, and abandon carts.
-
-The catastrophic failure principle applies: fail any task and the purchase never happens. Sites that successfully complete all five stages gain computational trust, agents return for more purchases through learned behaviour. Sites that fail at any stage disappear from the agent's map permanently.
-
-Unlike humans who persist through bad UX and can be won back with improvements, agents provide no analytics visibility and offer no second chance. First-mover advantage exists. Sites that work early become trusted sources. Sites that fail early become invisible.
-
-Served HTML vs Rendered HTML
-
-Most companies test their websites the way humans experience them: open a browser, wait for JavaScript to execute, interact with the visual interface. This tests the rendered HTML state, after JavaScript runs, after CSS applies, after dynamic updates complete.
-
-But many AI agents don't see rendered HTML. They see served HTML - the static HTML sent from your server before JavaScript executes.
-
-Diagram not available
-
-Served vs Rendered HTML
-
-Two states, two audiences
-
-Served HTML is what server-side agents see:
-
-- CLI agents like ChatGPT fetch your URL and process raw HTML
-
-- Server-based agents parse text content and HTML structure
-
-- They cannot execute JavaScript or render CSS
-
-- They see semantic structure, metadata, and link relationships
-
-- They miss JavaScript-rendered content, dynamic updates, and visual hierarchy
-
-If your site requires JavaScript to display products, show prices, or render navigation, server-side agents see nothing. Your carefully crafted user experience is invisible to them.
-
-Rendered HTML is what browser agents see:
-
-- In-browser agents like Microsoft Copilot execute JavaScript
-
-- Browser automation agents like Playwright control full browsers
-
-- They can access the DOM after JavaScript runs
-
-- They see dynamic content, interactive elements, and client-side state
-
-- They miss visual hierarchy from CSS, animation timing, and colour-based meaning
-
-Even browser agents need semantic structure. They can see everything humans see, but they parse structure like server-side agents. Visual design cues (colour, spacing, animation) don't help agents understand content purpose.
-
-The practical implication: both states need MX patterns.
-
-Serve semantic HTML so server-side agents can parse structure. Reflect state in DOM attributes so browser agents can track progress. Don't assume JavaScript execution. Don't rely on visual-only indicators. Design for the worst-case agent (served HTML, no JavaScript), and you automatically support all agents.
-
-Most companies only test rendered state because that's what humans experience. But if you want agent compatibility, you must test both states. The Web Audit Suite (described below) analyses both served and rendered HTML, identifying patterns that work for all agent types.
-
-What the Web Audit Suite Actually Measures
-
-The Web Audit Suite is a complete Node.js-based website analysis tool that audits entire sites across six dimensions simultaneously:
-
-1. SEO Optimisation
-
-- Title and meta description optimisation
-
-- Heading structure (H1-H6 hierarchy validation)
-
-- Content quality and word count analysis
-
-- Internal and external link analysis
-
-- Structured data (Schema.org) detection
-
-- Social media meta tags (Open Graph, Twitter Card)
-
-- Mobile-friendliness indicators
-
-2. Performance Metrics
-
-- Core Web Vitals: LCP (Largest Contentful Paint), FCP (First Contentful Paint), CLS (Cumulative Layout Shift)
-
-- Time to Interactive (TTI), Total Blocking Time (TBT)
-
-- Page load time and First Paint
-
-- Visual stability analysis
-
-- Performance thresholds with good/excellent standards
-
-3. WCAG 2.1 Accessibility
-
-- Pa11y integration for compliance checking
-
-- Severity classification (Critical, Serious, Moderate, Minor)
-
-- Compliance levels (A, AA, AAA)
-
-- Detailed remediation guidance with issue-specific fixes
-
-- Human-readable markdown reports for team review
-
-4. Security Headers
-
-- HTTPS/TLS validation
-
-- Security headers (HSTS, CSP, X-Frame-Options, X-Content-Type-Options)
-
-- Referrer-Policy analysis
-
-5. Content Quality
-
-- Word count and reading time analysis
-
-- Content freshness scoring
-
-- Media richness (images, videos, audio)
-
-- Keyword extraction and content relevance
-
-6. LLM Suitability (the unique MX component)
-
-This is where the tool differs from traditional SEO or accessibility audits. LLM Suitability measures how well your site works for AI agents.
-
-Served HTML metrics (for all agents, including CLI and server-based):
-
-- Semantic HTML structure detection (<main>, <nav>, <article>, <section>)
-
-- Heading hierarchy validation (h1 → h2 → h3 with no skipped levels)
-
-- Form field standardisation (email, firstName, phoneNumber patterns)
-
-- Structured data completeness (Schema.org JSON-LD validation)
-
-- llms.txt file presence and structure validation
-
-- Social and SEO metadata (Open Graph, Twitter Card, robots meta tags)
-
-- Reading time metadata (timeRequired, educationalLevel attributes)
-
-Rendered HTML metrics (for browser agents):
-
-- Explicit state attributes (data-state, aria-invalid, role attributes)
-
-- Persistent error messages (role="alert" detection)
-
-- Validation state indicators (form field error patterns)
-
-- Data visibility controls (data-agent-visible attribute)
-
-- Dynamic content patterns:
-
-- Carousel detection (informational vs decorative classification)
-
-- Animation library identification
-
-- Autoplay media analysis
-
-- Animated GIF tracking
-
-The tool categorises findings by implementation priority:
-
-- Priority 1 (Critical Quick Wins): missing <main> element, pre-rendering detection, heading hierarchy violations, PDF accessibility gaps
-
-- Priority 2 (Essential Improvements): DOM order mismatches, pricing tables without Schema, product variants lacking explicit attributes, AJAX navigation patterns
-
-- Priority 3 (Core Infrastructure): definition lists, skeleton content loaders, progressive enhancement patterns
-
-- Priority 4 (Advanced Features): multiple author attribution, content separation indicators, carousel accessibility
-
-Report Generation
-
-The tool generates 19+ reports across multiple formats:
-
-- CSV reports: per-page SEO metrics, performance analysis, accessibility data, content quality scores, security headers, LLM suitability metrics.
-
-- Markdown reports: human-readable WCAG compliance summaries with remediation guidance.
-
-- Executive summaries: high-level overview with key findings and actionable recommendations (JSON and markdown formats).
-
-- Interactive dashboards: HTML dashboard with embedded charts, historical trend visualisation, comparison tables, pass/fail summaries.
-
-- XML sitemaps: perfected sitemaps combining original and discovered URLs.
-
-The tool operates through a four-phase architecture: Phase 0 (robots.txt compliance checking), Phase 1 (gathering URLs from the sitemap), Phase 2 (concurrent data collection with browser pooling), Phase 3 (report generation). results.json is the single source of truth. Every report is generated from it, so you can change thresholds and rebuild the output without re-analysing sites.
-
-The LLM Suitability component is what makes this tool unique. Traditional SEO audits check for ranking signals. Accessibility audits check for WCAG compliance. This tool checks whether AI agents can actually extract information, understand context, and complete desired actions on your site.
-
-The tool is available as a service launching soon after the MX: The Protocols book publication (April 2026). Complete site analysis provides executive reports with actionable recommendations, priority-based implementation guidance, and ongoing monitoring to detect regressions over time.
-
-The Convergence Principle
-
-Here's the key insight that makes MX commercially viable: patterns that help AI agents also benefit accessibility users.
-
-Both groups need semantic HTML because both lack access to visual design cues. Both need explicit state attributes because both can't infer meaning from colour changes or animations. Both need structured data because both parse content programmatically rather than visually.
-
-The convergence isn't coincidental. It's fundamental.
-
-AI agents parse HTML structure, extract metadata, and process text content. They can't "see" visual hierarchy, colour coding, or spatial relationships. They need semantic elements (<button>, not <div class="btn">) because they parse structure, not appearance.
-
-Screen reader users parse HTML through assistive technology, extract meaning from semantic markup, and navigate by landmarks. They can't see visual hierarchy, colour coding, or spatial relationships, the same reason they need semantic elements.
-
-Tolerance and the MX-First Principle
-
-The tolerance differs fundamentally:
-
-Accessibility users persist. They'll click around until they find the right button, use browser search to locate content, ask for help, and leave feedback explaining what went wrong. Their persistence creates opportunities to improve and win them back.
-
-AI agents fail silently. One missing semantic element and they're gone. One ambiguous state indicator and they skip you. No error logs, no analytics signal, no second chance. Zero-tolerance parsing creates immediate commercial consequences.
-
-This tolerance difference leads to the MX-first principle: Design for machines with zero-tolerance requirements, and you automatically create structure that benefits accessibility users as a side effect.
-
-One implementation serves multiple audiences:
-
-- AI agents (primary focus), can't infer meaning, require explicit structure for any interaction
-
-- Screen reader users (side benefit), navigate more efficiently with semantic landmarks and clear hierarchy
-
-- Keyboard users (side benefit), tab through interactive elements with proper focus management
-
-- Search engines (side benefit), parse structured data for rich results
-
-- All users (side benefit), faster load times, clearer interfaces, better mobile experiences
-
-The convergence principle makes MX a strategic multiplier rather than an additional cost centre. Implement semantic HTML for agents, and accessibility improves automatically. Add Schema.org for agent comparison, and search engines surface rich results automatically. Make state explicit for agent confidence, and keyboard users gain clearer navigation automatically.
-
-This isn't about creating separate experiences. It's about fixing the underlying structure so it works for everyone, machines and humans alike. The business case (agent commerce, conversions, revenue) drives the technical requirements. The accessibility benefits are welcome side effects, not the primary driver.
-
-Why This Matters Right Now
-
-The timeline compressed dramatically between 2024 and 2026. What industry analysts predicted would take 12-24 months to reach mainstream adoption happened in 6-9 months or less.
-
-January 2026 convergence: three major platforms launched agent commerce systems within a single week:
-
-- Amazon Alexa+ (5 January 2026) - Browser agent for product discovery and purchase
-
-- Microsoft Copilot Checkout (8 January 2026) - Proprietary agent commerce integration
-
-- Google Universal Commerce Protocol (11 January 2026) - Open standard for agent-mediated transactions
-
-This convergence signals an industry inflection point. Agent-mediated commerce stopped being an experiment and became infrastructure. The technology isn't coming, it's here.
-
-The Data Confirms Commercial Reality
-
-Adobe's Holiday 2025 data shows AI referrals surged dramatically:
-
-- Retail: +700% year-over-year growth in AI-referred traffic
-
-- Travel: +500% year-over-year growth in AI-referred traffic
-
-- Conversion rates: +30%, AI-referred users now lead human traffic in conversion rates
-
-- Engagement: AI-referred users are 33% less likely to bounce compared to other traffic
-
-AI-referred users spend more time on sites, view more pages, and convert at higher rates than direct human traffic. The commercial imperative is clear: if agents can't extract your information, they recommend competitors who've implemented the explicit structure they require.
-
-Sites that work early become trusted sources that agents return to repeatedly. This creates a computational trust feedback loop:
-
-- Agent recommends Entity A → successful transaction
-
-- Agent increases trust score for Entity A
-
-- Next similar query → higher probability of recommending Entity A again
-
-- Pattern compounds over time
-
-Sites that fail early disappear from recommendations with no recovery opportunity. Unlike humans who persist through bad UX and can be won back with improvements, agents provide no analytics visibility and offer no second chance.
-
-MX: The Protocols (launching April 2026) documents this convergence, provides implementation patterns across 13 chapters and 14 appendices, and establishes MX as the strategic discipline for agent-compatible web development. The book isn't speculation about future possibilities, it's documentation of patterns needed right now for platforms launching this quarter.
-
-The timeline is compressed. Within two years (by January 2028), human browsing will likely be the exception rather than the norm. Organisations that build agent-compatible structure now will dominate agent-mediated interactions. Those that remain dependent on visual-only interfaces will face insurmountable catch-up costs.
-
-Can you afford to wait whilst competitors build computational trust?
-
-Getting Started with MX
-
-MX applies to ANY web goal, not just ecommerce. Whether you're selling products, informing readers about product recalls, establishing credibility, collecting contact information, or enabling downloads, agents need explicit structure to complete those actions.
-
-Goal completion varies by industry:
-
-- Ecommerce: purchase product, add to cart, complete checkout
-
-- Publishing: read article, share content, subscribe to newsletter
-
-- B2B: complete contact form, download whitepaper, register for webinar
-
-- Healthcare: book appointment, access patient portal, find provider information
-
-- Education: enrol in course, access resources, submit assignments
-
-- Government: find services, complete applications, access forms
-
-Without MX, fewer AI agent activities complete those actions, regardless of what those actions are. Here is a practical checklist for getting started.
-
-1. Start with semantic HTML
-
-- Replace generic <div> containers with semantic elements
-
-- Add <main> for primary content (every page needs exactly one)
-
-- Add <nav> for navigation menus
-
-- Add <article> for standalone content (blog posts, products, news items)
-
-- Add <section> for thematic grouping
-
-- Use <button> for clickable actions, not <div class="btn">
-
-- Ensure heading hierarchy (h1 → h2 → h3 with no skipped levels)
-
-2. Add structured data (Schema.org JSON-LD)
-
-- Product pages: Product, Offer, PriceSpecification types
-
-- Articles: Article or BlogPosting with datePublished, author, headline
-
-- Events: Event with startDate, location, organizer
-
-- Organisations: Organization with address, contactPoint, logo
-
-- Reviews: Review with reviewRating, author, itemReviewed
-
-- FAQs: FAQPage with Question/Answer pairs
-
-3. Make state explicit in the DOM
-
-- Add data-state attributes for dynamic states (data-state="loading", data-state="error", data-state="success")
-
-- Use aria-invalid="true" for form validation errors
-
-- Add role="alert" for important messages that agents must see
-
-- Reflect checkout progress in HTML attributes, not just visual indicators
-
-- Add aria-label to ambiguous buttons ("Read more" about what?)
-
-- Use aria-live for dynamic content updates
-
-4. Create llms.txt file for agent discovery
-
-- Place at domain root: https://yoursite.com/llms.txt
-
-- Include YAML frontmatter with metadata (title, author, description, creation-date)
-
-- Document site structure and content categories
-
-- List key pages and their purpose
-
-- Explain organisational context
-
-- Provide contact information for agent queries
-
-- Reference from robots.txt for discoverability
-
-5. Test both served and rendered states
-
-- View source (served HTML) - what do server-side agents see?
-
-- Disable JavaScript, does core content still appear?
-
-- Use curl or wget to fetch raw HTML, can agents parse it?
-
-- Check that state appears in DOM attributes, not just JavaScript variables
-
-- Validate that semantic structure exists before JavaScript executes
-
-6. Run complete audits
-
-- Use Web Audit Suite or similar tools to check agent compatibility
-
-- Identify missing semantic elements
-
-- Validate Schema.org implementation
-
-- Check for visual-only state indicators
-
-- Track LLM suitability scores over time
-
-- Monitor for regressions after deployments
-
-These aren't hypothetical future requirements. These are patterns needed right now for platforms launching this quarter. The Web Audit Suite (launching soon after book publication in April 2026) provides complete analysis across all six dimensions, priority-based recommendations, and ongoing monitoring to keep MX patterns intact through deployments and content updates.
-
-What's Next
-
-The Web Audit Suite service follows the launch of MX: The Protocols in April 2026. Each audit includes the analysis, reports and tracking below.
-
-- Complete site analysis across six dimensions (SEO, performance, WCAG 2.1 accessibility, security headers, content quality, LLM suitability)
-
-- Executive reports with high-level status, key findings, and actionable recommendations
-
-- Priority-based implementation guidance (Critical/Important/Nice-to-Have/Edge Cases)
-
-- Historical tracking to identify improvements and regressions over time
-
-- Interactive dashboards with visual analytics and trend visualisation
-
-- Configurable thresholds for pass/fail criteria customised to your requirements
-
-Across 13 chapters, MX: The Protocols (launching April 2026) provides complete MX patterns and implementation guidance. The chapters cover:
-
-- What AI agents actually are (technical capabilities and limitations)
-
-- The five agent tasks (Discovery, Citation, Compare, Pricing, Confidence)
-
-- Served vs Rendered HTML (designing for both states)
-
-- The convergence principle (how MX benefits multiple audiences)
-
-- Entity Asset Layer (sovereign, portable asset ownership)
-
-- Implementation patterns for semantic HTML, Schema.org, explicit state
-
-- Testing strategies for agent compatibility
-
-- Case studies from real-world implementations
-
-14 appendices freely available online:
-
-- Appendix A: Implementation cookbook with code examples
-
-- Appendix D: AI-friendly HTML guide (~3,000 lines of practical patterns)
-
-- Appendix H: Example llms.txt files from production sites
-
-- Appendix L: Complete pattern library
-
-- Additional appendices covering security, forms, tables, multimedia, and edge cases
-
-The book isn't speculation about future possibilities. It's documentation of patterns needed right now for platforms launching this quarter. The timing is deliberate: January 2026 convergence (Amazon, Microsoft, Google agent commerce launches) compressed the timeline from 12-24 months to 6-9 months or less.
-
-Follow MX developments:
-
-- Website: allabout.network
-
-- Author: Tom Cranstoun
-
-- LinkedIn: linkedin.com/in/tom-cranstoun
-
-This is about collaboration, not criticism. When we provide well-structured inputs (semantic HTML, structured metadata, explicit state), AI agents perform optimally. Hallucinations decrease. Accuracy increases. Commerce transactions complete successfully. Better-structured inputs produce better outputs for everyone: users, agents, and businesses alike.
-
-MX is the missing piece in web development. Not an optional extra. Not a future concern. A discipline needed right now for platforms launching this quarter.
-
-The question isn't whether to optimise for agents. The question is whether you can afford not to whilst competitors build agent-compatible structure and gain computational trust.
-
-          About this page
-
-            - Written by Tom Cranstoun.
-
-            - Last changed on 2026-10-19.
-
-            About the author
-
-            Tom Cranstoun
-
-            Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.
-
-          Continue the conversation
-
-          Want to talk through where your organisation sits on the agent-readiness curve?
-
-            - Get in touch
-
-            - Explore the books
-
-            - Join The Gathering
-
-<!-- x-mx-sourceHash: ccc85f965b95f210914e8e2024e8c0739bbf3ad42af6a46182393e0b847187cf -->
+<!-- x-mx-sourceHash: 05ebce9fe3811c1c039a2560db6aa2cc5961b0e98928b61dc803c5873996fe2d -->

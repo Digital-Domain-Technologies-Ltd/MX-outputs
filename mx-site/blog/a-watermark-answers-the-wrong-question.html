@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "A Watermark Answers the Wrong Question"
+description: "Anthropic explained how Claude marks its content: an imperceptible text watermark, and signed C2PA provenance metadata on files. The headlines said AI content can now be detected. The marks prove far less than that. A watermark you can strip with one rewrite, and a file manifest that certifies who touched the pixels rather than whether the claim inside is true, both answer what tool made this. The question a machine actually needs answered is what this is, who stands behind it, whether it is current, and whether anyone authoritative agrees. That is a different axis, and a more useful one."
+author: Tom Cranstoun
+created: "2026-08-11"
+modified: 2026-10-29
+version: "0.1"
+type: blog-post
+tags: [watching-the-machines, ai-detection, watermarking, c2pa, content-provenance, machine-trust, mx, reginald, attestation, corroboration, agent-web]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
+  audience: [humans, machines]
+  stability: stable
+  purpose: "Argue, for a general builder and content audience, that AI content marks (text watermarks and C2PA file provenance) prove much less than the headlines claim, because they answer what tool made this rather than whether the content can be trusted. Use the asymmetry of a strippable watermark and the narrow scope of a file manifest to reframe the useful question as readable, attributable, corroborated, and position MX and REGINALD as the opt-in posture that answers it, while conceding honestly that neither MX nor a watermark catches a liar."
+  contextProvides:
+    - "Why a text watermark is a one-sided signal: present means a model was in the loop, absent means nothing, because it strips with a rewrite."
+    - "Why C2PA file provenance certifies who processed the file, not whether the claim inside it is true."
+    - "The reframe from what tool made this to what this is, who stands behind it, is it current, and does an authoritative source corroborate it, and how MX and REGINALD answer that as an opt-in publisher posture rather than an adversarial detection game."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/watching-the-machines/a-watermark-answers-the-wrong-question.md
+  runbook: "Blog post. First-person, general builder and content audience, conversational. Occasioned by Anthropic's How Claude marks content support note. Keep the C2PA description accurate and do not overclaim MX as a detector. Read straight through."
+  servedAt: https://mx.allabout.network/blog/a-watermark-answers-the-wrong-question.html
+  partOf: https://mx.allabout.network/blog/watching-the-machines/
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Anthropic explained how Claude marks its content: an imperceptible text watermark, and signed C2PA provenance metadata on files. The headlines said AI content can now be detected. The marks prove far less than that. A watermark you can strip with one rewrite, and a file manifest that certifies who touched the pixels rather than whether the claim inside is true, both answer what tool made this. The question a machine actually needs answered is what this is, who stands behind it, whether it is current, and whether anyone authoritative agrees. That is a different axis, and a more useful one.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://mx.allabout.network/blog/a-watermark-answers-the-wrong-question.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/a-watermark-answers-the-wrong-question.html">
+  <meta property="og:title" content="A Watermark Answers the Wrong Question | CogNovaMX">
+  <meta property="og:description" content="Anthropic explained how Claude marks its content: an imperceptible text watermark, and signed C2PA provenance metadata on files. The headlines said AI content can now be detected. The marks prove far less than that. A watermark you can strip with one rewrite, and a file manifest that certifies who touched the pixels rather than whether the claim inside is true, both answer what tool made this. The question a machine actually needs answered is what this is, who stands behind it, whether it is current, and whether anyone authoritative agrees. That is a different axis, and a more useful one.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-08-11">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A Watermark Answers the Wrong Question | CogNovaMX">
+  <meta name="twitter:description" content="Anthropic explained how Claude marks its content: an imperceptible text watermark, and signed C2PA provenance metadata on files. The headlines said AI content can now be detected. The marks prove far less than that. A watermark you can strip with one rewrite, and a file manifest that certifies who touched the pixels rather than whether the claim inside is true, both answer what tool made this. The question a machine actually needs answered is what this is, who stands behind it, whether it is current, and whether anyone authoritative agrees. That is a different axis, and a more useful one.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="A Watermark Answers the Wrong Question">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="0.1">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/a-watermark-answers-the-wrong-question.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>A Watermark Answers the Wrong Question | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "A Watermark Answers the Wrong Question",
+      "headline": "A Watermark Answers the Wrong Question",
+      "description": "Anthropic explained how Claude marks its content: an imperceptible text watermark, and signed C2PA provenance metadata on files. The headlines said AI content can now be detected. The marks prove far less than that. A watermark you can strip with one rewrite, and a file manifest that certifies who touched the pixels rather than whether the claim inside is true, both answer what tool made this. The question a machine actually needs answered is what this is, who stands behind it, whether it is current, and whether anyone authoritative agrees. That is a different axis, and a more useful one.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-08-11",
+      "dateModified": "2026-08-11",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/a-watermark-answers-the-wrong-question.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 893,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/a-watermark-answers-the-wrong-question.html",
+      "name": "A Watermark Answers the Wrong Question",
+      "url": "https://mx.allabout.network/blog/a-watermark-answers-the-wrong-question.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#read-the-hedge">Read the hedge</a></li>
+        <li><a href="#the-file-mark-is-more-serious-and-still-narrow">The file mark is more serious, and still narrow</a></li>
+        <li><a href="#made-by-ai-is-the-wrong-axis">"Made by AI" is the wrong axis</a></li>
+        <li><a href="#one-honest-limit-so-im-not-selling-detection-either">One honest limit, so I'm not selling detection either</a></li>
+        <li><a href="#see-it-on-your-own-site">See it on your own site</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="893">
+        <header class="article-header">
+          <h1>A Watermark Answers the Wrong Question</h1>
+          <div class="article-meta"
+               data-published="2026-08-11"
+               data-modified="2026-08-11"
+               data-reading-time="5 min">
+            <time datetime="2026-08-11">11 August 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>5 min read</span>
+          </div>
+        </header>
+
+
+<p>In August 2026 Anthropic explained how Claude stamps the content it makes. It does it in two ways. It weaves an imperceptible watermark into the words, and when it writes a file like an image it attaches signed provenance metadata using C2PA, the open content-authenticity standard. The headlines that followed said what they always say when a marking scheme turns up: AI content can now be detected.</p>
+<p>I want to slow down on that, because the marks prove a good deal less than the headline suggests, and the gap between that and what people assume is where the interesting work sits.</p>
+<h2 id="read-the-hedge" tabindex="-1">Read the hedge</h2>
+<p>Start with the text watermark. The careful wording is that it &quot;may persist through some editing&quot;. That one word, some, is doing all the work. Paraphrase the sentence, translate it, run it back through a different model, or edit it hard, and the mark is gone. So the signal is one-sided in a way that matters.</p>
+<p>If it's present, it tells you one narrow thing: a Claude model was somewhere in the loop. If it's absent, it tells you nothing at all, because anyone who wanted it gone could strip it in a keystroke. And whoever is motivated to hide that a machine did the writing is exactly the person who'll remove it. Everyone else doesn't care.</p>
+<p>A test you can pass by pressing rewrite isn't worth much. It answers &quot;did an AI touch this&quot;, sometimes, and it's silent on who published the words, whether they're true, and what you should do with them.</p>
+<h2 id="the-file-mark-is-more-serious-and-still-narrow" tabindex="-1">The file mark is more serious, and still narrow</h2>
+<p>The provenance metadata is the better of the two, and it deserves credit. Look at what Anthropic actually did. Instead of inventing a proprietary mark, it reached for C2PA, an existing open standard the whole industry can read. That's the right instinct, and it's the founding principle of the Gathering. Never reinvent. Fill the gap the standards leave open.</p>
+<p>But watch the edge of what C2PA certifies. It records who processed the file. A Claude model touched these pixels, on this date, in this way. It's a manifest about the asset's history. It says nothing about the claim inside. It won't tell you the price in the picture is right, the policy it quotes is real, or the dosage it shows is safe. It attests the bits, not the meaning.</p>
+<h2 id="made-by-ai-is-the-wrong-axis" tabindex="-1">&quot;Made by AI&quot; is the wrong axis</h2>
+<p>Here's what both marks share. They answer &quot;what tool made this&quot;. And that question is quietly going useless, because soon the honest answer for almost everything is yes, a machine was involved.</p>
+<p>The question that actually earns its keep is a different one. When a machine decides what to cite, recommend, or buy from on your behalf, it needs to know what this thing is, who stands behind it, whether it's current, and if anyone authoritative says the same. A watermark can't answer one of those.</p>
+<p>That's the whole reason I work on MX and REGINALD, and the difference in posture is the part I want to spell out. A watermark is a hidden mark that one side tries to detect and the other works to erase. It's adversarial by design. MX runs the other way. The publisher opts in, declares in the open what the file is, puts their name to it, and any client can check it. Nothing's hidden, and nothing's being hunted.</p>
+<p>REGINALD then answers what the watermark leaves on the table. Who published this, and when. Whether it's the current version. Whether the publisher still stands behind it. And whether an authoritative source, somewhere else, states the same claim on its own. Readable, so a machine understands it. Attributable, so it knows who to hold to account. Corroborated, so the claim someone will act on isn't the only place it can be checked.</p>
+<h2 id="one-honest-limit-so-im-not-selling-detection-either" tabindex="-1">One honest limit, so I'm not selling detection either</h2>
+<p>None of this catches a liar, and I'll say so plainly, because it'd be easy to read the whole argument as &quot;so MX is the real detector&quot;. It isn't. MX won't unmask a dishonest publisher any more than a watermark will. What it does is make the honest one legible and accountable, and give a machine a reason to prefer the file that declared itself and staked a name on it over the one that turned up with nothing.</p>
+<p>That's the shift I want people to make. Stop asking whether a machine made the words. Start asking whether you can trust them. And ask if the next machine down the line can confirm that on its own. The watermark was never going to tell you that. It was answering a different question, and a smaller one.</p>
+<h2 id="see-it-on-your-own-site" tabindex="-1">See it on your own site</h2>
+<p>If you want the same story from the machine's side, the companion post on how ChatGPT decides which page to cite walks the retrieval end of it: a mark tells a model what made the thing; MX shows it what the words mean and whether to trust them enough to quote.</p>
+<p>And to see what an agent actually gets when it reads your own site, <a href="https://tityra.com">start with an AX (agent experience) audit</a>. It fetches your pages the way these systems do, shows you the plain text they receive, and points at the spots where a machine is left guessing about you.</p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/mx-provenance-demo.js"></script>
+</body>
+</html>

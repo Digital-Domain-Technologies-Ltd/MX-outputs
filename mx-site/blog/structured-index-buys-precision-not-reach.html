@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "The Structured Index Buys Precision, Not Reach"
+description: "A Google team ran the same agent against the open web and against a schema.org-gated corpus. Precision on machine-actionable results rose 65.7%. Relevance did not move at all, and coverage fell from 56 answered queries to 40. That trade is the part the GEO summaries leave out, and it makes structured markup a positioning decision rather than a technical fix."
+author: "Tom Cranstoun"
+created: 2026-09-03
+modified: 2026-10-29
+version: "0.1"
+
+type: blog-post
+tags: [watching-the-machines, seo-geo-aeo, commentary, schema-org, structured-data, agent-retrieval, research, google, provenance]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
+  audience: [humans, machines]
+  purpose: "Report what Chen, Alrashed, Halevy and Noy actually measured when they ran one agent architecture against Google Search and against Google Dataset Search, separate the paper's findings from the extrapolations circulating about them, and show that the precision gain comes paired with a coverage loss the summaries omit."
+  partOf: https://mx.allabout.network/blog/watching-the-machines/
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator (npm run promote)."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/watching-the-machines/structured-index-buys-precision-not-reach.md
+  contextProvides:
+    - "A Google study compared one agent architecture across the open-web index and a schema.org-gated corpus of 90 million dataset records. Precision on fully machine-actionable results rose from 28.0% to 46.4%. Semantic relevance was flat at 60.4% against 60.7%. Coverage fell from 56 of 58 queries answered to 40. The paper's own recommendation is a hybrid architecture, not blanket markup adoption."
+  stability: stable
+  servedAt: https://mx.allabout.network/blog/structured-index-buys-precision-not-reach.html
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A Google team ran the same agent against the open web and against a schema.org-gated corpus. Precision on machine-actionable results rose 65.7%. Relevance did not move at all, and coverage fell from 56 answered queries to 40. That trade is the part the GEO summaries leave out, and it makes structured markup a positioning decision rather than a technical fix.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://mx.allabout.network/blog/structured-index-buys-precision-not-reach.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/structured-index-buys-precision-not-reach.html">
+  <meta property="og:title" content="The Structured Index Buys Precision, Not Reach | CogNovaMX">
+  <meta property="og:description" content="A Google team ran the same agent against the open web and against a schema.org-gated corpus. Precision on machine-actionable results rose 65.7%. Relevance did not move at all, and coverage fell from 56 answered queries to 40. That trade is the part the GEO summaries leave out, and it makes structured markup a positioning decision rather than a technical fix.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-09-03">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Structured Index Buys Precision, Not Reach | CogNovaMX">
+  <meta name="twitter:description" content="A Google team ran the same agent against the open web and against a schema.org-gated corpus. Precision on machine-actionable results rose 65.7%. Relevance did not move at all, and coverage fell from 56 answered queries to 40. That trade is the part the GEO summaries leave out, and it makes structured markup a positioning decision rather than a technical fix.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="The Structured Index Buys Precision, Not Reach">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="0.1">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/structured-index-buys-precision-not-reach.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Structured Index Buys Precision, Not Reach | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "The Structured Index Buys Precision, Not Reach",
+      "headline": "The Structured Index Buys Precision, Not Reach",
+      "description": "A Google team ran the same agent against the open web and against a schema.org-gated corpus. Precision on machine-actionable results rose 65.7%. Relevance did not move at all, and coverage fell from 56 answered queries to 40. That trade is the part the GEO summaries leave out, and it makes structured markup a positioning decision rather than a technical fix.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-09-03",
+      "dateModified": "2026-09-03",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/structured-index-buys-precision-not-reach.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 1673,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/structured-index-buys-precision-not-reach.html",
+      "name": "The Structured Index Buys Precision, Not Reach",
+      "url": "https://mx.allabout.network/blog/structured-index-buys-precision-not-reach.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-they-actually-did">What They Actually Did</a></li>
+        <li><a href="#what-the-paper-proves">What the Paper Proves</a></li>
+        <li><a href="#the-two-numbers-the-summaries-drop">The Two Numbers the Summaries Drop</a></li>
+        <li><a href="#three-things-the-confident-version-gets-wrong">Three Things the Confident Version Gets Wrong</a></li>
+        <li><a href="#the-filter-nobody-mentions">The Filter Nobody Mentions</a></li>
+        <li><a href="#their-own-recommendation-isnt-add-markup">Their Own Recommendation Isn't "Add Markup"</a></li>
+        <li><a href="#where-i-go-beyond-the-paper">Where I Go Beyond the Paper</a></li>
+        <li><a href="#what-it-means-if-you-publish-data">What It Means If You Publish Data</a></li>
+        <li><a href="#where-mx-fits">Where MX Fits</a></li>
+        <li><a href="#reference">Reference</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1673">
+        <header class="article-header">
+          <h1>The Structured Index Buys Precision, Not Reach</h1>
+          <div class="article-meta"
+               data-published="2026-09-03"
+               data-modified="2026-09-03"
+               data-reading-time="9 min">
+            <time datetime="2026-09-03">3 September 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>9 min read</span>
+          </div>
+        </header>
+
+
+<p>Somebody finally ran the experiment the GEO argument keeps assuming.</p>
+<p>A Google team built two agents with the same architecture and pointed them at two different corpora. One queried the Google Search index. The other queried Google Dataset Search, a curated corpus of 90 million records where inclusion requires <a href="https://schema.org/Dataset">schema.org/Dataset</a> or DCAT markup. Then they measured what each agent brought back.</p>
+<p>The structured agent was much more precise. It also answered 29% fewer questions. Both halves of that sentence are in the paper, and only the first half is being quoted.</p>
+<h2 id="what-they-actually-did" tabindex="-1">What They Actually Did</h2>
+<p>Shiyu Chen, Tarfah Alrashed, Alon Halevy and Natasha Noy, all at Google in Mountain View, posted <em>Do Data Agents Need Semantic Metadata?</em> to arXiv in May 2026, revised in July. It's a preprint. There's no journal reference and no venue named on it, so treat it as unreviewed work by the people who built the system under test.</p>
+<p>The query set is 58 English keyword questions from the Information Retrieval subtask of the NTCIR-16 Data Search 2 benchmark. Real crowdsourced phrasings, short and underspecified, of the &quot;air quality baltimore&quot; kind.</p>
+<p>The controls are tight. Same framework, same model, temperature zero. Three results per query, the same JSON shape out, and a fixed &quot;no relevant datasets found&quot; string both agents had to return rather than improvise when they came up empty. An LLM-as-a-judge pipeline then scored every returned URL on relevance, accessibility and page type, with &quot;fully FAIR-compliant&quot; reserved for a result that scored top marks on all three at once.</p>
+<h2 id="what-the-paper-proves" tabindex="-1">What the Paper Proves</h2>
+<table>
+<thead>
+<tr>
+<th>Measure</th>
+<th>Open-web agent</th>
+<th>Structured agent</th>
+<th>Change</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Precision, fully machine-actionable results</td>
+<td>28.0% (46 of 164)</td>
+<td>46.4% (52 of 112)</td>
+<td>+65.7% relative, p&lt;0.01</td>
+</tr>
+<tr>
+<td>Pages with machine-readable downloads</td>
+<td>48.7%</td>
+<td>71.4%</td>
+<td>+46.6% relative</td>
+</tr>
+<tr>
+<td>Data-registry entries</td>
+<td>61.0%</td>
+<td>88.4%</td>
+<td>+44.9% relative</td>
+</tr>
+<tr>
+<td>Prose-heavy pages (&quot;data narratives&quot;)</td>
+<td>baseline</td>
+<td>reduced</td>
+<td>-86.6% relative</td>
+</tr>
+<tr>
+<td>Discovery portals</td>
+<td>baseline</td>
+<td>none</td>
+<td>-100%</td>
+</tr>
+</tbody>
+</table>
+<p>That's a real effect, and the precision figure carries statistical significance. The structured agent was much better at coming back with something you could actually open.</p>
+<p>The mechanism the authors give for those open-web failures is worth reading closely, because it isn't about ranking. It's about what happens after retrieval: page markup causes token bloat, dense prose degrades the context window, and portal pages trap an agent in redundant search loops instead of handing it a payload. They call it a last-mile utility failure. The open-web agent found relevant pages perfectly well. It just couldn't get the data out of them.</p>
+<h2 id="the-two-numbers-the-summaries-drop" tabindex="-1">The Two Numbers the Summaries Drop</h2>
+<p><strong>Relevance didn't move.</strong> Rated highly relevant: 60.4% for the open-web agent, 60.7% for the structured one. Statistically that's the same number. Markup didn't help the agent find data that matched the question better. It helped the agent find data it could open. Those are different products, and only one of them is what most people think they're buying.</p>
+<p><strong>Coverage collapsed.</strong> The open-web agent answered 56 of the 58 queries. The structured agent answered 40. The authors attribute the gap directly to limited <a href="https://schema.org">schema.org</a> adoption, and say it's most pronounced in the long tail, in the research domains and repositories where dataset pages carry no annotation at all.</p>
+<p>So here's the honest summary of the trade. Inside the curated index your odds improve a lot. Outside it you don't rank badly, you're absent by construction. And the agent, by the paper's own framing, is built to prefer an empty result over a probabilistic guess.</p>
+<h2 id="three-things-the-confident-version-gets-wrong" tabindex="-1">Three Things the Confident Version Gets Wrong</h2>
+<p>I've seen this study written up as &quot;only the index changed&quot;. The paper declines that framing itself.</p>
+<p><strong>The ranking differs too, and they say so.</strong> In the limitations the authors write that Google Search and Google Dataset Search share core infrastructure but that their internal ranking mechanisms remain black boxes, and that rather than isolating the algorithmic delta they're measuring end-to-end utility. So this isn't a clean single-variable experiment. It's a comparison of two ecosystems as they actually behave, which is a more useful thing to measure and a weaker thing to claim.</p>
+<p><strong>The query handling differed by design.</strong> The open-web agent appends data-seeking keywords such as &quot;dataset&quot; to the user's intent, because without that expansion it'd be a straw baseline. The structured agent skips the expansion, because the vertical already restricts results to dataset entities. That's defensible and it's documented, and it's also a second difference between the two arms.</p>
+<p><strong>It's a small study, and the authors flag that first.</strong> 58 queries, 164 URLs against 112. They write plainly that the query set may not capture the diversity of the long tail, and that the result-density difference between the two agents wasn't statistically significant at all. Only the URL-level precision figure clears p&lt;0.01. Anyone quoting a second significant finding out of this paper is inventing it.</p>
+<h2 id="the-filter-nobody-mentions" tabindex="-1">The Filter Nobody Mentions</h2>
+<p>Buried in the method section: Google runs a classification model over candidate pages and filters out roughly 80% of them for invalid or misused annotations before they reach the 90 million that remain.</p>
+<p>Read that again if you're about to bolt Dataset markup onto a blog post with no downloadable file behind it. That's precisely what the filter exists to catch. Marking up a page as something it isn't doesn't get you into the clean index. It gets you classified as noise, by a model built for the purpose, and you never find out.</p>
+<p>It's the same failure I keep seeing from automated markup: an agent told to &quot;add structured data&quot; can't tell a fact that carries weight from a decorative one, so it tags everything. Less, chosen well, beats more.</p>
+<h2 id="their-own-recommendation-isnt-add-markup" tabindex="-1">Their Own Recommendation Isn't &quot;Add Markup&quot;</h2>
+<p>The paper proposes a hybrid architecture, and it proposes it for the agent builder rather than the publisher. Query the high-precision semantic layer first. If it returns nothing, fall back to unstructured retrieval and cast a wider net. The authors are explicit that unstructured retrieval remains the right tool for broad exploratory work, and that the structured corpus trades away recall for reliability.</p>
+<p>That's a considerably more modest conclusion than &quot;structured data wins&quot;, and it's the one their numbers support.</p>
+<h2 id="where-i-go-beyond-the-paper" tabindex="-1">Where I Go Beyond the Paper</h2>
+<p>I want to be careful here, because the study is about a dataset search vertical feeding an agent. It says nothing about how ChatGPT, Perplexity or AI Overviews pick citations. Another corpus, another task, another scoring rubric.</p>
+<p>My working assumption is that the retrieval half generalises, and the paper gives a reason to think so: the failures it describes aren't specific to datasets. Token bloat from markup noise, prose that degrades the context window, portals that loop an agent instead of answering it. Any agent parsing any page hits those. An agent that has to reconstruct a number out of prose will often return nothing rather than risk returning the wrong one, and returning nothing is invisible to you.</p>
+<p>What doesn't carry across is citation behaviour. Whether a model puts your URL under its sentence is a ranking and attribution question, and this paper measures neither. So: the failure mode generalises, the citation outcome is untested. If someone tells you this study proves <a href="https://schema.org">schema.org</a> gets you cited, they haven't read past the abstract.</p>
+<h2 id="what-it-means-if-you-publish-data" tabindex="-1">What It Means If You Publish Data</h2>
+<p>You're not making your page more citable. You're choosing to compete inside a smaller, cleaner index instead of a larger, noisier one.</p>
+<p>Inside it, your odds improve. Outside it, you're not there at all. That's a positioning decision about which room you want to be judged in, and it deserves a conversation about who your data is for, not a ticket in a sprint labelled &quot;add schema&quot;.</p>
+<p>Two questions settle it faster than any audit. Is there a machine-readable file at the end of it, or only a page describing one? And is the audience you care about reaching you through a curated vertical, or through open-web search? If the answer to the first is &quot;only a page&quot;, the markup is a liability rather than an investment.</p>
+<h2 id="where-mx-fits" tabindex="-1">Where MX Fits</h2>
+<p>The result I keep coming back to is the flat one. Relevance didn't move. Structured markup didn't make the data a better answer to the question. It made the data openable. Findability was never the bottleneck. The last mile was.</p>
+<p>That's the MX argument arriving from an unexpected direction. Making a page machine-readable isn't a ranking tactic, and the paper's numbers say so plainly. It's what stops a machine having to guess at the moment it tries to act on what it found. The agents in this study didn't fail because they couldn't find the right page. They failed because, having found it, they couldn't get anything out of it.</p>
+<p>There's a layer past even that one, which this study doesn't touch because that wasn't its question. A curated index tells an agent that a record met an inclusion rule. It doesn't tell the agent who published the underlying file, when, under what version, or whether anything has changed since. Google's classification filter is a quality gate, not a provenance record. When a file travels beyond the index that catalogued it, and files always do, what it carries on its own is all that's left. Readable, so the agent can use it. Attributable, so the agent knows who stands behind it. That second half is the part no vertical index supplies, and it's why I wrote about <a href="https://mx.allabout.network/blog/schema-org-and-the-missing-provenance-layer.html">the provenance layer schema.org still doesn't have</a>.</p>
+<p>If you want to know which of your own pages an agent would find and then fail to use, <a href="https://tityra.com">an AX (agent experience) audit</a> fetches them the way these systems do and shows you the text that actually comes back.</p>
+<p>The longer argument about why none of this is a ranking trick is in <a href="https://mx.allabout.network/blog/industry/geo-is-a-tactic-mx-is-the-specification.html">GEO is a tactic, MX is the specification</a>, and the companion piece on what Google's own guidance does and doesn't endorse is <a href="https://mx.allabout.network/blog/industry/google-named-geo-then-debunked-it.html">Google Named GEO, Then Debunked Most of It</a>.</p>
+<h2 id="reference" tabindex="-1">Reference</h2>
+<p>Chen, S., Alrashed, T., Halevy, A., &amp; Noy, N. (2026). <em>Do data agents need semantic metadata? A comparative study in agentic data retrieval</em> (arXiv:2605.28787v2). arXiv. <a href="https://arxiv.org/abs/2605.28787">https://arxiv.org/abs/2605.28787</a></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-29.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/mx-provenance-demo.js"></script>
+</body>
+</html>

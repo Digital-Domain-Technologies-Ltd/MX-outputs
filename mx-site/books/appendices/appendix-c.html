@@ -7,8 +7,8 @@
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
 created: "2026-01-22"
-modified: 2026-10-10
-version: "2.1"
+modified: 2026-11-02
+version: "2.2"
 description: "Web Audit Suite - the CogNovaMX commercial service that measures how well a site works for the machines reading it. Outcomes, deliverables, and how to engage."
 
 title: 'Appendix C: Web Audit Suite'
@@ -38,7 +38,7 @@ mx:
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
 <meta charset="utf-8" />
-  <meta name="generator" content="pandoc 3.12" />
+  <meta name="generator" content="pandoc" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
   <meta name="author" content="Tom Cranstoun" />
   <meta name="description" content="Practical guidance from MX-Protocols book on designing AI agent-friendly websites" />
@@ -154,6 +154,11 @@ measures</a></li>
 <li><a href="#running-the-audit-inside-your-network"
 id="toc-running-the-audit-inside-your-network">Running the audit inside
 your network</a></li>
+<li><a href="#titles-descriptions-and-proposed-rewrites"
+id="toc-titles-descriptions-and-proposed-rewrites">Titles, descriptions
+and proposed rewrites</a></li>
+<li><a href="#the-pdf-inspector" id="toc-the-pdf-inspector">The PDF
+inspector</a></li>
 <li><a href="#what-you-receive" id="toc-what-you-receive">What you
 receive</a></li>
 <li><a href="#who-it-is-for" id="toc-who-it-is-for">Who it is
@@ -185,64 +190,143 @@ it is not a self-serve tool.</p>
 <p>The output is a client-facing report and a prioritised action plan.
 The report names the highest-leverage changes for the site under review,
 page by page, ranked by what is blocking machine readers from doing the
-work the site exists to support.</p>
+work it exists to support.</p>
 <h2 id="what-it-measures">What it measures</h2>
 <p>Web Audit Suite covers the dimensions that determine whether a
 machine reader can extract the same value from a page that a human
 visitor can:</p>
 <ul>
-<li><strong>Served HTML versus rendered HTML.</strong> What machines see
-at fetch time, before any JavaScript runs. The single highest-impact
-dimension; most machine readers never execute JavaScript.</li>
-<li><strong>Structured data presence and correctness.</strong>
+<li><p><strong>Served HTML versus rendered HTML.</strong> What machines
+see at fetch time, before any JavaScript runs. The single highest-impact
+dimension; most machine readers never execute JavaScript.</p></li>
+<li><p><strong>Structured data presence and correctness.</strong>
 Schema.org markup, JSON-LD blocks, and type disambiguation: the
 standards that let machines know what a page is about without inferring
-it from prose.</li>
-<li><strong>Pricing, availability, and other commercial facts.</strong>
-Whether the numbers and states a buyer needs are present in the HTML or
-hidden behind a render step.</li>
-<li><strong>Document and page accessibility.</strong> WCAG conformance,
-semantic HTML, and ARIA usage, which assistive technologies and machine
-readers both need.</li>
-<li><strong>Discovery surface.</strong> Sitemap completeness, robots.txt
-correctness, llms.txt presence, in-page link discoverability, canonical
-declarations. The probe extends beyond the well-known trio: every entry
-in the IANA Well-Known URIs registry that a machine reader might check
-is probed, including agent-card.json (A2A protocol), did.json (W3C
-decentralised identity), oauth-authorization-server /
-oauth-protected-resource / jwks.json (identity and signing), caldav /
-carddav (calendar and contact discovery), mta-sts.txt (mail transport
+it from prose.</p></li>
+<li><p><strong>Pricing, availability, and other commercial
+facts.</strong> Whether the numbers and states a buyer needs are present
+in the HTML or hidden behind a render step.</p></li>
+<li><p><strong>Document and page accessibility.</strong> WCAG
+conformance, semantic HTML, and ARIA usage, which assistive technologies
+and machine readers both need.</p></li>
+<li><p><strong>Discovery surface.</strong> Sitemap completeness,
+robots.txt correctness, llms.txt presence, in-page link discoverability,
+canonical declarations. The probe extends beyond the well-known trio:
+every entry in the IANA Well-Known URIs registry that a machine reader
+might check is probed, including agent-card.json (A2A protocol),
+did.json (W3C decentralised identity), oauth-authorization-server /
+oauth-protected-resource / jwks.json (authorisation and signing), caldav
+/ carddav (calendar and contact discovery), mta-sts.txt (mail transport
 security), the IoT and device-provisioning family (brski / cmp / coap /
 core), and others. Where a JSON discovery file is present, the audit
 parses its body and reports the structured contents in the report tables
-rather than presenting an unhelpful "yes / unknown / unknown" row. Where
-a path is absent the report stays silent, surfacing only the IANA
-registry pointer so the reader knows where to look up the full
-catalogue.</li>
-<li><strong>Provenance and trust signals.</strong> Whether the page
+rather than presenting a row that says only that it exists. Where a path
+is absent the report stays silent, surfacing only the IANA registry
+pointer so the reader knows where to look up the full
+catalogue.</p></li>
+<li><p><strong>Agent experience (AX).</strong> The site read the way a
+coding or research agent reads it, with plain HTTP and no JavaScript,
+against the public Agent-Friendly Documentation Spec: whether
+<code>llms.txt</code> exists and its links resolve, whether pages are
+available as markdown by address or by negotiation, whether a page is
+complete in one fetch with its content near the top, whether a wrong
+address answers 404, and how redirects, cache headers, sign-in walls and
+bot protection treat an automated visitor. The report carries two
+figures. The spec score is the site's standing on that specification's
+own public scale, which compares like for like with any other reading of
+it. The house score is the same scale extended to the full-content file,
+the agent skill file and the MCP server, and compares only with another
+audit from this series. Every check states pass, warn or fail, with its
+fix.</p></li>
+<li><p><strong>Provenance and trust signals.</strong> Whether the page
 declares who published it, when, under what licence, and how a reader
-can verify those claims.</li>
-<li><strong>Performance and pipeline survivability.</strong> Whether the
-page survives the truncation, byte caps, and timing constraints that
-real-world crawlers impose.</li>
-<li><strong>The accessibility tree.</strong> There is no single kind of
-machine visitor: an on-device model with a tight context window, a
-foundation model with browsing tools, a plain scraper, a converter that
-flattens the page to text, a one-shot fetcher. Each reads a different
-projection of the page, none sees the visual layout, and a page that
-carries its meaning in only one channel fails every visitor that lacks
-that channel. The suite reads each page the way a tree consumer does and
-flags where behaviour, names, and structure fail to reach the tree:
-clickable containers with no role, links named "read more", form fields
-labelled only by placeholder text, data locked inside images, landmark
-and role wiring that resolves to nothing. Findings that repeat across
-pages with the same structure are reported as one template-level fix,
-not page-by-page copies. Because screen readers consume the same tree,
-every fix serves human visitors and machine visitors at once.</li>
+can verify those claims.</p></li>
+<li><p><strong>Performance and pipeline survivability.</strong> Whether
+the page survives the truncation, byte caps, and timing constraints that
+real-world crawlers impose.</p></li>
+<li><p><strong>The accessibility tree.</strong> There is no single kind
+of machine visitor: an on-device model with a tight context window, a
+foundation LLM with browsing tools, a plain scraper, a converter that
+flattens HTML to text, a one-shot fetcher. Each reads a different
+projection of the page, none sees the visual layout, and meaning carried
+in only one channel fails every visitor that cannot read it. The suite
+reads each page the way an accessibility-tree consumer does and flags
+where behaviour, names, and structure fail to reach the tree: clickable
+containers with no role, links named "read more", form fields labelled
+only by placeholder text, data locked inside images, landmark wiring
+that resolves to nothing. Findings that repeat across pages with the
+same structure are reported as one template-level fix, not page-by-page
+copies. Because screen readers consume the same tree, every fix serves
+human visitors and machine visitors at once.</p></li>
+<li><p><strong>Machine Processing Speed.</strong> How long a machine
+takes to understand a page once the bytes have arrived, measured on
+cached pages with no network in the way. Network time describes the
+infrastructure. Analysis time describes the content. Two sites with
+identical browser performance scores can land in different bands: that
+score measures what is painted, and this one what a machine has to
+parse. The result is reported as a band rather than a raw number, so the
+site owner knows where they stand:</p></li>
 </ul>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Band</th>
+<th>Name</th>
+<th>Time per page</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Machine-Lean</td>
+<td>Under 100 ms</td>
+<td>Clean, structured markup that agents process without effort</td>
+</tr>
+<tr>
+<td>B</td>
+<td>Machine-Ready</td>
+<td>100 to 300 ms</td>
+<td>Standard complexity that agents handle without friction</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Machine-Workable</td>
+<td>300 to 800 ms</td>
+<td>Moderate overhead; agents cope but may miss context</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Machine-Heavy</td>
+<td>800 ms to 2 seconds</td>
+<td>Dense DOM or heavy script layers; agents slow down and risk missing
+information</td>
+</tr>
+<tr>
+<td>E</td>
+<td>Machine-Dense</td>
+<td>Over 2 seconds</td>
+<td>Parsing cost exceeds a practical agent budget</td>
+</tr>
+</tbody>
+</table>
+<p>A site in Band C, D or E is told which pages drive the overhead and
+which structural patterns cause it. The fixes are structural, not
+performance tuning: flatter DOM trees, semantic markup, and content
+written into the document instead of assembled by script (Cranstoun,
+2026, <a
+href="https://mx.allabout.network/blog/machine-parsability-speed.html"
+class="uri">https://mx.allabout.network/blog/machine-parsability-speed.html</a>).</p>
 <p>The dimensions are scored against thresholds CogNovaMX has calibrated
 against the behaviour of the major machine readers in production. The
-thresholds move when the readers move; the service tracks the drift.</p>
+thresholds follow those readers as their behaviour shifts; the service
+tracks the drift.</p>
 <p>Beyond the per-dimension scores, the suite applies a
 machine-readability adjustment. Some gaps are ones a machine cannot work
 around anywhere on the estate: an audience the audit had to infer rather
@@ -251,11 +335,11 @@ only once JavaScript has run, markup so deeply nested that the meaning
 is buried, an automated visitor that is blocked outright, or an origin
 too slow to finish a fetch. Where a site carries such gaps, the overall
 machine-readability score is reduced to reflect that a real agent would
-struggle to use the site. Every reduction is named in the report, so the
+struggle to use it. Every reduction is named in the report, so the
 reader sees exactly what drove the number down rather than facing an
-unexplained drop. The reduction is bounded, so a site is never scored to
-nothing on these signals alone, and a gap that an individual dimension
-already accounts for is never counted twice.</p>
+unexplained drop. The reduction is bounded, so these signals alone
+cannot score a site to nothing, and a gap that an individual dimension
+already accounts for is not counted twice.</p>
 <p>Occasionally a site refuses the interrogation altogether: every page
 request from every automated visitor is turned away. The audit still
 delivers, because the refusal is itself the finding. The report sets out
@@ -269,10 +353,10 @@ correct. Either way, the audit gives it a dated, evidenced record.</p>
 your network</h2>
 <p>Some content cannot leave the customer's network. Regulated
 procurement teams at banks, hospitals, public-sector bodies, and
-pharmaceutical companies routinely ask, before agreeing to an audit,
-whether any of the audit data (the pages crawled, the metadata
-extracted, the findings produced) leaves their network at any point in
-the pipeline.</p>
+pharmaceutical companies routinely ask, before agreeing to an
+engagement, whether any of the audit data (the pages crawled, the
+metadata extracted, the findings produced) leaves their network at any
+point in the pipeline.</p>
 <p>The structural answer is yes by default. The pipeline runs as a
 deterministic core with one inference layer at the end. The
 deterministic core is scripted: every probe, every gate, every check is
@@ -284,9 +368,103 @@ verified evidence into a readable report.</p>
 served one. Ollama, LM Studio, and an on-premise Llama deployment look
 identical from the audit's point of view. When the customer specifies a
 local inference target at scoping, the audit runs end-to-end inside
-their network, no audit data leaves, and the resulting report matches
-the hosted-inference equivalent. The choice is theirs; the audit's
-output does not change.</p>
+their network, no data leaves, and the resulting report matches the
+hosted-inference equivalent. The choice is theirs; the audit's output
+does not change.</p>
+<h2 id="titles-descriptions-and-proposed-rewrites">Titles, descriptions
+and proposed rewrites</h2>
+<p>The title and description checks match those of a search-focused
+audit (missing, too long, too short, duplicated), with two more that ask
+what the text does. A title is flagged when it does not name the page's
+topic, meaning the words its own main heading and meta description agree
+on, so no keyword is guessed. A meta description is flagged when nothing
+in it asks the visitor to act (find, book, compare, download). Both
+checks rely on English word lists. They judge only English pages, and a
+page in another language is not marked down for them.</p>
+<p>For each page that breaks a title or description rule, the technical
+appendix proposes a rewrite beside the current text and the rules it
+broke. A language model words the proposal and does nothing else. The
+audit then runs its own title and description rules on every proposal
+and drops any that still breaks one, rather than showing it. The pages,
+the current text and the rules broken come from the audit's own records,
+never from the model (Cranstoun, 2026, <a
+href="https://mx.allabout.network/blog/the-mx-audit-and-a-full-seo-audit.html"
+class="uri">https://mx.allabout.network/blog/the-mx-audit-and-a-full-seo-audit.html</a>).</p>
+<p>The standard report makes no comparison with a named competitor. Nor
+does it list the topics a competitor covers that the audited site lacks.
+Each would need a second full audit of the other site, with every number
+drawn from that run's records.</p>
+<h2 id="the-pdf-inspector">The PDF inspector</h2>
+<p>The document checks behind the document-accessibility supplement are
+also available on their own. A free public inspector at <a
+href="https://mx.allabout.network/tools/pdf-inspector.html"
+class="uri">https://mx.allabout.network/tools/pdf-inspector.html</a>
+takes one PDF at a time and parses it in the reader's browser, so the
+file never leaves the machine. It reads the tagged structure tree, the
+XMP metadata packet and any embedded AI-governance provenance record,
+and places the file in one of three tiers:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Tier</th>
+<th>What the file carries</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MX Compatible</td>
+<td>A tagged structure tree, MX metadata and the provenance record the
+MX badge claims</td>
+</tr>
+<tr>
+<td>Tagged only</td>
+<td>A tagged structure tree without MX metadata</td>
+</tr>
+<tr>
+<td>Plain</td>
+<td>Neither</td>
+</tr>
+</tbody>
+</table>
+<p>Four things run on one detection core:</p>
+<ul>
+<li>the public inspection page;</li>
+<li>a hard gate in CogNovaMX's own publishing pipeline, which fails the
+build if a freshly rendered PDF would not qualify for the MX Compatible
+mark;</li>
+<li>an automated check of the core against a reference file, repeated on
+every test run;</li>
+<li>a command-line tool for accredited operators' own pipelines.</li>
+</ul>
+<p>A regression in the core fails all four in the same way, so what
+CogNovaMX publishes and what it enforces cannot drift apart. The
+command-line tool runs locally, because the PDFs an operator checks are
+usually confidential, and it reports in a form a build system
+understands: exit code zero when every file meets the configured minimum
+tier, one when at least one falls below it, and two on a fatal error
+(Cranstoun, 2026, <a
+href="https://mx.allabout.network/blog/provenance/the-inspector-you-can-audit-yourself.html"
+class="uri">https://mx.allabout.network/blog/provenance/the-inspector-you-can-audit-yourself.html</a>).
+A buyer can therefore re-check a supplier's PDF in the public inspector
+and reach the same conclusion as the supplier's pipeline.</p>
+<p>A lighter page-level check exists in the same spirit. A browser
+extension reads the page in front of the reader for MX signals (the MX
+meta tags, AI disclosure, discovery links, files at the site's
+well-known addresses, structured data, Open Graph, accessibility quick
+wins and provenance markers) and scores each as pass, warn, fail or
+info. It then asks whichever on-device model the browser already has
+(Gemini Nano in Chrome, Phi-Silica in Edge on Copilot+ PCs, or a local
+Ollama server as the fallback) to write a short summary. Nothing leaves
+the device, and the model writes prose, not findings. The extension is a
+sideloaded developer tool for practitioners, a ten-second read of one
+page; the audit is the service when a written report and a record of how
+each finding was reached are needed (Cranstoun, 2026, <a
+href="https://mx.allabout.network/blog/watching-with-the-machines.html"
+class="uri">https://mx.allabout.network/blog/watching-with-the-machines.html</a>).</p>
 <h2 id="what-you-receive">What you receive</h2>
 <p>Each engagement produces:</p>
 <ol type="1">
@@ -327,7 +505,8 @@ being found by AI search and recommendation surfaces.</li>
 needs to reach the agents now placing transactions on behalf of
 buyers.</li>
 <li><strong>Government and public sector teams</strong> whose
-accessibility obligations have moved from policy to enforced.</li>
+accessibility obligations are now enforced, not only set out in
+policy.</li>
 <li><strong>Developers and architects</strong> building new sites who
 want to measure machine readiness before launch, not after.</li>
 <li><strong>Investors and acquirers</strong> running due diligence on a
@@ -345,16 +524,16 @@ delta.</p>
 after the initial cycle. The dashboard surfaces score movement,
 regression detection, and progress against the action plan.</p>
 <h2 id="what-changes-after-an-audit">What changes after an audit</h2>
-<p>Sites that act on Web Audit Suite findings consistently report three
-outcomes within the first quarter:</p>
+<p>The findings point a site at three changes it can make and then
+measure at re-audit:</p>
 <ul>
-<li>Pricing, availability, and product facts are reachable by AI search
-surfaces that previously returned "I don't have that information".</li>
-<li>Structured data coverage rises from partial to complete, lifting the
-site's eligibility for rich-result and answer-surface inclusion.</li>
-<li>Accessibility findings are quantified and triaged, moving the site
-from "we hope it's accessible" to "we know what is broken and what to
-fix first".</li>
+<li>Pricing, availability, and product facts made reachable to AI search
+surfaces that returned "I don't have that information".</li>
+<li>Structured data on every audited page instead of some of them, which
+is what rich-result and answer-surface eligibility depends on.</li>
+<li>Accessibility findings quantified and triaged, moving the site from
+"we hope it's accessible" to "we know what is broken and what to fix
+first".</li>
 </ul>
 <p>The MX framework documented in this book provides the conceptual
 basis. Web Audit Suite is the measurement layer that turns the framework
@@ -365,12 +544,13 @@ improving</h2>
 platform-level patterns: the type of finding, the platform it appeared
 on, and how often it recurs. We never store your domain in that shared
 record, nor your content, your URLs, or the specific text we corrected.
-When a class of problem keeps appearing on a platform, that signal
+When a class of problem keeps appearing on one platform, that signal
 prompts us to sharpen the deterministic check that catches it, so every
-future audit of that platform is more thorough. The audits run on local
-models by default, so your content stays inside your infrastructure. The
-result is a measurement layer that gets sharper for every site on your
-platform, without any site's data being exposed to another.</p>
+future audit of sites built on it is more thorough. The audits run on
+local models by default, so your content stays inside your
+infrastructure. The result is a measurement layer that gets sharper for
+every site on your platform, without any site's data being exposed to
+another.</p>
 <h2 id="how-to-engage">How to engage</h2>
 <p>CogNovaMX takes Web Audit Suite enquiries through one of two
 routes:</p>
@@ -390,7 +570,7 @@ on site size and the supplements requested.</p>
 <p>The Implementation Cookbook in Appendix A names the patterns that fix
 what Web Audit Suite measures. Together, the two appendices are the
 practitioner's path: measure, fix, re-measure.</p>
-<!-- audit-suite-sync: 2026-10-09-c -->
+<!-- audit-suite-sync: 2026-11-01-a -->
 </div>
 <hr>
 <nav class="appendix-navigation" role="navigation" aria-label="Appendix Navigation">

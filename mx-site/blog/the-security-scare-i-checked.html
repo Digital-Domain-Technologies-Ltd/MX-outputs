@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "The Security Scare I Checked Before I Repeated It"
+description: "A viral post landed in my feed: a massive Adobe extension hole, three hundred million people at risk right now. Before I passed it on I did the boring thing and read the primary record. Most of it was true. The urgency was not. The gap between those two is the whole reason I do this work."
+author: Tom Cranstoun
+created: "2026-07-26"
+modified: 2026-09-28
+version: "1.0"
+type: blog-post
+tags:
+  - watching-the-machines
+  - security
+  - provenance
+  - corroboration
+  - extensions
+  - verification
+  - machine-trust
+  - determinism
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/watching-the-machines/the-security-scare-i-checked.md
+  contextProvides:
+    - "A worked example of verifying a viral security claim (the Adobe Acrobat Chrome extension HermeticReader flaw, CVE-2026-48294) against the primary record rather than the news rewrites. The core mechanics check out against Guardio's own writeup, the install base and single-visit attack are real, but the 'everyone at risk right now' urgency is inflated: the flaw was responsibly disclosed, patched over a weekend, auto-delivered, with no observed exploitation. The MX lesson: a claim travels faster than its evidence, and MX plus REGINALD make the evidence travel with the claim so a machine can check who said it, whether it is current, and whether the primary record corroborates it."
+  stability: stable
+  purpose: "A worked fact-check of a viral security claim, used to show why corroboration against a primary record is the practice MX and REGINALD exist to make checkable by machine."
+  servedAt: https://mx.allabout.network/blog/the-security-scare-i-checked.html
+  partOf: https://mx.allabout.network/blog/watching-the-machines/
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A viral post landed in my feed: a massive Adobe extension hole, three hundred million people at risk right now. Before I passed it on I did the boring thing and read the primary record. Most of it was true. The urgency was not. The gap between those two is the whole reason I do this work.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://mx.allabout.network/blog/the-security-scare-i-checked.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/the-security-scare-i-checked.html">
+  <meta property="og:title" content="The Security Scare I Checked Before I Repeated It | CogNovaMX">
+  <meta property="og:description" content="A viral post landed in my feed: a massive Adobe extension hole, three hundred million people at risk right now. Before I passed it on I did the boring thing and read the primary record. Most of it was true. The urgency was not. The gap between those two is the whole reason I do this work.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-07-26">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Security Scare I Checked Before I Repeated It | CogNovaMX">
+  <meta name="twitter:description" content="A viral post landed in my feed: a massive Adobe extension hole, three hundred million people at risk right now. Before I passed it on I did the boring thing and read the primary record. Most of it was true. The urgency was not. The gap between those two is the whole reason I do this work.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="The Security Scare I Checked Before I Repeated It">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/the-security-scare-i-checked.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>The Security Scare I Checked Before I Repeated It</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "The Security Scare I Checked Before I Repeated It",
+      "headline": "The Security Scare I Checked Before I Repeated It",
+      "description": "A viral post landed in my feed: a massive Adobe extension hole, three hundred million people at risk right now. Before I passed it on I did the boring thing and read the primary record. Most of it was true. The urgency was not. The gap between those two is the whole reason I do this work.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-07-26",
+      "dateModified": "2026-07-26",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/the-security-scare-i-checked.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 1577,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/the-security-scare-i-checked.html",
+      "name": "The Security Scare I Checked Before I Repeated It",
+      "url": "https://mx.allabout.network/blog/the-security-scare-i-checked.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-checked-out">What checked out</a></li>
+        <li><a href="#what-did-not">What did not</a></li>
+        <li><a href="#the-gap-is-the-whole-job">The gap is the whole job</a></li>
+        <li><a href="#the-smaller-lesson-underneath-it">The smaller lesson underneath it</a></li>
+        <li><a href="#the-record-i-checked-against">The record I checked against</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1577">
+        <header class="article-header">
+          <h1>The Security Scare I Checked Before I Repeated It</h1>
+          <div class="article-meta"
+               data-published="2026-07-26"
+               data-modified="2026-07-26"
+               data-reading-time="8 min">
+            <time datetime="2026-07-26">26 July 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>8 min read</span>
+          </div>
+        </header>
+
+<p>In July 2026 a message landed in my feed, the kind built to be forwarded. A massive security hole in Adobe's Chrome extension. Three hundred million people at risk right now. A scary codename, HermeticReader, and a real-looking CVE number to make it stick. Then the mechanics: visit one bad page, no download, no password, no stolen cookies, and the extension quietly hands your entire WhatsApp Web conversation to an attacker. It ended on the one line that always ends these: the good news is there's a patch, so update.</p>
+<p>Someone asked me a simple question about it. Is this true?</p>
+<p>The pull, when a thing like that lands, is to answer from how it feels. It sounds true. It has a codename and a number and a plausible villain, and forwarding it makes you look alert. That is exactly the moment I have trained myself not to trust, because how a claim sounds is not whether it holds, and I have watched confident nonsense travel further than careful fact more times than I can count. So I did the unglamorous thing. I went and read the record.</p>
+<h2 id="what-checked-out" tabindex="-1">What checked out</h2>
+<p>Most of it, as it turns out. This was not a hoax.</p>
+<p>There is a real vulnerability. It is tracked as CVE-2026-48294, and the researchers who found it, at a firm called Guardio, really did name it HermeticReader. It affects the Adobe Acrobat Chrome extension. That extension is installed on somewhere around three hundred and twenty-nine million browsers, so the &quot;three hundred million&quot; in the post is rounding, not invention. The attack needed nothing more than luring you to a page the attacker controlled. No download, no password, no session-cookie theft. A single visit.</p>
+<p>Even the clever, boring mechanics the post described held up, and this was the part I most expected to be embellished, because a rewrite that gets the vibe right usually mangles the detail. It did not. I fetched Guardio's own writeup, the primary one, not a news article about it, and read the exploit chain in their words. The page could quietly write into the extension's own storage to switch on a WhatsApp integration engine, predict the tab number Chrome would hand a freshly opened WhatsApp Web tab, and send commands straight into it. Then it planted a hidden form in the WhatsApp page and made WhatsApp submit it to a server the attacker owned.</p>
+<p>And the two &quot;HTML quirks&quot; the viral post name-checked were exactly right. First, an option element with no value attribute submits its own text content when the form is sent. The text content of a node is everything rendered beneath it, so moving the live page body into that option turns the submitted value into the entire rendered conversation. Second, WhatsApp Web's content security policy shipped no form-action directive, and the specification says that absence lets a top-level form submission navigate to any origin at all. Put together, WhatsApp itself carried its own rendered chats out to the attacker's endpoint. The extension never had to read a thing. It asked WhatsApp to post itself to a stranger, and WhatsApp did.</p>
+<p>So the alarming core of the message was accurate. A single visit to a bad page could pull your chat list, your contact names, your message previews, your profile name, and the visible text of whatever conversation you had open. OTP codes delivered over WhatsApp travel in that same rendered stream. I could not fault the mechanics. I checked them and they were real.</p>
+<h2 id="what-did-not" tabindex="-1">What did not</h2>
+<p>The urgency did not survive the same reading.</p>
+<p>&quot;Three hundred million people at risk right now&quot; describes a live emergency. What the record describes is the opposite of live. Guardio reported the chain privately to Adobe. Adobe acknowledged it, triaged it, and shipped a patched version over the same weekend, then pushed it to users automatically. By the time the scary post was circulating, the fix had already gone out to the install base without anyone lifting a finger. Neither the researchers nor Adobe had seen any sign the flaw was ever used in the wild. The severity was rated moderate-to-high, not the world-ending figure the tone implied.</p>
+<p>None of that takes anything away from the research. Finding a way to make WhatsApp exfiltrate itself through a PDF extension is a lovely, nasty piece of work, and Adobe patching it inside a weekend is the encouraging half of the story. But &quot;at risk right now&quot; is not what happened. The honest version is: a serious flaw was found responsibly, closed fast, and closed for you before you heard about it. That is a reassuring story wearing a frightening one's clothes.</p>
+<p>So my answer to the question was: yes, mostly, and here is the part they left off. The frightening half of this travelled at the speed of a share. The reassuring half sat in a primary source that almost nobody who forwarded the warning had opened.</p>
+<h2 id="the-gap-is-the-whole-job" tabindex="-1">The gap is the whole job</h2>
+<p>That split is not a quirk of this one story. It is how every claim moves now, and closing that gap is the work I spend my days doing.</p>
+<p>A claim moves faster than its evidence. The assertion is a sentence you can repeat in a second; the corroboration is a report you have to go and read. So the assertion arrives first, gets believed, and gets forwarded, and by the time the evidence catches up the belief has already set. It does not even take a liar. A well-meaning rewrite that keeps the drama and drops the &quot;already patched, never exploited&quot; is enough to leave a whole feed frightened of a thing that was fixed on a Saturday.</p>
+<p>The instinct is to say people should be more careful, read more, forward less. True, and useless, because it asks every reader to repeat the afternoon I just spent. The fix that scales is not more caution. It is to make the evidence travel with the claim, in a form a machine can check without a human doing the reading each time.</p>
+<p>I build toward that pairing. Making content machine-readable is one half: a page states plainly what it is, so an agent does not have to guess. Making it machine-trustworthy is the other half, and this story turns on that second one. A trustworthy record answers three questions a machine can ask on its own. Who published this, signed, so a rewrite cannot borrow the researcher's authority the way the viral post borrowed the CVE's. Is this the current version, so a patched-months-ago finding cannot masquerade as a live emergency. And does the primary record actually corroborate the claim, so &quot;at risk right now&quot; gets checked against a source that says &quot;reported, patched, never exploited&quot; before it spreads, not after.</p>
+<p>That last question is what this whole exercise tested. A bare claim is only an assertion, and the share button carries assertions all day. Corroboration is the claim pointing at the authoritative source that independently states it, so anyone, human or machine, can walk from the scary sentence to the primary record in one step instead of an afternoon. The news rewrites were assertion. Guardio's writeup, the CVE entry, and Adobe's own bulletin were the corroborating chain. I had to assemble that chain by hand. The reader after me should not have to.</p>
+<h2 id="the-smaller-lesson-underneath-it" tabindex="-1">The smaller lesson underneath it</h2>
+<p>There is a quieter point in Guardio's own conclusion, and it rhymes with something I wrote here not long ago about the <a href="https://mx.allabout.network/blog/the-extensions-i-didnt-read.html">editor extensions I had installed and never read</a>. Their finding was not one dramatic bug. It was a dozen mundane shortcuts in the plumbing, message passing, storage, feature flags, host matching, each defensible on its own, that composed into a full takeover. Composition is the threat. The boring parts nobody audits are where the building actually collapses, and the bigger the install base the longer it stands before anyone checks the joints.</p>
+<p>That is the same argument from the other side. An extension sitting on hundreds of millions of machines could rely, for years, on nobody reading its plumbing closely. What broke that was somebody finally reading it quickly and then telling the truth about what they found. The defence and the story are the same act: read the primary thing, and make what you found checkable by the next reader instead of asking them to trust your summary of it.</p>
+<p>So, was the scary post true? Mostly, yes, and I would rather people knew that than dismissed it. But what mattered was the part it left out, and I only have it because I read the record instead of the retelling. The verdict took me an afternoon and one raw fetch of one report. The whole point of the work is that the next person should not have to spend that afternoon. The record should answer for itself.</p>
+<h2 id="the-record-i-checked-against" tabindex="-1">The record I checked against</h2>
+<p>A post that tells you to point at your sources had better do the same. These are the primary ones, the writeup and the registry entry, not the news retellings of them. Everything I claim above was read out of these, and the OTP exposure, the install count, and the two HTML enablers are stated in the first one in the researchers' own words.</p>
+<ul>
+<li>Guardio Labs, the researchers who found and named it: <a href="https://guard.io/labs/hermeticreader---the-vulnerability-that-turned-adobe-300m-install-extension-into-a-full-whatsapp-takeover">HermeticReader: The Vulnerability That Turned Adobe's 300M-Install Extension Into a Full WhatsApp Takeover</a></li>
+<li>The vulnerability registry entry: <a href="https://nvd.nist.gov/vuln/detail/CVE-2026-48294">CVE-2026-48294, National Vulnerability Database</a></li>
+</ul>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-09-28.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/mx-provenance-demo.js"></script>
+</body>
+</html>

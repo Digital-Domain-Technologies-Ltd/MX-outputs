@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "A Benchmark Table Is Not an Eval"
+description: "Google launched Gemini 4 Argon with a table that put it ahead of Claude Opus 5.5 on 14 of 18 benchmarks, at half the price. A journalist ran three tests of her own and got a tie, a near-total failure and a run of invented answers. The gap between the two is the case for running your own evals, and for writing down how you ran them."
+author: Tom Cranstoun
+created: "2026-10-19"
+modified: 2026-10-19
+version: "1.0"
+type: blog-post
+tags:
+  - watching-the-machines
+  - evals
+  - ai-models
+  - benchmarks
+  - verification
+  - mx
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: published
+  aiAssistance: "welcome"
+  audience:
+    - humans
+    - machines
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/watching-the-machines/a-benchmark-table-is-not-an-eval.md
+  contextProvides:
+    - "What The New Stack's head-to-head test of Gemini 4 Argon and Claude Opus 5.5 found, and why it differs from the vendor's benchmark table."
+    - "What made that test worth reading: a key fixed before testing, script grading, and the cause reported beside the score."
+    - "The MX eval profile: the fields an eval record carries so a reader can repeat a test or judge how far its result travels."
+  stability: draft
+  inLanguage: en-GB
+  purpose: "Practical post for teams choosing an AI model: why a vendor's benchmark is no substitute for an eval built from your own work, and what an eval record must state."
+  runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
+  servedAt: https://mx.allabout.network/blog/a-benchmark-table-is-not-an-eval.html
+  partOf: https://mx.allabout.network/blog/watching-the-machines/
+  refersToExternal:
+    - https://thenewstack.io/gemini-argon-claude-opus/
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Google launched Gemini 4 Argon with a table that put it ahead of Claude Opus 5.5 on 14 of 18 benchmarks, at half the price. A journalist ran three tests of her own and got a tie, a near-total failure and a run of invented answers. The gap between the two is the case for running your own evals, and for writing down how you ran them.">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+  <link rel="canonical" href="https://mx.allabout.network/blog/a-benchmark-table-is-not-an-eval.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/a-benchmark-table-is-not-an-eval.html">
+  <meta property="og:title" content="A Benchmark Table Is Not an Eval | CogNovaMX">
+  <meta property="og:description" content="Google launched Gemini 4 Argon with a table that put it ahead of Claude Opus 5.5 on 14 of 18 benchmarks, at half the price. A journalist ran three tests of her own and got a tie, a near-total failure and a run of invented answers. The gap between the two is the case for running your own evals, and for writing down how you ran them.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-10-19">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A Benchmark Table Is Not an Eval | CogNovaMX">
+  <meta name="twitter:description" content="Google launched Gemini 4 Argon with a table that put it ahead of Claude Opus 5.5 on 14 of 18 benchmarks, at half the price. A journalist ran three tests of her own and got a tie, a near-total failure and a run of invented answers. The gap between the two is the case for running your own evals, and for writing down how you ran them.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="published">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="A Benchmark Table Is Not an Eval">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/a-benchmark-table-is-not-an-eval.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>A Benchmark Table Is Not an Eval | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "A Benchmark Table Is Not an Eval",
+      "headline": "A Benchmark Table Is Not an Eval",
+      "description": "Google launched Gemini 4 Argon with a table that put it ahead of Claude Opus 5.5 on 14 of 18 benchmarks, at half the price. A journalist ran three tests of her own and got a tie, a near-total failure and a run of invented answers. The gap between the two is the case for running your own evals, and for writing down how you ran them.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-10-19",
+      "dateModified": "2026-10-19",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/a-benchmark-table-is-not-an-eval.html"
+      },
+      "articleSection": "Machine Experience",
+      "citation": [
+        {
+          "@type": "CreativeWork",
+          "url": "https://thenewstack.io/gemini-argon-claude-opus/"
+        }
+      ],
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 1359,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/a-benchmark-table-is-not-an-eval.html",
+      "name": "A Benchmark Table Is Not an Eval",
+      "url": "https://mx.allabout.network/blog/a-benchmark-table-is-not-an-eval.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../css/mx-unified.css">
+  <link rel="stylesheet" href="../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/">Home</a>
+        <a href="/books/">Books</a>
+        <a href="/learn/">Learn</a>
+        <a href="/services/">Services</a>
+        <a href="https://tityra.com">Audit</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+        <a href="/the-gathering/">The Gathering</a>
+        <a href="/about/">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary>Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-she-found">What She Found</a></li>
+        <li><a href="#the-table-and-the-tests-arent-arguing">The Table and the Tests Aren't Arguing</a></li>
+        <li><a href="#what-made-her-test-worth-reading">What Made Her Test Worth Reading</a></li>
+        <li><a href="#what-a-reader-still-cant-see">What a Reader Still Can't See</a></li>
+        <li><a href="#so-i-wrote-them-down">So I Wrote Them Down</a></li>
+        <li><a href="#what-id-pass-on">What I'd Pass On</a></li>
+        <li><a href="#source">Source</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1359">
+        <header class="article-header">
+          <h1>A Benchmark Table Is Not an Eval</h1>
+          <div class="article-meta"
+               data-published="2026-10-19"
+               data-modified="2026-10-19"
+               data-reading-time="7 min">
+            <time datetime="2026-10-19">19 October 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+
+<p>When Google opened Gemini 4 Argon to a small group of testers on 30 September, it came with a table. Argon led Claude Opus 5.5 on 14 of 18 benchmarks, and Google was honest enough to show the four it lost. Through 30 November, Argon costs half what Opus does. On 1 December the price rises to match.</p>
+<p>So the question for anyone paying for a model this autumn is simple. Is Argon better, or just cheaper for six weeks?</p>
+<p>Jessica Wachtel at The New Stack didn't take the table's word for it. She built three hard tests from categories where Google claimed a lead. She wrote and checked the answer keys before either model saw a task, and a script did the grading. Her results don't look much like the table.</p>
+<h2 id="what-she-found" tabindex="-1">What She Found</h2>
+<p><strong>The bug hunt was a tie.</strong> A 3,500-line Python library, 14 planted logic bugs, five decoys. Both models found all 14, including four that only show up when you follow a value across three or more files. Neither flagged a decoy. Both fixed every bug without breaking any of the 93 existing tests. Argon did it for less than half the cost, and would still be cheaper at full price because it used fewer tokens.</p>
+<p><strong>The billing spec was a rout, over one line.</strong> A subscription billing engine built from a written spec, graded by 80 hidden tests on daylight saving, month-end dates and rounding. Opus passed 80 of 80. Argon passed 11. Its code passed an extra argument to Python's <code>datetime.combine()</code>, which raises an error, and most of the module leaned on that helper. When she fixed that one line by hand, Argon scored 80 of 80. She kept the official score and told readers why it was so low.</p>
+<p><strong>The long-context test was the worrying one.</strong> A made-up wiki of 400 services, with a question about blast radius: which services go down when one fails. The answer is 33. Opus named all 33 at the first size and 32 at the next, with nothing wrong. At the first size Argon got 20 correct, plus 8 that don't belong. At the next it managed 19, with 16 invented. It treated a dependency as removed after the wiki had put it back. It also answered in a few hundred tokens where Opus reasoned through more than 5,000 first. She suspects the speed and the errors are linked, and says plainly that one run can't prove it.</p>
+<p>Her verdict was that she wouldn't trust Argon unchecked on any task.</p>
+<h2 id="the-table-and-the-tests-arent-arguing" tabindex="-1">The Table and the Tests Aren't Arguing</h2>
+<p>It's tempting to read this as &quot;the benchmarks lied&quot;. I don't think they did. A benchmark tells you how a model does on that particular set of tasks, run the way the vendor ran it. It's a real measurement of something. It just isn't a measurement of your work.</p>
+<p>Your work has its own shape. Maybe it's billing code where one wrong helper breaks everything downstream. Maybe it's a long document where a reinstated dependency matters more than any single fact. A table of other people's tasks can't tell you how a model handles those. Only a test built from your own work can.</p>
+<p>That's what an eval is: a fixed task, a known right answer, and a model put to it cold. The point isn't to crown a winner. It's to find out what this model does with this kind of work before you hand it the real thing.</p>
+<h2 id="what-made-her-test-worth-reading" tabindex="-1">What Made Her Test Worth Reading</h2>
+<p>What I liked most about the article was the method showing through, more than the verdict.</p>
+<ul>
+<li><strong>The key came first.</strong> She built and checked her answer keys before testing either model. A key written after you've seen the answers drifts towards them, however careful you are.</li>
+<li><strong>A script did the marking.</strong> Nobody's mood or fondness for a vendor touched the scores.</li>
+<li><strong>She reported the cause, not just the score.</strong> &quot;11 of 80&quot; on its own reads as a model that doesn't understand billing. The truth was a model that understood it and broke one helper. Both facts matter, and she gave both.</li>
+<li><strong>She said what one run can't prove.</strong> That sentence is rarer in model comparisons than it should be.</li>
+</ul>
+<h2 id="what-a-reader-still-cant-see" tabindex="-1">What a Reader Still Can't See</h2>
+<p>Even a careful write-up leaves gaps, and they're the same gaps in almost every comparison I read.</p>
+<ul>
+<li><strong>How many runs.</strong> One per model. A tie on one run tells you both models can find every bug, not how often they will.</li>
+<li><strong>Which version.</strong> &quot;Gemini 4 Argon&quot; and &quot;Claude Opus 5.5&quot; are names. A vendor can point a name at a different model later, and you won't be told.</li>
+<li><strong>What a token is.</strong> Her 500K document came to 549,483 tokens on Argon and 784,087 on Opus. A bigger one came to 1.4 million on Claude's tokenizer and was simply rejected. Price per token compares nothing across two vendors. Price per finished task does.</li>
+<li><strong>What the score leaves out.</strong> &quot;20 of 33&quot; sounds like a partial answer. With 8 invented services beside it, it's a wrong one. A score with no count of wrong answers hides exactly the failure that would hurt you.</li>
+<li><strong>When the price changes.</strong> Every cost comparison in the piece has a shelf life of six weeks.</li>
+</ul>
+<p>None of that's a criticism of her. She did more than most. It's that there's no agreed place to write these things down, so they live in paragraphs, and a machine reading the paragraphs has to guess.</p>
+<h2 id="so-i-wrote-them-down" tabindex="-1">So I Wrote Them Down</h2>
+<p>MX already has profiles: named lists of the fields each kind of document needs. I've added one for evals. An eval record holds the result beside the facts a reader needs to weigh it:</p>
+<pre><code class="language-yaml">type: eval-record
+mx:
+  evalTask: &quot;Answer graph questions over a large wiki with planted traps.&quot;
+  evalSubjects:
+    - model: example-model-4
+      provider: example-lab
+      route: openrouter
+      settings: default reasoning
+  evalGrading: script
+  evalRuns: 1
+  evalKey:
+    fixedAt: 2026-10-12
+  evalResults:
+    - model: example-model-4
+      score: 20
+      outOf: 33
+      wrong: 8
+</code></pre>
+<p>Four of those fields are required: the task, the models and their settings, how the answers were graded, and how many runs. Without any one of them, a score can't be read. With all four, a thin test still shows its limits. One run is a valid value. It just can't pass itself off as a rate any more.</p>
+<p>To check the profile against something real, I recorded her three tests as eval records. They hold up well. The gaps they expose are the ones above: no versions, no key dates, one run each. That's the profile doing its job.</p>
+<p>The profile is a proposal to The Gathering, the community that looks after the MX standard, and it isn't ratified. The field definitions are in the published dictionary at <a href="https://mx.allabout.network/canon/fields-data.yaml">https://mx.allabout.network/canon/fields-data.yaml</a>.</p>
+<h2 id="what-id-pass-on" tabindex="-1">What I'd Pass On</h2>
+<p>If you're weighing Argon's half-price window, or any model choice, six weeks is long enough to run your own evals.</p>
+<ul>
+<li><strong>Take three to five tasks from your real work,</strong> the ones where a wrong answer costs you something.</li>
+<li><strong>Write and check the answer key before any model sees the task,</strong> and date it.</li>
+<li><strong>Let a script mark it where you can.</strong> Where you can't, say who marked it.</li>
+<li><strong>Run each task more than once.</strong> If you only run it once, say so.</li>
+<li><strong>Count wrong answers as well as right ones.</strong></li>
+<li><strong>Compare cost per finished task, not per token.</strong></li>
+<li><strong>Rerun when the model changes,</strong> including when the name doesn't.</li>
+</ul>
+<p>Then write down how you ran it, next to what you found. A score with no method is a rumour. A score with its method is evidence the next reader, person or machine, can check.</p>
+<hr>
+<p><strong>A declared interest.</strong> I wrote the books on MX and consult on it, so I have a stake in the practice this post recommends. I drafted it with help from Claude, made by Anthropic, whose model is one of the two in the test. Every figure here is Jessica Wachtel's, from the article below; I haven't rerun her tests.</p>
+<h2 id="source" tabindex="-1">Source</h2>
+<p>Wachtel, J. (2026, October 18). Gemini 4 Argon vs. Claude Opus 5.5: Half the price and about half as accurate. <em>The New Stack</em>. <a href="https://thenewstack.io/gemini-argon-claude-opus/">https://thenewstack.io/gemini-argon-claude-opus/</a></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-10-19.</li>
+            <li>It cites <a href="https://thenewstack.io/gemini-argon-claude-opus/" rel="noopener">thenewstack.io/gemini-argon-claude-opus</a>.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps">
+        <div class="post-conclusion-author">
+          <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../js/app.js"></script>
+  <script type="module" src="../js/mx-provenance-demo.js"></script>
+</body>
+</html>
