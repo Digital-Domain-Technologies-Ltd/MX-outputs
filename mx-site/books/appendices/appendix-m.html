@@ -6,7 +6,7 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 author: "Tom Cranstoun"
-modified: 2026-10-26
+modified: 2026-10-31
 created: 2026-01-22
 description: "Complete categorized reference of all metadata elements: Schema.org types, YAML frontmatter, HTML attributes, structured data patterns, testing methodologies, terminology, the full MX field catalog, folder-metadata inheritance, book-manuscript frontmatter, carrier-format map, and HTML carrier writing guide. Sole source of truth for MX field definitions."
 
@@ -2598,7 +2598,7 @@ Anti-Patterns</h3>
 <th>#</th>
 <th>Anti-Pattern</th>
 <th>Impact</th>
-<th>Detection</th>
+<th>Priority</th>
 <th>Fix Complexity</th>
 </tr>
 </thead>
@@ -2607,91 +2607,91 @@ Anti-Patterns</h3>
 <td>1</td>
 <td>Visual-only information</td>
 <td>High</td>
-<td>1 min</td>
+<td>High</td>
 <td>Easy</td>
 </tr>
 <tr>
 <td>2</td>
 <td>Content in images</td>
 <td>High</td>
-<td>1 min</td>
+<td>High</td>
 <td>Medium</td>
 </tr>
 <tr>
 <td>3</td>
 <td>Generic link text</td>
 <td>Medium</td>
-<td>2 min</td>
+<td>Medium</td>
 <td>Easy</td>
 </tr>
 <tr>
 <td>4</td>
 <td>Broken heading hierarchy</td>
 <td>Medium</td>
-<td>2 min</td>
+<td>Medium</td>
 <td>Easy</td>
 </tr>
 <tr>
 <td>5</td>
 <td>JavaScript-only navigation</td>
 <td>High</td>
-<td>1 min</td>
+<td>High</td>
 <td>Medium</td>
 </tr>
 <tr>
 <td>6</td>
 <td>Hidden content no fallback</td>
 <td>High</td>
-<td>1 min</td>
+<td>High</td>
 <td>Easy</td>
 </tr>
 <tr>
 <td>7</td>
 <td>No/outdated sitemap</td>
 <td>High</td>
-<td>30 sec</td>
+<td>High</td>
 <td>Easy</td>
 </tr>
 <tr>
 <td>8</td>
 <td>Inconsistent Schema.org</td>
 <td>High</td>
-<td>5 min</td>
+<td>High</td>
 <td>Medium</td>
 </tr>
 <tr>
 <td>9</td>
 <td>Forms without labels</td>
 <td>Medium</td>
-<td>2 min</td>
+<td>Medium</td>
 <td>Easy</td>
 </tr>
 <tr>
 <td>10</td>
 <td>Table abuse</td>
 <td>Medium</td>
-<td>2 min</td>
+<td>Medium</td>
 <td>Medium</td>
 </tr>
 <tr>
 <td>11</td>
 <td>Content in iframes</td>
 <td>High</td>
-<td>1 min</td>
+<td>High</td>
 <td>Hard</td>
 </tr>
 <tr>
 <td>12</td>
 <td>PDF-only content</td>
 <td>High</td>
-<td>1 min</td>
+<td>High</td>
 <td>Medium</td>
 </tr>
 <tr>
 <td>13</td>
 <td>Auto-playing content</td>
 <td>Medium</td>
-<td>1 min</td>
+<td>Medium</td>
 <td>Easy</td>
 </tr>
 </tbody>
@@ -2699,18 +2699,19 @@ Anti-Patterns</h3>
 <p><strong>Quick Wins Summary</strong> (if you can only fix 5
 things):</p>
 <ol type="1">
-<li><strong>Heading hierarchy (30 min):</strong> Use a logical h1 to h2
-to h3 structure</li>
-<li><strong>Link text (1-2 hours):</strong> Replace "click here" with
-descriptive labels</li>
-<li><strong>Image alt text (2-3 hours):</strong> Meaningful descriptions
-for all images</li>
-<li><strong>Sitemap (1 hour):</strong> Create or update sitemap.xml</li>
-<li><strong>Basic Schema.org (1 hour):</strong>
+<li><strong>Heading hierarchy (priority: high):</strong> Use a logical
+h1 to h2 to h3 structure</li>
+<li><strong>Link text (priority: high):</strong> Replace "click here"
+with descriptive labels</li>
+<li><strong>Image alt text (priority: high):</strong> Meaningful
+descriptions for all images</li>
+<li><strong>Sitemap (priority: medium):</strong> Create or update
+sitemap.xml</li>
+<li><strong>Basic Schema.org (priority: medium):</strong>
 <code>Organization</code>/<code>LocalBusiness</code> on homepage</li>
 </ol>
-<p><strong>Total:</strong> 6-8 hours solves 80% of agent-readability
-problems</p>
+<p><strong>Together:</strong> these five address many of the most common
+agent-readability problems</p>
 <p><strong>Chapter References:</strong> 11, 12, Appendix N</p>
 <p><strong>Complete catalogue:</strong> See <a
 href="appendix-n-anti-patterns-catalog.md">Appendix N</a> for detailed
@@ -3313,7 +3314,9 @@ reports.</td>
 </tr>
 <tr>
 <td><strong>skill</strong></td>
-<td>Fields for .claude/skills/*/skill.md files.</td>
+<td>Fields for .claude/skills/*/SKILL.md files, judged on their MX view:
+the mx-prefixed metadata keys plus the folder record .mx.yaml.md
+(externalStandards.agent-skills).</td>
 <td><code>description</code>, <code>category</code>,
 <code>name</code></td>
 <td><code>description</code>, <code>category</code>,
@@ -3988,11 +3991,12 @@ class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><
 <span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">words</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">cognovamx</span><span class="kw">,</span><span class="at"> reginald</span><span class="kw">]</span></span>
 <span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">keyFields</span><span class="kw">:</span><span class="at"> </span><span class="kw">[</span><span class="at">title</span><span class="kw">,</span><span class="at"> tags</span><span class="kw">]</span></span>
 <span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span></code></pre></div>
-<p><strong>skill</strong> - Fields for .claude/skills/*/skill.md
-files.</p>
+<p><strong>skill</strong> - Fields for .claude/skills/*/SKILL.md files,
+judged on their MX view: the mx-prefixed metadata keys plus the folder
+record .mx.yaml.md (externalStandards.agent-skills).</p>
 <div class="sourceCode" id="cb23" data-role="code-container"><pre
 class="sourceCode yaml"><code class="sourceCode yaml" data-role="code-content"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="pp">---</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Carrier: .claude/skills/&lt;name&gt;/skill.md</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Carrier: the MX view of .claude/skills/&lt;name&gt;/SKILL.md (metadata mx.&lt;field&gt; plus the folder record .mx.yaml.md)</span></span>
 <span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Zone 1a: Identity ---</span></span>
 <span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="fu">title</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;MX Add Field&quot;</span></span>
 <span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="fu">description</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;One-command flow for adding a new MX field to the canon.&quot;</span></span>
@@ -14485,6 +14489,27 @@ and the Semantic Web.</td>
 <td><code>package.json</code> (npm), <code>pyproject.toml</code>
 (Python), equivalents</td>
 </tr>
+<tr>
+<td>Agent skill files (<code>SKILL.md</code>)</td>
+<td><a href="https://agentskills.io/specification">Agent Skills</a>. A
+file named exactly <code>SKILL.md</code>, in a directory named after the
+skill, belongs to that standard: its six frontmatter fields
+(<code>name</code>, <code>description</code>, <code>license</code>,
+<code>compatibility</code>, <code>metadata</code>,
+<code>allowed-tools</code>), their names and their limits are the
+standard's, and MX rules (deprecations, naming, the 160-character
+description guidance) do not judge them. The standard's reference
+validator rejects any other top-level field, so MX facts travel in
+<code>metadata</code> as <code>mx.</code>-prefixed string keys
+(<code>mx.title</code>, <code>mx.canonicalUri</code>), and the full MX
+record, lists and nested blocks included, sits in the skill folder's
+<code>.mx.yaml.md</code>, which <code>metadata</code> names as
+<code>mx.record</code>. A reader merges the two into the skill's MX
+view, the <code>metadata</code> value winning where both state a fact,
+so a skill's <code>category</code> (ADR 128) reads the same as any other
+document's. The dictionary's <code>externalStandards</code> section is
+the machine-readable registry every MX verifier reads.</td>
+</tr>
 </tbody>
 </table>
 <p>An MX-aware document describing a dataset, image, API, or package
@@ -14497,9 +14522,10 @@ through a shared canon loader and merge <code>mx.fields[]</code>,
 <code>mx.deprecations[]</code>, and <code>mx.profiles</code> into a
 single view. The governance sections (<code>namespacePolicy</code>,
 <code>validationPolicy</code>, <code>blockTypes</code>,
-<code>carrierFormats</code>, <code>overlap-resolution</code>,
-<code>contentTypeToProfile</code>, <code>defaultsPolicy</code>) are kept
-in the standard file as the canonical source of truth.</p>
+<code>carrierFormats</code>, <code>externalStandards</code>,
+<code>overlap-resolution</code>, <code>contentTypeToProfile</code>,
+<code>defaultsPolicy</code>) are kept in the standard file as the
+canonical source of truth.</p>
 <p>The field validators, drift checks and usage reports all read the
 merged view.</p>
 <p>Run <code>npm run fields:dict</code> for a quick summary (counts per

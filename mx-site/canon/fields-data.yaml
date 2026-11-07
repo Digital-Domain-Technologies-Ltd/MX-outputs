@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.63'
+version: '6.65'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-10-31'
+modified: '2026-11-06'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -431,7 +431,9 @@ mx:
       experimental: >-
         Defined so that early implementations share one spelling, while the proposal behind it is in Gathering review.
         Readers MAY honour it; it may change shape or be withdrawn without a deprecations entry, and no conformance
-        level requires it. It graduates to canonical on Gathering adoption.
+        level requires it. It graduates to canonical on Gathering adoption. During the dogfood window, through the end
+        of January 2027 (UK calendar), a new experimental field is for internal dogfood only and is not put to Gathering
+        review until after that window (BDR 2026-11-05, dogfood through January 2027 before Gathering).
       deprecated: Retained so old documents still validate; the deprecations table names its replacement.
   deprecations:
     - old: email
@@ -1534,6 +1536,7 @@ mx:
           required: false
           description: Derivation date (ISO 8601)
     - name: version
+      recommendedIn: [roadmap]
       implicit: false
       description: Version history and changelog within the cog. Complements the top-level version field with detailed history.
       fields:
@@ -1678,11 +1681,13 @@ mx:
         for properties it does not define
       mxIdentity: >-
         MX fields as `metadata` keys with the `mx.` prefix (`mx.title`, `mx.version`, `mx.canonicalUri`); the full MX
-        record, lists and nested blocks included, in the skill folder's `.mx.yaml.md`
+        record, lists and nested blocks included, in the skill folder's `.mx.yaml.md`, which `metadata` names as
+        `mx.record` (the carrier's pointer, not a field)
       nativeBlocks: name and description = identity and prose excerpt, Markdown body = instructions
       parsingRule: >-
         Read the frontmatter; the six Agent Skills fields belong to that standard (externalStandards.agent-skills);
-        strip the `mx.` prefix from a `metadata` key to get the camelCase MX field name
+        strip the `mx.` prefix from a `metadata` key to get the camelCase MX field name; read the folder record
+        `mx.record` names for the lists and nested blocks; a `metadata` value wins where both state a fact
       backwardCompatible: true
       note: Agent Skills clients read name and description and pass `metadata` through untouched.
       narrativeSection: 'Carrier: Agent Skills'
@@ -1898,7 +1903,7 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'This document is called {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: Human-readable document title. The canonical identity field for all documents including cog files.
       example: MX Field Dictionary
       alignsWith:
@@ -1910,7 +1915,7 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'In short: {value}'
-      requiredIn: [core, skill, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
+      requiredIn: [core, skill, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: One-line summary. Max 160 characters. Used by search engines, AI agents, and registry listings.
       example: Single source of truth for every YAML frontmatter field.
       alignsWith:
@@ -1923,7 +1928,7 @@ mx:
       type: string
       authoring: defaulted
       inPlainWords: 'Written by {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: Creator of the document. Person name or collaborative attribution.
       example: Tom Cranstoun and Maxine
       alignsWith:
@@ -1950,7 +1955,7 @@ mx:
       type: string
       authoring: defaulted
       inPlainWords: 'First written on {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: Creation date. ISO 8601 format (YYYY-MM-DD).
       example: '2026-03-01'
       alignsWith:
@@ -1963,7 +1968,7 @@ mx:
       type: string
       authoring: defaulted
       inPlainWords: 'Last changed on {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: Last modification date. ISO 8601 format (YYYY-MM-DD).
       example: '2026-03-02'
       alignsWith:
@@ -1996,7 +2001,7 @@ mx:
       authoring: authored
       inPlainWords: 'This is version {value} of the document.'
       requiredIn: [portable, aims-policy]
-      recommendedIn: [core, skill, book, blog, contact, report, audit, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, personal, agent, publishing-point, cms, aims-decision-right, eval]
+      recommendedIn: [core, skill, book, blog, contact, report, audit, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract]
       optionalIn: [folder]
       definition: Semantic version string. Lives in frontmatter, never in filenames.
       example: '2.0'
@@ -2094,9 +2099,10 @@ mx:
         - workflow
       notes: >-
         Distinct from type, which says what kind of document a file is; category says which part of the work it belongs
-        to. Published like every core field, so a value is visible on a served page. A Claude skill file (skill.md)
-        carries category because the Claude Skills specification requires it; the skill values (workflow, content,
-        audit, mx-os, other) are part of the vocabulary so one field serves both. Variant spellings are normalised to one
+        to. Published like every core field, so a value is visible on a served page. A skill (SKILL.md) carries
+        category in its MX view, as the metadata string mx.category, because the Agent Skills specification admits no
+        top-level category field; the skill values (workflow, content, audit, mx-os, other) are part of the vocabulary
+        so one field serves both. Variant spellings are normalised to one
         value (mx-tools to mx-tool, contact to mx-contact, adr to decision-record). The vendor-era name x-mx-category is
         a deprecated synonym in the deprecations table. Promoted by ADR 74.
       status: canonical
@@ -2106,7 +2112,7 @@ mx:
       authoring: authored
       inPlainWords: 'Its status is {value}.'
       requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
-      recommendedIn: [core, book, contact, report, audit, component, personal, agent, publishing-point, cms, eval]
+      recommendedIn: [core, book, contact, report, audit, component, personal, agent, publishing-point, cms, eval, smart-contract, roadmap]
       definition: >-
         Lifecycle state. Standard values: draft, active, published, deprecated, archived, unknown. Decision records:
         proposed, accepted, rejected, superseded. Workflow: pending, review, approved, planning, open, closed, sent.
@@ -2149,7 +2155,7 @@ mx:
       authoring: authored
       inPlainWords: 'It is about {value}.'
       recommendedIn: [cog, book, blog, action]
-      optionalIn: [core, folder, migration, routing, skill, html, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, agent, publishing-point, cms, aims-decision-right, eval]
+      optionalIn: [core, folder, migration, routing, skill, html, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: Discovery keywords. Array of strings for search, filtering, and agent matching.
       example:
         - metadata
@@ -2163,10 +2169,11 @@ mx:
       status: canonical
       profile: core
     - name: type
+      requiredIn: [roadmap]
       type: string
       authoring: authored
       inPlainWords: 'It is a {value}.'
-      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action, agent, publishing-point, cms, aims-decision-right, eval]
+      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action, agent, publishing-point, cms, aims-decision-right, eval, smart-contract]
       definition: >-
         Document kind. OKF reserved top-level field naming what the file is, so a machine selects the right handling
         before reading the body. Common values include info-doc, action, blog-post, report, guide, skill, hook,
@@ -2183,7 +2190,7 @@ mx:
       type: string
       inPlainWords: 'It describes the asset at {value}.'
       authoring: authored
-      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action, agent, publishing-point, cms, aims-decision-right, eval]
+      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: >-
         The URI of the one external asset this document describes. OKF reserved top-level field; absent on an
         abstract document (a playbook, a runbook, an info-doc) that describes no single asset.
@@ -2419,6 +2426,7 @@ mx:
       status: canonical
       profile: core
     - name: purpose
+      recommendedIn: [roadmap]
       type: string
       authoring: authored
       inPlainWords: 'What it is for: {value}'
@@ -2577,13 +2585,14 @@ mx:
       status: canonical
       profile: cog
     - name: refersTo
+      recommendedIn: [roadmap]
       type: array
       valueType: reference
       alignsWith:
         - dcterms:references
       authoring: authored
       inPlainWords: 'It refers to {value}.'
-      optionalIn: [cog, contact, report, audit, personal, action, eval]
+      optionalIn: [cog, contact, report, audit, personal, action, eval, smart-contract]
       definition: Related cogs or external resources. Informational links, not dependencies.
       example:
         - field-dictionary
@@ -5067,7 +5076,7 @@ mx:
     - name: supersededBy
       type: string
       authoring: authored
-      optionalIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval]
+      optionalIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: 'Canonical field: supersededBy.'
       status: canonical
       profile: cog
@@ -5490,7 +5499,7 @@ mx:
       inPlainWords: 'It expires on {value}.'
       authoring: authored
       recommendedIn: [portable, agent]
-      optionalIn: [cog, personal, action, publishing-point, eval]
+      optionalIn: [cog, personal, action, publishing-point, eval, smart-contract, roadmap]
       definition: Expiry date for time-sensitive cogs. ISO 8601 format (YYYY-MM-DD).
       example: 2026-12-31T00:00:00.000Z
       notes: ISO 8601. For time-sensitive content. Review or archive after this date.
@@ -6254,6 +6263,47 @@ mx:
         declared in volatileValues beside it.
       status: experimental
       profile: eval
+    - name: smartContract
+      type: object
+      inPlainWords: 'It comes in when this holds: {value}.'
+      authoring: authored
+      requiredIn: [smart-contract]
+      recommendedIn: [roadmap]
+      definition: >-
+        The deterministic rule a smart-contract cog carries: the facts it reads, each with a type, the condition over
+        those facts, and the result and allow-listed actions that follow when the condition holds.
+      example: '{id: overdue-invoice-notice, facts: {invoice.id: string, invoice.status: string, invoice.daysOverdue: number}, when: {all: [{fact: invoice.status, op: eq, value: unpaid}, {fact: invoice.daysOverdue, op: gte, value: 30}]}, then: {result: {notice: overdue, invoice: {fact: invoice.id}}}}'
+      notes: >-
+        Members id, facts, when and then (required); onceFor and llm (optional). facts maps each dotted fact path to
+        string, number, boolean or date; a condition may read only declared facts. when is a tree of all, any and not
+        over leaves {fact, op, value}, with op one of eq, ne, gt, gte, lt, lte, in, notIn, exists and missing; a value
+        is a literal or {fact: path}. There is no clock, no regular expression and no code in a condition: a time is a
+        fact the triggering event supplies. then.result is a template whose {fact: path} leaves are filled from the
+        facts; then.actions names entries in the runner's default-deny action allow-list. onceFor names the facts
+        that identify one firing; by default the whole declared fact set does. llm names one typed question with
+        labels and a dataClass, asked of a decider after the result under the reader's egress rules; its answer is
+        recorded beside the result and never decides whether the contract fired.
+      status: experimental
+      profile: smart-contract
+    - name: cogTypes
+      type: array
+      valueType: string
+      inPlainWords: 'This cog is at once {value}.'
+      authoring: authored
+      recommendedIn: [roadmap, smart-contract]
+      optionalIn: [cog]
+      definition: >-
+        The types one cog carries at once, when it is more than its top-level type: a roadmap that is also a
+        smart-contract lists both. The top-level type stays the primary identity; a reader or runner that handles
+        one of the listed types treats the cog as that type too.
+      example: [roadmap, smart-contract]
+      notes: >-
+        Each entry is a type value the canon already knows (info-doc, action-doc, routing-doc, cogs, smart-contract,
+        roadmap, and the rest). The smart-contract runner checks a cog whose cogTypes names smart-contract exactly as
+        it checks one whose type does; a profile that lists cogTypes as recommended expects the matching blocks
+        (a smartContract block for smart-contract) to be present.
+      status: experimental
+      profile: cog
     - name: publishedTo
       type: string
       inPlainWords: 'It is published to {value}.'
@@ -6806,6 +6856,7 @@ mx:
         - semantic
         - source
         - updateTriggers
+        - cogTypes
         - mcpServer
         - includes
         - deliverable
@@ -6839,6 +6890,7 @@ mx:
         - x-mx-collaborateAgentEnabled
         - x-mx-collaborateMessageCount
         - x-mx-collaborateLastActivity
+        - x-mx-engineFreeze
     - name: action
       description: >-
         An action-cog: a cog whose execute block a machine runs, as a script, as instructions, as a skill it loads,
@@ -7064,10 +7116,13 @@ mx:
         - resource
         - routing
     - name: skill
-      description: Fields for .claude/skills/*/SKILL.md files. Three-layer contract (Anthropic runtime, OKF discoverability, MX estate integration).
+      description: >-
+        Fields for .claude/skills/*/SKILL.md files, judged on their MX view: the mx-prefixed metadata keys
+        plus the folder record .mx.yaml.md (externalStandards.agent-skills). Three-layer contract (Agent Skills runtime, OKF
+        discoverability, MX estate integration).
       header: |
         ---
-        # Carrier: .claude/skills/<name>/SKILL.md
+        # Carrier: the MX view of .claude/skills/<name>/SKILL.md (metadata mx.<field> plus the folder record .mx.yaml.md)
         # --- Zone 1a: Identity ---
         title: "MX Add Field"
         description: "One-command flow for adding a new MX field to the canon."
@@ -7176,7 +7231,7 @@ mx:
         - x-mx-wordCount
         - x-mx-createdHash
     - name: blog
-      description: Fields for mx-site blog posts authored as markdown in datalake/draft-site/blog/.
+      description: Fields for mx-site posts authored as markdown in datalake/draft-site/blog/.
       header: |
         ---
         # Carrier: markdown source under datalake/draft-site/blog/
@@ -7465,7 +7520,7 @@ mx:
         - resource
     - name: portable
       description: >-
-        A portability profile, not a document type: the fields a document must carry to remain interpretable by a
+        A portability profile rather than a type: the fields a document must carry to remain interpretable by a
         machine that meets it away from its source, with no access to the originating site. It is the Documents Are
         Self-Sufficient test made checkable. A document opts in by listing this profile's address in conformsTo
         (https://mx.allabout.network/canon/fields-data.yaml#portable), and scripts/check-portable-conformance.cjs
@@ -7519,7 +7574,7 @@ mx:
         - resource
     - name: component
       description: >-
-        The fields a rendered component carries to its human reader and its machine reader, as the MX Component
+        The fields a rendered component carries to its human and machine readers, as the MX Component
         Standard defines them. A component is the unit in which an MX-described object reaches a reader (a card, a
         badge, a panel, an inspector view), and it carries the same metadata for both audiences: the root fields for
         identity, provenance, relationships and signals, plus the component family for how the component presents
@@ -7603,7 +7658,7 @@ mx:
     # an assessor reads, never a certification or a compliance grant.
     - name: aims-system-inventory
       description: >-
-        One AI system within the scope of an AI management system: its purpose, its owner and other accountable
+        One AI system within the scope of an AIMS: its purpose, its owner and other accountable
         parties, its permitted and prohibited uses, the data it draws on, and its compute and energy use. The record
         kind is aims:systemInventoryEntry. Part of the AIMS profile set, approved by The Gathering on 2026-09-27.
       header: |
@@ -7725,8 +7780,8 @@ mx:
         - supersededBy
     - name: aims-risk-register
       description: >-
-        One identified AI risk: the system it concerns, its owner, its level before treatment, the treatment chosen,
-        and the risk judged to remain. The record kind is aims:riskRegisterEntry. Part of the AIMS profile set,
+        One identified AI risk: the system it concerns, its owner, its level before treatment, how it is treated,
+        and what is judged to remain. The record kind is aims:riskRegisterEntry. Part of the AIMS profile set,
         approved by The Gathering on 2026-09-27.
       header: |
         ---
@@ -7794,7 +7849,7 @@ mx:
         - supersededBy
     - name: aims-impact-assessment
       description: >-
-        The record of an AI system impact assessment: the groups affected, each impact and its severity, the
+        The record of an AI system impact assessment: the groups affected and how severely, the
         mitigations and their owners, the assessor and the date. The record kind is aims:impactAssessment. Part of the
         AIMS profile set, approved by The Gathering on 2026-09-27.
       header: |
@@ -7914,7 +7969,7 @@ mx:
         - supersededBy
     - name: aims-decision-right
       description: >-
-        One class of AI decision and the single role accountable for it: who owns the decision, who is consulted,
+        One class of AI decision and the single role accountable for it: who owns it, who is consulted,
         when it goes up a level and to whom, and when the allocation was agreed. The record kind is
         aims:decisionRight. Experimental: proposed for The Gathering beside the AIMS profile set.
       header: |
@@ -8040,7 +8095,7 @@ mx:
         - declaredBy
     - name: agent
       description: >-
-        An agent cog: the record an AI agent carries and presents when it acts. It names the agent and its release, the
+        An agent cog: the record an AI carries and presents when it acts. It names the agent and its release, the
         principal it acts for, the kinds of action its mandate covers, where the mandate applies, what it may spend,
         which actions stop for a named person, where its actions are logged, and where its mandate can be withdrawn.
         The record kind is agent-cog. Who built and who runs the agent are parties entries (provider, deployer); what it
@@ -8235,7 +8290,7 @@ mx:
     - name: eval
       description: >-
         An eval record: a fixed task put to one or more models, the key the answers were scored against, how they were
-        scored, how many times the task ran, and what each model scored. The record kind is eval-record. A benchmark
+        scored, the number of runs, and what each model scored. The record kind is eval-record. A benchmark
         table states results; an eval record states enough for a reader to repeat the test or weigh the result.
         Proposed to The Gathering; not ratified.
       header: |
@@ -8295,3 +8350,124 @@ mx:
         - claimBasis
         - supersededBy
         - expires
+    - name: smart-contract
+      description: >-
+        A smart-contract cog: a deterministic if-then rule over declared facts. It does not run on its own; an event
+        hands a runner a set of facts, and the contract comes in only when its condition holds. Proposed to The
+        Gathering; not ratified.
+      header: |
+        ---
+        # Carrier: a smart-contract cog, run by a deterministic runner when an event supplies facts
+        # --- Zone 1a: Identity ---
+        title: "Overdue invoice notice"
+        description: "Raises an overdue notice when an invoice is unpaid 30 days or more after its due date."
+        author: Jane Doe
+        created: 2026-11-06
+        modified: 2026-11-06
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: smart-contract
+        tags: [example, profile]
+        resource: https://example.com/the-one-asset-this-document-describes
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          smartContract:
+            id: overdue-invoice-notice
+            facts:
+              invoice.id: string
+              invoice.status: string
+              invoice.daysOverdue: number
+            when:
+              all:
+                - {fact: invoice.status, op: eq, value: unpaid}
+                - {fact: invoice.daysOverdue, op: gte, value: 30}
+            then:
+              result:
+                notice: overdue
+                invoice: {fact: invoice.id}
+            onceFor: [invoice.id]
+        ---
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - smartContract
+      recommended:
+        - version
+        - status
+        - cogTypes
+      optional:
+        - tags
+        - type
+        - resource
+        - refersTo
+        - supersededBy
+        - expires
+        - dependencies
+    - name: roadmap
+      description: >-
+        A roadmap cog: what one product or estate is building now, next, and under consideration, as three focus
+        areas with no dates and no commitments. An item moves between areas when its state changes, never when a
+        date passes; each item names the record or plan that holds its detail. Proposed to The Gathering; not
+        ratified.
+      header: |
+        ---
+        # Carrier: a roadmap cog, one per product or estate, read before planning work on it
+        # --- Zone 1a: Identity ---
+        title: "Example: the roadmap"
+        description: "What Example is building now, next, and under consideration; one page, no dates, no commitments."
+        author: Jane Doe
+        created: 2026-11-07
+        modified: 2026-11-07
+        version: "1.0"
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: roadmap
+        tags: [example, roadmap]
+        resource: https://example.com/the-product-this-roadmap-is-for
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          purpose: "Give one short answer to: what is Example building, in what order."
+          cogTypes: [roadmap, smart-contract]
+          smartContract:
+            id: example-roadmap-item-done
+            facts:
+              roadmap.id: string
+              item.record: string
+              item.section: string
+              record.state: string
+            when:
+              all:
+                - {fact: roadmap.id, op: eq, value: example-roadmap}
+                - {fact: item.section, op: eq, value: in-development}
+                - {fact: record.state, op: eq, value: closed}
+            then:
+              result:
+                roadmap: {fact: roadmap.id}
+                move: shipped
+                item: {fact: item.record}
+            onceFor: [item.record]
+          refersTo:
+            - example/example-architecture.cog.md
+        ---
+      recommended:
+        - status
+        - purpose
+        - refersTo
+        - smartContract
+        - cogTypes
+      optional:
+        - tags
+        - resource
+        - supersededBy
+        - expires
+      required:
+        - title
+        - description
+        - author
+        - created
+        - modified
+        - type

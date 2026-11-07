@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '2.6'
+version: '2.8'
 created: '2026-04-15'
-modified: '2026-11-01'
+modified: '2026-11-07'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -1651,7 +1651,7 @@ mx:
       optionalIn: [cog, action]
       definition: The job a cog does inside the estate, from a controlled vocabulary; one role per cog.
       example: guide
-      validValues: [architecture, guide, sop, explainer, notes, tool, prd, reference, definition, template, method, domain-discipline, overview, building-brief, routing, control-plane, example, policy, ubercog, domaincog, obsession]
+      validValues: [architecture, guide, sop, explainer, notes, tool, prd, reference, definition, template, method, domain-discipline, overview, building-brief, routing, control-plane, example, policy, ubercog, domaincog, obsession, roadmap]
       notes: >-
         The vocabulary's single source is COG_ROLES in scripts/lib/cog-subtype.cjs, which the frontmatter validator
         enforces at write time; tests/test-cog-templates.js fails if this list and COG_ROLES differ. Each role has a
@@ -2211,6 +2211,25 @@ mx:
       status: canonical
       profile: x-mx-public
       context: 'Declared on a workflow contract cog that gates an action on measured limits.'
+    - name: x-mx-engineFreeze
+      type: object
+      authoring: authored
+      inPlainWords: 'The founders have frozen the audit engine, as {value} sets out.'
+      optionalIn: [cog]
+      definition: >-
+        The founders' freeze on the audit engine as data: its state, when it began, the paths read as the engine, its
+        one exception, and which pull requests have a ruling or wait for one.
+      example:
+        state: active
+        since: '2026-11-03'
+        scope:
+          - mx-reginald/audit/lib/
+      notes: >-
+        Carried under mx: on mx-canon/mx-maxine-lives/founders.cog.md and read by scripts/lib/engine-freeze.cjs, which
+        warns and never refuses (npm run freeze:check).
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on the founders cog.'
     - name: x-mx-approvers
       type: array
       authoring: authored
@@ -2431,6 +2450,7 @@ mx:
         - x-mx-ndr
         - x-mx-bdr
         - x-mx-reviewedOn
+        - x-mx-engineFreeze
         - x-mx-managedBy
         - x-mx-productionCanonical
         - x-mx-domainTerms

@@ -1,17 +1,16 @@
 ---
-"@context": https://mx.allabout.network/canon/context.json
 name: mx-allabout-network
 description: "Find, read and cite the Machine Experience (MX) material on mx.allabout.network, published by CogNovaMX. Use when an agent needs MX books, articles or learning pages, the cog (.cog.md) format specification, the MX field dictionaries, or wants the site's content as markdown rather than HTML."
-title: "Using mx.allabout.network - the agent skill"
-type: info-doc
-author: "Tom Cranstoun"
-created: 2026-10-29
-modified: 2026-10-29
-mx:
-  mxSpecVersion: "0.9"
-  status: active
-  audience: [humans, machines]
-  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/skill.md
+metadata:
+  mx.@context: "https://mx.allabout.network/canon/context.json"
+  mx.title: "Using mx.allabout.network - the agent skill"
+  mx.type: "info-doc"
+  mx.author: "Tom Cranstoun"
+  mx.created: "2026-10-29"
+  mx.modified: "2026-10-29"
+  mx.mxSpecVersion: "0.9"
+  mx.status: "active"
+  mx.canonicalUri: "https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/.well-known/agent-skills/mx-allabout-network/SKILL.md"
 ---
 
 # Using mx.allabout.network
