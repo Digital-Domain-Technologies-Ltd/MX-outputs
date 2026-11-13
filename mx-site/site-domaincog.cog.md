@@ -6,11 +6,11 @@
 # Do not guess. Do not invent. Follow the description and purpose exactly.
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 "@context": https://mx.allabout.network/canon/context.json
-title: "site-domaincog"
+title: "Site domaincog"
 description: "Domain anchor for the served site estate: the cogs, canon exports, and drafts that ship with mx.allabout.network under mx-site."
 author: "Tom Cranstoun"
 created: 2026-07-10
-modified: 2026-09-29
+modified: 2026-11-10
 version: "1.0"
 triggers: [site-domaincog, mx-site-domain, served-site-domain]
 
@@ -45,6 +45,6 @@ mx:
 
 ---
 
-# site-domaincog
+# Site domaincog
 
 The domain anchor for the served site estate: the cogs, canon exports, and drafts that ship with `mx-site/` (mx.allabout.network). A cog in this domain declares `partOf: site-domaincog`, or names an intermediate cog that chains here; the chain continues to the master cog. The format is described in the [cog specification](https://mx.allabout.network/cog.html).

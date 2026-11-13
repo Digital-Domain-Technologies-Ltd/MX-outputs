@@ -7,10 +7,10 @@
 # If you need deeper rules, see: https://mx.allabout.network/cog.html
 "@context": https://mx.allabout.network/canon/context.json
 title: "Filesystem Configuration"
-description: "Describes the mounted directories and their access permissions. Info-doc: no executable rules. Maps to filesystem_configuration in the Fable 5 system prompt."
+description: "Blog-draft copy of the fable5 reference cog. Describes the mounted directories and their access permissions. Info-doc: no executable rules. Maps to filesystem_configuration in the Fable 5 system prompt."
 author: Tom Cranstoun
 created: 2026-06-14
-modified: 2026-09-29
+modified: 2026-11-10
 version: "1.0"
 
 category: example

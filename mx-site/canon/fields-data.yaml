@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.65'
+version: '6.69'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-11-06'
+modified: '2026-11-12'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -797,14 +797,26 @@ mx:
       replacement: x-mx-p-revisionRules
       notes: How a private agreement may be revised, kept private.
     - old: x-mx-p-pipelineStage
-      replacement: x-mx-p-dealStage
-      notes: A contact's pipeline position kept private, apart from the shared pipelineStage.
+      replacement: x-mx-dealStage
+      notes: A contact's pipeline position; one deal-stage field, read by the CRM pipeline drift checker.
+    - old: x-mx-p-dealStage
+      replacement: x-mx-dealStage
+      notes: A contact's pipeline position; one deal-stage field, read by the CRM pipeline drift checker.
     - old: x-mx-p-nextActionDate
-      replacement: x-mx-p-followUpDate
-      notes: The date of a private follow-up, apart from the shared nextActionDate.
+      replacement: x-mx-nextActionDate
+      notes: The date of a contact's next action; one next-action date, read by the CRM pipeline drift checker.
+    - old: x-mx-p-followUpDate
+      replacement: x-mx-nextActionDate
+      notes: The date of a contact's next action; one next-action date, read by the CRM pipeline drift checker.
     - old: x-mx-p-offering
       replacement: x-mx-p-offerMade
       notes: What was offered to a contact, kept private, apart from the shared offering.
+    - old: x-mx-reviewBy
+      replacement: reviewBy
+      notes: The date by which a repo memory is due for review is the standard review-due date; scripts/lib/memory-schema.cjs reads it.
+    - old: x-mx-reviewedBy
+      replacement: x-mx-reviewTier
+      notes: The tier that reviewed a repo memory (deterministic, local, foundation, operator), a different item from the named person reviewedBy records.
     - old: x-mx-blocks
       replacement: blocks
       notes: >-
@@ -6566,6 +6578,144 @@ mx:
       notes: Read by chain and evidence-pack checkers, which refuse a card that left Backlog with nobody named here.
       status: canonical
       profile: core
+    - name: exchange
+      type: object
+      inPlainWords: 'It keeps a two-way exchange: {value}.'
+      authoring: authored
+      optionalIn: [core]
+      definition: >-
+        A two-way exchange kept as a record: the parties, whether it is open or closed, and its turns in order, each
+        reply naming the turn it answers and quoting the earlier words it depends on.
+      example: '{id: road-spending-request, parties: [Alex Resident, Sam Officer], state: closed, turns: [{turn: 1, from: Alex Resident, at: "2026-11-09T09:02:40Z", says: "Shall I use the old boundary or the new one?", expects: reply}, {turn: 2, from: Sam Officer, at: "2026-11-09T09:15:03Z", says: "The new one.", inReplyTo: 1, carries: [{turn: 1, quote: "the old boundary or the new one"}]}]}'
+      notes: >-
+        A short reply means nothing away from the turn it answers. The record keeps each reply beside what it answers,
+        in the first speaker's own words, so a reader that meets one turn alone can still tell what was asked, what
+        was agreed and what is still owed. A carried quote is a verbatim span of the cited turn, never a summary: a
+        summary is a new claim about what was said, and a quote can be checked by comparing text. The record states
+        what was said and in what order. It does not state that either party understood the other, or that an answer
+        met the need behind the question.
+      status: experimental
+      profile: core
+      context: 'Declared on a record of a conversation between two or more parties, whichever channel carried it.'
+    - name: exchange.id
+      type: string
+      authoring: authored
+      definition: The stable identifier of the exchange, in lower-case kebab form.
+      example: road-spending-request
+      status: experimental
+      profile: core
+    - name: exchange.parties
+      type: array
+      authoring: authored
+      definition: The names of the parties to the exchange, at least two, each exactly as it appears in a turn's from.
+      example:
+        - Alex Resident
+        - Sam Officer
+      status: experimental
+      profile: core
+    - name: exchange.state
+      type: string
+      authoring: authored
+      definition: Whether the exchange is still running or has ended.
+      example: closed
+      validValues:
+        - open
+        - closed
+      notes: >-
+        open - more turns may follow, and a turn still waiting for a reply is reported, not refused. closed - the
+        exchange has ended, and a turn that expected a reply and has none is an error in the record.
+      status: experimental
+      profile: core
+    - name: exchange.transcript
+      type: string
+      authoring: authored
+      definition: The path, relative to the record, of the transcript the record was made from, such as a chat export.
+      example: road-spending-request.txt
+      notes: Optional. When present, every turn's from and says match the transcript message in the same position.
+      status: experimental
+      profile: core
+    - name: exchange.transcriptSha256
+      type: string
+      authoring: authored
+      definition: The SHA-256 hash of the transcript file, as 64 lower-case hexadecimal characters.
+      example: e73d26db3c1e95be127b61d9005cb46c18742b9ddd040e5d3f73edbc1997da71
+      notes: Required with exchange.transcript. A transcript edited after the record was made no longer matches.
+      status: experimental
+      profile: core
+    - name: exchange.turns
+      type: array
+      authoring: authored
+      definition: The turns of the exchange in the order they were made, one object per message.
+      example: '[{turn: 1, from: Alex Resident, at: "2026-11-09T09:02:40Z", says: "Shall I use the old boundary or the new one?", expects: reply}]'
+      status: experimental
+      profile: core
+    - name: exchange.turns[].turn
+      type: number
+      authoring: authored
+      definition: The position of the turn in the exchange, counted from 1 with no gap.
+      example: 2
+      status: experimental
+      profile: core
+    - name: exchange.turns[].from
+      type: string
+      authoring: authored
+      definition: The party who made the turn, a name listed in exchange.parties.
+      example: Sam Officer
+      status: experimental
+      profile: core
+    - name: exchange.turns[].at
+      type: string
+      authoring: authored
+      definition: When the turn was made, as an ISO 8601 UTC timestamp ending in Z.
+      example: '2026-11-09T09:15:03Z'
+      notes: >-
+        A chat export often carries a local clock time with no zone. The record converts it once, so no later reader
+        has to guess the zone.
+      status: experimental
+      profile: core
+    - name: exchange.turns[].says
+      type: string
+      authoring: authored
+      definition: The words of the turn, verbatim.
+      example: The new one.
+      status: experimental
+      profile: core
+    - name: exchange.turns[].inReplyTo
+      type: number
+      authoring: authored
+      definition: The number of the earlier turn this turn answers.
+      example: 1
+      notes: Required on every turn after the first; the first turn opens the exchange and carries none.
+      status: experimental
+      profile: core
+    - name: exchange.turns[].carries
+      type: array
+      authoring: authored
+      definition: >-
+        The earlier words this turn depends on, each entry an object naming an earlier turn and a quote found
+        verbatim in that turn's says.
+      example:
+        - turn: 1
+          quote: the old boundary or the new one
+      notes: >-
+        Every turn after the first carries at least one quote from the turn it answers, and may carry more from any
+        earlier turn. A turn that agrees to something carries the words that say what was agreed.
+      status: experimental
+      profile: core
+    - name: exchange.turns[].expects
+      type: string
+      authoring: authored
+      definition: What the turn asks of the other party.
+      example: reply
+      validValues:
+        - reply
+        - acknowledgement
+        - nothing
+      notes: >-
+        reply - the turn asks something and is open until another party answers it. acknowledgement - a reply is
+        welcome and not owed. nothing - the turn closes its thread. Absent reads as nothing.
+      status: experimental
+      profile: core
     - name: completeness
       type: object
       inPlainWords: 'Whether its list is complete: {value}.'
@@ -6787,6 +6937,7 @@ mx:
         - ld
         - readingLevel
         - conformsTo
+        - exchange
         - completeness
         - cancellationTerms
         - loyaltyPointTerms
@@ -6890,7 +7041,7 @@ mx:
         - x-mx-collaborateAgentEnabled
         - x-mx-collaborateMessageCount
         - x-mx-collaborateLastActivity
-        - x-mx-engineFreeze
+        - x-mx-tityraFacts
     - name: action
       description: >-
         An action-cog: a cog whose execute block a machine runs, as a script, as instructions, as a skill it loads,

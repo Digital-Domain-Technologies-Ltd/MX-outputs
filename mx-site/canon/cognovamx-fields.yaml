@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '2.8'
+version: '2.12'
 created: '2026-04-15'
-modified: '2026-11-07'
+modified: '2026-11-11'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -581,7 +581,20 @@ mx:
       authoring: authored
       definition: This contact's current position in the sales/relationship pipeline.
       example: warm
-      notes: 'Free-form values in practice: committed, warm, pending. Pairs with nextAction and nextActionDate.'
+      validValues:
+        - cold
+        - warm
+        - interested
+        - proposal-sent
+        - committed
+        - closed-won
+        - closed-lost
+        - declined
+        - demo-prospect
+        - case-study
+      notes: >-
+        warm, interested, proposal-sent and committed are active stages, each held in step with a row in
+        mx-crm/pipeline.md (npm run crm:pipeline:check). Pairs with x-mx-nextAction and x-mx-nextActionDate.
       status: canonical
       profile: contact
     - name: x-mx-offering
@@ -1654,7 +1667,8 @@ mx:
       validValues: [architecture, guide, sop, explainer, notes, tool, prd, reference, definition, template, method, domain-discipline, overview, building-brief, routing, control-plane, example, policy, ubercog, domaincog, obsession, roadmap]
       notes: >-
         The vocabulary's single source is COG_ROLES in scripts/lib/cog-subtype.cjs, which the frontmatter validator
-        enforces at write time; tests/test-cog-templates.js fails if this list and COG_ROLES differ. Each role has a
+        enforces at write time; npm run cogrole:check (tests/test-cogrole-lockstep.js, in npm test) fails if this list, the
+        graph cog mx-graph-system.cog.md, and COG_ROLES differ. Each role has a
         template in mx-canon/ssot/templates/ (npm run cog:new -- --list). ubercog is reserved for UBERCOG.cog.md.
       status: canonical
       profile: x-mx-public
@@ -2211,25 +2225,27 @@ mx:
       status: canonical
       profile: x-mx-public
       context: 'Declared on a workflow contract cog that gates an action on measured limits.'
-    - name: x-mx-engineFreeze
+    - name: x-mx-tityraFacts
       type: object
       authoring: authored
-      inPlainWords: 'The founders have frozen the audit engine, as {value} sets out.'
+      inPlainWords: 'The Tityra facts every other document quotes, as {value} sets out.'
       optionalIn: [cog]
       definition: >-
-        The founders' freeze on the audit engine as data: its state, when it began, the paths read as the engine, its
-        one exception, and which pull requests have a ruling or wait for one.
+        The single source of Tityra facts: the company, the founders, the product, the prices and plans (with the
+        catalogue revision and publishedAt), the page limits, VAT, delivery, the raise and fixed costs, and the
+        pipeline. Each group names its source. scripts/check-tityra-facts.cjs holds every in-scope document to it.
       example:
-        state: active
-        since: '2026-11-03'
-        scope:
-          - mx-reginald/audit/lib/
+        company:
+          name: Tityra Ltd
+          companyNumber: SC908253
+        limits:
+          pagesPerAudit: 100
       notes: >-
-        Carried under mx: on mx-canon/mx-maxine-lives/founders.cog.md and read by scripts/lib/engine-freeze.cjs, which
-        warns and never refuses (npm run freeze:check).
+        Carried under mx: on tityra/tityra-facts.cog.md. The pricing.catalogue block is written only by npm run
+        facts:refresh. To change a fact, edit it here first, in the same commit as the content that restates it.
       status: canonical
       profile: x-mx-public
-      context: 'Declared on the founders cog.'
+      context: 'Declared on tityra/tityra-facts.cog.md.'
     - name: x-mx-approvers
       type: array
       authoring: authored
@@ -2450,7 +2466,7 @@ mx:
         - x-mx-ndr
         - x-mx-bdr
         - x-mx-reviewedOn
-        - x-mx-engineFreeze
+        - x-mx-tityraFacts
         - x-mx-managedBy
         - x-mx-productionCanonical
         - x-mx-domainTerms

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mx.allabout.network/canon/schemas/0.9/portable.schema.json",
   "title": "MX portable profile, specification 0.9",
-  "description": "Fields for the MX portable profile.",
+  "description": "A portability profile rather than a type: the fields a document must carry to remain interpretable by a machine that meets it away from its source, with no access to the originating site. It is the Documents Are Self-Sufficient test made checkable. A document opts in by listing this profile's address in conformsTo (https://mx.allabout.network/canon/fields-data.yaml#portable), and scripts/check-portable-conformance.cjs then holds it to the set below. Identity says what it is and who wrote it; canonicalUri says where the master lives, which with version is the currency signal; license says what a reader may do with it; and one of integritySignature or provenanceUri gives the reader a trust check it can run without the source. The profile is additive: a document that does not claim it is unaffected.",
   "type": "object",
   "properties": {
     "author": {
@@ -612,6 +612,9 @@
         },
         "evalTask": {
           "type": "string"
+        },
+        "exchange": {
+          "type": "object"
         },
         "excludeSites": {
           "type": "array"

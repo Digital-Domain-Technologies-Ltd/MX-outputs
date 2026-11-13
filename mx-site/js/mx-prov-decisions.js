@@ -54,7 +54,7 @@ function decisionRow(step) {
   return el('tr', {},
     el('td', { text: question }),
     el('td', { text: d.decision == null ? 'none' : String(d.decision) }),
-    el('td', { text: pct(d.confidence) }),
+    el('td', { text: d.measurement === 'unmeasured' ? 'not measured' : pct(d.confidence) }),
     el('td', { text: `${pct(d.bar)} ${d.actionClass || ''}`.trim() }),
     el('td', { text: d.disposition || '-' }),
     el('td', { text: d.route && d.route.to ? d.route.to : '-' }),
@@ -69,6 +69,7 @@ export function volumeText(steps) {
   const state = (d) => d.verdict && d.verdict.state;
   const below = ds.filter((d) => state(d) === 'acted-below-bar').length;
   const awaiting = ds.filter((d) => state(d) === 'escalated-awaiting').length;
+  const unmeasured = ds.filter((d) => d.measurement === 'unmeasured').length;
   const spend = {};
   for (const d of ds) {
     if (!d.route || !d.route.to) continue;
@@ -81,6 +82,7 @@ export function volumeText(steps) {
     `${below} acted below the bar`,
     `${awaiting} awaiting confirmation`,
   ];
+  if (unmeasured) parts.push(`${unmeasured} not measured`);
   const spendText = Object.entries(spend).map(([to, usd]) => `${to} $${usd.toFixed(4)}`).join(', ');
   if (spendText) parts.push(`routed spend: ${spendText}`);
   return parts.join(' - ');

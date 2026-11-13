@@ -7,17 +7,19 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 title: "A Verdict Should Carry Its Own Evidence"
-description: "A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence."
+description: "AWS now rejects any AI judge score that can't quote the text it used as evidence. We learned the same lesson from a red check that said only 'failed'. Here's why every verdict, human or machine, should carry its evidence, and how to test yours."
 author: Tom Cranstoun
 created: "2026-11-01"
-modified: 2026-11-01
-version: "1.0"
+modified: 2026-11-12
+version: "1.1"
 category: mx-content
 type: blog-post
 tags:
   - testing
   - evidence
   - provenance
+  - ai-agents
+  - prompt-injection
   - machine-experience
 mx:
   mxSpecVersion: "0.9"
@@ -30,16 +32,24 @@ mx:
   servedAt: https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
   contextProvides:
+    - "News hook (11 Nov 2026): AWS open-sourced the Universal Agent Evaluation Framework (UAEF), whose AI judge must quote a verbatim span of the content it scored; a score whose quote isn't found is rejected, which catches a judge talked into a number by injected text. AWS says judge scores are evaluation signal, not a safety decision."
     - "A worked example of an automated check whose failure message named only the failed stage, a cause found by reproducing the failure elsewhere (a VPN client dropping loopback traffic to a server listening on every interface), and the two fixes: a test that depends only on what it controls, and a red verdict that carries the failing test and its error line wherever it is published."
-  purpose: "Show engineering teams that a test result is an artefact like any other, and that it should carry what its reader needs to check it, which is the MX principle applied to the tools that build the work."
+  purpose: "Show teams that build or buy AI agents that a score or a test result is a record like any other, and that it should carry what its reader needs to check it, which is the MX principle applied to the tools that judge the work."
   stability: stable
+  refersToExternal:
+    - url: https://aws.amazon.com/blogs/machine-learning/uaef-a-framework-agnostic-system-for-closed-loop-evaluation-of-ai-agents/
+      note: "AWS Machine Learning Blog, UAEF announcement; judge must cite a verbatim span, unverified scores rejected."
+    - url: https://github.com/awslabs/uaef/blob/main/SECURITY.md
+      note: "UAEF security model; provenance binding, residual risk, not for gating security controls, not applied to caller-supplied templates."
+    - url: https://www.techtimes.com/articles/330523/20261112/aws-open-sources-ai-agent-evaluation-framework-that-hardens-its-ai-grader-against-prompt-injection.htm
+      note: "Tech Times, 12 Nov 2026; corroborates the release and cites a Cloud Security Alliance paper reporting Google's 32% rise in malicious prompt-injection payloads in web content, Nov 2025 to Feb 2026."
 ---
 -->
 <!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Tom Cranstoun">
-  <meta name="description" content="A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence.">
+  <meta name="description" content="AWS now rejects any AI judge score that can't quote the text it used as evidence. We learned the same lesson from a red check that said only 'failed'. Here's why every verdict, human or machine, should carry its evidence, and how to test yours.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="canonical" href="https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html">
 
@@ -47,7 +57,7 @@ mx:
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html">
   <meta property="og:title" content="A Verdict Should Carry Its Own Evidence | CogNovaMX">
-  <meta property="og:description" content="A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence.">
+  <meta property="og:description" content="AWS now rejects any AI judge score that can't quote the text it used as evidence. We learned the same lesson from a red check that said only 'failed'. Here's why every verdict, human or machine, should carry its evidence, and how to test yours.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta property="og:image:width" content="1200">
@@ -60,7 +70,7 @@ mx:
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="A Verdict Should Carry Its Own Evidence | CogNovaMX">
-  <meta name="twitter:description" content="A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence.">
+  <meta name="twitter:description" content="AWS now rejects any AI judge score that can't quote the text it used as evidence. We learned the same lesson from a red check that said only 'failed'. Here's why every verdict, human or machine, should carry its evidence, and how to test yours.">
   <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta name="twitter:site" content="@ddttomtom">
@@ -73,12 +83,12 @@ mx:
   <meta name="mx:status" content="draft">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
        never emitted here; a served page says what the document is, not how this
        estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="A Verdict Should Carry Its Own Evidence">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/drafts/a-verdict-should-carry-its-own-evidence.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -95,7 +105,7 @@ mx:
       "@type": "BlogPosting",
       "name": "A Verdict Should Carry Its Own Evidence",
       "headline": "A Verdict Should Carry Its Own Evidence",
-      "description": "A check said only that it failed, and its log sat on a machine nobody could reach. See how we found the cause, and why a verdict should carry its evidence.",
+      "description": "AWS now rejects any AI judge score that can't quote the text it used as evidence. We learned the same lesson from a red check that said only 'failed'. Here's why every verdict, human or machine, should carry its evidence, and how to test yours.",
       "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia",
       "datePublished": "2026-11-01",
       "dateModified": "2026-11-01",
@@ -113,7 +123,7 @@ mx:
         "machine-experience",
         "ai-agents"
       ],
-      "wordCount": 782,
+      "wordCount": 957,
       "inLanguage": "en-GB",
       "isPartOf": {
         "@id": "https://mx.allabout.network/#website"
@@ -224,56 +234,59 @@ mx:
         <li><a href="#what-a-bare-red-costs">What a Bare Red Costs</a></li>
         <li><a href="#the-test-was-judging-the-machine">The Test Was Judging the Machine</a></li>
         <li><a href="#fixing-the-test-then-the-verdict">Fixing the Test, Then the Verdict</a></li>
-        <li><a href="#a-pass-or-a-fail-is-an-artefact">A Pass or a Fail Is an Artefact</a></li>
+        <li><a href="#where-the-rule-stops">Where the Rule Stops</a></li>
+        <li><a href="#a-pass-or-a-fail-is-a-record-too">A Pass or a Fail Is a Record Too</a></li>
         <li><a href="#try-it-on-your-own-checks">Try It on Your Own Checks</a></li>
           </ul>
         </nav>
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="782">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="957">
         <header class="article-header">
           <h1>A Verdict Should Carry Its Own Evidence</h1>
           <div class="article-meta"
                data-published="2026-11-01"
                data-modified="2026-11-01"
-               data-reading-time="4 min">
+               data-reading-time="5 min">
             <time datetime="2026-11-01">1 November 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>4 min read</span>
+            <span>5 min read</span>
           </div>
         </header>
 
 
-<p>Every commit that reaches our main line is tested again after it lands. One afternoon that check came back red. The message named the stage that had failed and the place its log was kept. That was all it said. The log was on the computer that ran it, which wasn't answering.</p>
-<p>The next commit went the same way, and the one after that. Three failures in a row look like three bad commits, so each sent someone off to read its code. Each time the code was fine.</p>
+<p>If you're paying for AI agents, you're also paying for the scores that tell you whether they work. On 11 November AWS open-sourced an evaluation framework for agents, <a href="https://aws.amazon.com/blogs/machine-learning/uaef-a-framework-agnostic-system-for-closed-loop-evaluation-of-ai-agents/">UAEF</a>, and the most useful thing in it isn't a metric. It's a rule: when an AI judge scores an agent's answer, it has to quote the exact words it used as evidence for that score. UAEF checks that the quote really is in the answer. If it isn't, the score is thrown out rather than recorded.</p>
+<p>That rule exists because agents read the web. An agent that reads a page can pick up instructions someone planted there and pass them along. A judge that then reads the agent's answer can be talked into a number. <a href="https://www.techtimes.com/articles/330523/20261112/aws-open-sources-ai-agent-evaluation-framework-that-hardens-its-ai-grader-against-prompt-injection.htm">Tech Times</a> reports a Cloud Security Alliance paper citing Google's finding of a 32% rise in malicious prompt-injection payloads in web content between November 2025 and February 2026. A score that has to point at its evidence is much harder to fake.</p>
+<p>We learned the same lesson the dull way, from a check that said only &quot;failed&quot;.</p>
 <h2 id="what-a-bare-red-costs" tabindex="-1">What a Bare Red Costs</h2>
-<p>A message that only says &quot;failed&quot; hands its reader a job. To act on it, they need the name of the test and the error it printed. If those are in a log on one computer, every reader has to get there first. When they can't, they guess.</p>
-<p>Guessing goes like this. You open the newest commit, find nothing wrong with it, and move on to the one after. A cause that stays put while the commits come and go never shows up in any one of them.</p>
-<p>We had one piece of luck. The suite that ran on the unreachable computer works anywhere, so I ran it myself on my laptop. Nearly everything passed. One didn't, and it broke the same way every time: a request to a small local web server got no answer within five seconds.</p>
+<p>Every commit that reaches our main line is tested again after it lands. One afternoon that check came back red. The message named the stage that had failed and the place its log was kept. That was all it said. The log was on the computer that ran it, which wasn't answering.</p>
+<p>The next commit went the same way, and the one after that. A run of failures looks like a run of bad commits, so each sent someone off to read its code. Each time the code was fine.</p>
+<p>A message that only says &quot;failed&quot; hands its reader a job. To act on it, they need the name of the test and the error it printed. If the only copy is a log on one computer, every reader has to get there first. When they can't, they guess, and a cause that stays put while the commits come and go never shows up in any one of them.</p>
 <h2 id="the-test-was-judging-the-machine" tabindex="-1">The Test Was Judging the Machine</h2>
-<p>That test starts a little web server and fetches a file from it over loopback, the address a computer uses to talk to itself. The server listens on every network interface, because in real use other devices need to reach it. The fetch goes over loopback because that address is meant to answer whatever else is going on.</p>
-<p>On my laptop it didn't. A VPN client was running, and it filters local traffic. With the tunnel up, a request over loopback to anything listening on every interface was dropped without a word. Bind the same server to loopback alone and it answered at once. It wasn't the programming language, either: the web server built into a different runtime did exactly the same.</p>
-<p>The test, in other words, told us nothing about the code. It reported on the network setup of whichever computer ran it. On a build server with no VPN it passed. On a laptop with one, it failed every time, whatever the commit.</p>
-<p>I still can't say whether that was the whole story on the computer nobody could reach, because its message didn't say.</p>
+<p>The suite that ran on the unreachable computer works anywhere, so I ran it on my laptop. Nearly everything passed. One test didn't, and it broke the same way every time: a request to a small local web server got no answer within five seconds.</p>
+<p>That test starts a web server and fetches a file from it over loopback, the address a computer uses to talk to itself. The server listens on every network interface, because in real use other devices need to reach it. On my laptop a VPN client was running, and it filters local traffic. With the tunnel up, a loopback request to anything listening on every interface was dropped without a word. Bind the same server to loopback alone and it answered at once.</p>
+<p>The test told us nothing about the code. It reported on the network setup of whichever computer ran it. I still can't say whether that was the whole story on the computer nobody could reach, because its message didn't say.</p>
 <h2 id="fixing-the-test-then-the-verdict" tabindex="-1">Fixing the Test, Then the Verdict</h2>
-<p>A test should depend only on what it controls. This one controls the address it fetches from, so it now starts its server there too. A separate check makes sure that, left to its defaults, the server still listens on every interface. It does that without sending a request, so nothing on the network can change its answer.</p>
-<p>The second fix matters more. A red result now carries its own evidence: each failing test by name, and the line it failed with, wherever it's published. Anyone who sees the verdict, anywhere, can see why it's red. The full log is still there for the detail, but nobody needs it to make a start.</p>
-<h2 id="a-pass-or-a-fail-is-an-artefact" tabindex="-1">A Pass or a Fail Is an Artefact</h2>
-<p>This is the MX principle turned on our own tools. <a href="https://mx.allabout.network/learn/what-is-mx.html">MX</a> is metadata that records where a file came from, what it's for, and how it should be used, written so the next reader, human or machine, can check it instead of taking it on trust. A test result is a file too. Somebody reads it and acts on it, so it owes them the same things: what was checked, what was found, and where to look next.</p>
-<p>A machine has no stake in its own errors. It won't go hunting for the cause of a failure it reported; it'll just report the same thing again, as ours did. If you want the cause found, the verdict has to carry what its next reader needs to find it.</p>
+<p>A test should depend only on what it controls. This one controls the address it fetches from, so it now starts its server there too. A separate check makes sure the server still listens on every interface by default, without sending a request, so nothing on the network can change its answer.</p>
+<p>The second fix matters more. A red result now carries its own evidence: each failing test by name, and the line it failed with, wherever it's published. Anyone who sees the verdict can see why it's red without opening the log.</p>
+<p>That's the same move AWS made for its judge, pointed the other way. Our verdict names the error it saw; theirs names the words it scored. Either way the reader can check the claim instead of trusting it.</p>
+<h2 id="where-the-rule-stops" tabindex="-1">Where the Rule Stops</h2>
+<p>AWS is careful about the limits, and so should you be. Its <a href="https://github.com/awslabs/uaef/blob/main/SECURITY.md">security notes</a> say no delimiter is safe against every model on every input, and the quote check isn't applied when you supply your own judge template. They also say judge scores are evaluation signal, not a safety decision, and shouldn't gate a security control. A quote proves the judge looked at real words. It doesn't prove the judge read them well.</p>
+<h2 id="a-pass-or-a-fail-is-a-record-too" tabindex="-1">A Pass or a Fail Is a Record Too</h2>
+<p>This is the MX principle turned on the tools that judge the work. <a href="https://mx.allabout.network/learn/what-is-mx.html">MX</a> is metadata that records where a file came from, what it's for, and how it should be used, written so the next reader, human or machine, can check it instead of taking it on trust. A test result or an agent score is a file too. Somebody reads it and acts on it, so it owes them what was checked, what was found, and where to look next.</p>
+<p>A machine has no stake in its own errors. It won't hunt for the cause of a failure it reported, and a judge won't notice it was steered. If you want the cause found, the verdict has to carry what its next reader needs.</p>
 <h2 id="try-it-on-your-own-checks" tabindex="-1">Try It on Your Own Checks</h2>
-<p>Pick one of your own failure messages and read it as if you'd never seen the system before. Does it name what failed and say what it printed? Could you act on it without opening the log? If not, the evidence is somewhere else, and someone pays for that the next time it goes red.</p>
-<p>When a check passes in one place and fails in another, ask what it depends on that it doesn't control. Ours depended on the network. Yours might depend on the clock, the disk, the locale, or a service somebody left running.</p>
+<p>Pick one failure message from your build and one score from whatever evaluates your agents. For each, ask whether it names what it judged and quotes what it found. If you use an AI judge with your own template, confirm it asks for an evidence quote, and that something then checks those words are really in the answer, because UAEF won't do it for you there. Where the answer is no, add the quote and the check before you trust the next number.</p>
 
 
         <footer class="reader-notice" aria-labelledby="reader-notice-heading">
           <h2 id="reader-notice-heading">About this page</h2>
           <ul>
             <li>Written by Tom Cranstoun.</li>
-            <li>Last changed on 2026-11-01.</li>
+            <li>Last changed on 2026-11-12.</li>
           </ul>
         </footer>
 

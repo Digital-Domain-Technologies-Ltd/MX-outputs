@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mx.allabout.network/canon/schemas/0.9/action.schema.json",
   "title": "MX action profile, specification 0.9",
-  "description": "Fields for the MX action profile.",
+  "description": "An action-cog: a cog whose execute block a machine runs, as a script, as instructions, as a skill it loads, or as a mod it installs. It carries every cog field, and the security block is part of its contract: a reader weighs riskLevel, reversibility, verifiability, capabilities and network scope before it decides whether to run an action. securityLevels names the security members each conformance level adds; security is a block, so its members are enforced by scripts/check-action-security-level.cjs (Gate 143) rather than by the field lists. A new action-cog reaches Level 2 (Profiled); one that predates the profile holds the level it had, in a shrink-only baseline, and works towards Level 1 (Declared).",
   "type": "object",
   "properties": {
     "author": {
@@ -612,6 +612,9 @@
         },
         "evalTask": {
           "type": "string"
+        },
+        "exchange": {
+          "type": "object"
         },
         "excludeSites": {
           "type": "array"

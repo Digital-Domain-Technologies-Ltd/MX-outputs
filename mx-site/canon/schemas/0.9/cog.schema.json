@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mx.allabout.network/canon/schemas/0.9/cog.schema.json",
   "title": "MX cog profile, specification 0.9",
-  "description": "Fields for the MX cog profile.",
+  "description": "Fields specific to .cog.md files. Cogs are an optional layer on top of MX; the machine identifier is derived from the filename. This is the sole `cog` profile: scripts/cog-field-rules.js (the engine behind frontmatter-validator.js and cog-tools.js) reads ONLY this file directly for profiles, bypassing load-canon.js's multi-file merge - fields-data-cogs.yaml carries the cog-layer field DEFINITIONS (partOf, buildsOn, dependencies, refersTo, cogHeader) but declares no profile of its own.",
   "type": "object",
   "properties": {
     "author": {
@@ -612,6 +612,9 @@
         },
         "evalTask": {
           "type": "string"
+        },
+        "exchange": {
+          "type": "object"
         },
         "excludeSites": {
           "type": "array"
