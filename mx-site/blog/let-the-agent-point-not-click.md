@@ -1,0 +1,70 @@
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Let the Agent Point, Not Click"
+description: "An agent that can show a reader around a page, highlighting a control and explaining it in the publisher's words, is a safer first step than one that clicks for them. Filipe Boldo's webmcp-tour does exactly that, and the Intent CMS now marks every page up for it."
+author: "Tom Cranstoun"
+created: "2026-11-21"
+modified: "2026-11-21"
+type: "blog-post"
+tags: ["webmcp", "agents", "guided-tours", "intent-cms", "machine-experience", "accessibility"]
+mx:
+  mxSpecVersion: "0.9"
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/mx-site/blog/let-the-agent-point-not-click.md
+  servedAt: https://mx.allabout.network/blog/let-the-agent-point-not-click.md
+  derivedFrom: datalake/draft-site/blog/agent-web/let-the-agent-point-not-click.md
+  audience: [humans, machines]
+  stability: "draft"
+  x-mx-contentState: "draft"
+  contextProvides:
+    - "What webmcp-tour is, who made it, and what its four read-only tools do."
+    - "Why a declared description on a control beats an agent's guess, and how the Intent CMS emits one from a single site table."
+  runbook: "Generated from datalake/draft-site/blog/agent-web/let-the-agent-point-not-click.md; never edit this file. Change the source and regenerate the page, and this twin is rebuilt beside it."
+  purpose: "The markdown version of https://mx.allabout.network/blog/let-the-agent-point-not-click.html, built from its source: the same text as the page, without its navigation or footer."
+---
+
+> This is the markdown version of https://mx.allabout.network/blog/let-the-agent-point-not-click.html. For the site index, see [llms.txt](https://mx.allabout.network/llms.txt).
+
+# Let the Agent Point, Not Click
+
+Talk about agents on websites tends to be about agents doing things: booking the table, filling the form, pressing buy. That's the hard end. It needs confidence in the site and in the agent, and a clear record of who approved what. There's an easier end that gets less attention, and I'd start there. Let the agent show the reader where things are, and let the reader press the button.
+
+## A Small Library With the Right Instinct
+
+Filipe Boldo released [webmcp-tour](https://github.com/fboldo/webmcp-tour) in November 2026. It's an MIT-licensed script that gives any WebMCP agent guided-tour tools on the page in front of it. One script tag registers four tools, and every one of them is marked read-only:
+
+- one lists what's on the page: headings and controls, with their roles and names
+- one highlights a control and shows a short explanation beside it
+- one waits while the reader acts: they click it, press "Got it", or dismiss the card
+- one clears the step
+
+The agent never clicks on the reader's behalf. If the target is on another page, it offers a "Go to" card, and nothing moves until the reader presses Go. Each card says it comes from the AI assistant, so a page can't dress its own text up as the agent's. The outline it hands the agent leaves out field values, typed text and anything hidden. That's a careful set of choices for a version 0.x project, and the author is plain that both the library and WebMCP itself are still early. You can try it in the [live demo](https://fboldo.github.io/webmcp-tour/demo/).
+
+## The Description Is the Interesting Part
+
+Out of the box, the agent can point at anything by its visible text. Ask "where do I set up two-factor?" and it finds the button labelled that way. The step that matters for MX is optional. A publisher can put two attributes on a control:
+
+```html
+<a href="/books/"
+   data-tour-id="nav-books"
+   data-tour-description="The MX books: the Handbook and the Protocols, with where to buy them.">Books</a>
+```
+
+Now the agent explains that link in the publisher's words, not its own guess. That's the whole MX argument at the scale of one button. A machine has no stake in getting your page wrong, and no way to know it has. Give it a short, declared statement of what a control does and what happens next, and the guess goes away. We've spent years asking publishers to describe their pages for machines. This asks them to describe their buttons, which is a smaller job and often a more useful one.
+
+## Why Read-Only First
+
+Guidance is the right first step for in-page agents because it fails safely. If the agent points at the wrong control, the reader sees a mistaken highlight and ignores it. If an agent clicks a mistaken target, something has happened that may not undo. A tour also keeps the person in the loop by design, which suits onboarding, help pages and accessibility support, where the point is that the reader learns where things are.
+
+It also fits how trust gets built. An agent that has been right about where things are a hundred times has earned a bit of the confidence it'll need later, when it asks to act.
+
+## What We've Done With It
+
+All of our blog posts and pages are generated by the Intent CMS, so the markup belongs there rather than in each page by hand. The CMS now reads one table of tour targets, for each navigation link, the menu button, a post's index and its closing section, and writes `data-tour-id` and `data-tour-description` onto every page it builds. It also loads a pinned copy of the script, served from our own domain rather than a third-party CDN, so the code is the exact release we read before shipping. The menu button got a description of its own for a practical reason: on a phone the section links sit behind it, and an agent can only point at what's visible.
+
+A test holds the two output paths of the CMS to the same list, so a description can't drift between them. The site table also refuses a repeated id, because the library reports two controls sharing one as an ambiguous target.
+
+## Where This Goes
+
+None of this does anything for a visitor whose browser has no WebMCP, which in late 2026 is most of them. That's fine. The script does nothing there, and the descriptions are harmless attributes until something uses them. When agents arrive with WebMCP turned on, the pages will already say what their controls do.
+
+If you run a site, the cheap version of this is worth doing now: pick your ten most important controls and write one plain sentence for each, saying what it does and what happens after. Whether a tour library, an agent or a new colleague picks it up, that sentence is the publisher speaking instead of a guess.

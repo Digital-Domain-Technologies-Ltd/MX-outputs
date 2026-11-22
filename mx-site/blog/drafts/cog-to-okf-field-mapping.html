@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: A COG Is an OKF Concept Document, With the Trust Added
+description: "A field-by-field mapping from MX cogs to Google's Open Knowledge Format. The reserved OKF fields map cleanly onto MX core frontmatter, OKF's open content model leaves room for the MX relation graph, and the fields OKF has no equivalent for are exactly the trust layer: proof of authorship, integrity signature, and provenance."
+author: Tom Cranstoun
+created: "2026-06-13"
+modified: 2026-11-14
+version: "0.4"
+type: blog-post
+tags: [open-knowledge-format, okf, cog, field-mapping, provenance, mx, the-gathering]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  statusNote: "Field correspondences validated against OKF SPEC.md and real production OKF documents (GA4 bundle, No Hacks website bundle, Suganthan Mohanadasan generator output). The reserved-field rows follow mx-canon/ssot/registries/mx-okf-field-map.yaml: type, tags and resource sit at the top level under their OKF names, and resource stays distinct from refersToExternal."
+  audience: [machines, humans]
+  purpose: "Demonstrate that a cog is an OKF-compatible concept document by mapping the fields, and show that the fields OKF has no equivalent for are the trust layer MX adds on top."
+  stability: stable
+  contextProvides:
+    - "Proposed field-by-field mapping from MX cogs to OKF: reserved OKF fields map to MX core frontmatter; OKF's open content model holds the MX relation graph; the trust fields (proofOfAuthorship, integritySignature, provenancePedigree) have no OKF equivalent and are the MX/REGINALD extension."
+  runbook: "Blog draft in the Intent CMS source layer. Run npm run promote to generate the Zone 2 HTML when ready for staging. Keep the field rows in step with mx-canon/ssot/registries/mx-okf-field-map.yaml."
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/drafts/cog-to-okf-field-mapping.md
+  servedAt: https://mx.allabout.network/blog/drafts/cog-to-okf-field-mapping.html
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="A field-by-field mapping from MX cogs to Google's Open Knowledge Format. The reserved OKF fields map cleanly onto MX core frontmatter, OKF's open content model leaves room for the MX relation graph, and the fields OKF has no equivalent for are exactly the trust layer: proof of authorship, integrity signature, and provenance.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/cog-to-okf-field-mapping.html">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/cog-to-okf-field-mapping.html">
+  <meta property="og:title" content="A COG Is an OKF Concept Document, With the Trust Added | CogNovaMX">
+  <meta property="og:description" content="A field-by-field mapping from MX cogs to Google's Open Knowledge Format. The reserved OKF fields map cleanly onto MX core frontmatter, OKF's open content model leaves room for the MX relation graph, and the fields OKF has no equivalent for are exactly the trust layer: proof of authorship, integrity signature, and provenance.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-06-13">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="A COG Is an OKF Concept Document, With the Trust Added | CogNovaMX">
+  <meta name="twitter:description" content="A field-by-field mapping from MX cogs to Google's Open Knowledge Format. The reserved OKF fields map cleanly onto MX core frontmatter, OKF's open content model leaves room for the MX relation graph, and the fields OKF has no equivalent for are exactly the trust layer: proof of authorship, integrity signature, and provenance.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="A COG Is an OKF Concept Document, With the Trust Added">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="0.4">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/cog-to-okf-field-mapping.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>A COG Is an OKF Concept Document, With the Trust Added</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "A COG Is an OKF Concept Document, With the Trust Added",
+      "headline": "A COG Is an OKF Concept Document, With the Trust Added",
+      "description": "A field-by-field mapping from MX cogs to Google's Open Knowledge Format. The reserved OKF fields map cleanly onto MX core frontmatter, OKF's open content model leaves room for the MX relation graph, and the fields OKF has no equivalent for are exactly the trust layer: proof of authorship, integrity signature, and provenance.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-06-13",
+      "dateModified": "2026-06-13",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/drafts/cog-to-okf-field-mapping.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 1028,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/drafts/cog-to-okf-field-mapping.html",
+      "name": "A COG Is an OKF Concept Document, With the Trust Added",
+      "url": "https://mx.allabout.network/blog/drafts/cog-to-okf-field-mapping.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../css/mx-blog.css">
+  <link rel="stylesheet" href="/css/mx-unified.css">
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="/images/logo.webp" srcset="/images/logo.webp 1x, /images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav" data-tour-id="nav-menu" data-tour-description="Opens the site menu on a narrow screen; the section links are inside it.">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/" data-tour-id="nav-home" data-tour-description="The home page: what MX is and where to start.">Home</a>
+        <a href="/books/" data-tour-id="nav-books" data-tour-description="The MX books: the Handbook and the Protocols, with where to buy them.">Books</a>
+        <a href="/learn/" data-tour-id="nav-learn" data-tour-description="Lessons and explainers on Machine Experience, from first principles.">Learn</a>
+        <a href="/services/" data-tour-id="nav-services" data-tour-description="What CogNovaMX offers and how to get in touch about it.">Services</a>
+        <a href="https://tityra.com" data-tour-id="nav-audit" data-tour-description="Opens tityra.com, another site, where website audits are ordered.">Audit</a>
+        <a href="/blog/" data-tour-id="nav-blog" data-tour-description="Articles on MX, AI agents and the machine-readable web, newest first." aria-current="page">Blog</a>
+        <a href="/the-gathering/" data-tour-id="nav-gathering" data-tour-description="The Gathering: the independent body that stewards the MX standard.">The Gathering</a>
+        <a href="/about/" data-tour-id="nav-about" data-tour-description="Who is behind CogNovaMX and how to contact us.">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary data-tour-id="post-contents" data-tour-description="The article's index: jump to any section of this post.">Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#the-reserved-fields">The reserved fields</a></li>
+        <li><a href="#the-graph-two-ways">The graph, two ways</a></li>
+        <li><a href="#the-fields-okf-has-no-equivalent-for">The fields OKF has no equivalent for</a></li>
+        <li><a href="#a-worked-shape">A worked shape</a></li>
+        <li><a href="#who-decides-what-the-added-fields-mean">Who decides what the added fields mean</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1028">
+        <header class="article-header">
+          <h1>A COG Is an OKF Concept Document, With the Trust Added</h1>
+          <div class="article-meta"
+               data-published="2026-06-13"
+               data-modified="2026-06-13"
+               data-reading-time="6 min">
+            <time datetime="2026-06-13">13 June 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>6 min read</span>
+          </div>
+        </header>
+
+
+<p>In the <a href="https://mx.allabout.network/blog/google-shipped-a-knowledge-format.html">last post</a> I said a cog can be expressed as a concept in Google's <a href="https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing/">Open Knowledge Format</a>, so MX rides on top of OKF rather than competing with it. A claim about formats is worth nothing until you show the fields line up, so here they are.</p>
+<p>I've checked every correspondence below against <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md">OKF SPEC.md</a> and against real production OKF documents, including Google's own GA4 BigQuery bundle and community implementations. Treat this as the settled mapping.</p>
+<h2 id="the-reserved-fields" tabindex="-1">The reserved fields</h2>
+<p>OKF reserves a small set of frontmatter fields and leaves everything below them to the producer. Here's each one against its MX equivalent.</p>
+<table>
+<thead>
+<tr>
+<th>OKF reserved field</th>
+<th>MX / COG field</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>type</code></td>
+<td><code>type</code> (and <code>cogType</code> for the cog kind)</td>
+<td>Same field, at the top level. It answers the same question in both: what is this. A cog also declares whether it merely describes (info-cog) or acts (action-cog).</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td><code>title</code></td>
+<td>Direct. Same field, same job.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td><code>description</code></td>
+<td>Direct.</td>
+</tr>
+<tr>
+<td><code>resource</code></td>
+<td><code>resource</code></td>
+<td>Same field, at the top level. It's a single optional URI: the canonical external URL of the one asset the concept describes, such as a BigQuery table API URL or a web page URL. It's absent for abstract concepts such as playbooks. Don't read it as MX's <code>refersToExternal</code>, which lists the external sources a document cites as evidence. <code>resource</code> says what the document is about and <code>refersToExternal</code> says what it draws on, so the two never share a value. The <code>servedAt</code> field (where this document is published) has no OKF equivalent. It's a valid MX addition, since OKF identifies documents in a bundle by file path rather than by a published URL.</td>
+</tr>
+<tr>
+<td><code>tags</code></td>
+<td><code>tags</code></td>
+<td>Direct, at the top level. Plain array, no leading hash.</td>
+</tr>
+<tr>
+<td><code>timestamp</code></td>
+<td><code>created</code> and <code>modified</code></td>
+<td>OKF carries one timestamp; MX separates first-authored from last-modified, both ISO 8601. An OKF consumer reading one timestamp can take <code>modified</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Nothing here makes you choose. A cog already carries <code>type</code>, <code>title</code>, <code>description</code>, <code>tags</code> and, where it describes an asset, <code>resource</code>, all at the top level under OKF's own names. The same file is a valid OKF concept, with no change to the cog itself.</p>
+<h2 id="the-graph-two-ways" tabindex="-1">The graph, two ways</h2>
+<p>OKF turns a directory into a graph with ordinary markdown links between concepts in the body. MX keeps those links, so the two stay compatible, and also records each edge as a typed field in the frontmatter: <code>refersTo</code>, <code>buildsOn</code>, <code>relatedTo</code>. Any OKF consumer walking the markdown can still follow them. A machine reading the frontmatter can traverse the same edges and know the <em>kind</em> of each one without parsing prose. OKF gets its graph for free, MX adds a typed, machine-traversable layer over it, and carrying both costs a producer nothing.</p>
+<h2 id="the-fields-okf-has-no-equivalent-for" tabindex="-1">The fields OKF has no equivalent for</h2>
+<p>Map every reserved OKF field to a cog and some cog fields are left over. They have no OKF counterpart under any name, because OKF doesn't reach into the trust question.</p>
+<table>
+<thead>
+<tr>
+<th>MX / COG field</th>
+<th>What it answers</th>
+<th>Aligns with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>canonicalUri</code></td>
+<td>Where does this live, as a stable identity, regardless of where the copy was found</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>author</code></td>
+<td>Who wrote it</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>proofOfAuthorship</code></td>
+<td>I made this, and I can prove it</td>
+<td>W3C Verifiable Credentials, Signed Exchanges</td>
+</tr>
+<tr>
+<td><code>integritySignature</code></td>
+<td>What you read is what was written</td>
+<td>RFC 9421 HTTP Message Signatures, Subresource Integrity</td>
+</tr>
+<tr>
+<td><code>provenancePedigree</code></td>
+<td>Where did this come from, and through whom</td>
+<td>-</td>
+</tr>
+</tbody>
+</table>
+<p><code>author</code> and <code>canonicalUri</code> are mild gaps. They're identity and a stable address, and an OKF producer can always add them outside the reserved set. The real gap is the genuineness family, <code>proofOfAuthorship</code>, <code>integritySignature</code>, and <code>provenancePedigree</code>, and it's deliberate. OKF tells an agent what to read, while these fields tell it whether to believe it. That's what MX adds and what REGINALD records as a dated, verifiable entry. Leaving them out isn't a deficiency in OKF, which chose its scope, and this half of the stack is where the work has always been.</p>
+<h2 id="a-worked-shape" tabindex="-1">A worked shape</h2>
+<p>Here's a real OKF concept document from Google's own GA4 BigQuery bundle, as published in the <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog"><code>knowledge-catalog</code> repository</a>:</p>
+<pre><code class="language-yaml">---
+type: BigQuery Dataset
+resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/ga4_obfuscated_sample_ecommerce
+title: BigQuery sample dataset for Google Analytics ecommerce web implementation
+description: A sample of obfuscated Google Analytics BigQuery event export data...
+tags:
+- ecommerce
+- web analytics
+- Google Analytics
+- BigQuery
+- public dataset
+timestamp: '2026-05-28T22:49:59+00:00'
+---
+</code></pre>
+<p><code>resource</code> holds a canonical API URL for the underlying asset, and there are no provenance, authorship, or integrity fields. It's a well-formed OKF concept.</p>
+<p>Here's the same thing as a cog. OKF readers still get the fields they expect, and MX-aware ones find the rest:</p>
+<pre><code class="language-yaml">---
+type: BigQuery Dataset
+resource: https://bigquery.googleapis.com/v2/projects/bigquery-public-data/datasets/ga4_obfuscated_sample_ecommerce
+title: BigQuery sample dataset for GA4 ecommerce
+description: A sample of obfuscated GA4 BigQuery event export data from the public dataset.
+tags: [ecommerce, analytics, bigquery, public-dataset]
+author: Tom Cranstoun
+created: 2026-05-28
+modified: 2026-05-28
+mx:
+  servedAt: https://example.com/cogs/ga4-ecommerce-dataset
+  canonicalUri: https://example.com/cogs/ga4-ecommerce-dataset.cog.md
+  proofOfAuthorship: { ... }
+  integritySignature: { ... }
+---
+</code></pre>
+<p>The top block is a valid OKF concept. The bottom block is the same one, still OKF-readable, now with identity, a published URL, and the trust signals OKF leaves to you. In practice, OKF-compatible means you don't pick one format: you emit the reserved fields and add the rest.</p>
+<p>For abstract concepts, such as a playbook, a runbook, or a business process, OKF's own spec says <code>resource</code> should be absent. A cog follows the same rule and leaves <code>resource</code> out. It can still list the sources it cites in <code>refersToExternal</code>, and either way the governance block holds the full trust layer.</p>
+<h2 id="who-decides-what-the-added-fields-mean" tabindex="-1">Who decides what the added fields mean</h2>
+<p>The mapping also shows who's in charge of what. OKF defines the reserved fields, which means Google does. Whoever the producer answers to defines the fields added on top. For MX that's <a href="https://tg.community">The Gathering</a>, the community body that governs what each field means and how it's encoded, independent of any single vendor. One vendor can hold the interoperability side, but none should own the meaning of the trust layer. That split is deliberate, and it's the subject of the post that started this.</p>
+<hr>
+<p><em>Tom Cranstoun founded the Machine Experience community, MX for short, and wrote the MX book series. He consults on MX strategy through Digital Domain Technologies Ltd.</em></p>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-11-14.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps" data-tour-id="post-next-steps" data-tour-description="About the author, and where to go next from this article.">
+        <div class="post-conclusion-author">
+          <img src="../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through how ready your organisation is for agents?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../js/app.js"></script>
+  <script type="module" src="../../js/mx-provenance-demo.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="/js/vendor/webmcp-tour/webmcp-tour.js"></script>
+</body>
+</html>

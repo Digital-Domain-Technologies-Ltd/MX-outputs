@@ -14,7 +14,7 @@
   --mx-font-body: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --mx-font-heading: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
   --mx-font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
-  --mx-size-base: 1.05rem;
+  --mx-size-base: 1rem;
   --mx-size-h1: 2.5rem;
   --mx-size-h2: 2rem;
   --mx-size-h3: 1.5rem;
@@ -25,12 +25,29 @@
   --mx-content-width: min(92vw, 1100px);
   --mx-space: 5rem;
   --mx-radius: 8px;
+  --mx-color-gold: #d4a843;
+  --mx-color-surface-strong: rgba(26, 58, 92, 0.5);
+  --mx-color-border-strong: rgba(45, 125, 210, 0.25);
   /* theme-specific */
-  --mx-gold: #d4a843;
-  --mx-blue-deep: #0a1628;
-  --mx-blue-light: #5ba4e6;
+  --mx-blue-dark: #0d2137;
+  --mx-white: #ffffff;
+  --mx-off-white: #f0f4f8;
   --mx-green-free: #2ecc71;
   /* legacy aliases - let harvested stylesheets resolve */
+  --mx-text: var(--mx-color-text);
+  --mx-text-muted: var(--mx-color-text-muted);
+  --mx-surface: var(--mx-color-surface);
+  --mx-surface-strong: var(--mx-color-surface-strong);
+  --mx-border: var(--mx-color-border);
+  --mx-border-strong: var(--mx-color-border-strong);
+  --mx-blue-deep: var(--mx-color-bg);
+  --mx-blue-mid: var(--mx-color-bg-alt);
+  --mx-blue-accent: var(--mx-color-accent);
+  --mx-blue-light: var(--mx-color-link);
+  --mx-gold: var(--mx-color-gold);
+  --intro-bg: var(--mx-color-surface);
+  --code-bg: var(--mx-color-code-bg);
+  --table-header-bg: var(--mx-color-surface-strong);
   --primary-bg: var(--mx-color-bg);
   --primary-text: var(--mx-color-text);
   --secondary-text: var(--mx-color-text-muted);
@@ -48,49 +65,83 @@
   --heading-font-family: var(--mx-font-heading);
   --fixed-font-family: var(--mx-font-mono);
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --mx-color-bg: #0a1628;
-    --mx-color-bg-alt: #1a3a5c;
-    --mx-color-text: #e8edf2;
-    --mx-color-text-muted: #b3c1d4;
-    --mx-color-link: #5ba4e6;
-    --mx-color-link-hover: #d4a843;
-    --mx-color-accent: #2070c0;
-    --mx-color-border: rgba(45, 125, 210, 0.2);
-    --mx-color-surface: rgba(26, 58, 92, 0.4);
-    --mx-color-code-bg: rgba(26, 58, 92, 0.5);
-  }
-}
-
+/* native base: themes/mx-site/base.css */
+/* Native base for pages the one page path composes. Semantic elements and --mx-* tokens only;
+   chunk styles live in intent-cms/chunks/<name>/<name>.css and target data-mx-chunk. */
 *, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 5rem; overflow-x: hidden; }
+body, h1, h2, h3, h4, h5, h6, p, ul, ol, dl, dd, figure, blockquote, pre, address { margin: 0; }
+ul, ol { padding: 0; }
 body {
-  margin: 0;
+  padding-top: var(--mx-nav-height);
   font-family: var(--mx-font-body);
   font-size: var(--mx-size-base);
   line-height: var(--mx-line-height);
   color: var(--mx-color-text);
   background: var(--mx-color-bg);
+  -webkit-font-smoothing: antialiased;
 }
 main { display: block; }
-h1, h2, h3, h4, h5, h6 { font-family: var(--mx-font-heading); color: var(--mx-color-text); line-height: 1.2; margin: 1.2em 0 0.5em; }
+img { display: block; max-width: 100%; height: auto; }
+address { font-style: normal; }
+
+h1, h2, h3, h4, h5, h6 { font-family: var(--mx-font-heading); color: var(--mx-white); line-height: 1.2; }
 h1 { font-size: var(--mx-size-h1); }
 h2 { font-size: var(--mx-size-h2); }
 h3 { font-size: var(--mx-size-h3); }
-h4 { font-size: var(--mx-size-h4); }
-p { margin: 0 0 1em; }
-a { color: var(--mx-color-link); }
-a:hover { color: var(--mx-color-link-hover); }
-ul, ol { margin: 0 0 1em; padding-left: 1.5em; }
-img { max-width: 100%; height: auto; }
-code, pre { font-family: var(--mx-font-mono); }
-code { background: var(--mx-color-code-bg); padding: 0.1em 0.3em; border-radius: var(--mx-radius); }
-pre { background: var(--mx-color-code-bg); padding: 1em; border-radius: var(--mx-radius); overflow-x: auto; }
-pre code { background: none; padding: 0; }
-table { border-collapse: collapse; width: 100%; margin: 0 0 1em; }
-th, td { border: 1px solid var(--mx-color-border); padding: 0.5em 0.75em; text-align: left; }
-th { background: var(--mx-color-surface); }
-hr { border: 0; border-top: 1px solid var(--mx-color-border); margin: 2em 0; }
+h4 { font-size: var(--mx-size-h4); font-weight: 500; }
+h5, h6 { font-size: 1.125rem; font-weight: 500; }
+
+a { color: var(--mx-color-link); text-decoration: none; transition: color 0.2s ease; }
+a:hover, a:focus-visible { color: var(--mx-color-link-hover); }
+a:focus-visible { outline: 2px solid var(--mx-color-link-hover); outline-offset: 2px; }
+main p a, main li a, main dd a, main blockquote a, main td a, main th a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+}
+main p a:hover, main li a:hover, main dd a:hover, main blockquote a:hover, main td a:hover, main th a:hover { text-decoration-thickness: 2px; }
+
+.skip-link { position: absolute; top: -100%; left: 1rem; z-index: 1000; padding: 0.5rem 1rem; border-radius: 0 0 4px 4px; background: var(--mx-color-link-hover); color: var(--mx-color-bg); font-weight: 500; }
+.skip-link:focus { top: 0; color: var(--mx-color-bg); }
+
+/* Prose rhythm for any native page: the article inside a post, and the sections of every other page. */
+main section > p, main article p { margin-bottom: 1.5rem; }
+main section > ul, main section > ol, main article ul, main article ol { margin-bottom: 1.5rem; padding-left: 2rem; }
+main li { margin-bottom: 0.5rem; }
+main h2 { margin: 3rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid var(--mx-color-border); font-size: 1.875rem; }
+main h3 { margin: 2rem 0 1rem; }
+main h4 { margin: 1.75rem 0 0.875rem; }
+main h5 { margin: 1.5rem 0 0.75rem; }
+main h6 { margin: 1.25rem 0 0.625rem; }
+main section > :first-child { margin-top: 0; }
+/* Page layout: each section of a page is a centred column; a chunk's own stylesheet (zero specificity here) overrides it. */
+:where(main > section) { width: min(92vw, 1100px); margin-inline: auto; padding: 3rem 0; }
+:where(main > section:first-child) { padding-top: 4rem; }
+main > section > h2 { margin: 0 0 1.5rem; border-bottom: 0; font-size: 2.25rem; font-weight: 500; text-align: center; }
+main > section:first-child > h1 { margin-bottom: 1.5rem; font-size: clamp(2.5rem, 7vw, 5rem); font-weight: 400; line-height: 1.05; }
+
+pre { overflow-x: auto; margin-bottom: 1.5rem; padding: 1rem; border: 1px solid var(--mx-color-border); border-radius: 4px; background: var(--mx-color-code-bg); }
+code { font-family: var(--mx-font-mono); font-size: 0.9em; }
+p code, li code, td code { padding: 0.2em 0.4em; border: 1px solid var(--mx-color-border); border-radius: 3px; background: var(--mx-color-code-bg); }
+pre { position: relative; }
+pre > button[data-mx-copy] {
+  position: absolute; top: 0.5rem; right: 0.5rem; padding: 0.25rem 0.6rem; border: 1px solid var(--mx-color-border-strong);
+  border-radius: 4px; background: var(--mx-color-surface-strong); color: var(--mx-color-text); font: inherit; font-size: 0.8rem; cursor: pointer;
+}
+
+table { width: 100%; margin-bottom: 1.5rem; border-collapse: collapse; }
+caption { margin-bottom: 0.5rem; text-align: left; font-weight: 500; color: var(--mx-white); }
+th, td { padding: 0.75rem; border: 1px solid var(--mx-color-border); text-align: left; vertical-align: top; }
+th { background: var(--mx-color-surface-strong); font-weight: 500; color: var(--mx-white); }
+
+figure { max-width: 100%; margin: 2rem auto; text-align: center; }
+figcaption { margin-top: 0.5rem; font-size: 0.9rem; color: var(--mx-color-text-muted); }
+blockquote { margin: 1.5rem 0; padding-left: 1.25rem; border-left: 3px solid var(--mx-color-border-strong); color: var(--mx-color-text-muted); }
+hr { margin: 3rem 0; border: 0; border-top: 1px solid var(--mx-color-border); }
+sup a { text-decoration: none; }
+.footnotes { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--mx-color-border); font-size: 0.9rem; color: var(--mx-color-text-muted); }
+.footnotes h2 { margin-top: 0; border-bottom: none; font-size: 1.125rem; }
 .button, a.button {
   display: inline-block; padding: 0.6em 1.2em; border-radius: var(--mx-radius);
   background: var(--mx-color-accent); color: var(--mx-color-bg); text-decoration: none;

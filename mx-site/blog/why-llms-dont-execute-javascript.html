@@ -10,8 +10,8 @@ title: "Why LLMs Do Not Execute JavaScript (But Google Does)"
 description: "LLMs train on Common Crawl, which never executes JavaScript. Google indexes current state, which does. The difference reshapes how you write for machines."
 author: "Tom Cranstoun"
 created: 2026-05-13
-modified: 2026-10-15
-version: "1.0"
+modified: 2026-11-16
+version: "1.1"
 
 type: blog-post
 mx:
@@ -23,7 +23,7 @@ mx:
   contextProvides:
     - "LLMs train on Common Crawl, which never executes JavaScript. Google indexes current state, which does. The difference reshapes how you write for machines."
   stability: stable
-  purpose: "LLMs train on Common Crawl, which never executes JavaScript. Google indexes current state, which does. The difference reshapes how you write for machines."
+  purpose: "Explain to web authors why LLM crawlers miss JavaScript-rendered content that Google indexes, and how to write for both."
   servedAt: https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
 
@@ -32,6 +32,7 @@ mx:
 <!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="LLMs train on Common Crawl, which never executes JavaScript. Google indexes current state, which does. The difference reshapes how you write for machines.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -67,69 +68,100 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
        never emitted here; a served page says what the document is, not how this
        estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Why LLMs Do Not Execute JavaScript (But Google Does)">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
   <meta name="ai-disclosure" content="ai-assisted">
 
-  <title>Why LLMs Do Not Execute JavaScript (But Google Does) | CogNovaMX</title>
+  <title>Why LLMs Do Not Execute JavaScript (But Google Does)</title>
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BlogPosting",
-        "name": "Why LLMs Do Not Execute JavaScript (But Google Does)",
-        "headline": "Why LLMs Do Not Execute JavaScript (But Google Does)",
-        "description": "LLMs train on Common Crawl, which never executes JavaScript. Google indexes current state, which does. The difference reshapes how you write for machines.",
-        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
-        "datePublished": "2026-05-13",
-        "dateModified": "2026-05-13",
-        "author": {
-          "@type": "Person",
-          "name": "Tom Cranstoun",
-          "email": "tom@digitaldomaintechnologies.com",
-          "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "CogNovaMX",
-          "legalName": "Digital Domain Technologies Ltd",
-          "alternateName": "CogNovaMX Ltd",
-          "url": "https://mx.allabout.network/"
-        },
-        "mainEntityOfPage": {
-          "@id": "https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html"
-        },
-        "articleSection": "Machine Experience",
-        "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 3321,
-        "inLanguage": "en-GB",
-        "isPartOf": {
-          "@id": "https://mx.allabout.network/#website"
-        }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "Why LLMs Do Not Execute JavaScript (But Google Does)",
+      "headline": "Why LLMs Do Not Execute JavaScript (But Google Does)",
+      "description": "LLMs train on Common Crawl, which never executes JavaScript. Google indexes current state, which does. The difference reshapes how you write for machines.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-05-13",
+      "dateModified": "2026-05-13",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
       },
-      {
-        "@type": "WebPage",
-        "@id": "https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html",
-        "name": "Why LLMs Do Not Execute JavaScript (But Google Does)",
-        "url": "https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html",
-        "inLanguage": "en-GB",
-        "isPartOf": {
-          "@id": "https://mx.allabout.network/#website"
-        }
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 3321,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
       }
-    ]
-  }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html",
+      "name": "Why LLMs Do Not Execute JavaScript (But Google Does)",
+      "url": "https://mx.allabout.network/blog/why-llms-dont-execute-javascript.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
   </script>
 
   <!-- Stylesheets -->
@@ -147,16 +179,16 @@ mx:
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
         <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
-      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav" data-tour-id="nav-menu" data-tour-description="Opens the site menu on a narrow screen; the section links are inside it.">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/books/">Books</a>
-        <a href="/learn/">Learn</a>
-        <a href="/services/">Services</a>
-        <a href="https://tityra.com">Audit</a>
-        <a href="/blog/" aria-current="page">Blog</a>
-        <a href="/the-gathering/">The Gathering</a>
-        <a href="/about/">About</a>
+        <a href="/" data-tour-id="nav-home" data-tour-description="The home page: what MX is and where to start.">Home</a>
+        <a href="/books/" data-tour-id="nav-books" data-tour-description="The MX books: the Handbook and the Protocols, with where to buy them.">Books</a>
+        <a href="/learn/" data-tour-id="nav-learn" data-tour-description="Lessons and explainers on Machine Experience, from first principles.">Learn</a>
+        <a href="/services/" data-tour-id="nav-services" data-tour-description="What CogNovaMX offers and how to get in touch about it.">Services</a>
+        <a href="https://tityra.com" data-tour-id="nav-audit" data-tour-description="Opens tityra.com, another site, where website audits are ordered.">Audit</a>
+        <a href="/blog/" data-tour-id="nav-blog" data-tour-description="Articles on MX, AI agents and the machine-readable web, newest first." aria-current="page">Blog</a>
+        <a href="/the-gathering/" data-tour-id="nav-gathering" data-tour-description="The Gathering: the independent body that stewards the MX standard.">The Gathering</a>
+        <a href="/about/" data-tour-id="nav-about" data-tour-description="Who is behind CogNovaMX and how to contact us.">About</a>
       </nav>
     </div>
   </header>
@@ -181,7 +213,7 @@ mx:
 
       <!-- Collapsible Index (TOC) - Pre-collapsed -->
       <details id="index" class="table-of-contents" data-state="initially-collapsed">
-        <summary>Index</summary>
+        <summary data-tour-id="post-contents" data-tour-description="The article's index: jump to any section of this post.">Index</summary>
         <nav aria-label="Table of contents">
           <ul>
         <li><a href="#machines-are-users-too">Machines are users too</a></li>
@@ -314,58 +346,30 @@ mx:
 <h3 id="the-mx-caveat" tabindex="-1">The MX caveat</h3>
 <p><code>robots.txt</code> is a voluntary signalling mechanism, not a means of legal enforcement. It expresses preferences, not permissions. CCBot respects it. Not every bot calling itself a crawler does. For sites you care about, verify the traffic by IP and reverse DNS rather than trusting the user-agent string alone. Assume that any rule designed to keep content out of AI training is honoured by the well-behaved scrapers and ignored by the rest.</p>
 <h3 id="the-llmstxt-problem-stands-separately" tabindex="-1">The llms.txt problem stands separately</h3>
-<p>None of the <code>robots.txt</code> behaviour above helps a crawler find an <code>llms.txt</code> file. CCBot follows <code>robots.txt</code>, reads sitemaps, and indexes HTML. A raw <code>.txt</code> file with no entry in your sitemap is invisible to it. That's the problem the next section addresses.</p>
+<p>None of the <code>robots.txt</code> behaviour above tells an agent where your <code>llms.txt</code> file is or how to read it. That's a separate problem, and it's the subject of the next section.</p>
 <h3 id="the-llmstxt-problem" tabindex="-1">The llms.txt problem</h3>
-<p>The <code>llms.txt</code> file is a proposed convention for declaring how LLMs should use your content. The problem: Common Crawl won't find it.</p>
-<p>Why not?</p>
+<p>The <code>llms.txt</code> file is a proposed convention: a Markdown document at the root of a site that gives language models a short, curated overview of it, with links to the pages that matter (<a href="https://llmstxt.org/">llmstxt.org</a>). It's read when an agent or tool goes looking for it, typically at inference time. It isn't a way to get content into a training crawl, and it doesn't change how Common Crawl behaves.</p>
+<p>Two things stop most implementations from working:</p>
 <ul>
-<li>It isn't HTML (Common Crawl primarily harvests HTML).</li>
-<li>It isn't in your sitemap (typically).</li>
-<li>There's no standard discovery mechanism.</li>
-<li>It's a <code>.txt</code> file, and machines have no reason to seek it out.</li>
+<li>It doesn't answer as Markdown. A rewrite rule, a firewall challenge or a single-page app router returns an HTML page instead of the file.</li>
+<li>Nothing points to it. A file at the root is found only by a reader that already knows to look there.</li>
 </ul>
-<h3 id="the-machine-experience-solution-keep-llmstxt-as-it-is-serve-it-as-html-for-common-crawl" tabindex="-1">The Machine Experience solution: keep llms.txt as it is, serve it as HTML for Common Crawl</h3>
-<p>Two changes are enough. Don't move the file. Don't ship a second file. Keep the canonical <code>/llms.txt</code> exactly as authoring tools, MCP clients, and humans expect it. Change what the edge serves and what your sitemap lists.</p>
-<p><strong>1. Wrap <code>/llms.txt</code> as HTML at the edge.</strong></p>
-<p>The source-of-truth file on disk stays raw markdown so any tool fetching <code>/llms.txt</code> as text still works. A Cloudflare Worker (or equivalent) intercepts the request for that one URL, fetches the raw content, and serves it back wrapped in a minimal HTML document with <code>Content-Type: text/html</code>. The content inside is byte-identical to the original markdown, sitting in a <code>&lt;pre&gt;</code> block. Common Crawl now treats it as an HTML page and indexes it.</p>
-<pre><code class="language-javascript">export default {
-  async fetch(request) {
-    const url = new URL(request.url);
-    if (url.pathname === '/llms.txt') {
-      const content = await fetch('https://your-origin.com/llms.txt')
-        .then(r =&gt; r.text());
-
-      const html = `&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;title&gt;llms.txt&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;pre&gt;${content}&lt;/pre&gt;
-&lt;/body&gt;
-&lt;/html&gt;`;
-
-      return new Response(html, {
-        headers: { 'Content-Type': 'text/html; charset=utf-8' }
-      });
-    }
-    return fetch(request);
-  }
-};
+<h3 id="the-machine-experience-solution-serve-llmstxt-as-text-and-point-to-it" tabindex="-1">The Machine Experience solution: serve llms.txt as text, and point to it</h3>
+<p>Two changes are enough. Leave the file in place and keep to one copy.</p>
+<p><strong>1. Serve <code>/llms.txt</code> as the file it is.</strong></p>
+<p>Return it with a 200 and <code>Content-Type: text/plain; charset=utf-8</code> or <code>text/markdown; charset=utf-8</code>. Don't wrap it in an HTML document. Most web servers already send <code>text/plain</code> for a <code>.txt</code> file, so the work is making sure nothing in front of the server alters that. Lighthouse's <code>llms-txt</code> audit fetches the file and checks that it reads as Markdown text, with an H1 and a Markdown link (<a href="https://github.com/GoogleChrome/lighthouse/blob/main/core/audits/agentic/llms-txt.js">Lighthouse source</a>).</p>
+<pre><code class="language-bash">curl -sI https://example.com/llms.txt | grep -i '^content-type'
+curl -s https://example.com/llms.txt | head -n 1
 </code></pre>
-<p><strong>2. Add <code>/llms.txt</code> to <code>sitemap.xml</code>.</strong></p>
-<pre><code class="language-xml">&lt;urlset xmlns=&quot;http://www.sitemaps.org/schemas/sitemap/0.9&quot;&gt;
-  &lt;url&gt;
-    &lt;loc&gt;https://example.com/llms.txt&lt;/loc&gt;
-    &lt;lastmod&gt;2026-01-24&lt;/lastmod&gt;
-  &lt;/url&gt;
-&lt;/urlset&gt;
+<p>The first command should show <code>text/plain</code> or <code>text/markdown</code>. The second should print a Markdown H1, not <code>&lt;!DOCTYPE html&gt;</code>.</p>
+<p><strong>2. Point to it from every page.</strong></p>
+<p>The convention uses <code>rel=&quot;describedby&quot;</code> for this, either as an HTTP <code>Link</code> header or as a <code>&lt;link&gt;</code> element in the <code>&lt;head&gt;</code> (<a href="https://llmstxt.org/">llmstxt.org</a>):</p>
+<pre><code class="language-html">&lt;link rel=&quot;describedby&quot; href=&quot;/llms.txt&quot;&gt;
 </code></pre>
-<p>Sitemap inclusion is what tells Common Crawl the URL exists at all. HTML wrapping is what makes it index the content once it arrives.</p>
-<p>The full recipe, including the production version of the wrapper (which also injects JSON-LD, OG, and Twitter metadata into its <code>&lt;head&gt;</code> so the page carries proper agent-facing signals), is in the companion post: <a href="https://mx.allabout.network/blog/llms-txt-guide.html">Why llms.txt Isn't Working, and How to Fix It</a>.</p>
+<p>Leave <code>llms.txt</code> out of <code>sitemap.xml</code>. A sitemap lists the pages you want indexed for people; <code>llms.txt</code> is a reading guide for language models, not one of those pages.</p>
+<p>The full recipe and checklist are in the companion post: <a href="https://mx.allabout.network/blog/llms-txt-guide.html">Why llms.txt Isn't Working, and How to Fix It</a>.</p>
 <h3 id="why-this-matters" tabindex="-1">Why this matters</h3>
-<p>This is Machine Experience thinking. Don't assume proposed conventions will work just because they have been proposed. Understand how the actual infrastructure operates (Common Crawl scrapes HTML from sitemaps), and design accordingly. Keep what tooling expects. Reshape only what the crawler needs.</p>
+<p>This is Machine Experience thinking. Don't assume proposed conventions will work just because they have been proposed. Understand how the readers that use them behave, and design accordingly. Serve the file in the form the convention defines, and make it easy to find.</p>
 <h3 id="llmstxt-and-robotstxt-as-ephemeral-operational-files" tabindex="-1">llms.txt and robots.txt as ephemeral operational files</h3>
 <p>An important distinction: <code>llms.txt</code> and <code>robots.txt</code> aren't static sovereign data. They're ephemeral operational instructions that change as your site evolves.</p>
 <p><strong>llms.txt is ephemeral:</strong></p>
@@ -492,7 +496,7 @@ This site is optimised for LLM understanding...
 <li>Both use the same ARIA markup.</li>
 </ul>
 <p>This needs no new technology or extra attributes; it applies UX thinking to machine users.</p>
-<p>The <code>data-reason</code> attribute matters. It isn't just a boolean flag, it's explicit, human-readable context that prevents AI hallucination.</p>
+<p>The <code>data-reason</code> attribute matters. It isn't just a boolean flag, it's explicit, human-readable context that reduces the room for AI hallucination.</p>
 <p>Without this signal, an AI visiting your stock page might:</p>
 <ul>
 <li>See &quot;AAPL: £187.42&quot; in a cached snapshot.</li>
@@ -539,7 +543,7 @@ This site is optimised for LLM understanding...
           <h2 id="reader-notice-heading">About this page</h2>
           <ul>
             <li>Written by Tom Cranstoun.</li>
-            <li>Last changed on 2026-10-15.</li>
+            <li>Last changed on 2026-11-16.</li>
           </ul>
         </footer>
 
@@ -547,7 +551,7 @@ This site is optimised for LLM understanding...
 
 
       <!-- Post Conclusion: author + CTA + onward links -->
-      <aside class="post-conclusion" aria-label="About the author and next steps">
+      <aside class="post-conclusion" aria-label="About the author and next steps" data-tour-id="post-next-steps" data-tour-description="About the author, and where to go next from this article.">
         <div class="post-conclusion-author">
           <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
@@ -558,7 +562,7 @@ This site is optimised for LLM understanding...
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through how ready your organisation is for agents?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
@@ -603,6 +607,7 @@ This site is optimised for LLM understanding...
   </footer>
 
   <script src="../js/app.js"></script>
+  <script src="../js/vendor/webmcp-tour/webmcp-tour.js"></script>
   <script type="module" src="../js/mx-provenance-demo.js"></script>
 </body>
 </html>

@@ -10,8 +10,8 @@ title: "Your Site Is Already Training AI Models"
 description: "Your pages are harvested every month by Common Crawl, the archive nearly every large language model trains on. Being in it is not the same as being well represented in it. Here is what decides whether a model learns your content or drops it."
 author: "Tom Cranstoun"
 created: 2026-06-10
-modified: 2026-10-29
-version: "0.2"
+modified: 2026-11-16
+version: "0.3"
 
 type: blog-post
 tags: [common-crawl, llms-txt, schema-org, training-data, machine-experience, agent-readiness, provenance]
@@ -21,6 +21,7 @@ mx:
   audience: [humans, machines]
   purpose: "Explain how Common Crawl turns published pages into LLM training data, why being in the crawl is not the same as being well represented, and which structural signals (sitemaps, JSON-LD, meta tags, canonical URLs, accurate lastmod, clear content) survive the quality filters. Position MX as the architecture that makes a site machine-readable by design."
   partOf: "https://mx.allabout.network/blog/"
+  relatedTo: [datalake/draft-site/blog-corpus.cog.md]
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator (npm run promote)."
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/foundations/your-site-is-already-training-ai.md
   contextProvides:
@@ -33,6 +34,7 @@ mx:
 <!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <meta name="author" content="Tom Cranstoun">
   <meta name="description" content="Your pages are harvested every month by Common Crawl, the archive nearly every large language model trains on. Being in it is not the same as being well represented in it. Here is what decides whether a model learns your content or drops it.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
@@ -68,12 +70,12 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
        never emitted here; a served page says what the document is, not how this
        estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Your Site Is Already Training AI Models">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="0.2">
+  <meta name="mx:version" content="0.3">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/your-site-is-already-training-ai.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -83,54 +85,85 @@ mx:
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BlogPosting",
-        "name": "Your Site Is Already Training AI Models",
-        "headline": "Your Site Is Already Training AI Models",
-        "description": "Your pages are harvested every month by Common Crawl, the archive nearly every large language model trains on. Being in it is not the same as being well represented in it. Here is what decides whether a model learns your content or drops it.",
-        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
-        "datePublished": "2026-06-10",
-        "dateModified": "2026-06-10",
-        "author": {
-          "@type": "Person",
-          "name": "Tom Cranstoun",
-          "email": "tom@digitaldomaintechnologies.com",
-          "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "CogNovaMX",
-          "legalName": "Digital Domain Technologies Ltd",
-          "alternateName": "CogNovaMX Ltd",
-          "url": "https://mx.allabout.network/"
-        },
-        "mainEntityOfPage": {
-          "@id": "https://mx.allabout.network/blog/your-site-is-already-training-ai.html"
-        },
-        "articleSection": "Machine Experience",
-        "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 3575,
-        "inLanguage": "en-GB",
-        "isPartOf": {
-          "@id": "https://mx.allabout.network/#website"
-        }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "Your Site Is Already Training AI Models",
+      "headline": "Your Site Is Already Training AI Models",
+      "description": "Your pages are harvested every month by Common Crawl, the archive nearly every large language model trains on. Being in it is not the same as being well represented in it. Here is what decides whether a model learns your content or drops it.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-06-10",
+      "dateModified": "2026-06-10",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
       },
-      {
-        "@type": "WebPage",
-        "@id": "https://mx.allabout.network/blog/your-site-is-already-training-ai.html",
-        "name": "Your Site Is Already Training AI Models",
-        "url": "https://mx.allabout.network/blog/your-site-is-already-training-ai.html",
-        "inLanguage": "en-GB",
-        "isPartOf": {
-          "@id": "https://mx.allabout.network/#website"
-        }
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/your-site-is-already-training-ai.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 3473,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
       }
-    ]
-  }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/your-site-is-already-training-ai.html",
+      "name": "Your Site Is Already Training AI Models",
+      "url": "https://mx.allabout.network/blog/your-site-is-already-training-ai.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
   </script>
 
   <!-- Stylesheets -->
@@ -148,16 +181,16 @@ mx:
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
         <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
-      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav" data-tour-id="nav-menu" data-tour-description="Opens the site menu on a narrow screen; the section links are inside it.">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/books/">Books</a>
-        <a href="/learn/">Learn</a>
-        <a href="/services/">Services</a>
-        <a href="https://tityra.com">Audit</a>
-        <a href="/blog/" aria-current="page">Blog</a>
-        <a href="/the-gathering/">The Gathering</a>
-        <a href="/about/">About</a>
+        <a href="/" data-tour-id="nav-home" data-tour-description="The home page: what MX is and where to start.">Home</a>
+        <a href="/books/" data-tour-id="nav-books" data-tour-description="The MX books: the Handbook and the Protocols, with where to buy them.">Books</a>
+        <a href="/learn/" data-tour-id="nav-learn" data-tour-description="Lessons and explainers on Machine Experience, from first principles.">Learn</a>
+        <a href="/services/" data-tour-id="nav-services" data-tour-description="What CogNovaMX offers and how to get in touch about it.">Services</a>
+        <a href="https://tityra.com" data-tour-id="nav-audit" data-tour-description="Opens tityra.com, another site, where website audits are ordered.">Audit</a>
+        <a href="/blog/" data-tour-id="nav-blog" data-tour-description="Articles on MX, AI agents and the machine-readable web, newest first." aria-current="page">Blog</a>
+        <a href="/the-gathering/" data-tour-id="nav-gathering" data-tour-description="The Gathering: the independent body that stewards the MX standard.">The Gathering</a>
+        <a href="/about/" data-tour-id="nav-about" data-tour-description="Who is behind CogNovaMX and how to contact us.">About</a>
       </nav>
     </div>
   </header>
@@ -182,7 +215,7 @@ mx:
 
       <!-- Collapsible Index (TOC) - Pre-collapsed -->
       <details id="index" class="table-of-contents" data-state="initially-collapsed">
-        <summary>Index</summary>
+        <summary data-tour-id="post-contents" data-tour-description="The article's index: jump to any section of this post.">Index</summary>
         <nav aria-label="Table of contents">
           <ul>
         <li><a href="#what-common-crawl-is">What Common Crawl Is</a></li>
@@ -202,7 +235,7 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="3575">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="3473">
         <header class="article-header">
           <h1>Your Site Is Already Training AI Models</h1>
           <div class="article-meta"
@@ -291,16 +324,16 @@ mx:
 </table>
 <p>Blocking CCBot removes you from the open datasets that researchers use. It doesn't make you invisible to any commercial AI product.</p>
 <p><strong>It archives <code>robots.txt</code> itself</strong> as a dedicated dataset, kept separate from the main crawl, for researchers building robots.txt parsers.</p>
-<p><strong>It crawls <code>text/plain</code> files</strong>, though they made up a small fraction of the most recent crawl, so a plain-text <code>llms.txt</code> listed in your sitemap can be archived, but only as one of that minority. But Common Crawl is a passive archive. It stores the bytes; it doesn't read <code>llms.txt</code> to change how it crawls.</p>
+<p><strong>It crawls <code>text/plain</code> files</strong>, though they made up a small fraction of the most recent crawl. Common Crawl is a passive archive. It stores the bytes; it doesn't read <code>llms.txt</code> to change how it crawls.</p>
 <h2 id="llmstxt-honestly" tabindex="-1">llms.txt, Honestly</h2>
-<p><code>llms.txt</code> was proposed as a machine-readable file that tells AI systems what to include or exclude from a site. For a long time the honest answer was simple: the idea is reasonable, the adoption isn't there yet.</p>
+<p><code>llms.txt</code> was proposed as a Markdown file at the root of a site that gives language models a short, curated overview of it, with links to the pages that matter (<a href="https://llmstxt.org/">llms.txt proposal</a>). For a long time the honest answer was simple: the idea is reasonable, the adoption isn't there yet.</p>
 <p>That has shifted, though not in the way most coverage suggests.</p>
-<p>In May 2026, Google added an <strong>Agentic Browsing</strong> category to Lighthouse 13.3. It scores how well a site is built for machine interaction, using pass or fail checks rather than the traditional 0-to-100 number. Among the checks: presence of <code>llms.txt</code>, WebMCP integration, accessibility-tree integrity, and layout stability (CLS).</p>
+<p>In May 2026, Google added an <strong>Agentic Browsing</strong> category to Lighthouse 13.3. It scores how well a site is built for machine interaction, using pass or fail checks rather than the traditional 0-to-100 number. Among the checks: whether a published <code>llms.txt</code> is well formed, WebMCP integration, accessibility-tree integrity, and layout stability (CLS).</p>
 <p>Google's stated reason: &quot;Without llms.txt, agents may spend more time crawling the site to understand its high-level structure and primary content.&quot;</p>
-<p>Here is the tension worth naming. Google Search has said plainly that <code>llms.txt</code> isn't needed for AI search visibility. Lighthouse now flags its absence as a failing audit. The most plausible reading is that Google is future-proofing for agentic browsing, where a software agent navigates your site on its own, without yet committing to it as a ranking signal for AI Overviews.</p>
+<p>Here is the tension worth naming. Google Search has said plainly that <code>llms.txt</code> isn't needed for AI search visibility. Lighthouse now audits it: a missing file is marked not applicable, but one that answers with an error, or isn't valid Markdown with an H1 and at least one link, fails (<a href="https://github.com/GoogleChrome/lighthouse/blob/main/core/audits/agentic/llms-txt.js">Lighthouse llms-txt audit</a>). The most plausible reading is that Google is future-proofing for agentic browsing, where a software agent navigates your site on its own, without yet committing to it as a ranking signal for AI Overviews.</p>
 <p>For Common Crawl specifically, nothing has changed. It'll store your <code>llms.txt</code> if it finds it, and it won't read it to change how it crawls. The training pipeline is unaffected either way.</p>
-<p>There's a transport detail that decides whether <code>llms.txt</code> reaches the crawl at all, and it's the piece most implementations get wrong. Common Crawl archives HTML pages from your sitemap reliably, but it captures only a small fraction of plain-text files. A <code>llms.txt</code> served as plain text is therefore the less certain route into the archive. The fix, and what I do on this site, is to deliver <code>llms.txt</code> in an HTML page that wraps the plain-text content in a <code>&lt;pre&gt;</code> block. The crawler ingests it like any other HTML page, so the full text lands in the archive; the <code>&lt;pre&gt;</code> renders it faithfully as the readable plain-text file a person expects. The monospaced, code-block look is the point, not a fault: it's a rendering I chose, not anything Common Crawl did, and it gives you HTML reach and plain-text readability in one file. I walk through the same content before and after the wrap, with working Cloudflare Worker code, in <a href="https://mx.allabout.network/blog/llms-txt-guide.html">Why llms.txt Probably Isn't Working</a>. As <code>llms.txt</code> moves from a nicety to something people expect to find, getting the transport right decides whether yours reaches the crawl at all.</p>
-<p>So the practical position is: add <code>llms.txt</code>. It's now an official Lighthouse check, which means it shows up in performance reports, agency audits, and client dashboards. The cost is one file. The benefit is a pass on an increasingly visible check, plus genuine use for the agentic browsing that's coming regardless.</p>
+<p>There's a transport detail most implementations get wrong, and it has nothing to do with the crawl. <code>llms.txt</code> is a Markdown file, so serve it as one: a 200 with <code>Content-Type: text/plain</code> or <code>text/markdown</code>, and no HTML wrapper, rewrite rule or challenge page in front of it. That's what the convention defines (<a href="https://llmstxt.org/">llms.txt proposal</a>) and what the Lighthouse audit reads. Point to it from your pages with <code>&lt;link rel=&quot;describedby&quot; href=&quot;/llms.txt&quot;&gt;</code>, and leave it out of your sitemap, which is for the pages you want indexed. The checks are in <a href="https://mx.allabout.network/blog/llms-txt-guide.html">Why llms.txt Isn't Working, and How to Fix It</a>.</p>
+<p>So the practical position is: add <code>llms.txt</code> if it helps the agents that read your site, and get it right if you do. It's now a Lighthouse check, which means a broken one shows up in performance reports, agency audits, and client dashboards. The cost is one file. The benefit is a clear briefing for agents that look for it.</p>
 <p>For a worked example, <a href="https://mx.allabout.network/llms.txt">mx.allabout.network/llms.txt</a> shows what a complete file looks like: an explicit content policy, a link to a full-site corpus (<code>llms-full.txt</code>) for agents that want everything in one fetch, and direct links to the core technical specifications. That's the pattern to follow, a machine-readable briefing rather than a minimal placeholder.</p>
 <p>There's a larger point buried in that Lighthouse category. The Agentic Browsing checks put accessibility-tree integrity and layout stability alongside <code>llms.txt</code>. Google has now formally treated accessibility signals as agent-readiness signals: an agent and a person with assistive technology depend on the same page structure. The idea isn't new, but it is, at last, official.</p>
 <h2 id="what-actually-works" tabindex="-1">What Actually Works</h2>
@@ -421,7 +454,7 @@ mx:
 <p>So the structured data and explicit metadata on your current pages do two jobs at once: they shape future training runs, and they give the clearest possible signal to live-retrieval systems that can override stale training knowledge. Both matter. Both depend on the same underlying quality.</p>
 <h2 id="what-this-looks-like-on-my-own-site" tabindex="-1">What This Looks Like on My Own Site</h2>
 <p>The checklist above isn't theory. Here is how it's applied on this site.</p>
-<p><strong><code>llms.txt</code> and <code>llms-full.txt</code> are both published, served as HTML that wraps the plain text in a <code>&lt;pre&gt;</code> block.</strong> An agent that wants a high-level briefing reads <code>llms.txt</code>. An agent that wants everything, every published page in one file, fetches <code>llms-full.txt</code>. One request, full corpus, no crawling required. That's the pattern the convention intended and almost nobody implements. Serving them as HTML gets them ingested by Common Crawl like any other page; the <code>&lt;pre&gt;</code> renders them as the clean plain-text files a reader expects. HTML reach and plain-text readability, in one file.</p>
+<p><strong><code>llms.txt</code> and <code>llms-full.txt</code> are both published, as Markdown text.</strong> An agent that wants a high-level briefing reads <code>llms.txt</code>. An agent that wants everything, every published page in one file, fetches <code>llms-full.txt</code>. One request, full corpus, no crawling required. That's the pattern the convention intended and almost nobody implements.</p>
 <p><strong><code>robots.txt</code> declares the sitemap and allows all crawlers.</strong> <code>User-agent: *</code> with <code>Allow: /</code> means CCBot, GPTBot, ClaudeBot, PerplexityBot, and every other crawler has access. No accidental blocks. The exclusions are deliberate and limited to the book appendices and private drafts.</p>
 <p><strong>The content policy is stated in <code>llms.txt</code>, in plain words a machine can act on:</strong> &quot;AI agents may cite, summarise, and recommend content from this site with attribution to CogNovaMX (a trading name of Digital Domain Technologies Ltd) and Tom Cranstoun.&quot; No agent has to guess whether this content is reusable.</p>
 <p><strong>AI contributor profiles are published.</strong> There are pages for Claude Code, Claude Sonnet 4.5, and Microsoft Copilot alongside the author profile. Declaring which AI models contributed to content is a provenance signal almost no site makes explicit.</p>
@@ -438,7 +471,7 @@ mx:
           <h2 id="reader-notice-heading">About this page</h2>
           <ul>
             <li>Written by Tom Cranstoun.</li>
-            <li>Last changed on 2026-10-29.</li>
+            <li>Last changed on 2026-11-16.</li>
           </ul>
         </footer>
 
@@ -446,7 +479,7 @@ mx:
 
 
       <!-- Post Conclusion: author + CTA + onward links -->
-      <aside class="post-conclusion" aria-label="About the author and next steps">
+      <aside class="post-conclusion" aria-label="About the author and next steps" data-tour-id="post-next-steps" data-tour-description="About the author, and where to go next from this article.">
         <div class="post-conclusion-author">
           <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
@@ -457,7 +490,7 @@ mx:
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through how ready your organisation is for agents?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
@@ -502,6 +535,7 @@ mx:
   </footer>
 
   <script src="../js/app.js"></script>
+  <script src="../js/vendor/webmcp-tour/webmcp-tour.js"></script>
   <script type="module" src="../js/mx-provenance-demo.js"></script>
 </body>
 </html>

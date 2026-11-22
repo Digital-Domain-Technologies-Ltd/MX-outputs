@@ -7,14 +7,15 @@
 ---
 "@context": https://mx.allabout.network/canon/context.json
 title: "Why llms.txt Isn't Working, and How to Fix It"
-description: "Most llms.txt implementations have two structural problems that stop crawlers and agents reaching them. Here is the fix and the working code."
+description: "Most llms.txt implementations have two structural problems that stop agents reaching and reading them. Here are the fixes, and the checks that prove them."
 author: "Tom Cranstoun"
 created: 2026-04-09
-modified: 2026-10-29
-version: "1.0"
+modified: 2026-11-16
+version: "1.1"
 
 type: blog-post
 mx:
+  partOf: datalake/draft-site/blog-corpus.cog.md
   mxSpecVersion: "0.9"
   x-mx-contentState: published
   quotes:
@@ -23,9 +24,9 @@ mx:
   aiAssistance: "welcome"
   canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/agent-web/llms-txt-guide.md
   contextProvides:
-    - "Most llms.txt implementations have two structural problems that stop crawlers and agents reaching them. Here is the fix and the working code."
+    - "Most llms.txt implementations have two structural problems that stop agents reaching and reading them. Here are the fixes, and the checks that prove them."
   stability: stable
-  purpose: "Most llms.txt implementations have two structural problems that stop crawlers and agents reaching them. Here is the fix and the working code."
+  purpose: "Give developers the two structural fixes, and the checks, that make llms.txt reachable and readable by agents: serve it as Markdown text, and point to it from every page."
   servedAt: https://mx.allabout.network/blog/llms-txt-guide.html
   runbook: "Markdown source for the mx-site blog post. Edit here; the static HTML under mx-site/blog is generated from this file by the Intent CMS generator."
 
@@ -34,8 +35,9 @@ mx:
 <!-- MX-SOURCE-FRONTMATTER:END -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
   <meta name="author" content="Tom Cranstoun">
-  <meta name="description" content="Most llms.txt implementations have two structural problems that stop crawlers and agents reaching them. Here is the fix and the working code.">
+  <meta name="description" content="Most llms.txt implementations have two structural problems that stop agents reaching and reading them. Here are the fixes, and the checks that prove them.">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
   <link rel="canonical" href="https://mx.allabout.network/blog/llms-txt-guide.html">
 
@@ -43,7 +45,7 @@ mx:
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://mx.allabout.network/blog/llms-txt-guide.html">
   <meta property="og:title" content="Why llms.txt Isn't Working, and How to Fix It | CogNovaMX">
-  <meta property="og:description" content="Most llms.txt implementations have two structural problems that stop crawlers and agents reaching them. Here is the fix and the working code.">
+  <meta property="og:description" content="Most llms.txt implementations have two structural problems that stop agents reaching and reading them. Here are the fixes, and the checks that prove them.">
   <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta property="og:image:width" content="1200">
@@ -56,7 +58,7 @@ mx:
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Why llms.txt Isn't Working, and How to Fix It | CogNovaMX">
-  <meta name="twitter:description" content="Most llms.txt implementations have two structural problems that stop crawlers and agents reaching them. Here is the fix and the working code.">
+  <meta name="twitter:description" content="Most llms.txt implementations have two structural problems that stop agents reaching and reading them. Here are the fixes, and the checks that prove them.">
   <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
   <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
   <meta name="twitter:site" content="@ddttomtom">
@@ -69,12 +71,12 @@ mx:
   <meta name="mx:status" content="published">
   <meta name="mx:contentType" content="blog-post">
   <meta name="mx:audience" content="humans, machines">
-  <!-- MX carrier tags. Vendor-namespaced fields are internal (ADR 63) and are
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
        never emitted here; a served page says what the document is, not how this
        estate is organised. Stewardship lives in the markdown source. -->
   <meta name="mx:name" content="Why llms.txt Isn't Working, and How to Fix It">
   <meta name="mx:type" content="blog-post">
-  <meta name="mx:version" content="1.0">
+  <meta name="mx:version" content="1.1">
   <meta name="mx:author" content="Tom Cranstoun">
   <link rel="mx" href="https://mx.allabout.network/blog/llms-txt-guide.html">
   <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
@@ -84,54 +86,85 @@ mx:
 
   <!-- Schema.org JSON-LD -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "BlogPosting",
-        "name": "Why llms.txt Isn't Working, and How to Fix It",
-        "headline": "Why llms.txt Isn't Working, and How to Fix It",
-        "description": "Most llms.txt implementations have two structural problems that stop crawlers and agents reaching them. Here is the fix and the working code.",
-        "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
-        "datePublished": "2026-04-09",
-        "dateModified": "2026-04-09",
-        "author": {
-          "@type": "Person",
-          "name": "Tom Cranstoun",
-          "email": "tom@digitaldomaintechnologies.com",
-          "url": "https://www.linkedin.com/in/tom-cranstoun/",
-          "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "name": "CogNovaMX",
-          "legalName": "Digital Domain Technologies Ltd",
-          "alternateName": "CogNovaMX Ltd",
-          "url": "https://mx.allabout.network/"
-        },
-        "mainEntityOfPage": {
-          "@id": "https://mx.allabout.network/blog/llms-txt-guide.html"
-        },
-        "articleSection": "Machine Experience",
-        "keywords": ["machine-experience", "ai-agents"],
-        "wordCount": 2824,
-        "inLanguage": "en-GB",
-        "isPartOf": {
-          "@id": "https://mx.allabout.network/#website"
-        }
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "Why llms.txt Isn't Working, and How to Fix It",
+      "headline": "Why llms.txt Isn't Working, and How to Fix It",
+      "description": "Most llms.txt implementations have two structural problems that stop agents reaching and reading them. Here are the fixes, and the checks that prove them.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-04-09",
+      "dateModified": "2026-04-09",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
       },
-      {
-        "@type": "WebPage",
-        "@id": "https://mx.allabout.network/blog/llms-txt-guide.html",
-        "name": "Why llms.txt Isn't Working, and How to Fix It",
-        "url": "https://mx.allabout.network/blog/llms-txt-guide.html",
-        "inLanguage": "en-GB",
-        "isPartOf": {
-          "@id": "https://mx.allabout.network/#website"
-        }
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/llms-txt-guide.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 1745,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
       }
-    ]
-  }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/llms-txt-guide.html",
+      "name": "Why llms.txt Isn't Working, and How to Fix It",
+      "url": "https://mx.allabout.network/blog/llms-txt-guide.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
   </script>
 
   <!-- Stylesheets -->
@@ -149,16 +182,16 @@ mx:
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
         <img src="../images/logo.webp" srcset="../images/logo.webp 1x, ../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
-      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav" data-tour-id="nav-menu" data-tour-description="Opens the site menu on a narrow screen; the section links are inside it.">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/books/">Books</a>
-        <a href="/learn/">Learn</a>
-        <a href="/services/">Services</a>
-        <a href="https://tityra.com">Audit</a>
-        <a href="/blog/" aria-current="page">Blog</a>
-        <a href="/the-gathering/">The Gathering</a>
-        <a href="/about/">About</a>
+        <a href="/" data-tour-id="nav-home" data-tour-description="The home page: what MX is and where to start.">Home</a>
+        <a href="/books/" data-tour-id="nav-books" data-tour-description="The MX books: the Handbook and the Protocols, with where to buy them.">Books</a>
+        <a href="/learn/" data-tour-id="nav-learn" data-tour-description="Lessons and explainers on Machine Experience, from first principles.">Learn</a>
+        <a href="/services/" data-tour-id="nav-services" data-tour-description="What CogNovaMX offers and how to get in touch about it.">Services</a>
+        <a href="https://tityra.com" data-tour-id="nav-audit" data-tour-description="Opens tityra.com, another site, where website audits are ordered.">Audit</a>
+        <a href="/blog/" data-tour-id="nav-blog" data-tour-description="Articles on MX, AI agents and the machine-readable web, newest first." aria-current="page">Blog</a>
+        <a href="/the-gathering/" data-tour-id="nav-gathering" data-tour-description="The Gathering: the independent body that stewards the MX standard.">The Gathering</a>
+        <a href="/about/" data-tour-id="nav-about" data-tour-description="Who is behind CogNovaMX and how to contact us.">About</a>
       </nav>
     </div>
   </header>
@@ -183,7 +216,7 @@ mx:
 
       <!-- Collapsible Index (TOC) - Pre-collapsed -->
       <details id="index" class="table-of-contents" data-state="initially-collapsed">
-        <summary>Index</summary>
+        <summary data-tour-id="post-contents" data-tour-description="The article's index: jump to any section of this post.">Index</summary>
         <nav aria-label="Table of contents">
           <ul>
         <li><a href="#the-two-problems-nobody-mentions">The Two Problems Nobody Mentions</a></li>
@@ -191,10 +224,8 @@ mx:
         <li><a href="#services">Services</a></li>
         <li><a href="#docs">Docs</a></li>
         <li><a href="#optional">Optional</a></li>
-        <li><a href="#about-cognovamx">About CogNovaMX</a></li>
         <li><a href="#what-mx-practice-says-about-this">What MX Practice Says About This</a></li>
         <li><a href="#a-note-on-headless-and-javascript-rendered-sites">A Note on Headless and JavaScript-Rendered Sites</a></li>
-        <li><a href="#the-standard-behind-the-recipe">The Standard Behind the Recipe</a></li>
         <li><a href="#the-checklist">The Checklist</a></li>
         <li><a href="#readable-by-both-means-readable-by-both">Readable by Both Means Readable by Both</a></li>
           </ul>
@@ -202,61 +233,33 @@ mx:
       </details>
 
       <!-- Article -->
-      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="2824">
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1745">
         <header class="article-header">
           <h1>Why llms.txt Isn't Working, and How to Fix It</h1>
           <div class="article-meta"
                data-published="2026-04-09"
                data-modified="2026-04-09"
-               data-reading-time="15 min">
+               data-reading-time="9 min">
             <time datetime="2026-04-09">9 April 2026</time>
             <span>·</span>
             <span>Tom Cranstoun</span>
             <span>·</span>
-            <span>15 min read</span>
+            <span>9 min read</span>
           </div>
         </header>
 
 
 <p>There is a reasonable idea behind <code>llms.txt</code>. Proposed by Jeremy Howard in September 2024, it follows the same logic as <code>robots.txt</code>: place a structured file at your root, and AI systems can find a curated, structured description of your site, without needing to crawl every page to piece together what you do.</p>
 <p>The proposal is sensible. The execution, for most sites, is broken in two specific ways that are easy to miss and easy to fix.</p>
-<figure>
-<img src="assets/llms-txt-crawl-flow.svg" loading="lazy" width="680" height="580" alt="Diagram showing how llms.txt becomes reachable by crawlers, or fails to, depending on whether it is served as text/html, referenced in sitemap.xml, and linked from page head elements" />
-<figcaption>How <code>llms.txt</code> becomes reachable: serve it as <code>text/html</code> and reference it in <code>sitemap.xml</code>.</figcaption>
-</figure>
 <h2 id="the-two-problems-nobody-mentions" tabindex="-1">The Two Problems Nobody Mentions</h2>
 <p>A common assumption is that agents fetch <code>llms.txt</code> on their own whenever they answer a query about your site. Most do not. Agents operating at inference time follow their own retrieval logic; they are not scanning your root directory for an <code>llms.txt</code> file on each request.</p>
-<p>Where <code>llms.txt</code> does have value is as a <strong>query-time index</strong>: a short, curated map, kept current, from your site to the pages you stand behind. A tool or agent that chooses to read it gets there faster, and so does anyone who hands it to an assistant first when researching the site, your own team included. It is not a ranking signal, and there is no evidence that publishing one shapes what a model learns. That value only materialises if the file can be reached, and this is where most implementations fail.</p>
-<h3 id="problem-one-it-is-not-served-as-html" tabindex="-1">Problem one, it is not served as HTML</h3>
-<p>Many crawlers, Common Crawl among them, index HTML pages. Your web server will serve <code>llms.txt</code> with a <code>Content-Type: text/plain</code> header by default. Common Crawl will not treat that as an HTML page, and it will not be indexed as one.</p>
-<p>The fix is to wrap the content in a minimal HTML document and serve it with <code>Content-Type: text/html</code>. On Cloudflare, a Worker handles this cleanly for the one URL that needs it:</p>
-<pre><code class="language-javascript">export default {
-  async fetch(request) {
-    const url = new URL(request.url);
-    if (url.pathname === '/llms.txt') {
-      const content = await fetch('https://your-origin.com/llms.txt')
-        .then(r =&gt; r.text());
-
-      const html = `&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;title&gt;llms.txt&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;pre&gt;${content}&lt;/pre&gt;
-&lt;/body&gt;
-&lt;/html&gt;`;
-
-      return new Response(html, {
-        headers: { 'Content-Type': 'text/html; charset=utf-8' }
-      });
-    }
-    return fetch(request);
-  }
-};
-</code></pre>
-<p>To make the difference concrete, here is a real <code>llms.txt</code>, the one we use for allabout.network, as it sits on the server before any wrapping:</p>
+<p>Where <code>llms.txt</code> does have value is as a <strong>query-time index</strong>: a short, curated map, kept current, from your site to the pages you stand behind. A tool or agent that chooses to read it gets there faster, and so does anyone who hands it to an assistant first when researching the site, your own team included. It is not a ranking signal, and there is no evidence that publishing one shapes what a model learns. That value only materialises if the file can be reached and read, and this is where most implementations fail.</p>
+<h3 id="problem-one-it-does-not-answer-as-markdown" tabindex="-1">Problem one, it does not answer as Markdown</h3>
+<p>The <a href="https://llmstxt.org/">llms.txt proposal</a> defines the file as Markdown: an H1 with the site's name, a short summary, then sections of Markdown links to the pages that matter. A reader that asks for <code>/llms.txt</code> expects exactly that, as plain text, with a 200 status.</p>
+<p>Plenty of sites send something else. A catch-all rewrite returns the home page, or an HTML &quot;not found&quot; page, with a 200. A bot wall answers with a challenge page or a 429. A redirect sends the request somewhere that is not the file. Each looks like success in a browser tab and fails for a machine that wanted Markdown.</p>
+<p>Google's Lighthouse now checks this. Its Agentic Browsing category includes an <code>llms-txt</code> audit that fetches <code>/llms.txt</code> from the site root. A missing file (any 4xx) is marked not applicable, because publishing one is optional; a server error or a 429 fails. When a file comes back, the audit reads it as Markdown and expects at least one H1 line, at least one Markdown link in <code>[text](url)</code> form, and at least 50 characters (<a href="https://github.com/GoogleChrome/lighthouse/blob/main/core/audits/agentic/llms-txt.js">Lighthouse llms.txt audit source</a>; <a href="https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt">Chrome for Developers</a>). Bare URLs written as plain text do not count as links.</p>
+<p>The fix is to serve the file as it is, with <code>Content-Type: text/plain; charset=utf-8</code> or <code>text/markdown; charset=utf-8</code>, and a 200. Do not wrap it in an HTML document, and do not let a rewrite rule, a firewall or a single-page app router answer for it. Most web servers already send <code>text/plain</code> for a <code>.txt</code> file; the work is making sure nothing in front of the server changes that.</p>
+<p>Here is a real <code>llms.txt</code>, the one we use for allabout.network, as it is served:</p>
 <pre><code class="language-text"># allabout.network, CogNovaMX
 
 &gt; Making the web, and everything you publish beyond it, work for everyone and everything that uses it.
@@ -292,160 +295,49 @@ series. We help organizations design websites that work for both humans and mach
 ## Optional
 - [Blog](https://allabout.network/blogs/ddt/): Articles on MX, CMS, and AI readiness.
 </code></pre>
-<p>This is what an agent or assistant needs to understand who we are, what we do, and where to find more. It describes services in plain terms, links to substantive content, and gives enough context that an AI system reading it can form an accurate picture of the organisation, without needing to crawl dozens of pages. That is the point of the format: curated signal, not bulk content.</p>
-<p>And here is the same content after HTML wrapping, as Common Crawl will see it:</p>
-<pre><code class="language-html">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
-  &lt;title&gt;llms.txt, allabout.network&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;pre&gt;
-# allabout.network, CogNovaMX
-
-&amp;gt; Making the web, and everything you publish beyond it, work for everyone and everything that uses it.
-&amp;gt; MX (Machine Experience) is structured metadata that makes your content
-&amp;gt; readable by every AI agent on earth.
-
-## About CogNovaMX
-…
-&lt;/pre&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<p>This is what an agent or assistant needs to understand who we are, what we do, and where to find more. It describes services in plain terms, links to substantive content, and gives enough context that an AI system reading it can form an accurate picture of the organisation, without needing to crawl dozens of pages. That is the point of the format: curated signal, not bulk content. Notice that the links an agent should follow are written as Markdown links; the plain URLs in the &quot;About&quot; section are fine for a person, but a checker that looks for links will not count them.</p>
+<h3 id="problem-two-nothing-points-to-it" tabindex="-1">Problem two, nothing points to it</h3>
+<p>A file at the root is only found by a reader that already knows to look there. Most do not, so the second fix is to point to it from the pages themselves.</p>
+<p>The proposal gives a way to do that with an HTTP <code>Link</code> header on each page: <code>rel=&quot;describedby&quot;</code> points to the <code>llms.txt</code> file that covers the page, and <code>rel=&quot;alternate&quot; type=&quot;text/markdown&quot;</code> points to a Markdown version of the page if you publish one (<a href="https://llmstxt.org/">llms.txt proposal</a>):</p>
+<pre><code class="language-http">Link: &lt;/llms.txt&gt;; rel=&quot;describedby&quot;, &lt;/about.md&gt;; rel=&quot;alternate&quot;; type=&quot;text/markdown&quot;
 </code></pre>
-<p>The content is identical. The wrapper is minimal. The difference is that crawlers will now index it.</p>
-<h3 id="what-this-site-actually-deploys" tabindex="-1">What this site actually deploys</h3>
-<p>The snippet above is the minimum viable version, enough to make Common Crawl treat your <code>llms.txt</code> as HTML. The Worker that runs in front of <code>allabout.network</code>, <code>mx.allabout.network</code>, <code>content.allabout.network</code> and <code>reginald.allabout.network</code> goes a few steps further, because if we are going to wrap the file in HTML at all, we may as well make it carry the metadata that crawlers and AI agents already know how to read.</p>
-<p>Here is the actual pure helper running on this domain. You can verify it for yourself: visit <a href="https://mx.allabout.network/llms.txt"><code>https://mx.allabout.network/llms.txt</code></a> in a browser, use View Source, and compare it to the function below.</p>
-<pre><code class="language-javascript">// Wrap raw llms.txt content as a minimal HTML document so Common Crawl
-// (which only ingests HTML) can index the content. Preserves the original
-// text verbatim inside &lt;pre&gt;; no transformation of the text body.
-//
-// Pure function, testable in Node without the Workers runtime.
-export const wrapLlmsTxtAsHtml = (text, requestUrl) =&gt; {
-  const safe = (text || '')
-    .replace(/&amp;/g, '&amp;amp;')
-    .replace(/&lt;/g, '&amp;lt;')
-    .replace(/&gt;/g, '&amp;gt;');
-
-  // Title: first &quot;# heading&quot; line if present, else hostname-based fallback
-  const firstHeading = (text || '').split('\n').find((l) =&gt; l.startsWith('# '));
-
-  let host = '';
-  let canonical = '';
-  try {
-    const u = new URL(requestUrl);
-    host = u.hostname;
-    // Strip query string and fragment, canonical should be the bare resource URL
-    u.search = '';
-    u.hash = '';
-    canonical = u.toString();
-  } catch (_) {
-    // requestUrl is optional, tests may call without one
-  }
-
-  const title = firstHeading
-    ? firstHeading.replace(/^#\s+/, '').trim()
-    : `llms.txt${host ? `, ${host}` : ''}`;
-
-  const jsonLdObj = {
-    '@context': 'https://schema.org',
-    '@type': 'WebPage',
-    name: title,
-    description: 'Agent directory file (llms.txt) served as HTML for crawler ingestion.',
-    inLanguage: 'en-GB',
-  };
-  if (canonical) jsonLdObj.url = canonical;
-  const jsonLd = JSON.stringify(jsonLdObj);
-
-  const canonicalTag = canonical ? `&lt;link rel=&quot;canonical&quot; href=&quot;${canonical}&quot;&gt;\n` : '';
-  const descHost = host || 'this site';
-
-  return `&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en-GB&quot;&gt;
-&lt;head&gt;
-&lt;meta charset=&quot;utf-8&quot;&gt;
-&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
-&lt;title&gt;${title}&lt;/title&gt;
-&lt;meta name=&quot;description&quot; content=&quot;Agent directory file for ${descHost}, published as HTML so AI training crawlers can ingest it.&quot;&gt;
-&lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;
-&lt;meta name=&quot;mx:status&quot; content=&quot;active&quot;&gt;
-&lt;meta name=&quot;mx:contentType&quot; content=&quot;agent-directory&quot;&gt;
-&lt;meta name=&quot;mx:audience&quot; content=&quot;machines, humans&quot;&gt;
-${canonicalTag}&lt;script type=&quot;application/ld+json&quot;&gt;${jsonLd}&lt;/script&gt;
-&lt;style&gt;body{font:14px/1.5 ui-monospace,Menlo,Consolas,monospace;max-width:80ch;margin:2rem auto;padding:0 1rem;color:#1a1a1a}pre.llms-txt{white-space:pre-wrap;word-wrap:break-word}&lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;main&gt;
-&lt;pre class=&quot;llms-txt&quot;&gt;${safe}&lt;/pre&gt;
-&lt;/main&gt;
-&lt;/body&gt;
-&lt;/html&gt;`;
-};
+<p>The same relationships can go in the <code>&lt;head&gt;</code> of every page as <code>link</code> elements, which matters on sites where the body is empty until JavaScript runs:</p>
+<pre><code class="language-html">&lt;link rel=&quot;describedby&quot; href=&quot;/llms.txt&quot;&gt;
+&lt;link rel=&quot;alternate&quot; type=&quot;text/markdown&quot; href=&quot;/about.md&quot;&gt;
 </code></pre>
-<p>The differences from the minimum viable snippet are deliberate, and each one earns its place:</p>
-<ul>
-<li>HTML escaping: the raw <code>llms.txt</code> may legitimately contain <code>&lt;</code>, <code>&gt;</code>, or <code>&amp;</code>. Inserting that into a template without escaping would corrupt the document and, in the worst case, smuggle markup into the page. The minimum-viable snippet skips this for clarity; production cannot.</li>
-<li>Title from the first <code>#</code> heading: most well-formed <code>llms.txt</code> files start with a heading like <code># allabout.network, CogNovaMX</code>. Promoting it to <code>&lt;title&gt;</code> gives crawlers and humans a real page title for free, with a sensible <code>llms.txt, {hostname}</code> fallback if there is no heading.</li>
-<li><code>&lt;link rel=&quot;canonical&quot;&gt;</code>: tells crawlers that the bare <code>.txt</code> URL is the canonical address for this content, so the HTML wrapping is treated as a presentation of the same resource rather than a separate page that competes with itself. Query strings and fragments are stripped so cache-busters do not pollute the canonical.</li>
-<li><code>&lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</code>: explicit indexing permission. The point of the exercise is to be indexed, so we say so.</li>
-<li>MX governance metadata: three carrier tags (<code>mx:status</code>, <code>mx:contentType=agent-directory</code>, <code>mx:audience=machines, humans</code>) tell MX-aware tooling that this is a live agent directory intended for both audiences, not a general-purpose page. This is the same pattern every other MX page on the site uses.</li>
-<li><a href="https://schema.org">Schema.org</a> JSON-LD: a small <code>WebPage</code> block. <a href="https://schema.org">Schema.org</a> is the structured-data vocabulary crawlers and AI tools already understand. Adding it costs nothing and gives the wrapped file a structured identity.</li>
-<li>Inline minimal CSS: readable in browsers without depending on any external stylesheet. The wrapped <code>llms.txt</code> stays self-contained even if the rest of the site is unreachable.</li>
-<li>Pure-function shape: the helper takes a string and a URL, returns a string. No <code>HTMLRewriter</code>, no Workers-runtime APIs in the body. This means it can be unit-tested in Node without spinning up a Worker, and ours is, with thirteen tests covering the title extraction, canonical stripping, escaping, fallbacks, and verbatim preservation.</li>
-</ul>
-<p>The Worker calls this function from two places, once in the path that handles <code>mx.allabout.network</code> / <code>content.allabout.network</code> / <code>reginald.allabout.network</code>, and once in the path that handles <code>allabout.network</code> itself. Both call sites use a basename match (<code>filename === 'llms.txt'</code> or <code>endsWith('/llms.txt')</code>), so the wrapping fires automatically for any <code>llms.txt</code> at any depth, root <code>/llms.txt</code>, <code>/blog/llms.txt</code>, <code>/services/llms.txt</code>, anywhere. None of the source <code>.txt</code> files are modified. The HTML view exists only at serve time.</p>
-<h3 id="problem-two-it-is-not-in-sitemapxml" tabindex="-1">Problem two, it is not in <code>sitemap.xml</code></h3>
-<p>If your <code>llms.txt</code> is not referenced in your sitemap, crawlers have no reliable signal that it exists. It will not be systematically discovered, which means crawlers that work from the sitemap, Common Crawl among them, will not reach it.</p>
-<p>Fix both of those things, serve <code>llms.txt</code> as an HTML page, and include it in your sitemap, and it has a reasonable chance of being reached. These are not technical challenges. They are configuration decisions that most teams simply do not make, because the guidance around <code>llms.txt</code> rarely addresses how crawlers find a file.</p>
+<p>Leave <code>llms.txt</code> out of <code>sitemap.xml</code>. A sitemap lists the pages you want indexed for people; <code>llms.txt</code> is described as a curated overview for language models, not one of those pages (<a href="https://llmstxt.org/">llms.txt proposal</a>). Listing it there, or dressing it up as an HTML page so a crawler indexes it, turns a reading guide into a search result that competes with the pages it links.</p>
+<p>These are not technical challenges. They are configuration decisions that most teams simply do not make, because the guidance around <code>llms.txt</code> rarely addresses how a machine reaches the file and reads it.</p>
 <h2 id="what-mx-practice-says-about-this" tabindex="-1">What MX Practice Says About This</h2>
 <p>MX, Machine Experience, is a discipline concerned with how digital content is read, interpreted, and used by machines: AI agents, search indexers, voice assistants, training pipelines, and browser automation. Where web accessibility asks how we make content usable for people with disabilities, MX asks the same question about non-human readers. The two turn out to share most of the same answers. You can read more in the <a href="https://mx.allabout.network/books/">MX book series</a>.</p>
 <p>From an MX perspective, the <code>llms.txt</code> situation is a familiar pattern. The principle that guides MX work is straightforward: if you want machines to read your content reliably, you cannot depend on them inferring what you intended. You have to make the structure explicit, using mechanisms that machine readers already understand.</p>
-<p><code>llms.txt</code> in its common form asks AI systems to discover and interpret a relatively new standard, and most agents do not go looking for it unprompted. A file nobody fetches informs nobody.</p>
-<p>This is not an argument against <code>llms.txt</code>. It is an argument for implementing it in a way that works with existing infrastructure rather than waiting for new infrastructure to catch up. That is, in fact, one of the core principles of MX: do not reinvent, reuse existing patterns. Crawlers already understand HTML. Sitemaps already signal what matters. Use what is already there.</p>
-<p>The HTML meta tag approach does exactly that. Rather than relying on a crawler to find and correctly handle a markdown file, you embed the key information in the HTML that crawlers already process, on every page that matters. Add a <code>link</code> tag pointing to your <code>llms.txt</code>, alongside a meta description, in the <code>&lt;head&gt;</code> of every page:</p>
-<pre><code class="language-html">&lt;link rel=&quot;llms-txt&quot; href=&quot;/llms.txt&quot;&gt;
-&lt;meta name=&quot;llms-txt-description&quot; content=&quot;A description of your site and its content.&quot;&gt;
-</code></pre>
-<p>The <code>link</code> tag tells any agent or crawler that encounters the page exactly where to find the <code>llms.txt</code> file, no guessing, no root discovery required. For sites where content is concise enough, the full content can also go directly into the page as a meta tag:</p>
-<pre><code class="language-html">&lt;meta name=&quot;llms-txt-content&quot; content=&quot;# Your Site &gt; Description...&quot;&gt;
-</code></pre>
-<p>No new standard needs to be adopted. No new crawler behavior needs to be assumed. The structural information is present in the HTML itself, where crawlers have always looked.</p>
+<p><code>llms.txt</code> in its common form asks AI systems to discover and interpret a relatively new convention, and most agents do not go looking for it unprompted. An unfetched file informs no one, and a file that answers with the wrong thing misinforms whoever does fetch it.</p>
+<p>This is not an argument against <code>llms.txt</code>. It is an argument for implementing it in a way that works with existing infrastructure rather than waiting for new infrastructure to catch up. That is one of the core principles of MX: do not reinvent, reuse existing patterns. HTTP already has content types and status codes. HTML and HTTP already have link relations. Use what is already there.</p>
 <h2 id="a-note-on-headless-and-javascript-rendered-sites" tabindex="-1">A Note on Headless and JavaScript-Rendered Sites</h2>
-<p>If the above matters for conventional sites, it matters more for headless and JavaScript-rendered ones, and this is where <code>llms.txt</code>, done correctly, becomes particularly useful.</p>
-<p>Headless CMSs, Contentful, Sanity, Hygraph, and similar, deliver content through APIs to a frontend that renders it in JavaScript. When an AI scraper visits the resulting site, it typically sees something like this:</p>
+<p>If the above matters for conventional sites, it matters more for headless and JavaScript-rendered ones.</p>
+<p>Headless CMSs, Contentful, Sanity, Hygraph, and similar, deliver content through APIs to a frontend that renders it in JavaScript. When an AI agent visits the resulting site, it often sees something like this:</p>
 <pre><code class="language-html">&lt;body&gt;
   &lt;noscript&gt;You need to enable JavaScript to run this app.&lt;/noscript&gt;
   &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
 &lt;/body&gt;
 </code></pre>
-<p>No content. Just a shell. The scraper cannot see the products, articles, or services the site exists to describe. The <code>link</code> tag and meta description approach is especially useful here because they sit in the <code>&lt;head&gt;</code>, the part of the page that is served before JavaScript runs, and the only part most crawlers will ever see. You are not waiting for the JavaScript to execute; the reference to <code>llms.txt</code> is already in the response.</p>
-<h2 id="the-standard-behind-the-recipe" tabindex="-1">The Standard Behind the Recipe</h2>
-<p>The three moves above, serve as HTML, list in <code>sitemap.xml</code>, link from every page, are not just a recipe for <code>llms.txt</code>. They are a generic discoverability discipline that applies to any agent-directory file a host might publish: <code>llms.txt</code>, <code>ai.txt</code>, or whatever comes next, even <code>robots.txt</code> if you want it reachable by more than the crawlers that already know to look for it. The same three failure modes apply to all of them, and the same three fixes work in all cases.</p>
-<p>That generality is now formalized. The <a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-agent-directory-discovery.md">MX Agent Directory Discovery note</a> is a draft standard offered to <a href="https://tg.community">The Gathering</a> for community review. It specifies three conformance levels for any agent-directory file:</p>
-<ul>
-<li>Level 1 Transport: the file MUST be served as <code>text/html</code> at its canonical URL. The wrapper must preserve the directory text verbatim, escape HTML metacharacters, set <code>&lt;link rel=&quot;canonical&quot;&gt;</code> to the bare resource URL, and carry an explicit <code>&lt;meta name=&quot;robots&quot; content=&quot;index, follow&quot;&gt;</code>.</li>
-<li>Level 2 Discovery: if the host publishes a <code>sitemap.xml</code>, the agent-directory file MUST be listed in it. Hosts without a sitemap are not in scope for this level; they should still reach Level 1 and Level 3.</li>
-<li>Level 3 Resilience: every page on the host SHOULD include a <code>&lt;link rel=&quot;</code><em><code>directory-name</code></em><code>&quot; href=&quot;/</code><em><code>file</code></em><code>&quot;&gt;</code> in its <code>&lt;head&gt;</code>, where the rel value is the bare directory name (so <code>rel=&quot;llms-txt&quot;</code> for <code>/llms.txt</code>, <code>rel=&quot;ai-txt&quot;</code> for <code>/ai.txt</code>, and so on). This is what keeps the file discoverable when the body is empty until JavaScript runs.</li>
-</ul>
-<p>The note refers only to actually-published external standards, RFC 2119 and 8174 for normative language, RFC 9110 for HTTP semantics, the Sitemaps 0.9 protocol, the HTML Living Standard, and <a href="https://schema.org">Schema.org</a> for the optional JSON-LD block. It deliberately does not redefine <code>llms.txt</code> or any other directory format, those remain owned by their own communities. What it specifies is the transport, discovery, and resilience layer that any agent-directory file SHOULD adopt to be reliably reached.</p>
-<p>If you implement the recipe in this post, you can claim Level 3 conformance to the draft. If your team is comparing two implementations or specifying procurement requirements, the conformance levels give you a vocabulary that does not depend on any particular blog post or worker snippet.</p>
+<p>No content. Just a shell. Two things help here. The <code>link</code> elements live in the <code>&lt;head&gt;</code>, which is served before JavaScript runs, so the pointer to <code>llms.txt</code> is already in the response. And the single-page app router is the usual reason <code>/llms.txt</code> answers with the app shell, so check that the path is served statically before the router sees it.</p>
 <h2 id="the-checklist" tabindex="-1">The Checklist</h2>
-<p>If you are implementing <code>llms.txt</code>, for any kind of site, the steps map directly onto the three conformance levels in the draft:</p>
+<p>If you are implementing <code>llms.txt</code>, for any kind of site:</p>
 <ol>
-<li><strong>Level 1.</strong> Serve the file as <code>text/html</code>, use a Cloudflare Worker (or equivalent edge function) to wrap the content and set the correct header.</li>
-<li><strong>Level 2.</strong> Add it to <code>sitemap.xml</code>.</li>
-<li><strong>Level 3.</strong> Add <code>&lt;link rel=&quot;llms-txt&quot; href=&quot;/llms.txt&quot;&gt;</code> to the <code>&lt;head&gt;</code> of every page, especially important for headless sites where the page body may be empty until JavaScript runs.</li>
+<li><strong>Write it as Markdown.</strong> One H1 naming the site, a short summary, and sections of Markdown links to the pages you stand behind.</li>
+<li><strong>Serve it as text.</strong> <code>text/plain</code> or <code>text/markdown</code>, with a 200, from the file itself. No HTML wrapper, no catch-all rewrite, no challenge page.</li>
+<li><strong>Point to it.</strong> A <code>Link</code> header or <code>&lt;link rel=&quot;describedby&quot; href=&quot;/llms.txt&quot;&gt;</code> in the <code>&lt;head&gt;</code> of every page.</li>
+<li><strong>Keep it current.</strong> Generate it from the same source as the pages and the sitemap, so it cannot list a page that has gone.</li>
 </ol>
-<p>Verification at each level is a single shell command. Level 1 is a <code>curl -I</code> against the directory URL checking the <code>Content-Type</code> header. Level 2 is a <code>grep</code> against <code>sitemap.xml</code>. Level 3 is a <code>grep</code> against the rendered <code>&lt;head&gt;</code> of any sample page.</p>
+<p>Each check is quick. Run <code>curl -sI https://example.com/llms.txt</code> and confirm the status is 200 and the <code>Content-Type</code> is <code>text/plain</code> or <code>text/markdown</code>. Run <code>curl -s https://example.com/llms.txt | head</code> and confirm the first line is a Markdown H1, not <code>&lt;!DOCTYPE html&gt;</code>. Then run Lighthouse's Agentic Browsing category and look at the <code>llms-txt</code> audit.</p>
 <h2 id="readable-by-both-means-readable-by-both" tabindex="-1">Readable by Both Means Readable by Both</h2>
-<p>MX does not treat machine readability as a separate track from human readability. The same content, properly structured, should work for both. <code>llms.txt</code> is consistent with that principle, but only when it is implemented in a way that puts it in front of the systems that matter.</p>
-<p>Most <code>llms.txt</code> files are well-intentioned but structurally invisible. They are not in sitemaps. They are not served as HTML. Crawlers that ingest only HTML never reach them, and an agent that does not already know to look will not find them.</p>
+<p>MX does not treat machine readability as a separate track from human readability. The same content, properly structured, should work for both. <code>llms.txt</code> is consistent with that principle, but only when it is implemented in a way that a machine can reach and read.</p>
+<p>Most <code>llms.txt</code> files are well-intentioned but structurally invisible. Nothing links to them, and too many answer with something other than the file. An agent that does not already know to look will not find them, and one that does may receive an HTML page it never requested.</p>
 <p>Reachable is not the same as influential, and this post claims only the first. The fix is straightforward. But it does require understanding what <code>llms.txt</code> is for: a query-time index of the pages you stand behind, worth keeping current, because a stale one points machines at pages you no longer stand behind.</p>
 <h3 id="related-reading" tabindex="-1">Related reading</h3>
 <ul>
-<li><a href="https://github.com/ddttom/mx-shared-gathering/blob/main/draft-agent-directory-discovery.md">MX Agent Directory Discovery note (draft v1.0)</a>, the formal standard the recipe in this post claims conformance against</li>
+<li><a href="https://llmstxt.org/">The llms.txt proposal</a>, the format and the link relations it recommends</li>
+<li><a href="https://developer.chrome.com/docs/lighthouse/agentic-browsing/llms-txt">Lighthouse llms.txt audit</a>, what Google's check looks for</li>
 <li><a href="https://mx.allabout.network/blog/agent-discoverability-checklist.html">Agent Discoverability: What Your Site Is Missing</a>, diagnose the signals AI agents look for</li>
 <li><a href="https://mx.allabout.network/blog/what-is-machine-experience.html">What Is Machine Experience?</a>, the discipline behind these patterns</li>
 <li><a href="https://mx.allabout.network/blog/machine-experience-adding-metadata.html">Machine Experience: Adding Metadata</a>, the five agent tasks</li>
@@ -457,7 +349,7 @@ ${canonicalTag}&lt;script type=&quot;application/ld+json&quot;&gt;${jsonLd}&lt;/
           <h2 id="reader-notice-heading">About this page</h2>
           <ul>
             <li>Written by Tom Cranstoun.</li>
-            <li>Last changed on 2026-10-29.</li>
+            <li>Last changed on 2026-11-16.</li>
           </ul>
         </footer>
 
@@ -465,7 +357,7 @@ ${canonicalTag}&lt;script type=&quot;application/ld+json&quot;&gt;${jsonLd}&lt;/
 
 
       <!-- Post Conclusion: author + CTA + onward links -->
-      <aside class="post-conclusion" aria-label="About the author and next steps">
+      <aside class="post-conclusion" aria-label="About the author and next steps" data-tour-id="post-next-steps" data-tour-description="About the author, and where to go next from this article.">
         <div class="post-conclusion-author">
           <img src="../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
@@ -476,7 +368,7 @@ ${canonicalTag}&lt;script type=&quot;application/ld+json&quot;&gt;${jsonLd}&lt;/
         </div>
         <div class="post-conclusion-cta">
           <p class="post-conclusion-eyebrow">Continue the conversation</p>
-          <p class="post-conclusion-prompt">Want to talk through where your organisation sits on the agent-readiness curve?</p>
+          <p class="post-conclusion-prompt">Want to talk through how ready your organisation is for agents?</p>
           <ul class="post-conclusion-links">
             <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
             <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
@@ -521,6 +413,7 @@ ${canonicalTag}&lt;script type=&quot;application/ld+json&quot;&gt;${jsonLd}&lt;/
   </footer>
 
   <script src="../js/app.js"></script>
+  <script src="../js/vendor/webmcp-tour/webmcp-tour.js"></script>
   <script type="module" src="../js/mx-provenance-demo.js"></script>
 </body>
 </html>

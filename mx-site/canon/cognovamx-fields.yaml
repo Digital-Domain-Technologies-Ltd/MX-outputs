@@ -1,7 +1,7 @@
 title: CogNovaMX Field Extensions
-version: '2.12'
+version: '2.15'
 created: '2026-04-15'
-modified: '2026-11-11'
+modified: '2026-11-17'
 author: Tom Cranstoun
 description: >-
   CogNovaMX vendor extensions to the MX open standard, published as a reference pack for other vendors authoring their
@@ -49,6 +49,29 @@ mx:
       status: canonical
       profile: x-mx-public
       context: Used in .mx.yaml.md folder metadata for git submodules to categorise them in the hub mount table.
+    - name: x-mx-authority
+      type: string
+      inPlainWords: 'This folder is {value}.'
+      authoring: authored
+      definition: >-
+        How authoritative a folder's contents are, declared in its .mx.yaml.md and inherited by subfolders unless they
+        declare their own. Values: canonical (the source of truth; edit here), derived (generated from elsewhere; edit the
+        source and regenerate), working (in progress; not authoritative until promoted), scratch (disposable or private;
+        never cite), archive (retired; history only), external (mounted from another repository; change it upstream).
+      example: canonical
+      validValues:
+        - canonical
+        - derived
+        - working
+        - scratch
+        - archive
+        - external
+      notes: >-
+        Read by scripts/generators/gen-folder-contract.cjs to build the UBERCOG folder map; npm run folders:check
+        refuses a top-level folder whose descriptor omits it.
+      status: canonical
+      profile: x-mx-public
+      context: Used in .mx.yaml.md folder metadata alongside the folder SOUL.md, which says how to work in the folder.
     - name: x-mx-componentKind
       type: string
       authoring: authored
@@ -280,7 +303,7 @@ mx:
       authoring: authored
       definition: List of file paths, modules, or systems this change or document affects.
       example:
-        - scripts/mx-audit.js
+        - scripts/audit/mx-audit.js
         - mx-canon/ssot/fields-data.yaml
       status: canonical
       profile:
@@ -413,7 +436,7 @@ mx:
         so the files created together can be found together.
       example: 734140ed
       notes: >-
-        Written by scripts/fix-co-creation-cohorts.cjs from the repository history, never by hand. A copied value
+        Written by scripts/fixers/fix-co-creation-cohorts.cjs from the repository history, never by hand. A copied value
         names the wrong cohort; leave the field absent and let the fixer assign it.
       status: canonical
       profile: x-mx-public
@@ -424,7 +447,7 @@ mx:
       optionalIn: [blog]
       definition: The miniMax tasks this object is needed for, each a task id in mx-canon/ssot/registries/minimax-tasks.json.
       example: [publish]
-      notes: Gate 54 (scripts/check-needed-for.cjs) refuses a value that is not a task in the registry.
+      notes: Gate 54 (scripts/checks/check-needed-for.cjs) refuses a value that is not a task in the registry.
       status: canonical
       profile: any
     - name: x-mx-scope
@@ -500,7 +523,7 @@ mx:
       notes: >-
         camelCase values (NDR-02). Values in use include peer, prospect, businessSponsor, contact, advisor,
         coDirector, contractor, editor, principalPartner and self. Operator status is not a kind: it is membership of
-        the operator registry. Seeded by scripts/backfill-contact-kind.cjs.
+        the operator registry. Seeded by scripts/fixers/backfill-contact-kind.cjs.
       status: canonical
       profile: contact
     - name: x-mx-pdfDoctype
@@ -1231,7 +1254,7 @@ mx:
       definition: >-
         The one-line command that re-runs the audit which produced this report, captured at collect time so an
         operator never has to reconstruct the entry URL and flags.
-      example: node scripts/audit-pipeline.js https://example.com --pages 12
+      example: node scripts/audit/audit-pipeline.js https://example.com --pages 12
       notes: >-
         Written from the run's own invocation record. When that record is absent (a report regenerated from older
         results) a host-level fallback command is written, which loses any entry-path or scope flags.
@@ -1267,12 +1290,6 @@ mx:
       type: string-or-array
       authoring: authored
       definition: new mac steps. String or array of values.
-      status: canonical
-      profile: cog
-    - name: certification
-      type: string
-      authoring: authored
-      definition: 'Cog operational metadata: certification.'
       status: canonical
       profile: cog
     - name: defaultAuthor
@@ -1369,7 +1386,7 @@ mx:
       example: '[{ id: submodules-absent, when: run in a thin clone, signal: target submodule directory absent, severity: warn }]'
       notes: >-
         Required on every type action-doc cog. Paired one-to-one with x-mx-resolver by frictionId. Schema at
-        mx-canon/ssot/schemas/friction-resolver.v1.schema.json; gated by scripts/check-friction-resolver.cjs.
+        mx-canon/ssot/schemas/friction-resolver.v1.schema.json; gated by scripts/checks/check-friction-resolver.cjs.
       status: canonical
       profile: x-mx-public
       context: 'Declared under the mx block on action cogs so every executable cog states its failure modes machine-readably.'
@@ -1603,7 +1620,7 @@ mx:
         status superseded. Numbers are no longer allocated: legacyNumber is the positive integer a record dated on or
         before the cutover carried, kept read-only so a citation by number in dated history still resolves (npm run
         decision:resolve), and a record dated after it carries none. scripts/lib/decision-register.cjs is the one
-        reading of the block, and scripts/check-adr-numbers.cjs (Gate 33, and Gate 0.56 at commit) holds the rules,
+        reading of the block, and scripts/checks/check-adr-numbers.cjs (Gate 33, and Gate 0.56 at commit) holds the rules,
         refuses the old numbered design and repairs it (npm run decisions:repair), and writes a missing back-pointer.
         The bare `adr` name is a deprecated synonym; see fields-data.yaml's deprecations table.
       status: canonical
@@ -1633,7 +1650,7 @@ mx:
       notes: >-
         CogNovaMX registry block, not a Gathering open-standard field. The same members and relation rules as
         x-mx-adr, read by the same scripts/lib/decision-register.cjs and held by the same register check
-        (scripts/check-adr-numbers.cjs). A relation names its target by slug in either register, so a BDR amended by
+        (scripts/checks/check-adr-numbers.cjs). A relation names its target by slug in either register, so a BDR amended by
         an ADR declares amendedBy: ["<the ADR's slug>"] and the ADR declares amends: ["<the BDR's slug>"]. The bare
         `bdr` name is a deprecated synonym; see fields-data.yaml's deprecations table.
       status: canonical
@@ -1650,7 +1667,7 @@ mx:
       example: '2026-10-19'
       notes: >-
         Written by npm run records:reviewed, never by hand. The records gate's drift check
-        (scripts/check-record-claims.cjs, Gate 169) requires every record citing a file a push substantively changes to
+        (scripts/checks/check-record-claims.cjs, Gate 169) requires every record citing a file a push substantively changes to
         be in that push, edited or stamped; this is the stamp. On a decision record it says the change neither reverses
         nor amends the decision. It sits under mx: on an ADR or BDR, and at the top level of a memory beside
         x-mx-originMachine.
@@ -1699,6 +1716,56 @@ mx:
       status: canonical
       profile: x-mx-public
       context: 'Declared on an obsession cog.'
+    - name: x-mx-statechart
+      type: object
+      authoring: authored
+      inPlainWords: 'Its subject moves through a declared lifecycle: {value}.'
+      optionalIn: [cog]
+      definition: >-
+        A lifecycle declared as data: the states a subject can be in and every move allowed between them, so a reviewer
+        reads the allowed moves in one place and a writer can refuse any other.
+      example: '{name: pim-action, states: [open, doing, blocked, done], transitions: [{from: [open, blocked], to: doing}, {from: [open, doing, blocked], to: done, via: [close], effects: [clearClaim]}]}'
+      notes: >-
+        Members name, states and transitions. Each transition has from (a list of states) and to (one state), and may
+        add via (the only routes the move is allowed through), claimedVia (the routes allowed when the subject holds a
+        claim) and effects (named side effects the writer applies). A move to the same state is always allowed and is
+        not declared. Judged by scripts/lib/statechart.cjs (defineStatechart, canMove). First carried by the mx-pim
+        record schema cog, whose block tests/test-pim-statechart.js holds in lockstep with scripts/lib/pim-statechart.cjs.
+      status: experimental
+      profile: x-mx-public
+      context: 'Declared on a cog that defines a lifecycle its scripts enforce.'
+    - name: x-mx-tityraExclusive
+      type: boolean
+      authoring: authored
+      inPlainWords: 'It is only about Tityra.'
+      optionalIn: [cog]
+      definition: >-
+        The file is only about Tityra: Tityra Ltd and its trading name, its product, prices, customers, partners,
+        investors or operations. Its prose names no MX, CogNovaMX or REGINALD.
+      example: true
+      notes: >-
+        A file carries this or x-mx-tityraAdjacent, never both, and a file that mentions Tityra carries one of them.
+        Enforced at commit and push by scripts/tityra-scope.cjs (npm run tityra:scope; npm run tityra:scope:plan
+        proposes the field). Where each kind of file carries it is in scripts/cogs/tityra-scope-fields.cog.md.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a file, script header or CRM contact that is only about Tityra.'
+    - name: x-mx-tityraAdjacent
+      type: boolean
+      authoring: authored
+      inPlainWords: 'It is mainly about something else and serves or mentions Tityra.'
+      optionalIn: [cog]
+      definition: >-
+        The file is mainly about something else (MX, CogNovaMX, DDT, the audit engine, the hub's tooling) and serves or
+        mentions Tityra.
+      example: true
+      notes: >-
+        A file carries this or x-mx-tityraExclusive, never both, and a file that mentions Tityra carries one of them.
+        On a CRM contact it marks a relationship with a Tityra track and a separate MX track. Enforced at commit and push
+        by scripts/tityra-scope.cjs; see scripts/cogs/tityra-scope-fields.cog.md.
+      status: canonical
+      profile: x-mx-public
+      context: 'Declared on a file, script header or CRM contact that serves or mentions Tityra beside other work.'
     - name: x-mx-blockContent
       type: string-or-object
       authoring: authored
@@ -1709,7 +1776,7 @@ mx:
       notes: >-
         Holds payloads the core blocks field cannot: blocks only names the block types present (a closed list),
         while this field carries what a block declares. x-mx-blocks was the former name for both; its list form
-        moved to blocks and its payload form here (scripts/migrate-x-mx-blocks.cjs).
+        moved to blocks and its payload form here (scripts/fixers/migrate-x-mx-blocks.cjs).
       status: canonical
       profile: x-mx-public
       context: 'Declared on a cog whose blocks are described in its frontmatter.'
@@ -1994,7 +2061,7 @@ mx:
       definition: Whether the message tags @maxine and still awaits an agent reply.
       example: false
       validValues: [true, false]
-      notes: Set by the post-write hook scripts/collaborate-flag-agent.cjs when the body tags @maxine; cleared when the reply is written.
+      notes: Set by the post-write hook scripts/tools/collaborate-flag-agent.cjs when the body tags @maxine; cleared when the reply is written.
       status: canonical
       profile: x-mx-public
       context: 'Declared on a collaboration message.'
@@ -2209,7 +2276,7 @@ mx:
       notes: >-
         Declared on every intent, spec, plan and unit card under mx-canon/mx-maxine-lives/management/intents/. Read and
         written only through scripts/lib/chain.cjs, which holds rank unique within a column; checked by
-        scripts/check-chain.cjs. Acceptance is recorded in the core reviewedBy and statusNote fields, not here.
+        scripts/checks/check-chain.cjs. Acceptance is recorded in the core reviewedBy and statusNote fields, not here.
       status: canonical
       profile: x-mx-public
       context: 'Declared on a chain card so the board and agents share one order of work.'
@@ -2328,7 +2395,7 @@ mx:
   profiles:
     # book/blog/contact/report/audit/event profiles intentionally not declared
     # here. fields-data.yaml carries the evidence-grounded versions.
-    # scripts/cog-field-rules.js (the engine behind frontmatter-validator.js /
+    # scripts/metadata/cog-field-rules.js (the engine behind frontmatter-validator.js /
     # cog-tools.js) reads ONLY fields-data.yaml directly for profiles - it does
     # not merge this file's `profiles:` block at all - so fields-data.yaml is
     # the sole load-bearing source; a same-named profile here would only

@@ -10,7 +10,7 @@ title: "The MX-A2A message format, version mx-a2a/1"
 description: "The fields of an MX-A2A message, the checks a receiver makes on them, and a blank reply template that any editor or agent can fill in by hand."
 author: Tom Cranstoun
 created: 2026-10-26
-modified: 2026-10-26
+modified: 2026-11-16
 version: "1.0"
 
 category: mx-core
@@ -78,6 +78,10 @@ Thanks, the link is fixed on our side.
 | `inReplyTo` | no | the `id` being answered |
 | `dataClass` | no | `user-data` (default) or `none` |
 | `suggestions` | no | a list of `{ summary, rationale }`, as text |
+
+## The same message as a mailbox message
+
+Messages written by an MX sender also carry the fields of the MX mailbox profile, directly under `mx:`, so a reader that knows MX but not this protocol reads the same message. They repeat values from the block above: `messageId` is `id`, `sender` is `from`, and `conversation` and `inReplyTo` are the same. `dateSent` gives the time of sending, `legalEffect` is `none`, and a `request` may add `replyBy` and `requestedActions`. The recipient is not repeated, because the mailbox profile leaves addressing to the transport. These copies are optional in a reply. Where a message carries them, a receiver refuses it if a copy disagrees with the block above.
 
 ## What a receiver checks
 

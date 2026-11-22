@@ -149,15 +149,15 @@ mx:
       <a href="/" class="header-logo" aria-label="CogNovaMX home">
         <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
       </a>
-      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">&#9776;</button>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav" data-tour-id="nav-menu" data-tour-description="Opens the site menu on a narrow screen; the section links are inside it.">&#9776;</button>
       <nav class="header-nav" id="main-nav" aria-label="Main navigation">
-        <a href="/">Home</a>
-        <a href="/books/">Books</a>
-        <a href="/learn/">Learn</a>
-        <a href="/services/">Services</a>
-        <a href="/blog/" aria-current="page">Blog</a>
-        <a href="/the-gathering/">The Gathering</a>
-        <a href="/about/">About</a>
+        <a href="/" data-tour-id="nav-home" data-tour-description="The home page: what MX is and where to start.">Home</a>
+        <a href="/books/" data-tour-id="nav-books" data-tour-description="The MX books: the Handbook and the Protocols, with where to buy them.">Books</a>
+        <a href="/learn/" data-tour-id="nav-learn" data-tour-description="Lessons and explainers on Machine Experience, from first principles.">Learn</a>
+        <a href="/services/" data-tour-id="nav-services" data-tour-description="What CogNovaMX offers and how to get in touch about it.">Services</a>
+        <a href="/blog/" data-tour-id="nav-blog" data-tour-description="Articles on MX, AI agents and the machine-readable web, newest first." aria-current="page">Blog</a>
+        <a href="/the-gathering/" data-tour-id="nav-gathering" data-tour-description="The Gathering: the independent body that stewards the MX standard.">The Gathering</a>
+        <a href="/about/" data-tour-id="nav-about" data-tour-description="Who is behind CogNovaMX and how to contact us.">About</a>
       </nav>
     </div>
   </header>
@@ -182,7 +182,7 @@ mx:
 
       <!-- Collapsible Index (TOC) - Pre-collapsed -->
       <details id="index" class="table-of-contents" data-state="initially-collapsed">
-        <summary>Index</summary>
+        <summary data-tour-id="post-contents" data-tour-description="The article's index: jump to any section of this post.">Index</summary>
         <nav aria-label="Table of contents">
           <ul>
         <li><a href="#this-is-the-machine-first-argument-in-the-regulators-mouth">This is the machine-first argument, in the regulator's mouth</a></li>
@@ -224,7 +224,7 @@ mx:
 <li><code>ai-manipulated</code> for human-origin content a machine materially altered, which is the deepfake and synthetic-edit case.</li>
 </ul>
 <p>A file declares it in its own carrier and the declaration travels with the file. For a document that is the frontmatter. For an image it is the XMP packet. For an Office file it is the custom properties. And because a marking obligation is useless if it stops at text, we wired the same declaration into binary assets: a vendor can now mark an image, a diagram, or a deck as machine-made with one command, and the mark rides inside the file.</p>
-<pre><code class="language-bash">node scripts/decorate-asset.cjs hero.png --field mx.provenanceOrigin=ai-generated
+<pre><code class="language-bash">node scripts/content/decorate-asset.cjs hero.png --field mx.provenanceOrigin=ai-generated
 </code></pre>
 <p>After that, a validator that opens <code>hero.png</code> anywhere it travels reads <code>provenanceOrigin: ai-generated</code> straight out of the file. No surrounding page required. That is what &quot;machine-readable&quot; is supposed to mean.</p>
 <h2 id="the-honest-part-because-it-matters" tabindex="-1">The honest part, because it matters</h2>
@@ -239,7 +239,7 @@ mx:
 
 
       <!-- Post Conclusion: author + CTA + onward links -->
-      <aside class="post-conclusion" aria-label="About the author and next steps">
+      <aside class="post-conclusion" aria-label="About the author and next steps" data-tour-id="post-next-steps" data-tour-description="About the author, and where to go next from this article.">
         <div class="post-conclusion-author">
           <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
           <div class="post-conclusion-author-text">
@@ -292,6 +292,7 @@ mx:
   </footer>
 
   <script src="../../../js/app.js"></script>
+  <script src="../../../js/vendor/webmcp-tour/webmcp-tour.js"></script>
   <script type="module" src="../../../js/mx-provenance-demo.js"></script>
 </body>
 </html>

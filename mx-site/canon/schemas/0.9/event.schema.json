@@ -493,6 +493,9 @@
             }
           ]
         },
+        "conversation": {
+          "type": "string"
+        },
         "copyright": {
           "type": "string"
         },
@@ -507,6 +510,9 @@
         },
         "currency": {
           "type": "string"
+        },
+        "dataProcessing": {
+          "type": "array"
         },
         "dataSources": {
           "type": "array"
@@ -523,6 +529,7 @@
             "ymd"
           ]
         },
+        "dateSent": {},
         "decisionRightRef": {
           "type": "string"
         },
@@ -666,6 +673,16 @@
         "format": {
           "type": "string"
         },
+        "funder": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
         "generate": {
           "type": "object"
         },
@@ -696,10 +713,19 @@
         "inLanguage": {
           "type": "string"
         },
+        "inReplyTo": {
+          "type": "string"
+        },
         "includes": {
           "type": "array"
         },
+        "inferences": {
+          "type": "array"
+        },
         "inferred": {
+          "type": "boolean"
+        },
+        "inferredContents": {
           "type": "boolean"
         },
         "inherentRisk": {
@@ -738,6 +764,15 @@
         },
         "ld": {
           "type": "object"
+        },
+        "legalEffect": {
+          "type": "string",
+          "enum": [
+            "none",
+            "information",
+            "formal-notice",
+            "decision"
+          ]
         },
         "legalInstruments": {
           "type": "array"
@@ -805,6 +840,9 @@
         },
         "mcpServer": {
           "type": "object"
+        },
+        "messageId": {
+          "type": "string"
         },
         "metadataFields": {
           "type": "array"
@@ -909,6 +947,9 @@
         "narrativeContext": {
           "type": "string"
         },
+        "openQuestions": {
+          "type": "array"
+        },
         "operatesAt": {
           "type": "array"
         },
@@ -971,6 +1012,25 @@
         },
         "primaryLanguages": {
           "type": "array"
+        },
+        "principalAttestation": {
+          "type": "string"
+        },
+        "principalAttestationFor": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "read",
+              "draft",
+              "write",
+              "submit",
+              "publish",
+              "unpublish",
+              "delete",
+              "message",
+              "pay"
+            ]
+          }
         },
         "project": {
           "type": "object"
@@ -1087,6 +1147,10 @@
         "replaces": {
           "type": "string"
         },
+        "replyBy": {},
+        "requestedActions": {
+          "type": "array"
+        },
         "requires": {
           "type": "array"
         },
@@ -1174,6 +1238,12 @@
             }
           ]
         },
+        "sender": {
+          "type": "string"
+        },
+        "senderReference": {
+          "type": "string"
+        },
         "servedAt": {
           "type": "string"
         },
@@ -1196,6 +1266,19 @@
             },
             {
               "type": "array"
+            }
+          ]
+        },
+        "sourceOfTruth": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
             }
           ]
         },
@@ -1336,6 +1419,9 @@
         },
         "termGlossary": {
           "type": "object"
+        },
+        "termReadings": {
+          "type": "array"
         },
         "topic": {
           "type": "array"

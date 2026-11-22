@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta name="mx:cog" content="v1 spec=https://mx.allabout.network/cog.html runtime=https://mx.allabout.network/cog-runtime.html">
+  <!-- MX-SOURCE-FRONTMATTER:START -->
+<!--
+---
+"@context": https://mx.allabout.network/canon/context.json
+title: "Random Is a Claim"
+description: "Google's AI Overviews gave people the same 'randomly generated' password across devices, accounts and days. Calling something random is a claim about how it was made, and an answer that makes that claim should carry the evidence."
+author: Tom Cranstoun
+created: "2026-11-20"
+modified: "2026-11-20"
+version: "1.0"
+category: mx-content
+type: blog-post
+tags: [watching-the-machines, google, ai-overviews, passwords, randomness, provenance, determinism, pal, machine-experience]
+mx:
+  mxSpecVersion: "0.9"
+  x-mx-contentState: draft
+  servedAt: https://mx.allabout.network/blog/drafts/watching-the-machines/random-is-a-claim.html
+  runbook: "Revise if Google comments on the repeated password, if anyone shows that different people received the same one, or if Pal changes how it answers a password request. The account of the Google test rests on Computeractive's report of 18 November 2026 and is not repeated here; the claims about Pal rest on its own test suite, run on 20 November 2026 as described in the Method section. Public material: describe what Pal does, never how it is built."
+  audience:
+    - humans
+    - machines
+  aiAssistance: welcome
+  provenanceOrigin: ai-assisted
+  partOf: https://mx.allabout.network/blog/drafts/watching-the-machines/
+  canonicalUri: https://raw.githubusercontent.com/Digital-Domain-Technologies-Ltd/MX-hub/main/datalake/draft-site/blog/watching-the-machines/random-is-a-claim.md
+  contextProvides:
+    - "'Randomly generated' is a statement about how something was made, so it is a provenance claim, and a language model cannot back it: it predicts likely characters, and a stored or repeated answer gives everyone the same string."
+    - "An answer that claims a process should carry the evidence for it: what made it, where, with what settings, and whether anyone kept a copy."
+    - "Where a script can do a job exactly, such as making a random password, the script does it and the answer says so; a model is not asked to imitate it."
+  stability: stable
+  quotes:
+    - "generate a password"
+    - "k8#pz!vl9$mq2wx*"
+    - "with the exact same password every single time, even in an Incognito mode"
+    - "Imagine hundreds if not thousands of users worldwide thinking this has been randomly generated. Imagine 'k8#pz!vl9$mq2wx*' becoming the new 'password'."
+    - "she didn't prove that caching is responsible in this case, or established how many people have received the password"
+    - "the tests don't prove that the same password is shown to different people"
+  purpose: "Show from a reported case that 'random' is a provenance claim a language model cannot support, say what a password answer has to carry instead, and describe how Pal answers the same request."
+  corroboratedBy:
+    - https://www.snipca.com/61104
+refersTo:
+  - https://mx.allabout.network/blog/drafts/watching-the-machines/
+  - https://mx.allabout.network/blog/same-question-five-answers.html
+refersToExternal:
+  - https://www.snipca.com/61104
+  - https://www.snipca.com/61107
+
+---
+-->
+<!-- MX-SOURCE-FRONTMATTER:END -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light dark">
+  <meta name="author" content="Tom Cranstoun">
+  <meta name="description" content="Google's AI Overviews gave people the same 'randomly generated' password across devices, accounts and days. Calling something random is a claim about how it was made, and an answer that makes that claim should carry the evidence.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://mx.allabout.network/blog/drafts/watching-the-machines/random-is-a-claim.html">
+  <link rel="alternate" type="text/markdown" href="random-is-a-claim.md">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="article">
+  <meta property="og:url" content="https://mx.allabout.network/blog/drafts/watching-the-machines/random-is-a-claim.html">
+  <meta property="og:title" content="Random Is a Claim | CogNovaMX">
+  <meta property="og:description" content="Google's AI Overviews gave people the same 'randomly generated' password across devices, accounts and days. Calling something random is a claim about how it was made, and an answer that makes that claim should carry the evidence.">
+  <meta property="og:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta property="og:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:site_name" content="CogNovaMX">
+  <meta property="og:locale" content="en_GB">
+  <meta property="article:published_time" content="2026-11-20">
+  <meta property="article:author" content="Tom Cranstoun">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Random Is a Claim | CogNovaMX">
+  <meta name="twitter:description" content="Google's AI Overviews gave people the same 'randomly generated' password across devices, accounts and days. Calling something random is a claim about how it was made, and an answer that makes that claim should carry the evidence.">
+  <meta name="twitter:image" content="https://mx.allabout.network/images/mx-social.jpg">
+  <meta name="twitter:image:alt" content="Machine Experience by CogNovaMX. Making the web, and everything you publish beyond it, work for everyone and everything that uses it.">
+  <meta name="twitter:site" content="@ddttomtom">
+
+  <!-- Discovery -->
+  <link rel="llms-txt" href="/llms.txt">
+  <link rel="ai-usage" type="application/json" href="/AI-USAGE.json" title="MX AI Usage Declaration">
+
+  <!-- MX Carrier -->
+  <meta name="mx:status" content="draft">
+  <meta name="mx:contentType" content="blog-post">
+  <meta name="mx:audience" content="humans, machines">
+  <!-- MX carrier tags. Vendor-namespaced fields are internal (The vendor layer publishes nothing) and are
+       never emitted here; a served page says what the document is, not how this
+       estate is organised. Stewardship lives in the markdown source. -->
+  <meta name="mx:name" content="Random Is a Claim">
+  <meta name="mx:type" content="blog-post">
+  <meta name="mx:version" content="1.0">
+  <meta name="mx:author" content="Tom Cranstoun">
+  <link rel="mx" href="https://mx.allabout.network/blog/drafts/watching-the-machines/random-is-a-claim.html">
+  <!-- WICG AI Content Disclosure (https://github.com/WICG/proposals/issues/261) - derived from /AI-USAGE.json per the MX AI Usage Declaration draft §4.7 -->
+  <meta name="ai-disclosure" content="ai-assisted">
+
+  <title>Random Is a Claim | CogNovaMX</title>
+
+  <!-- Schema.org JSON-LD -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BlogPosting",
+      "name": "Random Is a Claim",
+      "headline": "Random Is a Claim",
+      "description": "Google's AI Overviews gave people the same 'randomly generated' password across devices, accounts and days. Calling something random is a claim about how it was made, and an answer that makes that claim should carry the evidence.",
+      "digitalSourceType": "https://cv.iptc.org/newscodes/digitalsourcetype/compositeWithTrainedAlgorithmicMedia",
+      "datePublished": "2026-11-20",
+      "dateModified": "2026-11-20",
+      "author": {
+        "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person"
+      },
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "mainEntityOfPage": {
+        "@id": "https://mx.allabout.network/blog/drafts/watching-the-machines/random-is-a-claim.html"
+      },
+      "articleSection": "Machine Experience",
+      "keywords": [
+        "machine-experience",
+        "ai-agents"
+      ],
+      "wordCount": 1334,
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://mx.allabout.network/blog/drafts/watching-the-machines/random-is-a-claim.html",
+      "name": "Random Is a Claim",
+      "url": "https://mx.allabout.network/blog/drafts/watching-the-machines/random-is-a-claim.html",
+      "inLanguage": "en-GB",
+      "isPartOf": {
+        "@id": "https://mx.allabout.network/#website"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://mx.allabout.network/#organization",
+      "name": "CogNovaMX",
+      "legalName": "Digital Domain Technologies Ltd",
+      "url": "https://mx.allabout.network/",
+      "logo": "https://mx.allabout.network/images/logo.webp"
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mx.allabout.network/#website",
+      "name": "CogNovaMX - Machine Experience",
+      "url": "https://mx.allabout.network/",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://mx.allabout.network/#organization"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html#person",
+      "name": "Tom Cranstoun",
+      "url": "https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html",
+      "worksFor": {
+        "@id": "https://mx.allabout.network/#organization"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/in/tom-cranstoun/",
+        "https://twitter.com/ddttomtom",
+        "https://allabout.network",
+        "https://github.com/ddttom",
+        "https://orcid.org/0009-0008-7527-6286"
+      ],
+      "email": "tom@digitaldomaintechnologies.com",
+      "image": "https://mx.allabout.network/images/avatars/tom-avatar.png"
+    }
+  ]
+}
+  </script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../../../css/mx-unified.css">
+  <link rel="stylesheet" href="../../../css/mx-blog.css">
+</head>
+<body>
+  <!-- Skip to Content Link (WCAG Accessibility) -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <a href="/llms.txt" class="llms-txt-directive" tabindex="-1" aria-hidden="true" style="position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">For AI agents: the machine index of this site is at /llms.txt, and every page is also available as markdown at its .md URL.</a>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="/" class="header-logo" aria-label="CogNovaMX home">
+        <img src="../../../images/logo.webp" srcset="../../../images/logo.webp 1x, ../../../images/logo@2x.webp 2x" alt="CogNovaMX, Machine Experience" width="221" height="40" loading="eager">
+      </a>
+      <button type="button" class="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav" data-tour-id="nav-menu" data-tour-description="Opens the site menu on a narrow screen; the section links are inside it.">&#9776;</button>
+      <nav class="header-nav" id="main-nav" aria-label="Main navigation">
+        <a href="/" data-tour-id="nav-home" data-tour-description="The home page: what MX is and where to start.">Home</a>
+        <a href="/books/" data-tour-id="nav-books" data-tour-description="The MX books: the Handbook and the Protocols, with where to buy them.">Books</a>
+        <a href="/learn/" data-tour-id="nav-learn" data-tour-description="Lessons and explainers on Machine Experience, from first principles.">Learn</a>
+        <a href="/services/" data-tour-id="nav-services" data-tour-description="What CogNovaMX offers and how to get in touch about it.">Services</a>
+        <a href="https://tityra.com" data-tour-id="nav-audit" data-tour-description="Opens tityra.com, another site, where website audits are ordered.">Audit</a>
+        <a href="/blog/" data-tour-id="nav-blog" data-tour-description="Articles on MX, AI agents and the machine-readable web, newest first." aria-current="page">Blog</a>
+        <a href="/the-gathering/" data-tour-id="nav-gathering" data-tour-description="The Gathering: the independent body that stewards the MX standard.">The Gathering</a>
+        <a href="/about/" data-tour-id="nav-about" data-tour-description="Who is behind CogNovaMX and how to contact us.">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="blog-page" aria-label="Article">
+
+      <!-- Blog Introduction -->
+      <aside class="blog-introduction" aria-label="Blog introduction" data-component="blog-header">
+        <div class="introduction-content" role="presentation">
+          <a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html" aria-label="View Tom Cranstoun's profile">
+            <img src="../../../images/avatars/tom-avatar.png"
+                 alt="Tom Cranstoun profile picture"
+                 class="author-image" width="80" height="80" loading="lazy">
+          </a>
+          <div class="introduction-text" role="presentation">
+            <p class="introduction-message">Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.</p>
+            <address class="author-name">Author: <strong>Tom Cranstoun</strong></address>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Collapsible Index (TOC) - Pre-collapsed -->
+      <details id="index" class="table-of-contents" data-state="initially-collapsed">
+        <summary data-tour-id="post-contents" data-tour-description="The article's index: jump to any section of this post.">Index</summary>
+        <nav aria-label="Table of contents">
+          <ul>
+        <li><a href="#what-the-magazine-got-right">What the Magazine Got Right</a></li>
+        <li><a href="#random-is-a-statement-about-how">Random Is a Statement About How</a></li>
+        <li><a href="#what-a-password-answer-should-carry">What a Password Answer Should Carry</a></li>
+        <li><a href="#how-pal-answers">How Pal Answers</a></li>
+        <li><a href="#a-script-for-what-a-script-can-do">A Script for What a Script Can Do</a></li>
+        <li><a href="#method">Method</a></li>
+        <li><a href="#what-to-do-about-it">What to Do About It</a></li>
+          </ul>
+        </nav>
+      </details>
+
+      <!-- Article -->
+      <article data-agent-visible="true" data-article-type="blog-post" data-word-count="1334">
+        <header class="article-header">
+          <h1>Random Is a Claim</h1>
+          <div class="article-meta"
+               data-published="2026-11-20"
+               data-modified="2026-11-20"
+               data-reading-time="7 min">
+            <time datetime="2026-11-20">20 November 2026</time>
+            <span>·</span>
+            <span>Tom Cranstoun</span>
+            <span>·</span>
+            <span>7 min read</span>
+          </div>
+        </header>
+
+
+<p>Part of <strong><a href="https://mx.allabout.network/blog/drafts/watching-the-machines/">Watching the Machines</a></strong>, a record of how the companies shipping AI treat the people who own the devices and write the content.</p>
+<p>For a while, if you typed &quot;generate a password&quot; into Google, its AI Overviews gave you <code>k8#pz!vl9$mq2wx*</code> and told you the password was strong and randomly generated.</p>
+<p>SEO consultant Natalia Witczyk spotted it. Computeractive reported on 18 November 2026 that she had tried the same request on several devices and Chrome profiles and got the same answer, &quot;with the exact same password every single time, even in an Incognito mode&quot;. In a <a href="https://www.snipca.com/61104">LinkedIn post</a> she wrote: &quot;Imagine hundreds if not thousands of users worldwide thinking this has been randomly generated. Imagine 'k8#pz!vl9$mq2wx*' becoming the new 'password'.&quot;</p>
+<p>Computeractive repeated the test. The same password came back across several Google accounts and devices, in normal searches and in Incognito, on successive days.</p>
+<h2 id="what-the-magazine-got-right" tabindex="-1">What the Magazine Got Right</h2>
+<p>The report is worth reading for its care as much as its finding. It says plainly that Witczyk &quot;didn't prove that caching is responsible in this case, or established how many people have received the password&quot;. It's just as plain about its own runs: &quot;the tests don't prove that the same password is shown to different people&quot;. Google hasn't commented.</p>
+<p>That's the distinction the AI Overview didn't make. The magazine kept what it saw apart from what it supposed, and named each. The Overview stated a fact about its own process, that the password was random, and offered nothing to support it.</p>
+<h2 id="random-is-a-statement-about-how" tabindex="-1">Random Is a Statement About How</h2>
+<p>&quot;Strong&quot; is a property you can check by looking at the password. &quot;Random&quot; isn't. You can't tell from <code>k8#pz!vl9$mq2wx*</code> whether it came from a coin, a dice, a secure generator, or a language model's best guess at what a password looks like. Random describes how the string was made. That makes it a provenance claim, and without evidence it's worth nothing.</p>
+<p>A language model can't supply that evidence, because it can't do the thing claimed. It writes the most likely next character, with a little chance mixed in. Looking random and being drawn by chance aren't the same thing. And once an answer is stored, or the chance is turned down, every person who asks gets the same string, still labelled random.</p>
+<p>I ran into the other side of this in <strong><a href="https://mx.allabout.network/blog/same-question-five-answers.html">Same Question, Five Answers</a></strong>. Apple's on-device model gave me five different answers to one question, and I argued that asking again can't recover what it said the first time. This case runs the other way. For a fact, a stable answer is welcome. For a secret, it's the whole failure. Either way the reader can't see which they got. Variation and sameness are both invisible from inside one answer, so the evidence has to arrive with it.</p>
+<h2 id="what-a-password-answer-should-carry" tabindex="-1">What a Password Answer Should Carry</h2>
+<p>If a machine hands you a password and says it's random, it should be able to say:</p>
+<ul>
+<li>what made it, and that it wasn't a language model</li>
+<li>where it was made: on your device, or on a server that might keep it</li>
+<li>its length, and which characters it draws from</li>
+<li>how strong that makes it, as bits of entropy</li>
+<li>whether anyone kept a copy, in a log, a cache, or the chat's memory</li>
+</ul>
+<p>There's nothing exotic here. It's the same metadata MX asks a published file to carry about itself, pointed at an answer instead of a page.</p>
+<h2 id="how-pal-answers" tabindex="-1">How Pal Answers</h2>
+<p>Pal is the personal assistant I build on MX, and I checked how it handles the same request before writing this. It didn't handle it well. A request like &quot;generate a password&quot; went to a language model, the same as anything else typed into it. Pal's safety checks would have caught a leaked API key, but a model-written password would have passed straight through.</p>
+<p>So I changed it, and Pal now answers like this:</p>
+<pre><code class="language-text">Generated on this device by a script, not a model:
+
+9fyzEtbfTdb#ke2hq-a4
+
+How it was made: a cryptographic random number generator, reading your
+operating system's secure random source, drew 20 characters from a set
+of 70 (capitals, small letters, digits and symbols, with look-alikes such
+as I, O and l left out), with every kind present. That gives about 122
+bits of entropy.
+
+Every request gets a new password. No model wrote it or saw it, and Pal
+does not keep it, remember it in the chat, or send it anywhere. Put it
+straight into your password manager.
+</code></pre>
+<p>That password is published now, so it's burned. Don't use it, and don't use <code>k8#pz!vl9$mq2wx*</code> either.</p>
+<p>Four rules produce that reply:</p>
+<ul>
+<li><strong>No model touches the request.</strong> Pal spots a request for a password or PIN before it decides where an answer should come from, and a script answers it. A model can't produce a random password, so Pal doesn't ask one to try.</li>
+<li><strong>The answer carries its provenance.</strong> It says what made the password, where, how long it is, what it draws from, and how strong that makes it. &quot;Random&quot; arrives with its evidence.</li>
+<li><strong>Nothing keeps it.</strong> The answer isn't kept in the chat's memory. If the conversation carries on, the password is replaced before any later message goes to a model.</li>
+<li><strong>A backstop covers the rest.</strong> Some questions about passwords still reach a model, such as &quot;what's an example of a strong one?&quot;. If the model writes something shaped like a password in reply, Pal withholds it, says why, and points to the script.</li>
+</ul>
+<p>Can Pal ever make Google's mistake? Not on the requests it spots, and not by passing on a password a model wrote. The guarantee is code, checked on every change, rather than a line in a prompt asking the model to behave. One check feeds Pal a model reply of <code>k8#pz!vl9$mq2wx*</code> and confirms the person never sees it.</p>
+<h2 id="a-script-for-what-a-script-can-do" tabindex="-1">A Script for What a Script Can Do</h2>
+<p>The rule I work to is simple: if a check can be scripted, script it. A model is the right tool when the work is reading, weighing, or writing. It's the wrong tool when the result has to be exact, as a random password, a sum, or the weekday of a date must be. When a script can do the job, the assistant should hand it over and say that's what it did.</p>
+<p>Pal does this for passwords now. The bigger point holds for any assistant, and for every page one reads. A claim about how something was made is only as good as the record behind it. A machine can check only what that record holds.</p>
+<p><strong>A declared interest.</strong> I wrote the books on MX and consult on it, and Pal is my own product, so I have a stake in what this column recommends. I haven't repeated the Google test myself; the account above is Computeractive's.</p>
+<h2 id="method" tabindex="-1">Method</h2>
+<ul>
+<li><strong>The Google case.</strong> Taken from Computeractive's report in its issue of 18 November 2026, read through PressReader. The magazine's quotations of Witczyk are reproduced as printed, and its link to her post is the one above.</li>
+<li><strong>Pal before the change.</strong> I read how Pal routed a password request on 20 November 2026. It went to a language model, and the output checks looked for private-key and access-key shapes only.</li>
+<li><strong>Pal after the change.</strong> Pal's test suite for the password route ran 60 checks that day, and all passed. Among them:
+<ul>
+<li>2,000 requests in a row gave 2,000 different results</li>
+<li>the length and character rules hold, and the stated entropy is right</li>
+<li>no model is called for a request Pal spots</li>
+<li>a generated password is kept out of later model turns</li>
+<li>a model's reply of <code>k8#pz!vl9$mq2wx*</code> is withheld when a password question gets through to one</li>
+</ul>
+</li>
+</ul>
+<h2 id="what-to-do-about-it" tabindex="-1">What to Do About It</h2>
+<p>Make passwords in a password manager, which does exactly this job and keeps the result safe. Computeractive's recommendation is <a href="https://www.snipca.com/61107">Bitwarden's free generator</a>. If you ever used the password from the Overview, change it now. When any machine tells you how something was made, ask it to show you.</p>
+<ul>
+<li><a href="https://tg.community">Join The Gathering</a></li>
+</ul>
+
+
+        <footer class="reader-notice" aria-labelledby="reader-notice-heading">
+          <h2 id="reader-notice-heading">About this page</h2>
+          <ul>
+            <li>Written by Tom Cranstoun.</li>
+            <li>Last changed on 2026-11-20.</li>
+            <li>Outside sources that make the same claims: <a href="https://www.snipca.com/61104" rel="noopener">www.snipca.com/61104</a>.</li>
+            <li>It cites <a href="https://www.snipca.com/61107" rel="noopener">www.snipca.com/61107</a>.</li>
+          </ul>
+        </footer>
+
+      </article>
+
+
+      <!-- Post Conclusion: author + CTA + onward links -->
+      <aside class="post-conclusion" aria-label="About the author and next steps" data-tour-id="post-next-steps" data-tour-description="About the author, and where to go next from this article.">
+        <div class="post-conclusion-author">
+          <img src="../../../images/avatars/tom-avatar.png" alt="" class="post-conclusion-avatar" width="72" height="72" loading="lazy">
+          <div class="post-conclusion-author-text">
+            <p class="post-conclusion-eyebrow">About the author</p>
+            <p class="post-conclusion-author-name"><a href="https://mx.allabout.network/blog/profiles/about.tom.cranstoun.html">Tom Cranstoun</a></p>
+            <p class="post-conclusion-author-bio">Founder of the Machine Experience (MX) community and author of the forthcoming MX book series. Building content systems since 1977. Specialises in Adobe Experience Manager, Edge Delivery Services, and MX strategic advisory through Digital Domain Technologies Ltd.</p>
+          </div>
+        </div>
+        <div class="post-conclusion-cta">
+          <p class="post-conclusion-eyebrow">Continue the conversation</p>
+          <p class="post-conclusion-prompt">Want to talk through how ready your organisation is for agents?</p>
+          <ul class="post-conclusion-links">
+            <li><a class="post-conclusion-link" href="/about/contact.html">Get in touch</a></li>
+            <li><a class="post-conclusion-link" href="https://mx.allabout.network/books/">Explore the books</a></li>
+            <li><a class="post-conclusion-link" href="https://tg.community" rel="noopener">Join The Gathering</a></li>
+          </ul>
+        </div>
+      </aside>
+
+    </section>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="../../../images/logo.webp" alt="CogNovaMX, Machine Experience" width="160" height="29" loading="lazy">
+        <p>Making the web, and everything you publish beyond it, work for everyone and everything that uses it.</p>
+      </div>
+      <nav class="footer-links" aria-label="Site links">
+        <p class="footer-heading"><strong>Explore</strong></p>
+        <ul>
+          <li><a href="https://mx.allabout.network/books/">Books</a></li>
+          <li><a href="/learn/">Learn MX</a></li>
+          <li><a href="/services/">Services</a></li>
+          <li><a href="https://tityra.com">Audit</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li><a href="/reginald/">REGINALD</a></li>
+          <li><a href="/the-gathering/">The Gathering</a></li>
+          <li><a href="https://tg.community" rel="noopener">TG Community</a></li>
+        </ul>
+      </nav>
+      <address class="footer-contact">
+        <p class="footer-heading"><strong>Contact</strong></p>
+        <a href="mailto:info@cognovamx.com">info@cognovamx.com</a>
+        <p>Published by Digital Domain Technologies Ltd, trading as CogNovaMX</p>
+      </address>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Digital Domain Technologies Ltd, trading as CogNovaMX. All rights reserved.</span>
+      <span>Designed with Machine Experience in mind.</span>
+    </div>
+  </footer>
+
+  <script src="../../../js/app.js"></script>
+  <script src="../../../js/vendor/webmcp-tour/webmcp-tour.js"></script>
+  <script type="module" src="../../../js/mx-provenance-demo.js"></script>
+</body>
+</html>

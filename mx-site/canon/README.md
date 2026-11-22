@@ -4,7 +4,7 @@ title: "MX Canon - Public Mirror"
 description: "Public mirror of the machine-readable MX canon: standard fields, carrier vocabulary, CogNovaMX vendor extensions, workflow vocabulary, and the MX frontmatter JSON Schema. Canonical source for MX-aware tools."
 author: "Tom Cranstoun"
 created: "2026-04-16"
-modified: 2026-09-05
+modified: 2026-11-22
 
 type: info-doc
 mx:
@@ -26,6 +26,7 @@ This folder publishes the machine-readable MX canon at stable URLs.
 | [cognovamx-fields.yaml](cognovamx-fields.yaml) | Vendor extension pack | `x-mx-` / `x-mx-p-` namespaces |
 | [workflow-fields.yaml](workflow-fields.yaml) | Workflow and process vocabulary for tooling artefacts | CogNovaMX tooling, outside the standard |
 | [mx-frontmatter.schema.v0.1.json](mx-frontmatter.schema.v0.1.json) | JSON Schema (Draft 2020-12) validating MX three-zone frontmatter presence and format | The standard's CI on-ramp |
+| `mx-core.linkml.yaml` | The core vocabulary as one LinkML schema, generated from fields-data.yaml by `scripts/generators/gen-mx-linkml.cjs`, never hand-edited. Each field's primary standard alignment is its `slot_uri`, the same one context.json uses; LinkML tools derive JSON Schema and OWL from it, and it is the form the ohi.dev ontology index accepts | LinkML / ontology tooling |
 | [context.json](context.json) | The served MX context: the field dictionary's standard-vocabulary alignments as one JSON-LD 1.1 context, generated from the dictionary, never hand-edited. A frontmatter block that declares this file's URL as its `"@context"` is a linked-data island whose fields mean what the dictionary says they mean | JSON-LD / YAML-LD consumers |
 
 The two field-dictionary files together form the proposed standard that The Gathering governs. The vendor extension pack is not part of the standard - it is a reference for other vendors authoring their own `x-vendor-` extension files - and the workflow vocabulary is CogNovaMX tooling vocabulary kept in its own dictionary so the canon stays focused on document content.

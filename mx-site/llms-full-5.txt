@@ -199,7 +199,7 @@ If your firm handles work that cannot leave the building, send me your domain at
 
 **URL:** https://mx.allabout.network/blog/tom-cranstoun-launches-mx-handbook.html
 
-**Description:** Tom Cranstoun's MX: The Handbook turns a 2024 CMS Critic insight into a full implementation framework for the AI agent era. A practical guide to building websites that AI agents can actually use.
+**Description:** Tom Cranstoun's MX: The Handbook turns a 2024 CMS Critic insight into a practical self-check guide for the AI agent era: what AI agents need from a website, and how to check for yourself whether yours provides it.
 
 Machine Experience (MX) is the practice of adding metadata and instructions to internet assets so AI agents don't have to guess.
 
@@ -231,13 +231,13 @@ Machine Experience (MX) is the practice of adding metadata and instructions to i
             ·
             7 min read
 
-Author and CMS veteran Tom Cranstoun has published the first volume in his Machine Experience series, turning a 2024 CMS Critic insight into a full implementation framework for the AI agent era.
+Author and CMS veteran Tom Cranstoun has published the first volume in his Machine Experience series, turning a 2024 CMS Critic insight into a practical self-check guide for the AI agent era.
 
 Two years ago, Tom Cranstoun wrote a piece for CMS Critic identifying what he called the AI tipping point: the moment when designing for machines became as important as designing for humans. That article landed. It named a conversation the CMS community had been circling without quite articulating.
 
 Now that insight has a book.
 
-MX: The Handbook, published 2 April 2026 by CogNovaMX, is a 320-page implementation guide for what Cranstoun calls Machine Experience (MX): the discipline of designing digital systems so that AI agents can read, trust, and act on them reliably.
+MX: The Handbook, published 2 April 2026 by CogNovaMX, is a practical self-check guide to what Cranstoun calls Machine Experience (MX): the discipline of designing digital systems so that AI agents can read, trust, and act on them reliably.
 
 Why this matters to CMS professionals
 
@@ -245,7 +245,7 @@ The timing is not accidental. The problem, as Cranstoun documents throughout the
 
 AI agents don't click, don't scroll, and don't forgive ambiguity. They parse your HTML, evaluate your metadata, and make decisions in milliseconds. If your content isn't structured for them, they move on.
 
-The CMS layer is at the centre of this. Every content management system in production today either helps or hinders an AI agent's ability to read the content it serves. The Handbook gives CMS teams a framework for understanding which side of that line they are on, and concrete patterns for crossing it.
+The CMS layer is at the centre of this. Every content management system in production today either helps or hinders an AI agent's ability to work with the content it serves. The Handbook gives CMS teams the checks to find out which side of that line they are on, using a browser, view source, a plain fetch and free public validators.
 
 The January 2026 tipping point
 
@@ -263,13 +263,13 @@ This is the failure mode the Handbook is built to surface. Cranstoun calls it qu
 
 What the book covers
 
-The Handbook is structured as a practical implementation guide rather than a strategic overview. Cranstoun is explicit about the audience: frontend developers, UX designers, technical leads, QA engineers, and business leaders who want to move from theory to working code.
+The Handbook is structured as a practical self-check guide rather than a strategic overview. It forces no implementation: it shows what to look for and how to check it, and leaves the fix to the reader, with the detail in MX: The Protocols. Cranstoun is explicit about the audience: frontend developers, UX designers, technical leads, QA engineers, and business leaders who want checks they can run themselves.
 
-The twelve chapters cover:
+The chapters cover:
 
 - How AI agents actually read your HTML: the served markup, not the rendered page. What the parser sees, and what it skips.
 
-- Semantic HTML and Schema.org patterns: working examples that pass machine audits, not just principles.
+- Semantic HTML and Schema.org: what to check, and how to see your markup the way a machine does.
 
 - Navigation, JavaScript, and the anti-patterns that silently break machine comprehension, including the routing patterns agents cannot follow.
 
@@ -297,13 +297,13 @@ Figure 1: How an AI agent evaluates task-completion feasibility. Adapted from MX
 
 - Purchase confidence: the agent has to believe its user will be safe completing the transaction. That means verifiable business identity, return policies in machine-readable form, and provenance signals the agent can cross-check.
 
-The Handbook treats each task as a testable checkpoint, with the HTML and metadata patterns that satisfy it and the anti-patterns that quietly fail it.
+The Handbook treats each task as a testable checkpoint, with the checks that show whether a page satisfies it and the anti-patterns that quietly fail it.
 
 The book series
 
 The Handbook is the second entry point into a three-book series. The free MX: The Introduction (53 pages, no sign-up required) makes the business and technical case and provides a five-step action framework. It is available at mx.allabout.network/books/introduction.html.
 
-MX: The Protocols, due January 2027, is the definitive architectural reference: 800 pages covering the full MX discipline including the Session Inheritance Problem, Identity Delegation for agent-mediated commerce, and the Entity Asset Layer for sovereign digital assets.
+MX: The Protocols, coming soon, is the definitive architectural reference: 800 pages covering the full MX discipline including the Session Inheritance Problem, Identity Delegation for agent-mediated commerce, and the Entity Asset Layer for sovereign digital assets.
 
 Book
 Format
@@ -323,7 +323,7 @@ April 2026
 MX: The Protocols
 PDF
 £99
-January 2027
+Coming soon
 
 The MX book series
 
@@ -351,7 +351,7 @@ Tom Cranstoun is a contributor to CMS Critic and a member of Boye & Company's CM
 
             - Written by Tom Cranstoun.
 
-            - Last changed on 2026-10-19.
+            - Last changed on 2026-11-16.
 
             About the author
 
@@ -361,7 +361,7 @@ Tom Cranstoun is a contributor to CMS Critic and a member of Boye & Company's CM
 
           Continue the conversation
 
-          Want to talk through where your organisation sits on the agent-readiness curve?
+          Want to talk through how ready your organisation is for agents?
 
             - Get in touch
 
@@ -3038,72 +3038,44 @@ robots.txt is a voluntary signalling mechanism, not a means of legal enforcement
 
 The llms.txt problem stands separately
 
-None of the robots.txt behaviour above helps a crawler find an llms.txt file. CCBot follows robots.txt, reads sitemaps, and indexes HTML. A raw .txt file with no entry in your sitemap is invisible to it. That's the problem the next section addresses.
+None of the robots.txt behaviour above tells an agent where your llms.txt file is or how to read it. That's a separate problem, and it's the subject of the next section.
 
 The llms.txt problem
 
-The llms.txt file is a proposed convention for declaring how LLMs should use your content. The problem: Common Crawl won't find it.
+The llms.txt file is a proposed convention: a Markdown document at the root of a site that gives language models a short, curated overview of it, with links to the pages that matter (llmstxt.org). It's read when an agent or tool goes looking for it, typically at inference time. It isn't a way to get content into a training crawl, and it doesn't change how Common Crawl behaves.
 
-Why not?
+Two things stop most implementations from working:
 
-- It isn't HTML (Common Crawl primarily harvests HTML).
+- It doesn't answer as Markdown. A rewrite rule, a firewall challenge or a single-page app router returns an HTML page instead of the file.
 
-- It isn't in your sitemap (typically).
+- Nothing points to it. A file at the root is found only by a reader that already knows to look there.
 
-- There's no standard discovery mechanism.
+The Machine Experience solution: serve llms.txt as text, and point to it
 
-- It's a .txt file, and machines have no reason to seek it out.
+Two changes are enough. Leave the file in place and keep to one copy.
 
-The Machine Experience solution: keep llms.txt as it is, serve it as HTML for Common Crawl
+1. Serve /llms.txt as the file it is.
 
-Two changes are enough. Don't move the file. Don't ship a second file. Keep the canonical /llms.txt exactly as authoring tools, MCP clients, and humans expect it. Change what the edge serves and what your sitemap lists.
+Return it with a 200 and Content-Type: text/plain; charset=utf-8 or text/markdown; charset=utf-8. Don't wrap it in an HTML document. Most web servers already send text/plain for a .txt file, so the work is making sure nothing in front of the server alters that. Lighthouse's llms-txt audit fetches the file and checks that it reads as Markdown text, with an H1 and a Markdown link (Lighthouse source).
 
-1. Wrap /llms.txt as HTML at the edge.
+curl -sI https://example.com/llms.txt | grep -i '^content-type'
+curl -s https://example.com/llms.txt | head -n 1
 
-The source-of-truth file on disk stays raw markdown so any tool fetching /llms.txt as text still works. A Cloudflare Worker (or equivalent) intercepts the request for that one URL, fetches the raw content, and serves it back wrapped in a minimal HTML document with Content-Type: text/html. The content inside is byte-identical to the original markdown, sitting in a <pre> block. Common Crawl now treats it as an HTML page and indexes it.
+The first command should show text/plain or text/markdown. The second should print a Markdown H1, not <!DOCTYPE html>.
 
-export default {
-  async fetch(request) {
-    const url = new URL(request.url);
-    if (url.pathname === '/llms.txt') {
-      const content = await fetch('https://your-origin.com/llms.txt')
-        .then(r => r.text());
+2. Point to it from every page.
 
-      const html = `<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>llms.txt</title>
-</head>
-<body>
-<pre>${content}</pre>
-</body>
-</html>`;
+The convention uses rel="describedby" for this, either as an HTTP Link header or as a <link> element in the <head> (llmstxt.org):
 
-      return new Response(html, {
-        headers: { 'Content-Type': 'text/html; charset=utf-8' }
-      });
-    }
-    return fetch(request);
-  }
-};
+<link rel="describedby" href="/llms.txt">
 
-2. Add /llms.txt to sitemap.xml.
+Leave llms.txt out of sitemap.xml. A sitemap lists the pages you want indexed for people; llms.txt is a reading guide for language models, not one of those pages.
 
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://example.com/llms.txt</loc>
-    <lastmod>2026-01-24</lastmod>
-  </url>
-</urlset>
-
-Sitemap inclusion is what tells Common Crawl the URL exists at all. HTML wrapping is what makes it index the content once it arrives.
-
-The full recipe, including the production version of the wrapper (which also injects JSON-LD, OG, and Twitter metadata into its <head> so the page carries proper agent-facing signals), is in the companion post: Why llms.txt Isn't Working, and How to Fix It.
+The full recipe and checklist are in the companion post: Why llms.txt Isn't Working, and How to Fix It.
 
 Why this matters
 
-This is Machine Experience thinking. Don't assume proposed conventions will work just because they have been proposed. Understand how the actual infrastructure operates (Common Crawl scrapes HTML from sitemaps), and design accordingly. Keep what tooling expects. Reshape only what the crawler needs.
+This is Machine Experience thinking. Don't assume proposed conventions will work just because they have been proposed. Understand how the readers that use them behave, and design accordingly. Serve the file in the form the convention defines, and make it easy to find.
 
 llms.txt and robots.txt as ephemeral operational files
 
@@ -3280,7 +3252,7 @@ This serves both classes of non-visual users:
 
 This needs no new technology or extra attributes; it applies UX thinking to machine users.
 
-The data-reason attribute matters. It isn't just a boolean flag, it's explicit, human-readable context that prevents AI hallucination.
+The data-reason attribute matters. It isn't just a boolean flag, it's explicit, human-readable context that reduces the room for AI hallucination.
 
 Without this signal, an AI visiting your stock page might:
 
@@ -3347,7 +3319,7 @@ That's Machine Experience: understanding what your machine users need, and using
 
             - Written by Tom Cranstoun.
 
-            - Last changed on 2026-10-15.
+            - Last changed on 2026-11-16.
 
             About the author
 
@@ -3357,7 +3329,7 @@ That's Machine Experience: understanding what your machine users need, and using
 
           Continue the conversation
 
-          Want to talk through where your organisation sits on the agent-readiness curve?
+          Want to talk through how ready your organisation is for agents?
 
             - Get in touch
 
@@ -4142,25 +4114,25 @@ Blocking CCBot removes you from the open datasets that researchers use. It doesn
 
 It archives robots.txt itself as a dedicated dataset, kept separate from the main crawl, for researchers building robots.txt parsers.
 
-It crawls text/plain files, though they made up a small fraction of the most recent crawl, so a plain-text llms.txt listed in your sitemap can be archived, but only as one of that minority. But Common Crawl is a passive archive. It stores the bytes; it doesn't read llms.txt to change how it crawls.
+It crawls text/plain files, though they made up a small fraction of the most recent crawl. Common Crawl is a passive archive. It stores the bytes; it doesn't read llms.txt to change how it crawls.
 
 llms.txt, Honestly
 
-llms.txt was proposed as a machine-readable file that tells AI systems what to include or exclude from a site. For a long time the honest answer was simple: the idea is reasonable, the adoption isn't there yet.
+llms.txt was proposed as a Markdown file at the root of a site that gives language models a short, curated overview of it, with links to the pages that matter (llms.txt proposal). For a long time the honest answer was simple: the idea is reasonable, the adoption isn't there yet.
 
 That has shifted, though not in the way most coverage suggests.
 
-In May 2026, Google added an Agentic Browsing category to Lighthouse 13.3. It scores how well a site is built for machine interaction, using pass or fail checks rather than the traditional 0-to-100 number. Among the checks: presence of llms.txt, WebMCP integration, accessibility-tree integrity, and layout stability (CLS).
+In May 2026, Google added an Agentic Browsing category to Lighthouse 13.3. It scores how well a site is built for machine interaction, using pass or fail checks rather than the traditional 0-to-100 number. Among the checks: whether a published llms.txt is well formed, WebMCP integration, accessibility-tree integrity, and layout stability (CLS).
 
 Google's stated reason: "Without llms.txt, agents may spend more time crawling the site to understand its high-level structure and primary content."
 
-Here is the tension worth naming. Google Search has said plainly that llms.txt isn't needed for AI search visibility. Lighthouse now flags its absence as a failing audit. The most plausible reading is that Google is future-proofing for agentic browsing, where a software agent navigates your site on its own, without yet committing to it as a ranking signal for AI Overviews.
+Here is the tension worth naming. Google Search has said plainly that llms.txt isn't needed for AI search visibility. Lighthouse now audits it: a missing file is marked not applicable, but one that answers with an error, or isn't valid Markdown with an H1 and at least one link, fails (Lighthouse llms-txt audit). The most plausible reading is that Google is future-proofing for agentic browsing, where a software agent navigates your site on its own, without yet committing to it as a ranking signal for AI Overviews.
 
 For Common Crawl specifically, nothing has changed. It'll store your llms.txt if it finds it, and it won't read it to change how it crawls. The training pipeline is unaffected either way.
 
-There's a transport detail that decides whether llms.txt reaches the crawl at all, and it's the piece most implementations get wrong. Common Crawl archives HTML pages from your sitemap reliably, but it captures only a small fraction of plain-text files. A llms.txt served as plain text is therefore the less certain route into the archive. The fix, and what I do on this site, is to deliver llms.txt in an HTML page that wraps the plain-text content in a <pre> block. The crawler ingests it like any other HTML page, so the full text lands in the archive; the <pre> renders it faithfully as the readable plain-text file a person expects. The monospaced, code-block look is the point, not a fault: it's a rendering I chose, not anything Common Crawl did, and it gives you HTML reach and plain-text readability in one file. I walk through the same content before and after the wrap, with working Cloudflare Worker code, in Why llms.txt Probably Isn't Working. As llms.txt moves from a nicety to something people expect to find, getting the transport right decides whether yours reaches the crawl at all.
+There's a transport detail most implementations get wrong, and it has nothing to do with the crawl. llms.txt is a Markdown file, so serve it as one: a 200 with Content-Type: text/plain or text/markdown, and no HTML wrapper, rewrite rule or challenge page in front of it. That's what the convention defines (llms.txt proposal) and what the Lighthouse audit reads. Point to it from your pages with <link rel="describedby" href="/llms.txt">, and leave it out of your sitemap, which is for the pages you want indexed. The checks are in Why llms.txt Isn't Working, and How to Fix It.
 
-So the practical position is: add llms.txt. It's now an official Lighthouse check, which means it shows up in performance reports, agency audits, and client dashboards. The cost is one file. The benefit is a pass on an increasingly visible check, plus genuine use for the agentic browsing that's coming regardless.
+So the practical position is: add llms.txt if it helps the agents that read your site, and get it right if you do. It's now a Lighthouse check, which means a broken one shows up in performance reports, agency audits, and client dashboards. The cost is one file. The benefit is a clear briefing for agents that look for it.
 
 For a worked example, mx.allabout.network/llms.txt shows what a complete file looks like: an explicit content policy, a link to a full-site corpus (llms-full.txt) for agents that want everything in one fetch, and direct links to the core technical specifications. That's the pattern to follow, a machine-readable briefing rather than a minimal placeholder.
 
@@ -4315,7 +4287,7 @@ What This Looks Like on My Own Site
 
 The checklist above isn't theory. Here is how it's applied on this site.
 
-llms.txt and llms-full.txt are both published, served as HTML that wraps the plain text in a <pre> block. An agent that wants a high-level briefing reads llms.txt. An agent that wants everything, every published page in one file, fetches llms-full.txt. One request, full corpus, no crawling required. That's the pattern the convention intended and almost nobody implements. Serving them as HTML gets them ingested by Common Crawl like any other page; the <pre> renders them as the clean plain-text files a reader expects. HTML reach and plain-text readability, in one file.
+llms.txt and llms-full.txt are both published, as Markdown text. An agent that wants a high-level briefing reads llms.txt. An agent that wants everything, every published page in one file, fetches llms-full.txt. One request, full corpus, no crawling required. That's the pattern the convention intended and almost nobody implements.
 
 robots.txt declares the sitemap and allows all crawlers. User-agent: * with Allow: / means CCBot, GPTBot, ClaudeBot, PerplexityBot, and every other crawler has access. No accidental blocks. The exclusions are deliberate and limited to the book appendices and private drafts.
 
@@ -4341,7 +4313,7 @@ If you're wondering how your company shows up in AI systems, or whether your con
 
             - Written by Tom Cranstoun.
 
-            - Last changed on 2026-10-29.
+            - Last changed on 2026-11-16.
 
             About the author
 
@@ -4351,7 +4323,7 @@ If you're wondering how your company shows up in AI systems, or whether your con
 
           Continue the conversation
 
-          Want to talk through where your organisation sits on the agent-readiness curve?
+          Want to talk through how ready your organisation is for agents?
 
             - Get in touch
 
@@ -4359,4 +4331,4 @@ If you're wondering how your company shows up in AI systems, or whether your con
 
             - Join The Gathering
 
-<!-- x-mx-sourceHash: fc023277ec7afc8dc81a069907ea81798238cb1c70de964c717f0ade899bec83 -->
+<!-- x-mx-sourceHash: 1d7b84bb3dfbc219bb2b930843d17ab328379a6ec0217089df989ac66f354bce -->

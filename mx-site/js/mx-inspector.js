@@ -36,7 +36,7 @@ import { el } from './mx-dom.js';
 import { readApproval } from './pdf-auditor-core.js';
 
 // The dictionary's profile table (generated from fields-data.yaml by
-// scripts/gen-mx-profiles.cjs). Loaded once; null when it cannot be fetched, and
+// scripts/generators/gen-mx-profiles.cjs). Loaded once; null when it cannot be fetched, and
 // the profile check then says it was not run rather than guessing.
 let profilesPromise = null;
 function loadProfiles() {

@@ -1,7 +1,7 @@
 title: MX Field Dictionary — Open Standard (Core)
-version: '6.69'
+version: '6.76'
 created: 2026-02-13T00:00:00.000Z
-modified: '2026-11-12'
+modified: '2026-11-21'
 author: The Gathering
 description: >-
   Open standard canonical MX metadata fields. The Gathering-owned core dictionary covering identity, classification,
@@ -136,7 +136,7 @@ mx:
           syntax: 'camelCase with mx: prefix'
           example: <meta name='mx:contentType' content='field-dictionary'>
           rationale: The meta tag carries the field's own name; a reader compares strings and converts nothing.
-          enforcement: mandatory (Gate 117, scripts/check-mx-carrier-names.cjs)
+          enforcement: mandatory (Gate 117, scripts/checks/check-mx-carrier-names.cjs)
         html-element:
           syntax: 'data-mx-<word> attribute on the element that acts; camelCase members inside the value'
           example: >-
@@ -402,6 +402,8 @@ mx:
     agent-cog: agent
     publishing-point-cog: publishing-point
     cms-cog: cms
+    mailbox-message: mailbox
+    a2a-message: mailbox
   validationPolicy:
     keywords:
       - '@context'
@@ -721,13 +723,13 @@ mx:
       replacement: domain
       notes: >-
         Extension names never match a standard name. The folder generator's subject area was always the standard
-        domain field under a vendor prefix; one name. scripts/migrate-extension-clash.cjs holds the rename table.
+        domain field under a vendor prefix; one name. scripts/fixers/migrate-extension-clash.cjs holds the rename table.
     - old: x-mx-ai
       replacement: ai
       notes: >-
         Same-name extension. An access-policy block (preferred-access, content-policy, freshness) is the standard ai
         field; a summary block for AI readers (summary, key_concepts) is x-mx-aiBrief, split by shape in
-        scripts/migrate-extension-clash.cjs.
+        scripts/fixers/migrate-extension-clash.cjs.
     - old: x-mx-cogType
       replacement: cogType
       notes: >-
@@ -821,7 +823,7 @@ mx:
       replacement: blocks
       notes: >-
         Two items under one name: the list of block-type names is the standard blocks field, block-content payloads
-        are x-mx-blockContent. scripts/migrate-x-mx-blocks.cjs splits by value shape; run it, not a plain rename.
+        are x-mx-blockContent. scripts/fixers/migrate-x-mx-blocks.cjs splits by value shape; run it, not a plain rename.
     - old: x-mx-riskLevel
       replacement: security.riskLevel
       notes: >-
@@ -1915,7 +1917,7 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'This document is called {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap, mailbox]
       definition: Human-readable document title. The canonical identity field for all documents including cog files.
       example: MX Field Dictionary
       alignsWith:
@@ -1927,7 +1929,7 @@ mx:
       type: string
       authoring: authored
       inPlainWords: 'In short: {value}'
-      requiredIn: [core, skill, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
+      requiredIn: [core, skill, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap, mailbox]
       definition: One-line summary. Max 160 characters. Used by search engines, AI agents, and registry listings.
       example: Single source of truth for every YAML frontmatter field.
       alignsWith:
@@ -1939,6 +1941,7 @@ mx:
     - name: author
       type: string
       authoring: defaulted
+      optionalIn: [mailbox]
       inPlainWords: 'Written by {value}.'
       requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
       definition: Creator of the document. Person name or collaborative attribution.
@@ -1967,7 +1970,7 @@ mx:
       type: string
       authoring: defaulted
       inPlainWords: 'First written on {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap, mailbox]
       definition: Creation date. ISO 8601 format (YYYY-MM-DD).
       example: '2026-03-01'
       alignsWith:
@@ -1980,7 +1983,7 @@ mx:
       type: string
       authoring: defaulted
       inPlainWords: 'Last changed on {value}.'
-      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
+      requiredIn: [core, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap, mailbox]
       definition: Last modification date. ISO 8601 format (YYYY-MM-DD).
       example: '2026-03-02'
       alignsWith:
@@ -2124,7 +2127,7 @@ mx:
       authoring: authored
       inPlainWords: 'Its status is {value}.'
       requiredIn: [aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
-      recommendedIn: [core, book, contact, report, audit, component, personal, agent, publishing-point, cms, eval, smart-contract, roadmap]
+      recommendedIn: [core, book, contact, report, audit, component, personal, agent, publishing-point, cms, eval, smart-contract, roadmap, mailbox]
       definition: >-
         Lifecycle state. Standard values: draft, active, published, deprecated, archived, unknown. Decision records:
         proposed, accepted, rejected, superseded. Workflow: pending, review, approved, planning, open, closed, sent.
@@ -2167,7 +2170,7 @@ mx:
       authoring: authored
       inPlainWords: 'It is about {value}.'
       recommendedIn: [cog, book, blog, action]
-      optionalIn: [core, folder, migration, routing, skill, html, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
+      optionalIn: [core, folder, migration, routing, skill, html, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap, mailbox]
       definition: Discovery keywords. Array of strings for search, filtering, and agent matching.
       example:
         - metadata
@@ -2181,7 +2184,7 @@ mx:
       status: canonical
       profile: core
     - name: type
-      requiredIn: [roadmap]
+      requiredIn: [roadmap, mailbox]
       type: string
       authoring: authored
       inPlainWords: 'It is a {value}.'
@@ -2202,7 +2205,7 @@ mx:
       type: string
       inPlainWords: 'It describes the asset at {value}.'
       authoring: authored
-      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap]
+      optionalIn: [core, cog, folder, migration, routing, skill, html, book, blog, contact, report, audit, event, script, portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, code-repository, code-file, code-function, code-class, code-inline, code-dependency, code-test, code-api, code-mod, js, css, pitch, x-mx-public, x-mx-private, submission-package, workflow-record, personal, action, agent, publishing-point, cms, aims-decision-right, eval, smart-contract, roadmap, mailbox]
       definition: >-
         The URI of the one external asset this document describes. OKF reserved top-level field; absent on an
         abstract document (a playbook, a runbook, an info-doc) that describes no single asset.
@@ -2220,7 +2223,7 @@ mx:
       inPlainWords: 'The authoritative copy lives at {value}.'
       requiredIn: [portable, component, aims-system-inventory, aims-statement-of-applicability, aims-risk-register, aims-impact-assessment, aims-policy, aims-decision-right]
       recommendedIn: [book, blog, contact, report, audit]
-      optionalIn: [skill, publishing-point, cms]
+      optionalIn: [skill, publishing-point, cms, mailbox]
       definition: >-
         The permanent, globally unique URI where the authoritative copy of this document lives. A reader that meets a
         copy anywhere can walk back to the source.
@@ -2252,6 +2255,8 @@ mx:
     - name: alternateFormats
       type: array
       authoring: authored
+      recommendedIn: [mailbox]
+      inPlainWords: 'The same document is also available as {value}.'
       definition: >-
         The other renderings of this same document a reader may fetch instead - the markdown behind an HTML page, the
         PDF beside a report, the JSON record beside a human-readable declaration - each an object naming the
@@ -2492,6 +2497,25 @@ mx:
       notes: Mutable. Distinct from author (immutable creator). The person handling ongoing updates.
       status: canonical
       profile: core
+    - name: funder
+      type: string-or-array
+      authoring: authored
+      inPlainWords: '{value} funded it.'
+      optionalIn: [core]
+      definition: >-
+        The person, organisation or funding scheme that supported this work through a financial contribution, named as
+        Schema.org names a funder.
+      example: Innovate UK Smart Grants
+      alignsWith:
+        - schema:funder
+        - schema:FundingScheme
+      notes: >-
+        MX defers to Schema.org. The value is the funder's name, or a list of names when several funders contributed.
+        A grant programme with its own guidelines and mechanisms is a Schema.org FundingScheme (a subtype of
+        Organization), so it is a valid funder value. Distinct from publisher (who released the work) and stewardship
+        (who answers for it). Name the funder only when the funding is public or the funder has agreed to be named.
+      status: experimental
+      profile: core
     - name: ownership
       type: string-or-object
       authoring: authored
@@ -2650,7 +2674,7 @@ mx:
         authoritative agrees, so corroboration is the separate signal a machine weights at the decision turn. A
         citation in refersToExternal says the document read a source; an entry here says the source states the claim.
         A URL on the publisher's own host is self-reference, not corroboration. The recorded disagreements behind the
-        same claims are its other half, contestedBy. Enforced by scripts/check-blog-corroboration.cjs (Gate 27).
+        same claims are its other half, contestedBy. Enforced by scripts/checks/check-blog-corroboration.cjs (Gate 27).
         Governing principle: Corroboration over Assertion.
       status: canonical
       profile: core
@@ -2675,14 +2699,14 @@ mx:
         states, and how the publisher resolved it rather than inheriting one side as settled. status is resolved or
         unresolved; unresolved is a signal to down-weight the claim, not a defect. Every source uri must be external
         authoritative and cited in the body, the same orphan rule corroboration carries. Enforced by
-        scripts/check-blog-corroboration.cjs (Gate 27). Governing principle: Corroboration over Assertion.
+        scripts/checks/check-blog-corroboration.cjs (Gate 27). Governing principle: Corroboration over Assertion.
       status: canonical
       profile: core
       context: 'Declared on any document that states a claim authoritative sources disagree about.'
     # --- Claim basis: how each load-bearing claim is known. Corroboration (above) records that an outside
     # source agrees; this family records the standing of every claim, including the ones nobody has checked,
     # so a machine can tell what it was told from what has been confirmed. Governing principle: Corroboration
-    # over Assertion. Enforced by scripts/lib/claim-basis.cjs through scripts/check-blog-corroboration.cjs (Gate 27).
+    # over Assertion. Enforced by scripts/lib/claim-basis.cjs through scripts/checks/check-blog-corroboration.cjs (Gate 27).
     - name: claimBasis
       type: string
       authoring: authored
@@ -2815,7 +2839,7 @@ mx:
       definition: >-
         The system or person that recorded an observed claim directly, and the method used; required when the
         basis is observed.
-      example: 'scripts/check-asset-links.cjs, HTTP status check'
+      example: 'scripts/checks/check-asset-links.cjs, HTTP status check'
       status: canonical
       profile: core
     - name: claims[].confidence
@@ -2884,6 +2908,356 @@ mx:
         whatever its basis, until checkedOn moves past it. The document is due for review on the earliest
         recheckBy among its claims. A claim that does not change carries no recheckBy.
       status: canonical
+      profile: core
+    - name: inferredContents
+      type: boolean
+      authoring: authored
+      inPlainWords: 'Some of its metadata was inferred rather than stated: {value}.'
+      definition: >-
+        Whether any metadata value in this document was inferred from prose or partial context rather than stated
+        outright; true exactly when inferences lists at least one entry.
+      example: true
+      notes: >-
+        A quick flag for a reader or a gate: a document carrying it holds values a person did not state, and each one
+        is listed in inferences with the words it came from and the rule that read them. Absent reads as false. A
+        value a person later confirms leaves inferences with basis confirmed, so the record of how it was first read
+        survives. Distinct from claims, which records how a document's statements are known; inferences records how
+        its metadata values were reached.
+      status: experimental
+      profile: core
+    - name: inferences
+      type: array
+      alignsWith:
+        - prov:wasDerivedFrom
+        - prov:wasGeneratedBy
+      authoring: authored
+      inPlainWords: 'These metadata values were inferred: {value}.'
+      definition: >-
+        The metadata values in this document that were inferred, each naming the field it set, the original words,
+        the rule that read them and its version, what it assumed, and the readings it kept, so a later engine or a
+        language model can check each one again under newer rules.
+      example:
+        - field: datePublished
+          value: '2026-07-01/2026-09-30'
+          sourceText: Q3 2026
+          rule: period-reader/quarter
+          ruleVersion: '1.0'
+          inferredBy: scripts/lib/period-reader.cjs
+          basis: rule
+          assumptions:
+            - calendar quarters unless a financial year is given
+          alternatives: []
+          recordedAt: '2026-11-15T03:20:00Z'
+        - field: birthDate
+          value: '1920-05-04'
+          sourceText: 04/05/1920
+          rule: numeric-date/day-month-order
+          ruleVersion: '1.0'
+          inferredBy: joymaker/backend/gedcom-import.js
+          basis: unresolved
+          assumptions:
+            - day-month order shown first; nothing in the source settles it
+          alternatives:
+            - '1920-04-05'
+          recordedAt: '2026-11-15T03:20:00Z'
+      notes: >-
+        Inference is never written over what the source said: sourceText keeps the words, and value is the reading
+        the inference chose. An entry with basis unresolved keeps every reading in alternatives and is a question
+        for a person, not an answer. Re-checking is the purpose: a newer rule or a model compares each entry against
+        its sourceText and records a changed reading as a new entry, leaving the old one as history. Aligns with
+        W3C PROV-O wasDerivedFrom (the source words) and wasGeneratedBy (the rule run), the same alignment claims
+        uses, rather than defining a new derivation vocabulary.
+      status: experimental
+      profile: core
+    - name: inferences[].field
+      type: string
+      authoring: authored
+      inPlainWords: 'The inferred value is the field {value}.'
+      definition: >-
+        The metadata field the inference set, as a field path: the field's name as the dictionary gives it, without
+        an mx. prefix, then a dot before each nested member and a zero-based index for an array item, such as
+        datePublished, sourceOfTruth.ref, x-mx-gedcom.events.BURI.date or inferences.0.value.
+      notes: >-
+        A canon field name means the same field wherever it is carried, at the top level or under mx:, so the path
+        leaves the carrier out. Each segment is a name (a letter or underscore, then letters, digits, hyphens or
+        underscores) or an index (digits only). npm run inferences:check refuses any other form.
+      example: datePublished
+      status: experimental
+      profile: core
+    - name: inferences[].value
+      type: string
+      authoring: authored
+      inPlainWords: 'The value inferred is {value}.'
+      definition: >-
+        The value the inference chose for the field, as written into it; a range is written as an ISO 8601 interval.
+      example: '2026-07-01/2026-09-30'
+      status: experimental
+      profile: core
+    - name: inferences[].sourceText
+      type: string
+      alignsWith:
+        - prov:wasDerivedFrom
+      authoring: authored
+      inPlainWords: 'It was read from the words: {value}'
+      definition: The original words the value was inferred from, exactly as the source gave them.
+      example: Q3 2026
+      notes: >-
+        Required on every entry. Without the source's own words a later rule has nothing to re-read, and a reader
+        cannot see how far the value goes beyond what was said.
+      status: experimental
+      profile: core
+    - name: inferences[].rule
+      type: string
+      authoring: authored
+      inPlainWords: 'The rule that read them is {value}.'
+      definition: The identifier of the rule, procedure or prompt that produced the value.
+      example: period-reader/quarter
+      status: experimental
+      profile: core
+    - name: inferences[].ruleVersion
+      type: string
+      authoring: authored
+      inPlainWords: 'That rule was at version {value}.'
+      definition: The version of the rule when it ran, so a reader knows whether a newer rule should look again.
+      example: '1.0'
+      status: experimental
+      profile: core
+    - name: inferences[].inferredBy
+      type: string
+      alignsWith:
+        - prov:wasAssociatedWith
+      authoring: authored
+      inPlainWords: 'The inference was made by {value}.'
+      definition: The script, engine or model that made the inference, by repository path or model identifier.
+      example: scripts/lib/period-reader.cjs
+      status: experimental
+      profile: core
+    - name: inferences[].basis
+      type: string
+      authoring: authored
+      inPlainWords: 'The value was settled by {value}.'
+      definition: What settled the value the inference chose.
+      example: rule
+      validValues:
+        - rule
+        - context
+        - confirmed
+        - model
+        - unresolved
+      notes: >-
+        rule - a deterministic rule read the words and nothing was left open. context - a context the caller
+        supplied (a financial year, a hemisphere, an order proved elsewhere in the same source) settled what the
+        rule would otherwise assume. confirmed - a person confirmed the reading. model - a language model chose it;
+        give confidence and confidenceBasis. unresolved - no reading was chosen with certainty; value holds the
+        first reading and alternatives holds the rest.
+      status: experimental
+      profile: core
+    - name: inferences[].assumptions
+      type: array
+      authoring: authored
+      inPlainWords: 'The inference assumed: {value}.'
+      definition: Every assumption the value rests on, in plain words; empty only when nothing was assumed.
+      example:
+        - calendar quarters unless a financial year is given
+      status: experimental
+      profile: core
+    - name: inferences[].alternatives
+      type: array
+      authoring: authored
+      inPlainWords: 'Other readings kept: {value}.'
+      definition: The other readings of the same words that the inference kept rather than discarded.
+      example:
+        - '1920-04-05'
+      status: experimental
+      profile: core
+    - name: inferences[].confidence
+      type: number
+      authoring: authored
+      inPlainWords: 'Confidence in this inference is {value} on a scale of 0 to 1.'
+      definition: The confidence in the inferred value, from 0 to 1; given only when the basis is model.
+      example: 0.7
+      notes: Always travels with confidenceBasis, as claims[].confidence does.
+      status: experimental
+      profile: core
+    - name: inferences[].confidenceBasis
+      type: string
+      authoring: authored
+      inPlainWords: 'The confidence has that value because {value}'
+      definition: Why the confidence value is what it is; required whenever confidence is given.
+      example: Two of three census returns agree on the age.
+      status: experimental
+      profile: core
+    - name: inferences[].recordedAt
+      type: string
+      authoring: authored
+      inPlainWords: 'This inference was made on {value}.'
+      definition: The ISO 8601 UTC timestamp at which the inference was made.
+      example: '2026-11-15T03:20:00Z'
+      status: experimental
+      profile: core
+    - name: openQuestions
+      type: array
+      authoring: authored
+      inPlainWords: 'Questions it leaves open: {value}.'
+      definition: >-
+        The questions this document leaves open, each saying what it is about, who can answer it, and, once answered,
+        the answer and who gave it, so a later reader or engine knows what is not yet known.
+      example:
+        - question: Is 04/05/1920 the 4th of May or the 5th of April?
+          about: inferences.birthDate
+          answerableBy: owner
+          raisedBy: joymaker/backend/gedcom-import.js
+          raisedAt: '2026-11-15T03:20:00Z'
+          status: open
+        - question: Which financial year does the plan's Q3 refer to?
+          about: inferences.datePublished
+          answerableBy: author
+          raisedBy: scripts/lib/period-reader.cjs
+          raisedAt: '2026-11-10T09:00:00Z'
+          status: answered
+          answer: The UK tax year.
+          answeredBy: author
+          answeredAt: '2026-11-11T10:00:00Z'
+      notes: >-
+        The third part of what a document holds, beside what it knows (claims) and what it inferred (inferences). An
+        inference with basis unresolved raises a question here that points at it through about. An answered question
+        stays, with its answer, so the record of what was once unknown survives; a withdrawn one stays with status
+        withdrawn. A question is never folded into prose, where a machine cannot find it.
+      status: experimental
+      profile: core
+    - name: openQuestions[].question
+      type: string
+      alignsWith:
+        - schema:text
+      authoring: authored
+      inPlainWords: 'The question is: {value}'
+      definition: The question, in one sentence, as a person would be asked it.
+      example: Is 04/05/1920 the 4th of May or the 5th of April?
+      status: experimental
+      profile: core
+    - name: openQuestions[].about
+      type: string
+      authoring: authored
+      inPlainWords: 'It is about {value}.'
+      definition: >-
+        What the question is about, as a field path in the form inferences[].field defines: inferences. followed by the
+        field of the inference it concerns (inferences.birthDate), claims. followed by a claim's zero-based index
+        (claims.0), or the path of any other field (sourceOfTruth.ref).
+      example: inferences.birthDate
+      status: experimental
+      profile: core
+    - name: openQuestions[].answerableBy
+      type: string
+      authoring: authored
+      inPlainWords: 'It can be answered by {value}.'
+      definition: The role or party able to answer, such as owner, author, operator or a named source.
+      example: owner
+      status: experimental
+      profile: core
+    - name: openQuestions[].raisedBy
+      type: string
+      authoring: authored
+      inPlainWords: 'It was raised by {value}.'
+      definition: The person, script, engine or model that raised the question.
+      example: joymaker/backend/gedcom-import.js
+      status: experimental
+      profile: core
+    - name: openQuestions[].raisedAt
+      type: string
+      authoring: authored
+      inPlainWords: 'It was raised on {value}.'
+      definition: The ISO 8601 UTC timestamp at which the question was raised.
+      example: '2026-11-15T03:20:00Z'
+      status: experimental
+      profile: core
+    - name: openQuestions[].status
+      type: string
+      authoring: authored
+      inPlainWords: 'The question is {value}.'
+      definition: Whether the question is still open.
+      example: open
+      validValues:
+        - open
+        - answered
+        - withdrawn
+      default: open
+      status: experimental
+      profile: core
+    - name: openQuestions[].answer
+      type: string
+      authoring: authored
+      inPlainWords: 'The answer given was: {value}'
+      definition: The answer, as given; present only when the status is answered.
+      example: The UK tax year.
+      notes: >-
+        An answer that settles an inference also moves that inference to basis confirmed, and a new inferences entry
+        records the confirmed reading.
+      status: experimental
+      profile: core
+    - name: openQuestions[].answeredBy
+      type: string
+      authoring: authored
+      inPlainWords: 'It was answered by {value}.'
+      definition: The role or party that gave the answer.
+      example: author
+      status: experimental
+      profile: core
+    - name: openQuestions[].answeredAt
+      type: string
+      authoring: authored
+      inPlainWords: 'It was answered on {value}.'
+      definition: The ISO 8601 UTC timestamp at which the answer was given.
+      example: '2026-11-11T10:00:00Z'
+      status: experimental
+      profile: core
+    - name: sourceOfTruth
+      type: object-or-array
+      alignsWith:
+        - prov:hadPrimarySource
+      authoring: authored
+      inPlainWords: 'Its facts come from {value}, which wins when the two disagree.'
+      definition: >-
+        The upstream record this document's facts come from, such as a GEDCOM file, a registry entry, a contract or
+        a dataset; when the document and that record disagree, the record wins and the document is derived again. One
+        object for one source, or a list of them when the facts come from several, each naming what it covers.
+      example:
+        ref: family/smith-tree.ged
+        covers: the people, families, dates and places in this document
+        checkedOn: '2026-11-15'
+      notes: >-
+        Distinct from canonicalUri, which says where this document's own authoritative copy lives, and from derivedFrom,
+        which traces folder lineage. A document with a sourceOfTruth is a derived view: correcting it means correcting
+        the source and deriving again, never editing the facts in place. Inferences and open questions belong to the
+        document, because they record how the document read its source. In a list, each entry carries its own ref,
+        covers and checkedOn, and covers says which facts that source holds (a GEDCOM file for the people and
+        families, a parish register for one baptism); where two sources cover the same fact, the earlier entry wins.
+      status: experimental
+      profile: core
+    - name: sourceOfTruth.ref
+      type: string
+      authoring: authored
+      inPlainWords: 'The source of truth is {value}.'
+      definition: The upstream record, as a repository path, an https URI or a REGINALD cogUrn.
+      example: family/smith-tree.ged
+      status: experimental
+      profile: core
+    - name: sourceOfTruth.covers
+      type: string
+      authoring: authored
+      inPlainWords: 'It is authoritative for {value}.'
+      definition: >-
+        Which of the document's facts the source is authoritative for; absent means all of them, and in a list of
+        sources every entry but a single one should say.
+      example: the people, families, dates and places in this document
+      status: experimental
+      profile: core
+    - name: sourceOfTruth.checkedOn
+      type: string
+      authoring: authored
+      inPlainWords: 'The document was last checked against it on {value}.'
+      definition: The ISO 8601 date on which the document was last derived from, or checked against, its source.
+      example: '2026-11-15'
+      status: experimental
       profile: core
     - name: legalInstruments
       type: array
@@ -3037,7 +3411,8 @@ mx:
           withheldFrom: [humans]
       notes: >-
         An action withheld from one audience is declared with withheldFrom rather than omitted, so the other audience
-        can see the withholding.
+        can see the withholding. What a piece of correspondence asks of its reader is a different item, declared in
+        requestedActions.
       status: canonical
       profile: component
     - name: actions[].name
@@ -3077,6 +3452,175 @@ mx:
         - agents
       status: canonical
       profile: component
+    - name: requestedActions
+      type: array
+      authoring: authored
+      recommendedIn: [mailbox]
+      inPlainWords: 'It asks the reader to: {value}.'
+      optionalIn: [core]
+      definition: >-
+        What a piece of correspondence (a letter, a notice, a bill) asks its reader to do, one entry per action, so an
+        assistant reads what is asked instead of inferring it from the body.
+      example:
+        - kind: pay
+          target: https://www.example-council.gov.uk/pay
+        - kind: reply
+          target: https://www.example-council.gov.uk/instalments
+          dueBy: '2026-11-28T17:00:00Z'
+      notes: >-
+        Distinct from actions, which lists what an object card offers on its object. A national digital-post format may
+        carry its own action codes (the Danish MeMo format has codes for payment and signing); requestedActions is the
+        portable reading that stays with the document outside that system.
+      status: experimental
+      profile: core
+    - name: requestedActions[].kind
+      type: string
+      authoring: authored
+      definition: What sort of response one requested action asks of the reader.
+      example: pay
+      validValues:
+        - pay
+        - sign
+        - book
+        - reply
+        - submit
+        - read
+      notes: read marks a letter that asks nothing beyond being read.
+      status: experimental
+      profile: core
+    - name: requestedActions[].target
+      type: string
+      authoring: authored
+      definition: The URI where the reader takes the requested action.
+      example: https://www.example-council.gov.uk/pay
+      status: experimental
+      profile: core
+    - name: requestedActions[].dueBy
+      type: date-time
+      authoring: authored
+      definition: The ISO 8601 UTC date-time by which one requested action must be taken, where it differs from the document's replyBy.
+      example: '2026-11-28T17:00:00Z'
+      notes: >-
+        When every action shares one deadline, declare replyBy alone. dueBy states the sender's deadline; it is not a
+        statement of the reader's legal rights.
+      status: experimental
+      profile: core
+    - name: sender
+      type: string
+      authoring: authored
+      requiredIn: [mailbox]
+      inPlainWords: 'It was issued by {value}.'
+      optionalIn: [core]
+      definition: >-
+        The organisation or person that issued the document as correspondence, as a resolvable identifier (a URL, a
+        registry entry, or a legal name) that a reader can check.
+      example: https://www.gov.scot
+      alignsWith:
+        - schema:sender
+      notes: >-
+        Distinct from author (who wrote the text) and publisher (who made it available): a letter drafted by a
+        contractor and issued by a council names the council as sender. Checking that the claim is true is the job of
+        integritySignature and provenancePedigree; sender states the claim.
+      status: experimental
+      profile: core
+    - name: replyBy
+      type: date-time
+      authoring: authored
+      recommendedIn: [mailbox]
+      inPlainWords: 'A reply is due by {value}.'
+      optionalIn: [core]
+      definition: The ISO 8601 UTC date-time by which the sender asks the reader of a piece of correspondence to respond or act.
+      example: '2026-12-01T17:00:00Z'
+      notes: >-
+        Distinct from validUntil (past which the content no longer applies), expires (a review-or-archive prompt) and
+        reviewBy (the author's next review). The Danish MeMo format carries the same idea as replyByDateTime inside
+        Digital Post; replyBy keeps it with the document after it leaves that system. It states the sender's deadline,
+        not the reader's legal position.
+      status: experimental
+      profile: core
+    - name: legalEffect
+      type: string
+      authoring: authored
+      recommendedIn: [mailbox]
+      inPlainWords: 'Its stated legal effect is {value}.'
+      optionalIn: [core]
+      definition: The legal standing the sender declares for a piece of correspondence.
+      example: formal-notice
+      validValues:
+        - none
+        - information
+        - formal-notice
+        - decision
+      notes: >-
+        none is ordinary correspondence; information is official information with no required response; formal-notice
+        starts or meets a legal process (a deadline, a demand, a summons); decision is an administrative decision that
+        may carry rights of review or appeal. The value is the sender's declaration, read as a claim to be checked, never
+        as legal advice; when a notice counts as served is set by the law that governs it.
+      status: experimental
+      profile: core
+    - name: messageId
+      type: string
+      authoring: authored
+      inPlainWords: 'Its message identifier is {value}.'
+      requiredIn: [mailbox]
+      optionalIn: [core]
+      definition: >-
+        A unique, stable identifier the sender gives one message, so a reply, a receipt or an audit can name exactly
+        this message.
+      example: urn:uuid:6f1c2a0e-8b7d-4c3e-9a51-2d0f4e7b9c11
+      alignsWith:
+        - schema:identifier
+      notes: >-
+        A URN or URI is preferred, because it stays unique across senders and systems. A national format's own message
+        id (the Danish MeMo MessageUUID, an MX-A2A id) can be written here unchanged.
+      status: experimental
+      profile: mailbox
+    - name: dateSent
+      type: date-time
+      authoring: authored
+      inPlainWords: 'It was sent at {value}.'
+      recommendedIn: [mailbox]
+      optionalIn: [core]
+      definition: The ISO 8601 UTC date-time at which the sender dispatched the message.
+      example: '2026-11-16T09:00:00Z'
+      alignsWith:
+        - schema:dateSent
+      notes: >-
+        Distinct from created (when the text was first written) and modified (its last edit). Deadlines are read
+        against it, and when a notice counts as served may depend on it under the law that governs the message.
+      status: experimental
+      profile: mailbox
+    - name: senderReference
+      type: string
+      authoring: authored
+      inPlainWords: 'The sender''s reference is {value}.'
+      recommendedIn: [mailbox]
+      optionalIn: [core]
+      definition: The sender's own case, file or account reference for the matter, which a reply should quote.
+      example: CT/2026/004512
+      notes: Distinct from messageId, which names one message; one senderReference may span many messages.
+      status: experimental
+      profile: mailbox
+    - name: inReplyTo
+      type: string
+      authoring: authored
+      inPlainWords: 'It replies to message {value}.'
+      optionalIn: [core, mailbox]
+      definition: The messageId of the message this one answers.
+      example: urn:uuid:6f1c2a0e-8b7d-4c3e-9a51-2d0f4e7b9c11
+      notes: The MX-A2A inReplyTo and the email In-Reply-To header carry the same relation.
+      status: experimental
+      profile: mailbox
+    - name: conversation
+      type: string
+      authoring: authored
+      inPlainWords: 'It belongs to conversation {value}.'
+      optionalIn: [core, mailbox]
+      definition: An identifier shared by every message in one exchange, so a reader can gather the thread.
+      example: urn:uuid:0a9e5f3c-1d2b-4e6f-8a7c-3b5d9e1f2a40
+      notes: Usually the messageId of the first message in the exchange. MX-A2A carries the same idea as conversation.
+      status: experimental
+      profile: mailbox
     - name: relationshipField
       type: string
       authoring: authored
@@ -3452,6 +3996,7 @@ mx:
     - name: accessibility
       type: boolean-string-or-object
       authoring: authored
+      recommendedIn: [mailbox]
       optionalIn: [cog, action]
       definition: Accessibility compliance level or detailed accessibility metadata for a cog.
       example: WCAG 2.1 AA
@@ -3710,6 +4255,27 @@ mx:
         empty list is a statement that nothing is prerequisite, not an omission.
       status: canonical
       profile: core
+    - name: termReadings
+      type: array
+      authoring: authored
+      inPlainWords: 'In this document these terms carry these readings: {value}'
+      optionalIn: [core]
+      definition: >-
+        The reading a term carries in this document, for each term a machine could read more than one way. Each entry
+        names the term, the reading it carries here, and optionally the registry or glossary that defines that reading.
+      example:
+        - term: dinner
+          reading: the midday meal
+          source: datalake/registries/period-terms.cog.md
+      notes: >-
+        A word means different things in different contexts, and a model reading it alone guesses which. This field
+        gives the term its address in the document's own context, so the reading travels with the file to every machine
+        that reads it rather than living inside one system's runtime. Declare only terms whose reading is genuinely in
+        doubt; a term with one reading needs no entry. source is a repo-root-relative path or an https URL and must
+        resolve; reading is plain words a person can check. Distinct from x-mx-aliases, which lists other names for the
+        document itself.
+      status: experimental
+      profile: core
     - name: aiAssistance
       type: string-or-object
       authoring: defaulted
@@ -3765,7 +4331,13 @@ mx:
         - allowed
         - prohibited
         - conditional
-      notes: Inheritable. When conditional, check aiTrainingConditions. The enumerated per-object form of the document-level trainingDataPolicy narrative field.
+      notes: >-
+        Inheritable. When conditional, check aiTrainingConditions. The enumerated per-object form of the
+        document-level trainingDataPolicy narrative field. MX defers to SPUR (Standards for Publisher Usage
+        Rights, https://www.spurcoalition.org/) on publisher usage-rights standards: where SPUR publishes a
+        standard for stating how content may be used, MX follows or maps to it rather than competing with it.
+        These fields carry those terms inside the file, complementing site-level signals such as robots.txt.
+        This is not a claim of SPUR endorsement, membership or partnership.
       status: canonical
       profile:
         - core
@@ -3778,7 +4350,9 @@ mx:
       example:
         - exclude credentials
         - exclude personal data
-      notes: Only relevant when aiTraining is conditional.
+      notes: >-
+        Only relevant when aiTraining is conditional. See the aiTraining note for MX's deferral to SPUR on
+        publisher usage-rights standards.
       status: canonical
       profile:
         - core
@@ -4011,7 +4585,7 @@ mx:
     - name: confidential
       type: boolean
       authoring: defaulted
-      optionalIn: [core, report]
+      optionalIn: [core, report, mailbox]
       definition: Whether this record must be excluded from public outputs.
       default: false
       example: true
@@ -4754,6 +5328,7 @@ mx:
     - name: integritySignature
       type: object
       authoring: authored
+      recommendedIn: [mailbox]
       definition: >-
         A hash or cryptographic signature over the artefact's content that lets a reader detect tampering since
         publication. Answers "what you read is what was written."
@@ -4810,7 +5385,7 @@ mx:
     - name: provenancePedigree
       type: object
       authoring: authored
-      recommendedIn: [portable]
+      recommendedIn: [portable, mailbox]
       definition: >-
         The traceable chain from this artefact back to its source, including every transformation along the way,
         with the authority at each step. Answers "where did this come from, and through whom?"
@@ -5169,7 +5744,7 @@ mx:
       type: string
       inPlainWords: 'It is written in {value}.'
       authoring: authored
-      recommendedIn: [portable, personal, eval]
+      recommendedIn: [portable, personal, eval, mailbox]
       definition: >-
         Primary language of the document content, as a BCP 47 language tag (en, es, en-GB). Aligns with Schema.org
         inLanguage and Dublin Core dc:language.
@@ -5511,7 +6086,7 @@ mx:
       inPlainWords: 'It expires on {value}.'
       authoring: authored
       recommendedIn: [portable, agent]
-      optionalIn: [cog, personal, action, publishing-point, eval, smart-contract, roadmap]
+      optionalIn: [cog, personal, action, publishing-point, eval, smart-contract, roadmap, mailbox]
       definition: Expiry date for time-sensitive cogs. ISO 8601 format (YYYY-MM-DD).
       example: 2026-12-31T00:00:00.000Z
       notes: ISO 8601. For time-sensitive content. Review or archive after this date.
@@ -5877,6 +6452,27 @@ mx:
         person only as far as the venue needs; a personal cog carries the rest under its own disclosureTier.
       status: experimental
       profile: agent
+    - name: principalAttestation
+      type: string
+      inPlainWords: 'An outside party vouches for its principal at {value}.'
+      authoring: authored
+      optionalIn: [agent]
+      definition: >-
+        A pointer to an attestation record, issued by a party other than the agent's provider or deployer, that vouches
+        for the principal named in actingFor by stating only the claim a venue needs, such as that the principal is an
+        accountable person or a registered organisation.
+      example: https://reginald.example.com/attestations/principal/7f3c9a
+      notes: >-
+        The record names its issuer, the claim it makes, and the period the claim holds, and carries the issuer's
+        signature or sits on a register the reader can query; a registry such as REGINALD or a public company register
+        can issue one. It states a claim rather than an identity: a venue learns that an accountable party stands
+        behind the agent without learning who, unless the record or actingFor says so. It proves accountability, never
+        that a person is at the keyboard for a given action; humanApprovalFor covers that. It corroborates actingFor
+        for the stated claim only and is never read as a trust score. Distinct from attestationRecord, which vouches for
+        the publisher of an artefact. A reader treats an attestation it cannot fetch, cannot verify, or finds expired as
+        absent.
+      status: experimental
+      profile: agent
     - name: mandate
       type: array
       inPlainWords: 'It may {value}.'
@@ -6091,6 +6687,36 @@ mx:
       notes: >-
         Where a point names one, an admitted agent uses it and identifies itself there, rather than driving the human
         interface as if it were a person. Absent, the point offers no agent route beyond what its pages carry.
+      status: experimental
+      profile: publishing-point
+    - name: principalAttestationFor
+      type: array
+      inPlainWords: 'An agent must show an outside attestation of its principal before it may {value} here.'
+      authoring: authored
+      optionalIn: [publishing-point]
+      definition: >-
+        The kinds of action, from the mandate vocabulary, for which a publishing point requires an admitted agent to
+        present a principalAttestation the point can verify.
+      example:
+        - message
+        - publish
+      validValues:
+        - read
+        - draft
+        - write
+        - submit
+        - publish
+        - unpublish
+        - delete
+        - message
+        - pay
+      notes: >-
+        Lets a venue ask that an accountable party stands behind an action without asking who that party is: a
+        community that wants a real principal behind every post lists publish and message, and leaves read open. The
+        point refuses a listed action when the agent presents no attestation, or one it cannot fetch, cannot verify, or
+        finds expired. The point names the issuers it accepts in its own terms; the field does not. Absent, the point
+        requires no attestation for any action. A requirement, never a grant: agentActions and the agent's mandate
+        still bound what the agent may do.
       status: experimental
       profile: publishing-point
     # --- CMS cogs: the cms profile. A CMS cog describes the content management system itself, as the controller of
@@ -6884,6 +7510,138 @@ mx:
         - 2026-12-24/2026-12-26
       status: experimental
       profile: core
+    - name: dataProcessing
+      type: array
+      alignsWith:
+        - dpv:hasProcess
+      inPlainWords: 'It processes personal data like this: {value}.'
+      authoring: authored
+      optionalIn: [core, mailbox]
+      definition: >-
+        The personal data processing the document's subject carries out, each an object naming the purposes, the
+        categories of personal data, the legal basis, who controls and receives the data, the measures that protect
+        it, how long it is kept, and where the notice and the rights route are, in W3C Data Privacy Vocabulary terms.
+      example:
+        - purposes: [dpv:ServiceProvision]
+          personalData: [pd:EmailAddress, pd:Name]
+          legalBasis: [dpv:Contract]
+          controller: https://example.com/#organisation
+          recipients: [https://example.com/#payment-processor]
+          measures: [dpv:Encryption]
+          retention: P2Y
+          notice: https://example.com/privacy
+          rightsExercise: https://example.com/privacy/requests
+      notes: >-
+        Each entry is one processing activity, a dpv:Process. Values are DPV concepts written as CURIEs (dpv:, pd:)
+        or URLs, so an agent can read what a page or service does with personal data without parsing a privacy
+        policy. The prefixes resolve through the served MX context. MX defines none of the concepts; the
+        purposes, data categories, legal bases and measures are the W3C Data Privacy Vocabularies and Controls
+        Community Group's. Declaring processing is not a statement of lawfulness or compliance, and the notice it
+        points to remains the authoritative text.
+      status: experimental
+      profile: core
+      context: 'Declared on a page, form, service or product description that collects or uses personal data.'
+    - name: dataProcessing[].purposes
+      type: array
+      valueType: reference
+      alignsWith:
+        - dpv:hasPurpose
+      authoring: authored
+      inPlainWords: 'It uses the data for {value}.'
+      definition: Why the personal data is processed, as DPV purpose concepts.
+      example: [dpv:ServiceProvision, dpv:Marketing]
+      status: experimental
+      profile: core
+    - name: dataProcessing[].personalData
+      type: array
+      valueType: reference
+      alignsWith:
+        - dpv:hasPersonalData
+      authoring: authored
+      inPlainWords: 'The data processed is {value}.'
+      definition: The categories of personal data processed, as DPV personal data concepts.
+      example: [pd:EmailAddress, pd:Name]
+      status: experimental
+      profile: core
+    - name: dataProcessing[].legalBasis
+      type: array
+      valueType: reference
+      alignsWith:
+        - dpv:hasLegalBasis
+      authoring: authored
+      inPlainWords: 'The legal basis is {value}.'
+      definition: The legal basis the processing relies on, as DPV legal basis concepts.
+      example: [dpv:Contract]
+      notes: A jurisdiction-specific basis uses the DPV legal extension's IRI, written as a full URL.
+      status: experimental
+      profile: core
+    - name: dataProcessing[].controller
+      type: string
+      valueType: reference
+      alignsWith:
+        - dpv:hasDataController
+      authoring: authored
+      inPlainWords: 'The data controller is {value}.'
+      definition: The organisation that decides why and how the data is processed, as its URL or @id.
+      example: https://example.com/#organisation
+      status: experimental
+      profile: core
+    - name: dataProcessing[].recipients
+      type: array
+      valueType: reference
+      alignsWith:
+        - dpv:hasRecipient
+      authoring: authored
+      inPlainWords: 'The data is shared with {value}.'
+      definition: The organisations or categories of recipient the data is disclosed to, as URLs or DPV concepts.
+      example: [https://example.com/#payment-processor]
+      status: experimental
+      profile: core
+    - name: dataProcessing[].measures
+      type: array
+      valueType: reference
+      alignsWith:
+        - dpv:hasTechnicalOrganisationalMeasure
+      authoring: authored
+      inPlainWords: 'The data is protected by {value}.'
+      definition: The technical and organisational measures that protect the data, as DPV measure concepts.
+      example: [dpv:Encryption]
+      status: experimental
+      profile: core
+    - name: dataProcessing[].retention
+      type: string
+      authoring: authored
+      inPlainWords: 'The data is kept for {value}.'
+      definition: How long the data is kept, as an ISO 8601 duration.
+      example: P2Y
+      notes: Omit it when the period depends on an event; the notice states the rule.
+      status: experimental
+      profile: core
+    - name: dataProcessing[].notice
+      type: string
+      valueType: reference
+      alignsWith:
+        - dpv:hasNotice
+      authoring: authored
+      inPlainWords: 'The privacy notice is at {value}.'
+      definition: The address of the privacy notice that describes this processing.
+      example: https://example.com/privacy
+      status: experimental
+      profile: core
+    - name: dataProcessing[].rightsExercise
+      type: string
+      valueType: reference
+      authoring: authored
+      inPlainWords: 'A person exercises their data rights at {value}.'
+      definition: >-
+        The address where a person exercises their data rights for this processing, ideally a page that publishes a
+        DPV RightExerciseNotice.
+      example: https://example.com/privacy/requests
+      notes: >-
+        Gives a page a public pointer to its rights route, which DPV describes but does not say how to find. A
+        Global Privacy Control signal is declared at /.well-known/gpc.json, not here.
+      status: experimental
+      profile: core
   profiles:
     - name: core
       description: Fields that apply to all MX documents.
@@ -6923,11 +7681,22 @@ mx:
         - purpose
         - license
         - maintainer
+        - funder
         - ownership
         - domain
         - segment
+        - requestedActions
+        - sender
+        - replyBy
+        - legalEffect
+        - messageId
+        - dateSent
+        - senderReference
+        - inReplyTo
+        - conversation
         - ai
         - contextProvides
+        - termReadings
         - aiAssistance
         - aiInvolvement
         - aiEditable
@@ -6941,11 +7710,12 @@ mx:
         - completeness
         - cancellationTerms
         - loyaltyPointTerms
+        - dataProcessing
         - x-mx-pim
     - name: cog
       description: >-
         Fields specific to .cog.md files. Cogs are an optional layer on top of MX; the machine identifier is derived
-        from the filename. This is the sole `cog` profile: scripts/cog-field-rules.js (the engine behind
+        from the filename. This is the sole `cog` profile: scripts/metadata/cog-field-rules.js (the engine behind
         frontmatter-validator.js and cog-tools.js) reads ONLY this file directly for profiles, bypassing
         load-canon.js's multi-file merge - fields-data-cogs.yaml carries the cog-layer field DEFINITIONS
         (partOf, buildsOn, dependencies, refersTo, cogHeader) but declares no profile of its own.
@@ -7027,6 +7797,9 @@ mx:
         - x-mx-cogRole
         - x-mx-domainScope
         - x-mx-obsession
+        - x-mx-statechart
+        - x-mx-tityraExclusive
+        - x-mx-tityraAdjacent
         - x-mx-blockContent
         - x-mx-policyScope
         - x-mx-persona
@@ -7048,7 +7821,7 @@ mx:
         or as a mod it installs. It carries every cog field, and the security block is part of its contract: a reader
         weighs riskLevel, reversibility, verifiability, capabilities and network scope before it decides whether to
         run an action. securityLevels names the security members each conformance level adds; security is a block,
-        so its members are enforced by scripts/check-action-security-level.cjs (Gate 143) rather than by the field
+        so its members are enforced by scripts/checks/check-action-security-level.cjs (Gate 143) rather than by the field
         lists. A new action-cog reaches Level 2 (Profiled); one that predates the profile holds the level it had, in a
         shrink-only baseline, and works towards Level 1 (Declared).
       header: |
@@ -7674,7 +8447,7 @@ mx:
         A portability profile rather than a type: the fields a document must carry to remain interpretable by a
         machine that meets it away from its source, with no access to the originating site. It is the Documents Are
         Self-Sufficient test made checkable. A document opts in by listing this profile's address in conformsTo
-        (https://mx.allabout.network/canon/fields-data.yaml#portable), and scripts/check-portable-conformance.cjs
+        (https://mx.allabout.network/canon/fields-data.yaml#portable), and scripts/checks/check-portable-conformance.cjs
         then holds it to the set below. Identity says what it is and who wrote it; canonicalUri says where the
         master lives, which with version is the currency signal; license says what a reader may do with it; and
         one of integritySignature or provenanceUri gives the reader a trust check it can run without the source.
@@ -8316,6 +9089,7 @@ mx:
         - workflowRecord
         - residualRisk
         - supersededBy
+        - principalAttestation
         - operatesAt
         - spendLimit
         - security
@@ -8380,6 +9154,7 @@ mx:
         - supersededBy
         - expires
         - admittedAgents
+        - principalAttestationFor
     - name: cms
       description: >-
         A CMS cog: the record of a content management system as the controller of one or more publishing points. It
@@ -8622,3 +9397,74 @@ mx:
         - created
         - modified
         - type
+    - name: mailbox
+      description: >-
+        A message in a digital mailbox: a letter, notice, bill or decision from one sender to one reader, or a message
+        between agents, that may ask its reader to act by a date. The profile keeps what the message asks, by when,
+        from whom and with what standing attached to the message in every carrier, so it survives being downloaded,
+        forwarded or read by the reader's own assistant. Addressing (who receives it) is the transport's job and is not
+        a profile field, so the published carriers never hold a recipient's personal data. Built for national digital
+        mailboxes (the Danish MeMo format, the Scottish Digital Mailbox) and for MX-A2A. Experimental; dogfooded
+        before any Gathering review.
+      header: |
+        ---
+        # Carrier: a message in a digital mailbox, sent by one organisation or agent to one reader
+        # --- Zone 1a: Identity ---
+        title: "Council tax reminder"
+        description: "Your November council tax payment is overdue; pay by 1 December 2026 or contact us to arrange instalments."
+        created: 2026-11-16
+        modified: 2026-11-16
+        # --- Zone 1b: OKF reserved surface (optional) ---
+        type: mailbox-message
+        tags: [example, council-tax]
+        resource: https://www.example-council.gov.uk/council-tax
+        # --- Zone 2: MX operational ---
+        mx:
+          status: active
+          sender: https://www.example-council.gov.uk
+          messageId: urn:uuid:6f1c2a0e-8b7d-4c3e-9a51-2d0f4e7b9c11
+          dateSent: '2026-11-16T09:00:00Z'
+          senderReference: CT/2026/004512
+          replyBy: '2026-12-01T17:00:00Z'
+          legalEffect: formal-notice
+          requestedActions:
+            - kind: pay
+              target: https://www.example-council.gov.uk/pay
+            - kind: reply
+              target: https://www.example-council.gov.uk/instalments
+              dueBy: '2026-11-28T17:00:00Z'
+          inLanguage: en-GB
+          alternateFormats:
+            - uri: https://www.example-council.gov.uk/letters/ct-2026-004512.pdf
+              format: application/pdf
+        ---
+      required:
+        - title
+        - description
+        - created
+        - modified
+        - type
+        - sender
+        - messageId
+      recommended:
+        - status
+        - alternateFormats
+        - requestedActions
+        - replyBy
+        - legalEffect
+        - dateSent
+        - senderReference
+        - accessibility
+        - integritySignature
+        - provenancePedigree
+        - inLanguage
+      optional:
+        - author
+        - tags
+        - resource
+        - canonicalUri
+        - inReplyTo
+        - conversation
+        - confidential
+        - expires
+        - dataProcessing

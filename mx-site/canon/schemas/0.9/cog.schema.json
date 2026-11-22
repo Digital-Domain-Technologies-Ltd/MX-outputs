@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://mx.allabout.network/canon/schemas/0.9/cog.schema.json",
   "title": "MX cog profile, specification 0.9",
-  "description": "Fields specific to .cog.md files. Cogs are an optional layer on top of MX; the machine identifier is derived from the filename. This is the sole `cog` profile: scripts/cog-field-rules.js (the engine behind frontmatter-validator.js and cog-tools.js) reads ONLY this file directly for profiles, bypassing load-canon.js's multi-file merge - fields-data-cogs.yaml carries the cog-layer field DEFINITIONS (partOf, buildsOn, dependencies, refersTo, cogHeader) but declares no profile of its own.",
+  "description": "Fields specific to .cog.md files. Cogs are an optional layer on top of MX; the machine identifier is derived from the filename. This is the sole `cog` profile: scripts/metadata/cog-field-rules.js (the engine behind frontmatter-validator.js and cog-tools.js) reads ONLY this file directly for profiles, bypassing load-canon.js's multi-file merge - fields-data-cogs.yaml carries the cog-layer field DEFINITIONS (partOf, buildsOn, dependencies, refersTo, cogHeader) but declares no profile of its own.",
   "type": "object",
   "properties": {
     "author": {
@@ -493,6 +493,9 @@
             }
           ]
         },
+        "conversation": {
+          "type": "string"
+        },
         "copyright": {
           "type": "string"
         },
@@ -507,6 +510,9 @@
         },
         "currency": {
           "type": "string"
+        },
+        "dataProcessing": {
+          "type": "array"
         },
         "dataSources": {
           "type": "array"
@@ -523,6 +529,7 @@
             "ymd"
           ]
         },
+        "dateSent": {},
         "decisionRightRef": {
           "type": "string"
         },
@@ -666,6 +673,16 @@
         "format": {
           "type": "string"
         },
+        "funder": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "array"
+            }
+          ]
+        },
         "generate": {
           "type": "object"
         },
@@ -696,10 +713,19 @@
         "inLanguage": {
           "type": "string"
         },
+        "inReplyTo": {
+          "type": "string"
+        },
         "includes": {
           "type": "array"
         },
+        "inferences": {
+          "type": "array"
+        },
         "inferred": {
+          "type": "boolean"
+        },
+        "inferredContents": {
           "type": "boolean"
         },
         "inherentRisk": {
@@ -738,6 +764,15 @@
         },
         "ld": {
           "type": "object"
+        },
+        "legalEffect": {
+          "type": "string",
+          "enum": [
+            "none",
+            "information",
+            "formal-notice",
+            "decision"
+          ]
         },
         "legalInstruments": {
           "type": "array"
@@ -805,6 +840,9 @@
         },
         "mcpServer": {
           "type": "object"
+        },
+        "messageId": {
+          "type": "string"
         },
         "metadataFields": {
           "type": "array"
@@ -909,6 +947,9 @@
         "narrativeContext": {
           "type": "string"
         },
+        "openQuestions": {
+          "type": "array"
+        },
         "operatesAt": {
           "type": "array"
         },
@@ -971,6 +1012,25 @@
         },
         "primaryLanguages": {
           "type": "array"
+        },
+        "principalAttestation": {
+          "type": "string"
+        },
+        "principalAttestationFor": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "read",
+              "draft",
+              "write",
+              "submit",
+              "publish",
+              "unpublish",
+              "delete",
+              "message",
+              "pay"
+            ]
+          }
         },
         "project": {
           "type": "object"
@@ -1087,6 +1147,10 @@
         "replaces": {
           "type": "string"
         },
+        "replyBy": {},
+        "requestedActions": {
+          "type": "array"
+        },
         "requires": {
           "type": "array"
         },
@@ -1174,6 +1238,12 @@
             }
           ]
         },
+        "sender": {
+          "type": "string"
+        },
+        "senderReference": {
+          "type": "string"
+        },
         "servedAt": {
           "type": "string"
         },
@@ -1196,6 +1266,19 @@
             },
             {
               "type": "array"
+            }
+          ]
+        },
+        "sourceOfTruth": {
+          "anyOf": [
+            {
+              "type": "object"
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object"
+              }
             }
           ]
         },
@@ -1336,6 +1419,9 @@
         },
         "termGlossary": {
           "type": "object"
+        },
+        "termReadings": {
+          "type": "array"
         },
         "topic": {
           "type": "array"

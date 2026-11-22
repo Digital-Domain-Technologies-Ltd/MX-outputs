@@ -4,7 +4,7 @@
    sequences what is already there - it never injects content. A non-JS
    reader (human or agent) sees the whole lesson in document order.
 
-   Contract with the page (enforced by scripts/check-lesson-compliance.cjs):
+   Contract with the page (enforced by scripts/checks/check-lesson-compliance.cjs):
    - #lesson wraps .lesson-step sections
    - elements that must be interacted with before Next unlocks carry
      data-gate; the engine marks them .is-done

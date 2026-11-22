@@ -1020,14 +1020,28 @@ body.cog-overlay-open {
    - content tables sized to their content. They stay real tables (display:
      block would strip table semantics in Safari and VoiceOver, on exactly the
      phones this is for); their cells wrap, and each keeps a minimum width so a
-     many-column table scrolls inside its box rather than squeezing a column
-     until words break letter by letter;
+     many-column table scrolls inside its .table-scroll box rather than squeezing a
+     column until words break letter by letter;
    - inline code with long unbreakable strings (paths, hashes, field names);
    - long unbroken links in running text;
    - form controls wider than the column.
    overflow-wrap: anywhere breaks a word only when it cannot otherwise fit its
    line, so ordinary prose is unchanged. Guarded by npm run site:phone-audit,
    which checks that every page both fits and reads. */
+/* A content table sits in a .table-scroll box (scripts/lib/table-scroll.cjs): a
+   focusable, named region. The table inside keeps its table semantics; the box
+   scrolls sideways when the table is wider than the column, at any width. */
+.table-scroll {
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
+.table-scroll:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
 @media (max-width: 720px) {
   /* Give content its width back: main, the section and its inner wrapper each
      add side padding, leaving a 390px phone a ~223px content column. */

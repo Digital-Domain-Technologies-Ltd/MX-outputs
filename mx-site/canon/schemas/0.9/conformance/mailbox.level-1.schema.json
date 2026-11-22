@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mx.allabout.network/canon/schemas/0.9/conformance/mailbox.level-1.schema.json",
+  "title": "MX conformance Level 1 (Declared), mailbox profile, specification 0.9",
+  "x-mx-profile": "mailbox",
+  "x-mx-level": 1,
+  "x-mx-levelName": "Declared",
+  "x-mx-specVersion": "0.9",
+  "$defs": {
+    "hasValue": {
+      "not": {
+        "anyOf": [
+          {
+            "type": "null"
+          },
+          {
+            "type": "string",
+            "pattern": "^\\s*$"
+          },
+          {
+            "type": "array",
+            "maxItems": 0
+          },
+          {
+            "type": "object",
+            "maxProperties": 0
+          }
+        ]
+      }
+    }
+  },
+  "description": "The fields a mailbox document carries to meet Level 1: the required fields its author writes, plus the derived fields a tool writes.",
+  "x-mx-fields": [
+    "title",
+    "description",
+    "type",
+    "sender",
+    "messageId"
+  ],
+  "type": "object",
+  "allOf": [
+    {
+      "anyOf": [
+        {
+          "required": [
+            "title"
+          ],
+          "properties": {
+            "title": {
+              "$ref": "#/$defs/hasValue"
+            }
+          }
+        },
+        {
+          "required": [
+            "mx"
+          ],
+          "properties": {
+            "mx": {
+              "type": "object",
+              "required": [
+                "title"
+              ],
+              "properties": {
+                "title": {
+                  "$ref": "#/$defs/hasValue"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "anyOf": [
+        {
+          "required": [
+            "description"
+          ],
+          "properties": {
+            "description": {
+              "$ref": "#/$defs/hasValue"
+            }
+          }
+        },
+        {
+          "required": [
+            "mx"
+          ],
+          "properties": {
+            "mx": {
+              "type": "object",
+              "required": [
+                "description"
+              ],
+              "properties": {
+                "description": {
+                  "$ref": "#/$defs/hasValue"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "anyOf": [
+        {
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "$ref": "#/$defs/hasValue"
+            }
+          }
+        },
+        {
+          "required": [
+            "mx"
+          ],
+          "properties": {
+            "mx": {
+              "type": "object",
+              "required": [
+                "type"
+              ],
+              "properties": {
+                "type": {
+                  "$ref": "#/$defs/hasValue"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "anyOf": [
+        {
+          "required": [
+            "sender"
+          ],
+          "properties": {
+            "sender": {
+              "$ref": "#/$defs/hasValue"
+            }
+          }
+        },
+        {
+          "required": [
+            "mx"
+          ],
+          "properties": {
+            "mx": {
+              "type": "object",
+              "required": [
+                "sender"
+              ],
+              "properties": {
+                "sender": {
+                  "$ref": "#/$defs/hasValue"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "anyOf": [
+        {
+          "required": [
+            "messageId"
+          ],
+          "properties": {
+            "messageId": {
+              "$ref": "#/$defs/hasValue"
+            }
+          }
+        },
+        {
+          "required": [
+            "mx"
+          ],
+          "properties": {
+            "mx": {
+              "type": "object",
+              "required": [
+                "messageId"
+              ],
+              "properties": {
+                "messageId": {
+                  "$ref": "#/$defs/hasValue"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
